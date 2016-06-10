@@ -659,10 +659,6 @@ span.since {
     margin-bottom: 25px;
 }
 
-:target > code {
-   background: #FDFFD3;
-}
-
 /* Media Queries */
 
 @media (max-width: 700px) {
