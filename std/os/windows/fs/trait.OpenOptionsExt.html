@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-13391' class='srclink' href='../../../../src/std/src/libstd/sys/windows/ext/fs.rs.html#23-126' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-13293' class='srclink' href='../../../../src/std/src/libstd/sys/windows/ext/fs.rs.html#23-126' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait OpenOptionsExt {
     fn <a href='#tymethod.access_mode' class='fnname'>access_mode</a>(&amp;mut self, access: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut Self;
     fn <a href='#tymethod.share_mode' class='fnname'>share_mode</a>(&amp;mut self, val: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut Self;
@@ -105,7 +105,7 @@ let file = OpenOptions::new().write(true)
 
 <span class='comment'>// Do not allow others to read or modify this file while we have it open</span>
 <span class='comment'>// for writing</span>
-<span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>().<span class='ident'>write</span>(<span class='boolvalue'>true</span>)
+<span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>().<span class='ident'>write</span>(<span class='bool-val'>true</span>)
                              .<span class='ident'>share_mode</span>(<span class='number'>0</span>)
                              .<span class='ident'>open</span>(<span class='string'>&quot;foo.txt&quot;</span>);</pre>
 </div><h3 id='tymethod.custom_flags' class='method stab '><code>fn <a href='#tymethod.custom_flags' class='fnname'>custom_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut Self</code></h3><div class='docblock'><p>Sets extra flags for the <code>dwFileFlags</code> argument to the call to
@@ -133,7 +133,7 @@ let file = options.open(&quot;foo.txt&quot;);
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>windows</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptionsExt</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>options</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>();
-<span class='ident'>options</span>.<span class='ident'>create</span>(<span class='boolvalue'>true</span>).<span class='ident'>write</span>(<span class='boolvalue'>true</span>);
+<span class='ident'>options</span>.<span class='ident'>create</span>(<span class='bool-val'>true</span>).<span class='ident'>write</span>(<span class='bool-val'>true</span>);
 <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>windows</span>) {
     <span class='ident'>options</span>.<span class='ident'>custom_flags</span>(<span class='ident'>winapi</span>::<span class='ident'>FILE_FLAG_DELETE_ON_CLOSE</span>);
 }
@@ -168,7 +168,7 @@ let file = options.open(&quot;foo.txt&quot;);
  <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptions</span>;
  <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>windows</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptionsExt</span>;
 
- <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>().<span class='ident'>write</span>(<span class='boolvalue'>true</span>).<span class='ident'>create</span>(<span class='boolvalue'>true</span>)
+ <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>().<span class='ident'>write</span>(<span class='bool-val'>true</span>).<span class='ident'>create</span>(<span class='bool-val'>true</span>)
                               .<span class='ident'>attributes</span>(<span class='ident'>winapi</span>::<span class='ident'>FILE_ATTRIBUTE_HIDDEN</span>)
                               .<span class='ident'>open</span>(<span class='string'>&quot;foo.txt&quot;</span>);</pre>
 </div><h3 id='tymethod.security_qos_flags' class='method stab '><code>fn <a href='#tymethod.security_qos_flags' class='fnname'>security_qos_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut <a class='struct' href='../../../../std/fs/struct.OpenOptions.html' title='std::fs::OpenOptions'>OpenOptions</a></code></h3><div class='docblock'><p>Sets the <code>dwSecurityQosFlags</code> argument to the call to <code>CreateFile2</code> to

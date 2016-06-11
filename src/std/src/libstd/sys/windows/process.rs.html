@@ -666,7 +666,7 @@
             <span class='ident'>args</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
             <span class='ident'>env</span>: <span class='prelude-val'>None</span>,
             <span class='ident'>cwd</span>: <span class='prelude-val'>None</span>,
-            <span class='ident'>detach</span>: <span class='boolvalue'>false</span>,
+            <span class='ident'>detach</span>: <span class='bool-val'>false</span>,
             <span class='ident'>stdin</span>: <span class='prelude-val'>None</span>,
             <span class='ident'>stdout</span>: <span class='prelude-val'>None</span>,
             <span class='ident'>stderr</span>: <span class='prelude-val'>None</span>,
@@ -834,7 +834,7 @@
             <span class='comment'>// INVALID_HANDLE_VALUE.</span>
             <span class='ident'>Stdio</span>::<span class='ident'>Inherit</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='ident'>stdio</span>::<span class='ident'>get</span>(<span class='ident'>stdio_id</span>) {
-                    <span class='prelude-val'>Ok</span>(<span class='ident'>io</span>) <span class='op'>=&gt;</span> <span class='ident'>io</span>.<span class='ident'>handle</span>().<span class='ident'>duplicate</span>(<span class='number'>0</span>, <span class='boolvalue'>true</span>,
+                    <span class='prelude-val'>Ok</span>(<span class='ident'>io</span>) <span class='op'>=&gt;</span> <span class='ident'>io</span>.<span class='ident'>handle</span>().<span class='ident'>duplicate</span>(<span class='number'>0</span>, <span class='bool-val'>true</span>,
                                                     <span class='ident'>c</span>::<span class='ident'>DUPLICATE_SAME_ACCESS</span>),
                     <span class='prelude-val'>Err</span>(..) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Handle</span>::<span class='ident'>new</span>(<span class='ident'>c</span>::<span class='ident'>INVALID_HANDLE_VALUE</span>)),
                 }
@@ -857,7 +857,7 @@
             }
 
             <span class='ident'>Stdio</span>::<span class='ident'>Handle</span>(<span class='kw-2'>ref</span> <span class='ident'>handle</span>) <span class='op'>=&gt;</span> {
-                <span class='ident'>handle</span>.<span class='ident'>duplicate</span>(<span class='number'>0</span>, <span class='boolvalue'>true</span>, <span class='ident'>c</span>::<span class='ident'>DUPLICATE_SAME_ACCESS</span>)
+                <span class='ident'>handle</span>.<span class='ident'>duplicate</span>(<span class='number'>0</span>, <span class='bool-val'>true</span>, <span class='ident'>c</span>::<span class='ident'>DUPLICATE_SAME_ACCESS</span>)
             }
 
             <span class='comment'>// Open up a reference to NUL with appropriate read/write</span>

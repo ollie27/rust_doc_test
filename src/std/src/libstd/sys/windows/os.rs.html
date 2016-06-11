@@ -530,7 +530,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>split_paths</span>(<span class='ident'>unparsed</span>: <span class='kw-2'>&amp;</span><span class='ident'>OsStr</span>) <span class='op'>-&gt;</span> <span class='ident'>SplitPaths</span> {
     <span class='ident'>SplitPaths</span> {
         <span class='ident'>data</span>: <span class='ident'>unparsed</span>.<span class='ident'>encode_wide</span>(),
-        <span class='ident'>must_yield</span>: <span class='boolvalue'>true</span>,
+        <span class='ident'>must_yield</span>: <span class='bool-val'>true</span>,
     }
 }
 
@@ -552,15 +552,15 @@
 
 
         <span class='kw'>let</span> <span class='ident'>must_yield</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>must_yield</span>;
-        <span class='self'>self</span>.<span class='ident'>must_yield</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+        <span class='self'>self</span>.<span class='ident'>must_yield</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
 
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>in_progress</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>in_quote</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>in_quote</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
         <span class='kw'>for</span> <span class='ident'>b</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>by_ref</span>() {
             <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>&#39;&quot;&#39;</span> <span class='kw'>as</span> <span class='ident'>u16</span> {
                 <span class='ident'>in_quote</span> <span class='op'>=</span> <span class='op'>!</span><span class='ident'>in_quote</span>;
             } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>&#39;;&#39;</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ident'>in_quote</span> {
-                <span class='self'>self</span>.<span class='ident'>must_yield</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
+                <span class='self'>self</span>.<span class='ident'>must_yield</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
                 <span class='kw'>break</span>
             } <span class='kw'>else</span> {
                 <span class='ident'>in_progress</span>.<span class='ident'>push</span>(<span class='ident'>b</span>)

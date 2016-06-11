@@ -147,9 +147,9 @@
                                              <span class='number'>0</span>);
         <span class='kw'>if</span> <span class='ident'>r</span> <span class='op'>==</span> <span class='number'>0</span> {
             <span class='macro'>debug_assert_eq</span><span class='macro'>!</span>(<span class='ident'>os</span>::<span class='ident'>errno</span>() <span class='kw'>as</span> <span class='ident'>usize</span>, <span class='ident'>c</span>::<span class='ident'>ERROR_TIMEOUT</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
-            <span class='boolvalue'>false</span>
+            <span class='bool-val'>false</span>
         } <span class='kw'>else</span> {
-            <span class='boolvalue'>true</span>
+            <span class='bool-val'>true</span>
         }
     }
 

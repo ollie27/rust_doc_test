@@ -148,14 +148,14 @@ assert_eq!(iter.is_empty(), true);
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='ident'>xs</span>.<span class='ident'>iter</span>().<span class='ident'>peekable</span>();
 
 <span class='comment'>// there are still elements to iterate over</span>
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>iter</span>.<span class='ident'>is_empty</span>(), <span class='boolvalue'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>iter</span>.<span class='ident'>is_empty</span>(), <span class='bool-val'>false</span>);
 
 <span class='comment'>// let&#39;s consume the iterator</span>
 <span class='ident'>iter</span>.<span class='ident'>next</span>();
 <span class='ident'>iter</span>.<span class='ident'>next</span>();
 <span class='ident'>iter</span>.<span class='ident'>next</span>();
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>iter</span>.<span class='ident'>is_empty</span>(), <span class='boolvalue'>true</span>);</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>iter</span>.<span class='ident'>is_empty</span>(), <span class='bool-val'>true</span>);</pre>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;I:&nbsp;<a class='trait' href='../../core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&gt; <a class='trait' href='../../core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../core/iter/struct.Peekable.html' title='core::iter::Peekable'>Peekable</a>&lt;I&gt; <span class='where'>where I::Item: <a class='trait' href='../../core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-32137' class='srclink' href='../../src/core/src/libcore/iter/mod.rs.html#993' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='../../core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='../../core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='../../core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>

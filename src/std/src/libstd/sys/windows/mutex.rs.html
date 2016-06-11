@@ -296,7 +296,7 @@
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Mutex</span> {
         <span class='ident'>Mutex</span> {
             <span class='ident'>lock</span>: <span class='ident'>AtomicUsize</span>::<span class='ident'>new</span>(<span class='number'>0</span>),
-            <span class='ident'>held</span>: <span class='ident'>UnsafeCell</span>::<span class='ident'>new</span>(<span class='boolvalue'>false</span>),
+            <span class='ident'>held</span>: <span class='ident'>UnsafeCell</span>::<span class='ident'>new</span>(<span class='bool-val'>false</span>),
         }
     }
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
@@ -320,18 +320,18 @@
             <span class='ident'>Kind</span>::<span class='ident'>CriticalSection</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>remutex</span>();
                 <span class='kw'>if</span> <span class='op'>!</span>(<span class='op'>*</span><span class='ident'>re</span>).<span class='ident'>try_lock</span>() {
-                    <span class='boolvalue'>false</span>
+                    <span class='bool-val'>false</span>
                 } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>flag_locked</span>() {
-                    <span class='boolvalue'>true</span>
+                    <span class='bool-val'>true</span>
                 } <span class='kw'>else</span> {
                     (<span class='op'>*</span><span class='ident'>re</span>).<span class='ident'>unlock</span>();
-                    <span class='boolvalue'>false</span>
+                    <span class='bool-val'>false</span>
                 }
             }
         }
     }
     <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>unlock</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
-        <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>held</span>.<span class='ident'>get</span>() <span class='op'>=</span> <span class='boolvalue'>false</span>;
+        <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>held</span>.<span class='ident'>get</span>() <span class='op'>=</span> <span class='bool-val'>false</span>;
         <span class='kw'>match</span> <span class='ident'>kind</span>() {
             <span class='ident'>Kind</span>::<span class='ident'>SRWLock</span> <span class='op'>=&gt;</span> <span class='ident'>c</span>::<span class='ident'>ReleaseSRWLockExclusive</span>(<span class='ident'>raw</span>(<span class='self'>self</span>)),
             <span class='ident'>Kind</span>::<span class='ident'>CriticalSection</span> <span class='op'>=&gt;</span> (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>remutex</span>()).<span class='ident'>unlock</span>(),
@@ -365,10 +365,10 @@
 
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>flag_locked</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>if</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>held</span>.<span class='ident'>get</span>() {
-            <span class='boolvalue'>false</span>
+            <span class='bool-val'>false</span>
         } <span class='kw'>else</span> {
-            <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>held</span>.<span class='ident'>get</span>() <span class='op'>=</span> <span class='boolvalue'>true</span>;
-            <span class='boolvalue'>true</span>
+            <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>held</span>.<span class='ident'>get</span>() <span class='op'>=</span> <span class='bool-val'>true</span>;
+            <span class='bool-val'>true</span>
         }
 
     }
