@@ -249,6 +249,7 @@
 <span id="205">205</span>
 <span id="206">206</span>
 <span id="207">207</span>
+<span id="208">208</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -320,6 +321,7 @@
     <span class='kw'>match</span> <span class='ident'>errno</span> <span class='kw'>as</span> <span class='ident'>c</span>::<span class='ident'>DWORD</span> {
         <span class='ident'>c</span>::<span class='ident'>ERROR_ACCESS_DENIED</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>ErrorKind</span>::<span class='ident'>PermissionDenied</span>,
         <span class='ident'>c</span>::<span class='ident'>ERROR_ALREADY_EXISTS</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>ErrorKind</span>::<span class='ident'>AlreadyExists</span>,
+        <span class='ident'>c</span>::<span class='ident'>ERROR_FILE_EXISTS</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>ErrorKind</span>::<span class='ident'>AlreadyExists</span>,
         <span class='ident'>c</span>::<span class='ident'>ERROR_BROKEN_PIPE</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>ErrorKind</span>::<span class='ident'>BrokenPipe</span>,
         <span class='ident'>c</span>::<span class='ident'>ERROR_FILE_NOT_FOUND</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>ErrorKind</span>::<span class='ident'>NotFound</span>,
         <span class='ident'>c</span>::<span class='ident'>ERROR_PATH_NOT_FOUND</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>ErrorKind</span>::<span class='ident'>NotFound</span>,

@@ -52,12 +52,12 @@
     // some fields omitted
 }</pre><div class='docblock'><p>A set based on a B-Tree.</p>
 
-<p>See <a href="../btree_map/struct.BTreeMap.html"><code>BTreeMap</code></a>&#39;s documentation for a detailed discussion of this collection&#39;s performance
+<p>See <a href="struct.BTreeMap.html"><code>BTreeMap</code></a>&#39;s documentation for a detailed discussion of this collection&#39;s performance
 benefits and drawbacks.</p>
 
 <p>It is a logic error for an item to be modified in such a way that the item&#39;s ordering relative
-to any other item, as determined by the <a href="../../../std/cmp/trait.Ord.html"><code>Ord</code></a> trait, changes while it is in the set. This is
-normally only possible through <a href="../../../std/cell/struct.Cell.html"><code>Cell</code></a>, <a href="../../../std/cell/struct.RefCell.html"><code>RefCell</code></a>, global state, I/O, or unsafe code.</p>
+to any other item, as determined by the <a href="../../std/cmp/trait.Ord.html"><code>Ord</code></a> trait, changes while it is in the set. This is
+normally only possible through <a href="../../std/cell/struct.Cell.html"><code>Cell</code></a>, <a href="../../std/cell/struct.RefCell.html"><code>RefCell</code></a>, global state, I/O, or unsafe code.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <span class='rusttest'>fn main() {
@@ -478,7 +478,7 @@ assert_eq!(set.is_superset(&amp;sub), true);
 <p>If the set did not have this value present, <code>true</code> is returned.</p>
 
 <p>If the set did have this value present, <code>false</code> is returned, and the
-entry is not updated. See the <a href="../index.html#insert-and-complex-keys">module-level documentation</a> for more.</p>
+entry is not updated. See the <a href="index.html#insert-and-complex-keys">module-level documentation</a> for more.</p>
 
 <h1 id='examples-15' class='section-header'><a href='#examples-15'>Examples</a></h1>
 <span class='rusttest'>fn main() {
