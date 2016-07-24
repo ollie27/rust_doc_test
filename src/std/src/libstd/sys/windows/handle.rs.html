@@ -291,10 +291,10 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_event</span>(<span class='ident'>manual</span>: <span class='ident'>bool</span>, <span class='ident'>init</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Handle</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>event</span> <span class='op'>=</span> <span class='ident'>c</span>::<span class='ident'>CreateEventW</span>(<span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _,
+            <span class='kw'>let</span> <span class='ident'>event</span> <span class='op'>=</span> <span class='ident'>c</span>::<span class='ident'>CreateEventW</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
                                         <span class='ident'>manual</span> <span class='kw'>as</span> <span class='ident'>c</span>::<span class='ident'>BOOL</span>,
                                         <span class='ident'>init</span> <span class='kw'>as</span> <span class='ident'>c</span>::<span class='ident'>BOOL</span>,
-                                        <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
+                                        <span class='ident'>ptr</span>::<span class='ident'>null</span>());
             <span class='kw'>if</span> <span class='ident'>event</span>.<span class='ident'>is_null</span>() {
                 <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>last_os_error</span>())
             } <span class='kw'>else</span> {
