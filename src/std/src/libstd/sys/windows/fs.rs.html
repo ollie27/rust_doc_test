@@ -793,6 +793,8 @@
 <span id="749">749</span>
 <span id="750">750</span>
 <span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1120,6 +1122,8 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>seek</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>SeekFrom</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> (<span class='ident'>whence</span>, <span class='ident'>pos</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>pos</span> {
+            <span class='comment'>// Casting to `i64` is fine, `SetFilePointerEx` reinterprets this</span>
+            <span class='comment'>// integer as `u64`.</span>
             <span class='ident'>SeekFrom</span>::<span class='ident'>Start</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> (<span class='ident'>c</span>::<span class='ident'>FILE_BEGIN</span>, <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>i64</span>),
             <span class='ident'>SeekFrom</span>::<span class='ident'>End</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> (<span class='ident'>c</span>::<span class='ident'>FILE_END</span>, <span class='ident'>n</span>),
             <span class='ident'>SeekFrom</span>::<span class='ident'>Current</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> (<span class='ident'>c</span>::<span class='ident'>FILE_CURRENT</span>, <span class='ident'>n</span>),
