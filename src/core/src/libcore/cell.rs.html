@@ -1108,6 +1108,28 @@
 <span id="1064">1064</span>
 <span id="1065">1065</span>
 <span id="1066">1066</span>
+<span id="1067">1067</span>
+<span id="1068">1068</span>
+<span id="1069">1069</span>
+<span id="1070">1070</span>
+<span id="1071">1071</span>
+<span id="1072">1072</span>
+<span id="1073">1073</span>
+<span id="1074">1074</span>
+<span id="1075">1075</span>
+<span id="1076">1076</span>
+<span id="1077">1077</span>
+<span id="1078">1078</span>
+<span id="1079">1079</span>
+<span id="1080">1080</span>
+<span id="1081">1081</span>
+<span id="1082">1082</span>
+<span id="1083">1083</span>
+<span id="1084">1084</span>
+<span id="1085">1085</span>
+<span id="1086">1086</span>
+<span id="1087">1087</span>
+<span id="1088">1088</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1257,6 +1279,7 @@
 
 <span class='kw'>use</span> <span class='ident'>clone</span>::<span class='ident'>Clone</span>;
 <span class='kw'>use</span> <span class='ident'>cmp</span>::{<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>, <span class='ident'>Ordering</span>};
+<span class='kw'>use</span> <span class='ident'>convert</span>::<span class='ident'>From</span>;
 <span class='kw'>use</span> <span class='ident'>default</span>::<span class='ident'>Default</span>;
 <span class='kw'>use</span> <span class='ident'>fmt</span>::{<span class='self'>self</span>, <span class='ident'>Debug</span>, <span class='ident'>Display</span>};
 <span class='kw'>use</span> <span class='ident'>marker</span>::{<span class='ident'>Copy</span>, <span class='ident'>PhantomData</span>, <span class='ident'>Send</span>, <span class='ident'>Sync</span>, <span class='ident'>Sized</span>, <span class='ident'>Unsize</span>};
@@ -1437,6 +1460,13 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Ordering</span> {
         <span class='self'>self</span>.<span class='ident'>get</span>().<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='ident'>other</span>.<span class='ident'>get</span>())
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cell_from&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Copy</span><span class='op'>&gt;</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>t</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='ident'>t</span>)
     }
 }
 
@@ -1853,6 +1883,13 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cell_from&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>t</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='ident'>t</span>)
+    }
+}
+
 <span class='kw'>struct</span> <span class='ident'>BorrowRef</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
     <span class='ident'>borrow</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>BorrowFlag</span><span class='op'>&gt;</span>,
 }
@@ -2173,6 +2210,13 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Default</span><span class='op'>&gt;</span> <span class='ident'>Default</span> <span class='kw'>for</span> <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>default</span>() <span class='op'>-&gt;</span> <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='ident'>UnsafeCell</span>::<span class='ident'>new</span>(<span class='ident'>Default</span>::<span class='ident'>default</span>())
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cell_from&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>t</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='ident'>UnsafeCell</span>::<span class='ident'>new</span>(<span class='ident'>t</span>)
     }
 }
 </pre>

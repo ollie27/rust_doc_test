@@ -390,7 +390,7 @@ function with the type <code>fn&lt;T&gt;() -&gt; Option&lt;T&gt;</code>.</p>
 story. The other half is <em>using</em> the <code>find</code> function we&#39;ve written. Let&#39;s try
 to use it to find the extension in a file name.</p>
 
-<span class='rusttest'>fn find(_: &amp;str, _: char) -&gt; Option&lt;usize&gt; { None }
+<span class='rusttest'>fn find(haystack: &amp;str, needle: char) -&gt; Option&lt;usize&gt; { haystack.find(needle) }
 fn main() {
     let file_name = &quot;foobar.rs&quot;;
     match find(file_name, &#39;.&#39;) {
@@ -467,7 +467,7 @@ message saying as such.</p>
 sense to put it into a function:</p>
 
 <span class='rusttest'>fn main() {
-    fn find(_: &amp;str, _: char) -&gt; Option&lt;usize&gt; { None }
+    fn find(haystack: &amp;str, needle: char) -&gt; Option&lt;usize&gt; { haystack.find(needle) }
 // Returns the extension of the given file name, where the extension is defined
 // as all characters following the first `.`.
 // If `file_name` has no `.`, then `None` is returned.
@@ -531,7 +531,7 @@ or <code>&amp;mut self</code> as their first argument.</p>
 to get rid of the case analysis:</p>
 
 <span class='rusttest'>fn main() {
-    fn find(_: &amp;str, _: char) -&gt; Option&lt;usize&gt; { None }
+    fn find(haystack: &amp;str, needle: char) -&gt; Option&lt;usize&gt; { haystack.find(needle) }
 // Returns the extension of the given file name, where the extension is defined
 // as all characters following the first `.`.
 // If `file_name` has no `.`, then `None` is returned.

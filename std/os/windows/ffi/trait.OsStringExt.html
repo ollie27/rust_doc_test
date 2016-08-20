@@ -43,18 +43,18 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>ffi</a>::<wbr><a class='trait' href=''>OsStringExt</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.0.0'>1.0.0</span><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>ffi</a>::<wbr><a class='trait' href=''>OsStringExt</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.0.0'>1.0.0</span><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-13367' class='srclink' href='../../../../src/std/src/libstd/sys/windows/ext/ffi.rs.html#25-33' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-13374' class='srclink' href='../../../../src/std/src/libstd/sys/windows/ext/ffi.rs.html#25-33' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait OsStringExt {
     fn <a href='#tymethod.from_wide' class='fnname'>from_wide</a>(wide: <a class='primitive' href='../../../primitive.slice.html'>&amp;[</a><a class='primitive' href='../../../primitive.u16.html'>u16</a><a class='primitive' href='../../../primitive.slice.html'>]</a>) -&gt; Self;
 }</pre><div class='docblock'><p>Windows-specific extensions to <code>OsString</code>.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.from_wide' class='method stab '><code>fn <a href='#tymethod.from_wide' class='fnname'>from_wide</a>(wide: <a class='primitive' href='../../../primitive.slice.html'>&amp;[</a><a class='primitive' href='../../../primitive.u16.html'>u16</a><a class='primitive' href='../../../primitive.slice.html'>]</a>) -&gt; Self</code></h3><div class='docblock'><p>Creates an <code>OsString</code> from a potentially ill-formed UTF-16 slice of
+        <h3 id='tymethod.from_wide' class='method stab '><span id='from_wide.v' class='invisible'><code>fn <a href='#tymethod.from_wide' class='fnname'>from_wide</a>(wide: <a class='primitive' href='../../../primitive.slice.html'>&amp;[</a><a class='primitive' href='../../../primitive.u16.html'>u16</a><a class='primitive' href='../../../primitive.slice.html'>]</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Creates an <code>OsString</code> from a potentially ill-formed UTF-16 slice of
 16-bit code units.</p>
 
 <p>This is lossless: calling <code>.encode_wide()</code> on the resulting string

@@ -22,9 +22,9 @@
 
     <div id="versioninfo">
   <img src="https://www.rust-lang.org/logos/rust-logo-32x32-blk.png" width="32" height="32" alt="Rust logo"><br>
-  <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.12.0-dev</span><br>
-  <a href="https://github.com/rust-lang/rust/commit/d38f43a4545baa6c8ee32ec7409e90d460a195be"
-    class="hash white-sticker">d38f43a45</a>
+  <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.13.0-dev</span><br>
+  <a href="https://github.com/rust-lang/rust/commit/bc1ef83b00fb60bf8b969948ae2b484303c7bf6a"
+    class="hash white-sticker">bc1ef83b0</a>
 </div>
 
 
@@ -380,6 +380,11 @@ token : simple_token | ident | literal | symbol | whitespace token ;
 
 <p>Each of these keywords has special meaning in its grammar, and all of them are
 excluded from the <code>ident</code> rule.</p>
+
+<p>Not all of these keywords are used by the language. Some of them were used
+before Rust 1.0, and were left reserved once their implementations were
+removed. Some of them were reserved before 1.0 to make space for possible
+future features.</p>
 
 <h3 id='literals' class='section-header'><a href='#literals'>3.5.2 Literals</a></h3>
 <pre><code class="language-antlr">lit_suffix : ident;

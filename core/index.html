@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/core/src/libcore/lib.rs.html#11-166' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/core/src/libcore/lib.rs.html#11-174' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
 <h1 id='the-rust-core-library' class='section-header'><a href='#the-rust-core-library'>The Rust Core Library</a></h1>
 <p>The Rust Core Library is the dependency-free<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> foundation of <a href="../std/index.html">The
@@ -77,6 +77,10 @@ dictate the panic message, the file at which panic was invoked, and the
 line. It is up to consumers of this core library to define this panic
 function; it is only required to never return. This requires a <code>lang</code>
 attribute named <code>panic_fmt</code>.</p></li>
+<li><p><code>rust_eh_personality</code> - is used by the failure mechanisms of the
+compiler. This is often mapped to GCC&#39;s personality function, but crates
+which do not trigger a panic can be assured that this function is never
+called. The <code>lang</code> attribute is called <code>eh_personality</code>.</p></li>
 </ul>
 
 <div class="footnotes">

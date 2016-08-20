@@ -2189,6 +2189,11 @@
 <span id="2145">2145</span>
 <span id="2146">2146</span>
 <span id="2147">2147</span>
+<span id="2148">2148</span>
+<span id="2149">2149</span>
+<span id="2150">2150</span>
+<span id="2151">2151</span>
+<span id="2152">2152</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2202,11 +2207,16 @@
 
 <span class='doccomment'>//! Overloadable operators.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Implementing these traits allows you to get an effect similar to</span>
-<span class='doccomment'>//! overloading operators.</span>
+<span class='doccomment'>//! Implementing these traits allows you to overload certain operators.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Some of these traits are imported by the prelude, so they are available in</span>
-<span class='doccomment'>//! every Rust program.</span>
+<span class='doccomment'>//! every Rust program. Only operators backed by traits can be overloaded. For</span>
+<span class='doccomment'>//! example, the addition operator (`+`) can be overloaded through the `Add`</span>
+<span class='doccomment'>//! trait, but since the assignment operator (`=`) has no backing trait, there</span>
+<span class='doccomment'>//! is no way of overloading its semantics. Additionally, this module does not</span>
+<span class='doccomment'>//! provide any mechanism to create new operators. If traitless overloading or</span>
+<span class='doccomment'>//! custom operators are required, you should look toward macros or compiler</span>
+<span class='doccomment'>//! plugins to extend Rust&#39;s syntax.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Many of the operators take their operands by value. In non-generic</span>
 <span class='doccomment'>//! contexts involving built-in types, this is usually not a problem.</span>
