@@ -1130,6 +1130,51 @@
 <span id="1086">1086</span>
 <span id="1087">1087</span>
 <span id="1088">1088</span>
+<span id="1089">1089</span>
+<span id="1090">1090</span>
+<span id="1091">1091</span>
+<span id="1092">1092</span>
+<span id="1093">1093</span>
+<span id="1094">1094</span>
+<span id="1095">1095</span>
+<span id="1096">1096</span>
+<span id="1097">1097</span>
+<span id="1098">1098</span>
+<span id="1099">1099</span>
+<span id="1100">1100</span>
+<span id="1101">1101</span>
+<span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
+<span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
+<span id="1113">1113</span>
+<span id="1114">1114</span>
+<span id="1115">1115</span>
+<span id="1116">1116</span>
+<span id="1117">1117</span>
+<span id="1118">1118</span>
+<span id="1119">1119</span>
+<span id="1120">1120</span>
+<span id="1121">1121</span>
+<span id="1122">1122</span>
+<span id="1123">1123</span>
+<span id="1124">1124</span>
+<span id="1125">1125</span>
+<span id="1126">1126</span>
+<span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
+<span id="1130">1130</span>
+<span id="1131">1131</span>
+<span id="1132">1132</span>
+<span id="1133">1133</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1277,17 +1322,10 @@
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 
-<span class='kw'>use</span> <span class='ident'>clone</span>::<span class='ident'>Clone</span>;
-<span class='kw'>use</span> <span class='ident'>cmp</span>::{<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>, <span class='ident'>Ordering</span>};
-<span class='kw'>use</span> <span class='ident'>convert</span>::<span class='ident'>From</span>;
-<span class='kw'>use</span> <span class='ident'>default</span>::<span class='ident'>Default</span>;
+<span class='kw'>use</span> <span class='ident'>cmp</span>::<span class='ident'>Ordering</span>;
 <span class='kw'>use</span> <span class='ident'>fmt</span>::{<span class='self'>self</span>, <span class='ident'>Debug</span>, <span class='ident'>Display</span>};
-<span class='kw'>use</span> <span class='ident'>marker</span>::{<span class='ident'>Copy</span>, <span class='ident'>PhantomData</span>, <span class='ident'>Send</span>, <span class='ident'>Sync</span>, <span class='ident'>Sized</span>, <span class='ident'>Unsize</span>};
-<span class='kw'>use</span> <span class='ident'>ops</span>::{<span class='ident'>Deref</span>, <span class='ident'>DerefMut</span>, <span class='ident'>Drop</span>, <span class='ident'>FnOnce</span>, <span class='ident'>CoerceUnsized</span>};
-<span class='kw'>use</span> <span class='ident'>option</span>::<span class='prelude-ty'>Option</span>;
-<span class='kw'>use</span> <span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::{<span class='prelude-val'>None</span>, <span class='prelude-val'>Some</span>};
-<span class='kw'>use</span> <span class='ident'>result</span>::<span class='prelude-ty'>Result</span>;
-<span class='kw'>use</span> <span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::{<span class='prelude-val'>Ok</span>, <span class='prelude-val'>Err</span>};
+<span class='kw'>use</span> <span class='ident'>marker</span>::{<span class='ident'>PhantomData</span>, <span class='ident'>Unsize</span>};
+<span class='kw'>use</span> <span class='ident'>ops</span>::{<span class='ident'>Deref</span>, <span class='ident'>DerefMut</span>, <span class='ident'>CoerceUnsized</span>};
 
 <span class='doccomment'>/// A mutable memory location that admits only `Copy` data.</span>
 <span class='doccomment'>///</span>
@@ -1366,8 +1404,26 @@
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;as_unsafe_cell&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27708&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>rustc_deprecated</span>(<span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>, <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;renamed to as_ptr&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_unsafe_cell</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>value</span>
+    }
+
+    <span class='doccomment'>/// Returns a raw pointer to the underlying data in this cell.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use std::cell::Cell;</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let c = Cell::new(5);</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let ptr = c.as_ptr();</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cell_as_ptr&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
+        <span class='self'>self</span>.<span class='ident'>value</span>.<span class='ident'>get</span>()
     }
 
     <span class='doccomment'>/// Returns a mutable reference to the underlying data.</span>
@@ -1469,6 +1525,9 @@
         <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='ident'>t</span>)
     }
 }
+
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;coerce_unsized&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27732&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>CoerceUnsized</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span>, <span class='ident'>U</span><span class='op'>&gt;</span> <span class='ident'>CoerceUnsized</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {}
 
 <span class='doccomment'>/// A mutable memory location with dynamically checked borrow rules</span>
 <span class='doccomment'>///</span>
@@ -1786,8 +1845,26 @@
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;as_unsafe_cell&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27708&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>rustc_deprecated</span>(<span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>, <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;renamed to as_ptr&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>as_unsafe_cell</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>value</span>
+    }
+
+    <span class='doccomment'>/// Returns a raw pointer to the underlying data in this cell.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use std::cell::RefCell;</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let c = RefCell::new(5);</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let ptr = c.as_ptr();</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cell_as_ptr&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
+        <span class='self'>self</span>.<span class='ident'>value</span>.<span class='ident'>get</span>()
     }
 
     <span class='doccomment'>/// Returns a mutable reference to the underlying data.</span>
@@ -1889,6 +1966,9 @@
         <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='ident'>t</span>)
     }
 }
+
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;coerce_unsized&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27732&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>CoerceUnsized</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span>, <span class='ident'>U</span><span class='op'>&gt;</span> <span class='ident'>CoerceUnsized</span><span class='op'>&lt;</span><span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {}
 
 <span class='kw'>struct</span> <span class='ident'>BorrowRef</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
     <span class='ident'>borrow</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>BorrowFlag</span><span class='op'>&gt;</span>,
@@ -2218,6 +2298,16 @@
     <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>t</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='ident'>UnsafeCell</span>::<span class='ident'>new</span>(<span class='ident'>t</span>)
     }
+}
+
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;coerce_unsized&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27732&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>CoerceUnsized</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span>, <span class='ident'>U</span><span class='op'>&gt;</span> <span class='ident'>CoerceUnsized</span><span class='op'>&lt;</span><span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {}
+
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>assert_coerce_unsized</span>(<span class='ident'>a</span>: <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>b</span>: <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>c</span>: <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) {
+    <span class='kw'>let</span> _: <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>Send</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>a</span>;
+    <span class='kw'>let</span> _: <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>Send</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>b</span>;
+    <span class='kw'>let</span> _: <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>Send</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>c</span>;
 }
 </pre>
 </section>

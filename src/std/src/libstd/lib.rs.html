@@ -515,6 +515,12 @@
 <span id="471">471</span>
 <span id="472">472</span>
 <span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -693,7 +699,7 @@
 <span class='doccomment'>//! [`atomic`]: sync/atomic/index.html</span>
 <span class='doccomment'>//! [`collections`]: collections/index.html</span>
 <span class='doccomment'>//! [`for`]: ../book/loops.html#for</span>
-<span class='doccomment'>//! [`format!`]: macro.format!.html</span>
+<span class='doccomment'>//! [`format!`]: macro.format.html</span>
 <span class='doccomment'>//! [`fs`]: fs/index.html</span>
 <span class='doccomment'>//! [`io`]: io/index.html</span>
 <span class='doccomment'>//! [`iter`]: iter/index.html</span>
@@ -750,6 +756,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>float_from_str_radix</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>fn_traits</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>fnbox</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>fused</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>hashmap_hasher</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>heap_api</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>inclusive_range</span>)]</span>
@@ -769,6 +776,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>optin_builtin_traits</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>panic_unwind</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>placement_in_syntax</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>prelude_import</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>question_mark</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>rand</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>raw</span>)]</span>
@@ -792,7 +800,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unboxed_closures</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unicode</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unique</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unsafe_no_drop_flag</span>, <span class='ident'>filling_drop</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>stage0</span>, <span class='ident'>feature</span>(<span class='ident'>unsafe_no_drop_flag</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unwind_attributes</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>vec_push_all</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>zero_one</span>)]</span>
@@ -808,6 +816,10 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_features</span>)]</span> <span class='comment'>// std may use features in a platform-specific way</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>stage0</span>), <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
+
+<span class='attribute'>#[<span class='ident'>prelude_import</span>]</span>
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused</span>)]</span>
+<span class='kw'>use</span> <span class='ident'>prelude</span>::<span class='ident'>v1</span>::<span class='op'>*</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
 

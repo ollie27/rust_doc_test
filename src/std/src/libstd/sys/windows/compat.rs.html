@@ -123,8 +123,6 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
-<span id="82">82</span>
-<span id="83">83</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -148,8 +146,6 @@
 <span class='doccomment'>//! static-per-function which caches the result of the first check. In this</span>
 <span class='doccomment'>//! manner we pay a semi-large one-time cost up front for detecting whether a</span>
 <span class='doccomment'>//! function is available but afterwards it&#39;s just a load and a jump.</span>
-
-<span class='kw'>use</span> <span class='ident'>prelude</span>::<span class='ident'>v1</span>::<span class='op'>*</span>;
 
 <span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>CString</span>;
 <span class='kw'>use</span> <span class='ident'>sync</span>::<span class='ident'>atomic</span>::{<span class='ident'>AtomicUsize</span>, <span class='ident'>Ordering</span>};
