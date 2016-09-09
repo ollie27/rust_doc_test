@@ -48,7 +48,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-16878' class='srclink' href='../../src/core/src/libcore/ptr.rs.html#744-752' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Shared&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; { .. }</pre><div class='stability'><em class='stab unstable'>Unstable (<code>shared</code> <a href="https://github.com/rust-lang/rust/issues/27730">#27730</a>)<p>: needs an RFC to flesh out design</p>
+<pre class='rust struct'>pub struct Shared&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; { /* fields omitted */ }</pre><div class='stability'><em class='stab unstable'>Unstable (<code>shared</code> <a href="https://github.com/rust-lang/rust/issues/27730">#27730</a>)<p>: needs an RFC to flesh out design</p>
 </em></div><div class='docblock'><p>A wrapper around a raw non-null <code>*mut T</code> that indicates that the possessor
 of this wrapper has shared ownership of the referent. Useful for
 building abstractions like <code>Rc&lt;T&gt;</code> or <code>Arc&lt;T&gt;</code>, which internally
