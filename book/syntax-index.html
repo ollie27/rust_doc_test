@@ -241,7 +241,6 @@
 <li><code>-</code> (<code>- expr</code>): arithmetic negation.  Overloadable (<code>Neg</code>).</li>
 <li><code>-=</code> (<code>var -= expr</code>): arithmetic subtraction &amp; assignment. Overloadable (<code>SubAssign</code>).</li>
 <li><code>-&gt;</code> (<code>fn(…) -&gt; type</code>, <code>|…| -&gt; type</code>): function and closure return type.  See <a href="functions.html">Functions</a>, <a href="closures.html">Closures</a>.</li>
-<li><code>-&gt; !</code> (<code>fn(…) -&gt; !</code>, <code>|…| -&gt; !</code>): diverging function or closure. See <a href="functions.html#diverging-functions">Diverging Functions</a>.</li>
 <li><code>.</code> (<code>expr.ident</code>): member access.  See <a href="structs.html">Structs</a>, <a href="method-syntax.html">Method Syntax</a>.</li>
 <li><code>..</code> (<code>..</code>, <code>expr..</code>, <code>..expr</code>, <code>expr..expr</code>): right-exclusive range literal.</li>
 <li><code>..</code> (<code>..expr</code>): struct literal update syntax.  See <a href="structs.html#update-syntax">Structs (Update syntax)</a>.</li>
@@ -351,6 +350,12 @@
 <li><code>/**…*/</code>: outer block doc comment.  See <a href="comments.html">Comments</a>.</li>
 </ul>
 
+<!-- Special types -->
+
+<ul>
+<li><code>!</code>: always empty Never type.  See <a href="functions.html#diverging-functions">Diverging Functions</a>.</li>
+</ul>
+
 <!-- Various things involving parens and tuples -->
 
 <ul>
@@ -382,11 +387,7 @@
 <li><code>expr[..]</code>, <code>expr[a..]</code>, <code>expr[..b]</code>, <code>expr[a..b]</code>: collection indexing pretending to be collection slicing, using <code>Range</code>, <code>RangeFrom</code>, <code>RangeTo</code>, <code>RangeFull</code> as the &quot;index&quot;.</li>
 </ul>
 
-    <script type="text/javascript">
-        window.playgroundUrl = "https://play.rust-lang.org";
-    </script>
     <script src='rustbook.js'></script>
-<script src='playpen.js'></script>
 </div></div>
 
 

@@ -47,32 +47,27 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-15874' class='srclink' href='../src/std/src/libstd/macros.rs.html#214-216' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-15795' class='srclink' href='../src/std/src/libstd/macros.rs.html#220-222' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>format_args</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>fmt</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>args</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> { ... };
 }</pre>
 <div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><div class='docblock'><p>The core macro for formatted string creation &amp; output.</p>
 
-<p>This macro produces a value of type <code>fmt::Arguments</code>. This value can be
-passed to the functions in <code>std::fmt</code> for performing useful functions.
-All other formatting macros (<code>format!</code>, <code>write!</code>, <code>println!</code>, etc) are
+<p>This macro produces a value of type <a href="../std/fmt/struct.Arguments.html"><code>fmt::Arguments</code></a>. This value can be
+passed to the functions in <a href="../std/fmt/index.html"><code>std::fmt</code></a> for performing useful functions.
+All other formatting macros (<a href="../std/macro.format.html"><code>format!</code></a>, <a href="../std/macro.write.html"><code>write!</code></a>, <a href="../std/macro.println.html"><code>println!</code></a>, etc) are
 proxied through this one.</p>
 
-<p>For more information, see the documentation in <code>std::fmt</code>.</p>
+<p>For more information, see the documentation in <a href="../std/fmt/index.html"><code>std::fmt</code></a>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
-<span class='rusttest'>fn main() {
-    use std::fmt;
-
-let s = fmt::format(format_args!(&quot;hello {}&quot;, &quot;world&quot;));
-assert_eq!(s, format!(&quot;hello {}&quot;, &quot;world&quot;));
-}</span><pre class='rust rust-example-rendered'>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 
 <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>fmt</span>::<span class='ident'>format</span>(<span class='macro'>format_args</span><span class='macro'>!</span>(<span class='string'>&quot;hello {}&quot;</span>, <span class='string'>&quot;world&quot;</span>));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;hello {}&quot;</span>, <span class='string'>&quot;world&quot;</span>));
-</pre>
+<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afmt%3B%0A%0Alet%20s%20%3D%20fmt%3A%3Aformat(format_args!(%22hello%20%7B%7D%22%2C%20%22world%22))%3B%0Aassert_eq!(s%2C%20format!(%22hello%20%7B%7D%22%2C%20%22world%22))%3B%0A%7D">Run</a></pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -129,11 +124,9 @@ assert_eq!(s, format!(&quot;hello {}&quot;, &quot;world&quot;));
     <script>
         window.rootPath = "../";
         window.currentCrate = "std";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    <script src="../playpen.js"></script>
     <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -522,6 +522,8 @@
 <span id="478">478</span>
 <span id="479">479</span>
 <span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -749,6 +751,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>char_internals</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>collections</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>collections_bound</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>compiler_builtins_lib</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>const_fn</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core_float</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core_intrinsics</span>)]</span>
@@ -797,12 +800,10 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>str_utf16</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>test</span>, <span class='ident'>rustc_private</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>thread_local</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>try_borrow</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>try_from</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unboxed_closures</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unicode</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unique</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>stage0</span>, <span class='ident'>feature</span>(<span class='ident'>unsafe_no_drop_flag</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unwind_attributes</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>vec_push_all</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>zero_one</span>)]</span>
@@ -828,8 +829,8 @@
 <span class='comment'>// We want to reexport a few macros from core but libcore has already been</span>
 <span class='comment'>// imported by the compiler (via our #[no_std] attribute) In this case we just</span>
 <span class='comment'>// add a new crate name so we can attach the reexports to it.</span>
-<span class='attribute'>#[<span class='ident'>macro_reexport</span>(<span class='ident'>assert</span>, <span class='ident'>assert_eq</span>, <span class='ident'>debug_assert</span>, <span class='ident'>debug_assert_eq</span>,
-                 <span class='ident'>unreachable</span>, <span class='ident'>unimplemented</span>, <span class='ident'>write</span>, <span class='ident'>writeln</span>, <span class='ident'>try</span>)]</span>
+<span class='attribute'>#[<span class='ident'>macro_reexport</span>(<span class='ident'>assert</span>, <span class='ident'>assert_eq</span>, <span class='ident'>assert_ne</span>, <span class='ident'>debug_assert</span>, <span class='ident'>debug_assert_eq</span>,
+                 <span class='ident'>debug_assert_ne</span>, <span class='ident'>unreachable</span>, <span class='ident'>unimplemented</span>, <span class='ident'>write</span>, <span class='ident'>writeln</span>, <span class='ident'>try</span>)]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>core</span> <span class='kw'>as</span> <span class='ident'>__core</span>;
 
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
@@ -846,6 +847,9 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>stage0</span>)]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>alloc_system</span>;
+
+<span class='comment'>// compiler-rt intrinsics</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>compiler_builtins</span>;
 
 <span class='comment'>// Make std testable by not duplicating lang items and other globals. See #2912</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>std</span> <span class='kw'>as</span> <span class='ident'>realstd</span>;
@@ -1060,11 +1064,9 @@
     <script>
         window.rootPath = "../../../../";
         window.currentCrate = "std";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
-    <script src="../../../../playpen.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>
 </html>

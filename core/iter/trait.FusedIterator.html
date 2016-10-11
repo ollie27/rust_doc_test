@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-35965' class='srclink' href='../../src/core/src/libcore/iter/traits.rs.html#670' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4211' class='srclink' href='../../src/core/src/libcore/iter/traits.rs.html#664' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait FusedIterator: <a class='trait' href='../../core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a> { }</pre><div class='stability'><em class='stab unstable'>Unstable (<code>fused</code> <a href="https://github.com/rust-lang/rust/issues/35602">#35602</a>)</em></div><div class='docblock'><p>An iterator that always continues to yield <code>None</code> when exhausted.</p>
 
 <p>Calling next on a fused iterator that has returned <code>None</code> once is guaranteed
@@ -64,8 +64,6 @@ wrapper will be a no-op with no performance penalty.</p>
     <li><code>impl FusedIterator for <a class='struct' href='../../core/char/struct.EscapeUnicode.html' title='core::char::EscapeUnicode'>EscapeUnicode</a></code></li>
 <li><code>impl FusedIterator for <a class='struct' href='../../core/char/struct.EscapeDefault.html' title='core::char::EscapeDefault'>EscapeDefault</a></code></li>
 <li><code>impl FusedIterator for <a class='struct' href='../../core/char/struct.EscapeDebug.html' title='core::char::EscapeDebug'>EscapeDebug</a></code></li>
-<li><code>impl FusedIterator for <a class='struct' href='../../core/char/struct.EncodeUtf8.html' title='core::char::EncodeUtf8'>EncodeUtf8</a></code></li>
-<li><code>impl FusedIterator for <a class='struct' href='../../core/char/struct.EncodeUtf16.html' title='core::char::EncodeUtf16'>EncodeUtf16</a></code></li>
 <li><code>impl&lt;I:&nbsp;<a class='trait' href='../../core/iter/trait.FusedIterator.html' title='core::iter::FusedIterator'>FusedIterator</a>&lt;Item=u8&gt;&gt; FusedIterator for <a class='struct' href='../../core/char/struct.DecodeUtf8.html' title='core::char::DecodeUtf8'>DecodeUtf8</a>&lt;I&gt;</code></li>
 <li><code>impl&lt;A&gt; FusedIterator for <a class='struct' href='../../core/iter/struct.StepBy.html' title='core::iter::StepBy'>StepBy</a>&lt;A,&nbsp;<a class='struct' href='../../core/ops/struct.RangeFrom.html' title='core::ops::RangeFrom'>RangeFrom</a>&lt;A&gt;&gt; <span class='where'>where A: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>, &amp;'a A: <a class='trait' href='../../core/ops/trait.Add.html' title='core::ops::Add'>Add</a>&lt;&amp;'a A,&nbsp;Output=A&gt;</span></code></li>
 <li><code>impl&lt;A:&nbsp;<a class='trait' href='../../core/iter/trait.Step.html' title='core::iter::Step'>Step</a> + <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; FusedIterator for <a class='struct' href='../../core/iter/struct.StepBy.html' title='core::iter::StepBy'>StepBy</a>&lt;A,&nbsp;<a class='struct' href='../../core/ops/struct.Range.html' title='core::ops::Range'>Range</a>&lt;A&gt;&gt;</code></li>
@@ -185,11 +183,9 @@ wrapper will be a no-op with no performance penalty.</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "core";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    <script src="../../playpen.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

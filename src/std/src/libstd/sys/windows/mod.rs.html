@@ -261,6 +261,10 @@
 <span id="217">217</span>
 <span id="218">218</span>
 <span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -282,17 +286,21 @@
 
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>compat</span>;
 
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>args</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>backtrace</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>c</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>condvar</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>dynamic_lib</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>env</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>ext</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>fs</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>handle</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>memchr</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>mutex</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>net</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>os</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>os_str</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>path</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>pipe</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>process</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>rand</span>;
@@ -538,11 +546,9 @@
     <script>
         window.rootPath = "../../../../../../";
         window.currentCrate = "std";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../../../../../../jquery.js"></script>
     <script src="../../../../../../main.js"></script>
-    <script src="../../../../../../playpen.js"></script>
     <script defer src="../../../../../../search-index.js"></script>
 </body>
 </html>

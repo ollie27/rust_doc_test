@@ -1219,6 +1219,9 @@
 <span id="1175">1175</span>
 <span id="1176">1176</span>
 <span id="1177">1177</span>
+<span id="1178">1178</span>
+<span id="1179">1179</span>
+<span id="1180">1180</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1428,10 +1431,12 @@
     <span class='doccomment'>/// Copied from String::push</span>
     <span class='doccomment'>/// This does **not** include the WTF-8 concatenation check.</span>
     <span class='kw'>fn</span> <span class='ident'>push_code_point_unchecked</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>code_point</span>: <span class='ident'>CodePoint</span>) {
-        <span class='kw'>let</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
-            <span class='ident'>char</span>::<span class='ident'>from_u32_unchecked</span>(<span class='ident'>code_point</span>.<span class='ident'>value</span>).<span class='ident'>encode_utf8</span>()
+        <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
+            <span class='ident'>char</span>::<span class='ident'>from_u32_unchecked</span>(<span class='ident'>code_point</span>.<span class='ident'>value</span>)
         };
-        <span class='self'>self</span>.<span class='ident'>bytes</span>.<span class='ident'>extend_from_slice</span>(<span class='ident'>bytes</span>.<span class='ident'>as_slice</span>());
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>4</span>];
+        <span class='kw'>let</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>c</span>.<span class='ident'>encode_utf8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>).<span class='ident'>as_bytes</span>();
+        <span class='self'>self</span>.<span class='ident'>bytes</span>.<span class='ident'>extend_from_slice</span>(<span class='ident'>bytes</span>)
     }
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
@@ -1960,15 +1965,16 @@
             <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='ident'>tmp</span>);
         }
 
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>2</span>];
         <span class='self'>self</span>.<span class='ident'>code_points</span>.<span class='ident'>next</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>code_point</span><span class='op'>|</span> {
-            <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
-                <span class='ident'>char</span>::<span class='ident'>from_u32_unchecked</span>(<span class='ident'>code_point</span>.<span class='ident'>value</span>).<span class='ident'>encode_utf16</span>()
+            <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
+                <span class='ident'>char</span>::<span class='ident'>from_u32_unchecked</span>(<span class='ident'>code_point</span>.<span class='ident'>value</span>)
             };
-            <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>n</span>.<span class='ident'>as_slice</span>();
-            <span class='kw'>if</span> <span class='ident'>n</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>2</span> {
-                <span class='self'>self</span>.<span class='ident'>extra</span> <span class='op'>=</span> <span class='ident'>n</span>[<span class='number'>1</span>];
+            <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>c</span>.<span class='ident'>encode_utf16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>).<span class='ident'>len</span>();
+            <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>==</span> <span class='number'>2</span> {
+                <span class='self'>self</span>.<span class='ident'>extra</span> <span class='op'>=</span> <span class='ident'>buf</span>[<span class='number'>1</span>];
             }
-            <span class='ident'>n</span>[<span class='number'>0</span>]
+            <span class='ident'>buf</span>[<span class='number'>0</span>]
         })
     }
 
@@ -2454,11 +2460,9 @@
     <script>
         window.rootPath = "../../../../../../";
         window.currentCrate = "std";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../../../../../../jquery.js"></script>
     <script src="../../../../../../main.js"></script>
-    <script src="../../../../../../playpen.js"></script>
     <script defer src="../../../../../../search-index.js"></script>
 </body>
 </html>

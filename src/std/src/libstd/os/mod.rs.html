@@ -78,6 +78,7 @@
 <span id="34">34</span>
 <span id="35">35</span>
 <span id="36">36</span>
+<span id="37">37</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -105,6 +106,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;bitrig&quot;</span>)]</span>    <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>bitrig</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;dragonfly&quot;</span>)]</span> <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>dragonfly</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>)]</span>   <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>freebsd</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;haiku&quot;</span>)]</span>     <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>haiku</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>)]</span>       <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>ios</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>)]</span>     <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>linux</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>)]</span>     <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>macos</span>;
@@ -172,11 +174,9 @@
     <script>
         window.rootPath = "../../../../../";
         window.currentCrate = "std";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../../../../../jquery.js"></script>
     <script src="../../../../../main.js"></script>
-    <script src="../../../../../playpen.js"></script>
     <script defer src="../../../../../search-index.js"></script>
 </body>
 </html>

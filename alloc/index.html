@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/alloc/src/liballoc/lib.rs.html#11-126' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/alloc/src/liballoc/lib.rs.html#11-125' title='goto source code'>[src]</a></span></h1>
 <div class='stability'><em class='stab unstable'>Unstable (<code>alloc</code> <a href="https://github.com/rust-lang/rust/issues/27783">#27783</a>)<p>: this library is unlikely to be stabilized in its current form or name</p>
 </em></div><div class='docblock'>
 <h1 id='the-rust-core-allocation-library' class='section-header'><a href='#the-rust-core-allocation-library'>The Rust core allocation library</a></h1>
@@ -98,43 +98,42 @@ default global allocator. It is not compatible with the libc allocator API.</p>
                        <tr class=' module-item'>
                            <td><a class='mod' href='arc/index.html'
                                   title='alloc::arc'>arc</a></td>
-                           <td class='docblock short'>
-                                <p>Threadsafe reference-counted boxes (the <code>Arc&lt;T&gt;</code> type).</p>
+                           <td class='docblock-short'>
+                                <p>Thread-safe reference-counting pointers.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='mod' href='boxed/index.html'
                                   title='alloc::boxed'>boxed</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A pointer type for heap allocation.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='mod' href='rc/index.html'
                                   title='alloc::rc'>rc</a></td>
-                           <td class='docblock short'>
-                                <p>Unsynchronized reference-counted boxes (the <code>Rc&lt;T&gt;</code> type) which are usable
-only within a single thread.</p>
+                           <td class='docblock-short'>
+                                <p>Single-threaded reference-counting pointers.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
                            <td><a class='mod' href='heap/index.html'
                                   title='alloc::heap'>heap</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                [<em class='stab unstable'>Unstable</em>] 
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
                            <td><a class='mod' href='oom/index.html'
                                   title='alloc::oom'>oom</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                [<em class='stab unstable'>Unstable</em>] 
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
                            <td><a class='mod' href='raw_vec/index.html'
                                   title='alloc::raw_vec'>raw_vec</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                [<em class='stab unstable'>Unstable</em>] 
                            </td>
                        </tr></table></section>
@@ -193,11 +192,9 @@ only within a single thread.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "alloc";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

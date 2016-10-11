@@ -503,6 +503,19 @@
 <span id="459">459</span>
 <span id="460">460</span>
 <span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -699,12 +712,18 @@
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>builtin</span> {
     <span class='doccomment'>/// The core macro for formatted string creation &amp; output.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This macro produces a value of type `fmt::Arguments`. This value can be</span>
-    <span class='doccomment'>/// passed to the functions in `std::fmt` for performing useful functions.</span>
-    <span class='doccomment'>/// All other formatting macros (`format!`, `write!`, `println!`, etc) are</span>
+    <span class='doccomment'>/// This macro produces a value of type [`fmt::Arguments`]. This value can be</span>
+    <span class='doccomment'>/// passed to the functions in [`std::fmt`] for performing useful functions.</span>
+    <span class='doccomment'>/// All other formatting macros ([`format!`], [`write!`], [`println!`], etc) are</span>
     <span class='doccomment'>/// proxied through this one.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// For more information, see the documentation in `std::fmt`.</span>
+    <span class='doccomment'>/// For more information, see the documentation in [`std::fmt`].</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// [`fmt::Arguments`]: ../std/fmt/struct.Arguments.html</span>
+    <span class='doccomment'>/// [`std::fmt`]: ../std/fmt/index.html</span>
+    <span class='doccomment'>/// [`format!`]: ../std/macro.format.html</span>
+    <span class='doccomment'>/// [`write!`]: ../std/macro.write.html</span>
+    <span class='doccomment'>/// [`println!`]: ../std/macro.println.html</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
@@ -950,9 +969,16 @@
     <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>cfg</span> { ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cfg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> ({ <span class='comment'>/* compiler built-in */</span> }) }
 
-    <span class='doccomment'>/// Parse the current given file as an expression.</span>
+    <span class='doccomment'>/// Parse the file provided in the argument as an expression or an</span>
+    <span class='doccomment'>/// item according to the context. This file is located relative</span>
+    <span class='doccomment'>/// to the current file (similarly to how modules are found).</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This is generally a bad idea, because it&#39;s going to behave unhygienically.</span>
+    <span class='doccomment'>/// Using this macro is often a bad idea, because if the file is</span>
+    <span class='doccomment'>/// parsed as an expression, it is going to be placed in the</span>
+    <span class='doccomment'>/// surrounding code unhygenically. This could result in variables</span>
+    <span class='doccomment'>/// or functions being different from what the file expected if</span>
+    <span class='doccomment'>/// there are variables or functions that have the same name in</span>
+    <span class='doccomment'>/// the current file.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
@@ -1022,11 +1048,9 @@
     <script>
         window.rootPath = "../../../../";
         window.currentCrate = "std";
-        window.playgroundUrl = "https://play.rust-lang.org/";
     </script>
     <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
-    <script src="../../../../playpen.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>
 </html>
