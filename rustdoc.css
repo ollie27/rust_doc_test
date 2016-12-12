@@ -523,16 +523,15 @@ body.blur > :not(#help) {
 	padding: 20px;
 }
 
-em.stab {
+.stab {
 	display: inline-block;
 	border-width: 1px;
 	border-style: solid;
 	padding: 3px;
 	margin-bottom: 5px;
 	font-size: 90%;
-	font-style: normal;
 }
-em.stab p {
+.stab p {
 	display: inline;
 }
 

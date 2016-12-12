@@ -62,7 +62,7 @@
 <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='ident'>atomic_ptr</span>  <span class='op'>=</span> <span class='ident'>AtomicPtr</span>::<span class='ident'>new</span>(<span class='ident'>ptr</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3AAtomicPtr%3B%0A%0Alet%20ptr%20%3D%20%26mut%205%3B%0Alet%20atomic_ptr%20%20%3D%20AtomicPtr%3A%3Anew(ptr)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get_mut' class='method'><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='primitive' href='../../primitive.pointer.html'>*mut T</a></code></span></h4>
-<div class='stability'><em class='stab unstable'>Unstable (<code>atomic_access</code> <a href="https://github.com/rust-lang/rust/issues/35603">#35603</a>)</em></div><div class='docblock'><p>Returns a mutable reference to the underlying pointer.</p>
+<div class='stability'><div class='stab unstable'>Unstable (<code>atomic_access</code> <a href="https://github.com/rust-lang/rust/issues/35603">#35603</a>)</div></div><div class='docblock'><p>Returns a mutable reference to the underlying pointer.</p>
 
 <p>This is safe because the mutable reference guarantees that no other threads are
 concurrently accessing the atomic data.</p>
@@ -76,7 +76,7 @@ concurrently accessing the atomic data.</p>
 <span class='op'>*</span><span class='ident'>atomic_ptr</span>.<span class='ident'>get_mut</span>() <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='number'>5</span>;
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw'>unsafe</span> { <span class='op'>*</span><span class='ident'>atomic_ptr</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) }, <span class='number'>5</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(atomic_access)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3A%7BAtomicPtr%2C%20Ordering%7D%3B%0A%0Alet%20mut%20atomic_ptr%20%3D%20AtomicPtr%3A%3Anew(%26mut%2010)%3B%0A*atomic_ptr.get_mut()%20%3D%20%26mut%205%3B%0Aassert_eq!(unsafe%20%7B%20*atomic_ptr.load(Ordering%3A%3ASeqCst)%20%7D%2C%205)%3B%0A%7D&amp;version=nightly">Run</a></pre>
 </div><h4 id='method.into_inner' class='method'><span id='into_inner.v' class='invisible'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; <a class='primitive' href='../../primitive.pointer.html'>*mut T</a></code></span></h4>
-<div class='stability'><em class='stab unstable'>Unstable (<code>atomic_access</code> <a href="https://github.com/rust-lang/rust/issues/35603">#35603</a>)</em></div><div class='docblock'><p>Consumes the atomic and returns the contained value.</p>
+<div class='stability'><div class='stab unstable'>Unstable (<code>atomic_access</code> <a href="https://github.com/rust-lang/rust/issues/35603">#35603</a>)</div></div><div class='docblock'><p>Consumes the atomic and returns the contained value.</p>
 
 <p>This is safe because passing <code>self</code> by value guarantees that no other threads are
 concurrently accessing the atomic data.</p>
