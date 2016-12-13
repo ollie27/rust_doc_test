@@ -524,7 +524,7 @@ body.blur > :not(#help) {
 }
 
 .stab {
-	display: inline-block;
+	display: table;
 	border-width: 1px;
 	border-style: solid;
 	padding: 3px;
@@ -536,6 +536,7 @@ body.blur > :not(#help) {
 }
 
 .module-item .stab {
+	display: inline;
 	border-width: 0;
 	padding: 0;
 	margin: 0;
