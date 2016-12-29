@@ -1,6 +1,6 @@
 (function() {var implementors = {};
 implementors["core"] = [];
-implementors["rustc_unicode"] = [];
+implementors["std_unicode"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

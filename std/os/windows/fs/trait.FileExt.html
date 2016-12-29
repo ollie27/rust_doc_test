@@ -9,6 +9,7 @@
 
     <title>std::os::windows::fs::FileExt - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
     
@@ -43,7 +44,7 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>fs</a>::<wbr><a class='trait' href=''>FileExt</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version '></span><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>fs</a>::<wbr><a class='trait' href=''>FileExt</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.15.0'>1.15.0</span><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
@@ -51,11 +52,11 @@
 <pre class='rust trait'>pub trait FileExt {
     fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class='primitive' href='../../../primitive.slice.html'>&amp;mut [</a><a class='primitive' href='../../../primitive.u8.html'>u8</a><a class='primitive' href='../../../primitive.slice.html'>]</a>, offset: <a class='primitive' href='../../../primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../../../std/io/type.Result.html' title='std::io::Result'>Result</a>&lt;<a class='primitive' href='../../../primitive.usize.html'>usize</a>&gt;;
     fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class='primitive' href='../../../primitive.slice.html'>&amp;[</a><a class='primitive' href='../../../primitive.u8.html'>u8</a><a class='primitive' href='../../../primitive.slice.html'>]</a>, offset: <a class='primitive' href='../../../primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../../../std/io/type.Result.html' title='std::io::Result'>Result</a>&lt;<a class='primitive' href='../../../primitive.usize.html'>usize</a>&gt;;
-}</pre><div class='stability'><div class='stab unstable'>Unstable (<code>file_offset</code> <a href="https://github.com/rust-lang/rust/issues/35918">#35918</a>)</div></div><div class='docblock'><p>Windows-specific extensions to <code>File</code></p>
+}</pre><div class='docblock'><p>Windows-specific extensions to <code>File</code></p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.seek_read' class='method stab unstable'><span id='seek_read.v' class='invisible'><code>fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class='primitive' href='../../../primitive.slice.html'>&amp;mut [</a><a class='primitive' href='../../../primitive.u8.html'>u8</a><a class='primitive' href='../../../primitive.slice.html'>]</a>, offset: <a class='primitive' href='../../../primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../../../std/io/type.Result.html' title='std::io::Result'>Result</a>&lt;<a class='primitive' href='../../../primitive.usize.html'>usize</a>&gt;</code></span></h3><div class='stability'><div class='stab unstable'>Unstable (<code>file_offset</code> <a href="https://github.com/rust-lang/rust/issues/35918">#35918</a>)</div></div><div class='docblock'><p>Seeks to a given position and reads a number of bytes.</p>
+        <h3 id='tymethod.seek_read' class='method'><span id='seek_read.v' class='invisible'><code>fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class='primitive' href='../../../primitive.slice.html'>&amp;mut [</a><a class='primitive' href='../../../primitive.u8.html'>u8</a><a class='primitive' href='../../../primitive.slice.html'>]</a>, offset: <a class='primitive' href='../../../primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../../../std/io/type.Result.html' title='std::io::Result'>Result</a>&lt;<a class='primitive' href='../../../primitive.usize.html'>usize</a>&gt;</code></span></h3><div class='docblock'><p>Seeks to a given position and reads a number of bytes.</p>
 
 <p>Returns the number of bytes read.</p>
 
@@ -69,7 +70,7 @@ function, it is set to the end of the read.</p>
 <p>Note that similar to <code>File::read</code>, it is not an error to return with a
 short read. When returning from such a short read, the file pointer is
 still updated.</p>
-</div><h3 id='tymethod.seek_write' class='method stab unstable'><span id='seek_write.v' class='invisible'><code>fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class='primitive' href='../../../primitive.slice.html'>&amp;[</a><a class='primitive' href='../../../primitive.u8.html'>u8</a><a class='primitive' href='../../../primitive.slice.html'>]</a>, offset: <a class='primitive' href='../../../primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../../../std/io/type.Result.html' title='std::io::Result'>Result</a>&lt;<a class='primitive' href='../../../primitive.usize.html'>usize</a>&gt;</code></span></h3><div class='stability'><div class='stab unstable'>Unstable (<code>file_offset</code> <a href="https://github.com/rust-lang/rust/issues/35918">#35918</a>)</div></div><div class='docblock'><p>Seeks to a given position and writes a number of bytes.</p>
+</div><h3 id='tymethod.seek_write' class='method'><span id='seek_write.v' class='invisible'><code>fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class='primitive' href='../../../primitive.slice.html'>&amp;[</a><a class='primitive' href='../../../primitive.u8.html'>u8</a><a class='primitive' href='../../../primitive.slice.html'>]</a>, offset: <a class='primitive' href='../../../primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../../../std/io/type.Result.html' title='std::io::Result'>Result</a>&lt;<a class='primitive' href='../../../primitive.usize.html'>usize</a>&gt;</code></span></h3><div class='docblock'><p>Seeks to a given position and writes a number of bytes.</p>
 
 <p>Returns the number of bytes written.</p>
 

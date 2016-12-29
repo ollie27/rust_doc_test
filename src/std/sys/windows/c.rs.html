@@ -9,6 +9,7 @@
 
     <title>c.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
     
@@ -1212,6 +1213,14 @@
 <span id="1168">1168</span>
 <span id="1169">1169</span>
 <span id="1170">1170</span>
+<span id="1171">1171</span>
+<span id="1172">1172</span>
+<span id="1173">1173</span>
+<span id="1174">1174</span>
+<span id="1175">1175</span>
+<span id="1176">1176</span>
+<span id="1177">1177</span>
+<span id="1178">1178</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1262,7 +1271,9 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>HCRYPTPROV</span> <span class='op'>=</span> <span class='ident'>LONG_PTR</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ULONG_PTR</span> <span class='op'>=</span> <span class='ident'>c_ulonglong</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ULONG</span> <span class='op'>=</span> <span class='ident'>c_ulong</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ULONGLONG</span> <span class='op'>=</span> <span class='ident'>u64</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>DWORDLONG</span> <span class='op'>=</span> <span class='ident'>ULONGLONG</span>;
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBOOL</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BOOL</span>;
@@ -1281,7 +1292,6 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWCH</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WCHAR</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWIN32_FIND_DATAW</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WIN32_FIND_DATAW</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSADATA</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSADATA</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSAPROTOCOLCHAIN</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSAPROTOCOLCHAIN</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSAPROTOCOL_INFO</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSAPROTOCOL_INFO</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSTR</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WCHAR</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPFILETIME</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>FILETIME</span>;
@@ -1525,8 +1535,6 @@
     <span class='kw'>pub</span> <span class='ident'>szDescription</span>: [<span class='ident'>u8</span>; <span class='ident'>WSADESCRIPTION_LEN</span> <span class='op'>+</span> <span class='number'>1</span>],
     <span class='kw'>pub</span> <span class='ident'>szSystemStatus</span>: [<span class='ident'>u8</span>; <span class='ident'>WSASYS_STATUS_LEN</span> <span class='op'>+</span> <span class='number'>1</span>],
 }
-
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>WSAEVENT</span> <span class='op'>=</span> <span class='ident'>HANDLE</span>;
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>WSAPROTOCOL_INFO</span> {
@@ -2034,6 +2042,16 @@
     <span class='ident'>ExceptionCollidedUnwind</span>
 }
 
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CONSOLE_READCONSOLE_CONTROL</span> {
+    <span class='kw'>pub</span> <span class='ident'>nLength</span>: <span class='ident'>ULONG</span>,
+    <span class='kw'>pub</span> <span class='ident'>nInitialChars</span>: <span class='ident'>ULONG</span>,
+    <span class='kw'>pub</span> <span class='ident'>dwCtrlWakeupMask</span>: <span class='ident'>ULONG</span>,
+    <span class='kw'>pub</span> <span class='ident'>dwControlKeyState</span>: <span class='ident'>ULONG</span>,
+}
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PCONSOLE_READCONSOLE_CONTROL</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONSOLE_READCONSOLE_CONTROL</span>;
+
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;ws2_32&quot;</span>)]</span>
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;userenv&quot;</span>)]</span>
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;shell32&quot;</span>)]</span>
@@ -2064,12 +2082,11 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>LeaveCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>DeleteCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
 
-    <span class='comment'>// FIXME - pInputControl should be PCONSOLE_READCONSOLE_CONTROL</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ReadConsoleW</span>(<span class='ident'>hConsoleInput</span>: <span class='ident'>HANDLE</span>,
                         <span class='ident'>lpBuffer</span>: <span class='ident'>LPVOID</span>,
                         <span class='ident'>nNumberOfCharsToRead</span>: <span class='ident'>DWORD</span>,
                         <span class='ident'>lpNumberOfCharsRead</span>: <span class='ident'>LPDWORD</span>,
-                        <span class='ident'>pInputControl</span>: <span class='ident'>LPVOID</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
+                        <span class='ident'>pInputControl</span>: <span class='ident'>PCONSOLE_READCONSOLE_CONTROL</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>WriteConsoleW</span>(<span class='ident'>hConsoleOutput</span>: <span class='ident'>HANDLE</span>,
                          <span class='ident'>lpBuffer</span>: <span class='ident'>LPCVOID</span>,

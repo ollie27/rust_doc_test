@@ -9,6 +9,7 @@
 
     <title>vec_deque.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -2764,19 +2765,6 @@
 <span id="2720">2720</span>
 <span id="2721">2721</span>
 <span id="2722">2722</span>
-<span id="2723">2723</span>
-<span id="2724">2724</span>
-<span id="2725">2725</span>
-<span id="2726">2726</span>
-<span id="2727">2727</span>
-<span id="2728">2728</span>
-<span id="2729">2729</span>
-<span id="2730">2730</span>
-<span id="2731">2731</span>
-<span id="2732">2732</span>
-<span id="2733">2733</span>
-<span id="2734">2734</span>
-<span id="2735">2735</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2986,11 +2974,7 @@
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>wrap_copy</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>dst</span>: <span class='ident'>usize</span>, <span class='ident'>src</span>: <span class='ident'>usize</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>) {
         <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
         <span class='kw'>fn</span> <span class='ident'>diff</span>(<span class='ident'>a</span>: <span class='ident'>usize</span>, <span class='ident'>b</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
-            <span class='kw'>if</span> <span class='ident'>a</span> <span class='op'>&lt;=</span> <span class='ident'>b</span> {
-                <span class='ident'>b</span> <span class='op'>-</span> <span class='ident'>a</span>
-            } <span class='kw'>else</span> {
-                <span class='ident'>a</span> <span class='op'>-</span> <span class='ident'>b</span>
-            }
+            <span class='kw'>if</span> <span class='ident'>a</span> <span class='op'>&lt;=</span> <span class='ident'>b</span> { <span class='ident'>b</span> <span class='op'>-</span> <span class='ident'>a</span> } <span class='kw'>else</span> { <span class='ident'>a</span> <span class='op'>-</span> <span class='ident'>b</span> }
         }
         <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>cmp</span>::<span class='ident'>min</span>(<span class='ident'>diff</span>(<span class='ident'>dst</span>, <span class='ident'>src</span>), <span class='self'>self</span>.<span class='ident'>cap</span>() <span class='op'>-</span> <span class='ident'>diff</span>(<span class='ident'>dst</span>, <span class='ident'>src</span>)) <span class='op'>+</span> <span class='ident'>len</span> <span class='op'>&lt;=</span> <span class='self'>self</span>.<span class='ident'>cap</span>(),
                       <span class='string'>&quot;wrc dst={} src={} len={} cap={}&quot;</span>,
@@ -3332,8 +3316,8 @@
         <span class='kw'>let</span> <span class='ident'>old_cap</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cap</span>();
         <span class='kw'>let</span> <span class='ident'>used_cap</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>len</span>() <span class='op'>+</span> <span class='number'>1</span>;
         <span class='kw'>let</span> <span class='ident'>new_cap</span> <span class='op'>=</span> <span class='ident'>used_cap</span>.<span class='ident'>checked_add</span>(<span class='ident'>additional</span>)
-                              .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>needed_cap</span><span class='op'>|</span> <span class='ident'>needed_cap</span>.<span class='ident'>checked_next_power_of_two</span>())
-                              .<span class='ident'>expect</span>(<span class='string'>&quot;capacity overflow&quot;</span>);
+            .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>needed_cap</span><span class='op'>|</span> <span class='ident'>needed_cap</span>.<span class='ident'>checked_next_power_of_two</span>())
+            .<span class='ident'>expect</span>(<span class='string'>&quot;capacity overflow&quot;</span>);
 
         <span class='kw'>if</span> <span class='ident'>new_cap</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>capacity</span>() {
             <span class='self'>self</span>.<span class='ident'>buf</span>.<span class='ident'>reserve_exact</span>(<span class='ident'>used_cap</span>, <span class='ident'>new_cap</span> <span class='op'>-</span> <span class='ident'>used_cap</span>);
@@ -4073,9 +4057,7 @@
 
         <span class='kw'>let</span> <span class='ident'>contiguous</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>is_contiguous</span>();
 
-        <span class='kw'>match</span> (<span class='ident'>contiguous</span>,
-               <span class='ident'>distance_to_tail</span> <span class='op'>&lt;=</span> <span class='ident'>distance_to_head</span>,
-               <span class='ident'>idx</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>tail</span>) {
+        <span class='kw'>match</span> (<span class='ident'>contiguous</span>, <span class='ident'>distance_to_tail</span> <span class='op'>&lt;=</span> <span class='ident'>distance_to_head</span>, <span class='ident'>idx</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>tail</span>) {
             (<span class='bool-val'>true</span>, <span class='bool-val'>true</span>, _) <span class='kw'>if</span> <span class='ident'>index</span> <span class='op'>==</span> <span class='number'>0</span> <span class='op'>=&gt;</span> {
                 <span class='comment'>// push_front</span>
                 <span class='comment'>//</span>
@@ -4293,9 +4275,7 @@
 
         <span class='kw'>let</span> <span class='ident'>contiguous</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>is_contiguous</span>();
 
-        <span class='kw'>match</span> (<span class='ident'>contiguous</span>,
-               <span class='ident'>distance_to_tail</span> <span class='op'>&lt;=</span> <span class='ident'>distance_to_head</span>,
-               <span class='ident'>idx</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>tail</span>) {
+        <span class='kw'>match</span> (<span class='ident'>contiguous</span>, <span class='ident'>distance_to_tail</span> <span class='op'>&lt;=</span> <span class='ident'>distance_to_head</span>, <span class='ident'>idx</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>tail</span>) {
             (<span class='bool-val'>true</span>, <span class='bool-val'>true</span>, _) <span class='op'>=&gt;</span> {
                 <span class='kw'>unsafe</span> {
                     <span class='comment'>// contiguous, remove closer to tail:</span>
@@ -4592,7 +4572,7 @@
 }
 
 <span class='doccomment'>/// Returns the two slices that cover the VecDeque&#39;s valid range</span>
-<span class='kw'>trait</span> <span class='ident'>RingSlices</span> : <span class='ident'>Sized</span> {
+<span class='kw'>trait</span> <span class='ident'>RingSlices</span>: <span class='ident'>Sized</span> {
     <span class='kw'>fn</span> <span class='ident'>slice</span>(<span class='self'>self</span>, <span class='ident'>from</span>: <span class='ident'>usize</span>, <span class='ident'>to</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span>;
     <span class='kw'>fn</span> <span class='ident'>split_at</span>(<span class='self'>self</span>, <span class='ident'>i</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> (<span class='self'>Self</span>, <span class='self'>Self</span>);
 
@@ -4675,7 +4655,7 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>fold</span><span class='op'>&lt;</span><span class='ident'>Acc</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>accum</span>: <span class='ident'>Acc</span>, <span class='kw-2'>mut</span> <span class='ident'>f</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>Acc</span>
-        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnMut</span>(<span class='ident'>Acc</span>, <span class='self'>Self</span>::<span class='ident'>Item</span>) <span class='op'>-&gt;</span> <span class='ident'>Acc</span>,
+        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnMut</span>(<span class='ident'>Acc</span>, <span class='self'>Self</span>::<span class='ident'>Item</span>) <span class='op'>-&gt;</span> <span class='ident'>Acc</span>
     {
         <span class='kw'>let</span> (<span class='ident'>front</span>, <span class='ident'>back</span>) <span class='op'>=</span> <span class='ident'>RingSlices</span>::<span class='ident'>ring_slices</span>(<span class='self'>self</span>.<span class='ident'>ring</span>, <span class='self'>self</span>.<span class='ident'>head</span>, <span class='self'>self</span>.<span class='ident'>tail</span>);
         <span class='ident'>accum</span> <span class='op'>=</span> <span class='ident'>front</span>.<span class='ident'>iter</span>().<span class='ident'>fold</span>(<span class='ident'>accum</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>f</span>);
@@ -4739,7 +4719,7 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>fold</span><span class='op'>&lt;</span><span class='ident'>Acc</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>accum</span>: <span class='ident'>Acc</span>, <span class='kw-2'>mut</span> <span class='ident'>f</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>Acc</span>
-        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnMut</span>(<span class='ident'>Acc</span>, <span class='self'>Self</span>::<span class='ident'>Item</span>) <span class='op'>-&gt;</span> <span class='ident'>Acc</span>,
+        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnMut</span>(<span class='ident'>Acc</span>, <span class='self'>Self</span>::<span class='ident'>Item</span>) <span class='op'>-&gt;</span> <span class='ident'>Acc</span>
     {
         <span class='kw'>let</span> (<span class='ident'>front</span>, <span class='ident'>back</span>) <span class='op'>=</span> <span class='ident'>RingSlices</span>::<span class='ident'>ring_slices</span>(<span class='self'>self</span>.<span class='ident'>ring</span>, <span class='self'>self</span>.<span class='ident'>head</span>, <span class='self'>self</span>.<span class='ident'>tail</span>);
         <span class='ident'>accum</span> <span class='op'>=</span> <span class='ident'>front</span>.<span class='ident'>iter_mut</span>().<span class='ident'>fold</span>(<span class='ident'>accum</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>f</span>);
@@ -4862,17 +4842,15 @@
             (_, <span class='number'>0</span>) <span class='op'>=&gt;</span> {
                 <span class='ident'>source_deque</span>.<span class='ident'>head</span> <span class='op'>=</span> <span class='ident'>drain_tail</span>;
             }
-            _ <span class='op'>=&gt;</span> {
-                <span class='kw'>unsafe</span> {
-                    <span class='kw'>if</span> <span class='ident'>tail_len</span> <span class='op'>&lt;=</span> <span class='ident'>head_len</span> {
-                        <span class='ident'>source_deque</span>.<span class='ident'>tail</span> <span class='op'>=</span> <span class='ident'>source_deque</span>.<span class='ident'>wrap_sub</span>(<span class='ident'>drain_head</span>, <span class='ident'>tail_len</span>);
-                        <span class='ident'>source_deque</span>.<span class='ident'>wrap_copy</span>(<span class='ident'>source_deque</span>.<span class='ident'>tail</span>, <span class='ident'>orig_tail</span>, <span class='ident'>tail_len</span>);
-                    } <span class='kw'>else</span> {
-                        <span class='ident'>source_deque</span>.<span class='ident'>head</span> <span class='op'>=</span> <span class='ident'>source_deque</span>.<span class='ident'>wrap_add</span>(<span class='ident'>drain_tail</span>, <span class='ident'>head_len</span>);
-                        <span class='ident'>source_deque</span>.<span class='ident'>wrap_copy</span>(<span class='ident'>drain_tail</span>, <span class='ident'>drain_head</span>, <span class='ident'>head_len</span>);
-                    }
+            _ <span class='op'>=&gt;</span> <span class='kw'>unsafe</span> {
+                <span class='kw'>if</span> <span class='ident'>tail_len</span> <span class='op'>&lt;=</span> <span class='ident'>head_len</span> {
+                    <span class='ident'>source_deque</span>.<span class='ident'>tail</span> <span class='op'>=</span> <span class='ident'>source_deque</span>.<span class='ident'>wrap_sub</span>(<span class='ident'>drain_head</span>, <span class='ident'>tail_len</span>);
+                    <span class='ident'>source_deque</span>.<span class='ident'>wrap_copy</span>(<span class='ident'>source_deque</span>.<span class='ident'>tail</span>, <span class='ident'>orig_tail</span>, <span class='ident'>tail_len</span>);
+                } <span class='kw'>else</span> {
+                    <span class='ident'>source_deque</span>.<span class='ident'>head</span> <span class='op'>=</span> <span class='ident'>source_deque</span>.<span class='ident'>wrap_add</span>(<span class='ident'>drain_tail</span>, <span class='ident'>head_len</span>);
+                    <span class='ident'>source_deque</span>.<span class='ident'>wrap_copy</span>(<span class='ident'>drain_tail</span>, <span class='ident'>drain_head</span>, <span class='ident'>head_len</span>);
                 }
-            }
+            },
         }
     }
 }
@@ -5068,10 +5046,8 @@
 
             <span class='comment'>// We need to extend the buf if it&#39;s not a power of two, too small</span>
             <span class='comment'>// or doesn&#39;t have at least one free space</span>
-            <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>buf</span>.<span class='ident'>cap</span>().<span class='ident'>is_power_of_two</span>()
-                <span class='op'>||</span> (<span class='ident'>buf</span>.<span class='ident'>cap</span>() <span class='op'>&lt;</span> (<span class='ident'>MINIMUM_CAPACITY</span> <span class='op'>+</span> <span class='number'>1</span>))
-                <span class='op'>||</span> (<span class='ident'>buf</span>.<span class='ident'>cap</span>() <span class='op'>==</span> <span class='ident'>len</span>)
-            {
+            <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>buf</span>.<span class='ident'>cap</span>().<span class='ident'>is_power_of_two</span>() <span class='op'>||</span> (<span class='ident'>buf</span>.<span class='ident'>cap</span>() <span class='op'>&lt;</span> (<span class='ident'>MINIMUM_CAPACITY</span> <span class='op'>+</span> <span class='number'>1</span>)) <span class='op'>||</span>
+               (<span class='ident'>buf</span>.<span class='ident'>cap</span>() <span class='op'>==</span> <span class='ident'>len</span>) {
                 <span class='kw'>let</span> <span class='ident'>cap</span> <span class='op'>=</span> <span class='ident'>cmp</span>::<span class='ident'>max</span>(<span class='ident'>buf</span>.<span class='ident'>cap</span>() <span class='op'>+</span> <span class='number'>1</span>, <span class='ident'>MINIMUM_CAPACITY</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>next_power_of_two</span>();
                 <span class='ident'>buf</span>.<span class='ident'>reserve_exact</span>(<span class='ident'>len</span>, <span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>len</span>);
             }
@@ -5079,7 +5055,7 @@
             <span class='ident'>VecDeque</span> {
                 <span class='ident'>tail</span>: <span class='number'>0</span>,
                 <span class='ident'>head</span>: <span class='ident'>len</span>,
-                <span class='ident'>buf</span>: <span class='ident'>buf</span>
+                <span class='ident'>buf</span>: <span class='ident'>buf</span>,
             }
         }
     }
@@ -5104,18 +5080,17 @@
                     <span class='comment'>// do this in at most three copy moves.</span>
                     <span class='kw'>if</span> (<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>tail</span>) <span class='op'>&gt;</span> <span class='ident'>head</span> {
                         <span class='comment'>// right hand block is the long one; move that enough for the left</span>
-                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(
-                            <span class='ident'>buf</span>.<span class='ident'>offset</span>(<span class='ident'>tail</span> <span class='kw'>as</span> <span class='ident'>isize</span>),
-                            <span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>tail</span> <span class='op'>-</span> <span class='ident'>head</span>) <span class='kw'>as</span> <span class='ident'>isize</span>),
-                            <span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>tail</span>);
+                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>.<span class='ident'>offset</span>(<span class='ident'>tail</span> <span class='kw'>as</span> <span class='ident'>isize</span>),
+                                  <span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>tail</span> <span class='op'>-</span> <span class='ident'>head</span>) <span class='kw'>as</span> <span class='ident'>isize</span>),
+                                  <span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>tail</span>);
                         <span class='comment'>// copy left in the end</span>
                         <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>, <span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>head</span>) <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>head</span>);
                         <span class='comment'>// shift the new thing to the start</span>
-                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>tail</span><span class='op'>-</span><span class='ident'>head</span>) <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>buf</span>, <span class='ident'>len</span>);
+                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>tail</span> <span class='op'>-</span> <span class='ident'>head</span>) <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>buf</span>, <span class='ident'>len</span>);
                     } <span class='kw'>else</span> {
                         <span class='comment'>// left hand block is the long one, we can do it in two!</span>
-                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>, <span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>cap</span><span class='op'>-</span><span class='ident'>tail</span>) <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>head</span>);
-                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>.<span class='ident'>offset</span>(<span class='ident'>tail</span> <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>buf</span>, <span class='ident'>cap</span><span class='op'>-</span><span class='ident'>tail</span>);
+                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>, <span class='ident'>buf</span>.<span class='ident'>offset</span>((<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>tail</span>) <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>head</span>);
+                        <span class='ident'>ptr</span>::<span class='ident'>copy</span>(<span class='ident'>buf</span>.<span class='ident'>offset</span>(<span class='ident'>tail</span> <span class='kw'>as</span> <span class='ident'>isize</span>), <span class='ident'>buf</span>, <span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>tail</span>);
                     }
                 } <span class='kw'>else</span> {
                     <span class='comment'>// Need to use N swaps to move the ring</span>
@@ -5356,8 +5331,8 @@
 
                         <span class='comment'>// We should see the correct values in the VecDeque</span>
                         <span class='kw'>let</span> <span class='ident'>expected</span>: <span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> (<span class='number'>0</span>..<span class='ident'>drain_start</span>)
-                                                        .<span class='ident'>chain</span>(<span class='ident'>drain_end</span>..<span class='ident'>len</span>)
-                                                        .<span class='ident'>collect</span>();
+                            .<span class='ident'>chain</span>(<span class='ident'>drain_end</span>..<span class='ident'>len</span>)
+                            .<span class='ident'>collect</span>();
                         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>expected</span>, <span class='ident'>tester</span>);
                     }
                 }
@@ -5473,19 +5448,19 @@
             <span class='kw'>let</span> <span class='ident'>cap</span> <span class='op'>=</span> (<span class='number'>2i32</span>.<span class='ident'>pow</span>(<span class='ident'>cap_pwr</span>) <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>usize</span>;
 
             <span class='comment'>// In these cases there is enough free space to solve it with copies</span>
-            <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> <span class='number'>0</span>..((<span class='ident'>cap</span><span class='op'>+</span><span class='number'>1</span>)<span class='op'>/</span><span class='number'>2</span>) {
+            <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> <span class='number'>0</span>..((<span class='ident'>cap</span> <span class='op'>+</span> <span class='number'>1</span>) <span class='op'>/</span> <span class='number'>2</span>) {
                 <span class='comment'>// Test contiguous cases</span>
-                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> <span class='number'>0</span>..(<span class='ident'>cap</span><span class='op'>-</span><span class='ident'>len</span>) {
+                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> <span class='number'>0</span>..(<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>len</span>) {
                     <span class='ident'>create_vec_and_test_convert</span>(<span class='ident'>cap</span>, <span class='ident'>offset</span>, <span class='ident'>len</span>)
                 }
 
                 <span class='comment'>// Test cases where block at end of buffer is bigger than block at start</span>
-                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span><span class='op'>-</span><span class='ident'>len</span>)..(<span class='ident'>cap</span><span class='op'>-</span>(<span class='ident'>len</span><span class='op'>/</span><span class='number'>2</span>)) {
+                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>len</span>)..(<span class='ident'>cap</span> <span class='op'>-</span> (<span class='ident'>len</span> <span class='op'>/</span> <span class='number'>2</span>)) {
                     <span class='ident'>create_vec_and_test_convert</span>(<span class='ident'>cap</span>, <span class='ident'>offset</span>, <span class='ident'>len</span>)
                 }
 
                 <span class='comment'>// Test cases where block at start of buffer is bigger than block at end</span>
-                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span><span class='op'>-</span>(<span class='ident'>len</span><span class='op'>/</span><span class='number'>2</span>))..<span class='ident'>cap</span> {
+                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span> <span class='op'>-</span> (<span class='ident'>len</span> <span class='op'>/</span> <span class='number'>2</span>))..<span class='ident'>cap</span> {
                     <span class='ident'>create_vec_and_test_convert</span>(<span class='ident'>cap</span>, <span class='ident'>offset</span>, <span class='ident'>len</span>)
                 }
             }
@@ -5494,19 +5469,19 @@
             <span class='comment'>// the ring will use swapping when:</span>
             <span class='comment'>// (cap + 1 - offset) &gt; (cap + 1 - len) &amp;&amp; (len - (cap + 1 - offset)) &gt; (cap + 1 - len))</span>
             <span class='comment'>//  right block size  &gt;   free space    &amp;&amp;      left block size       &gt;    free space</span>
-            <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> ((<span class='ident'>cap</span><span class='op'>+</span><span class='number'>1</span>)<span class='op'>/</span><span class='number'>2</span>)..<span class='ident'>cap</span> {
+            <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> ((<span class='ident'>cap</span> <span class='op'>+</span> <span class='number'>1</span>) <span class='op'>/</span> <span class='number'>2</span>)..<span class='ident'>cap</span> {
                 <span class='comment'>// Test contiguous cases</span>
-                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> <span class='number'>0</span>..(<span class='ident'>cap</span><span class='op'>-</span><span class='ident'>len</span>) {
+                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> <span class='number'>0</span>..(<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>len</span>) {
                     <span class='ident'>create_vec_and_test_convert</span>(<span class='ident'>cap</span>, <span class='ident'>offset</span>, <span class='ident'>len</span>)
                 }
 
                 <span class='comment'>// Test cases where block at end of buffer is bigger than block at start</span>
-                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span><span class='op'>-</span><span class='ident'>len</span>)..(<span class='ident'>cap</span><span class='op'>-</span>(<span class='ident'>len</span><span class='op'>/</span><span class='number'>2</span>)) {
+                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span> <span class='op'>-</span> <span class='ident'>len</span>)..(<span class='ident'>cap</span> <span class='op'>-</span> (<span class='ident'>len</span> <span class='op'>/</span> <span class='number'>2</span>)) {
                     <span class='ident'>create_vec_and_test_convert</span>(<span class='ident'>cap</span>, <span class='ident'>offset</span>, <span class='ident'>len</span>)
                 }
 
                 <span class='comment'>// Test cases where block at start of buffer is bigger than block at end</span>
-                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span><span class='op'>-</span>(<span class='ident'>len</span><span class='op'>/</span><span class='number'>2</span>))..<span class='ident'>cap</span> {
+                <span class='kw'>for</span> <span class='ident'>offset</span> <span class='kw'>in</span> (<span class='ident'>cap</span> <span class='op'>-</span> (<span class='ident'>len</span> <span class='op'>/</span> <span class='number'>2</span>))..<span class='ident'>cap</span> {
                     <span class='ident'>create_vec_and_test_convert</span>(<span class='ident'>cap</span>, <span class='ident'>offset</span>, <span class='ident'>len</span>)
                 }
             }

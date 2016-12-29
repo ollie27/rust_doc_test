@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -2044,6 +2045,25 @@
 <span id="2000">2000</span>
 <span id="2001">2001</span>
 <span id="2002">2002</span>
+<span id="2003">2003</span>
+<span id="2004">2004</span>
+<span id="2005">2005</span>
+<span id="2006">2006</span>
+<span id="2007">2007</span>
+<span id="2008">2008</span>
+<span id="2009">2009</span>
+<span id="2010">2010</span>
+<span id="2011">2011</span>
+<span id="2012">2012</span>
+<span id="2013">2013</span>
+<span id="2014">2014</span>
+<span id="2015">2015</span>
+<span id="2016">2016</span>
+<span id="2017">2017</span>
+<span id="2018">2018</span>
+<span id="2019">2019</span>
+<span id="2020">2020</span>
+<span id="2021">2021</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2303,7 +2323,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 
 <span class='kw'>use</span> <span class='ident'>cmp</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_unicode</span>::<span class='ident'>str</span> <span class='kw'>as</span> <span class='ident'>core_str</span>;
+<span class='kw'>use</span> <span class='ident'>std_unicode</span>::<span class='ident'>str</span> <span class='kw'>as</span> <span class='ident'>core_str</span>;
 <span class='kw'>use</span> <span class='ident'>error</span> <span class='kw'>as</span> <span class='ident'>std_error</span>;
 <span class='kw'>use</span> <span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>result</span>;
@@ -3472,6 +3492,12 @@
     <span class='doccomment'>///     println!(&quot;{}&quot;, line.unwrap());</span>
     <span class='doccomment'>/// }</span>
     <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Errors</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Each line of the iterator has the same error semantics as [`BufRead::read_line()`].</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// [`BufRead::read_line()`]: trait.BufRead.html#method.read_line</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>lines</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Lines</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='self'>Self</span>: <span class='ident'>Sized</span> {
         <span class='ident'>Lines</span> { <span class='ident'>buf</span>: <span class='self'>self</span> }
@@ -3489,6 +3515,16 @@
     <span class='ident'>first</span>: <span class='ident'>T</span>,
     <span class='ident'>second</span>: <span class='ident'>U</span>,
     <span class='ident'>done_first</span>: <span class='ident'>bool</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>fmt</span>::<span class='ident'>Debug</span>, <span class='ident'>U</span>: <span class='ident'>fmt</span>::<span class='ident'>Debug</span><span class='op'>&gt;</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>Chain</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='ident'>f</span>.<span class='ident'>debug_struct</span>(<span class='string'>&quot;Chain&quot;</span>)
+            .<span class='ident'>field</span>(<span class='string'>&quot;t&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>first</span>)
+            .<span class='ident'>field</span>(<span class='string'>&quot;u&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>second</span>)
+            .<span class='ident'>finish</span>()
+    }
 }
 
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
@@ -3532,6 +3568,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// [`take()`]: trait.Read.html#method.take</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Take</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='ident'>inner</span>: <span class='ident'>T</span>,
     <span class='ident'>limit</span>: <span class='ident'>u64</span>,
@@ -3573,8 +3610,6 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(io_take_into_inner)]</span>
-    <span class='doccomment'>///</span>
     <span class='doccomment'>/// use std::io;</span>
     <span class='doccomment'>/// use std::io::prelude::*;</span>
     <span class='doccomment'>/// use std::fs::File;</span>
@@ -3590,7 +3625,7 @@
     <span class='doccomment'>/// # Ok(())</span>
     <span class='doccomment'>/// # }</span>
     <span class='doccomment'>/// ```</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;io_take_into_inner&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;23755&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;io_take_into_inner&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span> {
         <span class='self'>self</span>.<span class='ident'>inner</span>
     }
@@ -3651,6 +3686,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// [`bytes()`]: trait.Read.html#method.bytes</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Bytes</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span> {
     <span class='ident'>inner</span>: <span class='ident'>R</span>,
 }
@@ -3672,6 +3708,7 @@
 <span class='doccomment'>/// [chars]: trait.Read.html#method.chars</span>
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;io&quot;</span>, <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;awaiting stability of Read::chars&quot;</span>,
            <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27802&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Chars</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span> {
     <span class='ident'>inner</span>: <span class='ident'>R</span>,
 }
@@ -3761,6 +3798,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// [split]: trait.BufRead.html#method.split</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Split</span><span class='op'>&lt;</span><span class='ident'>B</span><span class='op'>&gt;</span> {
     <span class='ident'>buf</span>: <span class='ident'>B</span>,
     <span class='ident'>delim</span>: <span class='ident'>u8</span>,
@@ -3792,6 +3830,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// [lines]: trait.BufRead.html#method.lines</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Lines</span><span class='op'>&lt;</span><span class='ident'>B</span><span class='op'>&gt;</span> {
     <span class='ident'>buf</span>: <span class='ident'>B</span>,
 }

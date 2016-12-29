@@ -9,6 +9,7 @@
 
     <title>std::str::FromStr - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -59,11 +60,11 @@ string.</p>
 </div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.Err' class='method stab '><span id='Err.t' class='invisible'><code>type <a href='#associatedtype.Err' class='type'>Err</a></code></span></h3><div class='docblock'><p>The associated error which can be returned from parsing.</p>
+        <h3 id='associatedtype.Err' class='method'><span id='Err.t' class='invisible'><code>type <a href='#associatedtype.Err' class='type'>Err</a></code></span></h3><div class='docblock'><p>The associated error which can be returned from parsing.</p>
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.from_str' class='method stab '><span id='from_str.v' class='invisible'><code>fn <a href='#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;<a class='primitive' href='../primitive.str.html'>str</a>) -&gt; <a class='enum' href='../../std/result/enum.Result.html' title='std::result::Result'>Result</a>&lt;Self, Self::<a class='trait' href='../../std/str/trait.FromStr.html' title='std::str::FromStr'>Err</a>&gt;</code></span></h3><div class='docblock'><p>Parses a string <code>s</code> to return a value of this type.</p>
+        <h3 id='tymethod.from_str' class='method'><span id='from_str.v' class='invisible'><code>fn <a href='#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;<a class='primitive' href='../primitive.str.html'>str</a>) -&gt; <a class='enum' href='../../std/result/enum.Result.html' title='std::result::Result'>Result</a>&lt;Self, Self::<a class='trait' href='../../std/str/trait.FromStr.html' title='std::str::FromStr'>Err</a>&gt;</code></span></h3><div class='docblock'><p>Parses a string <code>s</code> to return a value of this type.</p>
 
 <p>If parsing succeeds, return the value inside <code>Ok</code>, otherwise
 when the string is ill-formatted return an error specific to the

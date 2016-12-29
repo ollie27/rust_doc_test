@@ -9,6 +9,7 @@
 
     <title>stream.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
     
@@ -526,6 +527,9 @@
 <span id="482">482</span>
 <span id="483">483</span>
 <span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -551,8 +555,10 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>SelectionResult</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>Message</span>::<span class='op'>*</span>;
 
+<span class='kw'>use</span> <span class='ident'>cell</span>::<span class='ident'>UnsafeCell</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cmp</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>isize</span>;
+<span class='kw'>use</span> <span class='ident'>ptr</span>;
 <span class='kw'>use</span> <span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>time</span>::<span class='ident'>Instant</span>;
 
@@ -571,7 +577,7 @@
     <span class='ident'>queue</span>: <span class='ident'>spsc</span>::<span class='ident'>Queue</span><span class='op'>&lt;</span><span class='ident'>Message</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span>, <span class='comment'>// internal queue for all message</span>
 
     <span class='ident'>cnt</span>: <span class='ident'>AtomicIsize</span>, <span class='comment'>// How many items are on this channel</span>
-    <span class='ident'>steals</span>: <span class='ident'>isize</span>, <span class='comment'>// How many times has a port received without blocking?</span>
+    <span class='ident'>steals</span>: <span class='ident'>UnsafeCell</span><span class='op'>&lt;</span><span class='ident'>isize</span><span class='op'>&gt;</span>, <span class='comment'>// How many times has a port received without blocking?</span>
     <span class='ident'>to_wake</span>: <span class='ident'>AtomicUsize</span>, <span class='comment'>// SignalToken for the blocked thread to wake up</span>
 
     <span class='ident'>port_dropped</span>: <span class='ident'>AtomicBool</span>, <span class='comment'>// flag if the channel has been destroyed.</span>
@@ -608,14 +614,14 @@
             <span class='ident'>queue</span>: <span class='kw'>unsafe</span> { <span class='ident'>spsc</span>::<span class='ident'>Queue</span>::<span class='ident'>new</span>(<span class='number'>128</span>) },
 
             <span class='ident'>cnt</span>: <span class='ident'>AtomicIsize</span>::<span class='ident'>new</span>(<span class='number'>0</span>),
-            <span class='ident'>steals</span>: <span class='number'>0</span>,
+            <span class='ident'>steals</span>: <span class='ident'>UnsafeCell</span>::<span class='ident'>new</span>(<span class='number'>0</span>),
             <span class='ident'>to_wake</span>: <span class='ident'>AtomicUsize</span>::<span class='ident'>new</span>(<span class='number'>0</span>),
 
             <span class='ident'>port_dropped</span>: <span class='ident'>AtomicBool</span>::<span class='ident'>new</span>(<span class='bool-val'>false</span>),
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>t</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>t</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='comment'>// If the other port has deterministically gone away, then definitely</span>
         <span class='comment'>// must return the data back up the stack. Otherwise, the data is</span>
         <span class='comment'>// considered as being sent.</span>
@@ -628,7 +634,7 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>upgrade</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>up</span>: <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>UpgradeResult</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>upgrade</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>up</span>: <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>UpgradeResult</span> {
         <span class='comment'>// If the port has gone away, then there&#39;s no need to proceed any</span>
         <span class='comment'>// further.</span>
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>port_dropped</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) { <span class='kw'>return</span> <span class='ident'>UpDisconnected</span> }
@@ -636,7 +642,7 @@
         <span class='self'>self</span>.<span class='ident'>do_send</span>(<span class='ident'>GoUp</span>(<span class='ident'>up</span>))
     }
 
-    <span class='kw'>fn</span> <span class='ident'>do_send</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>t</span>: <span class='ident'>Message</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>UpgradeResult</span> {
+    <span class='kw'>fn</span> <span class='ident'>do_send</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>t</span>: <span class='ident'>Message</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>UpgradeResult</span> {
         <span class='self'>self</span>.<span class='ident'>queue</span>.<span class='ident'>push</span>(<span class='ident'>t</span>);
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>fetch_add</span>(<span class='number'>1</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='comment'>// As described in the mod&#39;s doc comment, -1 == wakeup</span>
@@ -670,7 +676,7 @@
     }
 
     <span class='comment'>// Consumes ownership of the &#39;to_wake&#39; field.</span>
-    <span class='kw'>fn</span> <span class='ident'>take_to_wake</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SignalToken</span> {
+    <span class='kw'>fn</span> <span class='ident'>take_to_wake</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SignalToken</span> {
         <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>to_wake</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
         <span class='self'>self</span>.<span class='ident'>to_wake</span>.<span class='ident'>store</span>(<span class='number'>0</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>ptr</span> <span class='op'>!=</span> <span class='number'>0</span>);
@@ -680,13 +686,12 @@
     <span class='comment'>// Decrements the count on the channel for a sleeper, returning the sleeper</span>
     <span class='comment'>// back if it shouldn&#39;t sleep. Note that this is the location where we take</span>
     <span class='comment'>// steals into account.</span>
-    <span class='kw'>fn</span> <span class='ident'>decrement</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>token</span>: <span class='ident'>SignalToken</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SignalToken</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>decrement</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>token</span>: <span class='ident'>SignalToken</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SignalToken</span><span class='op'>&gt;</span> {
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>to_wake</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>), <span class='number'>0</span>);
         <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>token</span>.<span class='ident'>cast_to_usize</span>() };
         <span class='self'>self</span>.<span class='ident'>to_wake</span>.<span class='ident'>store</span>(<span class='ident'>ptr</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
 
-        <span class='kw'>let</span> <span class='ident'>steals</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>steals</span>;
-        <span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='kw'>let</span> <span class='ident'>steals</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>ptr</span>::<span class='ident'>replace</span>(<span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>(), <span class='number'>0</span>) };
 
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>fetch_sub</span>(<span class='number'>1</span> <span class='op'>+</span> <span class='ident'>steals</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='ident'>DISCONNECTED</span> <span class='op'>=&gt;</span> { <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>store</span>(<span class='ident'>DISCONNECTED</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>); }
@@ -702,7 +707,7 @@
         <span class='prelude-val'>Err</span>(<span class='kw'>unsafe</span> { <span class='ident'>SignalToken</span>::<span class='ident'>cast_from_usize</span>(<span class='ident'>ptr</span>) })
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>recv</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>deadline</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Instant</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>Failure</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>recv</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>deadline</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Instant</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>Failure</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
         <span class='comment'>// Optimistic preflight check (scheduling is expensive).</span>
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>try_recv</span>() {
             <span class='prelude-val'>Err</span>(<span class='ident'>Empty</span>) <span class='op'>=&gt;</span> {}
@@ -728,16 +733,16 @@
             <span class='comment'>// a steal, so offset the decrement here (we already have our</span>
             <span class='comment'>// &quot;steal&quot; factored into the channel count above).</span>
             <span class='ident'>data</span> @ <span class='prelude-val'>Ok</span>(..) <span class='op'>|</span>
-            <span class='ident'>data</span> @ <span class='prelude-val'>Err</span>(<span class='ident'>Upgraded</span>(..)) <span class='op'>=&gt;</span> {
-                <span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>-=</span> <span class='number'>1</span>;
+            <span class='ident'>data</span> @ <span class='prelude-val'>Err</span>(<span class='ident'>Upgraded</span>(..)) <span class='op'>=&gt;</span> <span class='kw'>unsafe</span> {
+                <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() <span class='op'>-=</span> <span class='number'>1</span>;
                 <span class='ident'>data</span>
-            }
+            },
 
             <span class='ident'>data</span> <span class='op'>=&gt;</span> <span class='ident'>data</span>,
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_recv</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>Failure</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_recv</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>Failure</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>queue</span>.<span class='ident'>pop</span>() {
             <span class='comment'>// If we stole some data, record to that effect (this will be</span>
             <span class='comment'>// factored into cnt later on).</span>
@@ -750,26 +755,26 @@
             <span class='comment'>// a pretty slow operation, of swapping 0 into cnt, taking steals</span>
             <span class='comment'>// down as much as possible (without going negative), and then</span>
             <span class='comment'>// adding back in whatever we couldn&#39;t factor into steals.</span>
-            <span class='prelude-val'>Some</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>&gt;</span> <span class='ident'>MAX_STEALS</span> {
+            <span class='prelude-val'>Some</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='kw'>unsafe</span> {
+                <span class='kw'>if</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() <span class='op'>&gt;</span> <span class='ident'>MAX_STEALS</span> {
                     <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>swap</span>(<span class='number'>0</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
                         <span class='ident'>DISCONNECTED</span> <span class='op'>=&gt;</span> {
                             <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>store</span>(<span class='ident'>DISCONNECTED</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
                         }
                         <span class='ident'>n</span> <span class='op'>=&gt;</span> {
-                            <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='ident'>cmp</span>::<span class='ident'>min</span>(<span class='ident'>n</span>, <span class='self'>self</span>.<span class='ident'>steals</span>);
-                            <span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>-=</span> <span class='ident'>m</span>;
+                            <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='ident'>cmp</span>::<span class='ident'>min</span>(<span class='ident'>n</span>, <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>());
+                            <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() <span class='op'>-=</span> <span class='ident'>m</span>;
                             <span class='self'>self</span>.<span class='ident'>bump</span>(<span class='ident'>n</span> <span class='op'>-</span> <span class='ident'>m</span>);
                         }
                     }
-                    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>&gt;=</span> <span class='number'>0</span>);
+                    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() <span class='op'>&gt;=</span> <span class='number'>0</span>);
                 }
-                <span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>+=</span> <span class='number'>1</span>;
+                <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() <span class='op'>+=</span> <span class='number'>1</span>;
                 <span class='kw'>match</span> <span class='ident'>data</span> {
                     <span class='ident'>Data</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>),
                     <span class='ident'>GoUp</span>(<span class='ident'>up</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Upgraded</span>(<span class='ident'>up</span>)),
                 }
-            }
+            },
 
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
@@ -798,7 +803,7 @@
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>drop_chan</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>drop_chan</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
         <span class='comment'>// Dropping a channel is pretty simple, we just flag it as disconnected</span>
         <span class='comment'>// and then wakeup a blocker if there is one.</span>
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>swap</span>(<span class='ident'>DISCONNECTED</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
@@ -808,7 +813,7 @@
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>drop_port</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>drop_port</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
         <span class='comment'>// Dropping a port seems like a fairly trivial thing. In theory all we</span>
         <span class='comment'>// need to do is flag that we&#39;re disconnected and then everything else</span>
         <span class='comment'>// can take over (we don&#39;t have anyone to wake up).</span>
@@ -838,7 +843,7 @@
         <span class='comment'>// continue to fail while active senders send data while we&#39;re dropping</span>
         <span class='comment'>// data, but eventually we&#39;re guaranteed to break out of this loop</span>
         <span class='comment'>// (because there is a bounded number of senders).</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>steals</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>steals</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>steals</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() };
         <span class='kw'>while</span> {
             <span class='kw'>let</span> <span class='ident'>cnt</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>compare_and_swap</span>(
                             <span class='ident'>steals</span>, <span class='ident'>DISCONNECTED</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
@@ -861,7 +866,7 @@
     <span class='comment'>// Tests to see whether this port can receive without blocking. If Ok is</span>
     <span class='comment'>// returned, then that&#39;s the answer. If Err is returned, then the returned</span>
     <span class='comment'>// port needs to be queried instead (an upgrade happened)</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>can_recv</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>bool</span>, <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>can_recv</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>bool</span>, <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
         <span class='comment'>// We peek at the queue to see if there&#39;s anything on it, and we use</span>
         <span class='comment'>// this return value to determine if we should pop from the queue and</span>
         <span class='comment'>// upgrade this channel immediately. If it looks like we&#39;ve got an</span>
@@ -880,7 +885,7 @@
     }
 
     <span class='comment'>// increment the count on the channel (used for selection)</span>
-    <span class='kw'>fn</span> <span class='ident'>bump</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>amt</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='ident'>isize</span> {
+    <span class='kw'>fn</span> <span class='ident'>bump</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>amt</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='ident'>isize</span> {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>fetch_add</span>(<span class='ident'>amt</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='ident'>DISCONNECTED</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>cnt</span>.<span class='ident'>store</span>(<span class='ident'>DISCONNECTED</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
@@ -892,7 +897,7 @@
 
     <span class='comment'>// Attempts to start selecting on this port. Like a oneshot, this can fail</span>
     <span class='comment'>// immediately because of an upgrade.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>start_selection</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>token</span>: <span class='ident'>SignalToken</span>) <span class='op'>-&gt;</span> <span class='ident'>SelectionResult</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>start_selection</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>token</span>: <span class='ident'>SignalToken</span>) <span class='op'>-&gt;</span> <span class='ident'>SelectionResult</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>decrement</span>(<span class='ident'>token</span>) {
             <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='ident'>SelSuccess</span>,
             <span class='prelude-val'>Err</span>(<span class='ident'>token</span>) <span class='op'>=&gt;</span> {
@@ -916,7 +921,7 @@
     }
 
     <span class='comment'>// Removes a previous thread from being blocked in this port</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>abort_selection</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>abort_selection</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>,
                            <span class='ident'>was_upgrade</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>bool</span>, <span class='ident'>Receiver</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
         <span class='comment'>// If we&#39;re aborting selection after upgrading from a oneshot, then</span>
         <span class='comment'>// we&#39;re guarantee that no one is waiting. The only way that we could</span>
@@ -932,7 +937,7 @@
         <span class='comment'>// this end. This is fine because we know it&#39;s a small bounded windows</span>
         <span class='comment'>// of time until the data is actually sent.</span>
         <span class='kw'>if</span> <span class='ident'>was_upgrade</span> {
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>steals</span>, <span class='number'>0</span>);
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw'>unsafe</span> { <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() }, <span class='number'>0</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>to_wake</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>), <span class='number'>0</span>);
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='bool-val'>true</span>)
         }
@@ -973,8 +978,10 @@
                     <span class='ident'>thread</span>::<span class='ident'>yield_now</span>();
                 }
             }
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>steals</span>, <span class='number'>0</span>);
-            <span class='self'>self</span>.<span class='ident'>steals</span> <span class='op'>=</span> <span class='ident'>steals</span>;
+            <span class='kw'>unsafe</span> {
+                <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>(), <span class='number'>0</span>);
+                <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>steals</span>.<span class='ident'>get</span>() <span class='op'>=</span> <span class='ident'>steals</span>;
+            }
 
             <span class='comment'>// if we were previously positive, then there&#39;s surely data to</span>
             <span class='comment'>// receive</span>

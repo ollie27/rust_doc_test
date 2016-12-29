@@ -9,6 +9,7 @@
 
     <title>local.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -623,6 +624,22 @@
 <span id="579">579</span>
 <span id="580">580</span>
 <span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -639,6 +656,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;thread_local_internals&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;0&quot;</span>)]</span>
 
 <span class='kw'>use</span> <span class='ident'>cell</span>::<span class='ident'>UnsafeCell</span>;
+<span class='kw'>use</span> <span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>mem</span>;
 
 <span class='doccomment'>/// A thread local storage key which owns its contents.</span>
@@ -722,6 +740,13 @@
 
     <span class='comment'>// initialization routine to invoke to create a value</span>
     <span class='ident'>init</span>: <span class='kw'>fn</span>() <span class='op'>-&gt;</span> <span class='ident'>T</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>LocalKey</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='ident'>f</span>.<span class='ident'>pad</span>(<span class='string'>&quot;LocalKey { .. }&quot;</span>)
+    }
 }
 
 <span class='doccomment'>/// Declare a new thread local storage key of type `std::thread::LocalKey`.</span>
@@ -810,7 +835,7 @@
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;thread_local_state&quot;</span>,
            <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;state querying was recently added&quot;</span>,
            <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27716&quot;</span>)]</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>LocalKeyState</span> {
     <span class='doccomment'>/// All keys are in this state whenever a thread starts. Keys will</span>
     <span class='doccomment'>/// transition to the `Valid` state once the first call to `with` happens</span>
@@ -939,6 +964,7 @@
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>os</span> {
     <span class='kw'>use</span> <span class='ident'>cell</span>::{<span class='ident'>Cell</span>, <span class='ident'>UnsafeCell</span>};
+    <span class='kw'>use</span> <span class='ident'>fmt</span>;
     <span class='kw'>use</span> <span class='ident'>marker</span>;
     <span class='kw'>use</span> <span class='ident'>ptr</span>;
     <span class='kw'>use</span> <span class='ident'>sys_common</span>::<span class='ident'>thread_local</span>::<span class='ident'>StaticKey</span> <span class='kw'>as</span> <span class='ident'>OsStaticKey</span>;
@@ -947,6 +973,13 @@
         <span class='comment'>// OS-TLS key that we&#39;ll use to key off.</span>
         <span class='ident'>os</span>: <span class='ident'>OsStaticKey</span>,
         <span class='ident'>marker</span>: <span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span>,
+    }
+
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
+    <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>Key</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+            <span class='ident'>f</span>.<span class='ident'>pad</span>(<span class='string'>&quot;Key { .. }&quot;</span>)
+        }
     }
 
     <span class='kw'>unsafe</span> <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> ::<span class='ident'>marker</span>::<span class='ident'>Sync</span> <span class='kw'>for</span> <span class='ident'>Key</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> { }

@@ -9,6 +9,7 @@
 
     <title>fs.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../../main.css">
     
@@ -353,7 +354,7 @@
 <span class='kw'>use</span> <span class='ident'>sys_common</span>::{<span class='ident'>AsInnerMut</span>, <span class='ident'>AsInner</span>};
 
 <span class='doccomment'>/// Windows-specific extensions to `File`</span>
-<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35918&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>FileExt</span> {
     <span class='doccomment'>/// Seeks to a given position and reads a number of bytes.</span>
     <span class='doccomment'>///</span>
@@ -369,7 +370,7 @@
     <span class='doccomment'>/// Note that similar to `File::read`, it is not an error to return with a</span>
     <span class='doccomment'>/// short read. When returning from such a short read, the file pointer is</span>
     <span class='doccomment'>/// still updated.</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35918&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>seek_read</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>], <span class='ident'>offset</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Seeks to a given position and writes a number of bytes.</span>
@@ -386,11 +387,11 @@
     <span class='doccomment'>/// Note that similar to `File::write`, it is not an error to return a</span>
     <span class='doccomment'>/// short write. When returning from such a short write, the file pointer</span>
     <span class='doccomment'>/// is still updated.</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35918&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>seek_write</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>offset</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>;
 }
 
-<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35918&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;file_offset&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
 <span class='kw'>impl</span> <span class='ident'>FileExt</span> <span class='kw'>for</span> <span class='ident'>fs</span>::<span class='ident'>File</span> {
     <span class='kw'>fn</span> <span class='ident'>seek_read</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>], <span class='ident'>offset</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>as_inner</span>().<span class='ident'>read_at</span>(<span class='ident'>buf</span>, <span class='ident'>offset</span>)

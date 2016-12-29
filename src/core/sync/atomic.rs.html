@@ -9,6 +9,7 @@
 
     <title>atomic.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -1524,12 +1525,6 @@
 <span id="1480">1480</span>
 <span id="1481">1481</span>
 <span id="1482">1482</span>
-<span id="1483">1483</span>
-<span id="1484">1484</span>
-<span id="1485">1485</span>
-<span id="1486">1486</span>
-<span id="1487">1487</span>
-<span id="1488">1488</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1736,7 +1731,6 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(atomic_access)]</span>
     <span class='doccomment'>/// use std::sync::atomic::{AtomicBool, Ordering};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut some_bool = AtomicBool::new(true);</span>
@@ -1745,7 +1739,7 @@
     <span class='doccomment'>/// assert_eq!(some_bool.load(Ordering::SeqCst), false);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35603&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span>(<span class='self'>self</span>.<span class='ident'>v</span>.<span class='ident'>get</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>bool</span>) }
     }
@@ -1758,14 +1752,13 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(atomic_access)]</span>
     <span class='doccomment'>/// use std::sync::atomic::AtomicBool;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let some_bool = AtomicBool::new(true);</span>
     <span class='doccomment'>/// assert_eq!(some_bool.into_inner(), true);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35603&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> { <span class='self'>self</span>.<span class='ident'>v</span>.<span class='ident'>into_inner</span>() <span class='op'>!=</span> <span class='number'>0</span> }
     }
@@ -2121,7 +2114,6 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(atomic_access)]</span>
     <span class='doccomment'>/// use std::sync::atomic::{AtomicPtr, Ordering};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut atomic_ptr = AtomicPtr::new(&amp;mut 10);</span>
@@ -2129,7 +2121,7 @@
     <span class='doccomment'>/// assert_eq!(unsafe { *atomic_ptr.load(Ordering::SeqCst) }, 5);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35603&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
         <span class='kw'>unsafe</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>p</span>.<span class='ident'>get</span>() }
     }
@@ -2142,14 +2134,13 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(atomic_access)]</span>
     <span class='doccomment'>/// use std::sync::atomic::AtomicPtr;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let atomic_ptr = AtomicPtr::new(&amp;mut 5);</span>
     <span class='doccomment'>/// assert_eq!(unsafe { *atomic_ptr.into_inner() }, 5);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35603&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
         <span class='kw'>unsafe</span> { <span class='self'>self</span>.<span class='ident'>p</span>.<span class='ident'>into_inner</span>() }
     }
@@ -2416,7 +2407,6 @@
             <span class='doccomment'>/// # Examples</span>
             <span class='doccomment'>///</span>
             <span class='doccomment'>/// ```</span>
-            <span class='doccomment'>/// #![feature(atomic_access)]</span>
             <span class='doccomment'>/// use std::sync::atomic::{AtomicIsize, Ordering};</span>
             <span class='doccomment'>///</span>
             <span class='doccomment'>/// let mut some_isize = AtomicIsize::new(10);</span>
@@ -2438,7 +2428,6 @@
             <span class='doccomment'>/// # Examples</span>
             <span class='doccomment'>///</span>
             <span class='doccomment'>/// ```</span>
-            <span class='doccomment'>/// #![feature(atomic_access)]</span>
             <span class='doccomment'>/// use std::sync::atomic::AtomicIsize;</span>
             <span class='doccomment'>///</span>
             <span class='doccomment'>/// let some_isize = AtomicIsize::new(5);</span>
@@ -2794,7 +2783,7 @@
     <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>),
     <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;extended_compare_and_swap&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.10.0&quot;</span>),
     <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.3.0&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35603&quot;</span>),
+    <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>),
     <span class='ident'>isize</span> <span class='ident'>AtomicIsize</span> <span class='ident'>ATOMIC_ISIZE_INIT</span>
 }
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_has_atomic</span> <span class='op'>=</span> <span class='string'>&quot;ptr&quot;</span>)]</span>
@@ -2802,7 +2791,7 @@
     <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>),
     <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;extended_compare_and_swap&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.10.0&quot;</span>),
     <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.3.0&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35603&quot;</span>),
+    <span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;atomic_access&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>),
     <span class='ident'>usize</span> <span class='ident'>AtomicUsize</span> <span class='ident'>ATOMIC_USIZE_INIT</span>
 }
 

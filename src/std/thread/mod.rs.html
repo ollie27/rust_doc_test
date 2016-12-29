@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -1092,6 +1093,104 @@
 <span id="1048">1048</span>
 <span id="1049">1049</span>
 <span id="1050">1050</span>
+<span id="1051">1051</span>
+<span id="1052">1052</span>
+<span id="1053">1053</span>
+<span id="1054">1054</span>
+<span id="1055">1055</span>
+<span id="1056">1056</span>
+<span id="1057">1057</span>
+<span id="1058">1058</span>
+<span id="1059">1059</span>
+<span id="1060">1060</span>
+<span id="1061">1061</span>
+<span id="1062">1062</span>
+<span id="1063">1063</span>
+<span id="1064">1064</span>
+<span id="1065">1065</span>
+<span id="1066">1066</span>
+<span id="1067">1067</span>
+<span id="1068">1068</span>
+<span id="1069">1069</span>
+<span id="1070">1070</span>
+<span id="1071">1071</span>
+<span id="1072">1072</span>
+<span id="1073">1073</span>
+<span id="1074">1074</span>
+<span id="1075">1075</span>
+<span id="1076">1076</span>
+<span id="1077">1077</span>
+<span id="1078">1078</span>
+<span id="1079">1079</span>
+<span id="1080">1080</span>
+<span id="1081">1081</span>
+<span id="1082">1082</span>
+<span id="1083">1083</span>
+<span id="1084">1084</span>
+<span id="1085">1085</span>
+<span id="1086">1086</span>
+<span id="1087">1087</span>
+<span id="1088">1088</span>
+<span id="1089">1089</span>
+<span id="1090">1090</span>
+<span id="1091">1091</span>
+<span id="1092">1092</span>
+<span id="1093">1093</span>
+<span id="1094">1094</span>
+<span id="1095">1095</span>
+<span id="1096">1096</span>
+<span id="1097">1097</span>
+<span id="1098">1098</span>
+<span id="1099">1099</span>
+<span id="1100">1100</span>
+<span id="1101">1101</span>
+<span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
+<span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
+<span id="1113">1113</span>
+<span id="1114">1114</span>
+<span id="1115">1115</span>
+<span id="1116">1116</span>
+<span id="1117">1117</span>
+<span id="1118">1118</span>
+<span id="1119">1119</span>
+<span id="1120">1120</span>
+<span id="1121">1121</span>
+<span id="1122">1122</span>
+<span id="1123">1123</span>
+<span id="1124">1124</span>
+<span id="1125">1125</span>
+<span id="1126">1126</span>
+<span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
+<span id="1130">1130</span>
+<span id="1131">1131</span>
+<span id="1132">1132</span>
+<span id="1133">1133</span>
+<span id="1134">1134</span>
+<span id="1135">1135</span>
+<span id="1136">1136</span>
+<span id="1137">1137</span>
+<span id="1138">1138</span>
+<span id="1139">1139</span>
+<span id="1140">1140</span>
+<span id="1141">1141</span>
+<span id="1142">1142</span>
+<span id="1143">1143</span>
+<span id="1144">1144</span>
+<span id="1145">1145</span>
+<span id="1146">1146</span>
+<span id="1147">1147</span>
+<span id="1148">1148</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1112,13 +1211,11 @@
 <span class='doccomment'>//! provide some built-in support for low-level synchronization.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Communication between threads can be done through</span>
-<span class='doccomment'>//! [channels](../../std/sync/mpsc/index.html), Rust&#39;s message-passing</span>
-<span class='doccomment'>//! types, along with [other forms of thread</span>
+<span class='doccomment'>//! [channels], Rust&#39;s message-passing types, along with [other forms of thread</span>
 <span class='doccomment'>//! synchronization](../../std/sync/index.html) and shared-memory data</span>
 <span class='doccomment'>//! structures. In particular, types that are guaranteed to be</span>
 <span class='doccomment'>//! threadsafe are easily shared between threads using the</span>
-<span class='doccomment'>//! atomically-reference-counted container,</span>
-<span class='doccomment'>//! [`Arc`](../../std/sync/struct.Arc.html).</span>
+<span class='doccomment'>//! atomically-reference-counted container, [`Arc`].</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Fatal logic errors in Rust cause *thread panic*, during which</span>
 <span class='doccomment'>//! a thread will unwind the stack, running destructors and freeing</span>
@@ -1135,7 +1232,7 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## Spawning a thread</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! A new thread can be spawned using the `thread::spawn` function:</span>
+<span class='doccomment'>//! A new thread can be spawned using the [`thread::spawn`][`spawn`] function:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
 <span class='doccomment'>//! use std::thread;</span>
@@ -1150,7 +1247,7 @@
 <span class='doccomment'>//! it), unless this parent is the main thread.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The parent thread can also wait on the completion of the child</span>
-<span class='doccomment'>//! thread; a call to `spawn` produces a `JoinHandle`, which provides</span>
+<span class='doccomment'>//! thread; a call to [`spawn`] produces a [`JoinHandle`], which provides</span>
 <span class='doccomment'>//! a `join` method for waiting:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
@@ -1163,13 +1260,13 @@
 <span class='doccomment'>//! let res = child.join();</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The `join` method returns a `Result` containing `Ok` of the final</span>
-<span class='doccomment'>//! value produced by the child thread, or `Err` of the value given to</span>
-<span class='doccomment'>//! a call to `panic!` if the child panicked.</span>
+<span class='doccomment'>//! The [`join`] method returns a [`Result`] containing [`Ok`] of the final</span>
+<span class='doccomment'>//! value produced by the child thread, or [`Err`] of the value given to</span>
+<span class='doccomment'>//! a call to [`panic!`] if the child panicked.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## Configuring threads</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! A new thread can be configured before it is spawned via the `Builder` type,</span>
+<span class='doccomment'>//! A new thread can be configured before it is spawned via the [`Builder`] type,</span>
 <span class='doccomment'>//! which currently allows you to set the name and stack size for the child thread:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
@@ -1183,43 +1280,43 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## The `Thread` type</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Threads are represented via the `Thread` type, which you can get in one of</span>
+<span class='doccomment'>//! Threads are represented via the [`Thread`] type, which you can get in one of</span>
 <span class='doccomment'>//! two ways:</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! * By spawning a new thread, e.g. using the `thread::spawn` function, and</span>
-<span class='doccomment'>//!   calling `thread()` on the `JoinHandle`.</span>
-<span class='doccomment'>//! * By requesting the current thread, using the `thread::current` function.</span>
+<span class='doccomment'>//! * By spawning a new thread, e.g. using the [`thread::spawn`][`spawn`]</span>
+<span class='doccomment'>//!   function, and calling [`thread()`] on the [`JoinHandle`].</span>
+<span class='doccomment'>//! * By requesting the current thread, using the [`thread::current()`] function.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The `thread::current()` function is available even for threads not spawned</span>
+<span class='doccomment'>//! The [`thread::current()`] function is available even for threads not spawned</span>
 <span class='doccomment'>//! by the APIs of this module.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## Blocking support: park and unpark</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Every thread is equipped with some basic low-level blocking support, via the</span>
-<span class='doccomment'>//! `thread::park()` function and `thread::Thread::unpark()` method. `park()`</span>
-<span class='doccomment'>//! blocks the current thread, which can then be resumed from another thread by</span>
-<span class='doccomment'>//! calling the `unpark()` method on the blocked thread&#39;s handle.</span>
+<span class='doccomment'>//! [`thread::park()`][`park()`] function and [`thread::Thread::unpark()`][`unpark()`]</span>
+<span class='doccomment'>//! method. [`park()`] blocks the current thread, which can then be resumed from</span>
+<span class='doccomment'>//! another thread by calling the [`unpark()`] method on the blocked thread&#39;s handle.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Conceptually, each `Thread` handle has an associated token, which is</span>
+<span class='doccomment'>//! Conceptually, each [`Thread`] handle has an associated token, which is</span>
 <span class='doccomment'>//! initially not present:</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! * The `thread::park()` function blocks the current thread unless or until</span>
+<span class='doccomment'>//! * The [`thread::park()`][`park()`] function blocks the current thread unless or until</span>
 <span class='doccomment'>//!   the token is available for its thread handle, at which point it atomically</span>
 <span class='doccomment'>//!   consumes the token. It may also return *spuriously*, without consuming the</span>
-<span class='doccomment'>//!   token. `thread::park_timeout()` does the same, but allows specifying a</span>
+<span class='doccomment'>//!   token. [`thread::park_timeout()`] does the same, but allows specifying a</span>
 <span class='doccomment'>//!   maximum time to block the thread for.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! * The `unpark()` method on a `Thread` atomically makes the token available</span>
+<span class='doccomment'>//! * The [`unpark()`] method on a [`Thread`] atomically makes the token available</span>
 <span class='doccomment'>//!   if it wasn&#39;t already.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! In other words, each `Thread` acts a bit like a semaphore with initial count</span>
+<span class='doccomment'>//! In other words, each [`Thread`] acts a bit like a semaphore with initial count</span>
 <span class='doccomment'>//! 0, except that the semaphore is *saturating* (the count cannot go above 1),</span>
 <span class='doccomment'>//! and can return spuriously.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The API is typically used by acquiring a handle to the current thread,</span>
 <span class='doccomment'>//! placing that handle in a shared data structure so that other threads can</span>
 <span class='doccomment'>//! find it, and then `park`ing. When some desired condition is met, another</span>
-<span class='doccomment'>//! thread calls `unpark` on the handle.</span>
+<span class='doccomment'>//! thread calls [`unpark()`] on the handle.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The motivation for this design is twofold:</span>
 <span class='doccomment'>//!</span>
@@ -1244,6 +1341,22 @@
 <span class='doccomment'>//! will want to make use of some form of **interior mutability** through the</span>
 <span class='doccomment'>//! [`Cell`] or [`RefCell`] types.</span>
 <span class='doccomment'>//!</span>
+<span class='doccomment'>//! [channels]: ../../std/sync/mpsc/index.html</span>
+<span class='doccomment'>//! [`Arc`]: ../../std/sync/struct.Arc.html</span>
+<span class='doccomment'>//! [`spawn`]: ../../std/thread/fn.spawn.html</span>
+<span class='doccomment'>//! [`JoinHandle`]: ../../std/thread/struct.JoinHandle.html</span>
+<span class='doccomment'>//! [`thread()`]: ../../std/thread/struct.JoinHandle.html#method.thread</span>
+<span class='doccomment'>//! [`join`]: ../../std/thread/struct.JoinHandle.html#method.join</span>
+<span class='doccomment'>//! [`Result`]: ../../std/result/enum.Result.html</span>
+<span class='doccomment'>//! [`Ok`]: ../../std/result/enum.Result.html#variant.Ok</span>
+<span class='doccomment'>//! [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
+<span class='doccomment'>//! [`panic!`]: ../../std/macro.panic.html</span>
+<span class='doccomment'>//! [`Builder`]: ../../std/thread/struct.Builder.html</span>
+<span class='doccomment'>//! [`thread::current()`]: ../../std/thread/fn.spawn.html</span>
+<span class='doccomment'>//! [`Thread`]: ../../std/thread/struct.Thread.html</span>
+<span class='doccomment'>//! [`park()`]: ../../std/thread/fn.park.html</span>
+<span class='doccomment'>//! [`unpark()`]: ../../std/thread/struct.Thread.html#method.unpark</span>
+<span class='doccomment'>//! [`thread::park_timeout()`]: ../../std/thread/fn.park_timeout.html</span>
 <span class='doccomment'>//! [`Cell`]: ../cell/struct.Cell.html</span>
 <span class='doccomment'>//! [`RefCell`]: ../cell/struct.RefCell.html</span>
 <span class='doccomment'>//! [`thread_local!`]: ../macro.thread_local.html</span>
@@ -1298,6 +1411,7 @@
 <span class='doccomment'>/// Thread configuration. Provides detailed control over the properties</span>
 <span class='doccomment'>/// and behavior of new threads.</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Builder</span> {
     <span class='comment'>// A name for the thread-to-be, for identification in panic messages</span>
     <span class='ident'>name</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
@@ -1398,20 +1512,38 @@
 <span class='comment'>// Free functions</span>
 <span class='comment'>////////////////////////////////////////////////////////////////////////////////</span>
 
-<span class='doccomment'>/// Spawns a new thread, returning a `JoinHandle` for it.</span>
+<span class='doccomment'>/// Spawns a new thread, returning a [`JoinHandle`] for it.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// The join handle will implicitly *detach* the child thread upon being</span>
 <span class='doccomment'>/// dropped. In this case, the child thread may outlive the parent (unless</span>
 <span class='doccomment'>/// the parent thread is the main thread; the whole process is terminated when</span>
-<span class='doccomment'>/// the main thread finishes.) Additionally, the join handle provides a `join`</span>
+<span class='doccomment'>/// the main thread finishes). Additionally, the join handle provides a [`join`]</span>
 <span class='doccomment'>/// method that can be used to join the child thread. If the child thread</span>
-<span class='doccomment'>/// panics, `join` will return an `Err` containing the argument given to</span>
-<span class='doccomment'>/// `panic`.</span>
+<span class='doccomment'>/// panics, [`join`] will return an [`Err`] containing the argument given to</span>
+<span class='doccomment'>/// [`panic`].</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Panics</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Panics if the OS fails to create a thread; use `Builder::spawn`</span>
+<span class='doccomment'>/// Panics if the OS fails to create a thread; use [`Builder::spawn`]</span>
 <span class='doccomment'>/// to recover from such errors.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// [`JoinHandle`]: ../../std/thread/struct.JoinHandle.html</span>
+<span class='doccomment'>/// [`join`]: ../../std/thread/struct.JoinHandle.html#method.join</span>
+<span class='doccomment'>/// [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
+<span class='doccomment'>/// [`panic!`]: ../../std/macro.panic.html</span>
+<span class='doccomment'>/// [`Builder::spawn`]: ../../std/thread/struct.Builder.html#method.spawn</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use std::thread;</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// let handler = thread::spawn(|| {</span>
+<span class='doccomment'>///     // thread code</span>
+<span class='doccomment'>/// });</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// handler.join().unwrap();</span>
+<span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>spawn</span><span class='op'>&lt;</span><span class='ident'>F</span>, <span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>f</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>JoinHandle</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>where</span>
     <span class='ident'>F</span>: <span class='ident'>FnOnce</span>() <span class='op'>-&gt;</span> <span class='ident'>T</span>, <span class='ident'>F</span>: <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>, <span class='ident'>T</span>: <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>
@@ -1421,7 +1553,7 @@
 
 <span class='doccomment'>/// Gets a handle to the thread that invokes it.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// #Examples</span>
+<span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Getting a handle to the current thread with `thread::current()`:</span>
 <span class='doccomment'>///</span>
@@ -1446,6 +1578,14 @@
 }
 
 <span class='doccomment'>/// Cooperatively gives up a timeslice to the OS scheduler.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use std::thread;</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// thread::yield_now();</span>
+<span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>yield_now</span>() {
     <span class='ident'>imp</span>::<span class='ident'>Thread</span>::<span class='ident'>yield_now</span>()
@@ -1455,7 +1595,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// ```rust,should_panic</span>
+<span class='doccomment'>/// ```should_panic</span>
 <span class='doccomment'>/// use std::thread;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// struct SomeStruct;</span>
@@ -1493,6 +1633,15 @@
 <span class='doccomment'>/// specifics or platform-dependent functionality. Note that on unix platforms</span>
 <span class='doccomment'>/// this function will not return early due to a signal being received or a</span>
 <span class='doccomment'>/// spurious wakeup.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```no_run</span>
+<span class='doccomment'>/// use std::thread;</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// // Let&#39;s sleep for 2 seconds:</span>
+<span class='doccomment'>/// thread::sleep_ms(2000);</span>
+<span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='attribute'>#[<span class='ident'>rustc_deprecated</span>(<span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.6.0&quot;</span>, <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;replaced by `std::thread::sleep`&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sleep_ms</span>(<span class='ident'>ms</span>: <span class='ident'>u32</span>) {
@@ -1513,7 +1662,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// ```rust,no_run</span>
+<span class='doccomment'>/// ```no_run</span>
 <span class='doccomment'>/// use std::{thread, time};</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let ten_millis = time::Duration::from_millis(10);</span>
@@ -1665,6 +1814,13 @@
 
             <span class='ident'>ThreadId</span>(<span class='ident'>id</span>)
         }
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
+<span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>ThreadId</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='ident'>f</span>.<span class='ident'>pad</span>(<span class='string'>&quot;ThreadId { .. }&quot;</span>)
     }
 }
 
@@ -1822,7 +1978,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// A `JoinHandle` *detaches* the child thread when it is dropped.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Due to platform restrictions, it is not possible to `Clone` this</span>
+<span class='doccomment'>/// Due to platform restrictions, it is not possible to [`Clone`] this</span>
 <span class='doccomment'>/// handle: the ability to join a child thread is a uniquely-owned</span>
 <span class='doccomment'>/// permission.</span>
 <span class='doccomment'>///</span>
@@ -1833,7 +1989,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Creation from [`thread::spawn`]:</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// ```rust</span>
+<span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// use std::thread;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let join_handle: thread::JoinHandle&lt;_&gt; = thread::spawn(|| {</span>
@@ -1843,7 +1999,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Creation from [`thread::Builder::spawn`]:</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// ```rust</span>
+<span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// use std::thread;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let builder = thread::Builder::new();</span>
@@ -1853,13 +2009,31 @@
 <span class='doccomment'>/// }).unwrap();</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
+<span class='doccomment'>/// [`Clone`]: ../../std/clone/trait.Clone.html</span>
 <span class='doccomment'>/// [`thread::spawn`]: fn.spawn.html</span>
 <span class='doccomment'>/// [`thread::Builder::spawn`]: struct.Builder.html#method.spawn</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>JoinHandle</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>JoinInner</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>);
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>JoinHandle</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Extracts a handle to the underlying thread</span>
+    <span class='doccomment'>/// Extracts a handle to the underlying thread.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// #![feature(thread_id)]</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// use std::thread;</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let builder = thread::Builder::new();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let join_handle: thread::JoinHandle&lt;_&gt; = builder.spawn(|| {</span>
+    <span class='doccomment'>///     // some work here</span>
+    <span class='doccomment'>/// }).unwrap();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let thread = join_handle.thread();</span>
+    <span class='doccomment'>/// println!(&quot;thread id: {:?}&quot;, thread.id());</span>
+    <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>thread</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>Thread</span> {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>thread</span>
@@ -1867,8 +2041,24 @@
 
     <span class='doccomment'>/// Waits for the associated thread to finish.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// If the child thread panics, `Err` is returned with the parameter given</span>
-    <span class='doccomment'>/// to `panic`.</span>
+    <span class='doccomment'>/// If the child thread panics, [`Err`] is returned with the parameter given</span>
+    <span class='doccomment'>/// to [`panic`].</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class='doccomment'>/// [`panic!`]: ../../std/macro.panic.html</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use std::thread;</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let builder = thread::Builder::new();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let join_handle: thread::JoinHandle&lt;_&gt; = builder.spawn(|| {</span>
+    <span class='doccomment'>///     // some work here</span>
+    <span class='doccomment'>/// }).unwrap();</span>
+    <span class='doccomment'>/// join_handle.join().expect(&quot;Couldn&#39;t join on the associated thread&quot;);</span>
+    <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>join</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>join</span>()
@@ -1881,6 +2071,13 @@
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>IntoInner</span><span class='op'>&lt;</span><span class='ident'>imp</span>::<span class='ident'>Thread</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>JoinHandle</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>imp</span>::<span class='ident'>Thread</span> { <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>native</span>.<span class='ident'>unwrap</span>() }
+}
+
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>JoinHandle</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='ident'>f</span>.<span class='ident'>pad</span>(<span class='string'>&quot;JoinHandle { .. }&quot;</span>)
+    }
 }
 
 <span class='kw'>fn</span> <span class='ident'>_assert_sync_and_send</span>() {

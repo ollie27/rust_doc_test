@@ -9,6 +9,7 @@
 
     <title>slice.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -3177,10 +3178,10 @@
 <span class='doccomment'>/// The algorithm identifies strictly descending and non-descending subsequences, which are called</span>
 <span class='doccomment'>/// natural runs. There is a stack of pending runs yet to be merged. Each newly found run is pushed</span>
 <span class='doccomment'>/// onto the stack, and then some pairs of adjacent runs are merged until these two invariants are</span>
-<span class='doccomment'>/// satisfied, for every `i` in `0 .. runs.len() - 2`:</span>
+<span class='doccomment'>/// satisfied:</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// 1. `runs[i].len &gt; runs[i + 1].len`</span>
-<span class='doccomment'>/// 2. `runs[i].len &gt; runs[i + 1].len + runs[i + 2].len`</span>
+<span class='doccomment'>/// 1. for every `i` in `1..runs.len()`: `runs[i - 1].len &gt; runs[i].len`</span>
+<span class='doccomment'>/// 2. for every `i` in `2..runs.len()`: `runs[i - 2].len &gt; runs[i - 1].len + runs[i].len`</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// The invariants ensure that the total running time is `O(n log n)` worst-case.</span>
 <span class='kw'>fn</span> <span class='ident'>merge_sort</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>v</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>], <span class='kw-2'>mut</span> <span class='ident'>compare</span>: <span class='ident'>F</span>)

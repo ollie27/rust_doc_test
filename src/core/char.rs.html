@@ -9,6 +9,7 @@
 
     <title>char.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -878,7 +879,7 @@
 
 <span class='doccomment'>//! Character manipulation.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! For more details, see ::rustc_unicode::char (a.k.a. std::char)</span>
+<span class='doccomment'>//! For more details, see ::std_unicode::char (a.k.a. std::char)</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>non_snake_case</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;core_char&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.2.0&quot;</span>)]</span>
@@ -1195,9 +1196,9 @@
     <span class='kw'>fn</span> <span class='ident'>len_utf8</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span>;
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;core&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.6.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>len_utf16</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span>;
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;unicode&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27784&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;unicode_encode_char&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>encode_utf8</span>(<span class='self'>self</span>, <span class='ident'>dst</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>str</span>;
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;unicode&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27784&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;unicode_encode_char&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>encode_utf16</span>(<span class='self'>self</span>, <span class='ident'>dst</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u16</span>]) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u16</span>];
 }
 

@@ -9,6 +9,7 @@
 
     <title>std::os::windows::process::CommandExt - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
     
@@ -54,7 +55,7 @@
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.creation_flags' class='method stab unstable'><span id='creation_flags.v' class='invisible'><code>fn <a href='#tymethod.creation_flags' class='fnname'>creation_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut <a class='struct' href='../../../../std/process/struct.Command.html' title='std::process::Command'>Command</a></code></span></h3><div class='stability'><div class='stab unstable'>Unstable (<code>windows_process_extensions</code> <a href="https://github.com/rust-lang/rust/issues/37827">#37827</a>)</div></div><div class='docblock'><p>Sets the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms684863(v=vs.85).aspx">process creation flags</a> to be passed to <code>CreateProcess</code>.</p>
+        <h3 id='tymethod.creation_flags' class='method'><span id='creation_flags.v' class='invisible'><code>fn <a href='#tymethod.creation_flags' class='fnname'>creation_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut <a class='struct' href='../../../../std/process/struct.Command.html' title='std::process::Command'>Command</a></code></span></h3><div class='stability'><div class='stab unstable'>Unstable (<code>windows_process_extensions</code> <a href="https://github.com/rust-lang/rust/issues/37827">#37827</a>)</div></div><div class='docblock'><p>Sets the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms684863(v=vs.85).aspx">process creation flags</a> to be passed to <code>CreateProcess</code>.</p>
 
 <p>These will always be ORed with <code>CREATE_UNICODE_ENVIRONMENT</code>.</p>
 </div></div>

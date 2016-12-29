@@ -9,6 +9,7 @@
 
     <title>vec.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -2163,8 +2164,6 @@
 <span id="2119">2119</span>
 <span id="2120">2120</span>
 <span id="2121">2121</span>
-<span id="2122">2122</span>
-<span id="2123">2123</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -4070,14 +4069,13 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// # #![feature(vec_into_iter_as_slice)]</span>
     <span class='doccomment'>/// let vec = vec![&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];</span>
     <span class='doccomment'>/// let mut into_iter = vec.into_iter();</span>
     <span class='doccomment'>/// assert_eq!(into_iter.as_slice(), &amp;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</span>
     <span class='doccomment'>/// let _ = into_iter.next().unwrap();</span>
     <span class='doccomment'>/// assert_eq!(into_iter.as_slice(), &amp;[&#39;b&#39;, &#39;c&#39;]);</span>
     <span class='doccomment'>/// ```</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_into_iter_as_slice&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35601&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_into_iter_as_slice&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_slice</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>] {
         <span class='kw'>unsafe</span> {
             <span class='ident'>slice</span>::<span class='ident'>from_raw_parts</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>, <span class='self'>self</span>.<span class='ident'>len</span>())
@@ -4089,7 +4087,6 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// # #![feature(vec_into_iter_as_slice)]</span>
     <span class='doccomment'>/// let vec = vec![&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];</span>
     <span class='doccomment'>/// let mut into_iter = vec.into_iter();</span>
     <span class='doccomment'>/// assert_eq!(into_iter.as_slice(), &amp;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</span>
@@ -4098,7 +4095,7 @@
     <span class='doccomment'>/// assert_eq!(into_iter.next().unwrap(), &#39;b&#39;);</span>
     <span class='doccomment'>/// assert_eq!(into_iter.next().unwrap(), &#39;z&#39;);</span>
     <span class='doccomment'>/// ```</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_into_iter_as_slice&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35601&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_into_iter_as_slice&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_mut_slice</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
         <span class='kw'>unsafe</span> {
             <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>, <span class='self'>self</span>.<span class='ident'>len</span>())

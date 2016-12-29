@@ -9,6 +9,7 @@
 
     <title>heap.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -233,6 +234,8 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -363,6 +366,7 @@
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>EMPTY</span>: <span class='op'>*</span><span class='kw-2'>mut</span> () <span class='op'>=</span> <span class='number'>0x1</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> ();
 
 <span class='doccomment'>/// The allocator for unique pointers.</span>
+<span class='comment'>// This function must not unwind. If it does, MIR trans will fail.</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>test</span>))]</span>
 <span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;exchange_malloc&quot;</span>]</span>
 <span class='attribute'>#[<span class='ident'>inline</span>]</span>
@@ -379,6 +383,7 @@
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>test</span>))]</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>stage0</span>)]</span>
 <span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;exchange_free&quot;</span>]</span>
 <span class='attribute'>#[<span class='ident'>inline</span>]</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>exchange_free</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>, <span class='ident'>old_size</span>: <span class='ident'>usize</span>, <span class='ident'>align</span>: <span class='ident'>usize</span>) {

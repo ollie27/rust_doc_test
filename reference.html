@@ -38,9 +38,9 @@
 
     <div id="versioninfo">
   <img src="https://www.rust-lang.org/logos/rust-logo-32x32-blk.png" width="32" height="32" alt="Rust logo"><br>
-  <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.15.0-dev</span><br>
-  <a href="https://github.com/rust-lang/rust/commit/0cf7e48e46f4b834d0ce6b8e4cfa804318bee011"
-    class="hash white-sticker">0cf7e48e4</a>
+  <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.16.0-dev</span><br>
+  <a href="https://github.com/rust-lang/rust/commit/02b22ec7bd8fa542dd3b08a8497ad5cd3a20c417"
+    class="hash white-sticker">02b22ec7b</a>
 </div>
 
 
@@ -1940,7 +1940,8 @@ of an item to see whether it should be allowed or not. This is where privacy
 warnings are generated, or otherwise &quot;you used a private item of another module
 and weren&#39;t allowed to.&quot;</p>
 
-<p>By default, everything in Rust is <em>private</em>, with one exception. Enum variants
+<p>By default, everything in Rust is <em>private</em>, with two exceptions: Associated
+items in a <code>pub</code> Trait are public by default; Enum variants
 in a <code>pub</code> enum are also public by default. When an item is declared as <code>pub</code>,
 it can be thought of as being accessible to the outside world. For example:</p>
 
