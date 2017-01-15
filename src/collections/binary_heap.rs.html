@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libcollections\binary_heap.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libcollections\binary_heap.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>binary_heap.rs.html -- source</title>
@@ -1219,6 +1219,21 @@
 <span id="1174">1174</span>
 <span id="1175">1175</span>
 <span id="1176">1176</span>
+<span id="1177">1177</span>
+<span id="1178">1178</span>
+<span id="1179">1179</span>
+<span id="1180">1180</span>
+<span id="1181">1181</span>
+<span id="1182">1182</span>
+<span id="1183">1183</span>
+<span id="1184">1184</span>
+<span id="1185">1185</span>
+<span id="1186">1186</span>
+<span id="1187">1187</span>
+<span id="1188">1188</span>
+<span id="1189">1189</span>
+<span id="1190">1190</span>
+<span id="1191">1191</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1375,8 +1390,7 @@
 
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ops</span>::{<span class='ident'>Deref</span>, <span class='ident'>DerefMut</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>iter</span>::{<span class='ident'>FromIterator</span>, <span class='ident'>FusedIterator</span>};
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>mem</span>::<span class='ident'>swap</span>;
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>mem</span>::<span class='ident'>size_of</span>;
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>mem</span>::{<span class='ident'>swap</span>, <span class='ident'>size_of</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ptr</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>fmt</span>;
 
@@ -1448,12 +1462,15 @@
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;binary_heap_peek_mut&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PeekMut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span>: <span class='lifetime'>&#39;a</span> <span class='op'>+</span> <span class='ident'>Ord</span><span class='op'>&gt;</span> {
     <span class='ident'>heap</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>BinaryHeap</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
+    <span class='ident'>sift</span>: <span class='ident'>bool</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;binary_heap_peek_mut&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span>: <span class='ident'>Ord</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>PeekMut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='self'>self</span>.<span class='ident'>heap</span>.<span class='ident'>sift_down</span>(<span class='number'>0</span>);
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>sift</span> {
+            <span class='self'>self</span>.<span class='ident'>heap</span>.<span class='ident'>sift_down</span>(<span class='number'>0</span>);
+        }
     }
 }
 
@@ -1469,6 +1486,16 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span>: <span class='ident'>Ord</span><span class='op'>&gt;</span> <span class='ident'>DerefMut</span> <span class='kw'>for</span> <span class='ident'>PeekMut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>deref_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
         <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>heap</span>.<span class='ident'>data</span>[<span class='number'>0</span>]
+    }
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span>: <span class='ident'>Ord</span><span class='op'>&gt;</span> <span class='ident'>PeekMut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='doccomment'>/// Removes the peeked value from the heap and returns it.</span>
+    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;binary_heap_peek_mut_pop&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;38863&quot;</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>pop</span>(<span class='kw-2'>mut</span> <span class='ident'>this</span>: <span class='ident'>PeekMut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span> {
+        <span class='kw'>let</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='ident'>this</span>.<span class='ident'>heap</span>.<span class='ident'>pop</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>this</span>.<span class='ident'>sift</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
+        <span class='ident'>value</span>
     }
 }
 
@@ -1607,7 +1634,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>is_empty</span>() {
             <span class='prelude-val'>None</span>
         } <span class='kw'>else</span> {
-            <span class='prelude-val'>Some</span>(<span class='ident'>PeekMut</span> { <span class='ident'>heap</span>: <span class='self'>self</span> })
+            <span class='prelude-val'>Some</span>(<span class='ident'>PeekMut</span> {
+                <span class='ident'>heap</span>: <span class='self'>self</span>,
+                <span class='ident'>sift</span>: <span class='bool-val'>true</span>,
+            })
         }
     }
 
@@ -1775,7 +1805,7 @@
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>get_mut</span>(<span class='number'>0</span>) {
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>item</span>,
             <span class='prelude-val'>Some</span>(<span class='ident'>top</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>if</span> <span class='op'>*</span><span class='ident'>top</span> <span class='op'>&gt;</span> <span class='ident'>item</span> {
+                <span class='kw'>if</span> <span class='kw-2'>*</span><span class='ident'>top</span> <span class='op'>&gt;</span> <span class='ident'>item</span> {
                     <span class='ident'>swap</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>item</span>, <span class='ident'>top</span>);
                 } <span class='kw'>else</span> {
                     <span class='kw'>return</span> <span class='ident'>item</span>;
@@ -2150,7 +2180,7 @@
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>move_to</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) {
         <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>index</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>pos</span>);
         <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>index</span> <span class='op'>&lt;</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>len</span>());
-        <span class='kw'>let</span> <span class='ident'>index_ptr</span>: <span class='op'>*</span><span class='kw'>const</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>get_unchecked</span>(<span class='ident'>index</span>);
+        <span class='kw'>let</span> <span class='ident'>index_ptr</span>: <span class='kw-2'>*</span><span class='kw'>const</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>get_unchecked</span>(<span class='ident'>index</span>);
         <span class='kw'>let</span> <span class='ident'>hole_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>get_unchecked_mut</span>(<span class='self'>self</span>.<span class='ident'>pos</span>);
         <span class='ident'>ptr</span>::<span class='ident'>copy_nonoverlapping</span>(<span class='ident'>index_ptr</span>, <span class='ident'>hole_ptr</span>, <span class='number'>1</span>);
         <span class='self'>self</span>.<span class='ident'>pos</span> <span class='op'>=</span> <span class='ident'>index</span>;

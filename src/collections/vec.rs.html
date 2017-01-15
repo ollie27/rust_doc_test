@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libcollections\vec.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libcollections\vec.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>vec.rs.html -- source</title>
@@ -2164,6 +2164,77 @@
 <span id="2119">2119</span>
 <span id="2120">2120</span>
 <span id="2121">2121</span>
+<span id="2122">2122</span>
+<span id="2123">2123</span>
+<span id="2124">2124</span>
+<span id="2125">2125</span>
+<span id="2126">2126</span>
+<span id="2127">2127</span>
+<span id="2128">2128</span>
+<span id="2129">2129</span>
+<span id="2130">2130</span>
+<span id="2131">2131</span>
+<span id="2132">2132</span>
+<span id="2133">2133</span>
+<span id="2134">2134</span>
+<span id="2135">2135</span>
+<span id="2136">2136</span>
+<span id="2137">2137</span>
+<span id="2138">2138</span>
+<span id="2139">2139</span>
+<span id="2140">2140</span>
+<span id="2141">2141</span>
+<span id="2142">2142</span>
+<span id="2143">2143</span>
+<span id="2144">2144</span>
+<span id="2145">2145</span>
+<span id="2146">2146</span>
+<span id="2147">2147</span>
+<span id="2148">2148</span>
+<span id="2149">2149</span>
+<span id="2150">2150</span>
+<span id="2151">2151</span>
+<span id="2152">2152</span>
+<span id="2153">2153</span>
+<span id="2154">2154</span>
+<span id="2155">2155</span>
+<span id="2156">2156</span>
+<span id="2157">2157</span>
+<span id="2158">2158</span>
+<span id="2159">2159</span>
+<span id="2160">2160</span>
+<span id="2161">2161</span>
+<span id="2162">2162</span>
+<span id="2163">2163</span>
+<span id="2164">2164</span>
+<span id="2165">2165</span>
+<span id="2166">2166</span>
+<span id="2167">2167</span>
+<span id="2168">2168</span>
+<span id="2169">2169</span>
+<span id="2170">2170</span>
+<span id="2171">2171</span>
+<span id="2172">2172</span>
+<span id="2173">2173</span>
+<span id="2174">2174</span>
+<span id="2175">2175</span>
+<span id="2176">2176</span>
+<span id="2177">2177</span>
+<span id="2178">2178</span>
+<span id="2179">2179</span>
+<span id="2180">2180</span>
+<span id="2181">2181</span>
+<span id="2182">2182</span>
+<span id="2183">2183</span>
+<span id="2184">2184</span>
+<span id="2185">2185</span>
+<span id="2186">2186</span>
+<span id="2187">2187</span>
+<span id="2188">2188</span>
+<span id="2189">2189</span>
+<span id="2190">2190</span>
+<span id="2191">2191</span>
+<span id="2192">2192</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2244,7 +2315,7 @@
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>intrinsics</span>::{<span class='ident'>arith_offset</span>, <span class='ident'>assume</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>iter</span>::{<span class='ident'>FromIterator</span>, <span class='ident'>FusedIterator</span>, <span class='ident'>TrustedLen</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>mem</span>;
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ops</span>::{<span class='ident'>InPlace</span>, <span class='ident'>Index</span>, <span class='ident'>IndexMut</span>, <span class='ident'>Place</span>, <span class='ident'>Placer</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ops</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ptr</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ptr</span>::<span class='ident'>Shared</span>;
@@ -2537,7 +2608,8 @@
     <span class='doccomment'>/// * `capacity` needs to be the capacity that the pointer was allocated with.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Violating these may cause problems like corrupting the allocator&#39;s</span>
-    <span class='doccomment'>/// internal datastructures.</span>
+    <span class='doccomment'>/// internal datastructures. For example it is **not** safe</span>
+    <span class='doccomment'>/// to build a `Vec&lt;u8&gt;` from a pointer to a C `char` array and a `size_t`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The ownership of `ptr` is effectively transferred to the</span>
     <span class='doccomment'>/// `Vec&lt;T&gt;` which may then deallocate, reallocate or change the</span>
@@ -2578,7 +2650,7 @@
     <span class='doccomment'>/// }</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
-    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>, <span class='ident'>length</span>: <span class='ident'>usize</span>, <span class='ident'>capacity</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>, <span class='ident'>length</span>: <span class='ident'>usize</span>, <span class='ident'>capacity</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='ident'>Vec</span> {
             <span class='ident'>buf</span>: <span class='ident'>RawVec</span>::<span class='ident'>from_raw_parts</span>(<span class='ident'>ptr</span>, <span class='ident'>capacity</span>),
             <span class='ident'>len</span>: <span class='ident'>length</span>,
@@ -2963,7 +3035,7 @@
         <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>len</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>del</span> <span class='op'>=</span> <span class='number'>0</span>;
         {
-            <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>;
+            <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>;
 
             <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> {
                 <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>f</span>(<span class='kw-2'>&amp;</span><span class='ident'>v</span>[<span class='ident'>i</span>]) {
@@ -3088,10 +3160,10 @@
             <span class='kw'>while</span> <span class='ident'>r</span> <span class='op'>&lt;</span> <span class='ident'>ln</span> {
                 <span class='kw'>let</span> <span class='ident'>p_r</span> <span class='op'>=</span> <span class='ident'>p</span>.<span class='ident'>offset</span>(<span class='ident'>r</span> <span class='kw'>as</span> <span class='ident'>isize</span>);
                 <span class='kw'>let</span> <span class='ident'>p_wm1</span> <span class='op'>=</span> <span class='ident'>p</span>.<span class='ident'>offset</span>((<span class='ident'>w</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>isize</span>);
-                <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>same_bucket</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>p_r</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>p_wm1</span>) {
+                <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>same_bucket</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='ident'>p_r</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='ident'>p_wm1</span>) {
                     <span class='kw'>if</span> <span class='ident'>r</span> <span class='op'>!=</span> <span class='ident'>w</span> {
                         <span class='kw'>let</span> <span class='ident'>p_w</span> <span class='op'>=</span> <span class='ident'>p_wm1</span>.<span class='ident'>offset</span>(<span class='number'>1</span>);
-                        <span class='ident'>mem</span>::<span class='ident'>swap</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>p_r</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>p_w</span>);
+                        <span class='ident'>mem</span>::<span class='ident'>swap</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='ident'>p_r</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='ident'>p_w</span>);
                     }
                     <span class='ident'>w</span> <span class='op'>+=</span> <span class='number'>1</span>;
                 }
@@ -3226,8 +3298,8 @@
         <span class='comment'>// the hole, and the vector length is restored to the new length.</span>
         <span class='comment'>//</span>
         <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>len</span>();
-        <span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>range</span>.<span class='ident'>start</span>().<span class='ident'>unwrap_or</span>(<span class='kw-2'>&amp;</span><span class='number'>0</span>);
-        <span class='kw'>let</span> <span class='ident'>end</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>range</span>.<span class='ident'>end</span>().<span class='ident'>unwrap_or</span>(<span class='kw-2'>&amp;</span><span class='ident'>len</span>);
+        <span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='ident'>range</span>.<span class='ident'>start</span>().<span class='ident'>unwrap_or</span>(<span class='kw-2'>&amp;</span><span class='number'>0</span>);
+        <span class='kw'>let</span> <span class='ident'>end</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='ident'>range</span>.<span class='ident'>end</span>().<span class='ident'>unwrap_or</span>(<span class='kw-2'>&amp;</span><span class='ident'>len</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>start</span> <span class='op'>&lt;=</span> <span class='ident'>end</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>end</span> <span class='op'>&lt;=</span> <span class='ident'>len</span>);
 
@@ -3242,7 +3314,7 @@
                 <span class='ident'>tail_start</span>: <span class='ident'>end</span>,
                 <span class='ident'>tail_len</span>: <span class='ident'>len</span> <span class='op'>-</span> <span class='ident'>end</span>,
                 <span class='ident'>iter</span>: <span class='ident'>range_slice</span>.<span class='ident'>iter</span>(),
-                <span class='ident'>vec</span>: <span class='ident'>Shared</span>::<span class='ident'>new</span>(<span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _),
+                <span class='ident'>vec</span>: <span class='ident'>Shared</span>::<span class='ident'>new</span>(<span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _),
             }
         }
     }
@@ -3413,6 +3485,29 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>extend_from_slice</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>]) {
         <span class='self'>self</span>.<span class='ident'>spec_extend</span>(<span class='ident'>other</span>.<span class='ident'>iter</span>())
     }
+
+    <span class='doccomment'>/// Returns a place for insertion at the back of the `Vec`.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Using this method with placement syntax is equivalent to [`push`](#method.push),</span>
+    <span class='doccomment'>/// but may be more efficient.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// #![feature(collection_placement)]</span>
+    <span class='doccomment'>/// #![feature(placement_in_syntax)]</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut vec = vec![1, 2];</span>
+    <span class='doccomment'>/// vec.place_back() &lt;- 3;</span>
+    <span class='doccomment'>/// vec.place_back() &lt;- 4;</span>
+    <span class='doccomment'>/// assert_eq!(&amp;vec, &amp;[1, 2, 3, 4]);</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;collection_placement&quot;</span>,
+               <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;placement protocol is subject to change&quot;</span>,
+               <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;30172&quot;</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>place_back</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PlaceBack</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='ident'>PlaceBack</span> { <span class='ident'>vec</span>: <span class='self'>self</span> }
+    }
 }
 
 <span class='comment'>// Set the length of the vec when the `SetLenOnDrop` value goes out of scope.</span>
@@ -3428,7 +3523,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>SetLenOnDrop</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>len</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>SetLenOnDrop</span> { <span class='ident'>local_len</span>: <span class='op'>*</span><span class='ident'>len</span>, <span class='ident'>len</span>: <span class='ident'>len</span> }
+        <span class='ident'>SetLenOnDrop</span> { <span class='ident'>local_len</span>: <span class='kw-2'>*</span><span class='ident'>len</span>, <span class='ident'>len</span>: <span class='ident'>len</span> }
     }
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
@@ -3440,7 +3535,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>SetLenOnDrop</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>local_len</span>;
+        <span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>local_len</span>;
     }
 }
 
@@ -3485,7 +3580,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span><span class='op'>&gt;</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>test</span>))]</span>
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-        <span class='op'>&lt;</span>[<span class='ident'>T</span>]<span class='op'>&gt;</span>::<span class='ident'>to_vec</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>)
+        <span class='op'>&lt;</span>[<span class='ident'>T</span>]<span class='op'>&gt;</span>::<span class='ident'>to_vec</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>)
     }
 
     <span class='comment'>// HACK(japaric): with cfg(test) the inherent `[T]::to_vec` method, which is</span>
@@ -3494,7 +3589,7 @@
     <span class='comment'>// NB see the slice::hack module in slice.rs for more information</span>
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-        ::<span class='ident'>slice</span>::<span class='ident'>to_vec</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>)
+        ::<span class='ident'>slice</span>::<span class='ident'>to_vec</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>)
     }
 
     <span class='kw'>fn</span> <span class='ident'>clone_from</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) {
@@ -3515,7 +3610,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Hash</span><span class='op'>&gt;</span> <span class='ident'>Hash</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>hash</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>hash</span>::<span class='ident'>Hasher</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>state</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>H</span>) {
-        <span class='ident'>Hash</span>::<span class='ident'>hash</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>state</span>)
+        <span class='ident'>Hash</span>::<span class='ident'>hash</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>state</span>)
     }
 }
 
@@ -3526,7 +3621,7 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>T</span> {
         <span class='comment'>// NB built-in indexing via `&amp;[T]`</span>
-        <span class='kw-2'>&amp;</span>(<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>)[<span class='ident'>index</span>]
+        <span class='kw-2'>&amp;</span>(<span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>)[<span class='ident'>index</span>]
     }
 }
 
@@ -3535,7 +3630,7 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
         <span class='comment'>// NB built-in indexing via `&amp;mut [T]`</span>
-        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>)[<span class='ident'>index</span>]
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>)[<span class='ident'>index</span>]
     }
 }
 
@@ -3546,7 +3641,7 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>Range</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>] {
-        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
@@ -3555,7 +3650,7 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeTo</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>] {
-        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
@@ -3564,7 +3659,7 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeFrom</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>] {
-        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
@@ -3582,7 +3677,7 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeInclusive</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>] {
-        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;inclusive_range&quot;</span>, <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;recently added, follows RFC&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;28237&quot;</span>)]</span>
@@ -3591,7 +3686,7 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeToInclusive</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>] {
-        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>Index</span>::<span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 
@@ -3599,21 +3694,21 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>ops</span>::<span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>ops</span>::<span class='ident'>Range</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>Range</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
-        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>ops</span>::<span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>ops</span>::<span class='ident'>RangeTo</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeTo</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
-        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>ops</span>::<span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>ops</span>::<span class='ident'>RangeFrom</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeFrom</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
-        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
@@ -3627,14 +3722,14 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>ops</span>::<span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>ops</span>::<span class='ident'>RangeInclusive</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeInclusive</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
-        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;inclusive_range&quot;</span>, <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;recently added, follows RFC&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;28237&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>ops</span>::<span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>ops</span>::<span class='ident'>RangeToInclusive</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>ops</span>::<span class='ident'>RangeToInclusive</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
-        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
+        <span class='ident'>IndexMut</span>::<span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>index</span>)
     }
 }
 
@@ -3694,9 +3789,9 @@
             <span class='kw'>let</span> <span class='ident'>begin</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>as_mut_ptr</span>();
             <span class='ident'>assume</span>(<span class='op'>!</span><span class='ident'>begin</span>.<span class='ident'>is_null</span>());
             <span class='kw'>let</span> <span class='ident'>end</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='op'>==</span> <span class='number'>0</span> {
-                <span class='ident'>arith_offset</span>(<span class='ident'>begin</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>i8</span>, <span class='self'>self</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>
+                <span class='ident'>arith_offset</span>(<span class='ident'>begin</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>i8</span>, <span class='self'>self</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>T</span>
             } <span class='kw'>else</span> {
-                <span class='ident'>begin</span>.<span class='ident'>offset</span>(<span class='self'>self</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>
+                <span class='ident'>begin</span>.<span class='ident'>offset</span>(<span class='self'>self</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>T</span>
             };
             <span class='kw'>let</span> <span class='ident'>cap</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>buf</span>.<span class='ident'>cap</span>();
             <span class='ident'>mem</span>::<span class='ident'>forget</span>(<span class='self'>self</span>);
@@ -3914,7 +4009,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialOrd</span><span class='op'>&gt;</span> <span class='ident'>PartialOrd</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>partial_cmp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Ordering</span><span class='op'>&gt;</span> {
-        <span class='ident'>PartialOrd</span>::<span class='ident'>partial_cmp</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>other</span>)
+        <span class='ident'>PartialOrd</span>::<span class='ident'>partial_cmp</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>other</span>)
     }
 }
 
@@ -3925,13 +4020,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Ord</span><span class='op'>&gt;</span> <span class='ident'>Ord</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Ordering</span> {
-        <span class='ident'>Ord</span>::<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>other</span>)
+        <span class='ident'>Ord</span>::<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='ident'>other</span>)
     }
 }
 
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='attribute'>#[<span class='ident'>unsafe_destructor_blind_to_params</span>]</span>
+<span class='kw'>unsafe</span> <span class='kw'>impl</span><span class='op'>&lt;</span><span class='attribute'>#[<span class='ident'>may_dangle</span>]</span> <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>unsafe</span> {
             <span class='comment'>// use drop for [T]</span>
@@ -3952,7 +4046,7 @@
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>fmt</span>::<span class='ident'>Debug</span><span class='op'>&gt;</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='ident'>fmt</span>::<span class='ident'>Debug</span>::<span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>f</span>)
+        <span class='ident'>fmt</span>::<span class='ident'>Debug</span>::<span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>, <span class='ident'>f</span>)
     }
 }
 
@@ -4050,8 +4144,8 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>IntoIter</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='ident'>buf</span>: <span class='ident'>Shared</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
     <span class='ident'>cap</span>: <span class='ident'>usize</span>,
-    <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>,
-    <span class='ident'>end</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>,
+    <span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>T</span>,
+    <span class='ident'>end</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>T</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_intoiter_debug&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.13.0&quot;</span>)]</span>
@@ -4098,7 +4192,7 @@
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_into_iter_as_slice&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.15.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_mut_slice</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>] {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>, <span class='self'>self</span>.<span class='ident'>len</span>())
+            <span class='ident'>slice</span>::<span class='ident'>from_raw_parts_mut</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>, <span class='self'>self</span>.<span class='ident'>len</span>())
         }
     }
 }
@@ -4115,17 +4209,17 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _ <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>end</span> {
+            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _ <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>end</span> {
                 <span class='prelude-val'>None</span>
             } <span class='kw'>else</span> {
                 <span class='kw'>if</span> <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='op'>==</span> <span class='number'>0</span> {
                     <span class='comment'>// purposefully don&#39;t use &#39;ptr.offset&#39; because for</span>
                     <span class='comment'>// vectors with 0-size elements this would return the</span>
                     <span class='comment'>// same pointer.</span>
-                    <span class='self'>self</span>.<span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>arith_offset</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>i8</span>, <span class='number'>1</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>;
+                    <span class='self'>self</span>.<span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>arith_offset</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>i8</span>, <span class='number'>1</span>) <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>;
 
                     <span class='comment'>// Use a non-null pointer value</span>
-                    <span class='prelude-val'>Some</span>(<span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>EMPTY</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>))
+                    <span class='prelude-val'>Some</span>(<span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>EMPTY</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>))
                 } <span class='kw'>else</span> {
                     <span class='kw'>let</span> <span class='ident'>old</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>ptr</span>;
                     <span class='self'>self</span>.<span class='ident'>ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>ptr</span>.<span class='ident'>offset</span>(<span class='number'>1</span>);
@@ -4165,10 +4259,10 @@
             } <span class='kw'>else</span> {
                 <span class='kw'>if</span> <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='op'>==</span> <span class='number'>0</span> {
                     <span class='comment'>// See above for why &#39;ptr.offset&#39; isn&#39;t used</span>
-                    <span class='self'>self</span>.<span class='ident'>end</span> <span class='op'>=</span> <span class='ident'>arith_offset</span>(<span class='self'>self</span>.<span class='ident'>end</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>i8</span>, <span class='op'>-</span><span class='number'>1</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>;
+                    <span class='self'>self</span>.<span class='ident'>end</span> <span class='op'>=</span> <span class='ident'>arith_offset</span>(<span class='self'>self</span>.<span class='ident'>end</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>i8</span>, <span class='op'>-</span><span class='number'>1</span>) <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>;
 
                     <span class='comment'>// Use a non-null pointer value</span>
-                    <span class='prelude-val'>Some</span>(<span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>EMPTY</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>))
+                    <span class='prelude-val'>Some</span>(<span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>EMPTY</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>))
                 } <span class='kw'>else</span> {
                     <span class='self'>self</span>.<span class='ident'>end</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>end</span>.<span class='ident'>offset</span>(<span class='op'>-</span><span class='number'>1</span>);
 
@@ -4200,14 +4294,13 @@
 }
 
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>IntoIter</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='attribute'>#[<span class='ident'>unsafe_destructor_blind_to_params</span>]</span>
+<span class='kw'>unsafe</span> <span class='kw'>impl</span><span class='op'>&lt;</span><span class='attribute'>#[<span class='ident'>may_dangle</span>]</span> <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>IntoIter</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='comment'>// destroy the remaining elements</span>
         <span class='kw'>for</span> <span class='ident'>_x</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>by_ref</span>() {}
 
         <span class='comment'>// RawVec handles deallocation</span>
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>RawVec</span>::<span class='ident'>from_raw_parts</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>buf</span>, <span class='self'>self</span>.<span class='ident'>cap</span>) };
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>RawVec</span>::<span class='ident'>from_raw_parts</span>(<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>buf</span>, <span class='self'>self</span>.<span class='ident'>cap</span>) };
     }
 }
 
@@ -4239,7 +4332,7 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>iter</span>.<span class='ident'>next</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>elt</span><span class='op'>|</span> <span class='kw'>unsafe</span> { <span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>elt</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _) })
+        <span class='self'>self</span>.<span class='ident'>iter</span>.<span class='ident'>next</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>elt</span><span class='op'>|</span> <span class='kw'>unsafe</span> { <span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>elt</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _) })
     }
 
     <span class='kw'>fn</span> <span class='ident'>size_hint</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>usize</span>, <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>) {
@@ -4251,7 +4344,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>DoubleEndedIterator</span> <span class='kw'>for</span> <span class='ident'>Drain</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>next_back</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>iter</span>.<span class='ident'>next_back</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>elt</span><span class='op'>|</span> <span class='kw'>unsafe</span> { <span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>elt</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _) })
+        <span class='self'>self</span>.<span class='ident'>iter</span>.<span class='ident'>next_back</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>elt</span><span class='op'>|</span> <span class='kw'>unsafe</span> { <span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='ident'>elt</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _) })
     }
 }
 
@@ -4263,7 +4356,7 @@
 
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>tail_len</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>source_vec</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>vec</span>;
+                <span class='kw'>let</span> <span class='ident'>source_vec</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>vec</span>;
                 <span class='comment'>// memmove back untouched tail, update to new length</span>
                 <span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='ident'>source_vec</span>.<span class='ident'>len</span>();
                 <span class='kw'>let</span> <span class='ident'>tail</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>tail_start</span>;
@@ -4286,6 +4379,55 @@
 
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;fused&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35602&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>FusedIterator</span> <span class='kw'>for</span> <span class='ident'>Drain</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {}
+
+<span class='doccomment'>/// A place for insertion at the back of a `Vec`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// See [`Vec::place_back`](struct.Vec.html#method.place_back) for details.</span>
+<span class='attribute'>#[<span class='ident'>must_use</span> <span class='op'>=</span> <span class='string'>&quot;places do nothing unless written to with `&lt;-` syntax&quot;</span>]</span>
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;collection_placement&quot;</span>,
+           <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;struct name and placement protocol are subject to change&quot;</span>,
+           <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;30172&quot;</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PlaceBack</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span>: <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='ident'>vec</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;collection_placement&quot;</span>,
+           <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;placement protocol is subject to change&quot;</span>,
+           <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;30172&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Placer</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>PlaceBack</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>type</span> <span class='ident'>Place</span> <span class='op'>=</span> <span class='ident'>PlaceBack</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span>;
+
+    <span class='kw'>fn</span> <span class='ident'>make_place</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
+        <span class='comment'>// This will panic or abort if we would allocate &gt; isize::MAX bytes</span>
+        <span class='comment'>// or if the length increment would overflow for zero-sized types.</span>
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>vec</span>.<span class='ident'>len</span> <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>vec</span>.<span class='ident'>buf</span>.<span class='ident'>cap</span>() {
+            <span class='self'>self</span>.<span class='ident'>vec</span>.<span class='ident'>buf</span>.<span class='ident'>double</span>();
+        }
+        <span class='self'>self</span>
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;collection_placement&quot;</span>,
+           <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;placement protocol is subject to change&quot;</span>,
+           <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;30172&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Place</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>PlaceBack</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>pointer</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
+        <span class='kw'>unsafe</span> { <span class='self'>self</span>.<span class='ident'>vec</span>.<span class='ident'>as_mut_ptr</span>().<span class='ident'>offset</span>(<span class='self'>self</span>.<span class='ident'>vec</span>.<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>isize</span>) }
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;collection_placement&quot;</span>,
+           <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;placement protocol is subject to change&quot;</span>,
+           <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;30172&quot;</span>)]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>InPlace</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>PlaceBack</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>type</span> <span class='ident'>Owner</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>T</span>;
+
+    <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>finalize</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>T</span> {
+        <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>pointer</span>();
+        <span class='self'>self</span>.<span class='ident'>vec</span>.<span class='ident'>len</span> <span class='op'>+=</span> <span class='number'>1</span>;
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='ident'>ptr</span>
+    }
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

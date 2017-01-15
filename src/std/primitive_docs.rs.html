@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libstd\primitive_docs.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libstd\primitive_docs.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>primitive_docs.rs.html -- source</title>
@@ -707,6 +707,50 @@
 <span id="662">662</span>
 <span id="663">663</span>
 <span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
+<span id="708">708</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -766,6 +810,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Also, since `bool` implements the [`Copy`](marker/trait.Copy.html) trait, we don&#39;t</span>
 <span class='doccomment'>/// have to worry about the move semantics (just like the integer and float primitives).</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_bool</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;char&quot;</span>)]</span>
@@ -836,6 +881,7 @@
 <span class='doccomment'>/// assert_eq!(12, s.len() * std::mem::size_of::&lt;u8&gt;());</span>
 <span class='doccomment'>/// assert_eq!(32, v.len() * std::mem::size_of::&lt;char&gt;());</span>
 <span class='doccomment'>/// ```</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_char</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;unit&quot;</span>)]</span>
@@ -873,6 +919,7 @@
 <span class='doccomment'>/// };</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_unit</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;pointer&quot;</span>)]</span>
@@ -954,6 +1001,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// *[See also the `std::ptr` module](ptr/index.html).*</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_pointer</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;array&quot;</span>)]</span>
@@ -1052,6 +1100,7 @@
 <span class='doccomment'>/// for x in &amp;array { }</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_array</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;slice&quot;</span>)]</span>
@@ -1082,6 +1131,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// *[See also the `std::slice` module](slice/index.html).*</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_slice</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;str&quot;</span>)]</span>
@@ -1148,6 +1198,7 @@
 <span class='doccomment'>/// Note: This example shows the internals of `&amp;str`. `unsafe` should not be</span>
 <span class='doccomment'>/// used to get a string slice under normal circumstances. Use `.as_slice()`</span>
 <span class='doccomment'>/// instead.</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_str</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;tuple&quot;</span>)]</span>
@@ -1212,7 +1263,7 @@
 <span class='doccomment'>/// [`Hash`]: hash/trait.Hash.html</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Due to a temporary restriction in Rust&#39;s type system, these traits are only</span>
-<span class='doccomment'>/// implemented on tuples of arity 32 or less. In the future, this may change.</span>
+<span class='doccomment'>/// implemented on tuples of arity 12 or less. In the future, this may change.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
@@ -1246,6 +1297,7 @@
 <span class='doccomment'>/// assert_eq!(y, 5);</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_tuple</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;f32&quot;</span>)]</span>
@@ -1253,6 +1305,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// *[See also the `std::f32` module](f32/index.html).*</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_f32</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;f64&quot;</span>)]</span>
@@ -1261,6 +1314,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// *[See also the `std::f64` module](f64/index.html).*</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_f64</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;i8&quot;</span>)]</span>
@@ -1272,6 +1326,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `i64` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_i8</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;i16&quot;</span>)]</span>
@@ -1283,6 +1338,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `i32` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_i16</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;i32&quot;</span>)]</span>
@@ -1294,6 +1350,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `i16` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_i32</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;i64&quot;</span>)]</span>
@@ -1305,7 +1362,20 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `i8` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_i64</span> { }
+
+<span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>)]</span>
+<span class='comment'>//</span>
+<span class='doccomment'>/// The 128-bit signed integer type.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// *[See also the `std::i128` module](i128/index.html).*</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
+<span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `i8` in there.</span>
+<span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span><span class='op'>=</span><span class='string'>&quot;35118&quot;</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>prim_i128</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;u8&quot;</span>)]</span>
 <span class='comment'>//</span>
@@ -1316,6 +1386,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `u64` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_u8</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;u16&quot;</span>)]</span>
@@ -1327,6 +1398,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `u32` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_u16</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;u32&quot;</span>)]</span>
@@ -1338,6 +1410,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `u16` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_u32</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;u64&quot;</span>)]</span>
@@ -1349,7 +1422,20 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `u8` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_u64</span> { }
+
+<span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;u128&quot;</span>)]</span>
+<span class='comment'>//</span>
+<span class='doccomment'>/// The 128-bit unsigned integer type.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// *[See also the `std::u128` module](u128/index.html).*</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
+<span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `u8` in there.</span>
+<span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span><span class='op'>=</span><span class='string'>&quot;35118&quot;</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>prim_u128</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;isize&quot;</span>)]</span>
 <span class='comment'>//</span>
@@ -1360,6 +1446,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `usize` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_isize</span> { }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>primitive</span> <span class='op'>=</span> <span class='string'>&quot;usize&quot;</span>)]</span>
@@ -1371,6 +1458,7 @@
 <span class='doccomment'>/// However, please note that examples are shared between primitive integer</span>
 <span class='doccomment'>/// types. So it&#39;s normal if you see usage of types like `isize` in there.</span>
 <span class='doccomment'>///</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>prim_usize</span> { }
 </pre>
 </section>

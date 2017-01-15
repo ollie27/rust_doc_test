@@ -72,7 +72,7 @@ transitively: if <code>T: PartialOrd&lt;U&gt;</code> and <code>U: PartialOrd&lt;
 <p>This trait can be used with <code>#[derive]</code>. When <code>derive</code>d, it will produce a lexicographic
 ordering based on the top-to-bottom declaration order of the struct&#39;s members.</p>
 
-<h2 id='how-can-i-implement-ord' class='section-header'><a href='#how-can-i-implement-ord'>How can I implement <code>Ord</code>?</a></h2>
+<h2 id='how-can-i-implement-partialord' class='section-header'><a href='#how-can-i-implement-partialord'>How can I implement <code>PartialOrd</code>?</a></h2>
 <p>PartialOrd only requires implementation of the <code>partial_cmp</code> method, with the others generated
 from default implementations.</p>
 
@@ -216,78 +216,78 @@ operator.</p>
 <li><code>impl&lt;Ret&gt; PartialOrd for extern fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; PartialOrd for unsafe fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; PartialOrd for unsafe extern fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialOrd for fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialOrd for extern fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialOrd for extern fn(A, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialOrd for unsafe fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialOrd for unsafe extern fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialOrd for unsafe extern fn(A, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialOrd for fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialOrd for extern fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialOrd for extern fn(A, B, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialOrd for unsafe fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialOrd for unsafe extern fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialOrd for unsafe extern fn(A, B, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for extern fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for extern fn(A, B, C, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for unsafe fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for unsafe extern fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for unsafe extern fn(A, B, C, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for extern fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for extern fn(A, B, C, D, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for unsafe fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for unsafe extern fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for unsafe extern fn(A, B, C, D, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for extern fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for extern fn(A, B, C, D, E, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for unsafe fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for unsafe extern fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for extern fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for extern fn(A, B, C, D, E, F, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for unsafe fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for extern fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for unsafe fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for unsafe fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for unsafe fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, J, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for unsafe fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, J, K, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for unsafe fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for extern fn(A, B, C, D, E, F, G, H, I, J, K, L, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for unsafe fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialOrd for fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialOrd for extern fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialOrd for extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialOrd for unsafe fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialOrd for unsafe extern fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialOrd for unsafe extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialOrd for fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialOrd for extern fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialOrd for extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialOrd for unsafe fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialOrd for unsafe extern fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialOrd for unsafe extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for unsafe fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialOrd for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialOrd for *const T</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialOrd for *mut T</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialOrd for <a class='struct' href='../../core/marker/struct.PhantomData.html' title='core::marker::PhantomData'>PhantomData</a>&lt;T&gt;</code></li>
@@ -306,6 +306,8 @@ operator.</p>
 <li><code>impl PartialOrd for i16</code></li>
 <li><code>impl PartialOrd for i32</code></li>
 <li><code>impl PartialOrd for i64</code></li>
+<li><code>impl PartialOrd for u128</code></li>
+<li><code>impl PartialOrd for i128</code></li>
 <li><code>impl PartialOrd for !</code></li>
 <li><code>impl&lt;'a, 'b, A:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>, B:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialOrd&lt;&amp;'b B&gt; for &amp;'a A <span class='where fmt-newline'>where A: <a class='trait' href='../../core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a>&lt;B&gt;</span></code></li>
 <li><code>impl&lt;'a, 'b, A:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>, B:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialOrd&lt;&amp;'b mut B&gt; for &amp;'a mut A <span class='where fmt-newline'>where A: <a class='trait' href='../../core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a>&lt;B&gt;</span></code></li>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libstd\net\tcp.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libstd\net\tcp.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>tcp.rs.html -- source</title>
@@ -1452,31 +1452,6 @@
 <span id="1407">1407</span>
 <span id="1408">1408</span>
 <span id="1409">1409</span>
-<span id="1410">1410</span>
-<span id="1411">1411</span>
-<span id="1412">1412</span>
-<span id="1413">1413</span>
-<span id="1414">1414</span>
-<span id="1415">1415</span>
-<span id="1416">1416</span>
-<span id="1417">1417</span>
-<span id="1418">1418</span>
-<span id="1419">1419</span>
-<span id="1420">1420</span>
-<span id="1421">1421</span>
-<span id="1422">1422</span>
-<span id="1423">1423</span>
-<span id="1424">1424</span>
-<span id="1425">1425</span>
-<span id="1426">1426</span>
-<span id="1427">1427</span>
-<span id="1428">1428</span>
-<span id="1429">1429</span>
-<span id="1430">1430</span>
-<span id="1431">1431</span>
-<span id="1432">1432</span>
-<span id="1433">1433</span>
-<span id="1434">1434</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1488,7 +1463,7 @@
 <span class='comment'>// option. This file may not be copied, modified, or distributed</span>
 <span class='comment'>// except according to those terms.</span>
 
-<span class='kw'>use</span> <span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>use</span> <span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>io</span>;
@@ -1532,7 +1507,7 @@
 <span class='doccomment'>///     // ...</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// // accept connections and process them, spawning a new thread for each one</span>
+<span class='doccomment'>/// // accept connections and process them serially</span>
 <span class='doccomment'>/// for stream in listener.incoming() {</span>
 <span class='doccomment'>///     match stream {</span>
 <span class='doccomment'>///         Ok(stream) =&gt; {</span>
@@ -2093,44 +2068,18 @@
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>ttl</span>()
     }
 
-    <span class='doccomment'>/// Sets the value for the `IPV6_V6ONLY` option on this socket.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// If this is set to `true` then the socket is restricted to sending and</span>
-    <span class='doccomment'>/// receiving IPv6 packets only. In this case two IPv4 and IPv6 applications</span>
-    <span class='doccomment'>/// can bind the same port at the same time.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// If this is set to `false` then the socket can be used to send and</span>
-    <span class='doccomment'>/// receive packets from an IPv4-mapped IPv6 address.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use std::net::TcpListener;</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let listener = TcpListener::bind(&quot;127.0.0.1:80&quot;).unwrap();</span>
-    <span class='doccomment'>/// listener.set_only_v6(true).expect(&quot;Cannot set to IPv6&quot;);</span>
-    <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;net2_mutators&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.9.0&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>rustc_deprecated</span>(<span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>,
+                       <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;this option can only be set before the socket is bound&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_only_v6</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>only_v6</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>set_only_v6</span>(<span class='ident'>only_v6</span>)
     }
 
-    <span class='doccomment'>/// Gets the value of the `IPV6_V6ONLY` option for this socket.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// For more information about this option, see [`set_only_v6`][link].</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// [link]: #method.set_only_v6</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use std::net::TcpListener;</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let listener = TcpListener::bind(&quot;127.0.0.1:80&quot;).unwrap();</span>
-    <span class='doccomment'>/// listener.set_only_v6(true).expect(&quot;Cannot set to IPv6&quot;);</span>
-    <span class='doccomment'>/// assert_eq!(listener.only_v6().unwrap_or(false), true);</span>
-    <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;net2_mutators&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.9.0&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>rustc_deprecated</span>(<span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>,
+                       <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;this option can only be set before the socket is bound&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>only_v6</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>bool</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>only_v6</span>()
     }
@@ -2205,8 +2154,8 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>all</span>(<span class='ident'>test</span>, <span class='ident'>not</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;emscripten&quot;</span>)))]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>;
-    <span class='kw'>use</span> <span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
-    <span class='kw'>use</span> <span class='ident'>net</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='kw-2'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>net</span>::<span class='kw-2'>*</span>;
     <span class='kw'>use</span> <span class='ident'>net</span>::<span class='ident'>test</span>::{<span class='ident'>next_test_ip4</span>, <span class='ident'>next_test_ip6</span>};
     <span class='kw'>use</span> <span class='ident'>sync</span>::<span class='ident'>mpsc</span>::<span class='ident'>channel</span>;
     <span class='kw'>use</span> <span class='ident'>sys_common</span>::<span class='ident'>AsInner</span>;
@@ -2659,6 +2608,7 @@
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>unix</span>)]</span> <span class='comment'>// test doesn&#39;t work on Windows, see #31657</span>
     <span class='kw'>fn</span> <span class='ident'>close_read_wakes_up</span>() {
         <span class='ident'>each_ip</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>|</span><span class='ident'>addr</span><span class='op'>|</span> {
             <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='macro'>t</span><span class='macro'>!</span>(<span class='ident'>TcpListener</span>::<span class='ident'>bind</span>(<span class='kw-2'>&amp;</span><span class='ident'>addr</span>));

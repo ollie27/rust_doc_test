@@ -137,6 +137,8 @@
 </li>
 <li><a  href='using-rust-without-the-standard-library.html'><b>5.12.</b> Using Rust without the standard library</a>
 </li>
+<li><a  href='procedural-macros.html'><b>5.13.</b> Procedural Macros (and custom derive)</a>
+</li>
 </ol>
 </li>
 <li><a  href='nightly-rust.html'><b>6.</b> Nightly Rust</a>
@@ -253,7 +255,7 @@ that implements Roman numeral integer literals.</p>
         }
     };
 
-    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>text</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>text</span>;
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>total</span> <span class='op'>=</span> <span class='number'>0</span>;
     <span class='kw'>while</span> <span class='op'>!</span><span class='ident'>text</span>.<span class='ident'>is_empty</span>() {
         <span class='kw'>match</span> <span class='ident'>NUMERALS</span>.<span class='ident'>iter</span>().<span class='ident'>find</span>(<span class='op'>|</span><span class='op'>&amp;&amp;</span>(<span class='ident'>rn</span>, _)<span class='op'>|</span> <span class='ident'>text</span>.<span class='ident'>starts_with</span>(<span class='ident'>rn</span>)) {

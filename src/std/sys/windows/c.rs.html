@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libstd\sys\windows\c.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libstd\sys\windows\c.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>c.rs.html -- source</title>
@@ -1221,6 +1221,8 @@
 <span id="1176">1176</span>
 <span id="1177">1177</span>
 <span id="1178">1178</span>
+<span id="1179">1179</span>
+<span id="1180">1180</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1248,8 +1250,8 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)]</span>
 <span class='kw'>struct</span> <span class='ident'>u64x2</span>(<span class='ident'>u64</span>, <span class='ident'>u64</span>);
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>FILE_INFO_BY_HANDLE_CLASS</span>::<span class='op'>*</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>EXCEPTION_DISPOSITION</span>::<span class='op'>*</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>FILE_INFO_BY_HANDLE_CLASS</span>::<span class='kw-2'>*</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>EXCEPTION_DISPOSITION</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='ident'>c_ulong</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>HANDLE</span> <span class='op'>=</span> <span class='ident'>LPVOID</span>;
@@ -1276,29 +1278,29 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>DWORDLONG</span> <span class='op'>=</span> <span class='ident'>ULONGLONG</span>;
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBOOL</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BOOL</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBYTE</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BYTE</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBY_HANDLE_FILE_INFORMATION</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BY_HANDLE_FILE_INFORMATION</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPCSTR</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>CHAR</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPCVOID</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPCWSTR</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>WCHAR</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPDWORD</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>DWORD</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPHANDLE</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>HANDLE</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPOVERLAPPED</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>OVERLAPPED</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPPROCESS_INFORMATION</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>PROCESS_INFORMATION</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPSECURITY_ATTRIBUTES</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SECURITY_ATTRIBUTES</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPSTARTUPINFO</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>STARTUPINFO</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPVOID</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWCH</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WCHAR</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWIN32_FIND_DATAW</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WIN32_FIND_DATAW</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSADATA</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSADATA</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSAPROTOCOL_INFO</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSAPROTOCOL_INFO</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSTR</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>WCHAR</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPFILETIME</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>FILETIME</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBOOL</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>BOOL</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBYTE</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>BYTE</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPBY_HANDLE_FILE_INFORMATION</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>BY_HANDLE_FILE_INFORMATION</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPCSTR</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>CHAR</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPCVOID</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPCWSTR</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>WCHAR</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPDWORD</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>DWORD</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPHANDLE</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>HANDLE</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPOVERLAPPED</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>OVERLAPPED</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPPROCESS_INFORMATION</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>PROCESS_INFORMATION</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPSECURITY_ATTRIBUTES</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SECURITY_ATTRIBUTES</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPSTARTUPINFO</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>STARTUPINFO</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPVOID</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWCH</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>WCHAR</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWIN32_FIND_DATAW</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>WIN32_FIND_DATAW</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSADATA</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSADATA</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSAPROTOCOL_INFO</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>WSAPROTOCOL_INFO</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPWSTR</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>WCHAR</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>LPFILETIME</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>FILETIME</span>;
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PCONDITION_VARIABLE</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONDITION_VARIABLE</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PLARGE_INTEGER</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_longlong</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PSRWLOCK</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SRWLOCK</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PCONDITION_VARIABLE</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONDITION_VARIABLE</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PLARGE_INTEGER</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_longlong</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PSRWLOCK</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SRWLOCK</span>;
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>SOCKET</span> <span class='op'>=</span> ::<span class='ident'>os</span>::<span class='ident'>windows</span>::<span class='ident'>raw</span>::<span class='ident'>SOCKET</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>socklen_t</span> <span class='op'>=</span> <span class='ident'>c_int</span>;
@@ -1357,7 +1359,7 @@
     <span class='kw'>pub</span> <span class='ident'>cAlternateFileName</span>: [<span class='ident'>wchar_t</span>; <span class='number'>14</span>],
 }
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>WIN32_FIND_DATAW</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>WSA_FLAG_OVERLAPPED</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x01</span>;
@@ -1489,6 +1491,7 @@
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>FILE_END</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>2</span>;
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>WAIT_OBJECT_0</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x00000000</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>WAIT_TIMEOUT</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>258</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_env</span> <span class='op'>=</span> <span class='string'>&quot;msvc&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>MAX_SYM_NAME</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>2000</span>;
@@ -1506,6 +1509,7 @@
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>EXCEPTION_MAXIMUM_PARAMETERS</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>15</span>;
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>PIPE_ACCESS_INBOUND</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x00000001</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>PIPE_ACCESS_OUTBOUND</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x00000002</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>FILE_FLAG_FIRST_PIPE_INSTANCE</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x00080000</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>FILE_FLAG_OVERLAPPED</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x40000000</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>PIPE_WAIT</span>: <span class='ident'>DWORD</span> <span class='op'>=</span> <span class='number'>0x00000000</span>;
@@ -1522,7 +1526,7 @@
     <span class='kw'>pub</span> <span class='ident'>szSystemStatus</span>: [<span class='ident'>u8</span>; <span class='ident'>WSASYS_STATUS_LEN</span> <span class='op'>+</span> <span class='number'>1</span>],
     <span class='kw'>pub</span> <span class='ident'>iMaxSockets</span>: <span class='ident'>u16</span>,
     <span class='kw'>pub</span> <span class='ident'>iMaxUdpDg</span>: <span class='ident'>u16</span>,
-    <span class='kw'>pub</span> <span class='ident'>lpVendorInfo</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>,
+    <span class='kw'>pub</span> <span class='ident'>lpVendorInfo</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>,
 }
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)]</span>
@@ -1531,7 +1535,7 @@
     <span class='kw'>pub</span> <span class='ident'>wHighVersion</span>: <span class='ident'>WORD</span>,
     <span class='kw'>pub</span> <span class='ident'>iMaxSockets</span>: <span class='ident'>u16</span>,
     <span class='kw'>pub</span> <span class='ident'>iMaxUdpDg</span>: <span class='ident'>u16</span>,
-    <span class='kw'>pub</span> <span class='ident'>lpVendorInfo</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>,
+    <span class='kw'>pub</span> <span class='ident'>lpVendorInfo</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>,
     <span class='kw'>pub</span> <span class='ident'>szDescription</span>: [<span class='ident'>u8</span>; <span class='ident'>WSADESCRIPTION_LEN</span> <span class='op'>+</span> <span class='number'>1</span>],
     <span class='kw'>pub</span> <span class='ident'>szSystemStatus</span>: [<span class='ident'>u8</span>; <span class='ident'>WSASYS_STATUS_LEN</span> <span class='op'>+</span> <span class='number'>1</span>],
 }
@@ -1694,7 +1698,7 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>EXCEPTION_RECORD</span> {
     <span class='kw'>pub</span> <span class='ident'>ExceptionCode</span>: <span class='ident'>DWORD</span>,
     <span class='kw'>pub</span> <span class='ident'>ExceptionFlags</span>: <span class='ident'>DWORD</span>,
-    <span class='kw'>pub</span> <span class='ident'>ExceptionRecord</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EXCEPTION_RECORD</span>,
+    <span class='kw'>pub</span> <span class='ident'>ExceptionRecord</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>EXCEPTION_RECORD</span>,
     <span class='kw'>pub</span> <span class='ident'>ExceptionAddress</span>: <span class='ident'>LPVOID</span>,
     <span class='kw'>pub</span> <span class='ident'>NumberParameters</span>: <span class='ident'>DWORD</span>,
     <span class='kw'>pub</span> <span class='ident'>ExceptionInformation</span>: [<span class='ident'>LPVOID</span>; <span class='ident'>EXCEPTION_MAXIMUM_PARAMETERS</span>]
@@ -1702,12 +1706,12 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>EXCEPTION_POINTERS</span> {
-    <span class='kw'>pub</span> <span class='ident'>ExceptionRecord</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EXCEPTION_RECORD</span>,
-    <span class='kw'>pub</span> <span class='ident'>ContextRecord</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONTEXT</span>,
+    <span class='kw'>pub</span> <span class='ident'>ExceptionRecord</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>EXCEPTION_RECORD</span>,
+    <span class='kw'>pub</span> <span class='ident'>ContextRecord</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONTEXT</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PVECTORED_EXCEPTION_HANDLER</span> <span class='op'>=</span> <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span>
-        <span class='kw'>fn</span>(<span class='ident'>ExceptionInfo</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EXCEPTION_POINTERS</span>) <span class='op'>-&gt;</span> <span class='ident'>LONG</span>;
+        <span class='kw'>fn</span>(<span class='ident'>ExceptionInfo</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>EXCEPTION_POINTERS</span>) <span class='op'>-&gt;</span> <span class='ident'>LONG</span>;
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>GUID</span> {
@@ -1775,8 +1779,8 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>OVERLAPPED</span> {
-    <span class='kw'>pub</span> <span class='ident'>Internal</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>,
-    <span class='kw'>pub</span> <span class='ident'>InternalHigh</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>,
+    <span class='kw'>pub</span> <span class='ident'>Internal</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>,
+    <span class='kw'>pub</span> <span class='ident'>InternalHigh</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>,
     <span class='kw'>pub</span> <span class='ident'>Offset</span>: <span class='ident'>DWORD</span>,
     <span class='kw'>pub</span> <span class='ident'>OffsetHigh</span>: <span class='ident'>DWORD</span>,
     <span class='kw'>pub</span> <span class='ident'>hEvent</span>: <span class='ident'>HANDLE</span>,
@@ -1809,9 +1813,9 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_env</span> <span class='op'>=</span> <span class='string'>&quot;msvc&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>IMAGEHLP_LINE64</span> {
     <span class='kw'>pub</span> <span class='ident'>SizeOfStruct</span>: <span class='ident'>u32</span>,
-    <span class='kw'>pub</span> <span class='ident'>Key</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
+    <span class='kw'>pub</span> <span class='ident'>Key</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
     <span class='kw'>pub</span> <span class='ident'>LineNumber</span>: <span class='ident'>u32</span>,
-    <span class='kw'>pub</span> <span class='ident'>Filename</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
+    <span class='kw'>pub</span> <span class='ident'>Filename</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
     <span class='kw'>pub</span> <span class='ident'>Address</span>: <span class='ident'>u64</span>,
 }
 
@@ -1838,7 +1842,7 @@
     <span class='kw'>pub</span> <span class='ident'>AddrFrame</span>: <span class='ident'>ADDRESS64</span>,
     <span class='kw'>pub</span> <span class='ident'>AddrStack</span>: <span class='ident'>ADDRESS64</span>,
     <span class='kw'>pub</span> <span class='ident'>AddrBStore</span>: <span class='ident'>ADDRESS64</span>,
-    <span class='kw'>pub</span> <span class='ident'>FuncTableEntry</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+    <span class='kw'>pub</span> <span class='ident'>FuncTableEntry</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
     <span class='kw'>pub</span> <span class='ident'>Params</span>: [<span class='ident'>u64</span>; <span class='number'>4</span>],
     <span class='kw'>pub</span> <span class='ident'>Far</span>: <span class='ident'>BOOL</span>,
     <span class='kw'>pub</span> <span class='ident'>Virtual</span>: <span class='ident'>BOOL</span>,
@@ -1996,9 +2000,9 @@
     <span class='kw'>pub</span> <span class='ident'>ai_socktype</span>: <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>ai_protocol</span>: <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>ai_addrlen</span>: <span class='ident'>size_t</span>,
-    <span class='kw'>pub</span> <span class='ident'>ai_canonname</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
-    <span class='kw'>pub</span> <span class='ident'>ai_addr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
-    <span class='kw'>pub</span> <span class='ident'>ai_next</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ADDRINFOA</span>,
+    <span class='kw'>pub</span> <span class='ident'>ai_canonname</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
+    <span class='kw'>pub</span> <span class='ident'>ai_addr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
+    <span class='kw'>pub</span> <span class='ident'>ai_next</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ADDRINFOA</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -2050,7 +2054,7 @@
     <span class='kw'>pub</span> <span class='ident'>dwCtrlWakeupMask</span>: <span class='ident'>ULONG</span>,
     <span class='kw'>pub</span> <span class='ident'>dwControlKeyState</span>: <span class='ident'>ULONG</span>,
 }
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PCONSOLE_READCONSOLE_CONTROL</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONSOLE_READCONSOLE_CONTROL</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>PCONSOLE_READCONSOLE_CONTROL</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONSOLE_READCONSOLE_CONTROL</span>;
 
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;ws2_32&quot;</span>)]</span>
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;userenv&quot;</span>)]</span>
@@ -2075,12 +2079,12 @@
                       <span class='ident'>lpProtocolInfo</span>: <span class='ident'>LPWSAPROTOCOL_INFO</span>,
                       <span class='ident'>g</span>: <span class='ident'>GROUP</span>,
                       <span class='ident'>dwFlags</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>SOCKET</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ioctlsocket</span>(<span class='ident'>s</span>: <span class='ident'>SOCKET</span>, <span class='ident'>cmd</span>: <span class='ident'>c_long</span>, <span class='ident'>argp</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>InitializeCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EnterCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TryEnterCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOLEAN</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>LeaveCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>DeleteCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ioctlsocket</span>(<span class='ident'>s</span>: <span class='ident'>SOCKET</span>, <span class='ident'>cmd</span>: <span class='ident'>c_long</span>, <span class='ident'>argp</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>InitializeCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EnterCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TryEnterCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOLEAN</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>LeaveCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>DeleteCriticalSection</span>(<span class='ident'>CriticalSection</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CRITICAL_SECTION</span>);
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ReadConsoleW</span>(<span class='ident'>hConsoleInput</span>: <span class='ident'>HANDLE</span>,
                         <span class='ident'>lpBuffer</span>: <span class='ident'>LPVOID</span>,
@@ -2104,15 +2108,15 @@
                             <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SetLastError</span>(<span class='ident'>dwErrCode</span>: <span class='ident'>DWORD</span>);
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetCommandLineW</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>LPCWSTR</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>LocalFree</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CommandLineToArgvW</span>(<span class='ident'>lpCmdLine</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>LPCWSTR</span>,
-                              <span class='ident'>pNumArgs</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u16</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetCommandLineW</span>() <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>LPCWSTR</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>LocalFree</span>(<span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CommandLineToArgvW</span>(<span class='ident'>lpCmdLine</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>LPCWSTR</span>,
+                              <span class='ident'>pNumArgs</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>u16</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetTempPathW</span>(<span class='ident'>nBufferLength</span>: <span class='ident'>DWORD</span>,
                         <span class='ident'>lpBuffer</span>: <span class='ident'>LPCWSTR</span>) <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>OpenProcessToken</span>(<span class='ident'>ProcessHandle</span>: <span class='ident'>HANDLE</span>,
                             <span class='ident'>DesiredAccess</span>: <span class='ident'>DWORD</span>,
-                            <span class='ident'>TokenHandle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>HANDLE</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
+                            <span class='ident'>TokenHandle</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>HANDLE</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetCurrentProcess</span>() <span class='op'>-&gt;</span> <span class='ident'>HANDLE</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetCurrentThread</span>() <span class='op'>-&gt;</span> <span class='ident'>HANDLE</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetStdHandle</span>(<span class='ident'>which</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>HANDLE</span>;
@@ -2127,7 +2131,7 @@
                            <span class='ident'>lpOverlapped</span>: <span class='ident'>LPOVERLAPPED</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CreateThread</span>(<span class='ident'>lpThreadAttributes</span>: <span class='ident'>LPSECURITY_ATTRIBUTES</span>,
                         <span class='ident'>dwStackSize</span>: <span class='ident'>SIZE_T</span>,
-                        <span class='ident'>lpStartAddress</span>: <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+                        <span class='ident'>lpStartAddress</span>: <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span>(<span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
                                                            <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>,
                         <span class='ident'>lpParameter</span>: <span class='ident'>LPVOID</span>,
                         <span class='ident'>dwCreationFlags</span>: <span class='ident'>DWORD</span>,
@@ -2139,7 +2143,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetProcessId</span>(<span class='ident'>handle</span>: <span class='ident'>HANDLE</span>) <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetUserProfileDirectoryW</span>(<span class='ident'>hToken</span>: <span class='ident'>HANDLE</span>,
                                     <span class='ident'>lpProfileDir</span>: <span class='ident'>LPCWSTR</span>,
-                                    <span class='ident'>lpcchSize</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
+                                    <span class='ident'>lpcchSize</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SetHandleInformation</span>(<span class='ident'>hObject</span>: <span class='ident'>HANDLE</span>,
                                 <span class='ident'>dwMask</span>: <span class='ident'>DWORD</span>,
                                 <span class='ident'>dwFlags</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
@@ -2158,15 +2162,15 @@
                           <span class='ident'>langId</span>: <span class='ident'>DWORD</span>,
                           <span class='ident'>buf</span>: <span class='ident'>LPWSTR</span>,
                           <span class='ident'>nsize</span>: <span class='ident'>DWORD</span>,
-                          <span class='ident'>args</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>)
+                          <span class='ident'>args</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>)
                           <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TlsAlloc</span>() <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TlsFree</span>(<span class='ident'>dwTlsIndex</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TlsGetValue</span>(<span class='ident'>dwTlsIndex</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>LPVOID</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TlsSetValue</span>(<span class='ident'>dwTlsIndex</span>: <span class='ident'>DWORD</span>, <span class='ident'>lpTlsvalue</span>: <span class='ident'>LPVOID</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetLastError</span>() <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>QueryPerformanceFrequency</span>(<span class='ident'>lpFrequency</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>LARGE_INTEGER</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>QueryPerformanceCounter</span>(<span class='ident'>lpPerformanceCount</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>LARGE_INTEGER</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>QueryPerformanceFrequency</span>(<span class='ident'>lpFrequency</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>LARGE_INTEGER</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>QueryPerformanceCounter</span>(<span class='ident'>lpPerformanceCount</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>LARGE_INTEGER</span>)
                                    <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetExitCodeProcess</span>(<span class='ident'>hProcess</span>: <span class='ident'>HANDLE</span>, <span class='ident'>lpExitCode</span>: <span class='ident'>LPDWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>TerminateProcess</span>(<span class='ident'>hProcess</span>: <span class='ident'>HANDLE</span>, <span class='ident'>uExitCode</span>: <span class='ident'>UINT</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
@@ -2197,28 +2201,28 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SetCurrentDirectoryW</span>(<span class='ident'>lpPathName</span>: <span class='ident'>LPCWSTR</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>closesocket</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>recv</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>recv</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>buf</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>,
                 <span class='ident'>flags</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>buf</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>,
                 <span class='ident'>flags</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>recvfrom</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>,
-                    <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+                    <span class='ident'>buf</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
                     <span class='ident'>len</span>: <span class='ident'>c_int</span>,
                     <span class='ident'>flags</span>: <span class='ident'>c_int</span>,
-                    <span class='ident'>addr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
-                    <span class='ident'>addrlen</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
+                    <span class='ident'>addr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
+                    <span class='ident'>addrlen</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
                     <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sendto</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>,
-                  <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
+                  <span class='ident'>buf</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
                   <span class='ident'>len</span>: <span class='ident'>c_int</span>,
                   <span class='ident'>flags</span>: <span class='ident'>c_int</span>,
-                  <span class='ident'>addr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SOCKADDR</span>,
+                  <span class='ident'>addr</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>SOCKADDR</span>,
                   <span class='ident'>addrlen</span>: <span class='ident'>c_int</span>)
                   <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>shutdown</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>how</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>accept</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>,
-                  <span class='ident'>address</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
-                  <span class='ident'>address_len</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
+                  <span class='ident'>address</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
+                  <span class='ident'>address_len</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
                   <span class='op'>-&gt;</span> <span class='ident'>SOCKET</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>DuplicateHandle</span>(<span class='ident'>hSourceProcessHandle</span>: <span class='ident'>HANDLE</span>,
                            <span class='ident'>hSourceHandle</span>: <span class='ident'>HANDLE</span>,
@@ -2270,50 +2274,50 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>FindNextFileW</span>(<span class='ident'>findFile</span>: <span class='ident'>HANDLE</span>, <span class='ident'>findFileData</span>: <span class='ident'>LPWIN32_FIND_DATAW</span>)
                          <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>FindClose</span>(<span class='ident'>findFile</span>: <span class='ident'>HANDLE</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>RtlCaptureContext</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONTEXT</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>RtlCaptureContext</span>(<span class='ident'>ctx</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>CONTEXT</span>);
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getsockopt</span>(<span class='ident'>s</span>: <span class='ident'>SOCKET</span>,
                       <span class='ident'>level</span>: <span class='ident'>c_int</span>,
                       <span class='ident'>optname</span>: <span class='ident'>c_int</span>,
-                      <span class='ident'>optval</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
-                      <span class='ident'>optlen</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
+                      <span class='ident'>optval</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
+                      <span class='ident'>optlen</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
                       <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setsockopt</span>(<span class='ident'>s</span>: <span class='ident'>SOCKET</span>,
                       <span class='ident'>level</span>: <span class='ident'>c_int</span>,
                       <span class='ident'>optname</span>: <span class='ident'>c_int</span>,
-                      <span class='ident'>optval</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
+                      <span class='ident'>optval</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
                       <span class='ident'>optlen</span>: <span class='ident'>c_int</span>)
                       <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getsockname</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>,
-                       <span class='ident'>address</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
-                       <span class='ident'>address_len</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
+                       <span class='ident'>address</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
+                       <span class='ident'>address_len</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
                        <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getpeername</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>,
-                       <span class='ident'>address</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
-                       <span class='ident'>address_len</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
+                       <span class='ident'>address</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>SOCKADDR</span>,
+                       <span class='ident'>address_len</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>)
                        <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>bind</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>address</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SOCKADDR</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>bind</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>address</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>SOCKADDR</span>,
                 <span class='ident'>address_len</span>: <span class='ident'>socklen_t</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>backlog</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>connect</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>address</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SOCKADDR</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>connect</span>(<span class='ident'>socket</span>: <span class='ident'>SOCKET</span>, <span class='ident'>address</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>SOCKADDR</span>, <span class='ident'>len</span>: <span class='ident'>c_int</span>)
                    <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getaddrinfo</span>(<span class='ident'>node</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>service</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                       <span class='ident'>hints</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ADDRINFOA</span>,
-                       <span class='ident'>res</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ADDRINFOA</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>freeaddrinfo</span>(<span class='ident'>res</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ADDRINFOA</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getaddrinfo</span>(<span class='ident'>node</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>service</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
+                       <span class='ident'>hints</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>ADDRINFOA</span>,
+                       <span class='ident'>res</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ADDRINFOA</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>freeaddrinfo</span>(<span class='ident'>res</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ADDRINFOA</span>);
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>LoadLibraryW</span>(<span class='ident'>name</span>: <span class='ident'>LPCWSTR</span>) <span class='op'>-&gt;</span> <span class='ident'>HMODULE</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>FreeLibrary</span>(<span class='ident'>handle</span>: <span class='ident'>HMODULE</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetProcAddress</span>(<span class='ident'>handle</span>: <span class='ident'>HMODULE</span>,
-                          <span class='ident'>name</span>: <span class='ident'>LPCSTR</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
+                          <span class='ident'>name</span>: <span class='ident'>LPCSTR</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetModuleHandleW</span>(<span class='ident'>lpModuleName</span>: <span class='ident'>LPCWSTR</span>) <span class='op'>-&gt;</span> <span class='ident'>HMODULE</span>;
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CryptAcquireContextA</span>(<span class='ident'>phProv</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>HCRYPTPROV</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CryptAcquireContextA</span>(<span class='ident'>phProv</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>HCRYPTPROV</span>,
                                 <span class='ident'>pszContainer</span>: <span class='ident'>LPCSTR</span>,
                                 <span class='ident'>pszProvider</span>: <span class='ident'>LPCSTR</span>,
                                 <span class='ident'>dwProvType</span>: <span class='ident'>DWORD</span>,
                                 <span class='ident'>dwFlags</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CryptGenRandom</span>(<span class='ident'>hProv</span>: <span class='ident'>HCRYPTPROV</span>,
                           <span class='ident'>dwLen</span>: <span class='ident'>DWORD</span>,
-                          <span class='ident'>pbBuffer</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BYTE</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
+                          <span class='ident'>pbBuffer</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>BYTE</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CryptReleaseContext</span>(<span class='ident'>hProv</span>: <span class='ident'>HCRYPTPROV</span>, <span class='ident'>dwFlags</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>GetSystemTimeAsFileTime</span>(<span class='ident'>lpSystemTimeAsFileTime</span>: <span class='ident'>LPFILETIME</span>);
@@ -2323,7 +2327,7 @@
                         <span class='ident'>bInitialState</span>: <span class='ident'>BOOL</span>,
                         <span class='ident'>lpName</span>: <span class='ident'>LPCWSTR</span>) <span class='op'>-&gt;</span> <span class='ident'>HANDLE</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>WaitForMultipleObjects</span>(<span class='ident'>nCount</span>: <span class='ident'>DWORD</span>,
-                                  <span class='ident'>lpHandles</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>HANDLE</span>,
+                                  <span class='ident'>lpHandles</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>HANDLE</span>,
                                   <span class='ident'>bWaitAll</span>: <span class='ident'>BOOL</span>,
                                   <span class='ident'>dwMilliseconds</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>DWORD</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>CreateNamedPipeW</span>(<span class='ident'>lpName</span>: <span class='ident'>LPCWSTR</span>,
@@ -2358,7 +2362,7 @@
                                      <span class='ident'>_dwFlags</span>: <span class='ident'>DWORD</span>) <span class='op'>-&gt;</span> <span class='ident'>DWORD</span> {
         <span class='ident'>SetLastError</span>(<span class='ident'>ERROR_CALL_NOT_IMPLEMENTED</span> <span class='kw'>as</span> <span class='ident'>DWORD</span>); <span class='number'>0</span>
     }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SetThreadStackGuarantee</span>(<span class='ident'>_size</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SetThreadStackGuarantee</span>(<span class='ident'>_size</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_ulong</span>) <span class='op'>-&gt;</span> <span class='ident'>BOOL</span> {
         <span class='ident'>SetLastError</span>(<span class='ident'>ERROR_CALL_NOT_IMPLEMENTED</span> <span class='kw'>as</span> <span class='ident'>DWORD</span>); <span class='number'>0</span>
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SetFileInformationByHandle</span>(<span class='ident'>_hFile</span>: <span class='ident'>HANDLE</span>,

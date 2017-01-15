@@ -84,7 +84,7 @@ library only implements <code>Clone</code> up until arrays of size 32. In this c
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Stats</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Stats</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Stats</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Bderive(Copy)%5D%0Astruct%20Stats%20%7B%0A%20%20%20frequencies%3A%20%5Bi32%3B%20100%5D%2C%0A%7D%0A%0Aimpl%20Clone%20for%20Stats%20%7B%0A%20%20%20%20fn%20clone(%26self)%20-%3E%20Stats%20%7B%20*self%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
@@ -120,78 +120,78 @@ allocations.</p>
 <li><code>impl&lt;Ret&gt; Clone for extern fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; Clone for unsafe fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; Clone for unsafe extern fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Clone for fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Clone for extern fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Clone for extern fn(A, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Clone for unsafe fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Clone for unsafe extern fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Clone for unsafe extern fn(A, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Clone for fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Clone for extern fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Clone for extern fn(A, B, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Clone for unsafe fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Clone for unsafe extern fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Clone for unsafe extern fn(A, B, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Clone for fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Clone for extern fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Clone for extern fn(A, B, C, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Clone for unsafe fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Clone for unsafe extern fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Clone for unsafe extern fn(A, B, C, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for extern fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for extern fn(A, B, C, D, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for unsafe fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for unsafe extern fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for unsafe extern fn(A, B, C, D, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for extern fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for extern fn(A, B, C, D, E, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for unsafe fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for unsafe extern fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for unsafe extern fn(A, B, C, D, E, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for extern fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for extern fn(A, B, C, D, E, F, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for unsafe fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for unsafe extern fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for unsafe extern fn(A, B, C, D, E, F, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for extern fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for extern fn(A, B, C, D, E, F, G, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for unsafe fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for extern fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for extern fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for unsafe fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for unsafe fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, J, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for unsafe fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, J, K, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for unsafe fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for extern fn(A, B, C, D, E, F, G, H, I, J, K, L, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for unsafe fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Clone for fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Clone for extern fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Clone for extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Clone for unsafe fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Clone for unsafe extern fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Clone for unsafe extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Clone for fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Clone for extern fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Clone for extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Clone for unsafe fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Clone for unsafe extern fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Clone for unsafe extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Clone for fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Clone for extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Clone for extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Clone for unsafe fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Clone for unsafe extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Clone for unsafe extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Clone for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; Clone for <a class='struct' href='../../core/ptr/struct.Shared.html' title='core::ptr::Shared'>Shared</a>&lt;T&gt;</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; Clone for <a class='struct' href='../../core/marker/struct.PhantomData.html' title='core::marker::PhantomData'>PhantomData</a>&lt;T&gt;</code></li>
 <li><code>impl Clone for <a class='struct' href='../../core/ops/struct.RangeFull.html' title='core::ops::RangeFull'>RangeFull</a></code></li>
@@ -200,18 +200,20 @@ allocations.</p>
 <li><code>impl&lt;Idx:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='struct' href='../../core/ops/struct.RangeTo.html' title='core::ops::RangeTo'>RangeTo</a>&lt;Idx&gt;</code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='enum' href='../../core/ops/enum.RangeInclusive.html' title='core::ops::RangeInclusive'>RangeInclusive</a>&lt;Idx&gt;</code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='struct' href='../../core/ops/struct.RangeToInclusive.html' title='core::ops::RangeToInclusive'>RangeToInclusive</a>&lt;Idx&gt;</code></li>
-<li><code>impl Clone for <a class='enum' href='../../core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></code></li>
+<li><code>impl Clone for core::cmp::<a class='enum' href='../../core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></code></li>
 <li><code>impl&lt;'a, T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; Clone for &amp;'a T</code></li>
 <li><code>impl Clone for isize</code></li>
 <li><code>impl Clone for i8</code></li>
 <li><code>impl Clone for i16</code></li>
 <li><code>impl Clone for i32</code></li>
 <li><code>impl Clone for i64</code></li>
+<li><code>impl Clone for i128</code></li>
 <li><code>impl Clone for usize</code></li>
 <li><code>impl Clone for u8</code></li>
 <li><code>impl Clone for u16</code></li>
 <li><code>impl Clone for u32</code></li>
 <li><code>impl Clone for u64</code></li>
+<li><code>impl Clone for u128</code></li>
 <li><code>impl Clone for f32</code></li>
 <li><code>impl Clone for f64</code></li>
 <li><code>impl Clone for ()</code></li>
@@ -251,7 +253,7 @@ allocations.</p>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a>&gt; Clone for [T; 30]</code></li>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a>&gt; Clone for [T; 31]</code></li>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a>&gt; Clone for [T; 32]</code></li>
-<li><code>impl Clone for <a class='enum' href='../../core/sync/atomic/enum.Ordering.html' title='core::sync::atomic::Ordering'>Ordering</a></code></li>
+<li><code>impl Clone for core::sync::atomic::<a class='enum' href='../../core/sync/atomic/enum.Ordering.html' title='core::sync::atomic::Ordering'>Ordering</a></code></li>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a>&gt; Clone for <a class='struct' href='../../core/cell/struct.Cell.html' title='core::cell::Cell'>Cell</a>&lt;T&gt;</code></li>
 <li><code>impl Clone for <a class='enum' href='../../core/cell/enum.BorrowState.html' title='core::cell::BorrowState'>BorrowState</a></code></li>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='struct' href='../../core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;T&gt;</code></li>
@@ -283,13 +285,13 @@ allocations.</p>
 <li><code>impl&lt;I:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='struct' href='../../core/iter/struct.Fuse.html' title='core::iter::Fuse'>Fuse</a>&lt;I&gt;</code></li>
 <li><code>impl&lt;I:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>, F:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='struct' href='../../core/iter/struct.Inspect.html' title='core::iter::Inspect'>Inspect</a>&lt;I, F&gt;</code></li>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='enum' href='../../core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;</code></li>
-<li><code>impl&lt;'a, A&gt; Clone for <a class='struct' href='../../core/option/struct.Iter.html' title='core::option::Iter'>Iter</a>&lt;'a, A&gt;</code></li>
+<li><code>impl&lt;'a, A&gt; Clone for core::option::<a class='struct' href='../../core/option/struct.Iter.html' title='core::option::Iter'>Iter</a>&lt;'a, A&gt;</code></li>
 <li><code>impl&lt;A:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='struct' href='../../core/option/struct.IntoIter.html' title='core::option::IntoIter'>IntoIter</a>&lt;A&gt;</code></li>
 <li><code>impl Clone for <a class='struct' href='../../core/raw/struct.TraitObject.html' title='core::raw::TraitObject'>TraitObject</a></code></li>
 <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>, E:&nbsp;<a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; Clone for <a class='enum' href='../../core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T, E&gt;</code></li>
-<li><code>impl&lt;'a, T&gt; Clone for <a class='struct' href='../../core/result/struct.Iter.html' title='core::result::Iter'>Iter</a>&lt;'a, T&gt;</code></li>
-<li><code>impl&lt;'a, T&gt; Clone for <a class='struct' href='../../core/slice/struct.Iter.html' title='core::slice::Iter'>Iter</a>&lt;'a, T&gt;</code></li>
-<li><code>impl&lt;'a, T, P&gt; Clone for <a class='struct' href='../../core/slice/struct.Split.html' title='core::slice::Split'>Split</a>&lt;'a, T, P&gt; <span class='where'>where P: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='../../core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; bool</span></code></li>
+<li><code>impl&lt;'a, T&gt; Clone for core::result::<a class='struct' href='../../core/result/struct.Iter.html' title='core::result::Iter'>Iter</a>&lt;'a, T&gt;</code></li>
+<li><code>impl&lt;'a, T&gt; Clone for core::slice::<a class='struct' href='../../core/slice/struct.Iter.html' title='core::slice::Iter'>Iter</a>&lt;'a, T&gt;</code></li>
+<li><code>impl&lt;'a, T, P&gt; Clone for core::slice::<a class='struct' href='../../core/slice/struct.Split.html' title='core::slice::Split'>Split</a>&lt;'a, T, P&gt; <span class='where'>where P: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='../../core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; bool</span></code></li>
 <li><code>impl&lt;'a, T&gt; Clone for <a class='struct' href='../../core/slice/struct.Windows.html' title='core::slice::Windows'>Windows</a>&lt;'a, T&gt;</code></li>
 <li><code>impl&lt;'a, T&gt; Clone for <a class='struct' href='../../core/slice/struct.Chunks.html' title='core::slice::Chunks'>Chunks</a>&lt;'a, T&gt;</code></li>
 <li><code>impl Clone for <a class='enum' href='../../core/str/pattern/enum.SearchStep.html' title='core::str::pattern::SearchStep'>SearchStep</a></code></li>
@@ -302,7 +304,7 @@ allocations.</p>
 <li><code>impl&lt;'a&gt; Clone for <a class='struct' href='../../core/str/struct.Chars.html' title='core::str::Chars'>Chars</a>&lt;'a&gt;</code></li>
 <li><code>impl&lt;'a&gt; Clone for <a class='struct' href='../../core/str/struct.CharIndices.html' title='core::str::CharIndices'>CharIndices</a>&lt;'a&gt;</code></li>
 <li><code>impl&lt;'a&gt; Clone for <a class='struct' href='../../core/str/struct.Bytes.html' title='core::str::Bytes'>Bytes</a>&lt;'a&gt;</code></li>
-<li><code>impl&lt;'a, P:&nbsp;<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Pattern</a>&lt;'a&gt;&gt; Clone for <a class='struct' href='../../core/str/struct.Split.html' title='core::str::Split'>Split</a>&lt;'a, P&gt; <span class='where'>where P::<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Searcher</a>: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></li>
+<li><code>impl&lt;'a, P:&nbsp;<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Pattern</a>&lt;'a&gt;&gt; Clone for core::str::<a class='struct' href='../../core/str/struct.Split.html' title='core::str::Split'>Split</a>&lt;'a, P&gt; <span class='where'>where P::<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Searcher</a>: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></li>
 <li><code>impl&lt;'a, P:&nbsp;<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Pattern</a>&lt;'a&gt;&gt; Clone for <a class='struct' href='../../core/str/struct.RSplit.html' title='core::str::RSplit'>RSplit</a>&lt;'a, P&gt; <span class='where'>where P::<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Searcher</a>: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></li>
 <li><code>impl&lt;'a, P:&nbsp;<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Pattern</a>&lt;'a&gt;&gt; Clone for <a class='struct' href='../../core/str/struct.SplitTerminator.html' title='core::str::SplitTerminator'>SplitTerminator</a>&lt;'a, P&gt; <span class='where fmt-newline'>where P::<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Searcher</a>: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></li>
 <li><code>impl&lt;'a, P:&nbsp;<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Pattern</a>&lt;'a&gt;&gt; Clone for <a class='struct' href='../../core/str/struct.RSplitTerminator.html' title='core::str::RSplitTerminator'>RSplitTerminator</a>&lt;'a, P&gt; <span class='where fmt-newline'>where P::<a class='trait' href='../../core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Searcher</a>: <a class='trait' href='../../core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></li>

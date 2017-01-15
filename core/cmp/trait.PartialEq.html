@@ -137,78 +137,78 @@ by <code>==</code>.</p>
 <li><code>impl&lt;Ret&gt; PartialEq for extern fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; PartialEq for unsafe fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; PartialEq for unsafe extern fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialEq for fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialEq for extern fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialEq for extern fn(A, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialEq for unsafe fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialEq for unsafe extern fn(A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; PartialEq for unsafe extern fn(A, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialEq for fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialEq for extern fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialEq for extern fn(A, B, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialEq for unsafe fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialEq for unsafe extern fn(A, B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; PartialEq for unsafe extern fn(A, B, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for extern fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for extern fn(A, B, C, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for unsafe fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for unsafe extern fn(A, B, C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for unsafe extern fn(A, B, C, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for extern fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for extern fn(A, B, C, D, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for unsafe fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for unsafe extern fn(A, B, C, D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for unsafe extern fn(A, B, C, D, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for extern fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for extern fn(A, B, C, D, E, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for unsafe fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for unsafe extern fn(A, B, C, D, E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for unsafe extern fn(A, B, C, D, E, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for extern fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for extern fn(A, B, C, D, E, F, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for unsafe fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for extern fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for extern fn(A, B, C, D, E, F, G, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for unsafe fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for unsafe fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for unsafe fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, J, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for unsafe fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, J, K, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for unsafe fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for extern fn(A, B, C, D, E, F, G, H, I, J, K, L, ...) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for unsafe fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for unsafe extern fn(A, B, C, D, E, F, G, H, I, J, K, L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialEq for fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialEq for extern fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialEq for extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialEq for unsafe fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialEq for unsafe extern fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; PartialEq for unsafe extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialEq for fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialEq for extern fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialEq for extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialEq for unsafe fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialEq for unsafe extern fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; PartialEq for unsafe extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for unsafe fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; PartialEq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialEq for <a class='struct' href='../../core/marker/struct.PhantomData.html' title='core::marker::PhantomData'>PhantomData</a>&lt;T&gt;</code></li>
 <li><code>impl PartialEq for <a class='struct' href='../../core/ops/struct.RangeFull.html' title='core::ops::RangeFull'>RangeFull</a></code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class='trait' href='../../core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&gt; PartialEq for <a class='struct' href='../../core/ops/struct.Range.html' title='core::ops::Range'>Range</a>&lt;Idx&gt;</code></li>
@@ -231,6 +231,8 @@ by <code>==</code>.</p>
 <li><code>impl PartialEq for i64</code></li>
 <li><code>impl PartialEq for f32</code></li>
 <li><code>impl PartialEq for f64</code></li>
+<li><code>impl PartialEq for u128</code></li>
+<li><code>impl PartialEq for i128</code></li>
 <li><code>impl PartialEq for !</code></li>
 <li><code>impl&lt;'a, 'b, A:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>, B:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialEq&lt;&amp;'b B&gt; for &amp;'a A <span class='where fmt-newline'>where A: <a class='trait' href='../../core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;B&gt;</span></code></li>
 <li><code>impl&lt;'a, 'b, A:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>, B:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; PartialEq&lt;&amp;'b mut B&gt; for &amp;'a mut A <span class='where fmt-newline'>where A: <a class='trait' href='../../core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;B&gt;</span></code></li>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libstd\sys\windows\thread.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libstd\sys\windows\thread.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>thread.rs.html -- source</title>
@@ -151,7 +151,7 @@
 <span class='kw'>use</span> <span class='ident'>ptr</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>::<span class='ident'>c</span>;
 <span class='kw'>use</span> <span class='ident'>sys</span>::<span class='ident'>handle</span>::<span class='ident'>Handle</span>;
-<span class='kw'>use</span> <span class='ident'>sys_common</span>::<span class='ident'>thread</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>sys_common</span>::<span class='ident'>thread</span>::<span class='kw-2'>*</span>;
 <span class='kw'>use</span> <span class='ident'>time</span>::<span class='ident'>Duration</span>;
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Thread</span> {
@@ -170,9 +170,9 @@
         <span class='comment'>// That threshold is application and architecture-specific, however.</span>
         <span class='comment'>// Round up to the next 64 kB because that&#39;s what the NT kernel does,</span>
         <span class='comment'>// might as well make it explicit.</span>
-        <span class='kw'>let</span> <span class='ident'>stack_size</span> <span class='op'>=</span> (<span class='ident'>stack</span> <span class='op'>+</span> <span class='number'>0xfffe</span>) <span class='kw-2'>&amp;</span> (<span class='op'>!</span><span class='number'>0xfffe</span>);
+        <span class='kw'>let</span> <span class='ident'>stack_size</span> <span class='op'>=</span> (<span class='ident'>stack</span> <span class='op'>+</span> <span class='number'>0xfffe</span>) <span class='op'>&amp;</span> (<span class='op'>!</span><span class='number'>0xfffe</span>);
         <span class='kw'>let</span> <span class='ident'>ret</span> <span class='op'>=</span> <span class='ident'>c</span>::<span class='ident'>CreateThread</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='ident'>stack_size</span>,
-                                  <span class='ident'>thread_start</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>p</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _ <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _,
+                                  <span class='ident'>thread_start</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='ident'>p</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> _ <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _,
                                   <span class='number'>0</span>, <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>());
 
         <span class='kw'>return</span> <span class='kw'>if</span> <span class='ident'>ret</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>==</span> <span class='number'>0</span> {
@@ -182,7 +182,7 @@
             <span class='prelude-val'>Ok</span>(<span class='ident'>Thread</span> { <span class='ident'>handle</span>: <span class='ident'>Handle</span>::<span class='ident'>new</span>(<span class='ident'>ret</span>) })
         };
 
-        <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span> <span class='ident'>thread_start</span>(<span class='ident'>main</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>c</span>::<span class='ident'>DWORD</span> {
+        <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span> <span class='ident'>thread_start</span>(<span class='ident'>main</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>c</span>::<span class='ident'>DWORD</span> {
             <span class='kw'>unsafe</span> { <span class='ident'>start_thread</span>(<span class='ident'>main</span>); }
             <span class='number'>0</span>
         }

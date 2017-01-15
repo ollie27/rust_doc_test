@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libstd\sys\windows\compat.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libstd\sys\windows\compat.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>compat.rs.html -- source</title>
@@ -174,16 +174,16 @@
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>compat_fn</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>module</span>:<span class='ident'>ident</span>: $(
-        <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>symbol</span>:<span class='ident'>ident</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>:<span class='ident'>ident</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>:<span class='ident'>ty</span>),<span class='op'>*</span>)
+        <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>symbol</span>:<span class='ident'>ident</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>:<span class='ident'>ident</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>:<span class='ident'>ty</span>),<span class='kw-2'>*</span>)
                                   <span class='op'>-&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rettype</span>:<span class='ident'>ty</span> {
             $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>body</span>:<span class='ident'>expr</span>);<span class='op'>*</span>
         }
-    )<span class='op'>*</span>) <span class='op'>=&gt;</span> ($(
+    )<span class='kw-2'>*</span>) <span class='op'>=&gt;</span> ($(
         <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_variables</span>)]</span>
-        <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>symbol</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>),<span class='op'>*</span>) <span class='op'>-&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rettype</span> {
+        <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>symbol</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>),<span class='kw-2'>*</span>) <span class='op'>-&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rettype</span> {
             <span class='kw'>use</span> <span class='ident'>sync</span>::<span class='ident'>atomic</span>::{<span class='ident'>AtomicUsize</span>, <span class='ident'>Ordering</span>};
             <span class='kw'>use</span> <span class='ident'>mem</span>;
-            <span class='kw'>type</span> <span class='ident'>F</span> <span class='op'>=</span> <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>),<span class='op'>*</span>) <span class='op'>-&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rettype</span>;
+            <span class='kw'>type</span> <span class='ident'>F</span> <span class='op'>=</span> <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>),<span class='kw-2'>*</span>) <span class='op'>-&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rettype</span>;
 
             <span class='kw'>static</span> <span class='ident'>PTR</span>: <span class='ident'>AtomicUsize</span> <span class='op'>=</span> <span class='ident'>AtomicUsize</span>::<span class='ident'>new</span>(<span class='number'>0</span>);
 
@@ -193,7 +193,7 @@
                                           <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>symbol</span>),
                                           <span class='ident'>fallback</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
             }
-            <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span> <span class='ident'>fallback</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>),<span class='op'>*</span>)
+            <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span> <span class='ident'>fallback</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argtype</span>),<span class='kw-2'>*</span>)
                                                <span class='op'>-&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rettype</span> {
                 $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>body</span>);<span class='op'>*</span>
             }
@@ -202,9 +202,9 @@
                 <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='ident'>load</span>(),
                 <span class='ident'>n</span> <span class='op'>=&gt;</span> <span class='ident'>n</span>,
             };
-            <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='ident'>usize</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>)($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>),<span class='op'>*</span>)
+            <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='ident'>usize</span>, <span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>)($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>argname</span>),<span class='kw-2'>*</span>)
         }
-    )<span class='op'>*</span>)
+    )<span class='kw-2'>*</span>)
 }
 </pre>
 </section>

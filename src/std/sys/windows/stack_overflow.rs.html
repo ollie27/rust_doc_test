@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/libstd\sys\windows\stack_overflow.rs`.">
+    <meta name="description" content="Source to the Rust file `src\libstd\sys\windows\stack_overflow.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>stack_overflow.rs.html -- source</title>
@@ -126,10 +126,10 @@
     }
 }
 
-<span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span> <span class='ident'>vectored_handler</span>(<span class='ident'>ExceptionInfo</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c</span>::<span class='ident'>EXCEPTION_POINTERS</span>)
+<span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span> <span class='ident'>vectored_handler</span>(<span class='ident'>ExceptionInfo</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c</span>::<span class='ident'>EXCEPTION_POINTERS</span>)
                                     <span class='op'>-&gt;</span> <span class='ident'>c</span>::<span class='ident'>LONG</span> {
     <span class='kw'>unsafe</span> {
-        <span class='kw'>let</span> <span class='ident'>rec</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>(<span class='op'>*</span>(<span class='op'>*</span><span class='ident'>ExceptionInfo</span>).<span class='ident'>ExceptionRecord</span>);
+        <span class='kw'>let</span> <span class='ident'>rec</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>(<span class='kw-2'>*</span>(<span class='kw-2'>*</span><span class='ident'>ExceptionInfo</span>).<span class='ident'>ExceptionRecord</span>);
         <span class='kw'>let</span> <span class='ident'>code</span> <span class='op'>=</span> <span class='ident'>rec</span>.<span class='ident'>ExceptionCode</span>;
 
         <span class='kw'>if</span> <span class='ident'>code</span> <span class='op'>==</span> <span class='ident'>c</span>::<span class='ident'>EXCEPTION_STACK_OVERFLOW</span> {
