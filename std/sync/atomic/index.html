@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/core/sync/atomic.rs.html#11-1553' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/core/sync/atomic.rs.html#11-1575' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Atomic types</p>
 
 <p>Atomic types provide primitive shared-memory communication between
@@ -62,7 +62,7 @@ updates between threads.</p>
 
 <p>Each method takes an <code>Ordering</code> which represents the strength of
 the memory barrier for that operation. These orderings are the
-same as <a href="http://llvm.org/docs/LangRef.html#memory-model-for-concurrent-operations">LLVM atomic orderings</a>.</p>
+same as <a href="http://llvm.org/docs/LangRef.html#memory-model-for-concurrent-operations">LLVM atomic orderings</a>. For more information see the <a href="../../../nomicon/atomics.html">nomicon</a>.</p>
 
 <p>Atomic variables are safe to share between threads (they implement <code>Sync</code>)
 but they do not themselves provide the mechanism for sharing and follow the

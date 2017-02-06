@@ -202,6 +202,10 @@
 <span id="157">157</span>
 <span id="158">158</span>
 <span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -255,6 +259,10 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_env</span> <span class='op'>=</span> <span class='string'>&quot;gnu&quot;</span>)]</span>
 <span class='attribute'>#[<span class='ident'>path</span> <span class='op'>=</span> <span class='string'>&quot;printing/gnu.rs&quot;</span>]</span>
 <span class='kw'>mod</span> <span class='ident'>printing</span>;
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_env</span> <span class='op'>=</span> <span class='string'>&quot;gnu&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>path</span> <span class='op'>=</span> <span class='string'>&quot;backtrace_gnu.rs&quot;</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>gnu</span>;
 
 <span class='kw'>type</span> <span class='ident'>SymInitializeFn</span> <span class='op'>=</span>
     <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;system&quot;</span> <span class='kw'>fn</span>(<span class='ident'>c</span>::<span class='ident'>HANDLE</span>, <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,

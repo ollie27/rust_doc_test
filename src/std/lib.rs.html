@@ -752,9 +752,10 @@
 <span class='comment'>// Tell the compiler to link to either panic_abort or panic_unwind</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>needs_panic_runtime</span>]</span>
 
-<span class='comment'>// Always use alloc_system during stage0 since jemalloc might be unavailable or</span>
-<span class='comment'>// disabled (Issue #30592)</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>stage0</span>, <span class='ident'>feature</span>(<span class='ident'>alloc_system</span>))]</span>
+<span class='comment'>// Always use alloc_system during stage0 since we don&#39;t know if the alloc_*</span>
+<span class='comment'>// crate the stage0 compiler will pick by default is available (most</span>
+<span class='comment'>// obviously, if the user has disabled jemalloc in `./configure`).</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>any</span>(<span class='ident'>stage0</span>, <span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;force_alloc_system&quot;</span>), <span class='ident'>feature</span>(<span class='ident'>alloc_system</span>))]</span>
 
 <span class='comment'>// Turn warnings into errors, but only after stage0, where it can be useful for</span>
 <span class='comment'>// code to emit warnings during language transitions</span>
@@ -809,6 +810,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>oom</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>optin_builtin_traits</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>panic_unwind</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>peek</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>placement_in_syntax</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>prelude_import</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>pub_restricted</span>)]</span>
@@ -866,7 +868,7 @@
 <span class='comment'>// We always need an unwinder currently for backtraces</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>unwind</span>;
 
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>stage0</span>)]</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>stage0</span>, <span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;force_alloc_system&quot;</span>))]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>alloc_system</span>;
 
 <span class='comment'>// compiler-rt intrinsics</span>
@@ -931,7 +933,6 @@
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>i64</span>;
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>)]</span>
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>stage0</span>))]</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>i128</span>;
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>usize</span>;
@@ -962,7 +963,6 @@
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>std_unicode</span>::<span class='ident'>char</span>;
 <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>)]</span>
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>stage0</span>))]</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>u128</span>;
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>f32</span>;

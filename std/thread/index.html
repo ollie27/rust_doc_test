@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/std/thread/mod.rs.html#11-1268' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/std/thread/mod.rs.html#11-1271' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Native threads.</p>
 
 <h2 id='the-threading-model' class='section-header'><a href='#the-threading-model'>The threading model</a></h2>
@@ -116,7 +116,7 @@ which currently allows you to set the name and stack size for the child thread:<
 
 <span class='ident'>thread</span>::<span class='ident'>Builder</span>::<span class='ident'>new</span>().<span class='ident'>name</span>(<span class='string'>&quot;child1&quot;</span>.<span class='ident'>to_string</span>()).<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello, world!&quot;</span>);
-});<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23!%5Ballow(unused_must_use)%5D%0Ause%20std%3A%3Athread%3B%0A%0Athread%3A%3ABuilder%3A%3Anew().name(%22child1%22.to_string()).spawn(move%20%7C%7C%20%7B%0A%20%20%20%20println!(%22Hello%2C%20world!%22)%3B%0A%7D)%3B%0A%7D">Run</a></pre>
+});<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused_must_use)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Athread%3B%0A%0Athread%3A%3ABuilder%3A%3Anew().name(%22child1%22.to_string()).spawn(move%20%7C%7C%20%7B%0A%20%20%20%20println!(%22Hello%2C%20world!%22)%3B%0A%7D)%3B%0A%7D">Run</a></pre>
 
 <h2 id='the-thread-type' class='section-header'><a href='#the-thread-type'>The <code>Thread</code> type</a></h2>
 <p>Threads are represented via the <a href="../../std/thread/struct.Thread.html"><code>Thread</code></a> type, which you can get in one of

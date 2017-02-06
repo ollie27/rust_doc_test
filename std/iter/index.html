@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/iter/mod.rs.html#11-2070' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/iter/mod.rs.html#11-2090' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Composable external iteration.</p>
 
 <p>If you&#39;ve found yourself with a collection of some kind, and needed to
@@ -261,7 +261,7 @@ method calls a closure on each element it iterates over:</p>
 
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>];
-<span class='ident'>v</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23!%5Ballow(unused_must_use)%5D%0Alet%20v%20%3D%20vec!%5B1%2C%202%2C%203%2C%204%2C%205%5D%3B%0Av.iter().map(%7Cx%7C%20println!(%22%7B%7D%22%2C%20x))%3B%0A%7D">Run</a></pre>
+<span class='ident'>v</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused_must_use)%5D%0Afn%20main()%20%7B%0Alet%20v%20%3D%20vec!%5B1%2C%202%2C%203%2C%204%2C%205%5D%3B%0Av.iter().map(%7Cx%7C%20println!(%22%7B%7D%22%2C%20x))%3B%0A%7D">Run</a></pre>
 
 <p>This will not print any values, as we only created an iterator, rather than
 using it. The compiler will warn us about this kind of behavior:</p>

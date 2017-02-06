@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#11-2965' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#11-2913' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Overloadable operators.</p>
 
 <p>Implementing these traits allows you to overload certain operators.</p>
@@ -474,14 +474,14 @@ where unsizing can be performed on the pointee.</p>
                            <td><a class='trait' href='trait.InPlace.html'
                                   title='core::ops::InPlace'>InPlace</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Specialization of <code>Place</code> trait supporting <code>in (PLACE) EXPR</code>.</p>
+                               [<div class='stab unstable'>Experimental</div>] <p>Specialization of <code>Place</code> trait supporting <code>PLACE &lt;- EXPR</code>.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
                            <td><a class='trait' href='trait.Place.html'
                                   title='core::ops::Place'>Place</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Both <code>in (PLACE) EXPR</code> and <code>box EXPR</code> desugar into expressions
+                               [<div class='stab unstable'>Experimental</div>] <p>Both <code>PLACE &lt;- EXPR</code> and <code>box EXPR</code> desugar into expressions
 that allocate an intermediate &quot;place&quot; that holds uninitialized
 state.  The desugaring evaluates EXPR, and writes the result at
 the address returned by the <code>pointer</code> method of this trait.</p>
@@ -491,7 +491,7 @@ the address returned by the <code>pointer</code> method of this trait.</p>
                            <td><a class='trait' href='trait.Placer.html'
                                   title='core::ops::Placer'>Placer</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Interface to implementations of  <code>in (PLACE) EXPR</code>.</p>
+                               [<div class='stab unstable'>Experimental</div>] <p>Interface to implementations of  <code>PLACE &lt;- EXPR</code>.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

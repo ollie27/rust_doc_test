@@ -2768,6 +2768,45 @@
 <span id="2723">2723</span>
 <span id="2724">2724</span>
 <span id="2725">2725</span>
+<span id="2726">2726</span>
+<span id="2727">2727</span>
+<span id="2728">2728</span>
+<span id="2729">2729</span>
+<span id="2730">2730</span>
+<span id="2731">2731</span>
+<span id="2732">2732</span>
+<span id="2733">2733</span>
+<span id="2734">2734</span>
+<span id="2735">2735</span>
+<span id="2736">2736</span>
+<span id="2737">2737</span>
+<span id="2738">2738</span>
+<span id="2739">2739</span>
+<span id="2740">2740</span>
+<span id="2741">2741</span>
+<span id="2742">2742</span>
+<span id="2743">2743</span>
+<span id="2744">2744</span>
+<span id="2745">2745</span>
+<span id="2746">2746</span>
+<span id="2747">2747</span>
+<span id="2748">2748</span>
+<span id="2749">2749</span>
+<span id="2750">2750</span>
+<span id="2751">2751</span>
+<span id="2752">2752</span>
+<span id="2753">2753</span>
+<span id="2754">2754</span>
+<span id="2755">2755</span>
+<span id="2756">2756</span>
+<span id="2757">2757</span>
+<span id="2758">2758</span>
+<span id="2759">2759</span>
+<span id="2760">2760</span>
+<span id="2761">2761</span>
+<span id="2762">2762</span>
+<span id="2763">2763</span>
+<span id="2764">2764</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2804,6 +2843,7 @@
 <span class='kw'>use</span> <span class='ident'>alloc</span>::<span class='ident'>raw_vec</span>::<span class='ident'>RawVec</span>;
 
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>range</span>::<span class='ident'>RangeArgument</span>;
+<span class='kw'>use</span> <span class='ident'>Bound</span>::{<span class='ident'>Excluded</span>, <span class='ident'>Included</span>, <span class='ident'>Unbounded</span>};
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>vec</span>::<span class='ident'>Vec</span>;
 
 <span class='kw'>const</span> <span class='ident'>INITIAL_CAPACITY</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>7</span>; <span class='comment'>// 2^3 - 1</span>
@@ -3239,9 +3279,9 @@
     <span class='doccomment'>/// buf.push_back(3);</span>
     <span class='doccomment'>/// buf.push_back(4);</span>
     <span class='doccomment'>/// buf.push_back(5);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [3, 4, 5]);</span>
     <span class='doccomment'>/// buf.swap(0, 2);</span>
-    <span class='doccomment'>/// assert_eq!(buf[0], 5);</span>
-    <span class='doccomment'>/// assert_eq!(buf[2], 3);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [5, 4, 3]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>i</span>: <span class='ident'>usize</span>, <span class='ident'>j</span>: <span class='ident'>usize</span>) {
@@ -3413,21 +3453,17 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(deque_extras)]</span>
-    <span class='doccomment'>///</span>
     <span class='doccomment'>/// use std::collections::VecDeque;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut buf = VecDeque::new();</span>
     <span class='doccomment'>/// buf.push_back(5);</span>
     <span class='doccomment'>/// buf.push_back(10);</span>
     <span class='doccomment'>/// buf.push_back(15);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [5, 10, 15]);</span>
     <span class='doccomment'>/// buf.truncate(1);</span>
-    <span class='doccomment'>/// assert_eq!(buf.len(), 1);</span>
-    <span class='doccomment'>/// assert_eq!(Some(&amp;5), buf.get(0));</span>
+    <span class='doccomment'>/// assert_eq!(buf, [5]);</span>
     <span class='doccomment'>/// ```</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras&quot;</span>,
-               <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;matches collection reform specification; waiting on panic semantics&quot;</span>,
-               <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27788&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>truncate</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>) {
         <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='ident'>len</span>..<span class='self'>self</span>.<span class='ident'>len</span>() {
             <span class='self'>self</span>.<span class='ident'>pop_back</span>();
@@ -3600,8 +3636,9 @@
     <span class='doccomment'>/// use std::collections::VecDeque;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut v: VecDeque&lt;_&gt; = vec![1, 2, 3].into_iter().collect();</span>
-    <span class='doccomment'>/// assert_eq!(vec![3].into_iter().collect::&lt;VecDeque&lt;_&gt;&gt;(), v.drain(2..).collect());</span>
-    <span class='doccomment'>/// assert_eq!(vec![1, 2].into_iter().collect::&lt;VecDeque&lt;_&gt;&gt;(), v);</span>
+    <span class='doccomment'>/// let drained = v.drain(2..).collect::&lt;VecDeque&lt;_&gt;&gt;();</span>
+    <span class='doccomment'>/// assert_eq!(drained, [3]);</span>
+    <span class='doccomment'>/// assert_eq!(v, [1, 2]);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// // A full range clears all contents</span>
     <span class='doccomment'>/// v.drain(..);</span>
@@ -3623,8 +3660,16 @@
         <span class='comment'>// and the head/tail values will be restored correctly.</span>
         <span class='comment'>//</span>
         <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>len</span>();
-        <span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='ident'>range</span>.<span class='ident'>start</span>().<span class='ident'>unwrap_or</span>(<span class='kw-2'>&amp;</span><span class='number'>0</span>);
-        <span class='kw'>let</span> <span class='ident'>end</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='ident'>range</span>.<span class='ident'>end</span>().<span class='ident'>unwrap_or</span>(<span class='kw-2'>&amp;</span><span class='ident'>len</span>);
+        <span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>range</span>.<span class='ident'>start</span>() {
+            <span class='ident'>Included</span>(<span class='kw-2'>&amp;</span><span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>n</span>,
+            <span class='ident'>Excluded</span>(<span class='kw-2'>&amp;</span><span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>+</span> <span class='number'>1</span>,
+            <span class='ident'>Unbounded</span>    <span class='op'>=&gt;</span> <span class='number'>0</span>,
+        };
+        <span class='kw'>let</span> <span class='ident'>end</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>range</span>.<span class='ident'>end</span>() {
+            <span class='ident'>Included</span>(<span class='kw-2'>&amp;</span><span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>+</span> <span class='number'>1</span>,
+            <span class='ident'>Excluded</span>(<span class='kw-2'>&amp;</span><span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>n</span>,
+            <span class='ident'>Unbounded</span>    <span class='op'>=&gt;</span> <span class='ident'>len</span>,
+        };
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>start</span> <span class='op'>&lt;=</span> <span class='ident'>end</span>, <span class='string'>&quot;drain lower bound was too large&quot;</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>end</span> <span class='op'>&lt;=</span> <span class='ident'>len</span>, <span class='string'>&quot;drain upper bound was too large&quot;</span>);
 
@@ -3945,11 +3990,10 @@
     <span class='doccomment'>/// buf.push_back(1);</span>
     <span class='doccomment'>/// buf.push_back(2);</span>
     <span class='doccomment'>/// buf.push_back(3);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [1, 2, 3]);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// assert_eq!(buf.swap_remove_back(0), Some(1));</span>
-    <span class='doccomment'>/// assert_eq!(buf.len(), 2);</span>
-    <span class='doccomment'>/// assert_eq!(buf[0], 3);</span>
-    <span class='doccomment'>/// assert_eq!(buf[1], 2);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [3, 2]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras_15&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.5.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_remove_back</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
@@ -3981,11 +4025,10 @@
     <span class='doccomment'>/// buf.push_back(1);</span>
     <span class='doccomment'>/// buf.push_back(2);</span>
     <span class='doccomment'>/// buf.push_back(3);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [1, 2, 3]);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// assert_eq!(buf.swap_remove_front(2), Some(3));</span>
-    <span class='doccomment'>/// assert_eq!(buf.len(), 2);</span>
-    <span class='doccomment'>/// assert_eq!(buf[0], 2);</span>
-    <span class='doccomment'>/// assert_eq!(buf[1], 1);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [2, 1]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras_15&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.5.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_remove_front</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
@@ -4016,11 +4059,10 @@
     <span class='doccomment'>/// vec_deque.push_back(&#39;a&#39;);</span>
     <span class='doccomment'>/// vec_deque.push_back(&#39;b&#39;);</span>
     <span class='doccomment'>/// vec_deque.push_back(&#39;c&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(vec_deque, &amp;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// vec_deque.insert(1, &#39;d&#39;);</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let vec = vec_deque.into_iter().collect::&lt;Vec&lt;_&gt;&gt;();</span>
-    <span class='doccomment'>/// assert_eq!(vec, [&#39;a&#39;, &#39;d&#39;, &#39;b&#39;, &#39;c&#39;]);</span>
+    <span class='doccomment'>/// assert_eq!(vec_deque, &amp;[&#39;a&#39;, &#39;d&#39;, &#39;b&#39;, &#39;c&#39;]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras_15&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.5.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>insert</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>, <span class='ident'>value</span>: <span class='ident'>T</span>) {
@@ -4244,9 +4286,10 @@
     <span class='doccomment'>/// buf.push_back(1);</span>
     <span class='doccomment'>/// buf.push_back(2);</span>
     <span class='doccomment'>/// buf.push_back(3);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [1, 2, 3]);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// assert_eq!(buf.remove(1), Some(2));</span>
-    <span class='doccomment'>/// assert_eq!(buf.get(1), Some(&amp;3));</span>
+    <span class='doccomment'>/// assert_eq!(buf, [1, 3]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>remove</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
@@ -4425,9 +4468,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut buf: VecDeque&lt;_&gt; = vec![1,2,3].into_iter().collect();</span>
     <span class='doccomment'>/// let buf2 = buf.split_off(1);</span>
-    <span class='doccomment'>/// // buf = [1], buf2 = [2, 3]</span>
-    <span class='doccomment'>/// assert_eq!(buf.len(), 1);</span>
-    <span class='doccomment'>/// assert_eq!(buf2.len(), 2);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [1]);</span>
+    <span class='doccomment'>/// assert_eq!(buf2, [2, 3]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;split_off&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.4.0&quot;</span>)]</span>
@@ -4484,11 +4526,11 @@
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>/// use std::collections::VecDeque;</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut buf: VecDeque&lt;_&gt; = vec![1, 2, 3].into_iter().collect();</span>
-    <span class='doccomment'>/// let mut buf2: VecDeque&lt;_&gt; = vec![4, 5, 6].into_iter().collect();</span>
+    <span class='doccomment'>/// let mut buf: VecDeque&lt;_&gt; = vec![1, 2].into_iter().collect();</span>
+    <span class='doccomment'>/// let mut buf2: VecDeque&lt;_&gt; = vec![3, 4].into_iter().collect();</span>
     <span class='doccomment'>/// buf.append(&amp;mut buf2);</span>
-    <span class='doccomment'>/// assert_eq!(buf.len(), 6);</span>
-    <span class='doccomment'>/// assert_eq!(buf2.len(), 0);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [1, 2, 3, 4]);</span>
+    <span class='doccomment'>/// assert_eq!(buf2, []);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;append&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.4.0&quot;</span>)]</span>
@@ -4511,9 +4553,7 @@
     <span class='doccomment'>/// let mut buf = VecDeque::new();</span>
     <span class='doccomment'>/// buf.extend(1..5);</span>
     <span class='doccomment'>/// buf.retain(|&amp;x| x%2 == 0);</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let v: Vec&lt;_&gt; = buf.into_iter().collect();</span>
-    <span class='doccomment'>/// assert_eq!(&amp;v[..], &amp;[2, 4]);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [2, 4]);</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec_deque_retain&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.4.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>retain</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>f</span>: <span class='ident'>F</span>)
@@ -4541,23 +4581,21 @@
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// #![feature(deque_extras)]</span>
-    <span class='doccomment'>///</span>
     <span class='doccomment'>/// use std::collections::VecDeque;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut buf = VecDeque::new();</span>
     <span class='doccomment'>/// buf.push_back(5);</span>
     <span class='doccomment'>/// buf.push_back(10);</span>
     <span class='doccomment'>/// buf.push_back(15);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [5, 10, 15]);</span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// buf.resize(2, 0);</span>
-    <span class='doccomment'>/// buf.resize(6, 20);</span>
-    <span class='doccomment'>/// for (a, b) in [5, 10, 20, 20, 20, 20].iter().zip(&amp;buf) {</span>
-    <span class='doccomment'>///     assert_eq!(a, b);</span>
-    <span class='doccomment'>/// }</span>
+    <span class='doccomment'>/// assert_eq!(buf, [5, 10]);</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// buf.resize(5, 20);</span>
+    <span class='doccomment'>/// assert_eq!(buf, [5, 10, 20, 20, 20]);</span>
     <span class='doccomment'>/// ```</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras&quot;</span>,
-               <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;matches collection reform specification; waiting on panic semantics&quot;</span>,
-               <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;27788&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;deque_extras&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>resize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>new_len</span>: <span class='ident'>usize</span>, <span class='ident'>value</span>: <span class='ident'>T</span>) {
         <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>len</span>();
 
@@ -4932,6 +4970,46 @@
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>Eq</span><span class='op'>&gt;</span> <span class='ident'>Eq</span> <span class='kw'>for</span> <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span> {}
 
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>__impl_slice_eq1</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Lhs</span>: <span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Rhs</span>: <span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
+        <span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Lhs</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Rhs</span>, <span class='ident'>Sized</span> }
+    };
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Lhs</span>: <span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Rhs</span>: <span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Bound</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
+        <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;vec-deque-partial-eq-slice&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>)]</span>
+        <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span>, <span class='ident'>A</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Bound</span>, <span class='ident'>B</span><span class='op'>&gt;</span> <span class='ident'>PartialEq</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Rhs</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Lhs</span> <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>PartialEq</span><span class='op'>&lt;</span><span class='ident'>B</span><span class='op'>&gt;</span> {
+            <span class='kw'>fn</span> <span class='ident'>eq</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>Rhs</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>len</span>() <span class='op'>!=</span> <span class='ident'>other</span>.<span class='ident'>len</span>() {
+                    <span class='kw'>return</span> <span class='bool-val'>false</span>;
+                }
+                <span class='kw'>let</span> (<span class='ident'>sa</span>, <span class='ident'>sb</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>as_slices</span>();
+                <span class='kw'>let</span> (<span class='ident'>oa</span>, <span class='ident'>ob</span>) <span class='op'>=</span> <span class='ident'>other</span>[..].<span class='ident'>split_at</span>(<span class='ident'>sa</span>.<span class='ident'>len</span>());
+                <span class='ident'>sa</span> <span class='op'>==</span> <span class='ident'>oa</span> <span class='op'>&amp;&amp;</span> <span class='ident'>sb</span> <span class='op'>==</span> <span class='ident'>ob</span>
+            }
+        }
+    }
+}
+
+<span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>B</span><span class='op'>&gt;</span> }
+<span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> [<span class='ident'>B</span>] }
+<span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> [<span class='ident'>B</span>] }
+
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>array_impls</span> {
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>N</span>: <span class='ident'>expr</span>)<span class='op'>+</span>) <span class='op'>=&gt;</span> {
+        $(
+            <span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>, [<span class='ident'>B</span>; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>N</span>] }
+            <span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> [<span class='ident'>B</span>; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>N</span>] }
+            <span class='macro'>__impl_slice_eq1</span><span class='macro'>!</span> { <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> [<span class='ident'>B</span>; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>N</span>] }
+        )<span class='op'>+</span>
+    }
+}
+
+<span class='macro'>array_impls</span><span class='macro'>!</span> {
+     <span class='number'>0</span>  <span class='number'>1</span>  <span class='number'>2</span>  <span class='number'>3</span>  <span class='number'>4</span>  <span class='number'>5</span>  <span class='number'>6</span>  <span class='number'>7</span>  <span class='number'>8</span>  <span class='number'>9</span>
+    <span class='number'>10</span> <span class='number'>11</span> <span class='number'>12</span> <span class='number'>13</span> <span class='number'>14</span> <span class='number'>15</span> <span class='number'>16</span> <span class='number'>17</span> <span class='number'>18</span> <span class='number'>19</span>
+    <span class='number'>20</span> <span class='number'>21</span> <span class='number'>22</span> <span class='number'>23</span> <span class='number'>24</span> <span class='number'>25</span> <span class='number'>26</span> <span class='number'>27</span> <span class='number'>28</span> <span class='number'>29</span>
+    <span class='number'>30</span> <span class='number'>31</span> <span class='number'>32</span>
+}
+
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>PartialOrd</span><span class='op'>&gt;</span> <span class='ident'>PartialOrd</span> <span class='kw'>for</span> <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>partial_cmp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Ordering</span><span class='op'>&gt;</span> {
@@ -5204,7 +5282,7 @@
             <span class='kw'>let</span> <span class='ident'>final_len</span> <span class='op'>=</span> <span class='ident'>usable_cap</span> <span class='op'>/</span> <span class='number'>2</span>;
 
             <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>final_len</span> {
-                <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>back</span> {
+                <span class='kw'>let</span> <span class='ident'>expected</span>: <span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>back</span> {
                     (<span class='number'>0</span>..<span class='ident'>len</span>).<span class='ident'>collect</span>()
                 } <span class='kw'>else</span> {
                     (<span class='number'>0</span>..<span class='ident'>len</span>).<span class='ident'>rev</span>().<span class='ident'>collect</span>()
@@ -5253,7 +5331,7 @@
         <span class='comment'>// len is the length *after* insertion</span>
         <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> <span class='number'>1</span>..<span class='ident'>cap</span> {
             <span class='comment'>// 0, 1, 2, .., len - 1</span>
-            <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>len</span>).<span class='ident'>collect</span>();
+            <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>len</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
             <span class='kw'>for</span> <span class='ident'>tail_pos</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>cap</span> {
                 <span class='kw'>for</span> <span class='ident'>to_insert</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> {
                     <span class='ident'>tester</span>.<span class='ident'>tail</span> <span class='op'>=</span> <span class='ident'>tail_pos</span>;
@@ -5286,7 +5364,7 @@
         <span class='comment'>// len is the length *after* removal</span>
         <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>cap</span> <span class='op'>-</span> <span class='number'>1</span> {
             <span class='comment'>// 0, 1, 2, .., len - 1</span>
-            <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>len</span>).<span class='ident'>collect</span>();
+            <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>len</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
             <span class='kw'>for</span> <span class='ident'>tail_pos</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>cap</span> {
                 <span class='kw'>for</span> <span class='ident'>to_remove</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> <span class='op'>+</span> <span class='number'>1</span> {
                     <span class='ident'>tester</span>.<span class='ident'>tail</span> <span class='op'>=</span> <span class='ident'>tail_pos</span>;
@@ -5361,7 +5439,7 @@
 
         <span class='kw'>for</span> <span class='ident'>len</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>cap</span> <span class='op'>+</span> <span class='number'>1</span> {
             <span class='comment'>// 0, 1, 2, .., len - 1</span>
-            <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>len</span>).<span class='ident'>collect</span>();
+            <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>len</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
             <span class='kw'>for</span> <span class='ident'>tail_pos</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>max_cap</span> <span class='op'>+</span> <span class='number'>1</span> {
                 <span class='ident'>tester</span>.<span class='ident'>tail</span> <span class='op'>=</span> <span class='ident'>tail_pos</span>;
                 <span class='ident'>tester</span>.<span class='ident'>head</span> <span class='op'>=</span> <span class='ident'>tail_pos</span>;
@@ -5394,9 +5472,9 @@
             <span class='comment'>// index to split at</span>
             <span class='kw'>for</span> <span class='ident'>at</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> <span class='op'>+</span> <span class='number'>1</span> {
                 <span class='comment'>// 0, 1, 2, .., at - 1 (may be empty)</span>
-                <span class='kw'>let</span> <span class='ident'>expected_self</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>at</span>).<span class='ident'>collect</span>();
+                <span class='kw'>let</span> <span class='ident'>expected_self</span> <span class='op'>=</span> (<span class='number'>0</span>..).<span class='ident'>take</span>(<span class='ident'>at</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
                 <span class='comment'>// at, at + 1, .., len - 1 (may be empty)</span>
-                <span class='kw'>let</span> <span class='ident'>expected_other</span> <span class='op'>=</span> (<span class='ident'>at</span>..).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='op'>-</span> <span class='ident'>at</span>).<span class='ident'>collect</span>();
+                <span class='kw'>let</span> <span class='ident'>expected_other</span> <span class='op'>=</span> (<span class='ident'>at</span>..).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='op'>-</span> <span class='ident'>at</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>VecDeque</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
                 <span class='kw'>for</span> <span class='ident'>tail_pos</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>cap</span> {
                     <span class='ident'>tester</span>.<span class='ident'>tail</span> <span class='op'>=</span> <span class='ident'>tail_pos</span>;

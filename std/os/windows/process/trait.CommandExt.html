@@ -44,18 +44,18 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>process</a>::<wbr><a class='trait' href=''>CommandExt</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version '></span><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>process</a>::<wbr><a class='trait' href=''>CommandExt</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.16.0'>1.16.0</span><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../../src/std/sys/windows/ext/process.rs.html#103-110' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait CommandExt {
     fn <a href='#tymethod.creation_flags' class='fnname'>creation_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut <a class='struct' href='../../../../std/process/struct.Command.html' title='std::process::Command'>Command</a>;
-}</pre><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>windows_process_extensions</code> <a href="https://github.com/rust-lang/rust/issues/37827">#37827</a>)</div></div><div class='docblock'><p>Windows-specific extensions to the <code>std::process::Command</code> builder</p>
+}</pre><div class='docblock'><p>Windows-specific extensions to the <code>std::process::Command</code> builder</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.creation_flags' class='method'><span id='creation_flags.v' class='invisible'><code>fn <a href='#tymethod.creation_flags' class='fnname'>creation_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut <a class='struct' href='../../../../std/process/struct.Command.html' title='std::process::Command'>Command</a></code></span></h3><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>windows_process_extensions</code> <a href="https://github.com/rust-lang/rust/issues/37827">#37827</a>)</div></div><div class='docblock'><p>Sets the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms684863(v=vs.85).aspx">process creation flags</a> to be passed to <code>CreateProcess</code>.</p>
+        <h3 id='tymethod.creation_flags' class='method'><span id='creation_flags.v' class='invisible'><code>fn <a href='#tymethod.creation_flags' class='fnname'>creation_flags</a>(&amp;mut self, flags: <a class='primitive' href='../../../primitive.u32.html'>u32</a>) -&gt; &amp;mut <a class='struct' href='../../../../std/process/struct.Command.html' title='std::process::Command'>Command</a></code></span></h3><div class='docblock'><p>Sets the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms684863(v=vs.85).aspx">process creation flags</a> to be passed to <code>CreateProcess</code>.</p>
 
 <p>These will always be ORed with <code>CREATE_UNICODE_ENVIRONMENT</code>.</p>
 </div></div>

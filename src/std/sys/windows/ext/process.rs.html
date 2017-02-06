@@ -263,17 +263,17 @@
 }
 
 <span class='doccomment'>/// Windows-specific extensions to the `std::process::Command` builder</span>
-<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;windows_process_extensions&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;37827&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;windows_process_extensions&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>CommandExt</span> {
     <span class='doccomment'>/// Sets the [process creation flags][1] to be passed to `CreateProcess`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// These will always be ORed with `CREATE_UNICODE_ENVIRONMENT`.</span>
     <span class='doccomment'>/// [1]: https://msdn.microsoft.com/en-us/library/windows/desktop/ms684863(v=vs.85).aspx</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;windows_process_extensions&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;37827&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;windows_process_extensions&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>creation_flags</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>flags</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>process</span>::<span class='ident'>Command</span>;
 }
 
-<span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;windows_process_extensions&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;37827&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;windows_process_extensions&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.16.0&quot;</span>)]</span>
 <span class='kw'>impl</span> <span class='ident'>CommandExt</span> <span class='kw'>for</span> <span class='ident'>process</span>::<span class='ident'>Command</span> {
     <span class='kw'>fn</span> <span class='ident'>creation_flags</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>flags</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>process</span>::<span class='ident'>Command</span> {
         <span class='self'>self</span>.<span class='ident'>as_inner_mut</span>().<span class='ident'>creation_flags</span>(<span class='ident'>flags</span>);

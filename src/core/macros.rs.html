@@ -744,6 +744,17 @@
 <span id="699">699</span>
 <span id="700">700</span>
 <span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
+<span id="708">708</span>
+<span id="709">709</span>
+<span id="710">710</span>
+<span id="711">711</span>
+<span id="712">712</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -792,7 +803,8 @@
 <span class='doccomment'>/// Other use-cases of `assert!` include [testing] and enforcing run-time</span>
 <span class='doccomment'>/// invariants in safe code (whose violation cannot result in unsafety).</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// This macro has a second version, where a custom panic message can be provided.</span>
+<span class='doccomment'>/// This macro has a second version, where a custom panic message can</span>
+<span class='doccomment'>/// be provided with or without arguments for formatting.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// [testing]: ../book/testing.html</span>
 <span class='doccomment'>///</span>
@@ -834,12 +846,17 @@
 <span class='doccomment'>/// On panic, this macro will print the values of the expressions with their</span>
 <span class='doccomment'>/// debug representations.</span>
 <span class='doccomment'>///</span>
+<span class='doccomment'>/// Like `assert!()`, this macro has a second version, where a custom</span>
+<span class='doccomment'>/// panic message can be provided.</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// let a = 3;</span>
 <span class='doccomment'>/// let b = 1 + 2;</span>
 <span class='doccomment'>/// assert_eq!(a, b);</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// assert_eq!(a, b, &quot;we are testing addition with {} and {}&quot;, a, b);</span>
 <span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;rust1&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.0.0&quot;</span>)]</span>
@@ -872,12 +889,17 @@
 <span class='doccomment'>/// On panic, this macro will print the values of the expressions with their</span>
 <span class='doccomment'>/// debug representations.</span>
 <span class='doccomment'>///</span>
+<span class='doccomment'>/// Like `assert!()`, this macro has a second version, where a custom</span>
+<span class='doccomment'>/// panic message can be provided.</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// let a = 3;</span>
 <span class='doccomment'>/// let b = 2;</span>
 <span class='doccomment'>/// assert_ne!(a, b);</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// assert_ne!(a, b, &quot;we are testing that the values are not equal&quot;);</span>
 <span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;assert_ne&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.12.0&quot;</span>)]</span>

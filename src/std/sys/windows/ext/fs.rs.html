@@ -592,7 +592,7 @@
 <span class='doccomment'>/// use std::os::windows::fs;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # fn foo() -&gt; std::io::Result&lt;()&gt; {</span>
-<span class='doccomment'>/// try!(fs::symlink_file(&quot;a.txt&quot;, &quot;b.txt&quot;));</span>
+<span class='doccomment'>/// fs::symlink_file(&quot;a.txt&quot;, &quot;b.txt&quot;)?;</span>
 <span class='doccomment'>/// # Ok(())</span>
 <span class='doccomment'>/// # }</span>
 <span class='doccomment'>/// ```</span>
@@ -613,7 +613,7 @@
 <span class='doccomment'>/// use std::os::windows::fs;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # fn foo() -&gt; std::io::Result&lt;()&gt; {</span>
-<span class='doccomment'>/// try!(fs::symlink_file(&quot;a&quot;, &quot;b&quot;));</span>
+<span class='doccomment'>/// fs::symlink_file(&quot;a&quot;, &quot;b&quot;)?;</span>
 <span class='doccomment'>/// # Ok(())</span>
 <span class='doccomment'>/// # }</span>
 <span class='doccomment'>/// ```</span>
