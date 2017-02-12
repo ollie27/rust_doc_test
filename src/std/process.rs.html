@@ -1477,7 +1477,6 @@
 <span id="1432">1432</span>
 <span id="1433">1433</span>
 <span id="1434">1434</span>
-<span id="1435">1435</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2325,9 +2324,9 @@
     <span class='doccomment'>/// guaranteed to repeatedly return a successful exit status so long as the</span>
     <span class='doccomment'>/// child has already exited.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// If the child has exited, then `Ok(status)` is returned. If the exit</span>
-    <span class='doccomment'>/// status is not available at this time then an error is returned with the</span>
-    <span class='doccomment'>/// error kind `WouldBlock`. If an error occurs, then that error is returned.</span>
+    <span class='doccomment'>/// If the child has exited, then `Ok(Some(status))` is returned. If the</span>
+    <span class='doccomment'>/// exit status is not available at this time then `Ok(None)` is returned.</span>
+    <span class='doccomment'>/// If an error occurs, then that error is returned.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Note that unlike `wait`, this function will not attempt to drop stdin.</span>
     <span class='doccomment'>///</span>
@@ -2338,14 +2337,13 @@
     <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// #![feature(process_try_wait)]</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// use std::io;</span>
     <span class='doccomment'>/// use std::process::Command;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut child = Command::new(&quot;ls&quot;).spawn().unwrap();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// match child.try_wait() {</span>
-    <span class='doccomment'>///     Ok(status) =&gt; println!(&quot;exited with: {}&quot;, status),</span>
-    <span class='doccomment'>///     Err(ref e) if e.kind() == io::ErrorKind::WouldBlock =&gt; {</span>
+    <span class='doccomment'>///     Ok(Some(status)) =&gt; println!(&quot;exited with: {}&quot;, status),</span>
+    <span class='doccomment'>///     Ok(None) =&gt; {</span>
     <span class='doccomment'>///         println!(&quot;status not ready yet, let&#39;s really wait&quot;);</span>
     <span class='doccomment'>///         let res = child.wait();</span>
     <span class='doccomment'>///         println!(&quot;result: {:?}&quot;, res);</span>
@@ -2354,8 +2352,8 @@
     <span class='doccomment'>/// }</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;process_try_wait&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;38903&quot;</span>)]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_wait</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ExitStatus</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>handle</span>.<span class='ident'>try_wait</span>().<span class='ident'>map</span>(<span class='ident'>ExitStatus</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_wait</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>ExitStatus</span><span class='op'>&gt;&gt;</span> {
+        <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='ident'>handle</span>.<span class='ident'>try_wait</span>()<span class='question-mark'>?</span>.<span class='ident'>map</span>(<span class='ident'>ExitStatus</span>))
     }
 
     <span class='doccomment'>/// Simultaneously waits for the child to exit and collect all remaining</span>

@@ -49,8 +49,9 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/core/ops.rs.html#1514-1518' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait RemAssign&lt;Rhs&nbsp;=&nbsp;Self&gt; {
-    fn <a href='#tymethod.rem_assign' class='fnname'>rem_assign</a>(&amp;mut self, Rhs);
+<pre class='rust trait'><div class="docblock attributes">#[lang = "rem_assign"]
+</div>pub trait RemAssign&lt;Rhs&nbsp;=&nbsp;Self&gt; {
+    fn <a href='#tymethod.rem_assign' class='fnname'>rem_assign</a>(&amp;mut self, rhs: Rhs);
 }</pre><div class='docblock'><p>The <code>RemAssign</code> trait is used to specify the functionality of <code>%=</code>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -75,7 +76,7 @@ calling <code>rem_assign</code>, and therefore, <code>main</code> prints <code>R
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.rem_assign' class='method'><span id='rem_assign.v' class='invisible'><code>fn <a href='#tymethod.rem_assign' class='fnname'>rem_assign</a>(&amp;mut self, Rhs)</code></span></h3><div class='docblock'><p>The method for the <code>%=</code> operator</p>
+        <h3 id='tymethod.rem_assign' class='method'><span id='rem_assign.v' class='invisible'><code>fn <a href='#tymethod.rem_assign' class='fnname'>rem_assign</a>(&amp;mut self, rhs: Rhs)</code></span></h3><div class='docblock'><p>The method for the <code>%=</code> operator</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

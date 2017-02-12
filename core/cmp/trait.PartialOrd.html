@@ -49,7 +49,8 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/core/cmp.rs.html#511-619' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait PartialOrd&lt;Rhs:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&nbsp;=&nbsp;Self&gt;: <a class='trait' href='../../core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;Rhs&gt; {
+<pre class='rust trait'><div class="docblock attributes">#[lang = "ord"]
+</div>pub trait PartialOrd&lt;Rhs:&nbsp;?<a class='trait' href='../../core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&nbsp;=&nbsp;Self&gt;: <a class='trait' href='../../core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;Rhs&gt; {
     fn <a href='#tymethod.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;Rhs) -&gt; <a class='enum' href='../../core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a>&gt;;
 
     fn <a href='#method.lt' class='fnname'>lt</a>(&amp;self, other: &amp;Rhs) -&gt; bool { ... }

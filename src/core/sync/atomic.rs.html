@@ -1600,24 +1600,6 @@
 <span id="1555">1555</span>
 <span id="1556">1556</span>
 <span id="1557">1557</span>
-<span id="1558">1558</span>
-<span id="1559">1559</span>
-<span id="1560">1560</span>
-<span id="1561">1561</span>
-<span id="1562">1562</span>
-<span id="1563">1563</span>
-<span id="1564">1564</span>
-<span id="1565">1565</span>
-<span id="1566">1566</span>
-<span id="1567">1567</span>
-<span id="1568">1568</span>
-<span id="1569">1569</span>
-<span id="1570">1570</span>
-<span id="1571">1571</span>
-<span id="1572">1572</span>
-<span id="1573">1573</span>
-<span id="1574">1574</span>
-<span id="1575">1575</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2938,24 +2920,6 @@
     <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;integer_atomics&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;32976&quot;</span>),
     <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;integer_atomics&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;32976&quot;</span>),
     <span class='ident'>u64</span> <span class='ident'>AtomicU64</span> <span class='ident'>ATOMIC_U64_INIT</span>
-}
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>stage0</span>))]</span>
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_has_atomic</span> <span class='op'>=</span> <span class='string'>&quot;128&quot;</span>)]</span>
-<span class='macro'>atomic_int</span><span class='macro'>!</span> {
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>i128</span> <span class='ident'>AtomicI128</span> <span class='ident'>ATOMIC_I128_INIT</span>
-}
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>stage0</span>))]</span>
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_has_atomic</span> <span class='op'>=</span> <span class='string'>&quot;128&quot;</span>)]</span>
-<span class='macro'>atomic_int</span><span class='macro'>!</span> {
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;i128&quot;</span>, <span class='ident'>issue</span> <span class='op'>=</span> <span class='string'>&quot;35118&quot;</span>),
-    <span class='ident'>u128</span> <span class='ident'>AtomicU128</span> <span class='ident'>ATOMIC_U128_INIT</span>
 }
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_has_atomic</span> <span class='op'>=</span> <span class='string'>&quot;ptr&quot;</span>)]</span>
 <span class='macro'>atomic_int</span><span class='macro'>!</span>{

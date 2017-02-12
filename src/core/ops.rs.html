@@ -4283,7 +4283,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>AddAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `+=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>add_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>add_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>add_assign_impl</span> {
@@ -4339,7 +4339,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>SubAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `-=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>sub_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>sub_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>sub_assign_impl</span> {
@@ -4384,7 +4384,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>MulAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `*=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>mul_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>mul_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>mul_assign_impl</span> {
@@ -4429,7 +4429,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>DivAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `/=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>div_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>div_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>div_assign_impl</span> {
@@ -4473,7 +4473,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>RemAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `%=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>rem_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>rem_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>rem_assign_impl</span> {
@@ -4559,7 +4559,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>BitAndAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `&amp;=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>bitand_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>bitand_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>bitand_assign_impl</span> {
@@ -4603,7 +4603,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>BitOrAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `|=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>bitor_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>bitor_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>bitor_assign_impl</span> {
@@ -4647,7 +4647,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>BitXorAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `^=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>bitxor_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>bitxor_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>bitxor_assign_impl</span> {
@@ -4691,7 +4691,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ShlAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `&lt;&lt;=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>shl_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>shl_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>shl_assign_impl</span> {
@@ -4756,7 +4756,7 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ShrAssign</span><span class='op'>&lt;</span><span class='ident'>Rhs</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// The method for the `&gt;&gt;=` operator</span>
     <span class='attribute'>#[<span class='ident'>stable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;op_assign_traits&quot;</span>, <span class='ident'>since</span> <span class='op'>=</span> <span class='string'>&quot;1.8.0&quot;</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>shr_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>Rhs</span>);
+    <span class='kw'>fn</span> <span class='ident'>shr_assign</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rhs</span>: <span class='ident'>Rhs</span>);
 }
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>shr_assign_impl</span> {
