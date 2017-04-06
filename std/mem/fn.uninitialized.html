@@ -49,14 +49,13 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/core/mem.rs.html#427-429' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe fn uninitialized&lt;T&gt;() -&gt; T</pre><div class='docblock'><p>Bypasses Rust&#39;s normal memory-initialization checks by pretending to
+<pre class='rust fn'>pub unsafe fn uninitialized&lt;T&gt;() -&gt; T</pre><div class='docblock'><p>Bypasses Rust's normal memory-initialization checks by pretending to
 produce a value of type <code>T</code>, while doing nothing at all.</p>
 <p><strong>This is incredibly dangerous and should not be done lightly. Deeply
 consider initializing your memory with a default value instead.</strong></p>
 <p>This is useful for <a href="../../book/first-edition/ffi.html">FFI</a> functions and initializing arrays sometimes,
 but should generally be avoided.</p>
-
-<h1 id='undefined-behavior' class='section-header'><a href='#undefined-behavior'>Undefined behavior</a></h1>
+<h1 id="undefined-behavior" class="section-header"><a href="#undefined-behavior">Undefined behavior</a></h1>
 <p>It is <a href="../../reference/behavior-considered-undefined.html">undefined behavior</a> to read uninitialized memory, even just an
 uninitialized boolean. For instance, if you branch on the value of such
 a boolean, your program may take one, both, or neither of the branches.</p>
@@ -68,9 +67,8 @@ to safely initialize an uninitialized value is with <a href="../ptr/fn.write.htm
 <p>If the value does implement <a href="../ops/trait.Drop.html"><code>Drop</code></a>, it must be initialized before
 it goes out of scope (and therefore would be dropped). Note that this
 includes a <code>panic</code> occurring and unwinding the stack suddenly.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
-<p>Here&#39;s how to safely initialize an array of <a href="../../std/vec/struct.Vec.html"><code>Vec</code></a>s.</p>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<p>Here's how to safely initialize an array of <a href="../../std/vec/struct.Vec.html"><code>Vec</code></a>s.</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;

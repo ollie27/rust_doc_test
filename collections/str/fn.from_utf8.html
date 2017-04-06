@@ -55,7 +55,7 @@
 the two. Not all byte slices are valid string slices, however: <a href="../../std/primitive.str.html"><code>&amp;str</code></a> requires
 that it is valid UTF-8. <code>from_utf8()</code> checks to ensure that the bytes are valid
 UTF-8, and then does the conversion.</p>
-<p>If you are sure that the byte slice is valid UTF-8, and you don&#39;t want to
+<p>If you are sure that the byte slice is valid UTF-8, and you don't want to
 incur the overhead of the validity check, there is an unsafe version of
 this function, <a href="fn.from_utf8_unchecked.html"><code>from_utf8_unchecked</code></a>, which has the same
 behavior but skips the check.</p>
@@ -65,12 +65,10 @@ behavior but skips the check.</p>
 <a href="../../std/primitive.slice.html"><code>&amp;[u8]</code></a> of it, this function is one way to have a
 stack-allocated string. There is an example of this in the
 examples section below.</p>
-
-<h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
+<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>Returns <code>Err</code> if the slice is not UTF-8 with a description as to why the
 provided slice is not UTF-8.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

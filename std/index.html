@@ -49,8 +49,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../src/std/lib.rs.html#11-487' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'>
-<h1 id='the-rust-standard-library' class='section-header'><a href='#the-rust-standard-library'>The Rust Standard Library</a></h1>
+<div class='docblock'><h1 id="the-rust-standard-library" class="section-header"><a href="#the-rust-standard-library">The Rust Standard Library</a></h1>
 <p>The Rust Standard Library is the foundation of portable Rust software, a
 set of minimal and battle-tested shared abstractions for the <a href="https://crates.io">broader Rust
 ecosystem</a>. It offers core types, like <a href="vec/index.html"><code>Vec&lt;T&gt;</code></a> and
@@ -62,8 +61,7 @@ contained an <code>extern crate std;</code> import at the <a href="../book/first
 standard library can be accessed in <a href="../book/first-edition/crates-and-modules.html#importing-modules-with-use"><code>use</code></a> statements through the path
 <code>std</code>, as in <a href="env/index.html"><code>use std::env</code></a>, or in expressions through the absolute path
 <code>::std</code>, as in <a href="env/fn.args.html"><code>::std::env::args</code></a>.</p>
-
-<h1 id='how-to-read-this-documentation' class='section-header'><a href='#how-to-read-this-documentation'>How to read this documentation</a></h1>
+<h1 id="how-to-read-this-documentation" class="section-header"><a href="#how-to-read-this-documentation">How to read this documentation</a></h1>
 <p>If you already know the name of what you are looking for, the fastest way to
 find it is to use the <a href="#" onclick="focusSearchBar();">search
 bar</a> at the top of the page.</p>
@@ -77,22 +75,21 @@ bar</a> at the top of the page.</p>
 <p>If this is your first time, the documentation for the standard library is
 written to be casually perused. Clicking on interesting things should
 generally lead you to interesting places. Still, there are important bits
-you don&#39;t want to miss, so read on for a tour of the standard library and
+you don't want to miss, so read on for a tour of the standard library and
 its documentation!</p>
 <p>Once you are familiar with the contents of the standard library you may
 begin to find the verbosity of the prose distracting. At this stage in your
 development you may want to press the <strong>[-]</strong> button near the top of the
 page to collapse it into a more skimmable view.</p>
 <p>While you are looking at that <strong>[-]</strong> button also notice the <strong>[src]</strong>
-button. Rust&#39;s API documentation comes with the source code and you are
+button. Rust's API documentation comes with the source code and you are
 encouraged to read it. The standard library source is generally high
 quality and a peek behind the curtains is often enlightening.</p>
-
-<h1 id='what-is-in-the-standard-library-documentation' class='section-header'><a href='#what-is-in-the-standard-library-documentation'>What is in the standard library documentation?</a></h1>
+<h1 id="what-is-in-the-standard-library-documentation" class="section-header"><a href="#what-is-in-the-standard-library-documentation">What is in the standard library documentation?</a></h1>
 <p>First of all, The Rust Standard Library is divided into a number of focused
 modules, <a href="#modules">all listed further down this page</a>. These modules are
 the bedrock upon which all of Rust is forged, and they have mighty names
-like <a href="slice/index.html"><code>std::slice</code></a> and <a href="cmp/index.html"><code>std::cmp</code></a>. Modules&#39; documentation typically
+like <a href="slice/index.html"><code>std::slice</code></a> and <a href="cmp/index.html"><code>std::cmp</code></a>. Modules' documentation typically
 includes an overview of the module along with examples, and are a smart
 place to start familiarizing yourself with the library.</p>
 <p>Second, implicit methods on <a href="../book/first-edition/primitive-types.html">primitive types</a> are documented here. This can
@@ -112,7 +109,7 @@ type, but not the all-important methods.</li>
 <code>std::i32</code></a> that documents the constant values <a href="i32/constant.MIN.html"><code>MIN</code></a> and
 <a href="i32/constant.MAX.html"><code>MAX</code></a> (rarely useful).</p>
 <p>Note the documentation for the primitives <a href="primitive.str.html"><code>str</code></a> and <a href="primitive.slice.html"><code>[T]</code></a> (also
-called &#39;slice&#39;). Many method calls on <a href="string/struct.String.html"><code>String</code></a> and <a href="vec/index.html"><code>Vec&lt;T&gt;</code></a> are actually
+called 'slice'). Many method calls on <a href="string/struct.String.html"><code>String</code></a> and <a href="vec/index.html"><code>Vec&lt;T&gt;</code></a> are actually
 calls to methods on <a href="primitive.str.html"><code>str</code></a> and <a href="primitive.slice.html"><code>[T]</code></a> respectively, via <a href="../book/first-edition/deref-coercions.html">deref
 coercions</a>.</p>
 <p>Third, the standard library defines <a href="prelude/index.html">The Rust Prelude</a>, a small collection
@@ -124,15 +121,13 @@ documentation a good entry point to learning about the library.</p>
 macros are defined by the standard library - some are defined by the
 compiler - but they are documented here the same). Like the prelude, the
 standard macros are imported by default into all crates.</p>
-
-<h1 id='a-tour-of-the-rust-standard-library' class='section-header'><a href='#a-tour-of-the-rust-standard-library'>A Tour of The Rust Standard Library</a></h1>
+<h1 id="a-tour-of-the-rust-standard-library" class="section-header"><a href="#a-tour-of-the-rust-standard-library">A Tour of The Rust Standard Library</a></h1>
 <p>The rest of this crate documentation is dedicated to pointing out notable
 features of The Rust Standard Library.</p>
-
-<h2 id='containers-and-collections' class='section-header'><a href='#containers-and-collections'>Containers and collections</a></h2>
+<h2 id="containers-and-collections" class="section-header"><a href="#containers-and-collections">Containers and collections</a></h2>
 <p>The <a href="option/index.html"><code>option</code></a> and <a href="result/index.html"><code>result</code></a> modules define optional and error-handling
 types, <a href="option/enum.Option.html"><code>Option&lt;T&gt;</code></a> and <a href="result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>. The <a href="iter/index.html"><code>iter</code></a> module defines
-Rust&#39;s iterator trait, <a href="iter/trait.Iterator.html"><code>Iterator</code></a>, which works with the <a href="../book/first-edition/loops.html#for"><code>for</code></a> loop to
+Rust's iterator trait, <a href="iter/trait.Iterator.html"><code>Iterator</code></a>, which works with the <a href="../book/first-edition/loops.html#for"><code>for</code></a> loop to
 access collections.</p>
 <p>The standard library exposes three common ways to deal with contiguous
 regions of memory:</p>
@@ -162,14 +157,13 @@ atomically-reference-counted box, <a href="sync/struct.Arc.html"><code>Arc</code
 effect.</p>
 <p>The <a href="collections/index.html"><code>collections</code></a> module defines maps, sets, linked lists and other
 typical collection types, including the common <a href="collections/struct.HashMap.html"><code>HashMap&lt;K, V&gt;</code></a>.</p>
-
-<h2 id='platform-abstractions-and-io' class='section-header'><a href='#platform-abstractions-and-io'>Platform abstractions and I/O</a></h2>
+<h2 id="platform-abstractions-and-io" class="section-header"><a href="#platform-abstractions-and-io">Platform abstractions and I/O</a></h2>
 <p>Besides basic data types, the standard library is largely concerned with
 abstracting over differences in common platforms, most notably Windows and
 Unix derivatives.</p>
 <p>Common types of I/O, including <a href="fs/struct.File.html">files</a>, <a href="net/struct.TcpStream.html">TCP</a>, <a href="net/struct.UdpSocket.html">UDP</a>, are defined in the
 <a href="io/index.html"><code>io</code></a>, <a href="fs/index.html"><code>fs</code></a>, and <a href="net/index.html"><code>net</code></a> modules.</p>
-<p>The <a href="thread/index.html"><code>thread</code></a> module contains Rust&#39;s threading abstractions. <a href="sync/index.html"><code>sync</code></a>
+<p>The <a href="thread/index.html"><code>thread</code></a> module contains Rust's threading abstractions. <a href="sync/index.html"><code>sync</code></a>
 contains further primitive shared memory types, including <a href="sync/atomic/index.html"><code>atomic</code></a> and
 <a href="sync/mpsc/index.html"><code>mpsc</code></a>, which contains the channel types for message passing.</p>
 </div><h2 id='primitives' class='section-header'><a href="#primitives">Primitive Types</a></h2>

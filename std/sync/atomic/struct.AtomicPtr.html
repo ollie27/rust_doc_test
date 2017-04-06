@@ -54,8 +54,7 @@
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../../std/sync/atomic/struct.AtomicPtr.html" title="struct std::sync::atomic::AtomicPtr">AtomicPtr</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/core/sync/atomic.rs.html#617-897' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>const fn <a href='#method.new' class='fnname'>new</a>(p: <a class="primitive" href="../../primitive.pointer.html">*mut T</a>) -&gt; <a class="struct" href="../../../std/sync/atomic/struct.AtomicPtr.html" title="struct std::sync::atomic::AtomicPtr">AtomicPtr</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Creates a new <code>AtomicPtr</code>.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicPtr</span>;
 
@@ -65,8 +64,7 @@
 <div class='docblock'><p>Returns a mutable reference to the underlying pointer.</p>
 <p>This is safe because the mutable reference guarantees that no other threads are
 concurrently accessing the atomic data.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 
@@ -77,8 +75,7 @@ concurrently accessing the atomic data.</p>
 <div class='docblock'><p>Consumes the atomic and returns the contained value.</p>
 <p>This is safe because passing <code>self</code> by value guarantees that no other threads are
 concurrently accessing the atomic data.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicPtr</span>;
 
@@ -88,11 +85,9 @@ concurrently accessing the atomic data.</p>
 <div class='docblock'><p>Loads a value from the pointer.</p>
 <p><code>load</code> takes an <a href="enum.Ordering.html"><code>Ordering</code></a> argument which describes the memory ordering
 of this operation.</p>
-
-<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
 <p>Panics if <code>order</code> is <a href="enum.Ordering.html#variant.Release"><code>Release</code></a> or <a href="enum.Ordering.html#variant.AcqRel"><code>AcqRel</code></a>.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 
@@ -104,8 +99,7 @@ of this operation.</p>
 <div class='docblock'><p>Stores a value into the pointer.</p>
 <p><code>store</code> takes an <a href="enum.Ordering.html"><code>Ordering</code></a> argument which describes the memory ordering
 of this operation.</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 
@@ -115,15 +109,13 @@ of this operation.</p>
 <span class="kw">let</span> <span class="ident">other_ptr</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="number">10</span>;
 
 <span class="ident">some_ptr</span>.<span class="ident">store</span>(<span class="ident">other_ptr</span>, <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3A%7BAtomicPtr%2C%20Ordering%7D%3B%0A%0Alet%20ptr%20%3D%20%26mut%205%3B%0Alet%20some_ptr%20%20%3D%20AtomicPtr%3A%3Anew(ptr)%3B%0A%0Alet%20other_ptr%20%3D%20%26mut%2010%3B%0A%0Asome_ptr.store(other_ptr%2C%20Ordering%3A%3ARelaxed)%3B%0A%7D">Run</a></pre>
-
-<h1 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h1>
+<h1 id="panics-1" class="section-header"><a href="#panics-1">Panics</a></h1>
 <p>Panics if <code>order</code> is <a href="enum.Ordering.html#variant.Acquire"><code>Acquire</code></a> or <a href="enum.Ordering.html#variant.AcqRel"><code>AcqRel</code></a>.</p>
 </div><h4 id='method.swap' class="method"><span id='swap.v' class='invisible'><code>fn <a href='#method.swap' class='fnname'>swap</a>(&amp;self, ptr: <a class="primitive" href="../../primitive.pointer.html">*mut T</a>, order: <a class="enum" href="../../../std/sync/atomic/enum.Ordering.html" title="enum std::sync::atomic::Ordering">Ordering</a>) -&gt; <a class="primitive" href="../../primitive.pointer.html">*mut T</a></code></span></h4>
 <div class='docblock'><p>Stores a value into the pointer, returning the previous value.</p>
 <p><code>swap</code> takes an <a href="enum.Ordering.html"><code>Ordering</code></a> argument which describes the memory ordering
 of this operation.</p>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 
@@ -139,8 +131,7 @@ of this operation.</p>
 was updated.</p>
 <p><code>compare_and_swap</code> also takes an <a href="enum.Ordering.html"><code>Ordering</code></a> argument which describes the memory
 ordering of this operation.</p>
-
-<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 
@@ -158,10 +149,9 @@ the previous value. On success this value is guaranteed to be equal to <code>cur
 <p><code>compare_exchange</code> takes two <a href="enum.Ordering.html"><code>Ordering</code></a> arguments to describe the memory
 ordering of this operation. The first describes the required ordering if
 the operation succeeds while the second describes the required ordering when
-the operation fails. The failure ordering can&#39;t be <a href="enum.Ordering.html#variant.Release"><code>Release</code></a> or <a href="enum.Ordering.html#variant.AcqRel"><code>AcqRel</code></a>
+the operation fails. The failure ordering can't be <a href="enum.Ordering.html#variant.Release"><code>Release</code></a> or <a href="enum.Ordering.html#variant.AcqRel"><code>AcqRel</code></a>
 and must be equivalent or weaker than the success ordering.</p>
-
-<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 
@@ -182,10 +172,9 @@ previous value.</p>
 <p><code>compare_exchange_weak</code> takes two <a href="enum.Ordering.html"><code>Ordering</code></a> arguments to describe the memory
 ordering of this operation. The first describes the required ordering if the operation
 succeeds while the second describes the required ordering when the operation fails. The
-failure ordering can&#39;t be <a href="enum.Ordering.html#variant.Release"><code>Release</code></a> or <a href="enum.Ordering.html#variant.AcqRel"><code>AcqRel</code></a> and must be equivalent or
+failure ordering can't be <a href="enum.Ordering.html#variant.Release"><code>Release</code></a> or <a href="enum.Ordering.html#variant.AcqRel"><code>AcqRel</code></a> and must be equivalent or
 weaker than the success ordering.</p>
-
-<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicPtr</span>, <span class="ident">Ordering</span>};
 

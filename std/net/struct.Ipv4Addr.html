@@ -53,12 +53,10 @@
 <p>IPv4 addresses are defined as 32-bit integers in <a href="https://tools.ietf.org/html/rfc791">IETF RFC 791</a>.
 They are usually represented as four octets.</p>
 <p>See <a href="../../std/net/enum.IpAddr.html"><code>IpAddr</code></a> for a type encompassing both IPv4 and IPv6 addresses.</p>
-
-<h1 id='textual-representation' class='section-header'><a href='#textual-representation'>Textual representation</a></h1>
+<h1 id="textual-representation" class="section-header"><a href="#textual-representation">Textual representation</a></h1>
 <p><code>Ipv4Addr</code> provides a <a href="../../std/str/trait.FromStr.html"><code>FromStr</code></a> implementation. The four octets are in decimal
 notation, divided by <code>.</code> (this is called &quot;dot-decimal notation&quot;).</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -69,27 +67,24 @@ notation, divided by <code>.</code> (this is called &quot;dot-decimal notation&q
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(a: <a class="primitive" href="../primitive.u8.html">u8</a>, b: <a class="primitive" href="../primitive.u8.html">u8</a>, c: <a class="primitive" href="../primitive.u8.html">u8</a>, d: <a class="primitive" href="../primitive.u8.html">u8</a>) -&gt; <a class="struct" href="../../std/net/struct.Ipv4Addr.html" title="struct std::net::Ipv4Addr">Ipv4Addr</a></code></span></h4>
 <div class='docblock'><p>Creates a new IPv4 address from four eight-bit octets.</p>
 <p>The result will represent the IP address <code>a</code>.<code>b</code>.<code>c</code>.<code>d</code>.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
 <span class="kw">let</span> <span class="ident">addr</span> <span class="op">=</span> <span class="ident">Ipv4Addr</span>::<span class="ident">new</span>(<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3AIpv4Addr%3B%0A%0Alet%20addr%20%3D%20Ipv4Addr%3A%3Anew(127%2C%200%2C%200%2C%201)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.octets' class="method"><span id='octets.v' class='invisible'><code>fn <a href='#method.octets' class='fnname'>octets</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.array.html">[</a><a class="primitive" href="../primitive.u8.html">u8</a><a class="primitive" href="../primitive.array.html">; 4]</a></code></span></h4>
 <div class='docblock'><p>Returns the four eight-bit integers that make up this address.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
 <span class="kw">let</span> <span class="ident">addr</span> <span class="op">=</span> <span class="ident">Ipv4Addr</span>::<span class="ident">new</span>(<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">addr</span>.<span class="ident">octets</span>(), [<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3AIpv4Addr%3B%0A%0Alet%20addr%20%3D%20Ipv4Addr%3A%3Anew(127%2C%200%2C%200%2C%201)%3B%0Aassert_eq!(addr.octets()%2C%20%5B127%2C%200%2C%200%2C%201%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_unspecified' class="method"><span id='is_unspecified.v' class='invisible'><code>fn <a href='#method.is_unspecified' class='fnname'>is_unspecified</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.12.0'>1.12.0</div></span></h4>
-<div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> for the special &#39;unspecified&#39; address (0.0.0.0).</p>
+<div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> for the special 'unspecified' address (0.0.0.0).</p>
 <p>This property is defined in <em>UNIX Network Programming, Second Edition</em>,
 W. Richard Stevens, p. 891; see also <a href="http://man7.org/linux/man-pages/man7/ip.7.html">ip7</a>.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -98,8 +93,7 @@ W. Richard Stevens, p. 891; see also <a href="http://man7.org/linux/man-pages/ma
 </div><h4 id='method.is_loopback' class="method"><span id='is_loopback.v' class='invisible'><code>fn <a href='#method.is_loopback' class='fnname'>is_loopback</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is a loopback address (127.0.0.0/8).</p>
 <p>This property is defined by <a href="https://tools.ietf.org/html/rfc1122">IETF RFC 1122</a>.</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -113,8 +107,7 @@ W. Richard Stevens, p. 891; see also <a href="http://man7.org/linux/man-pages/ma
 <li>172.16.0.0/12</li>
 <li>192.168.0.0/16</li>
 </ul>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -128,8 +121,7 @@ W. Richard Stevens, p. 891; see also <a href="http://man7.org/linux/man-pages/ma
 </div><h4 id='method.is_link_local' class="method"><span id='is_link_local.v' class='invisible'><code>fn <a href='#method.is_link_local' class='fnname'>is_link_local</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if the address is link-local (169.254.0.0/16).</p>
 <p>This property is defined by <a href="https://tools.ietf.org/html/rfc3927">IETF RFC 3927</a>.</p>
-
-<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -149,8 +141,7 @@ See <a href="http://goo.gl/RaZ7lg">iana-ipv4-special-registry</a>.</p>
 <li>test addresses used for documentation (192.0.2.0/24, 198.51.100.0/24 and 203.0.113.0/24)</li>
 <li>the unspecified address (0.0.0.0)</li>
 </ul>
-
-<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">ip</span>)]</span>
 
@@ -167,8 +158,7 @@ See <a href="http://goo.gl/RaZ7lg">iana-ipv4-special-registry</a>.</p>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is a multicast address (224.0.0.0/4).</p>
 <p>Multicast addresses have a most significant octet between 224 and 239,
 and is defined by <a href="https://tools.ietf.org/html/rfc5771">IETF RFC 5771</a>.</p>
-
-<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -178,8 +168,7 @@ and is defined by <a href="https://tools.ietf.org/html/rfc5771">IETF RFC 5771</a
 </div><h4 id='method.is_broadcast' class="method"><span id='is_broadcast.v' class='invisible'><code>fn <a href='#method.is_broadcast' class='fnname'>is_broadcast</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is a broadcast address (255.255.255.255).</p>
 <p>A broadcast address has all octets set to 255 as defined in <a href="https://tools.ietf.org/html/rfc919">IETF RFC 919</a>.</p>
-
-<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
+<h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -193,8 +182,7 @@ and is defined by <a href="https://tools.ietf.org/html/rfc5771">IETF RFC 5771</a
 <li>198.51.100.0/24 (TEST-NET-2)</li>
 <li>203.0.113.0/24 (TEST-NET-3)</li>
 </ul>
-
-<h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>
+<h1 id="examples-10" class="section-header"><a href="#examples-10">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::<span class="ident">Ipv4Addr</span>;
 
@@ -205,8 +193,7 @@ and is defined by <a href="https://tools.ietf.org/html/rfc5771">IETF RFC 5771</a
 </div><h4 id='method.to_ipv6_compatible' class="method"><span id='to_ipv6_compatible.v' class='invisible'><code>fn <a href='#method.to_ipv6_compatible' class='fnname'>to_ipv6_compatible</a>(&amp;self) -&gt; <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a></code></span></h4>
 <div class='docblock'><p>Converts this address to an IPv4-compatible <a href="../../std/net/struct.Ipv6Addr.html">IPv6 address</a>.</p>
 <p>a.b.c.d becomes ::a.b.c.d</p>
-
-<h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1>
+<h1 id="examples-11" class="section-header"><a href="#examples-11">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::{<span class="ident">Ipv4Addr</span>, <span class="ident">Ipv6Addr</span>};
 
@@ -215,8 +202,7 @@ and is defined by <a href="https://tools.ietf.org/html/rfc5771">IETF RFC 5771</a
 </div><h4 id='method.to_ipv6_mapped' class="method"><span id='to_ipv6_mapped.v' class='invisible'><code>fn <a href='#method.to_ipv6_mapped' class='fnname'>to_ipv6_mapped</a>(&amp;self) -&gt; <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a></code></span></h4>
 <div class='docblock'><p>Converts this address to an IPv4-mapped <a href="../../std/net/struct.Ipv6Addr.html">IPv6 address</a>.</p>
 <p>a.b.c.d becomes ::ffff:a.b.c.d</p>
-
-<h1 id='examples-12' class='section-header'><a href='#examples-12'>Examples</a></h1>
+<h1 id="examples-12" class="section-header"><a href="#examples-12">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">net</span>::{<span class="ident">Ipv4Addr</span>, <span class="ident">Ipv6Addr</span>};
 

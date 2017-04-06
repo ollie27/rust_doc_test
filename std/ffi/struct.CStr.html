@@ -57,8 +57,7 @@ C string as well and represents a C string borrowed from another location.</p>
 placed in the signatures of FFI functions. Instead safe wrappers of FFI
 functions may leverage the unsafe <code>from_ptr</code> constructor to provide a safe
 interface to other consumers.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Inspecting a foreign C string</p>
 
 <pre class="rust rust-example-rendered">
@@ -118,8 +117,7 @@ valid nul terminator byte at the end of the string.</li>
 currently implemented with an up-front calculation of the length of
 the string. This is not guaranteed to always be the case.</p>
 </blockquote>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
@@ -137,8 +135,7 @@ the string. This is not guaranteed to always be the case.</p>
 <p>This function will cast the provided <code>bytes</code> to a <code>CStr</code> wrapper after
 ensuring that it is null terminated and does not contain any interior
 nul bytes.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>;
 
@@ -149,8 +146,7 @@ nul bytes.</p>
 <p>This function will cast the provided <code>bytes</code> to a <code>CStr</code> wrapper without
 performing any sanity checks. The provided slice must be null terminated
 and not contain any interior nul bytes.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::{<span class="ident">CStr</span>, <span class="ident">CString</span>};
 
@@ -215,7 +211,7 @@ length calculation whenever this method is called.</p>
 </div><h4 id='method.to_str' class="method"><span id='to_str.v' class='invisible'><code>fn <a href='#method.to_str' class='fnname'>to_str</a>(&amp;self) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;&amp;<a class="primitive" href="../primitive.str.html">str</a>, <a class="struct" href="../../std/str/struct.Utf8Error.html" title="struct std::str::Utf8Error">Utf8Error</a>&gt;</code><div class='since' title='Stable since Rust version 1.4.0'>1.4.0</div></span></h4>
 <div class='docblock'><p>Yields a <code>&amp;str</code> slice if the <code>CStr</code> contains valid UTF-8.</p>
 <p>This function will calculate the length of this string and check for
-UTF-8 validity, and then return the <code>&amp;str</code> if it&#39;s valid.</p>
+UTF-8 validity, and then return the <code>&amp;str</code> if it's valid.</p>
 <blockquote>
 <p><strong>Note</strong>: This method is currently implemented to check for validity
 after a 0-cost cast, but it is planned to alter its definition in the

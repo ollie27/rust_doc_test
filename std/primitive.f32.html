@@ -239,7 +239,7 @@ number is <code>NAN</code>.</p>
 
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">f32</span>::<span class="ident">NAN</span>.<span class="ident">signum</span>().<span class="ident">is_nan</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Af32%3B%0A%0Alet%20f%20%3D%203.5_f32%3B%0A%0Aassert_eq!(f.signum()%2C%201.0)%3B%0Aassert_eq!(f32%3A%3ANEG_INFINITY.signum()%2C%20-1.0)%3B%0A%0Aassert!(f32%3A%3ANAN.signum().is_nan())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_sign_positive' class="method"><span id='is_sign_positive.v' class='invisible'><code>fn <a href='#method.is_sign_positive' class='fnname'>is_sign_positive</a>(self) -&gt; <a class="primitive" href="primitive.bool.html">bool</a></code></span></h4>
-<div class='docblock'><p>Returns <code>true</code> if <code>self</code>&#39;s sign bit is positive, including
+<div class='docblock'><p>Returns <code>true</code> if <code>self</code>'s sign bit is positive, including
 <code>+0.0</code> and <code>INFINITY</code>.</p>
 
 <pre class="rust rust-example-rendered">
@@ -254,7 +254,7 @@ number is <code>NAN</code>.</p>
 <span class="comment">// Requires both tests to determine if is `NaN`</span>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_sign_positive</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_sign_negative</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Af32%3B%0A%0Alet%20nan%20%3D%20f32%3A%3ANAN%3B%0Alet%20f%20%3D%207.0_f32%3B%0Alet%20g%20%3D%20-7.0_f32%3B%0A%0Aassert!(f.is_sign_positive())%3B%0Aassert!(!g.is_sign_positive())%3B%0A%2F%2F%20Requires%20both%20tests%20to%20determine%20if%20is%20%60NaN%60%0Aassert!(!nan.is_sign_positive()%20%26%26%20!nan.is_sign_negative())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_sign_negative' class="method"><span id='is_sign_negative.v' class='invisible'><code>fn <a href='#method.is_sign_negative' class='fnname'>is_sign_negative</a>(self) -&gt; <a class="primitive" href="primitive.bool.html">bool</a></code></span></h4>
-<div class='docblock'><p>Returns <code>true</code> if <code>self</code>&#39;s sign is negative, including <code>-0.0</code>
+<div class='docblock'><p>Returns <code>true</code> if <code>self</code>'s sign is negative, including <code>-0.0</code>
 and <code>NEG_INFINITY</code>.</p>
 
 <pre class="rust rust-example-rendered">
@@ -967,23 +967,21 @@ the operations were performed separately.</p>
 Accepts an optional decimal exponent.</p>
 <p>This function accepts strings such as</p>
 <ul>
-<li>&#39;3.14&#39;</li>
-<li>&#39;-3.14&#39;</li>
-<li>&#39;2.5E10&#39;, or equivalently, &#39;2.5e10&#39;</li>
-<li>&#39;2.5E-10&#39;</li>
-<li>&#39;.&#39; (understood as 0)</li>
-<li>&#39;5.&#39;</li>
-<li>&#39;.5&#39;, or, equivalently,  &#39;0.5&#39;</li>
-<li>&#39;inf&#39;, &#39;-inf&#39;, &#39;NaN&#39;</li>
+<li>'3.14'</li>
+<li>'-3.14'</li>
+<li>'2.5E10', or equivalently, '2.5e10'</li>
+<li>'2.5E-10'</li>
+<li>'.' (understood as 0)</li>
+<li>'5.'</li>
+<li>'.5', or, equivalently,  '0.5'</li>
+<li>'inf', '-inf', 'NaN'</li>
 </ul>
 <p>Leading and trailing whitespace represent an error.</p>
-
-<h1 id='arguments' class='section-header'><a href='#arguments'>Arguments</a></h1>
+<h1 id="arguments" class="section-header"><a href="#arguments">Arguments</a></h1>
 <ul>
 <li>src - A string</li>
 </ul>
-
-<h1 id='return-value' class='section-header'><a href='#return-value'>Return value</a></h1>
+<h1 id="return-value" class="section-header"><a href="#return-value">Return value</a></h1>
 <p><code>Err(ParseFloatError)</code> if the string did not represent a valid
 number.  Otherwise, <code>Ok(n)</code> where <code>n</code> is the floating-point
 number represented by <code>src</code>.</p>

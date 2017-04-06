@@ -53,9 +53,8 @@
 <p>This module provides two types, <a href="../../std/path/struct.PathBuf.html"><code>PathBuf</code></a> and <a href="../../std/path/struct.Path.html"><code>Path</code></a> (akin to <a href="../../std/string/struct.String.html"><code>String</code></a>
 and <a href="../../std/primitive.str.html"><code>str</code></a>), for working with paths abstractly. These types are thin wrappers
 around <a href="../../std/ffi/struct.OsString.html"><code>OsString</code></a> and <a href="../../std/ffi/struct.OsStr.html"><code>OsStr</code></a> respectively, meaning that they work directly
-on strings according to the local platform&#39;s path syntax.</p>
-
-<h2 id='simple-usage' class='section-header'><a href='#simple-usage'>Simple usage</a></h2>
+on strings according to the local platform's path syntax.</p>
+<h2 id="simple-usage" class="section-header"><a href="#simple-usage">Simple usage</a></h2>
 <p>Path manipulation includes both parsing components from slices and building
 new owned paths.</p>
 <p>To parse a path, you can create a <a href="../../std/path/struct.Path.html"><code>Path</code></a> slice from a <a href="../../std/primitive.str.html"><code>str</code></a>
@@ -84,18 +83,16 @@ slice and start asking questions:</p>
 <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;windows&quot;</span>);
 <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;system32&quot;</span>);
 <span class="ident">path</span>.<span class="ident">set_extension</span>(<span class="string">&quot;dll&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APathBuf%3B%0A%0Alet%20mut%20path%20%3D%20PathBuf%3A%3Afrom(%22c%3A%5C%5C%22)%3B%0Apath.push(%22windows%22)%3B%0Apath.push(%22system32%22)%3B%0Apath.set_extension(%22dll%22)%3B%0A%7D">Run</a></pre>
-
-<h2 id='path-components-and-normalization' class='section-header'><a href='#path-components-and-normalization'>Path components and normalization</a></h2>
+<h2 id="path-components-and-normalization" class="section-header"><a href="#path-components-and-normalization">Path components and normalization</a></h2>
 <p>The path APIs are built around the notion of &quot;components&quot;, which roughly
 correspond to the substrings between path separators (<code>/</code> and, on Windows,
-<code>\</code>). The APIs for path parsing are largely specified in terms of the path&#39;s
-components, so it&#39;s important to clearly understand how those are
+<code>\</code>). The APIs for path parsing are largely specified in terms of the path's
+components, so it's important to clearly understand how those are
 determined.</p>
 <p>A path can always be reconstructed into an <em>equivalent</em> path by
 putting together its components via <code>push</code>. Syntactically, the
 paths may differ by the normalization described below.</p>
-
-<h3 id='component-types' class='section-header'><a href='#component-types'>Component types</a></h3>
+<h3 id="component-types" class="section-header"><a href="#component-types">Component types</a></h3>
 <p>Components come in several types:</p>
 <ul>
 <li>
@@ -120,8 +117,7 @@ component <code>C:</code> and a normal component <code>windows</code>; the path 
 prefix component <code>C:</code>, a root directory component, and a normal component
 <code>windows</code>.</li>
 </ul>
-
-<h3 id='normalization' class='section-header'><a href='#normalization'>Normalization</a></h3>
+<h3 id="normalization" class="section-header"><a href="#normalization">Normalization</a></h3>
 <p>Aside from splitting on the separator(s), there is a small amount of
 &quot;normalization&quot;:</p>
 <ul>
@@ -139,7 +135,7 @@ has a leading current directory component.</p>
 </ul>
 <p>No other normalization takes place by default. In particular,
 <code>a/c</code> and <code>a/b/../c</code> are distinct, to account for the possibility
-that <code>b</code> is a symbolic link (so its parent isn&#39;t <code>a</code>). Further
+that <code>b</code> is a symbolic link (so its parent isn't <code>a</code>). Further
 normalization is possible to build on top of the components APIs,
 and will be included in this library in the near future.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>

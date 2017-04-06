@@ -62,12 +62,12 @@ instructions around atomic operations. At its most restrictive,
 &quot;sequentially consistent&quot; atomics allow neither reads nor writes
 to be moved either before or after the atomic operation; on the other end
 &quot;relaxed&quot; atomics allow all reorderings.</p>
-<p>Rust&#39;s memory orderings are <a href="http://llvm.org/docs/LangRef.html#memory-model-for-concurrent-operations">the same as
-LLVM&#39;s</a>.</p>
+<p>Rust's memory orderings are <a href="http://llvm.org/docs/LangRef.html#memory-model-for-concurrent-operations">the same as
+LLVM's</a>.</p>
 <p>For more information see the <a href="../../../nomicon/atomics.html">nomicon</a>.</p>
 </div><h2 class='variants'>Variants</h2>
 <span id='variant.Relaxed' class='variant'><span id='Relaxed.v' class='invisible'><code>Relaxed</code></span></span><div class='docblock'><p>No ordering constraints, only atomic operations.</p>
-<p>Corresponds to LLVM&#39;s <a href="http://llvm.org/docs/Atomics.html#monotonic"><code>Monotonic</code></a> ordering.</p>
+<p>Corresponds to LLVM's <a href="http://llvm.org/docs/Atomics.html#monotonic"><code>Monotonic</code></a> ordering.</p>
 </div><span id='variant.Release' class='variant'><span id='Release.v' class='invisible'><code>Release</code></span></span><div class='docblock'><p>When coupled with a store, all previous writes become visible
 to the other threads that perform a load with <a href="http://llvm.org/docs/Atomics.html#acquire"><code>Acquire</code></a> ordering
 on the same value.</p>

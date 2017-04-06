@@ -51,7 +51,7 @@
                </span><a class='srclink' href='../../src/std/thread/mod.rs.html#599-601' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn park_timeout_ms(ms: <a class="primitive" href="../primitive.u32.html">u32</a>)</pre><div class='stability'><div class='stab deprecated'>Deprecated since 1.6.0<p>: replaced by <code>std::thread::park_timeout</code></p>
 </div></div><div class='docblock'><p>Use <a href="fn.park_timeout.html">park_timeout</a>.</p>
-<p>Blocks unless or until the current thread&#39;s token is made available or
+<p>Blocks unless or until the current thread's token is made available or
 the specified duration has been reached (may wake spuriously).</p>
 <p>The semantics of this function are equivalent to <code>park()</code> except that the
 thread will be blocked for roughly no longer than <code>ms</code>. This method

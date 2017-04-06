@@ -54,22 +54,19 @@ reading or dropping the old value.</p>
 <p>Volatile operations are intended to act on I/O memory, and are guaranteed
 to not be elided or reordered by the compiler across other volatile
 operations.</p>
-
-<h1 id='notes' class='section-header'><a href='#notes'>Notes</a></h1>
+<h1 id="notes" class="section-header"><a href="#notes">Notes</a></h1>
 <p>Rust does not currently have a rigorously and formally defined memory model,
 so the precise semantics of what &quot;volatile&quot; means here is subject to change
 over time. That being said, the semantics will almost always end up pretty
-similar to <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">C11&#39;s definition of volatile</a>.</p>
-
-<h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
+similar to <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">C11's definition of volatile</a>.</p>
+<h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
 <p>This operation is marked unsafe because it accepts a raw pointer.</p>
 <p>It does not drop the contents of <code>dst</code>. This is safe, but it could leak
 allocations or resources, so care must be taken not to overwrite an object
 that should be dropped.</p>
 <p>This is appropriate for initializing uninitialized memory, or overwriting
 memory that has previously been <code>read</code> from.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

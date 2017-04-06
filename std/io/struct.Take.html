@@ -56,12 +56,10 @@ Please see the documentation of <a href="trait.Read.html#method.take"><code>take
 <div class='impl-items'><h4 id='method.limit' class="method"><span id='limit.v' class='invisible'><code>fn <a href='#method.limit' class='fnname'>limit</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.u64.html">u64</a></code></span></h4>
 <div class='docblock'><p>Returns the number of bytes that can be read before this instance will
 return EOF.</p>
-
-<h1 id='note' class='section-header'><a href='#note'>Note</a></h1>
+<h1 id="note" class="section-header"><a href="#note">Note</a></h1>
 <p>This instance may reach <code>EOF</code> after reading fewer bytes than indicated by
 this method if the underlying <a href="../../std/io/trait.Read.html"><code>Read</code></a> instance reaches EOF.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
@@ -75,8 +73,7 @@ this method if the underlying <a href="../../std/io/trait.Read.html"><code>Read<
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;limit: {}&quot;</span>, <span class="ident">handle</span>.<span class="ident">limit</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Aio%3A%3Aprelude%3A%3A*%3B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20f%20%3D%20File%3A%3Aopen(%22foo.txt%22)%3F%3B%0A%0A%2F%2F%20read%20at%20most%20five%20bytes%0Alet%20handle%20%3D%20f.take(5)%3B%0A%0Aprintln!(%22limit%3A%20%7B%7D%22%2C%20handle.limit())%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; T</code><div class='since' title='Stable since Rust version 1.15.0'>1.15.0</div></span></h4>
 <div class='docblock'><p>Consumes the <code>Take</code>, returning the wrapped reader.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;

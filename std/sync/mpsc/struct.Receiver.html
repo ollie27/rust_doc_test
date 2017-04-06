@@ -49,11 +49,10 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../src/std/sync/mpsc/mod.rs.html#327-329' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Receiver&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>The receiving-half of Rust&#39;s channel type. This half can only be owned by
+<pre class='rust struct'>pub struct Receiver&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>The receiving-half of Rust's channel type. This half can only be owned by
 one thread.</p>
 <p>Messages sent to the channel can be retrieved using <a href="../../../std/sync/mpsc/struct.Receiver.html#method.recv"><code>recv</code></a>.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>::<span class="ident">channel</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;
@@ -82,7 +81,7 @@ block on a receiver.</p>
 <div class='docblock'><p>Attempts to wait for a value on this receiver, returning an error if the
 corresponding channel has hung up.</p>
 <p>This function will always block the current thread if there is no data
-available and it&#39;s possible for more data to be sent. Once a message is
+available and it's possible for more data to be sent. Once a message is
 sent to the corresponding <a href="../../../std/sync/mpsc/struct.Sender.html"><code>Sender</code></a>, then this receiver will wake up and
 return that message.</p>
 <p>If the corresponding <a href="../../../std/sync/mpsc/struct.Sender.html"><code>Sender</code></a> has disconnected, or it disconnects while
@@ -90,8 +89,7 @@ this call is blocking, this call will wake up and return <a href="../../../std/r
 indicate that no more messages can ever be received on this channel.
 However, since channels are buffered, messages sent before the disconnect
 will still be properly received.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;
@@ -130,7 +128,7 @@ will still be properly received.</p>
 <div class='docblock'><p>Attempts to wait for a value on this receiver, returning an error if the
 corresponding channel has hung up, or if it waits more than <code>timeout</code>.</p>
 <p>This function will always block the current thread if there is no data
-available and it&#39;s possible for more data to be sent. Once a message is
+available and it's possible for more data to be sent. Once a message is
 sent to the corresponding <a href="../../../std/sync/mpsc/struct.Sender.html"><code>Sender</code></a>, then this receiver will wake up and
 return that message.</p>
 <p>If the corresponding <a href="../../../std/sync/mpsc/struct.Sender.html"><code>Sender</code></a> has disconnected, or it disconnects while
@@ -138,8 +136,7 @@ this call is blocking, this call will wake up and return <a href="../../../std/r
 indicate that no more messages can ever be received on this channel.
 However, since channels are buffered, messages sent before the disconnect
 will still be properly received.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>::{<span class="self">self</span>, <span class="ident">RecvTimeoutError</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
@@ -151,8 +148,7 @@ will still be properly received.</p>
 </div><h4 id='method.iter' class="method"><span id='iter.v' class='invisible'><code>fn <a href='#method.iter' class='fnname'>iter</a>(&amp;self) -&gt; <a class="struct" href="../../../std/sync/mpsc/struct.Iter.html" title="struct std::sync::mpsc::Iter">Iter</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Returns an iterator that will block waiting for messages, but never
 <a href="../../../std/macro.panic.html"><code>panic!</code></a>. It will return <a href="../../../std/option/enum.Option.html#variant.None"><code>None</code></a> when the channel has hung up.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>::<span class="ident">channel</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;

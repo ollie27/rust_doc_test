@@ -51,8 +51,7 @@
                </span><a class='srclink' href='../../src/core/ptr.rs.html#168-172' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub unsafe fn read&lt;T&gt;(src: *const T) -&gt; T</pre><div class='docblock'><p>Reads the value from <code>src</code> without moving it. This leaves the
 memory in <code>src</code> unchanged.</p>
-
-<h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
+<h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
 <p>Beyond accepting a raw pointer, this is unsafe because it semantically
 moves the value out of <code>src</code> without preventing further usage of <code>src</code>.
 If <code>T</code> is not <code>Copy</code>, then care must be taken to ensure that the value at
@@ -60,8 +59,7 @@ If <code>T</code> is not <code>Copy</code>, then care must be taken to ensure th
 <code>zero_memory</code>, or <code>copy_memory</code>). Note that <code>*src = foo</code> counts as a use
 because it will attempt to drop the value previously at <code>*src</code>.</p>
 <p>The pointer must be aligned; use <code>read_unaligned</code> if that is not the case.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

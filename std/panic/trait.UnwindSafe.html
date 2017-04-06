@@ -54,8 +54,7 @@
 terms of inference of implementation to the <code>Send</code> and <code>Sync</code> traits. The
 purpose of this trait is to encode what types are safe to cross a <code>catch_unwind</code>
 boundary with no fear of unwind safety.</p>
-
-<h2 id='what-is-unwind-safety' class='section-header'><a href='#what-is-unwind-safety'>What is unwind safety?</a></h2>
+<h2 id="what-is-unwind-safety" class="section-header"><a href="#what-is-unwind-safety">What is unwind safety?</a></h2>
 <p>In Rust a function can &quot;return&quot; early if it either panics or calls a
 function which transitively panics. This sort of control flow is not always
 anticipated, and has the possibility of causing subtle bugs through a
@@ -68,7 +67,7 @@ panics.</li>
 <p>Typically in Rust, it is difficult to perform step (2) because catching a
 panic involves either spawning a thread (which in turns makes it difficult
 to later witness broken invariants) or using the <code>catch_unwind</code> function in this
-module. Additionally, even if an invariant is witnessed, it typically isn&#39;t a
+module. Additionally, even if an invariant is witnessed, it typically isn't a
 problem in Rust because there are no uninitialized values (like in C or C++).</p>
 <p>It is possible, however, for <strong>logical</strong> invariants to be broken in Rust,
 which can end up causing behavioral bugs. Another key aspect of unwind safety
@@ -76,9 +75,8 @@ in Rust is that, in the absence of <code>unsafe</code> code, a panic cannot lead
 memory unsafety.</p>
 <p>That was a bit of a whirlwind tour of unwind safety, but for more information
 about unwind safety and how it applies to Rust, see an <a href="https://github.com/rust-lang/rfcs/blob/master/text/1236-stabilize-catch-panic.md">associated RFC</a>.</p>
-
-<h2 id='what-is-unwindsafe' class='section-header'><a href='#what-is-unwindsafe'>What is <code>UnwindSafe</code>?</a></h2>
-<p>Now that we&#39;ve got an idea of what unwind safety is in Rust, it&#39;s also
+<h2 id="what-is-unwindsafe" class="section-header"><a href="#what-is-unwindsafe">What is <code>UnwindSafe</code>?</a></h2>
+<p>Now that we've got an idea of what unwind safety is in Rust, it's also
 important to understand what this trait represents. As mentioned above, one
 way to witness broken invariants is through the <code>catch_unwind</code> function in this
 module as it allows catching a panic and then re-using the environment of
@@ -92,8 +90,7 @@ safe if all of its components are unwind safe).</p>
 contract that this trait is providing. Instead it is intended as more of a
 &quot;speed bump&quot; to alert users of <code>catch_unwind</code> that broken invariants may be
 witnessed and may need to be accounted for.</p>
-
-<h2 id='who-implements-unwindsafe' class='section-header'><a href='#who-implements-unwindsafe'>Who implements <code>UnwindSafe</code>?</a></h2>
+<h2 id="who-implements-unwindsafe" class="section-header"><a href="#who-implements-unwindsafe">Who implements <code>UnwindSafe</code>?</a></h2>
 <p>Types such as <code>&amp;mut T</code> and <code>&amp;RefCell&lt;T&gt;</code> are examples which are <strong>not</strong>
 unwind safe. The general idea is that any mutable state which can be shared
 across <code>catch_unwind</code> is not unwind safe by default. This is because it is very
@@ -102,8 +99,7 @@ simply accessed as usual.</p>
 <p>Types like <code>&amp;Mutex&lt;T&gt;</code>, however, are unwind safe because they implement
 poisoning by default. They still allow witnessing a broken invariant, but
 they already provide their own &quot;speed bumps&quot; to do so.</p>
-
-<h2 id='when-should-unwindsafe-be-used' class='section-header'><a href='#when-should-unwindsafe-be-used'>When should <code>UnwindSafe</code> be used?</a></h2>
+<h2 id="when-should-unwindsafe-be-used" class="section-header"><a href="#when-should-unwindsafe-be-used">When should <code>UnwindSafe</code> be used?</a></h2>
 <p>Is not intended that most types or functions need to worry about this trait.
 It is only used as a bound on the <code>catch_unwind</code> function and as mentioned above,
 the lack of <code>unsafe</code> means it is mostly an advisory. The <code>AssertUnwindSafe</code>

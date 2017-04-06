@@ -49,7 +49,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../src/std/sync/mpsc/mod.rs.html#429-431' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct SyncSender&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>The sending-half of Rust&#39;s synchronous channel type. This half can only be
+<pre class='rust struct'>pub struct SyncSender&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>The sending-half of Rust's synchronous channel type. This half can only be
 owned by one thread, but it can be cloned to send to other threads.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../../std/sync/mpsc/struct.SyncSender.html" title="struct std::sync::mpsc::SyncSender">SyncSender</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/std/sync/mpsc/mod.rs.html#779-822' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.send' class="method"><span id='send.v' class='invisible'><code>fn <a href='#method.send' class='fnname'>send</a>(&amp;self, t: T) -&gt; <a class="enum" href="../../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../../primitive.tuple.html">()</a>, <a class="struct" href="../../../std/sync/mpsc/struct.SendError.html" title="struct std::sync::mpsc::SendError">SendError</a>&lt;T&gt;&gt;</code></span></h4>
@@ -67,7 +67,7 @@ information.</p>
 </div><h4 id='method.try_send' class="method"><span id='try_send.v' class='invisible'><code>fn <a href='#method.try_send' class='fnname'>try_send</a>(&amp;self, t: T) -&gt; <a class="enum" href="../../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../../primitive.tuple.html">()</a>, <a class="enum" href="../../../std/sync/mpsc/enum.TrySendError.html" title="enum std::sync::mpsc::TrySendError">TrySendError</a>&lt;T&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Attempts to send a value on this channel without blocking.</p>
 <p>This method differs from <a href="../../../std/sync/mpsc/struct.Sender.html#method.send"><code>send</code></a> by returning immediately if the
-channel&#39;s buffer is full or no receiver is waiting to acquire some
+channel's buffer is full or no receiver is waiting to acquire some
 data. Compared with <a href="../../../std/sync/mpsc/struct.Sender.html#method.send"><code>send</code></a>, this function has two failure cases
 instead of one (one for disconnection, one for a full buffer).</p>
 <p>See <a href="../../../std/sync/mpsc/struct.SyncSender.html#method.send"><code>SyncSender::send</code></a> for notes about guarantees of whether the

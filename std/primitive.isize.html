@@ -52,33 +52,29 @@
 <div class='docblock'><p>The pointer-sized signed integer type.</p>
 <p><em><a href="isize/index.html">See also the <code>std::isize</code> module</a>.</em></p>
 <p>However, please note that examples are shared between primitive integer
-types. So it&#39;s normal if you see usage of types like <code>usize</code> in there.</p>
+types. So it's normal if you see usage of types like <code>usize</code> in there.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="primitive" href="primitive.isize.html">isize</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/core/num/mod.rs.html#1369-1374' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.min_value' class="method"><span id='min_value.v' class='invisible'><code>const fn <a href='#method.min_value' class='fnname'>min_value</a>() -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Returns the smallest value that can be represented by this integer type.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">i8</span>::<span class="ident">min_value</span>(), <span class="op">-</span><span class="number">128</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!(i8%3A%3Amin_value()%2C%20-128)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.max_value' class="method"><span id='max_value.v' class='invisible'><code>const fn <a href='#method.max_value' class='fnname'>max_value</a>() -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Returns the largest value that can be represented by this integer type.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">i8</span>::<span class="ident">max_value</span>(), <span class="number">127</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!(i8%3A%3Amax_value()%2C%20127)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.from_str_radix' class="method"><span id='from_str_radix.v' class='invisible'><code>fn <a href='#method.from_str_radix' class='fnname'>from_str_radix</a>(src: &amp;<a class="primitive" href="primitive.str.html">str</a>, radix: <a class="primitive" href="primitive.u32.html">u32</a>) -&gt; <a class="enum" href="../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>, <a class="struct" href="../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>&gt;</code></span></h4>
 <div class='docblock'><p>Converts a string slice in a given base to an integer.</p>
 <p>Leading and trailing whitespace represent an error.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">i32</span>::<span class="ident">from_str_radix</span>(<span class="string">&quot;A&quot;</span>, <span class="number">16</span>), <span class="prelude-val">Ok</span>(<span class="number">10</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!(i32%3A%3Afrom_str_radix(%22A%22%2C%2016)%2C%20Ok(10))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.count_ones' class="method"><span id='count_ones.v' class='invisible'><code>fn <a href='#method.count_ones' class='fnname'>count_ones</a>(self) -&gt; <a class="primitive" href="primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the number of ones in the binary representation of <code>self</code>.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -87,8 +83,7 @@ types. So it&#39;s normal if you see usage of types like <code>usize</code> in t
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">n</span>.<span class="ident">count_ones</span>(), <span class="number">1</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20n%20%3D%20-0b1000_0000i8%3B%0A%0Aassert_eq!(n.count_ones()%2C%201)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.count_zeros' class="method"><span id='count_zeros.v' class='invisible'><code>fn <a href='#method.count_zeros' class='fnname'>count_zeros</a>(self) -&gt; <a class="primitive" href="primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the number of zeros in the binary representation of <code>self</code>.</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -98,8 +93,7 @@ types. So it&#39;s normal if you see usage of types like <code>usize</code> in t
 </div><h4 id='method.leading_zeros' class="method"><span id='leading_zeros.v' class='invisible'><code>fn <a href='#method.leading_zeros' class='fnname'>leading_zeros</a>(self) -&gt; <a class="primitive" href="primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the number of leading zeros in the binary representation
 of <code>self</code>.</p>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -109,8 +103,7 @@ of <code>self</code>.</p>
 </div><h4 id='method.trailing_zeros' class="method"><span id='trailing_zeros.v' class='invisible'><code>fn <a href='#method.trailing_zeros' class='fnname'>trailing_zeros</a>(self) -&gt; <a class="primitive" href="primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the number of trailing zeros in the binary representation
 of <code>self</code>.</p>
-
-<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -120,9 +113,8 @@ of <code>self</code>.</p>
 </div><h4 id='method.rotate_left' class="method"><span id='rotate_left.v' class='invisible'><code>fn <a href='#method.rotate_left' class='fnname'>rotate_left</a>(self, n: <a class="primitive" href="primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Shifts the bits to the left by a specified amount, <code>n</code>,
 wrapping the truncated bits to the end of the resulting integer.</p>
-<p>Please note this isn&#39;t the same operation as <code>&lt;&lt;</code>!</p>
-
-<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<p>Please note this isn't the same operation as <code>&lt;&lt;</code>!</p>
+<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -134,9 +126,8 @@ wrapping the truncated bits to the end of the resulting integer.</p>
 <div class='docblock'><p>Shifts the bits to the right by a specified amount, <code>n</code>,
 wrapping the truncated bits to the beginning of the resulting
 integer.</p>
-<p>Please note this isn&#39;t the same operation as <code>&gt;&gt;</code>!</p>
-
-<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<p>Please note this isn't the same operation as <code>&gt;&gt;</code>!</p>
+<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -146,8 +137,7 @@ integer.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">n</span>.<span class="ident">rotate_right</span>(<span class="number">4</span>), <span class="ident">m</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20n%20%3D%200x0123456789ABCDEFi64%3B%0Alet%20m%20%3D%20-0xFEDCBA987654322i64%3B%0A%0Aassert_eq!(n.rotate_right(4)%2C%20m)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.swap_bytes' class="method"><span id='swap_bytes.v' class='invisible'><code>fn <a href='#method.swap_bytes' class='fnname'>swap_bytes</a>(self) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Reverses the byte order of the integer.</p>
-
-<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
+<h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -156,11 +146,10 @@ integer.</p>
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">n</span>.<span class="ident">swap_bytes</span>(), <span class="ident">m</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20n%20%3D%20%200x0123456789ABCDEFi64%3B%0Alet%20m%20%3D%20-0x1032547698BADCFFi64%3B%0A%0Aassert_eq!(n.swap_bytes()%2C%20m)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.from_be' class="method"><span id='from_be.v' class='invisible'><code>fn <a href='#method.from_be' class='fnname'>from_be</a>(x: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
-<div class='docblock'><p>Converts an integer from big endian to the target&#39;s endianness.</p>
+<div class='docblock'><p>Converts an integer from big endian to the target's endianness.</p>
 <p>On big endian this is a no-op. On little endian the bytes are
 swapped.</p>
-
-<h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>
+<h1 id="examples-10" class="section-header"><a href="#examples-10">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -172,11 +161,10 @@ swapped.</p>
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">i64</span>::<span class="ident">from_be</span>(<span class="ident">n</span>), <span class="ident">n</span>.<span class="ident">swap_bytes</span>())
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20n%20%3D%200x0123456789ABCDEFi64%3B%0A%0Aif%20cfg!(target_endian%20%3D%20%22big%22)%20%7B%0A%20%20%20%20assert_eq!(i64%3A%3Afrom_be(n)%2C%20n)%0A%7D%20else%20%7B%0A%20%20%20%20assert_eq!(i64%3A%3Afrom_be(n)%2C%20n.swap_bytes())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.from_le' class="method"><span id='from_le.v' class='invisible'><code>fn <a href='#method.from_le' class='fnname'>from_le</a>(x: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
-<div class='docblock'><p>Converts an integer from little endian to the target&#39;s endianness.</p>
+<div class='docblock'><p>Converts an integer from little endian to the target's endianness.</p>
 <p>On little endian this is a no-op. On big endian the bytes are
 swapped.</p>
-
-<h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1>
+<h1 id="examples-11" class="section-header"><a href="#examples-11">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -188,11 +176,10 @@ swapped.</p>
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">i64</span>::<span class="ident">from_le</span>(<span class="ident">n</span>), <span class="ident">n</span>.<span class="ident">swap_bytes</span>())
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20n%20%3D%200x0123456789ABCDEFi64%3B%0A%0Aif%20cfg!(target_endian%20%3D%20%22little%22)%20%7B%0A%20%20%20%20assert_eq!(i64%3A%3Afrom_le(n)%2C%20n)%0A%7D%20else%20%7B%0A%20%20%20%20assert_eq!(i64%3A%3Afrom_le(n)%2C%20n.swap_bytes())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.to_be' class="method"><span id='to_be.v' class='invisible'><code>fn <a href='#method.to_be' class='fnname'>to_be</a>(self) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
-<div class='docblock'><p>Converts <code>self</code> to big endian from the target&#39;s endianness.</p>
+<div class='docblock'><p>Converts <code>self</code> to big endian from the target's endianness.</p>
 <p>On big endian this is a no-op. On little endian the bytes are
 swapped.</p>
-
-<h1 id='examples-12' class='section-header'><a href='#examples-12'>Examples</a></h1>
+<h1 id="examples-12" class="section-header"><a href="#examples-12">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -204,11 +191,10 @@ swapped.</p>
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">n</span>.<span class="ident">to_be</span>(), <span class="ident">n</span>.<span class="ident">swap_bytes</span>())
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20n%20%3D%200x0123456789ABCDEFi64%3B%0A%0Aif%20cfg!(target_endian%20%3D%20%22big%22)%20%7B%0A%20%20%20%20assert_eq!(n.to_be()%2C%20n)%0A%7D%20else%20%7B%0A%20%20%20%20assert_eq!(n.to_be()%2C%20n.swap_bytes())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.to_le' class="method"><span id='to_le.v' class='invisible'><code>fn <a href='#method.to_le' class='fnname'>to_le</a>(self) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
-<div class='docblock'><p>Converts <code>self</code> to little endian from the target&#39;s endianness.</p>
+<div class='docblock'><p>Converts <code>self</code> to little endian from the target's endianness.</p>
 <p>On little endian this is a no-op. On big endian the bytes are
 swapped.</p>
-
-<h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1>
+<h1 id="examples-13" class="section-header"><a href="#examples-13">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -222,8 +208,7 @@ swapped.</p>
 </div><h4 id='method.checked_add' class="method"><span id='checked_add.v' class='invisible'><code>fn <a href='#method.checked_add' class='fnname'>checked_add</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code></span></h4>
 <div class='docblock'><p>Checked integer addition. Computes <code>self + other</code>, returning <code>None</code>
 if overflow occurred.</p>
-
-<h1 id='examples-14' class='section-header'><a href='#examples-14'>Examples</a></h1>
+<h1 id="examples-14" class="section-header"><a href="#examples-14">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -232,8 +217,7 @@ if overflow occurred.</p>
 </div><h4 id='method.checked_sub' class="method"><span id='checked_sub.v' class='invisible'><code>fn <a href='#method.checked_sub' class='fnname'>checked_sub</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code></span></h4>
 <div class='docblock'><p>Checked integer subtraction. Computes <code>self - other</code>, returning
 <code>None</code> if underflow occurred.</p>
-
-<h1 id='examples-15' class='section-header'><a href='#examples-15'>Examples</a></h1>
+<h1 id="examples-15" class="section-header"><a href="#examples-15">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -242,8 +226,7 @@ if overflow occurred.</p>
 </div><h4 id='method.checked_mul' class="method"><span id='checked_mul.v' class='invisible'><code>fn <a href='#method.checked_mul' class='fnname'>checked_mul</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code></span></h4>
 <div class='docblock'><p>Checked integer multiplication. Computes <code>self * other</code>, returning
 <code>None</code> if underflow or overflow occurred.</p>
-
-<h1 id='examples-16' class='section-header'><a href='#examples-16'>Examples</a></h1>
+<h1 id="examples-16" class="section-header"><a href="#examples-16">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -252,8 +235,7 @@ if overflow occurred.</p>
 </div><h4 id='method.checked_div' class="method"><span id='checked_div.v' class='invisible'><code>fn <a href='#method.checked_div' class='fnname'>checked_div</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code></span></h4>
 <div class='docblock'><p>Checked integer division. Computes <code>self / other</code>, returning <code>None</code>
 if <code>other == 0</code> or the operation results in underflow or overflow.</p>
-
-<h1 id='examples-17' class='section-header'><a href='#examples-17'>Examples</a></h1>
+<h1 id="examples-17" class="section-header"><a href="#examples-17">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -263,8 +245,7 @@ if <code>other == 0</code> or the operation results in underflow or overflow.</p
 </div><h4 id='method.checked_rem' class="method"><span id='checked_rem.v' class='invisible'><code>fn <a href='#method.checked_rem' class='fnname'>checked_rem</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Checked integer remainder. Computes <code>self % other</code>, returning <code>None</code>
 if <code>other == 0</code> or the operation results in underflow or overflow.</p>
-
-<h1 id='examples-18' class='section-header'><a href='#examples-18'>Examples</a></h1>
+<h1 id="examples-18" class="section-header"><a href="#examples-18">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -275,8 +256,7 @@ if <code>other == 0</code> or the operation results in underflow or overflow.</p
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">i32</span>::<span class="ident">MIN</span>.<span class="ident">checked_rem</span>(<span class="op">-</span><span class="number">1</span>), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Ai32%3B%0A%0Aassert_eq!(5i32.checked_rem(2)%2C%20Some(1))%3B%0Aassert_eq!(5i32.checked_rem(0)%2C%20None)%3B%0Aassert_eq!(i32%3A%3AMIN.checked_rem(-1)%2C%20None)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.checked_neg' class="method"><span id='checked_neg.v' class='invisible'><code>fn <a href='#method.checked_neg' class='fnname'>checked_neg</a>(self) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Checked negation. Computes <code>-self</code>, returning <code>None</code> if <code>self == MIN</code>.</p>
-
-<h1 id='examples-19' class='section-header'><a href='#examples-19'>Examples</a></h1>
+<h1 id="examples-19" class="section-header"><a href="#examples-19">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -287,8 +267,7 @@ if <code>other == 0</code> or the operation results in underflow or overflow.</p
 </div><h4 id='method.checked_shl' class="method"><span id='checked_shl.v' class='invisible'><code>fn <a href='#method.checked_shl' class='fnname'>checked_shl</a>(self, rhs: <a class="primitive" href="primitive.u32.html">u32</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Checked shift left. Computes <code>self &lt;&lt; rhs</code>, returning <code>None</code>
 if <code>rhs</code> is larger than or equal to the number of bits in <code>self</code>.</p>
-
-<h1 id='examples-20' class='section-header'><a href='#examples-20'>Examples</a></h1>
+<h1 id="examples-20" class="section-header"><a href="#examples-20">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -297,8 +276,7 @@ if <code>rhs</code> is larger than or equal to the number of bits in <code>self<
 </div><h4 id='method.checked_shr' class="method"><span id='checked_shr.v' class='invisible'><code>fn <a href='#method.checked_shr' class='fnname'>checked_shr</a>(self, rhs: <a class="primitive" href="primitive.u32.html">u32</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Checked shift right. Computes <code>self &gt;&gt; rhs</code>, returning <code>None</code>
 if <code>rhs</code> is larger than or equal to the number of bits in <code>self</code>.</p>
-
-<h1 id='examples-21' class='section-header'><a href='#examples-21'>Examples</a></h1>
+<h1 id="examples-21" class="section-header"><a href="#examples-21">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -307,8 +285,7 @@ if <code>rhs</code> is larger than or equal to the number of bits in <code>self<
 </div><h4 id='method.checked_abs' class="method"><span id='checked_abs.v' class='invisible'><code>fn <a href='#method.checked_abs' class='fnname'>checked_abs</a>(self) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code><div class='since' title='Stable since Rust version 1.13.0'>1.13.0</div></span></h4>
 <div class='docblock'><p>Checked absolute value. Computes <code>self.abs()</code>, returning <code>None</code> if
 <code>self == MIN</code>.</p>
-
-<h1 id='examples-22' class='section-header'><a href='#examples-22'>Examples</a></h1>
+<h1 id="examples-22" class="section-header"><a href="#examples-22">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -319,8 +296,7 @@ if <code>rhs</code> is larger than or equal to the number of bits in <code>self<
 </div><h4 id='method.saturating_add' class="method"><span id='saturating_add.v' class='invisible'><code>fn <a href='#method.saturating_add' class='fnname'>saturating_add</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Saturating integer addition. Computes <code>self + other</code>, saturating at
 the numeric bounds instead of overflowing.</p>
-
-<h1 id='examples-23' class='section-header'><a href='#examples-23'>Examples</a></h1>
+<h1 id="examples-23" class="section-header"><a href="#examples-23">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -329,8 +305,7 @@ the numeric bounds instead of overflowing.</p>
 </div><h4 id='method.saturating_sub' class="method"><span id='saturating_sub.v' class='invisible'><code>fn <a href='#method.saturating_sub' class='fnname'>saturating_sub</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Saturating integer subtraction. Computes <code>self - other</code>, saturating
 at the numeric bounds instead of overflowing.</p>
-
-<h1 id='examples-24' class='section-header'><a href='#examples-24'>Examples</a></h1>
+<h1 id="examples-24" class="section-header"><a href="#examples-24">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -339,8 +314,7 @@ at the numeric bounds instead of overflowing.</p>
 </div><h4 id='method.saturating_mul' class="method"><span id='saturating_mul.v' class='invisible'><code>fn <a href='#method.saturating_mul' class='fnname'>saturating_mul</a>(self, other: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Saturating integer multiplication. Computes <code>self * other</code>,
 saturating at the numeric bounds instead of overflowing.</p>
-
-<h1 id='examples-25' class='section-header'><a href='#examples-25'>Examples</a></h1>
+<h1 id="examples-25" class="section-header"><a href="#examples-25">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -352,8 +326,7 @@ saturating at the numeric bounds instead of overflowing.</p>
 </div><h4 id='method.wrapping_add' class="method"><span id='wrapping_add.v' class='invisible'><code>fn <a href='#method.wrapping_add' class='fnname'>wrapping_add</a>(self, rhs: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Wrapping (modular) addition. Computes <code>self + other</code>,
 wrapping around at the boundary of the type.</p>
-
-<h1 id='examples-26' class='section-header'><a href='#examples-26'>Examples</a></h1>
+<h1 id="examples-26" class="section-header"><a href="#examples-26">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -362,8 +335,7 @@ wrapping around at the boundary of the type.</p>
 </div><h4 id='method.wrapping_sub' class="method"><span id='wrapping_sub.v' class='invisible'><code>fn <a href='#method.wrapping_sub' class='fnname'>wrapping_sub</a>(self, rhs: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Wrapping (modular) subtraction. Computes <code>self - other</code>,
 wrapping around at the boundary of the type.</p>
-
-<h1 id='examples-27' class='section-header'><a href='#examples-27'>Examples</a></h1>
+<h1 id="examples-27" class="section-header"><a href="#examples-27">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -371,8 +343,7 @@ wrapping around at the boundary of the type.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="op">-</span><span class="number">2i8</span>).<span class="ident">wrapping_sub</span>(<span class="number">127</span>), <span class="number">127</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!(0i8.wrapping_sub(127)%2C%20-127)%3B%0Aassert_eq!((-2i8).wrapping_sub(127)%2C%20127)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.wrapping_mul' class="method"><span id='wrapping_mul.v' class='invisible'><code>fn <a href='#method.wrapping_mul' class='fnname'>wrapping_mul</a>(self, rhs: <a class="primitive" href="primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Wrapping (modular) multiplication. Computes <code>self * other</code>, wrapping around at the boundary of the type.</p>
-
-<h1 id='examples-28' class='section-header'><a href='#examples-28'>Examples</a></h1>
+<h1 id="examples-28" class="section-header"><a href="#examples-28">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -387,11 +358,9 @@ negative minimal value for the type); this is equivalent
 to <code>-MIN</code>, a positive value that is too large to represent
 in the type. In such a case, this function returns <code>MIN</code>
 itself.</p>
-
-<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
 <p>This function will panic if <code>rhs</code> is 0.</p>
-
-<h1 id='examples-29' class='section-header'><a href='#examples-29'>Examples</a></h1>
+<h1 id="examples-29" class="section-header"><a href="#examples-29">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -403,11 +372,9 @@ wrapping around at the boundary of the type.</p>
 <p>Such wrap-around never actually occurs mathematically;
 implementation artifacts make <code>x % y</code> invalid for <code>MIN / -1</code> on a signed type (where <code>MIN</code> is the negative
 minimal value). In such a case, this function returns <code>0</code>.</p>
-
-<h1 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h1>
+<h1 id="panics-1" class="section-header"><a href="#panics-1">Panics</a></h1>
 <p>This function will panic if <code>rhs</code> is 0.</p>
-
-<h1 id='examples-30' class='section-header'><a href='#examples-30'>Examples</a></h1>
+<h1 id="examples-30" class="section-header"><a href="#examples-30">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -421,8 +388,7 @@ negates <code>MIN</code> on a signed type (where <code>MIN</code> is the
 negative minimal value for the type); this is a positive
 value that is too large to represent in the type. In such
 a case, this function returns <code>MIN</code> itself.</p>
-
-<h1 id='examples-31' class='section-header'><a href='#examples-31'>Examples</a></h1>
+<h1 id="examples-31" class="section-header"><a href="#examples-31">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -438,8 +404,7 @@ of the type, rather than the bits shifted out of the LHS
 being returned to the other end. The primitive integer
 types all implement a <code>rotate_left</code> function, which may
 be what you want instead.</p>
-
-<h1 id='examples-32' class='section-header'><a href='#examples-32'>Examples</a></h1>
+<h1 id="examples-32" class="section-header"><a href="#examples-32">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -455,8 +420,7 @@ of the type, rather than the bits shifted out of the LHS
 being returned to the other end. The primitive integer
 types all implement a <code>rotate_right</code> function, which may
 be what you want instead.</p>
-
-<h1 id='examples-33' class='section-header'><a href='#examples-33'>Examples</a></h1>
+<h1 id="examples-33" class="section-header"><a href="#examples-33">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -469,8 +433,7 @@ wrapping around at the boundary of the type.</p>
 the absolute value of the negative minimal value for the type
 this is a positive value that is too large to represent in the
 type. In such a case, this function returns <code>MIN</code> itself.</p>
-
-<h1 id='examples-34' class='section-header'><a href='#examples-34'>Examples</a></h1>
+<h1 id="examples-34" class="section-header"><a href="#examples-34">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -483,8 +446,7 @@ type. In such a case, this function returns <code>MIN</code> itself.</p>
 <p>Returns a tuple of the addition along with a boolean indicating
 whether an arithmetic overflow would occur. If an overflow would
 have occurred then the wrapped value is returned.</p>
-
-<h1 id='examples-35' class='section-header'><a href='#examples-35'>Examples</a></h1>
+<h1 id="examples-35" class="section-header"><a href="#examples-35">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -497,8 +459,7 @@ have occurred then the wrapped value is returned.</p>
 <p>Returns a tuple of the subtraction along with a boolean indicating
 whether an arithmetic overflow would occur. If an overflow would
 have occurred then the wrapped value is returned.</p>
-
-<h1 id='examples-36' class='section-header'><a href='#examples-36'>Examples</a></h1>
+<h1 id="examples-36" class="section-header"><a href="#examples-36">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -511,8 +472,7 @@ have occurred then the wrapped value is returned.</p>
 <p>Returns a tuple of the multiplication along with a boolean
 indicating whether an arithmetic overflow would occur. If an
 overflow would have occurred then the wrapped value is returned.</p>
-
-<h1 id='examples-37' class='section-header'><a href='#examples-37'>Examples</a></h1>
+<h1 id="examples-37" class="section-header"><a href="#examples-37">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -523,11 +483,9 @@ overflow would have occurred then the wrapped value is returned.</p>
 <p>Returns a tuple of the divisor along with a boolean indicating
 whether an arithmetic overflow would occur. If an overflow would
 occur then self is returned.</p>
-
-<h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
+<h1 id="panics-2" class="section-header"><a href="#panics-2">Panics</a></h1>
 <p>This function will panic if <code>rhs</code> is 0.</p>
-
-<h1 id='examples-38' class='section-header'><a href='#examples-38'>Examples</a></h1>
+<h1 id="examples-38" class="section-header"><a href="#examples-38">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -540,11 +498,9 @@ occur then self is returned.</p>
 <p>Returns a tuple of the remainder after dividing along with a boolean
 indicating whether an arithmetic overflow would occur. If an
 overflow would occur then 0 is returned.</p>
-
-<h1 id='panics-3' class='section-header'><a href='#panics-3'>Panics</a></h1>
+<h1 id="panics-3" class="section-header"><a href="#panics-3">Panics</a></h1>
 <p>This function will panic if <code>rhs</code> is 0.</p>
-
-<h1 id='examples-39' class='section-header'><a href='#examples-39'>Examples</a></h1>
+<h1 id="examples-39" class="section-header"><a href="#examples-39">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -559,8 +515,7 @@ indicating whether an overflow happened. If <code>self</code> is the minimum
 value (e.g. <code>i32::MIN</code> for values of type <code>i32</code>), then the minimum
 value will be returned again and <code>true</code> will be returned for an
 overflow happening.</p>
-
-<h1 id='examples-40' class='section-header'><a href='#examples-40'>Examples</a></h1>
+<h1 id="examples-40" class="section-header"><a href="#examples-40">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -575,8 +530,7 @@ indicating whether the shift value was larger than or equal to the
 number of bits. If the shift value is too large, then value is
 masked (N-1) where N is the number of bits, and this value is then
 used to perform the shift.</p>
-
-<h1 id='examples-41' class='section-header'><a href='#examples-41'>Examples</a></h1>
+<h1 id="examples-41" class="section-header"><a href="#examples-41">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -589,8 +543,7 @@ indicating whether the shift value was larger than or equal to the
 number of bits. If the shift value is too large, then value is
 masked (N-1) where N is the number of bits, and this value is then
 used to perform the shift.</p>
-
-<h1 id='examples-42' class='section-header'><a href='#examples-42'>Examples</a></h1>
+<h1 id="examples-42" class="section-header"><a href="#examples-42">Examples</a></h1>
 <p>Basic usage</p>
 
 <pre class="rust rust-example-rendered">
@@ -603,8 +556,7 @@ boolean indicating whether an overflow happened. If self is the
 minimum value (e.g. i32::MIN for values of type i32), then the
 minimum value will be returned again and true will be returned for
 an overflow happening.</p>
-
-<h1 id='examples-43' class='section-header'><a href='#examples-43'>Examples</a></h1>
+<h1 id="examples-43" class="section-header"><a href="#examples-43">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -613,8 +565,7 @@ an overflow happening.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="op">-</span><span class="number">128i8</span>).<span class="ident">overflowing_abs</span>(), (<span class="op">-</span><span class="number">128</span>,<span class="bool-val">true</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!(10i8.overflowing_abs()%2C%20(10%2Cfalse))%3B%0Aassert_eq!((-10i8).overflowing_abs()%2C%20(10%2Cfalse))%3B%0Aassert_eq!((-128i8).overflowing_abs()%2C%20(-128%2Ctrue))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.pow' class="method"><span id='pow.v' class='invisible'><code>fn <a href='#method.pow' class='fnname'>pow</a>(self, exp: <a class="primitive" href="primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Raises self to the power of <code>exp</code>, using exponentiation by squaring.</p>
-
-<h1 id='examples-44' class='section-header'><a href='#examples-44'>Examples</a></h1>
+<h1 id="examples-44" class="section-header"><a href="#examples-44">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -623,14 +574,12 @@ an overflow happening.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">pow</span>(<span class="number">4</span>), <span class="number">16</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20i32%20%3D%202%3B%20%2F%2F%20or%20any%20other%20integer%20type%0A%0Aassert_eq!(x.pow(4)%2C%2016)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.abs' class="method"><span id='abs.v' class='invisible'><code>fn <a href='#method.abs' class='fnname'>abs</a>(self) -&gt; <a class="primitive" href="primitive.isize.html">isize</a></code></span></h4>
 <div class='docblock'><p>Computes the absolute value of <code>self</code>.</p>
-
-<h1 id='overflow-behavior' class='section-header'><a href='#overflow-behavior'>Overflow behavior</a></h1>
+<h1 id="overflow-behavior" class="section-header"><a href="#overflow-behavior">Overflow behavior</a></h1>
 <p>The absolute value of <code>i32::min_value()</code> cannot be represented as an
 <code>i32</code>, and attempting to calculate it will cause an overflow. This
 means that code in debug mode will trigger a panic on this case and
 optimized code will return <code>i32::min_value()</code> without a panic.</p>
-
-<h1 id='examples-45' class='section-header'><a href='#examples-45'>Examples</a></h1>
+<h1 id="examples-45" class="section-header"><a href="#examples-45">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -643,8 +592,7 @@ optimized code will return <code>i32::min_value()</code> without a panic.</p>
 <li><code>1</code> if the number is positive</li>
 <li><code>-1</code> if the number is negative</li>
 </ul>
-
-<h1 id='examples-46' class='section-header'><a href='#examples-46'>Examples</a></h1>
+<h1 id="examples-46" class="section-header"><a href="#examples-46">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -654,8 +602,7 @@ optimized code will return <code>i32::min_value()</code> without a panic.</p>
 </div><h4 id='method.is_positive' class="method"><span id='is_positive.v' class='invisible'><code>fn <a href='#method.is_positive' class='fnname'>is_positive</a>(self) -&gt; <a class="primitive" href="primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if <code>self</code> is positive and <code>false</code> if the number
 is zero or negative.</p>
-
-<h1 id='examples-47' class='section-header'><a href='#examples-47'>Examples</a></h1>
+<h1 id="examples-47" class="section-header"><a href="#examples-47">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -664,8 +611,7 @@ is zero or negative.</p>
 </div><h4 id='method.is_negative' class="method"><span id='is_negative.v' class='invisible'><code>fn <a href='#method.is_negative' class='fnname'>is_negative</a>(self) -&gt; <a class="primitive" href="primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if <code>self</code> is negative and <code>false</code> if the number
 is zero or positive.</p>
-
-<h1 id='examples-48' class='section-header'><a href='#examples-48'>Examples</a></h1>
+<h1 id="examples-48" class="section-header"><a href="#examples-48">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

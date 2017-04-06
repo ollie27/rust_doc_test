@@ -55,18 +55,17 @@
 <ul>
 <li>
 <p>It is <em>required</em> to use <code>drop_in_place</code> to drop unsized types like
-trait objects, because they can&#39;t be read out onto the stack and
+trait objects, because they can't be read out onto the stack and
 dropped normally.</p>
 </li>
 <li>
 <p>It is friendlier to the optimizer to do this over <code>ptr::read</code> when
 dropping manually allocated memory (e.g. when writing Box/Rc/Vec),
-as the compiler doesn&#39;t need to prove that it&#39;s sound to elide the
+as the compiler doesn't need to prove that it's sound to elide the
 copy.</p>
 </li>
 </ul>
-
-<h1 id='undefined-behavior' class='section-header'><a href='#undefined-behavior'>Undefined Behavior</a></h1>
+<h1 id="undefined-behavior" class="section-header"><a href="#undefined-behavior">Undefined Behavior</a></h1>
 <p>This has all the same safety problems as <code>ptr::read</code> with respect to
 invalid pointers, types, and double drops.</p>
 </div></section>

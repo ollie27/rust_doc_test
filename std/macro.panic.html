@@ -57,13 +57,12 @@
 }</pre>
 <div class='docblock'><p>The entry point for panic of Rust threads.</p>
 <p>This macro is used to inject panic into a Rust thread, causing the thread to
-panic entirely. Each thread&#39;s panic can be reaped as the <code>Box&lt;Any&gt;</code> type,
+panic entirely. Each thread's panic can be reaped as the <code>Box&lt;Any&gt;</code> type,
 and the single-argument form of the <code>panic!</code> macro will be the value which
 is transmitted.</p>
 <p>The multi-argument form of this macro panics with a string and has the
 <code>format!</code> syntax for building a string.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="macro">panic</span><span class="macro">!</span>();
 <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;this is a terrible mistake!&quot;</span>);

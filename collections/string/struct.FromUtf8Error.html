@@ -55,11 +55,10 @@ is designed in such a way to carefully avoid reallocations: the
 <a href="struct.FromUtf8Error.html#method.into_bytes"><code>into_bytes</code></a> method will give back the byte vector that was used in the
 conversion attempt.</p>
 <p>The <a href="../../std/str/struct.Utf8Error.html"><code>Utf8Error</code></a> type provided by <a href="../../std/str/index.html"><code>std::str</code></a> represents an error that may
-occur when converting a slice of <a href="../../std/primitive.u8.html"><code>u8</code></a>s to a <a href="../../std/primitive.str.html"><code>&amp;str</code></a>. In this sense, it&#39;s
+occur when converting a slice of <a href="../../std/primitive.u8.html"><code>u8</code></a>s to a <a href="../../std/primitive.str.html"><code>&amp;str</code></a>. In this sense, it's
 an analogue to <code>FromUtf8Error</code>, and you can get one from a <code>FromUtf8Error</code>
 through the <a href="#method.utf8_error"><code>utf8_error</code></a> method.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -76,8 +75,7 @@ through the <a href="#method.utf8_error"><code>utf8_error</code></a> method.</p>
 <p>This method is carefully constructed to avoid allocation. It will
 consume the error, moving out the bytes, so that a copy of the bytes
 does not need to be made.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -90,11 +88,10 @@ does not need to be made.</p>
 </div><h4 id='method.utf8_error' class="method"><span id='utf8_error.v' class='invisible'><code>fn <a href='#method.utf8_error' class='fnname'>utf8_error</a>(&amp;self) -&gt; <a class="struct" href="../../collections/str/struct.Utf8Error.html" title="struct collections::str::Utf8Error">Utf8Error</a></code></span></h4>
 <div class='docblock'><p>Fetch a <code>Utf8Error</code> to get more details about the conversion failure.</p>
 <p>The <a href="../../std/str/struct.Utf8Error.html"><code>Utf8Error</code></a> type provided by <a href="../../std/str/index.html"><code>std::str</code></a> represents an error that may
-occur when converting a slice of <a href="../../std/primitive.u8.html"><code>u8</code></a>s to a <a href="../../std/primitive.str.html"><code>&amp;str</code></a>. In this sense, it&#39;s
+occur when converting a slice of <a href="../../std/primitive.u8.html"><code>u8</code></a>s to a <a href="../../std/primitive.str.html"><code>&amp;str</code></a>. In this sense, it's
 an analogue to <code>FromUtf8Error</code>. See its documentation for more details
 on using it.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

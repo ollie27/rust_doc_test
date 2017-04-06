@@ -57,16 +57,14 @@ use raw pointers to manage the memory that they own.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../std/ptr/struct.Shared.html" title="struct std::ptr::Shared">Shared</a>&lt;T&gt; <span class="where fmt-newline">where T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/ptr.rs.html#1069-1078' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>unsafe fn <a href='#method.new' class='fnname'>new</a>(ptr: <a class="primitive" href="../primitive.pointer.html">*const T</a>) -&gt; <a class="struct" href="../../std/ptr/struct.Shared.html" title="struct std::ptr::Shared">Shared</a>&lt;T&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>shared </code><a href="https://github.com/rust-lang/rust/issues/27730">#27730</a>)</div></div><div class='docblock'><p>Creates a new <code>Shared</code>.</p>
-
-<h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
+<h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
 <p><code>ptr</code> must be non-null.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../std/ptr/struct.Shared.html" title="struct std::ptr::Shared">Shared</a>&lt;T&gt; <span class="where fmt-newline">where T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/ptr.rs.html#1081-1086' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.as_mut_ptr' class="method"><span id='as_mut_ptr.v' class='invisible'><code>unsafe fn <a href='#method.as_mut_ptr' class='fnname'>as_mut_ptr</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.pointer.html">*mut T</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>shared </code><a href="https://github.com/rust-lang/rust/issues/27730">#27730</a>)</div></div><div class='docblock'><p>Acquires the underlying pointer as a <code>*mut</code> pointer.</p>
 </div></div><h2 id='deref-methods'>Methods from <a class="trait" href="../../std/ops/trait.Deref.html" title="trait std::ops::Deref">Deref</a>&lt;Target = <a class="primitive" href="../primitive.pointer.html">*const T</a>&gt;</h2><div class='impl-items'><h4 id='method.is_null' class="method"><span id='is_null.v' class='invisible'><code>fn <a href='#method.is_null' class='fnname'>is_null</a>(self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the pointer is null.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -76,16 +74,14 @@ use raw pointers to manage the memory that they own.</p>
 </div><h4 id='method.as_ref' class="method"><span id='as_ref.v' class='invisible'><code>unsafe fn <a href='#method.as_ref' class='fnname'>as_ref</a>&lt;'a&gt;(self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;'a T&gt;</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Returns <code>None</code> if the pointer is null, or else returns a reference to
 the value wrapped in <code>Some</code>.</p>
-
-<h1 id='safety-1' class='section-header'><a href='#safety-1'>Safety</a></h1>
+<h1 id="safety-1" class="section-header"><a href="#safety-1">Safety</a></h1>
 <p>While this method and its mutable counterpart are useful for
 null-safety, it is important to note that this is still an unsafe
 operation because the returned value could be pointing to invalid
 memory.</p>
-<p>Additionally, the lifetime <code>&#39;a</code> returned is arbitrarily chosen and does
+<p>Additionally, the lifetime <code>'a</code> returned is arbitrarily chosen and does
 not necessarily reflect the actual lifetime of the data.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -99,14 +95,12 @@ not necessarily reflect the actual lifetime of the data.</p>
 </div><h4 id='method.offset' class="method"><span id='offset.v' class='invisible'><code>unsafe fn <a href='#method.offset' class='fnname'>offset</a>(self, count: <a class="primitive" href="../primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="../primitive.pointer.html">*const T</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Calculates the offset from a pointer. <code>count</code> is in units of T; e.g. a
 <code>count</code> of 3 represents a pointer offset of <code>3 * size_of::&lt;T&gt;()</code> bytes.</p>
-
-<h1 id='safety-2' class='section-header'><a href='#safety-2'>Safety</a></h1>
+<h1 id="safety-2" class="section-header"><a href="#safety-2">Safety</a></h1>
 <p>Both the starting and resulting pointer must be either in bounds or one
 byte past the end of an allocated object. If either pointer is out of
 bounds or arithmetic overflow occurs then
 any further use of the returned value will result in undefined behavior.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -121,14 +115,12 @@ any further use of the returned value will result in undefined behavior.</p>
 <div class='docblock'><p>Calculates the offset from a pointer using wrapping arithmetic.
 <code>count</code> is in units of T; e.g. a <code>count</code> of 3 represents a pointer
 offset of <code>3 * size_of::&lt;T&gt;()</code> bytes.</p>
-
-<h1 id='safety-3' class='section-header'><a href='#safety-3'>Safety</a></h1>
+<h1 id="safety-3" class="section-header"><a href="#safety-3">Safety</a></h1>
 <p>The resulting pointer does not need to be in bounds, but it is
 potentially hazardous to dereference (which requires <code>unsafe</code>).</p>
 <p>Always use <code>.offset(count)</code> instead when possible, because <code>offset</code>
 allows the compiler to optimize better.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -152,8 +144,7 @@ units of T: the distance in bytes is divided by <code>mem::size_of::&lt;T&gt;()<
 <code>mem::size_of::&lt;T&gt;()</code> then the result of the division is rounded towards
 zero.</p>
 <p>This function returns <code>None</code> if <code>T</code> is a zero-sized typed.</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -170,8 +161,7 @@ zero.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(offset_to)%5D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%5B0%3B%205%5D%3B%0A%20%20%20%20let%20ptr1%3A%20*const%20i32%20%3D%20%26a%5B1%5D%3B%0A%20%20%20%20let%20ptr2%3A%20*const%20i32%20%3D%20%26a%5B3%5D%3B%0A%20%20%20%20assert_eq!(ptr1.offset_to(ptr2)%2C%20Some(2))%3B%0A%20%20%20%20assert_eq!(ptr2.offset_to(ptr1)%2C%20Some(-2))%3B%0A%20%20%20%20assert_eq!(unsafe%20%7B%20ptr1.offset(2)%20%7D%2C%20ptr2)%3B%0A%20%20%20%20assert_eq!(unsafe%20%7B%20ptr2.offset(-2)%20%7D%2C%20ptr1)%3B%0A%7D%0A&amp;version=nightly">Run</a></pre>
 </div></div><div class='impl-items'><h4 id='method.is_null-1' class="method"><span id='is_null.v-1' class='invisible'><code>fn <a href='#method.is_null-1' class='fnname'>is_null</a>(self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the pointer is null.</p>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -181,16 +171,14 @@ zero.</p>
 </div><h4 id='method.as_ref-1' class="method"><span id='as_ref.v-1' class='invisible'><code>unsafe fn <a href='#method.as_ref-1' class='fnname'>as_ref</a>&lt;'a&gt;(self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;'a T&gt;</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Returns <code>None</code> if the pointer is null, or else returns a reference to
 the value wrapped in <code>Some</code>.</p>
-
-<h1 id='safety-4' class='section-header'><a href='#safety-4'>Safety</a></h1>
+<h1 id="safety-4" class="section-header"><a href="#safety-4">Safety</a></h1>
 <p>While this method and its mutable counterpart are useful for
 null-safety, it is important to note that this is still an unsafe
 operation because the returned value could be pointing to invalid
 memory.</p>
-<p>Additionally, the lifetime <code>&#39;a</code> returned is arbitrarily chosen and does
+<p>Additionally, the lifetime <code>'a</code> returned is arbitrarily chosen and does
 not necessarily reflect the actual lifetime of the data.</p>
-
-<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -204,13 +192,11 @@ not necessarily reflect the actual lifetime of the data.</p>
 </div><h4 id='method.offset-1' class="method"><span id='offset.v-1' class='invisible'><code>unsafe fn <a href='#method.offset-1' class='fnname'>offset</a>(self, count: <a class="primitive" href="../primitive.isize.html">isize</a>) -&gt; <a class="primitive" href="../primitive.pointer.html">*mut T</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Calculates the offset from a pointer. <code>count</code> is in units of T; e.g. a
 <code>count</code> of 3 represents a pointer offset of <code>3 * size_of::&lt;T&gt;()</code> bytes.</p>
-
-<h1 id='safety-5' class='section-header'><a href='#safety-5'>Safety</a></h1>
+<h1 id="safety-5" class="section-header"><a href="#safety-5">Safety</a></h1>
 <p>The offset must be in-bounds of the object, or one-byte-past-the-end.
 Otherwise <code>offset</code> invokes Undefined Behavior, regardless of whether
 the pointer is used.</p>
-
-<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -225,14 +211,12 @@ the pointer is used.</p>
 <div class='docblock'><p>Calculates the offset from a pointer using wrapping arithmetic.
 <code>count</code> is in units of T; e.g. a <code>count</code> of 3 represents a pointer
 offset of <code>3 * size_of::&lt;T&gt;()</code> bytes.</p>
-
-<h1 id='safety-6' class='section-header'><a href='#safety-6'>Safety</a></h1>
+<h1 id="safety-6" class="section-header"><a href="#safety-6">Safety</a></h1>
 <p>The resulting pointer does not need to be in bounds, but it is
 potentially hazardous to dereference (which requires <code>unsafe</code>).</p>
 <p>Always use <code>.offset(count)</code> instead when possible, because <code>offset</code>
 allows the compiler to optimize better.</p>
-
-<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -252,13 +236,11 @@ allows the compiler to optimize better.</p>
 </div><h4 id='method.as_mut' class="method"><span id='as_mut.v' class='invisible'><code>unsafe fn <a href='#method.as_mut' class='fnname'>as_mut</a>&lt;'a&gt;(self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;'a mut T&gt;</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Returns <code>None</code> if the pointer is null, or else returns a mutable
 reference to the value wrapped in <code>Some</code>.</p>
-
-<h1 id='safety-7' class='section-header'><a href='#safety-7'>Safety</a></h1>
+<h1 id="safety-7" class="section-header"><a href="#safety-7">Safety</a></h1>
 <p>As with <code>as_ref</code>, this is unsafe because it cannot verify the validity
-of the returned pointer, nor can it ensure that the lifetime <code>&#39;a</code>
+of the returned pointer, nor can it ensure that the lifetime <code>'a</code>
 returned is indeed a valid lifetime for the contained data.</p>
-
-<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
+<h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -274,8 +256,7 @@ units of T: the distance in bytes is divided by <code>mem::size_of::&lt;T&gt;()<
 <code>mem::size_of::&lt;T&gt;()</code> then the result of the division is rounded towards
 zero.</p>
 <p>This function returns <code>None</code> if <code>T</code> is a zero-sized typed.</p>
-
-<h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>
+<h1 id="examples-10" class="section-header"><a href="#examples-10">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

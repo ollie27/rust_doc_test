@@ -56,7 +56,7 @@
     fn <a href='#method.write_fmt' class='fnname'>write_fmt</a>(&amp;mut self, args: <a class="struct" href="../../core/fmt/struct.Arguments.html" title="struct core::fmt::Arguments">Arguments</a>) -&gt; <a class="type" href="../../core/fmt/type.Result.html" title="type core::fmt::Result">Result</a> { ... }
 }</pre><div class='docblock'><p>A collection of methods that are required to format a message into a stream.</p>
 <p>This trait is the type which this modules requires when formatting
-information. This is similar to the standard library&#39;s <a href="../../std/io/trait.Write.html"><code>io::Write</code></a> trait,
+information. This is similar to the standard library's <a href="../../std/io/trait.Write.html"><code>io::Write</code></a> trait,
 but it is only intended for use in libcore.</p>
 <p>This trait should generally not be implemented by consumers of the standard
 library. The <a href="../../std/macro.write.html"><code>write!</code></a> macro accepts an instance of <a href="../../std/io/trait.Write.html"><code>io::Write</code></a>, and the
@@ -69,11 +69,9 @@ succeeded.</p>
 <p>This method can only succeed if the entire byte slice was successfully
 written, and this method will not return until all data has been
 written or an error occurs.</p>
-
-<h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
+<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>This function will return an instance of <a href="struct.Error.html"><code>Error</code></a> on error.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="ident">Error</span>, <span class="ident">Write</span>};
 
@@ -92,11 +90,9 @@ written or an error occurs.</p>
 This method can only succeed if the entire byte sequence was successfully
 written, and this method will not return until all data has been
 written or an error occurs.</p>
-
-<h1 id='errors-1' class='section-header'><a href='#errors-1'>Errors</a></h1>
+<h1 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h1>
 <p>This function will return an instance of <a href="struct.Error.html"><code>Error</code></a> on error.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="ident">Error</span>, <span class="ident">Write</span>};
 
@@ -111,8 +107,7 @@ written or an error occurs.</p>
 </div><h3 id='method.write_fmt' class='method'><span id='write_fmt.v' class='invisible'><code>fn <a href='#method.write_fmt' class='fnname'>write_fmt</a>(&amp;mut self, args: <a class="struct" href="../../core/fmt/struct.Arguments.html" title="struct core::fmt::Arguments">Arguments</a>) -&gt; <a class="type" href="../../core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h3><div class='docblock'><p>Glue for usage of the <a href="../../std/macro.write.html"><code>write!</code></a> macro with implementors of this trait.</p>
 <p>This method should generally not be invoked manually, but rather through
 the <a href="../../std/macro.write.html"><code>write!</code></a> macro itself.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="ident">Error</span>, <span class="ident">Write</span>};
 

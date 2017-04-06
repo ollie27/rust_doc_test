@@ -58,8 +58,7 @@ operations like <code>container[index]</code> when used in a mutable context.</p
 <code>*container.index_mut(index)</code>, but only when used as a mutable value. If
 an immutable value is requested, the <a href="../../std/ops/trait.Index.html"><code>Index</code></a> trait is used instead. This
 allows nice things such as <code>v[index] = value</code> if <code>value</code> implements <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a>.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>A very simple implementation of a <code>Balance</code> struct that has two sides, where
 each can be indexed mutably and immutably.</p>
 

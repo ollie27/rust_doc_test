@@ -56,18 +56,16 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>A utility macro for indicating unreachable code.</p>
-<p>This is useful any time that the compiler can&#39;t determine that some code is unreachable. For
+<p>This is useful any time that the compiler can't determine that some code is unreachable. For
 example:</p>
 <ul>
 <li>Match arms with guard conditions.</li>
 <li>Loops that dynamically terminate.</li>
 <li>Iterators that dynamically terminate.</li>
 </ul>
-
-<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
 <p>This will always panic.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Match arms:</p>
 
 <pre class="rust rust-example-rendered">

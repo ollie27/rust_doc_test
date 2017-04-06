@@ -50,11 +50,10 @@
                    </a>
                </span><a class='srclink' href='../../src/alloc/boxed.rs.html#11-744' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A pointer type for heap allocation.</p>
-<p><code>Box&lt;T&gt;</code>, casually referred to as a &#39;box&#39;, provides the simplest form of
+<p><code>Box&lt;T&gt;</code>, casually referred to as a 'box', provides the simplest form of
 heap allocation in Rust. Boxes provide ownership for this allocation, and
 drop their contents when they go out of scope.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Creating a box:</p>
 
 <pre class="rust rust-example-rendered">
@@ -78,8 +77,8 @@ looked like this:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="ident">Cons</span>(<span class="ident">T</span>, <span class="ident">List</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>),<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0ACons(T%2C%20List%3CT%3E)%2C%0A%7D">Run</a></pre>
-<p>It wouldn&#39;t work. This is because the size of a <code>List</code> depends on how many
-elements are in the list, and so we don&#39;t know how much memory to allocate
+<p>It wouldn't work. This is because the size of a <code>List</code> depends on how many
+elements are in the list, and so we don't know how much memory to allocate
 for a <code>Cons</code>. By introducing a <code>Box</code>, which has a defined size, we know how
 big <code>Cons</code> needs to be.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>

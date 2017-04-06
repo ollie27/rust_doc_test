@@ -50,7 +50,7 @@
                    </a>
                </span><a class='srclink' href='../../src/core/mem.rs.html#614' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn drop&lt;T&gt;(_x: T)</pre><div class='docblock'><p>Disposes of a value.</p>
-<p>While this does call the argument&#39;s implementation of <a href="../ops/trait.Drop.html"><code>Drop</code></a>,
+<p>While this does call the argument's implementation of <a href="../ops/trait.Drop.html"><code>Drop</code></a>,
 it will not release any borrows, as borrows are based on lexical scope.</p>
 <p>This effectively does nothing for
 <a href="../../book/first-edition/ownership.html#copy-types">types which implement <code>Copy</code></a>,
@@ -62,8 +62,7 @@ so the value persists after this function call.</p>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">drop</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">_x</span>: <span class="ident">T</span>) { }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Apub%20fn%20drop%3CT%3E(_x%3A%20T)%20%7B%20%7D%0A%7D">Run</a></pre>
 <p>Because <code>_x</code> is moved into the function, it is automatically dropped before
 the function returns.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

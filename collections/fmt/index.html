@@ -53,10 +53,9 @@
 <p>This module contains the runtime support for the <code>format!</code> syntax extension.
 This macro is implemented in the compiler to emit calls to this module in
 order to format arguments at runtime into strings.</p>
-
-<h1 id='usage' class='section-header'><a href='#usage'>Usage</a></h1>
-<p>The <code>format!</code> macro is intended to be familiar to those coming from C&#39;s
-printf/fprintf functions or Python&#39;s <code>str.format</code> function.</p>
+<h1 id="usage" class="section-header"><a href="#usage">Usage</a></h1>
+<p>The <code>format!</code> macro is intended to be familiar to those coming from C's
+printf/fprintf functions or Python's <code>str.format</code> function.</p>
 <p>Some examples of the <code>format!</code> extension are:</p>
 
 <pre class="rust rust-example-rendered">
@@ -72,12 +71,11 @@ required by the compiler for this to be a string literal; it cannot be a
 variable passed in (in order to perform validity checking). The compiler
 will then parse the format string and determine if the list of arguments
 provided is suitable to pass to this format string.</p>
-
-<h2 id='positional-parameters' class='section-header'><a href='#positional-parameters'>Positional parameters</a></h2>
-<p>Each formatting argument is allowed to specify which value argument it&#39;s
+<h2 id="positional-parameters" class="section-header"><a href="#positional-parameters">Positional parameters</a></h2>
+<p>Each formatting argument is allowed to specify which value argument it's
 referencing, and if omitted it is assumed to be &quot;the next argument&quot;. For
 example, the format string <code>{} {} {}</code> would take three parameters, and they
-would be formatted in the same order as they&#39;re given. The format string
+would be formatted in the same order as they're given. The format string
 <code>{2} {1} {0}</code>, however, would format arguments in reverse order.</p>
 <p>Things can get a little tricky once you start intermingling the two types of
 positional specifiers. The &quot;next argument&quot; specifier can be thought of as an
@@ -94,13 +92,12 @@ parameters which do not name an argument in terms of positional specifiers.</p>
 <p>A format string is required to use all of its arguments, otherwise it is a
 compile-time error. You may refer to the same argument more than once in the
 format string.</p>
-
-<h2 id='named-parameters' class='section-header'><a href='#named-parameters'>Named parameters</a></h2>
+<h2 id="named-parameters" class="section-header"><a href="#named-parameters">Named parameters</a></h2>
 <p>Rust itself does not have a Python-like equivalent of named parameters to a
 function, but the <code>format!</code> macro is a syntax extension which allows it to
 leverage named parameters. Named parameters are listed at the end of the
 argument list and have the syntax:</p>
-<pre><code class="language-text">identifier &#39;=&#39; expression
+<pre><code class="language-text">identifier '=' expression
 </code></pre>
 <p>For example, the following <code>format!</code> expressions all use named argument:</p>
 
@@ -111,9 +108,8 @@ argument list and have the syntax:</p>
 <p>It is not valid to put positional parameters (those without names) after
 arguments which have names. Like with positional parameters, it is not
 valid to provide named parameters that are unused by the format string.</p>
-
-<h2 id='argument-types' class='section-header'><a href='#argument-types'>Argument types</a></h2>
-<p>Each argument&#39;s type is dictated by the format string.
+<h2 id="argument-types" class="section-header"><a href="#argument-types">Argument types</a></h2>
+<p>Each argument's type is dictated by the format string.
 There are various parameters which require a particular type, however.
 An example is the <code>{:.*}</code> syntax, which sets the number of decimal places
 in floating-point types:</p>
@@ -125,8 +121,7 @@ in floating-point types:</p>
 <p>If this syntax is used, then the number of characters to print precedes the
 actual object being formatted, and the number of characters must have the
 type <code>usize</code>.</p>
-
-<h2 id='formatting-traits' class='section-header'><a href='#formatting-traits'>Formatting traits</a></h2>
+<h2 id="formatting-traits" class="section-header"><a href="#formatting-traits">Formatting traits</a></h2>
 <p>When requesting that an argument be formatted with a particular type, you
 are actually requesting that an argument ascribes to a particular trait.
 This allows multiple actual types to be formatted via <code>{:x}</code> (like <code>i8</code> as
@@ -213,8 +208,7 @@ like:</p>
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">myvector</span>);     <span class="comment">// =&gt; &quot;Vector2D {x: 3, y:4}&quot;</span>
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:10.3b}&quot;</span>, <span class="ident">myvector</span>); <span class="comment">// =&gt; &quot;     5.000&quot;</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Afmt%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20Vector2D%20%7B%0A%20%20%20%20x%3A%20isize%2C%0A%20%20%20%20y%3A%20isize%2C%0A%7D%0A%0Aimpl%20fmt%3A%3ADisplay%20for%20Vector2D%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter)%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20The%20%60f%60%20value%20implements%20the%20%60Write%60%20trait%2C%20which%20is%20what%20the%0A%20%20%20%20%20%20%20%20%2F%2F%20write!%20macro%20is%20expecting.%20Note%20that%20this%20formatting%20ignores%20the%0A%20%20%20%20%20%20%20%20%2F%2F%20various%20flags%20provided%20to%20format%20strings.%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22(%7B%7D%2C%20%7B%7D)%22%2C%20self.x%2C%20self.y)%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Different%20traits%20allow%20different%20forms%20of%20output%20of%20a%20type.%20The%20meaning%0A%2F%2F%20of%20this%20format%20is%20to%20print%20the%20magnitude%20of%20a%20vector.%0Aimpl%20fmt%3A%3ABinary%20for%20Vector2D%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter)%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20let%20magnitude%20%3D%20(self.x%20*%20self.x%20%2B%20self.y%20*%20self.y)%20as%20f64%3B%0A%20%20%20%20%20%20%20%20let%20magnitude%20%3D%20magnitude.sqrt()%3B%0A%0A%20%20%20%20%20%20%20%20%2F%2F%20Respect%20the%20formatting%20flags%20by%20using%20the%20helper%20method%0A%20%20%20%20%20%20%20%20%2F%2F%20%60pad_integral%60%20on%20the%20Formatter%20object.%20See%20the%20method%0A%20%20%20%20%20%20%20%20%2F%2F%20documentation%20for%20details%2C%20and%20the%20function%20%60pad%60%20can%20be%20used%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20pad%20strings.%0A%20%20%20%20%20%20%20%20let%20decimals%20%3D%20f.precision().unwrap_or(3)%3B%0A%20%20%20%20%20%20%20%20let%20string%20%3D%20format!(%22%7B%3A.*%7D%22%2C%20decimals%2C%20magnitude)%3B%0A%20%20%20%20%20%20%20%20f.pad_integral(true%2C%20%22%22%2C%20%26string)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20myvector%20%3D%20Vector2D%20%7B%20x%3A%203%2C%20y%3A%204%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20myvector)%3B%20%20%20%20%20%20%20%2F%2F%20%3D%3E%20%22(3%2C%204)%22%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20myvector)%3B%20%20%20%20%20%2F%2F%20%3D%3E%20%22Vector2D%20%7Bx%3A%203%2C%20y%3A4%7D%22%0A%20%20%20%20println!(%22%7B%3A10.3b%7D%22%2C%20myvector)%3B%20%2F%2F%20%3D%3E%20%22%20%20%20%20%205.000%22%0A%7D%0A">Run</a></pre>
-
-<h3 id='fmtdisplay-vs-fmtdebug' class='section-header'><a href='#fmtdisplay-vs-fmtdebug'><code>fmt::Display</code> vs <code>fmt::Debug</code></a></h3>
+<h3 id="fmtdisplay-vs-fmtdebug" class="section-header"><a href="#fmtdisplay-vs-fmtdebug"><code>fmt::Display</code> vs <code>fmt::Debug</code></a></h3>
 <p>These two formatting traits have distinct purposes:</p>
 <ul>
 <li><code>fmt::Display</code> implementations assert that the type can be faithfully
@@ -231,8 +225,7 @@ most cases, using <code>#[derive(Debug)]</code> is sufficient and recommended.</
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{} {:?}&quot;</span>, <span class="number">3</span>, <span class="number">4</span>), <span class="string">&quot;3 4&quot;</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{} {:?}&quot;</span>, <span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>), <span class="string">&quot;a &#39;b&#39;&quot;</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{} {:?}&quot;</span>, <span class="string">&quot;foo\n&quot;</span>, <span class="string">&quot;bar\n&quot;</span>), <span class="string">&quot;foo\n \&quot;bar\\n\&quot;&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!(format!(%22%7B%7D%20%7B%3A%3F%7D%22%2C%203%2C%204)%2C%20%223%204%22)%3B%0Aassert_eq!(format!(%22%7B%7D%20%7B%3A%3F%7D%22%2C%20'a'%2C%20'b')%2C%20%22a%20'b'%22)%3B%0Aassert_eq!(format!(%22%7B%7D%20%7B%3A%3F%7D%22%2C%20%22foo%5Cn%22%2C%20%22bar%5Cn%22)%2C%20%22foo%5Cn%20%5C%22bar%5C%5Cn%5C%22%22)%3B%0A%7D">Run</a></pre>
-
-<h2 id='related-macros' class='section-header'><a href='#related-macros'>Related macros</a></h2>
+<h2 id="related-macros" class="section-header"><a href="#related-macros">Related macros</a></h2>
 <p>There are a number of related macros in the <code>format!</code> family. The ones that
 are currently implemented are:</p>
 
@@ -243,8 +236,7 @@ are currently implemented are:</p>
 <span class="macro">print</span><span class="macro">!</span>       <span class="comment">// the format string is printed to the standard output</span>
 <span class="macro">println</span><span class="macro">!</span>     <span class="comment">// same as print but appends a newline</span>
 <span class="macro">format_args</span><span class="macro">!</span> <span class="comment">// described below.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aformat!%20%20%20%20%20%20%2F%2F%20described%20above%0Awrite!%20%20%20%20%20%20%20%2F%2F%20first%20argument%20is%20a%20%26mut%20io%3A%3AWrite%2C%20the%20destination%0Awriteln!%20%20%20%20%20%2F%2F%20same%20as%20write%20but%20appends%20a%20newline%0Aprint!%20%20%20%20%20%20%20%2F%2F%20the%20format%20string%20is%20printed%20to%20the%20standard%20output%0Aprintln!%20%20%20%20%20%2F%2F%20same%20as%20print%20but%20appends%20a%20newline%0Aformat_args!%20%2F%2F%20described%20below.%0A%7D">Run</a></pre>
-
-<h3 id='write' class='section-header'><a href='#write'><code>write!</code></a></h3>
+<h3 id="write" class="section-header"><a href="#write"><code>write!</code></a></h3>
 <p>This and <code>writeln</code> are two macros which are used to emit the format string
 to a specified stream. This is used to prevent intermediate allocations of
 format strings and instead directly write the output. Under the hood, this
@@ -255,8 +247,7 @@ function is actually invoking the <code>write_fmt</code> function defined on the
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
 <span class="macro">write</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">w</span>, <span class="string">&quot;Hello {}!&quot;</span>, <span class="string">&quot;world&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused_must_use)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3AWrite%3B%0Alet%20mut%20w%20%3D%20Vec%3A%3Anew()%3B%0Awrite!(%26mut%20w%2C%20%22Hello%20%7B%7D!%22%2C%20%22world%22)%3B%0A%7D">Run</a></pre>
-
-<h3 id='print' class='section-header'><a href='#print'><code>print!</code></a></h3>
+<h3 id="print" class="section-header"><a href="#print"><code>print!</code></a></h3>
 <p>This and <code>println</code> emit their output to stdout. Similarly to the <code>write!</code>
 macro, the goal of these macros is to avoid intermediate allocations when
 printing output. Example usage is:</p>
@@ -264,8 +255,7 @@ printing output. Example usage is:</p>
 <pre class="rust rust-example-rendered">
 <span class="macro">print</span><span class="macro">!</span>(<span class="string">&quot;Hello {}!&quot;</span>, <span class="string">&quot;world&quot;</span>);
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;I have a newline {}&quot;</span>, <span class="string">&quot;character at the end&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aprint!(%22Hello%20%7B%7D!%22%2C%20%22world%22)%3B%0Aprintln!(%22I%20have%20a%20newline%20%7B%7D%22%2C%20%22character%20at%20the%20end%22)%3B%0A%7D">Run</a></pre>
-
-<h3 id='format_args' class='section-header'><a href='#format_args'><code>format_args!</code></a></h3>
+<h3 id="format_args" class="section-header"><a href="#format_args"><code>format_args!</code></a></h3>
 <p>This is a curious macro which is used to safely pass around
 an opaque object describing the format string. This object
 does not require any heap allocations to create, and it only
@@ -292,35 +282,32 @@ when dealing formatting strings.</p>
 <p>For example, a logging library could use the standard formatting syntax, but
 it would internally pass around this structure until it has been determined
 where output should go to.</p>
-
-<h1 id='syntax' class='section-header'><a href='#syntax'>Syntax</a></h1>
+<h1 id="syntax" class="section-header"><a href="#syntax">Syntax</a></h1>
 <p>The syntax for the formatting language used is drawn from other languages,
 so it should not be too alien. Arguments are formatted with Python-like
 syntax, meaning that arguments are surrounded by <code>{}</code> instead of the C-like
 <code>%</code>. The actual grammar for the formatting syntax is:</p>
 <pre><code class="language-text">format_string := &lt;text&gt; [ maybe-format &lt;text&gt; ] *
-maybe-format := &#39;{&#39; &#39;{&#39; | &#39;}&#39; &#39;}&#39; | &lt;format&gt;
-format := &#39;{&#39; [ argument ] [ &#39;:&#39; format_spec ] &#39;}&#39;
+maybe-format := '{' '{' | '}' '}' | &lt;format&gt;
+format := '{' [ argument ] [ ':' format_spec ] '}'
 argument := integer | identifier
 
-format_spec := [[fill]align][sign][&#39;#&#39;][&#39;0&#39;][width][&#39;.&#39; precision][type]
+format_spec := [[fill]align][sign]['#']['0'][width]['.' precision][type]
 fill := character
-align := &#39;&lt;&#39; | &#39;^&#39; | &#39;&gt;&#39;
-sign := &#39;+&#39; | &#39;-&#39;
+align := '&lt;' | '^' | '&gt;'
+sign := '+' | '-'
 width := count
-precision := count | &#39;*&#39;
-type := identifier | &#39;&#39;
+precision := count | '*'
+type := identifier | ''
 count := parameter | integer
-parameter := argument &#39;$&#39;
+parameter := argument '$'
 </code></pre>
-
-<h1 id='formatting-parameters' class='section-header'><a href='#formatting-parameters'>Formatting Parameters</a></h1>
+<h1 id="formatting-parameters" class="section-header"><a href="#formatting-parameters">Formatting Parameters</a></h1>
 <p>Each argument being formatted can be transformed by a number of formatting
 parameters (corresponding to <code>format_spec</code> in the syntax above). These
-parameters affect the string representation of what&#39;s being formatted. This
-syntax draws heavily from Python&#39;s, so it may seem a bit familiar.</p>
-
-<h2 id='fillalignment' class='section-header'><a href='#fillalignment'>Fill/Alignment</a></h2>
+parameters affect the string representation of what's being formatted. This
+syntax draws heavily from Python's, so it may seem a bit familiar.</p>
+<h2 id="fillalignment" class="section-header"><a href="#fillalignment">Fill/Alignment</a></h2>
 <p>The fill character is provided normally in conjunction with the <code>width</code>
 parameter. This indicates that if the value being formatted is smaller than
 <code>width</code> some extra characters will be printed around it. The extra
@@ -334,8 +321,7 @@ following options:</p>
 <p>Note that alignment may not be implemented by some types. A good way
 to ensure padding is applied is to format your input, then use this
 resulting string to pad your output.</p>
-
-<h2 id='sign0' class='section-header'><a href='#sign0'>Sign/<code>#</code>/<code>0</code></a></h2>
+<h2 id="sign0" class="section-header"><a href="#sign0">Sign/<code>#</code>/<code>0</code></a></h2>
 <p>These can all be interpreted as flags for a particular formatter.</p>
 <ul>
 <li><code>+</code> - This is intended for numeric types and indicates that the sign
@@ -364,10 +350,9 @@ and before the digits. When used together with the <code>#</code> flag, a simila
 rule applies: padding zeroes are inserted after the prefix but before
 the digits.</li>
 </ul>
-
-<h2 id='width' class='section-header'><a href='#width'>Width</a></h2>
+<h2 id="width" class="section-header"><a href="#width">Width</a></h2>
 <p>This is a parameter for the &quot;minimum width&quot; that the format should take up.
-If the value&#39;s string does not fill up this many characters, then the
+If the value's string does not fill up this many characters, then the
 padding specified by fill/alignment will be used to take up the required
 space.</p>
 <p>The default fill/alignment for non-numerics is a space and left-aligned. The
@@ -385,10 +370,9 @@ a <code>usize</code> specifying the width, for example:</p>
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Hello {1:0$}!&quot;</span>, <span class="number">5</span>, <span class="string">&quot;x&quot;</span>);
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Hello {:width$}!&quot;</span>, <span class="string">&quot;x&quot;</span>, <span class="ident">width</span> <span class="op">=</span> <span class="number">5</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20All%20of%20these%20print%20%22Hello%20x%20%20%20%20!%22%0Aprintln!(%22Hello%20%7B%3A5%7D!%22%2C%20%22x%22)%3B%0Aprintln!(%22Hello%20%7B%3A1%24%7D!%22%2C%20%22x%22%2C%205)%3B%0Aprintln!(%22Hello%20%7B1%3A0%24%7D!%22%2C%205%2C%20%22x%22)%3B%0Aprintln!(%22Hello%20%7B%3Awidth%24%7D!%22%2C%20%22x%22%2C%20width%20%3D%205)%3B%0A%7D">Run</a></pre>
 <p>Referring to an argument with the dollar syntax does not affect the &quot;next
-argument&quot; counter, so it&#39;s usually a good idea to refer to arguments by
+argument&quot; counter, so it's usually a good idea to refer to arguments by
 position, or use named arguments.</p>
-
-<h2 id='precision' class='section-header'><a href='#precision'>Precision</a></h2>
+<h2 id="precision" class="section-header"><a href="#precision">Precision</a></h2>
 <p>For non-numeric types, this can be considered a &quot;maximum width&quot;. If the resulting string is
 longer than this width, then it is truncated down to this many characters and that truncated
 value is emitted with proper <code>fill</code>, <code>alignment</code> and <code>width</code> if those parameters are set.</p>
@@ -447,8 +431,7 @@ to the <em>value</em> to print, and the <code>precision</code> must come in the 
 Hello, `123` has 3 characters
 Hello, `     123` has 3 right-aligned characters
 </code></pre>
-
-<h1 id='escaping' class='section-header'><a href='#escaping'>Escaping</a></h1>
+<h1 id="escaping" class="section-header"><a href="#escaping">Escaping</a></h1>
 <p>The literal characters <code>{</code> and <code>}</code> may be included in a string by preceding
 them with the same character. For example, the <code>{</code> character is escaped with
 <code>{{</code> and the <code>}</code> character is escaped with <code>}}</code>.</p>

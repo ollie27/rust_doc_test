@@ -58,7 +58,7 @@ trait, but since the assignment operator (<code>=</code>) has no backing trait, 
 is no way of overloading its semantics. Additionally, this module does not
 provide any mechanism to create new operators. If traitless overloading or
 custom operators are required, you should look toward macros or compiler
-plugins to extend Rust&#39;s syntax.</p>
+plugins to extend Rust's syntax.</p>
 <p>Note that the <code>&amp;&amp;</code> and <code>||</code> operators short-circuit, i.e. they only
 evaluate their second operand if it contributes to the result. Since this
 behavior is not enforceable by traits, <code>&amp;&amp;</code> and <code>||</code> are not supported as
@@ -74,8 +74,7 @@ type <code>T</code> which is supposed to support addition, it is probably a good
 idea to have both <code>T</code> and <code>&amp;T</code> implement the traits <a href="trait.Add.html"><code>Add&lt;T&gt;</code></a> and
 <a href="trait.Add.html"><code>Add&lt;&amp;T&gt;</code></a> so that generic code can be written without unnecessary
 cloning.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>This example creates a <code>Point</code> struct that implements <a href="trait.Add.html"><code>Add</code></a> and <a href="trait.Sub.html"><code>Sub</code></a>,
 and then demonstrates adding and subtracting two <code>Point</code>s.</p>
 

@@ -61,7 +61,7 @@
     fn <a href='#method.chain' class='fnname'>chain</a>&lt;R:&nbsp;<a class="trait" href="../../std/io/trait.Read.html" title="trait std::io::Read">Read</a>&gt;(self, next: R) -&gt; <a class="struct" href="../../std/io/struct.Chain.html" title="struct std::io::Chain">Chain</a>&lt;Self, R&gt; <span class="where fmt-newline">where Self: <a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span> { ... }
     fn <a href='#method.take' class='fnname'>take</a>(self, limit: <a class="primitive" href="../primitive.u64.html">u64</a>) -&gt; <a class="struct" href="../../std/io/struct.Take.html" title="struct std::io::Take">Take</a>&lt;Self&gt; <span class="where fmt-newline">where Self: <a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span> { ... }
 }</pre><div class='docblock'><p>The <code>Read</code> trait allows for reading bytes from a source.</p>
-<p>Implementors of the <code>Read</code> trait are sometimes called &#39;readers&#39;.</p>
+<p>Implementors of the <code>Read</code> trait are sometimes called 'readers'.</p>
 <p>Readers are defined by one required method, <code>read()</code>. Each call to <code>read</code>
 will attempt to pull bytes from this source into a provided buffer. A
 number of other methods are implemented in terms of <code>read()</code>, giving
@@ -73,8 +73,7 @@ trait.</p>
 <p>Please note that each call to <code>read</code> may involve a system call, and
 therefore, using something that implements <a href="trait.BufRead.html"><code>BufRead</code></a>, such as
 <a href="struct.BufReader.html"><code>BufReader</code></a>, will be more efficient.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -119,13 +118,11 @@ reader will <em>always</em> no longer be able to produce bytes.</li>
 function is called, implementations cannot rely on any property of the
 contents of <code>buf</code> being true. It is recommended that implementations
 only write data to <code>buf</code> instead of reading its contents.</p>
-
-<h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
+<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>If this function encounters any form of I/O or other error, an error
 variant will be returned. If an error is returned then it must be
 guaranteed that no bytes were read.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -147,16 +144,14 @@ guaranteed that no bytes were read.</p>
 <code>buf</code> until <code>read</code> returns either <code>Ok(0)</code> or an error of
 non-<code>ErrorKind::Interrupted</code> kind.</p>
 <p>If successful, this function will return the total number of bytes read.</p>
-
-<h1 id='errors-1' class='section-header'><a href='#errors-1'>Errors</a></h1>
+<h1 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h1>
 <p>If this function encounters an error of the kind
 <code>ErrorKind::Interrupted</code> then the error is ignored and the operation
 will continue.</p>
 <p>If any other read error is encountered then this function immediately
 returns. Any bytes which have already been read will be appended to
 <code>buf</code>.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -172,13 +167,11 @@ returns. Any bytes which have already been read will be appended to
 </div><h3 id='method.read_to_string' class='method'><span id='read_to_string.v' class='invisible'><code>fn <a href='#method.read_to_string' class='fnname'>read_to_string</a>(&amp;mut self, buf: &amp;mut <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a>) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='docblock'><p>Read all bytes until EOF in this source, placing them into <code>buf</code>.</p>
 <p>If successful, this function returns the number of bytes which were read
 and appended to <code>buf</code>.</p>
-
-<h1 id='errors-2' class='section-header'><a href='#errors-2'>Errors</a></h1>
+<h1 id="errors-2" class="section-header"><a href="#errors-2">Errors</a></h1>
 <p>If the data in this stream is <em>not</em> valid UTF-8 then an error is
 returned and <code>buf</code> is unchanged.</p>
 <p>See <a href="#method.read_to_end"><code>read_to_end</code></a> for other error semantics.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -197,8 +190,7 @@ specified buffer <code>buf</code>.</p>
 function is called, implementations cannot rely on any property of the
 contents of <code>buf</code> being true. It is recommended that implementations
 only write data to <code>buf</code> instead of reading its contents.</p>
-
-<h1 id='errors-3' class='section-header'><a href='#errors-3'>Errors</a></h1>
+<h1 id="errors-3" class="section-header"><a href="#errors-3">Errors</a></h1>
 <p>If this function encounters an error of the kind
 <code>ErrorKind::Interrupted</code> then the error is ignored and the operation
 will continue.</p>
@@ -210,8 +202,7 @@ returns. The contents of <code>buf</code> are unspecified in this case.</p>
 <p>If this function returns an error, it is unspecified how many bytes it
 has read, but it will never read more than would be necessary to
 completely fill the buffer.</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -227,8 +218,7 @@ completely fill the buffer.</p>
 </div><h3 id='method.by_ref' class='method'><span id='by_ref.v' class='invisible'><code>fn <a href='#method.by_ref' class='fnname'>by_ref</a>(&amp;mut self) -&gt; &amp;mut Self <span class="where fmt-newline">where Self: <a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span></h3><div class='docblock'><p>Creates a &quot;by reference&quot; adaptor for this instance of <code>Read</code>.</p>
 <p>The returned adaptor also implements <code>Read</code> and will simply borrow this
 current reader.</p>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -254,8 +244,7 @@ current reader.</p>
 <p>The returned type implements <code>Iterator</code> where the <code>Item</code> is <code>Result&lt;u8, R::Err&gt;</code>.  The yielded item is <code>Ok</code> if a byte was successfully read and
 <code>Err</code> otherwise for I/O errors. EOF is mapped to returning <code>None</code> from
 this iterator.</p>
-
-<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -277,8 +266,7 @@ EOF is reached for this reader. Otherwise each element yielded will be a
 occurred or where decoding failed.</p>
 <p>Currently this adaptor will discard intermediate data read, and should
 be avoided if this is not desired.</p>
-
-<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -296,8 +284,7 @@ be avoided if this is not desired.</p>
 <p>The returned <code>Read</code> instance will first read all bytes from this object
 until EOF is encountered. Afterwards the output is equivalent to the
 output of <code>next</code>.</p>
-
-<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -319,8 +306,7 @@ output of <code>next</code>.</p>
 <code>limit</code> bytes, after which it will always return EOF (<code>Ok(0)</code>). Any
 read errors will not count towards the number of bytes read and future
 calls to <code>read</code> may succeed.</p>
-
-<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
+<h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <p><a href="../fs/struct.File.html"><code>File</code></a>s implement <code>Read</code>:</p>
 
 <pre class="rust rust-example-rendered">

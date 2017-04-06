@@ -53,12 +53,11 @@
 <p>The function will never return and will immediately terminate the current
 process in a platform specific &quot;abnormal&quot; manner.</p>
 <p>Note that because this function never returns, and that it terminates the
-process, no destructors on the current stack or any other thread&#39;s stack
+process, no destructors on the current stack or any other thread's stack
 will be run. If a clean shutdown is needed it is recommended to only call
 this function at a known point where there are no more destructors left
 to run.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">process</span>;
 

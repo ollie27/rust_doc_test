@@ -56,8 +56,7 @@ APIs binding a system timeout will typically round up the nanosecond
 precision if the underlying system does not support that level of precision.</p>
 <p><code>Duration</code>s implement many common traits, including <a href="../../std/ops/trait.Add.html"><code>Add</code></a>, <a href="../../std/ops/trait.Sub.html"><code>Sub</code></a>, and other
 <a href="../../std/ops/index.html"><code>ops</code></a> traits.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
@@ -74,28 +73,24 @@ precision if the underlying system does not support that level of precision.</p>
 additional nanosecond precision.</p>
 <p>If the nanoseconds is greater than 1 billion (the number of nanoseconds
 in a second), then it will carry over into the seconds provided.</p>
-
-<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
 <p>This constructor will panic if the carry from the nanoseconds overflows
 the seconds counter.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
 <span class="kw">let</span> <span class="ident">five_seconds</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">new</span>(<span class="number">5</span>, <span class="number">0</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Atime%3A%3ADuration%3B%0A%0Alet%20five_seconds%20%3D%20Duration%3A%3Anew(5%2C%200)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.from_secs' class="method"><span id='from_secs.v' class='invisible'><code>fn <a href='#method.from_secs' class='fnname'>from_secs</a>(secs: <a class="primitive" href="../primitive.u64.html">u64</a>) -&gt; <a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a></code></span></h4>
 <div class='docblock'><p>Creates a new <code>Duration</code> from the specified number of seconds.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
 <span class="kw">let</span> <span class="ident">five_seconds</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">from_secs</span>(<span class="number">5</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Atime%3A%3ADuration%3B%0A%0Alet%20five_seconds%20%3D%20Duration%3A%3Afrom_secs(5)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.from_millis' class="method"><span id='from_millis.v' class='invisible'><code>fn <a href='#method.from_millis' class='fnname'>from_millis</a>(millis: <a class="primitive" href="../primitive.u64.html">u64</a>) -&gt; <a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a></code></span></h4>
 <div class='docblock'><p>Creates a new <code>Duration</code> from the specified number of milliseconds.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
@@ -104,8 +99,7 @@ the seconds counter.</p>
 <div class='docblock'><p>Returns the number of whole seconds represented by this <code>Duration</code>.</p>
 <p>The extra precision represented by this duration is ignored (i.e. extra
 nanoseconds are not represented in the returned value).</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
@@ -116,8 +110,7 @@ nanoseconds are not represented in the returned value).</p>
 <p>This method does <strong>not</strong> return the length of the duration when
 represented by nanoseconds. The returned number always represents a
 fractional portion of a second (i.e. it is less than one billion).</p>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
 
@@ -126,8 +119,7 @@ fractional portion of a second (i.e. it is less than one billion).</p>
 </div><h4 id='method.checked_add' class="method"><span id='checked_add.v' class='invisible'><code>fn <a href='#method.checked_add' class='fnname'>checked_add</a>(self, rhs: <a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>&gt;</code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Checked <code>Duration</code> addition. Computes <code>self + other</code>, returning <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>
 if overflow occurred.</p>
-
-<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -138,8 +130,7 @@ if overflow occurred.</p>
 </div><h4 id='method.checked_sub' class="method"><span id='checked_sub.v' class='invisible'><code>fn <a href='#method.checked_sub' class='fnname'>checked_sub</a>(self, rhs: <a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>&gt;</code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Checked <code>Duration</code> subtraction. Computes <code>self - other</code>, returning <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>
 if the result would be negative or if underflow occurred.</p>
-
-<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
+<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -150,8 +141,7 @@ if the result would be negative or if underflow occurred.</p>
 </div><h4 id='method.checked_mul' class="method"><span id='checked_mul.v' class='invisible'><code>fn <a href='#method.checked_mul' class='fnname'>checked_mul</a>(self, rhs: <a class="primitive" href="../primitive.u32.html">u32</a>) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>&gt;</code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Checked <code>Duration</code> multiplication. Computes <code>self * other</code>, returning
 <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a> if overflow occurred.</p>
-
-<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
+<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -162,8 +152,7 @@ if the result would be negative or if underflow occurred.</p>
 </div><h4 id='method.checked_div' class="method"><span id='checked_div.v' class='invisible'><code>fn <a href='#method.checked_div' class='fnname'>checked_div</a>(self, rhs: <a class="primitive" href="../primitive.u32.html">u32</a>) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>&gt;</code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Checked <code>Duration</code> division. Computes <code>self / other</code>, returning <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>
 if <code>other == 0</code>.</p>
-
-<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
+<h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">

@@ -54,15 +54,14 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dst</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>Write formatted data into a buffer</p>
-<p>This macro accepts a format string, a list of arguments, and a &#39;writer&#39;. Arguments will be
+<p>This macro accepts a format string, a list of arguments, and a 'writer'. Arguments will be
 formatted according to the specified format string and the result will be passed to the writer.
 The writer may be any value with a <code>write_fmt</code> method; generally this comes from an
 implementation of either the <a href="../std/fmt/trait.Write.html"><code>std::fmt::Write</code></a> or the <a href="../std/io/trait.Write.html"><code>std::io::Write</code></a> trait. The macro
-returns whatever the &#39;write_fmt&#39; method returns; commonly a <a href="../std/fmt/type.Result.html"><code>std::fmt::Result</code></a>, or an
+returns whatever the 'write_fmt' method returns; commonly a <a href="../std/fmt/type.Result.html"><code>std::fmt::Result</code></a>, or an
 <a href="../std/io/type.Result.html"><code>io::Result</code></a>.</p>
 <p>See <a href="../std/fmt/index.html"><code>std::fmt</code></a> for more information on the format string syntax.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span>;
 

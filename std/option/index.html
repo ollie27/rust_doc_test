@@ -88,9 +88,8 @@ of a value and take action, always accounting for the <a href="enum.Option.html#
     <span class="comment">// The division was invalid</span>
     <span class="prelude-val">None</span>    <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Cannot divide by 0&quot;</span>),
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20divide(numerator%3A%20f64%2C%20denominator%3A%20f64)%20-%3E%20Option%3Cf64%3E%20%7B%0A%20%20%20%20if%20denominator%20%3D%3D%200.0%20%7B%0A%20%20%20%20%20%20%20%20None%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Some(numerator%20%2F%20denominator)%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20The%20return%20value%20of%20the%20function%20is%20an%20option%0Alet%20result%20%3D%20divide(2.0%2C%203.0)%3B%0A%0A%2F%2F%20Pattern%20match%20to%20retrieve%20the%20value%0Amatch%20result%20%7B%0A%20%20%20%20%2F%2F%20The%20division%20was%20valid%0A%20%20%20%20Some(x)%20%3D%3E%20println!(%22Result%3A%20%7B%7D%22%2C%20x)%2C%0A%20%20%20%20%2F%2F%20The%20division%20was%20invalid%0A%20%20%20%20None%20%20%20%20%3D%3E%20println!(%22Cannot%20divide%20by%200%22)%2C%0A%7D%0A%7D">Run</a></pre>
-
-<h1 id='options-and-pointers-nullable-pointers' class='section-header'><a href='#options-and-pointers-nullable-pointers'>Options and pointers (&quot;nullable&quot; pointers)</a></h1>
-<p>Rust&#39;s pointer types must always point to a valid location; there are
+<h1 id="options-and-pointers-nullable-pointers" class="section-header"><a href="#options-and-pointers-nullable-pointers">Options and pointers (&quot;nullable&quot; pointers)</a></h1>
+<p>Rust's pointer types must always point to a valid location; there are
 no &quot;null&quot; pointers. Instead, Rust has <em>optional</em> pointers, like
 the optional owned box, <a href="enum.Option.html"><code>Option</code></a><code>&lt;</code><a href="../../std/boxed/struct.Box.html"><code>Box&lt;T&gt;</code></a><code>&gt;</code>.</p>
 <p>The following example uses <a href="enum.Option.html"><code>Option</code></a> to create an optional box of
@@ -116,8 +115,7 @@ not (<a href="enum.Option.html#variant.None"><code>None</code></a>).</p>
 common that Rust does special optimizations to make the
 representation of <a href="enum.Option.html"><code>Option</code></a><code>&lt;</code><a href="../../std/boxed/struct.Box.html"><code>Box&lt;T&gt;</code></a><code>&gt;</code> a single pointer. Optional pointers
 in Rust are stored as efficiently as any other pointer type.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic pattern matching on <a href="enum.Option.html"><code>Option</code></a>:</p>
 
 <pre class="rust rust-example-rendered">

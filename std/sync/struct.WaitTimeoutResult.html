@@ -55,8 +55,7 @@ due to a time out or not.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/sync/struct.WaitTimeoutResult.html" title="struct std::sync::WaitTimeoutResult">WaitTimeoutResult</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/sync/condvar.rs.html#29-76' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.timed_out' class="method"><span id='timed_out.v' class='invisible'><code>fn <a href='#method.timed_out' class='fnname'>timed_out</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Returns whether the wait was known to have timed out.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>This example spawns a thread which will update the boolean value and
 then wait 100 milliseconds before notifying the condvar.</p>
 <p>The main thread will wait with a timeout on the condvar and then leave

@@ -75,7 +75,7 @@ There are two forms of this macro:</p>
 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>; <span class="number">3</span>];
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">v</span>, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20vec!%5B1%3B%203%5D%3B%0Aassert_eq!(v%2C%20%5B1%2C%201%2C%201%5D)%3B%0A%7D">Run</a></pre>
 <p>Note that unlike array expressions this syntax supports all elements
-which implement <code>Clone</code> and the number of elements doesn&#39;t have to be
+which implement <code>Clone</code> and the number of elements doesn't have to be
 a constant.</p>
 <p>This will use <code>clone()</code> to duplicate an expression, so one should be careful
 using this with types having a nonstandard <code>Clone</code> implementation. For

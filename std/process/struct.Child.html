@@ -59,8 +59,7 @@
 process is created via the <a href="struct.Command.html"><code>Command</code></a> struct, which configures the
 spawning process and can itself be constructed using a builder-style
 interface.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">process</span>::<span class="ident">Command</span>;
 
@@ -73,8 +72,7 @@ interface.</p>
                  .<span class="ident">expect</span>(<span class="string">&quot;failed to wait on child&quot;</span>);
 
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">ecode</span>.<span class="ident">success</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0Alet%20mut%20child%20%3D%20Command%3A%3Anew(%22%2Fbin%2Fcat%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.arg(%22file.txt%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.spawn()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.expect(%22failed%20to%20execute%20child%22)%3B%0A%0Alet%20ecode%20%3D%20child.wait()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.expect(%22failed%20to%20wait%20on%20child%22)%3B%0A%0Aassert!(ecode.success())%3B%0A%7D">Run</a></pre>
-
-<h1 id='note' class='section-header'><a href='#note'>Note</a></h1>
+<h1 id="note" class="section-header"><a href="#note">Note</a></h1>
 <p>Take note that there is no implementation of <a href="../../core/ops/trait.Drop.html"><code>Drop</code></a> for child processes,
 so if you do not ensure the <code>Child</code> has exited then it will continue to
 run, even after the <code>Child</code> handle to the child process has gone out of
@@ -85,21 +83,20 @@ continuing.</p>
 </div><h2 class='fields'>Fields</h2><span id='structfield.stdin' class="structfield">
                            <span id='stdin.v' class='invisible'>
                            <code>stdin: <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/process/struct.ChildStdin.html" title="struct std::process::ChildStdin">ChildStdin</a>&gt;</code>
-                           </span></span><div class='docblock'><p>The handle for writing to the child&#39;s stdin, if it has been captured</p>
+                           </span></span><div class='docblock'><p>The handle for writing to the child's stdin, if it has been captured</p>
 </div><span id='structfield.stdout' class="structfield">
                            <span id='stdout.v' class='invisible'>
                            <code>stdout: <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/process/struct.ChildStdout.html" title="struct std::process::ChildStdout">ChildStdout</a>&gt;</code>
-                           </span></span><div class='docblock'><p>The handle for reading from the child&#39;s stdout, if it has been captured</p>
+                           </span></span><div class='docblock'><p>The handle for reading from the child's stdout, if it has been captured</p>
 </div><span id='structfield.stderr' class="structfield">
                            <span id='stderr.v' class='invisible'>
                            <code>stderr: <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/process/struct.ChildStderr.html" title="struct std::process::ChildStderr">ChildStderr</a>&gt;</code>
-                           </span></span><div class='docblock'><p>The handle for reading from the child&#39;s stderr, if it has been captured</p>
+                           </span></span><div class='docblock'><p>The handle for reading from the child's stderr, if it has been captured</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/process/struct.Child.html" title="struct std::process::Child">Child</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#813-988' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.kill' class="method"><span id='kill.v' class='invisible'><code>fn <a href='#method.kill' class='fnname'>kill</a>(&amp;mut self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../primitive.tuple.html">()</a>&gt;</code></span></h4>
 <div class='docblock'><p>Forces the child to exit. This is equivalent to sending a
 SIGKILL on unix platforms.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -113,8 +110,7 @@ SIGKILL on unix platforms.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0Alet%20mut%20command%20%3D%20Command%3A%3Anew(%22yes%22)%3B%0Aif%20let%20Ok(mut%20child)%20%3D%20command.spawn()%20%7B%0A%20%20%20%20child.kill().expect(%22command%20wasn't%20running%22)%3B%0A%7D%20else%20%7B%0A%20%20%20%20println!(%22yes%20command%20didn't%20start%22)%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.id' class="method"><span id='id.v' class='invisible'><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.u32.html">u32</a></code><div class='since' title='Stable since Rust version 1.3.0'>1.3.0</div></span></h4>
 <div class='docblock'><p>Returns the OS-assigned process identifier associated with this child.</p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -134,8 +130,7 @@ after it has been called at least once.</p>
 before waiting. This helps avoid deadlock: it ensures that the
 child does not block waiting for input from the parent, while
 the parent waits for the child to exit.</p>
-
-<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -160,8 +155,7 @@ child has already exited.</p>
 exit status is not available at this time then <code>Ok(None)</code> is returned.
 If an error occurs, then that error is returned.</p>
 <p>Note that unlike <code>wait</code>, this function will not attempt to drop stdin.</p>
-
-<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -192,8 +186,7 @@ the parent waits for the child to exit.</p>
 In order to capture the output into this <code>Result&lt;Output&gt;</code> it is
 necessary to create new pipes between parent and child. Use
 <code>stdout(Stdio::piped())</code> or <code>stderr(Stdio::piped())</code>, respectively.</p>
-
-<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">process</span>::{<span class="ident">Command</span>, <span class="ident">Stdio</span>};
 

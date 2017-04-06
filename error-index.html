@@ -15,8 +15,7 @@
 <body>
 <h1>Rust Compiler Error Index</h1>
 <div class="error-described error-unused"><h2 id="E0001" class="section-header"><a href="#E0001">E0001</a></h2>
-
-<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler'>Note: this error code is no longer emitted by the compiler.</a></h4>
+<h4 id="note-this-error-code-is-no-longer-emitted-by-the-compiler" class="section-header"><a href="#note-this-error-code-is-no-longer-emitted-by-the-compiler">Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>This error suggests that the expression arm corresponding to the noted pattern
 will never be reached as for all possible values of the expression being
 matched, one of the preceding patterns will match.</p>
@@ -36,8 +35,7 @@ a wildcard arm above a more specific arm will make the latter arm irrelevant.</p
 arms.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0002" class="section-header"><a href="#E0002">E0002</a></h2>
-
-<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-1' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-1'>Note: this error code is no longer emitted by the compiler.</a></h4>
+<h4 id="note-this-error-code-is-no-longer-emitted-by-the-compiler-1" class="section-header"><a href="#note-this-error-code-is-no-longer-emitted-by-the-compiler-1">Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>This error indicates that an empty match expression is invalid because the type
 it is matching on is non-empty (there exist values of this type). In safe code
 it is impossible to create an instance of an empty type, so empty match
@@ -53,7 +51,7 @@ one or more cases to the match expression.</p>
         <span class="comment">// empty</span>
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aenum%20Empty%20%7B%7D%0A%0Afn%20foo(x%3A%20Empty)%20%7B%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20empty%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-<p>However, this won&#39;t:</p>
+<p>However, this won't:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
@@ -63,8 +61,7 @@ one or more cases to the match expression.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo(x%3A%20Option%3CString%3E)%20%7B%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20empty%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0003" class="section-header"><a href="#E0003">E0003</a></h2>
-
-<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-2' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-2'>Note: this error code is no longer emitted by the compiler.</a></h4>
+<h4 id="note-this-error-code-is-no-longer-emitted-by-the-compiler-2" class="section-header"><a href="#note-this-error-code-is-no-longer-emitted-by-the-compiler-2">Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>Not-a-Number (NaN) values cannot be compared for equality and hence can never
 match the input to a match expression. So, the following will not compile:</p>
 
@@ -240,7 +237,7 @@ can be cloned, here is a not-so-specific solution:</p>
 move its ownership, so the code works.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0009" class="section-header"><a href="#E0009">E0009</a></h2>
-<p>In a pattern, all values that don&#39;t implement the <code>Copy</code> trait have to be bound
+<p>In a pattern, all values that don't implement the <code>Copy</code> trait have to be bound
 the same way. The goal here is to avoid binding simultaneously by-move and
 by-ref.</p>
 <p>This limitation may be removed in a future version of Rust.</p>
@@ -256,7 +253,7 @@ by-ref.</p>
     <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>()
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20X%20%7B%20x%3A%20()%2C%20%7D%0A%0Alet%20x%20%3D%20Some((X%20%7B%20x%3A%20()%20%7D%2C%20X%20%7B%20x%3A%20()%20%7D))%3B%0Amatch%20x%20%7B%0A%20%20%20%20Some((y%2C%20ref%20z))%20%3D%3E%20%7B%7D%2C%20%2F%2F%20error%3A%20cannot%20bind%20by-move%20and%20by-ref%20in%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20same%20pattern%0A%20%20%20%20None%20%3D%3E%20panic!()%0A%7D%0A%7D">Run</a></pre>
 <p>You have two solutions:</p>
-<p>Solution #1: Bind the pattern&#39;s values the same way.</p>
+<p>Solution #1: Bind the pattern's values the same way.</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">X</span> { <span class="ident">x</span>: (), }
@@ -415,7 +412,7 @@ by a different name, you should rename it explicitly.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0027" class="section-header"><a href="#E0027">E0027</a></h2>
 <p>This error indicates that a pattern for a struct fails to specify a sub-pattern
-for every one of the struct&#39;s fields. Ensure that each field from the struct&#39;s
+for every one of the struct's fields. Ensure that each field from the struct's
 definition is mentioned in the pattern, or use <code>..</code> to ignore unwanted fields.</p>
 <p>For example:</p>
 
@@ -476,7 +473,7 @@ a guard.</p>
 <div class="error-described error-used"><h2 id="E0033" class="section-header"><a href="#E0033">E0033</a></h2>
 <p>This error indicates that a pointer to a trait type cannot be implicitly
 dereferenced by a pattern. Every trait defines a type, but because the
-size of trait implementors isn&#39;t fixed, this type has no compile-time size.
+size of trait implementors isn't fixed, this type has no compile-time size.
 Therefore, all accesses to trait types must be through pointers. If you
 encounter this error you should try to avoid dereferencing the pointer.</p>
 
@@ -494,7 +491,7 @@ Reference:</p>
 <p>https://doc.rust-lang.org/reference.html#trait-objects</p>
 </div>
 <div class="error-described error-used"><h2 id="E0034" class="section-header"><a href="#E0034">E0034</a></h2>
-<p>The compiler doesn&#39;t know what method to call because more than one method
+<p>The compiler doesn't know what method to call because more than one method
 has the same prototype. Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -515,7 +512,7 @@ has the same prototype. Erroneous code example:</p>
     <span class="ident">Test</span>::<span class="ident">foo</span>() <span class="comment">// error, which foo() to call?</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20Test%3B%0A%0Atrait%20Trait1%20%7B%0A%20%20%20%20fn%20foo()%3B%0A%7D%0A%0Atrait%20Trait2%20%7B%0A%20%20%20%20fn%20foo()%3B%0A%7D%0A%0Aimpl%20Trait1%20for%20Test%20%7B%20fn%20foo()%20%7B%7D%20%7D%0Aimpl%20Trait2%20for%20Test%20%7B%20fn%20foo()%20%7B%7D%20%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20Test%3A%3Afoo()%20%2F%2F%20error%2C%20which%20foo()%20to%20call%3F%0A%7D%0A">Run</a></pre>
 <p>To avoid this error, you have to keep only one of them and remove the others.
-So let&#39;s take our example and fix it:</p>
+So let's take our example and fix it:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Test</span>;
@@ -573,7 +570,7 @@ trait:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=trait%20F%20%7B%0A%20%20%20%20fn%20m(%26self)%3B%0A%7D%0A%0Atrait%20G%20%7B%0A%20%20%20%20fn%20m(%26self)%3B%0A%7D%0A%0Astruct%20X%3B%0A%0Aimpl%20F%20for%20X%20%7B%20fn%20m(%26self)%20%7B%20println!(%22I%20am%20F%22)%3B%20%7D%20%7D%0Aimpl%20G%20for%20X%20%7B%20fn%20m(%26self)%20%7B%20println!(%22I%20am%20G%22)%3B%20%7D%20%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20X%3B%0A%0A%20%20%20%20F%3A%3Am(%26f)%3B%20%2F%2F%20it%20displays%20%22I%20am%20F%22%0A%20%20%20%20G%3A%3Am(%26f)%3B%20%2F%2F%20it%20displays%20%22I%20am%20G%22%0A%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0035" class="section-header"><a href="#E0035">E0035</a></h2>
-<p>You tried to give a type parameter where it wasn&#39;t needed. Erroneous code
+<p>You tried to give a type parameter where it wasn't needed. Erroneous code
 example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -649,16 +646,15 @@ a method. Erroneous code example:</p>
 requirements are satisfied by the trait in question.</p>
 <p>Trait objects are a form of dynamic dispatch and use a dynamically sized type
 for the inner type. So, for a given trait <code>Trait</code>, when <code>Trait</code> is treated as a
-type, as in <code>Box&lt;Trait&gt;</code>, the inner type is &#39;unsized&#39;. In such cases the boxed
-pointer is a &#39;fat pointer&#39; that contains an extra pointer to a table of methods
+type, as in <code>Box&lt;Trait&gt;</code>, the inner type is 'unsized'. In such cases the boxed
+pointer is a 'fat pointer' that contains an extra pointer to a table of methods
 (among other things) for dynamic dispatch. This design mandates some
 restrictions on the types of traits that are allowed to be used in trait
-objects, which are collectively termed as &#39;object safety&#39; rules.</p>
+objects, which are collectively termed as 'object safety' rules.</p>
 <p>Attempting to create a trait object for a non object-safe trait will trigger
 this error.</p>
 <p>There are various rules:</p>
-
-<h3 id='the-trait-cannot-require-self-sized' class='section-header'><a href='#the-trait-cannot-require-self-sized'>The trait cannot require <code>Self: Sized</code></a></h3>
+<h3 id="the-trait-cannot-require-self-sized" class="section-header"><a href="#the-trait-cannot-require-self-sized">The trait cannot require <code>Self: Sized</code></a></h3>
 <p>When <code>Trait</code> is treated as a type, the type does not implement the special
 <code>Sized</code> trait, because the type does not have a known size at compile time and
 can only be accessed behind a pointer. Thus, if we have a trait like the
@@ -673,8 +669,7 @@ following:</p>
 <p>Generally, <code>Self : Sized</code> is used to indicate that the trait should not be used
 as a trait object. If the trait comes from your own crate, consider removing
 this restriction.</p>
-
-<h3 id='method-references-the-self-type-in-its-arguments-or-return-type' class='section-header'><a href='#method-references-the-self-type-in-its-arguments-or-return-type'>Method references the <code>Self</code> type in its arguments or return type</a></h3>
+<h3 id="method-references-the-self-type-in-its-arguments-or-return-type" class="section-header"><a href="#method-references-the-self-type-in-its-arguments-or-return-type">Method references the <code>Self</code> type in its arguments or return type</a></h3>
 <p>This happens when a trait has a method like the following:</p>
 
 <pre class="rust rust-example-rendered">
@@ -693,7 +688,7 @@ this restriction.</p>
         <span class="number">1</span>
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Trait%20%7B%0A%20%20%20%20fn%20foo(%26self)%20-%3E%20Self%3B%0A%7D%0A%0Aimpl%20Trait%20for%20String%20%7B%0A%20%20%20%20fn%20foo(%26self)%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%22hi%22.to_owned()%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Trait%20for%20u8%20%7B%0A%20%20%20%20fn%20foo(%26self)%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%201%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-<p>(Note that <code>&amp;self</code> and <code>&amp;mut self</code> are okay, it&#39;s additional <code>Self</code> types which
+<p>(Note that <code>&amp;self</code> and <code>&amp;mut self</code> are okay, it's additional <code>Self</code> types which
 cause this problem.)</p>
 <p>In such a case, the compiler cannot predict the return type of <code>foo()</code> in a
 situation like the following:</p>
@@ -707,7 +702,7 @@ situation like the following:</p>
     <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">foo</span>(); <span class="comment">// What type is y?</span>
     <span class="comment">// ...</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Trait%20%7B%0A%20%20%20%20fn%20foo(%26self)%20-%3E%20Self%3B%0A%7D%0A%0Afn%20call_foo(x%3A%20Box%3CTrait%3E)%20%7B%0A%20%20%20%20let%20y%20%3D%20x.foo()%3B%20%2F%2F%20What%20type%20is%20y%3F%0A%20%20%20%20%2F%2F%20...%0A%7D%0A%7D">Run</a></pre>
-<p>If only some methods aren&#39;t object-safe, you can add a <code>where Self: Sized</code> bound
+<p>If only some methods aren't object-safe, you can add a <code>where Self: Sized</code> bound
 on them to mark them as explicitly unavailable to trait objects. The
 functionality will still be available to all other implementers, including
 <code>Box&lt;Trait&gt;</code> which is itself sized (assuming you <code>impl Trait for Box&lt;Trait&gt;</code>).</p>
@@ -720,9 +715,8 @@ functionality will still be available to all other implementers, including
 <p>Now, <code>foo()</code> can no longer be called on a trait object, but you will now be
 allowed to make a trait object, and that will be able to call any object-safe
 methods. With such a bound, one can still call <code>foo()</code> on types implementing
-that trait that aren&#39;t behind trait objects.</p>
-
-<h3 id='method-has-generic-type-parameters' class='section-header'><a href='#method-has-generic-type-parameters'>Method has generic type parameters</a></h3>
+that trait that aren't behind trait objects.</p>
+<h3 id="method-has-generic-type-parameters" class="section-header"><a href="#method-has-generic-type-parameters">Method has generic type parameters</a></h3>
 <p>As mentioned before, trait objects contain pointers to method tables. So, if we
 have:</p>
 
@@ -795,7 +789,7 @@ theoretically be an infinite number of types.</p>
     <span class="ident">thing</span>.<span class="ident">foo</span>(<span class="number">1</span>);
     <span class="ident">thing</span>.<span class="ident">foo</span>(<span class="string">&quot;hello&quot;</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20call_foo(thing%3A%20Box%3CTrait%3E)%20%7B%0A%20%20%20%20thing.foo(true)%3B%20%2F%2F%20this%20could%20be%20any%20one%20of%20the%208%20types%20above%0A%20%20%20%20thing.foo(1)%3B%0A%20%20%20%20thing.foo(%22hello%22)%3B%0A%7D%0A%7D">Run</a></pre>
-<p>We don&#39;t just need to create a table of all implementations of all methods of
+<p>We don't just need to create a table of all implementations of all methods of
 <code>Trait</code>, we need to create such a table, for each different type fed to
 <code>foo()</code>. In this case this turns out to be (10 types implementing <code>Trait</code>)*(3
 types being fed to <code>foo()</code>) = 30 implementations!</p>
@@ -813,9 +807,8 @@ parameters:</p>
 trait object (e.g. if <code>T: OtherTrait</code>, use <code>on: Box&lt;OtherTrait&gt;</code>). If the number
 of types you intend to feed to this method is limited, consider manually listing
 out the methods of different types.</p>
-
-<h3 id='method-has-no-receiver' class='section-header'><a href='#method-has-no-receiver'>Method has no receiver</a></h3>
-<p>Methods that do not take a <code>self</code> parameter can&#39;t be called since there won&#39;t be
+<h3 id="method-has-no-receiver" class="section-header"><a href="#method-has-no-receiver">Method has no receiver</a></h3>
+<p>Methods that do not take a <code>self</code> parameter can't be called since there won't be
 a way to get a pointer to the method table for them.</p>
 
 <pre class="rust rust-example-rendered">
@@ -830,8 +823,7 @@ an implementation.</p>
 <span class="kw">trait</span> <span class="ident">Foo</span> {
     <span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-&gt;</span> <span class="ident">u8</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20foo()%20-%3E%20u8%20where%20Self%3A%20Sized%3B%0A%7D%0A%7D">Run</a></pre>
-
-<h3 id='the-trait-cannot-use-self-as-a-type-parameter-in-the-supertrait-listing' class='section-header'><a href='#the-trait-cannot-use-self-as-a-type-parameter-in-the-supertrait-listing'>The trait cannot use <code>Self</code> as a type parameter in the supertrait listing</a></h3>
+<h3 id="the-trait-cannot-use-self-as-a-type-parameter-in-the-supertrait-listing" class="section-header"><a href="#the-trait-cannot-use-self-as-a-type-parameter-in-the-supertrait-listing">The trait cannot use <code>Self</code> as a type parameter in the supertrait listing</a></h3>
 <p>This is similar to the second sub-error, but subtler. It happens in situations
 like the following:</p>
 
@@ -859,14 +851,14 @@ like the following:</p>
 the method <code>get_a()</code> would return an object of unknown type when called on the
 function. <code>Self</code> type parameters let us make object safe traits no longer safe,
 so they are forbidden when specifying supertraits.</p>
-<p>There&#39;s no easy fix for this, generally code will need to be refactored so that
+<p>There's no easy fix for this, generally code will need to be refactored so that
 you no longer need to derive from <code>Super&lt;Self&gt;</code>.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0040" class="section-header"><a href="#E0040">E0040</a></h2>
 <p>It is not allowed to manually call destructors in Rust. It is also not
 necessary to do this since <code>drop</code> is called automatically whenever a value goes
 out of scope.</p>
-<p>Here&#39;s an example of this error:</p>
+<p>Here's an example of this error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Foo</span> {
@@ -885,7 +877,7 @@ out of scope.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Aimpl%20Drop%20for%20Foo%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22kaboom%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%20Foo%20%7B%20x%3A%20-7%20%7D%3B%0A%20%20%20%20x.drop()%3B%20%2F%2F%20error%3A%20explicit%20use%20of%20destructor%20method%0A%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0044" class="section-header"><a href="#E0044">E0044</a></h2>
-<p>You can&#39;t use type parameters on foreign items. Example of erroneous code:</p>
+<p>You can't use type parameters on foreign items. Example of erroneous code:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">extern</span> { <span class="kw">fn</span> <span class="ident">some_func</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>); }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20%7B%20fn%20some_func%3CT%3E(x%3A%20T)%3B%20%7D%0A%7D">Run</a></pre>
@@ -929,7 +921,7 @@ using the C ABI. Examples of erroneous code:</p>
 <span class="kw">impl</span> <span class="ident">Foo</span> <span class="kw">for</span> <span class="ident">Bar</span> {}
 <span class="comment">// error: not all trait items implemented, missing: `foo`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20foo()%3B%0A%7D%0A%0Astruct%20Bar%3B%0A%0Aimpl%20Foo%20for%20Bar%20%7B%7D%0A%2F%2F%20error%3A%20not%20all%20trait%20items%20implemented%2C%20missing%3A%20%60foo%60%0A%7D">Run</a></pre>
 <p>When trying to make some type implement a trait <code>Foo</code>, you must, at minimum,
-provide implementations for all of <code>Foo</code>&#39;s required methods (meaning the
+provide implementations for all of <code>Foo</code>'s required methods (meaning the
 methods that do not have default implementations), as well as any required
 trait items like associated types or constants. Example:</p>
 
@@ -1022,7 +1014,7 @@ to a bool, you can compare it with zero instead:</p>
 </div>
 <div class="error-described error-used"><h2 id="E0055" class="section-header"><a href="#E0055">E0055</a></h2>
 <p>During a method call, a value is automatically dereferenced as many times as
-needed to make the value&#39;s type match the method&#39;s receiver. The catch is that
+needed to make the value's type match the method's receiver. The catch is that
 the compiler will only attempt to dereference a number of times up to the
 recursion limit (which can be set via the <code>recursion_limit</code> attribute).</p>
 <p>For a somewhat artificial example:</p>
@@ -1089,7 +1081,7 @@ type <code>T</code>. The comma is necessary for syntactic disambiguation.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0060" class="section-header"><a href="#E0060">E0060</a></h2>
 <p>External C functions are allowed to be variadic. However, a variadic function
-takes a minimum number of arguments. For example, consider C&#39;s variadic <code>printf</code>
+takes a minimum number of arguments. For example, consider C's variadic <code>printf</code>
 function:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1175,7 +1167,7 @@ enum variant, one of the fields was not provided. Erroneous code example:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%20Foo%20%7B%20x%3A%200%2C%20y%3A%200%20%7D%3B%20%2F%2F%20ok!%0A%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0066" class="section-header"><a href="#E0066">E0066</a></h2>
-<p>Box placement expressions (like C++&#39;s &quot;placement new&quot;) do not yet support any
+<p>Box placement expressions (like C++'s &quot;placement new&quot;) do not yet support any
 place expression except the exchange heap (i.e. <code>std::boxed::HEAP</code>).
 Furthermore, the syntax is changing to use <code>in</code> instead of <code>box</code>. See <a href="https://github.com/rust-lang/rfcs/pull/470">RFC 470</a>
 and <a href="https://github.com/rust-lang/rfcs/blob/master/text/0809-box-and-in-for-stdlib.md">RFC 809</a> for more details.</p>
@@ -1185,7 +1177,7 @@ and <a href="https://github.com/rust-lang/rfcs/blob/master/text/0809-box-and-in-
 expression. An lvalue expression represents a memory location and includes
 item paths (ie, namespaced variables), dereferences, indexing expressions,
 and field references.</p>
-<p>Let&#39;s start with some erroneous code examples:</p>
+<p>Let's start with some erroneous code examples:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">LinkedList</span>;
@@ -1221,7 +1213,7 @@ whose return type is not <code>()</code>. An example of this is:</p>
     <span class="kw">return</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20error%0Afn%20foo()%20-%3E%20u8%20%7B%0A%20%20%20%20return%3B%0A%7D%0A%7D">Run</a></pre>
 <p>Since <code>return;</code> is just like <code>return ();</code>, there is a mismatch between the
-function&#39;s return type and the value being returned.</p>
+function's return type and the value being returned.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0070" class="section-header"><a href="#E0070">E0070</a></h2>
 <p>The left-hand side of an assignment operator must be an lvalue expression. An
@@ -1249,7 +1241,7 @@ https://doc.rust-lang.org/reference.html#lvalues-rvalues-and-temporaries</p>
     <span class="ident">SomeStruct</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">12</span>; <span class="comment">// error : SomeStruct a structure name but it is used</span>
                        <span class="comment">// like a variable!</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20SomeStruct%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%0A%7D%0A%0Aconst%20SOME_CONST%20%3A%20i32%20%3D%2012%3B%0A%0Afn%20some_other_func()%20%7B%7D%0A%0Afn%20some_function()%20%7B%0A%20%20%20%20SOME_CONST%20%3D%2014%3B%20%2F%2F%20error%20%3A%20a%20constant%20value%20cannot%20be%20changed!%0A%20%20%20%201%20%3D%203%3B%20%2F%2F%20error%20%3A%201%20isn't%20a%20valid%20lvalue!%0A%20%20%20%20some_other_func()%20%3D%204%3B%20%2F%2F%20error%20%3A%20we%20can't%20assign%20value%20to%20a%20function!%0A%20%20%20%20SomeStruct.x%20%3D%2012%3B%20%2F%2F%20error%20%3A%20SomeStruct%20a%20structure%20name%20but%20it%20is%20used%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20like%20a%20variable!%0A%7D%0A%7D">Run</a></pre>
-<p>And now let&#39;s give working examples:</p>
+<p>And now let's give working examples:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">SomeStruct</span> {
@@ -1322,7 +1314,7 @@ large (since we would be able to nest <code>ListNode</code>s to any depth). Spec
 <p>You cannot define a struct (or enum) <code>Foo</code> that requires an instance of <code>Foo</code>
 in order to make a new <code>Foo</code> value. This is because there would be no way a
 first instance of <code>Foo</code> could be made to initialize another instance!</p>
-<p>Here&#39;s an example of a struct that has this problem:</p>
+<p>Here's an example of a struct that has this problem:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Foo</span><span class="op">&gt;</span> } <span class="comment">// error</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%20x%3A%20Box%3CFoo%3E%20%7D%20%2F%2F%20error%0A%7D">Run</a></pre>
@@ -1330,7 +1322,7 @@ first instance of <code>Foo</code> could be made to initialize another instance!
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Foo</span><span class="op">&gt;&gt;</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%20x%3A%20Option%3CBox%3CFoo%3E%3E%20%7D%0A%7D">Run</a></pre>
-<p>Now it&#39;s possible to create at least one instance of <code>Foo</code>: <code>Foo { x: None }</code>.</p>
+<p>Now it's possible to create at least one instance of <code>Foo</code>: <code>Foo { x: None }</code>.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0074" class="section-header"><a href="#E0074">E0074</a></h2>
 <p>When using the <code>#[simd]</code> attribute on a tuple struct, the components of the
@@ -1354,7 +1346,7 @@ are generic.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0075" class="section-header"><a href="#E0075">E0075</a></h2>
 <p>The <code>#[simd]</code> attribute can only be applied to non empty tuple structs, because
-it doesn&#39;t make sense to try to use SIMD operations when there are no values to
+it doesn't make sense to try to use SIMD operations when there are no values to
 operate on.</p>
 <p>This will cause an error:</p>
 
@@ -1532,7 +1524,7 @@ parameters.</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="ident">f</span>() <span class="comment">// ok!</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20f()%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20f()%20%2F%2F%20ok!%0A%7D%0A">Run</a></pre>
-<p>It&#39;s also important to note that the Rust compiler can generally
+<p>It's also important to note that the Rust compiler can generally
 determine the lifetime by itself. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1601,7 +1593,7 @@ example:</p>
 <span class="kw">type</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">u32</span>; <span class="comment">// error: type parameter `T` is unused</span>
 <span class="comment">// or:</span>
 <span class="kw">type</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">A</span>,<span class="ident">B</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>; <span class="comment">// error: type parameter `B` is unused</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atype%20Foo%3CT%3E%20%3D%20u32%3B%20%2F%2F%20error%3A%20type%20parameter%20%60T%60%20is%20unused%0A%2F%2F%20or%3A%0Atype%20Foo%3CA%2CB%3E%20%3D%20Box%3CA%3E%3B%20%2F%2F%20error%3A%20type%20parameter%20%60B%60%20is%20unused%0A%7D">Run</a></pre>
-<p>Please check you didn&#39;t write too many type parameters. Example:</p>
+<p>Please check you didn't write too many type parameters. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">type</span> <span class="ident">Foo</span> <span class="op">=</span> <span class="ident">u32</span>; <span class="comment">// ok!</span>
@@ -1618,7 +1610,7 @@ Erroneous code example:</p>
     <span class="kw">fn</span> <span class="ident">atomic_foo</span>(); <span class="comment">// error: unrecognized atomic operation</span>
                      <span class="comment">//        function</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(intrinsics)%5D%0A%0Afn%20main()%20%7B%0Aextern%20%22rust-intrinsic%22%20%7B%0A%20%20%20%20fn%20atomic_foo()%3B%20%2F%2F%20error%3A%20unrecognized%20atomic%20operation%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20function%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
-<p>Please check you didn&#39;t make a mistake in the function&#39;s name. All intrinsic
+<p>Please check you didn't make a mistake in the function's name. All intrinsic
 functions are defined in librustc_trans/trans/intrinsic.rs and in
 libcore/intrinsics.rs in the Rust source code. Example:</p>
 
@@ -1644,7 +1636,7 @@ libcore/intrinsics.rs in the Rust source code. Example:</p>
         <span class="ident">foo</span>();
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(intrinsics)%5D%0A%0Aextern%20%22rust-intrinsic%22%20%7B%0A%20%20%20%20fn%20foo()%3B%20%2F%2F%20error%3A%20unrecognized%20intrinsic%20function%3A%20%60foo%60%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20foo()%3B%0A%20%20%20%20%7D%0A%7D%0A&amp;version=nightly">Run</a></pre>
-<p>Please check you didn&#39;t make a mistake in the function&#39;s name. All intrinsic
+<p>Please check you didn't make a mistake in the function's name. All intrinsic
 functions are defined in librustc_trans/trans/intrinsic.rs and in
 libcore/intrinsics.rs in the Rust source code. Example:</p>
 
@@ -1729,7 +1721,7 @@ Examples:</p>
 <p>This error indicates that a lifetime is missing from a type. If it is an error
 inside a function signature, the problem may be with failing to adhere to the
 lifetime elision rules (see below).</p>
-<p>Here are some simple examples of where you&#39;ll run into this error:</p>
+<p>Here are some simple examples of where you'll run into this error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span> }        <span class="comment">// error</span>
@@ -1764,7 +1756,7 @@ same as the lifetime on <code>&amp;self</code> or <code>&amp;mut self</code>.</p
 
 <span class="comment">// error, `y`&#39;s lifetime is inferred to be distinct from `x`&#39;s</span>
 <span class="kw">fn</span> <span class="ident">baz</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> { }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20error%2C%20no%20input%20lifetimes%0Afn%20foo()%20-%3E%20%26str%20%7B%20%7D%0A%0A%2F%2F%20error%2C%20%60x%60%20and%20%60y%60%20have%20distinct%20lifetimes%20inferred%0Afn%20bar(x%3A%20%26str%2C%20y%3A%20%26str)%20-%3E%20%26str%20%7B%20%7D%0A%0A%2F%2F%20error%2C%20%60y%60's%20lifetime%20is%20inferred%20to%20be%20distinct%20from%20%60x%60's%0Afn%20baz%3C'a%3E(x%3A%20%26'a%20str%2C%20y%3A%20%26str)%20-%3E%20%26str%20%7B%20%7D%0A%7D">Run</a></pre>
-<p>Here&#39;s an example that is currently an error, but may work in a future version
+<p>Here's an example that is currently an error, but may work in a future version
 of Rust:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1789,13 +1781,13 @@ for a type (like a struct or enum) or trait:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3C'a%2C%20'b%3E(%26'a%20str%2C%20%26'b%20str)%3B%0Aenum%20Bar%20%7B%20A%2C%20B%2C%20C%20%7D%0A%0Astruct%20Baz%3C'a%3E%20%7B%0A%20%20%20%20foo%3A%20Foo%3C'a%3E%2C%20%2F%2F%20error%3A%20expected%202%2C%20found%201%0A%20%20%20%20bar%3A%20Bar%3C'a%3E%2C%20%2F%2F%20error%3A%20expected%200%2C%20found%201%0A%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0109" class="section-header"><a href="#E0109">E0109</a></h2>
-<p>You tried to give a type parameter to a type which doesn&#39;t need it. Erroneous
+<p>You tried to give a type parameter to a type which doesn't need it. Erroneous
 code example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">type</span> <span class="ident">X</span> <span class="op">=</span> <span class="ident">u32</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>; <span class="comment">// error: type parameters are not allowed on this type</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atype%20X%20%3D%20u32%3Ci32%3E%3B%20%2F%2F%20error%3A%20type%20parameters%20are%20not%20allowed%20on%20this%20type%0A%7D">Run</a></pre>
 <p>Please check that you used the correct type and recheck its definition. Perhaps
-it doesn&#39;t need the type parameter.</p>
+it doesn't need the type parameter.</p>
 <p>Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1804,14 +1796,14 @@ it doesn&#39;t need the type parameter.</p>
 not after the enum (<code>Option::None::&lt;u32&gt;</code>, not <code>Option::&lt;u32&gt;::None</code>).</p>
 </div>
 <div class="error-described error-used"><h2 id="E0110" class="section-header"><a href="#E0110">E0110</a></h2>
-<p>You tried to give a lifetime parameter to a type which doesn&#39;t need it.
+<p>You tried to give a lifetime parameter to a type which doesn't need it.
 Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">type</span> <span class="ident">X</span> <span class="op">=</span> <span class="ident">u32</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>; <span class="comment">// error: lifetime parameters are not allowed on</span>
                        <span class="comment">//        this type</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atype%20X%20%3D%20u32%3C'static%3E%3B%20%2F%2F%20error%3A%20lifetime%20parameters%20are%20not%20allowed%20on%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20this%20type%0A%7D">Run</a></pre>
 <p>Please check that the correct type was used and recheck its definition; perhaps
-it doesn&#39;t need the lifetime parameter. Example:</p>
+it doesn't need the lifetime parameter. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">type</span> <span class="ident">X</span> <span class="op">=</span> <span class="ident">u32</span>; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atype%20X%20%3D%20u32%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
@@ -1839,7 +1831,7 @@ introduces a type alias:</p>
 <span class="kw">impl</span> <span class="ident">Bytes</span> { } <span class="comment">// error, same as above</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atype%20Bytes%20%3D%20Vec%3Cu8%3E%3B%0A%0Aimpl%20Bytes%20%7B%20%7D%20%2F%2F%20error%2C%20same%20as%20above%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0117" class="section-header"><a href="#E0117">E0117</a></h2>
-<p>This error indicates a violation of one of Rust&#39;s orphan rules for trait
+<p>This error indicates a violation of one of Rust's orphan rules for trait
 implementations. The rule prohibits any implementation of a foreign trait (a
 trait defined in another crate) where</p>
 <ul>
@@ -1847,7 +1839,7 @@ trait defined in another crate) where</p>
 <li>all of the parameters being passed to the trait (if there are any) are also
 foreign.</li>
 </ul>
-<p>Here&#39;s one example of this error:</p>
+<p>Here's one example of this error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">u32</span> {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aimpl%20Drop%20for%20u32%20%7B%7D%0A%7D">Run</a></pre>
@@ -1880,7 +1872,7 @@ by the <code>impl</code>:</p>
 <p>For information on the design of the orphan rules, see <a href="https://github.com/rust-lang/rfcs/blob/master/text/1023-rebalancing-coherence.md">RFC 1023</a>.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0118" class="section-header"><a href="#E0118">E0118</a></h2>
-<p>You&#39;re trying to write an inherent implementation for something which isn&#39;t a
+<p>You're trying to write an inherent implementation for something which isn't a
 struct nor an enum. Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -2005,7 +1997,7 @@ Drop on that. An example is shown below:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20MyTrait%20%7B%7D%0A%0A%2F%2For%20Box%3CMyTrait%3E%2C%20if%20you%20wanted%20an%20owned%20trait%20object%0Astruct%20MyWrapper%3C'a%3E%20%7B%20foo%3A%20%26'a%20MyTrait%20%7D%0A%0Aimpl%20%3C'a%3E%20Drop%20for%20MyWrapper%3C'a%3E%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%7D%0A%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0121" class="section-header"><a href="#E0121">E0121</a></h2>
-<p>In order to be consistent with Rust&#39;s lack of global type inference, type
+<p>In order to be consistent with Rust's lack of global type inference, type
 placeholders are disallowed by design in item signatures.</p>
 <p>Examples of this error include:</p>
 
@@ -2027,7 +2019,7 @@ Consider the example below:</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">t</span>: <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=trait%20Foo%7B%7D%0A%0Atype%20MyType%3CR%3A%20Foo%3E%20%3D%20(R%2C%20())%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20t%3A%20MyType%3Cu32%3E%3B%0A%7D%0A">Run</a></pre>
-<p>We&#39;re able to declare a variable of type <code>MyType&lt;u32&gt;</code>, despite the fact that
+<p>We're able to declare a variable of type <code>MyType&lt;u32&gt;</code>, despite the fact that
 <code>u32</code> does not implement <code>Foo</code>. As a result, one should avoid using generic
 constraints in concert with type aliases.</p>
 </div>
@@ -2067,7 +2059,7 @@ by doing:</p>
     <span class="ident">field1</span>: <span class="ident">T</span>,
     <span class="ident">filed2</span>: <span class="ident">U</span>,
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3CU%3D()%2C%20T%3DU%3E%20%7B%0A%20%20%20%20field1%3A%20T%2C%0A%20%20%20%20filed2%3A%20U%2C%0A%7D%0A%7D">Run</a></pre>
-<p>Please also verify that this wasn&#39;t because of a name-clash and rename the type
+<p>Please also verify that this wasn't because of a name-clash and rename the type
 parameter if so.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0131" class="section-header"><a href="#E0131">E0131</a></h2>
@@ -2198,18 +2190,18 @@ parameters are involved, this cannot always be done.</p>
     <span class="kw">let</span> <span class="ident">y</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">transmute</span>(<span class="ident">x</span>) };
     <span class="comment">// do something with y</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Amem%3A%3Atransmute%3B%0A%0Astruct%20Foo%3CT%3E(Vec%3CT%3E)%3B%0A%0Afn%20foo%3CT%3E(x%3A%20Vec%3CT%3E)%20%7B%0A%20%20%20%20%2F%2F%20we%20are%20transmuting%20between%20Vec%3CT%3E%20and%20Foo%3CF%3E%20here%0A%20%20%20%20let%20y%3A%20Foo%3CT%3E%20%3D%20unsafe%20%7B%20transmute(x)%20%7D%3B%0A%20%20%20%20%2F%2F%20do%20something%20with%20y%0A%7D%0A%7D">Run</a></pre>
-<p>In this specific case there&#39;s a good chance that the transmute is harmless (but
+<p>In this specific case there's a good chance that the transmute is harmless (but
 this is not guaranteed by Rust). However, when alignment and enum optimizations
-come into the picture, it&#39;s quite likely that the sizes may or may not match
-with different type parameter substitutions. It&#39;s not possible to check this for
+come into the picture, it's quite likely that the sizes may or may not match
+with different type parameter substitutions. It's not possible to check this for
 <em>all</em> possible types, so <code>transmute()</code> simply only accepts types without any
 unsubstituted type parameters.</p>
-<p>If you need this, there&#39;s a good chance you&#39;re doing something wrong. Keep in
-mind that Rust doesn&#39;t guarantee much about the layout of different structs
+<p>If you need this, there's a good chance you're doing something wrong. Keep in
+mind that Rust doesn't guarantee much about the layout of different structs
 (even two structs with identical declarations may have different layouts). If
 there is a solution that avoids the transmute entirely, try it instead.</p>
-<p>If it&#39;s possible, hand-monomorphize the code by writing the function for each
-possible type substitution. It&#39;s possible to use traits to do this cleanly,
+<p>If it's possible, hand-monomorphize the code by writing the function for each
+possible type substitution. It's possible to use traits to do this cleanly,
 for example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -2267,8 +2259,7 @@ attributes:</p>
 <p>See also https://doc.rust-lang.org/book/no-stdlib.html</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0154" class="section-header"><a href="#E0154">E0154</a></h2>
-
-<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-3' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-3'>Note: this error code is no longer emitted by the compiler.</a></h2>
+<h2 id="note-this-error-code-is-no-longer-emitted-by-the-compiler-3" class="section-header"><a href="#note-this-error-code-is-no-longer-emitted-by-the-compiler-3">Note: this error code is no longer emitted by the compiler.</a></h2>
 <p>Imports (<code>use</code> statements) are not allowed after non-item statements, such as
 variable declarations and expression statements.</p>
 <p>Here is an example that demonstrates the error:</p>
@@ -2403,7 +2394,7 @@ match), use a regular <code>let</code>-binding inside a <code>loop</code> instea
     <span class="ident">Method</span>::<span class="ident">GET</span> <span class="op">=&gt;</span> {},
     <span class="ident">Method</span>::<span class="ident">POST</span> <span class="op">=&gt;</span> {},
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aenum%20Method%20%7B%0A%20%20%20%20GET%2C%0A%20%20%20%20POST%2C%0A%7D%0A%0Alet%20m%20%3D%20Method%3A%3AGET%3B%0A%0Amatch%20m%20%7B%0A%20%20%20%20Method%3A%3AGET%20%3D%3E%20%7B%7D%2C%0A%20%20%20%20Method%3A%3APOST%20%3D%3E%20%7B%7D%2C%0A%7D%0A%7D">Run</a></pre>
-<p>If you don&#39;t qualify the names, the code will bind new variables named &quot;GET&quot; and
+<p>If you don't qualify the names, the code will bind new variables named &quot;GET&quot; and
 &quot;POST&quot; instead. This behavior is likely not what you want, so <code>rustc</code> warns when
 that happens.</p>
 <p>Qualified names are good practice, and most code works well with them. But if
@@ -2466,7 +2457,7 @@ it has been disabled for now.</p>
 <p>An associated function for a trait was defined to be static, but an
 implementation of the trait declared the same function to be a method (i.e. to
 take a <code>self</code> parameter).</p>
-<p>Here&#39;s an example of this error:</p>
+<p>Here's an example of this error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">trait</span> <span class="ident">Foo</span> {
@@ -2485,7 +2476,7 @@ take a <code>self</code> parameter).</p>
 <p>An associated function for a trait was defined to be a method (i.e. to take a
 <code>self</code> parameter), but an implementation of the trait declared the same function
 to be static.</p>
-<p>Here&#39;s an example of this error:</p>
+<p>Here's an example of this error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">trait</span> <span class="ident">Foo</span> {
@@ -2557,11 +2548,11 @@ something like the following:</p>
 <span class="kw">impl</span> <span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Foo</span> <span class="kw">for</span> <span class="ident">Wrapper</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Wrapper</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">Clone</span> {
     <span class="kw">fn</span> <span class="ident">bar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) { }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%3B%0A%7D%0A%0A%23%5Bderive(Copy%2CClone)%5D%0Astruct%20Wrapper%3CT%3E%20%7B%0A%20%20%20%20Wrapped%3A%20T%0A%7D%0Aimpl%20%3CT%3E%20Foo%20for%20Wrapper%3CT%3E%20where%20Wrapper%3CT%3E%3A%20Clone%20%7B%0A%20%20%20%20fn%20bar(%26self)%20%7B%20%7D%0A%7D%0A%7D">Run</a></pre>
-<p>Here, we&#39;re saying that the implementation exists on Wrapper only when the
+<p>Here, we're saying that the implementation exists on Wrapper only when the
 wrapped type <code>T</code> implements <code>Clone</code>. The <code>where</code> clause is important because
 some types will not implement <code>Clone</code>, and thus will not get this method.</p>
-<p>In our erroneous example, however, we&#39;re referencing a single concrete type.
-Since we know for certain that <code>Wrapper&lt;u32&gt;</code> implements <code>Clone</code>, there&#39;s no
+<p>In our erroneous example, however, we're referencing a single concrete type.
+Since we know for certain that <code>Wrapper&lt;u32&gt;</code> implements <code>Clone</code>, there's no
 reason to also specify it in a <code>where</code> clause.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0194" class="section-header"><a href="#E0194">E0194</a></h2>
@@ -2578,7 +2569,7 @@ define a type parameter <code>T</code>. This is not allowed: if the method wishe
 define a type parameter, it must use a different name for it.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0195" class="section-header"><a href="#E0195">E0195</a></h2>
-<p>Your method&#39;s lifetime parameters do not match the trait declaration.
+<p>Your method's lifetime parameters do not match the trait declaration.
 Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -2594,7 +2585,7 @@ Erroneous code example:</p>
     <span class="comment">// do not match the trait declaration</span>
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Trait%20%7B%0A%20%20%20%20fn%20bar%3C'a%2C'b%3A'a%3E(x%3A%20%26'a%20str%2C%20y%3A%20%26'b%20str)%3B%0A%7D%0A%0Astruct%20Foo%3B%0A%0Aimpl%20Trait%20for%20Foo%20%7B%0A%20%20%20%20fn%20bar%3C'a%2C'b%3E(x%3A%20%26'a%20str%2C%20y%3A%20%26'b%20str)%20%7B%0A%20%20%20%20%2F%2F%20error%3A%20lifetime%20parameters%20or%20bounds%20on%20method%20%60bar%60%0A%20%20%20%20%2F%2F%20do%20not%20match%20the%20trait%20declaration%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-<p>The lifetime constraint <code>&#39;b</code> for bar() implementation does not match the
+<p>The lifetime constraint <code>'b</code> for bar() implementation does not match the
 trait declaration. Ensure lifetime declarations match exactly in both trait
 declaration and implementation. Example:</p>
 
@@ -2671,7 +2662,7 @@ the unsafe marker on the trait noted in the error will resolve this problem.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0200" class="section-header"><a href="#E0200">E0200</a></h2>
 <p>Unsafe traits must have unsafe implementations. This error occurs when an
-implementation for an unsafe trait isn&#39;t marked as unsafe. This may be resolved
+implementation for an unsafe trait isn't marked as unsafe. This may be resolved
 by marking the unsafe implementation as unsafe.</p>
 
 <pre class="rust rust-example-rendered">
@@ -2714,7 +2705,7 @@ associated functions, etc.) with the same identifier.</p>
     <span class="kw">type</span> <span class="ident">Quux</span> <span class="op">=</span> <span class="ident">u32</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo(u8)%3B%0A%0Aimpl%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%20-%3E%20bool%20%7B%20self.0%20%3E%205%20%7D%0A%20%20%20%20fn%20bar()%20%7B%7D%20%2F%2F%20error%3A%20duplicate%20associated%20function%0A%7D%0A%0Atrait%20Baz%20%7B%0A%20%20%20%20type%20Quux%3B%0A%20%20%20%20fn%20baz(%26self)%20-%3E%20bool%3B%0A%7D%0A%0Aimpl%20Baz%20for%20Foo%20%7B%0A%20%20%20%20type%20Quux%20%3D%20u32%3B%0A%0A%20%20%20%20fn%20baz(%26self)%20-%3E%20bool%20%7B%20true%20%7D%0A%0A%20%20%20%20%2F%2F%20error%3A%20duplicate%20method%0A%20%20%20%20fn%20baz(%26self)%20-%3E%20bool%20%7B%20self.0%20%3E%205%20%7D%0A%0A%20%20%20%20%2F%2F%20error%3A%20duplicate%20associated%20type%0A%20%20%20%20type%20Quux%20%3D%20u32%3B%0A%7D%0A%7D">Run</a></pre>
 <p>Note, however, that items with the same name are allowed for inherent <code>impl</code>
-blocks that don&#39;t overlap:</p>
+blocks that don't overlap:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">T</span>);
@@ -2746,7 +2737,7 @@ mentioned field. Note that this may not be possible, as in the example of</p>
 
 <span class="kw">impl</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Foo</span> { }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20foo%20%3A%20Vec%3Cu32%3E%2C%0A%7D%0A%0Aimpl%20Copy%20for%20Foo%20%7B%20%7D%0A%7D">Run</a></pre>
 <p>This fails because <code>Vec&lt;T&gt;</code> does not implement <code>Copy</code> for any <code>T</code>.</p>
-<p>Here&#39;s another example that will fail:</p>
+<p>Here's another example that will fail:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>)]</span>
@@ -2758,7 +2749,7 @@ differs from the behavior for <code>&amp;T</code>, which is always <code>Copy</c
 </div>
 <div class="error-described error-used"><h2 id="E0206" class="section-header"><a href="#E0206">E0206</a></h2>
 <p>You can only implement <code>Copy</code> for a struct or enum. Both of the following
-examples will fail, because neither <code>i32</code> (primitive type) nor <code>&amp;&#39;static Bar</code>
+examples will fail, because neither <code>i32</code> (primitive type) nor <code>&amp;'static Bar</code>
 (reference to <code>Bar</code>) is a struct or enum:</p>
 
 <pre class="rust rust-example-rendered">
@@ -2777,8 +2768,7 @@ the following criteria:</p>
 <li>for a trait impl, it appears in the trait reference</li>
 <li>it is bound as an associated type</li>
 </ul>
-
-<h3 id='error-example-1' class='section-header'><a href='#error-example-1'>Error example 1</a></h3>
+<h3 id="error-example-1" class="section-header"><a href="#error-example-1">Error example 1</a></h3>
 <p>Suppose we have a struct <code>Foo</code> and we would like to define some methods for it.
 The following definition leads to a compiler error:</p>
 
@@ -2805,8 +2795,7 @@ from the <code>impl</code> to the method <code>get</code>:</p>
         <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Default</span><span class="op">&gt;</span>::<span class="ident">default</span>()
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3B%0A%0A%2F%2F%20Move%20the%20type%20parameter%20from%20the%20impl%20to%20the%20method%0Aimpl%20Foo%20%7B%0A%20%20%20%20fn%20get%3CT%3A%20Default%3E(%26self)%20-%3E%20T%20%7B%0A%20%20%20%20%20%20%20%20%3CT%20as%20Default%3E%3A%3Adefault()%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-
-<h3 id='error-example-2' class='section-header'><a href='#error-example-2'>Error example 2</a></h3>
+<h3 id="error-example-2" class="section-header"><a href="#error-example-2">Error example 2</a></h3>
 <p>As another example, suppose we have a <code>Maker</code> trait and want to establish a
 type <code>FooMaker</code> that makes <code>Foo</code>s:</p>
 
@@ -2882,15 +2871,14 @@ type parameter instead:</p>
         <span class="ident">Foo</span> { <span class="ident">foo</span>: <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Default</span><span class="op">&gt;</span>::<span class="ident">default</span>() }
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20Use%20a%20type%20parameter%20instead%20of%20an%20associated%20type%20here%0Atrait%20Maker%3CItem%3E%20%7B%0A%20%20%20%20fn%20make(%26mut%20self)%20-%3E%20Item%3B%0A%7D%0A%0Astruct%20Foo%3CT%3E%20%7B%0A%20%20%20%20foo%3A%20T%0A%7D%0A%0Astruct%20FooMaker%3B%0A%0Aimpl%3CT%3A%20Default%3E%20Maker%3CFoo%3CT%3E%3E%20for%20FooMaker%20%7B%0A%20%20%20%20fn%20make(%26mut%20self)%20-%3E%20Foo%3CT%3E%20%7B%0A%20%20%20%20%20%20%20%20Foo%20%7B%20foo%3A%20%3CT%20as%20Default%3E%3A%3Adefault()%20%7D%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-
-<h3 id='additional-information' class='section-header'><a href='#additional-information'>Additional information</a></h3>
+<h3 id="additional-information" class="section-header"><a href="#additional-information">Additional information</a></h3>
 <p>For more information, please see <a href="https://github.com/rust-lang/rfcs/blob/master/text/0447-no-unused-impl-parameters.md">RFC 447</a>.</p>
 </div>
 <div class="error-undescribed error-used"><h2 id="E0208" class="section-header"><a href="#E0208">E0208</a></h2>
 <p>No description.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0210" class="section-header"><a href="#E0210">E0210</a></h2>
-<p>This error indicates a violation of one of Rust&#39;s orphan rules for trait
+<p>This error indicates a violation of one of Rust's orphan rules for trait
 implementations. The rule concerns the use of type parameters in an
 implementation of a foreign trait (a trait defined in another crate), and
 states that type parameters must be &quot;covered&quot; by a local type. To understand
@@ -2911,7 +2899,7 @@ following trait <code>impl</code> is an error:</p>
 <span class="kw">struct</span> <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">T</span>);
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ForeignTrait</span> <span class="kw">for</span> <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { } <span class="comment">// Ok</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20MyType%3CT%3E(T)%3B%0Aimpl%3CT%3E%20ForeignTrait%20for%20MyType%3CT%3E%20%7B%20%7D%20%2F%2F%20Ok%0A%7D">Run</a></pre>
 <p>Please note that a type alias is not sufficient.</p>
-<p>For another example of an error, suppose there&#39;s another trait defined in <code>foo</code>
+<p>For another example of an error, suppose there's another trait defined in <code>foo</code>
 named <code>ForeignTrait2</code> that takes two type parameters. Then this <code>impl</code> results
 in the same rule violation:</p>
 
@@ -2956,7 +2944,7 @@ Parentheses are currently only used with generic types when defining parameters
 for <code>Fn</code>-family traits.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0220" class="section-header"><a href="#E0220">E0220</a></h2>
-<p>You used an associated type which isn&#39;t defined in the trait.
+<p>You used an associated type which isn't defined in the trait.
 Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -2975,7 +2963,7 @@ Erroneous code example:</p>
     <span class="kw">fn</span> <span class="ident">return_bool</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Bar</span>, <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Baz</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20T1%20%7B%0A%20%20%20%20type%20Bar%3B%0A%7D%0A%0Atype%20Foo%20%3D%20T1%3CF%3Di32%3E%3B%20%2F%2F%20error%3A%20associated%20type%20%60F%60%20not%20found%20for%20%60T1%60%0A%0A%2F%2F%20or%3A%0A%0Atrait%20T2%20%7B%0A%20%20%20%20type%20Bar%3B%0A%0A%20%20%20%20%2F%2F%20error%3A%20Baz%20is%20used%20but%20not%20declared%0A%20%20%20%20fn%20return_bool(%26self%2C%20%26Self%3A%3ABar%2C%20%26Self%3A%3ABaz)%20-%3E%20bool%3B%0A%7D%0A%7D">Run</a></pre>
 <p>Make sure that you have defined the associated type in the trait body.
-Also, verify that you used the right trait or you didn&#39;t misspell the
+Also, verify that you used the right trait or you didn't misspell the
 associated type name. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3015,7 +3003,7 @@ For example:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20T1%20%7B%7D%0Atrait%20T2%20%7B%7D%0A%0Atrait%20Foo%20%7B%0A%20%20%20%20type%20A%3A%20T1%3B%0A%7D%0A%0Atrait%20Bar%20%3A%20Foo%20%7B%0A%20%20%20%20type%20A%3A%20T2%3B%0A%20%20%20%20fn%20do_something()%20%7B%0A%20%20%20%20%20%20%20%20let%20_%3A%20Self%3A%3AA%3B%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 <p>In this example, <code>Foo</code> defines an associated type <code>A</code>. <code>Bar</code> inherits that type
 from <code>Foo</code>, and defines another associated type of the same name. As a result,
-when we attempt to use <code>Self::A</code>, it&#39;s ambiguous whether we mean the <code>A</code> defined
+when we attempt to use <code>Self::A</code>, it's ambiguous whether we mean the <code>A</code> defined
 by <code>Foo</code> or the one defined by <code>Bar</code>.</p>
 <p>There are two options to work around this issue. The first is simply to rename
 one of the types. Alternatively, one can specify the intended type using the
@@ -3046,8 +3034,8 @@ For example:</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">foo</span>: <span class="ident">MyTrait</span>::<span class="ident">X</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=trait%20MyTrait%20%7Btype%20X%3B%20%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%3A%20MyTrait%3A%3AX%3B%0A%7D%0A">Run</a></pre>
-<p>The problem here is that we&#39;re attempting to take the type of X from MyTrait.
-Unfortunately, the type of X is not defined, because it&#39;s only made concrete in
+<p>The problem here is that we're attempting to take the type of X from MyTrait.
+Unfortunately, the type of X is not defined, because it's only made concrete in
 implementations of the trait. A working version of this code might look like:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3077,7 +3065,7 @@ Rust does not currently support this. A simple example that causes this error:</
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> _: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Read</span> <span class="op">+</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span><span class="op">&gt;</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%20%20%20%20let%20_%3A%20Box%3Cstd%3A%3Aio%3A%3ARead%20%2B%20std%3A%3Aio%3A%3AWrite%3E%3B%0A%7D%0A">Run</a></pre>
-<p>Send and Sync are an exception to this rule: it&#39;s possible to have bounds of
+<p>Send and Sync are an exception to this rule: it's possible to have bounds of
 one non-builtin trait, plus either or both of Send and Sync. For example, the
 following compiles correctly:</p>
 
@@ -3185,8 +3173,7 @@ with two in the definition of <code>Bar</code>:</p>
 <p>No description.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0251" class="section-header"><a href="#E0251">E0251</a></h2>
-
-<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-4' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-4'>Note: this error code is no longer emitted by the compiler.</a></h2>
+<h2 id="note-this-error-code-is-no-longer-emitted-by-the-compiler-4" class="section-header"><a href="#note-this-error-code-is-no-longer-emitted-by-the-compiler-4">Note: this error code is no longer emitted by the compiler.</a></h2>
 <p>Two items of the same name cannot be imported without rebinding one of the
 items under a new local name.</p>
 <p>An example of this error:</p>
@@ -3271,7 +3258,7 @@ to import a method from a trait.</p>
 <span class="comment">// error: `do_something` is not directly importable</span>
 
 <span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=mod%20foo%20%7B%0A%20%20%20%20pub%20trait%20MyTrait%20%7B%0A%20%20%20%20%20%20%20%20fn%20do_something()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Ause%20foo%3A%3AMyTrait%3A%3Ado_something%3B%0A%2F%2F%20error%3A%20%60do_something%60%20is%20not%20directly%20importable%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
-<p>It&#39;s invalid to directly import methods belonging to a trait or concrete type.</p>
+<p>It's invalid to directly import methods belonging to a trait or concrete type.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0254" class="section-header"><a href="#E0254">E0254</a></h2>
 <p>Attempt was made to import an item whereas an extern crate with this name has
@@ -3308,7 +3295,7 @@ Example:</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20collections%20as%20libcollections%3B%20%2F%2F%20ok!%0A%0Amod%20foo%20%7B%0A%20%20%20%20pub%20trait%20collections%20%7B%0A%20%20%20%20%20%20%20%20fn%20do_something()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Ause%20foo%3A%3Acollections%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0255" class="section-header"><a href="#E0255">E0255</a></h2>
-<p>You can&#39;t import a value whose name is the same as another value defined in the
+<p>You can't import a value whose name is the same as another value defined in the
 module.</p>
 <p>Erroneous code example:</p>
 
@@ -3348,9 +3335,8 @@ module.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20foo()%20%7B%7D%0A%0Amod%20bar%20%7B%0A%20%20%20%20%20pub%20fn%20foo()%20%7B%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20bar%3A%3Afoo()%3B%20%2F%2F%20we%20get%20the%20item%20by%20referring%20to%20its%20parent%0A%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0256" class="section-header"><a href="#E0256">E0256</a></h2>
-
-<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-5' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-5'>Note: this error code is no longer emitted by the compiler.</a></h2>
-<p>You can&#39;t import a type or module when the name of the item being imported is
+<h2 id="note-this-error-code-is-no-longer-emitted-by-the-compiler-5" class="section-header"><a href="#note-this-error-code-is-no-longer-emitted-by-the-compiler-5">Note: this error code is no longer emitted by the compiler.</a></h2>
+<p>You can't import a type or module when the name of the item being imported is
 the same as another type or submodule defined in the module.</p>
 <p>An example of this error:</p>
 
@@ -3375,7 +3361,7 @@ that has been imported into the current module.</p>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span> <span class="kw">as</span> <span class="ident">std</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20std%3B%0Aextern%20crate%20libc%20as%20std%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
-<p>The solution is to choose a different name that doesn&#39;t conflict with any
+<p>The solution is to choose a different name that doesn't conflict with any
 external crate imported into the current module.</p>
 <p>Correct example:</p>
 
@@ -3384,7 +3370,7 @@ external crate imported into the current module.</p>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span> <span class="kw">as</span> <span class="ident">other_name</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20std%3B%0Aextern%20crate%20libc%20as%20other_name%3B%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0260" class="section-header"><a href="#E0260">E0260</a></h2>
-<p>The name for an item declaration conflicts with an external crate&#39;s name.</p>
+<p>The name for an item declaration conflicts with an external crate's name.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3409,7 +3395,7 @@ about what constitutes an Item declaration and what does not:</p>
 <p>https://doc.rust-lang.org/reference.html#statements</p>
 </div>
 <div class="error-described error-used"><h2 id="E0261" class="section-header"><a href="#E0261">E0261</a></h2>
-<p>When using a lifetime like <code>&#39;a</code> in a type, it must be declared before being
+<p>When using a lifetime like <code>'a</code> in a type, it must be declared before being
 used.</p>
 <p>These two examples illustrate the problem:</p>
 
@@ -3432,7 +3418,7 @@ used.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0262" class="section-header"><a href="#E0262">E0262</a></h2>
 <p>Declaring certain lifetime names in parameters is disallowed. For example,
-because the <code>&#39;static</code> lifetime is a special built-in lifetime name denoting
+because the <code>'static</code> lifetime is a special built-in lifetime name denoting
 the lifetime of the entire program, this is an error:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3601,7 +3587,7 @@ So we can fix the previous examples like this:</p>
 </div>
 <div class="error-described error-used"><h2 id="E0272" class="section-header"><a href="#E0272">E0272</a></h2>
 <p>The <code>#[rustc_on_unimplemented]</code> attribute lets you specify a custom error
-message for when a particular trait isn&#39;t implemented on a type placed in a
+message for when a particular trait isn't implemented on a type placed in a
 position that needs that trait. For example, when the following code is
 compiled:</p>
 
@@ -3620,7 +3606,7 @@ note saying &quot;the type <code>bool</code> cannot be indexed by <code>u8</code
 substitution with the actual types (using the regular format string syntax) in
 a given situation. Furthermore, <code>{Self}</code> will substitute to the type (in this
 case, <code>bool</code>) that we tried to use.</p>
-<p>This error appears when the curly braces contain an identifier which doesn&#39;t
+<p>This error appears when the curly braces contain an identifier which doesn't
 match with any of the type parameters or the string <code>Self</code>. This might happen
 if you misspelled a type parameter, or if you intended to use literal curly
 braces. If it is the latter, escape the curly braces with a second curly brace
@@ -3628,7 +3614,7 @@ of the same type; e.g. a literal <code>{</code> is <code>{{</code>.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0273" class="section-header"><a href="#E0273">E0273</a></h2>
 <p>The <code>#[rustc_on_unimplemented]</code> attribute lets you specify a custom error
-message for when a particular trait isn&#39;t implemented on a type placed in a
+message for when a particular trait isn't implemented on a type placed in a
 position that needs that trait. For example, when the following code is
 compiled:</p>
 
@@ -3653,7 +3639,7 @@ braces, use <code>{{</code> and <code>}}</code> to escape them.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0274" class="section-header"><a href="#E0274">E0274</a></h2>
 <p>The <code>#[rustc_on_unimplemented]</code> attribute lets you specify a custom error
-message for when a particular trait isn&#39;t implemented on a type placed in a
+message for when a particular trait isn't implemented on a type placed in a
 position that needs that trait. For example, when the following code is
 compiled:</p>
 
@@ -3687,8 +3673,8 @@ recursion in resolving some type bounds.</p>
 <p>To determine if a <code>T</code> is <code>Foo</code>, we need to check if <code>Bar&lt;T&gt;</code> is <code>Foo</code>. However,
 to do this check, we need to determine that <code>Bar&lt;Bar&lt;T&gt;&gt;</code> is <code>Foo</code>. To
 determine this, we check if <code>Bar&lt;Bar&lt;Bar&lt;T&gt;&gt;&gt;</code> is <code>Foo</code>, and so on. This is
-clearly a recursive requirement that can&#39;t be resolved directly.</p>
-<p>Consider changing your trait bounds so that they&#39;re less self-referential.</p>
+clearly a recursive requirement that can't be resolved directly.</p>
+<p>Consider changing your trait bounds so that they're less self-referential.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0276" class="section-header"><a href="#E0276">E0276</a></h2>
 <p>This error occurs when a bound in an implementation of a trait does not match
@@ -3704,12 +3690,12 @@ the bounds specified in the original trait. For example:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20foo%3CT%3E(x%3A%20T)%3B%0A%7D%0A%0Aimpl%20Foo%20for%20bool%20%7B%0A%20%20%20%20fn%20foo%3CT%3E(x%3A%20T)%20where%20T%3A%20Copy%20%7B%7D%0A%7D%0A%7D">Run</a></pre>
 <p>Here, all types implementing <code>Foo</code> must have a method <code>foo&lt;T&gt;(x: T)</code> which can
 take any type <code>T</code>. However, in the <code>impl</code> for <code>bool</code>, we have added an extra
-bound that <code>T</code> is <code>Copy</code>, which isn&#39;t compatible with the original trait.</p>
+bound that <code>T</code> is <code>Copy</code>, which isn't compatible with the original trait.</p>
 <p>Consider removing the bound from the method or adding the bound to the original
 method definition in the trait.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0277" class="section-header"><a href="#E0277">E0277</a></h2>
-<p>You tried to use a type which doesn&#39;t implement some trait in a place which
+<p>You tried to use a type which doesn't implement some trait in a place which
 expected that trait. Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3728,7 +3714,7 @@ expected that trait. Erroneous code example:</p>
     <span class="comment">// the Foo trait</span>
     <span class="ident">some_func</span>(<span class="number">5i32</span>); <span class="comment">// error: the trait bound `i32 : Foo` is not satisfied</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%2F%2F%20here%20we%20declare%20the%20Foo%20trait%20with%20a%20bar%20method%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%3B%0A%7D%0A%0A%2F%2F%20we%20now%20declare%20a%20function%20which%20takes%20an%20object%20implementing%20the%20Foo%20trait%0Afn%20some_func%3CT%3A%20Foo%3E(foo%3A%20T)%20%7B%0A%20%20%20%20foo.bar()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20we%20now%20call%20the%20method%20with%20the%20i32%20type%2C%20which%20doesn't%20implement%0A%20%20%20%20%2F%2F%20the%20Foo%20trait%0A%20%20%20%20some_func(5i32)%3B%20%2F%2F%20error%3A%20the%20trait%20bound%20%60i32%20%3A%20Foo%60%20is%20not%20satisfied%0A%7D%0A">Run</a></pre>
-<p>In order to fix this error, verify that the type you&#39;re using does implement
+<p>In order to fix this error, verify that the type you're using does implement
 the trait. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3765,7 +3751,7 @@ the trait. Example:</p>
 <p>Note that the error here is in the definition of the generic function: Although
 we only call it with a parameter that does implement <code>Debug</code>, the compiler
 still rejects the function: It must work with all possible input types. In
-order to make this example compile, we need to restrict the generic type we&#39;re
+order to make this example compile, we need to restrict the generic type we're
 accepting:</p>
 
 <pre class="rust rust-example-rendered">
@@ -3797,7 +3783,7 @@ already specify all requirements that will be used for every type parameter.</p>
 <p>No description.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0281" class="section-header"><a href="#E0281">E0281</a></h2>
-<p>You tried to supply a type which doesn&#39;t implement some trait in a location
+<p>You tried to supply a type which doesn't implement some trait in a location
 which expected that trait. This error typically occurs when working with
 <code>Fn</code>-based types. Erroneous code example:</p>
 
@@ -3868,7 +3854,7 @@ have the same return type. For instance:</p>
 call <code>bar</code> on. Change <code>Foo::bar()</code> to <code>Foo::&lt;T&gt;::bar()</code> to resolve the error.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0283" class="section-header"><a href="#E0283">E0283</a></h2>
-<p>This error occurs when the compiler doesn&#39;t have enough information
+<p>This error occurs when the compiler doesn't have enough information
 to unambiguously choose an implementation.</p>
 <p>For example:</p>
 
@@ -4028,7 +4014,7 @@ restriction, but for now patterns must be rewritten without sub-bindings.</p>
 <div class="error-described error-used"><h2 id="E0308" class="section-header"><a href="#E0308">E0308</a></h2>
 <p>This error occurs when the compiler was unable to infer the concrete type of a
 variable. It can occur for several cases, the most common of which is a
-mismatch in the expected type that the compiler inferred for a variable&#39;s
+mismatch in the expected type that the compiler inferred for a variable's
 initializing expression, and the actual type explicitly assigned to the
 variable.</p>
 <p>For example:</p>
@@ -4061,7 +4047,7 @@ denotes this will cause this error.</p>
     <span class="ident">foo</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3C'a%2C%20T%3A%20'a%3E%20%7B%0A%20%20%20%20foo%3A%20%26'a%20T%0A%7D%0A%7D">Run</a></pre>
 <p>To see why this is important, consider the case where <code>T</code> is itself a reference
-(e.g., <code>T = &amp;str</code>). If we don&#39;t include the restriction that <code>T: &#39;a</code>, the
+(e.g., <code>T = &amp;str</code>). If we don't include the restriction that <code>T: 'a</code>, the
 following code would be perfectly legal:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4157,7 +4143,7 @@ defined. For more information see the <a href="https://github.com/rust-lang/rfcs
 <p>No description.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0321" class="section-header"><a href="#E0321">E0321</a></h2>
-<p>A cross-crate opt-out trait was implemented on something which wasn&#39;t a struct
+<p>A cross-crate opt-out trait was implemented on something which wasn't a struct
 or enum type. Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4199,7 +4185,7 @@ Erroneous code example:</p>
     <span class="comment">// error: item `N` is an associated const, which doesn&#39;t match its</span>
     <span class="comment">//        trait `&lt;Bar as Foo&gt;`</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(associated_consts)%5D%0A%0Afn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20type%20N%3B%0A%7D%0A%0Astruct%20Bar%3B%0A%0Aimpl%20Foo%20for%20Bar%20%7B%0A%20%20%20%20const%20N%20%3A%20u32%20%3D%200%3B%0A%20%20%20%20%2F%2F%20error%3A%20item%20%60N%60%20is%20an%20associated%20const%2C%20which%20doesn't%20match%20its%0A%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20trait%20%60%3CBar%20as%20Foo%3E%60%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
-<p>Please verify that the associated const wasn&#39;t misspelled and the correct trait
+<p>Please verify that the associated const wasn't misspelled and the correct trait
 was implemented. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4247,7 +4233,7 @@ code example:</p>
     <span class="comment">// error: item `N` is an associated method, which doesn&#39;t match its</span>
     <span class="comment">//        trait `&lt;Bar as Foo&gt;`</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(associated_consts)%5D%0A%0Afn%20main()%20%7B%0Astruct%20Bar%3B%0A%0Atrait%20Foo%20%7B%0A%20%20%20%20const%20N%20%3A%20u32%3B%0A%0A%20%20%20%20fn%20M()%3B%0A%7D%0A%0Aimpl%20Foo%20for%20Bar%20%7B%0A%20%20%20%20fn%20N()%20%7B%7D%0A%20%20%20%20%2F%2F%20error%3A%20item%20%60N%60%20is%20an%20associated%20method%2C%20which%20doesn't%20match%20its%0A%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20trait%20%60%3CBar%20as%20Foo%3E%60%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
-<p>To fix this error, please verify that the method name wasn&#39;t misspelled and
+<p>To fix this error, please verify that the method name wasn't misspelled and
 verify that you are indeed implementing the correct trait items. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4285,7 +4271,7 @@ Erroneous code example:</p>
     <span class="comment">// error: item `N` is an associated type, which doesn&#39;t match its</span>
     <span class="comment">//        trait `&lt;Bar as Foo&gt;`</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(associated_consts)%5D%0A%0Afn%20main()%20%7B%0Astruct%20Bar%3B%0A%0Atrait%20Foo%20%7B%0A%20%20%20%20const%20N%20%3A%20u32%3B%0A%7D%0A%0Aimpl%20Foo%20for%20Bar%20%7B%0A%20%20%20%20type%20N%20%3D%20u32%3B%0A%20%20%20%20%2F%2F%20error%3A%20item%20%60N%60%20is%20an%20associated%20type%2C%20which%20doesn't%20match%20its%0A%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20trait%20%60%3CBar%20as%20Foo%3E%60%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
-<p>Please verify that the associated type name wasn&#39;t misspelled and your
+<p>Please verify that the associated type name wasn't misspelled and your
 implementation corresponds to the trait definition. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4316,7 +4302,7 @@ implementation corresponds to the trait definition. Example:</p>
 <div class="error-described error-used"><h2 id="E0326" class="section-header"><a href="#E0326">E0326</a></h2>
 <p>The types of any associated constants in a trait implementation must match the
 types in the trait definition. This error indicates that there was a mismatch.</p>
-<p>Here&#39;s an example of this error:</p>
+<p>Here's an example of this error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">associated_consts</span>)]</span>
@@ -4421,7 +4407,7 @@ re-exporting are themselves marked with <code>pub</code>:</p>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">X</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=mod%20foo%20%7B%0A%20%20%20%20pub%20const%20X%3A%20u32%20%3D%201%3B%0A%7D%0A%0Apub%20use%20foo%3A%3AX%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
-<p>See the &#39;Use Declarations&#39; section of the reference for more information on
+<p>See the 'Use Declarations' section of the reference for more information on
 this topic:</p>
 <p>https://doc.rust-lang.org/reference.html#use-declarations</p>
 </div>
@@ -4449,7 +4435,7 @@ re-exporting is itself marked with <code>pub</code>:</p>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">foo</span> <span class="kw">as</span> <span class="ident">foo2</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=pub%20mod%20foo%20%7B%0A%20%20%20%20pub%20const%20X%3A%20u32%20%3D%201%3B%0A%7D%0A%0Apub%20use%20foo%20as%20foo2%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
-<p>See the &#39;Use Declarations&#39; section of the reference for more information
+<p>See the 'Use Declarations' section of the reference for more information
 on this topic:</p>
 <p>https://doc.rust-lang.org/reference.html#use-declarations</p>
 </div>
@@ -4518,7 +4504,7 @@ to wrap the generic type in another that specializes appropriately:</p>
 </div>
 <div class="error-described error-used"><h2 id="E0368" class="section-header"><a href="#E0368">E0368</a></h2>
 <p>This error indicates that a binary assignment operator like <code>+=</code> or <code>^=</code> was
-applied to a type that doesn&#39;t support it. For example:</p>
+applied to a type that doesn't support it. For example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">12f32</span>; <span class="comment">// error: binary operation `&lt;&lt;` cannot be applied to</span>
@@ -4534,7 +4520,7 @@ operation. Example:</p>
 <span class="ident">x</span> <span class="op">&lt;&lt;=</span> <span class="number">2</span>; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20x%20%3D%2012u32%3B%20%2F%2F%20the%20%60u32%60%20type%20does%20implement%20the%20%60ShlAssign%60%20trait%0A%0Ax%20%3C%3C%3D%202%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
 <p>It is also possible to overload most operators for your own type by
 implementing the <code>[OP]Assign</code> traits from <code>std::ops</code>.</p>
-<p>Another problem you might be facing is this: suppose you&#39;ve overloaded the <code>+</code>
+<p>Another problem you might be facing is this: suppose you've overloaded the <code>+</code>
 operator for some type <code>Foo</code> by implementing the <code>std::ops::Add</code> trait for
 <code>Foo</code>, but you find that using <code>+=</code> does not work, as in this example:</p>
 
@@ -4559,7 +4545,7 @@ operator for some type <code>Foo</code> by implementing the <code>std::ops::Add<
 manually implement it for your type.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0369" class="section-header"><a href="#E0369">E0369</a></h2>
-<p>A binary operation was attempted on a type which doesn&#39;t support it.
+<p>A binary operation was attempted on a type which doesn't support it.
 Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4625,7 +4611,7 @@ definition, so it is not useful to do this.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0373" class="section-header"><a href="#E0373">E0373</a></h2>
 <p>This error occurs when an attempt is made to use data captured by a closure,
-when that data may no longer exist. It&#39;s most commonly seen when attempting to
+when that data may no longer exist. It's most commonly seen when attempting to
 return a closure:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4651,8 +4637,8 @@ unsafe.</p>
 <p>Since our new thread runs in parallel, the stack frame containing <code>x</code> and <code>y</code>
 may well have disappeared by the time we try to use them. Even if we call
 <code>thr.join()</code> within foo (which blocks until <code>thr</code> has completed, ensuring the
-stack frame won&#39;t disappear), we will not succeed: the compiler cannot prove
-that this behaviour is safe, and so won&#39;t let us do it.</p>
+stack frame won't disappear), we will not succeed: the compiler cannot prove
+that this behaviour is safe, and so won't let us do it.</p>
 <p>The solution to this problem is usually to switch to using a <code>move</code> closure.
 This approach moves (or copies, where possible) data into the closure, rather
 than taking references to it. For example:</p>
@@ -4662,14 +4648,14 @@ than taking references to it. For example:</p>
     <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0u32</span>;
     <span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>)
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo()%20-%3E%20Box%3CFn(u32)%20-%3E%20u32%3E%20%7B%0A%20%20%20%20let%20x%20%3D%200u32%3B%0A%20%20%20%20Box%3A%3Anew(move%20%7Cy%7C%20x%20%2B%20y)%0A%7D%0A%7D">Run</a></pre>
-<p>Now that the closure has its own copy of the data, there&#39;s no need to worry
+<p>Now that the closure has its own copy of the data, there's no need to worry
 about safety.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0374" class="section-header"><a href="#E0374">E0374</a></h2>
 <p>A struct without a field containing an unsized type cannot implement
 <code>CoerceUnsized</code>. An
 <a href="https://doc.rust-lang.org/book/unsized-types.html">unsized type</a>
-is any type that the compiler doesn&#39;t know the length or alignment of at
+is any type that the compiler doesn't know the length or alignment of at
 compile time. Any struct containing an unsized type is also unsized.</p>
 <p>Example of erroneous code:</p>
 
@@ -4686,7 +4672,7 @@ compile time. Any struct containing an unsized type is also unsized.</p>
     <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">CoerceUnsized</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(coerce_unsized)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aops%3A%3ACoerceUnsized%3B%0A%0Astruct%20Foo%3CT%3A%20%3FSized%3E%20%7B%0A%20%20%20%20a%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20error%3A%20Struct%20%60Foo%60%20has%20no%20unsized%20fields%20that%20need%20%60CoerceUnsized%60.%0Aimpl%3CT%2C%20U%3E%20CoerceUnsized%3CFoo%3CU%3E%3E%20for%20Foo%3CT%3E%0A%20%20%20%20where%20T%3A%20CoerceUnsized%3CU%3E%20%7B%7D%0A%7D&amp;version=nightly">Run</a></pre>
 <p><code>CoerceUnsized</code> is used to coerce one struct containing an unsized type
 into another struct containing a different unsized type. If the struct
-doesn&#39;t have any fields of unsized types then you don&#39;t need explicit
+doesn't have any fields of unsized types then you don't need explicit
 coercion to get the types you want. To fix this you can either
 not try to implement <code>CoerceUnsized</code> or you can add a field that is
 unsized to the struct.</p>
@@ -4721,7 +4707,7 @@ are pointing at.</p>
 types in your struct to another type in the struct. In this case we try to
 impl <code>CoerceUnsized</code> from <code>T</code> to <code>U</code> which are both types that the struct
 takes. An <a href="https://doc.rust-lang.org/book/unsized-types.html">unsized type</a>
-is any type that the compiler doesn&#39;t know the length or alignment of at
+is any type that the compiler doesn't know the length or alignment of at
 compile time. Any struct containing an unsized type is also unsized.</p>
 <p>Example of erroneous code:</p>
 
@@ -4767,9 +4753,9 @@ multiple structs to manage each unsized type field you need.</p>
 <code>CoerceUnsized</code> can only be implemented for a struct. Unsized types are
 already able to be coerced without an implementation of <code>CoerceUnsized</code>
 whereas a struct containing an unsized type needs to know the unsized type
-field it&#39;s containing is able to be coerced. An
+field it's containing is able to be coerced. An
 <a href="https://doc.rust-lang.org/book/unsized-types.html">unsized type</a>
-is any type that the compiler doesn&#39;t know the length or alignment of at
+is any type that the compiler doesn't know the length or alignment of at
 compile time. Any struct containing an unsized type is also unsized.</p>
 <p>Example of erroneous code:</p>
 
@@ -4840,7 +4826,7 @@ have been moved elsewhere. For example:</p>
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">x</span>.<span class="ident">s</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20MyStruct%20%7B%20s%3A%20u32%20%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%20MyStruct%7B%20s%3A%205u32%20%7D%3B%0A%20%20%20%20let%20y%20%3D%20x%3B%0A%20%20%20%20x.s%20%3D%206%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x.s)%3B%0A%7D%0A">Run</a></pre>
 <p>Since <code>MyStruct</code> is a type that is not marked <code>Copy</code>, the data gets moved out
-of <code>x</code> when we set <code>y</code>. This is fundamental to Rust&#39;s ownership system: outside
+of <code>x</code> when we set <code>y</code>. This is fundamental to Rust's ownership system: outside
 of workarounds like <code>Rc</code>, a value cannot be owned by more than one variable.</p>
 <p>If we own the type, the easiest way to address this problem is to implement
 <code>Copy</code> and <code>Clone</code> on it, as shown below. This allows <code>y</code> to copy the
@@ -4857,7 +4843,7 @@ changes to <code>x</code> will not be reflected when accessing <code>y</code>.</
     <span class="ident">x</span>.<span class="ident">s</span> <span class="op">=</span> <span class="number">6</span>;
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">x</span>.<span class="ident">s</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23%5Bderive(Copy%2C%20Clone)%5D%0Astruct%20MyStruct%20%7B%20s%3A%20u32%20%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%20MyStruct%7B%20s%3A%205u32%20%7D%3B%0A%20%20%20%20let%20y%20%3D%20x%3B%0A%20%20%20%20x.s%20%3D%206%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x.s)%3B%0A%7D%0A">Run</a></pre>
-<p>Alternatively, if we don&#39;t control the struct&#39;s definition, or mutable shared
+<p>Alternatively, if we don't control the struct's definition, or mutable shared
 ownership is truly required, we can use <code>Rc</code> and <code>RefCell</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -4953,7 +4939,7 @@ rather than Fn:</p>
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnMut</span>()<span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>) { }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo%3CF%3A%20FnMut()%3E(f%3A%20F)%20%7B%20%7D%0A%7D">Run</a></pre>
 <p>Alternatively, we can consider using the <code>Cell</code> and <code>RefCell</code> types to achieve
-interior mutability through a shared reference. Our example&#39;s <code>mutable</code>
+interior mutability through a shared reference. Our example's <code>mutable</code>
 function could be redefined as below:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5038,7 +5024,7 @@ immutable to prevent multiple mutable references to the same value.</p>
 <span class="kw">impl</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Foo</span> {}
 <span class="comment">// error: only a single inherent implementation marked with</span>
 <span class="comment">//        `#[lang = &quot;mut_ptr&quot;]` is allowed for the `*mut T` primitive</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%0A%7D%0A%0Aimpl%20*mut%20Foo%20%7B%7D%0A%2F%2F%20error%3A%20only%20a%20single%20inherent%20implementation%20marked%20with%0A%2F%2F%20%20%20%20%20%20%20%20%60%23%5Blang%20%3D%20%22mut_ptr%22%5D%60%20is%20allowed%20for%20the%20%60*mut%20T%60%20primitive%0A%7D">Run</a></pre>
-<p>This isn&#39;t allowed, but using a trait to implement a method is a good solution.
+<p>This isn't allowed, but using a trait to implement a method is a good solution.
 Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5099,11 +5085,11 @@ error:</p>
 <span class="kw">struct</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="ident">x</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>,
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3C'a%2C%20T%3E%20%7B%0A%20%20%20%20x%3A%20*const%20T%2C%0A%7D%0A%7D">Run</a></pre>
-<p>We want to express the constraint that Foo should not outlive <code>&#39;a</code>, because
+<p>We want to express the constraint that Foo should not outlive <code>'a</code>, because
 the data pointed to by <code>T</code> is only valid for that lifetime. The problem is
-that there are no actual uses of <code>&#39;a</code>. It&#39;s possible to work around this
+that there are no actual uses of <code>'a</code>. It's possible to work around this
 by adding a PhantomData type to the struct, using it to tell the compiler
-to act as if the struct contained a borrowed reference <code>&amp;&#39;a T</code>:</p>
+to act as if the struct contained a borrowed reference <code>&amp;'a T</code>:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
@@ -5148,8 +5134,8 @@ defaulted parameter will fix this issue. Fixed example:</p>
 described in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1156-adjust-default-object-bounds.md">RFC 1156</a>. You are getting a warning because the compiler
 thinks it is possible that this change will cause a compilation error in your
 code. It is possible, though unlikely, that this is a false alarm.</p>
-<p>The heart of the change is that where <code>&amp;&#39;a Box&lt;SomeTrait&gt;</code> used to default to
-<code>&amp;&#39;a Box&lt;SomeTrait+&#39;a&gt;</code>, it now defaults to <code>&amp;&#39;a Box&lt;SomeTrait+&#39;static&gt;</code> (here,
+<p>The heart of the change is that where <code>&amp;'a Box&lt;SomeTrait&gt;</code> used to default to
+<code>&amp;'a Box&lt;SomeTrait+'a&gt;</code>, it now defaults to <code>&amp;'a Box&lt;SomeTrait+'static&gt;</code> (here,
 <code>SomeTrait</code> is the name of some trait type). Note that the only types which are
 affected are references to boxes, like <code>&amp;Box&lt;SomeTrait&gt;</code> or
 <code>&amp;[Box&lt;SomeTrait&gt;]</code>. More common types like <code>&amp;SomeTrait</code> or <code>Box&lt;SomeTrait&gt;</code>
@@ -5166,7 +5152,7 @@ and <code>foo</code> is defined as follows:</p>
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">arg</span>: <span class="kw-2">&amp;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">SomeTrait</span><span class="op">+</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) { ... }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo%3C'a%3E(arg%3A%20%26Box%3CSomeTrait%2B'a%3E)%20%7B%20...%20%7D%0A%7D">Run</a></pre>
 <p>This explicitly states that you expect the trait object <code>SomeTrait</code> to contain
-references (with a maximum lifetime of <code>&#39;a</code>).</p>
+references (with a maximum lifetime of <code>'a</code>).</p>
 </div>
 <div class="error-described error-used"><h2 id="E0399" class="section-header"><a href="#E0399">E0399</a></h2>
 <p>You implemented a trait, overriding one or more of its associated types but did
@@ -5285,7 +5271,7 @@ function might be easier:</p>
         <span class="comment">// ..</span>
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aimpl%3CT%3E%20Foo%3CT%3E%20%7B%0A%20%20%20%20pub%20fn%20foo(%26self%2C%20x%3A%20T)%20%7B%0A%20%20%20%20%20%20%20%20self.bar(x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20fn%20bar(%26self%2C%20y%3A%20T)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20..%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-<p>For default impls in traits, the private helper solution won&#39;t work, however
+<p>For default impls in traits, the private helper solution won't work, however
 closures or copying the parameters should still work.</p>
 </div>
 <div class="error-undescribed error-used"><h2 id="E0402" class="section-header"><a href="#E0402">E0402</a></h2>
@@ -5313,7 +5299,7 @@ clashing parameters. Example:</p>
 <span class="kw">struct</span> <span class="ident">Bar</span>;
 
 <span class="kw">impl</span> <span class="ident">Foo</span> <span class="kw">for</span> <span class="ident">Bar</span> {} <span class="comment">// error: `Foo` is not a trait</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3B%0Astruct%20Bar%3B%0A%0Aimpl%20Foo%20for%20Bar%20%7B%7D%20%2F%2F%20error%3A%20%60Foo%60%20is%20not%20a%20trait%0A%7D">Run</a></pre>
-<p>Please verify that you didn&#39;t misspell the trait&#39;s name or otherwise use the
+<p>Please verify that you didn't misspell the trait's name or otherwise use the
 wrong identifier. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5334,7 +5320,7 @@ wrong identifier. Example:</p>
 <span class="kw">struct</span> <span class="ident">Foo</span>;
 
 <span class="kw">impl</span> <span class="ident">SomeTrait</span> <span class="kw">for</span> <span class="ident">Foo</span> {} <span class="comment">// error: trait `SomeTrait` is not in scope</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3B%0A%0Aimpl%20SomeTrait%20for%20Foo%20%7B%7D%20%2F%2F%20error%3A%20trait%20%60SomeTrait%60%20is%20not%20in%20scope%0A%7D">Run</a></pre>
-<p>Please verify that the name of the trait wasn&#39;t misspelled and ensure that it
+<p>Please verify that the name of the trait wasn't misspelled and ensure that it
 was imported. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5368,7 +5354,7 @@ implementation.</p>
     <span class="kw">fn</span> <span class="ident">a</span>() {}
     <span class="kw">fn</span> <span class="ident">b</span>() {} <span class="comment">// error: method `b` is not a member of trait `Foo`</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20a()%3B%0A%7D%0A%0Astruct%20Bar%3B%0A%0Aimpl%20Foo%20for%20Bar%20%7B%0A%20%20%20%20fn%20a()%20%7B%7D%0A%20%20%20%20fn%20b()%20%7B%7D%20%2F%2F%20error%3A%20method%20%60b%60%20is%20not%20a%20member%20of%20trait%20%60Foo%60%0A%7D%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell the method name and you used the correct
+<p>Please verify you didn't misspell the method name and you used the correct
 trait. First example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5533,7 +5519,7 @@ type:</p>
 <span class="comment">// or:</span>
 
 <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="ident">T</span>) {} <span class="comment">// type name `T` is not in scope</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aimpl%20Something%20%7B%7D%20%2F%2F%20error%3A%20type%20name%20%60Something%60%20is%20not%20in%20scope%0A%0A%2F%2F%20or%3A%0A%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar(N)%3B%20%2F%2F%20error%3A%20type%20name%20%60N%60%20is%20not%20in%20scope%0A%7D%0A%0A%2F%2F%20or%3A%0A%0Afn%20foo(x%3A%20T)%20%7B%7D%20%2F%2F%20type%20name%20%60T%60%20is%20not%20in%20scope%0A%7D">Run</a></pre>
-<p>To fix this error, please verify you didn&#39;t misspell the type name, you did
+<p>To fix this error, please verify you didn't misspell the type name, you did
 declare it or imported it into the scope. Examples:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5560,7 +5546,7 @@ declare it or imported it into the scope. Examples:</p>
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">f</span>: <span class="ident">i32</span>, <span class="ident">f</span>: <span class="ident">i32</span>) {} <span class="comment">// error: identifier `f` is bound more than</span>
                           <span class="comment">//        once in this parameter list</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo(f%3A%20i32%2C%20f%3A%20i32)%20%7B%7D%20%2F%2F%20error%3A%20identifier%20%60f%60%20is%20bound%20more%20than%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20once%20in%20this%20parameter%20list%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell parameters&#39; name. Example:</p>
+<p>Please verify you didn't misspell parameters' name. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">f</span>: <span class="ident">i32</span>, <span class="ident">g</span>: <span class="ident">i32</span>) {} <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo(f%3A%20i32%2C%20g%3A%20i32)%20%7B%7D%20%2F%2F%20ok!%0A%7D">Run</a></pre>
@@ -5574,7 +5560,7 @@ declare it or imported it into the scope. Examples:</p>
     (<span class="ident">x</span>, <span class="ident">x</span>) <span class="op">=&gt;</span> {} <span class="comment">// error: identifier `x` is bound more than once in the</span>
                  <span class="comment">//        same pattern</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amatch%20(1%2C%202)%20%7B%0A%20%20%20%20(x%2C%20x)%20%3D%3E%20%7B%7D%20%2F%2F%20error%3A%20identifier%20%60x%60%20is%20bound%20more%20than%20once%20in%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20same%20pattern%0A%7D%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell identifiers&#39; name. Example:</p>
+<p>Please verify you didn't misspell identifiers' name. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">match</span> (<span class="number">1</span>, <span class="number">2</span>) {
@@ -5596,7 +5582,7 @@ Erroneous code example:</p>
 <span class="kw">fn</span> <span class="ident">main</span> () {
     <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="number">1</span>, <span class="ident">y</span>: <span class="number">2</span> };
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main%20()%20%7B%0A%20%20%20%20let%20x%20%3D%20Foo%20%7B%20x%3A%201%2C%20y%3A%202%20%7D%3B%0A%7D%0A">Run</a></pre>
-<p>In this case, <code>Foo</code> is undefined, so it inherently isn&#39;t anything, and
+<p>In this case, <code>Foo</code> is undefined, so it inherently isn't anything, and
 definitely not a struct.</p>
 
 <pre class="rust rust-example-rendered">
@@ -5604,7 +5590,7 @@ definitely not a struct.</p>
     <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="number">1</span>;
     <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">foo</span> { <span class="ident">x</span>: <span class="number">1</span>, <span class="ident">y</span>: <span class="number">2</span> };
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main%20()%20%7B%0A%20%20%20%20let%20foo%20%3D%201%3B%0A%20%20%20%20let%20x%20%3D%20foo%20%7B%20x%3A%201%2C%20y%3A%202%20%7D%3B%0A%7D%0A">Run</a></pre>
-<p>In this case, <code>foo</code> is defined, but is not a struct, so Rust can&#39;t use it as
+<p>In this case, <code>foo</code> is defined, but is not a struct, so Rust can't use it as
 one.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0423" class="section-header"><a href="#E0423">E0423</a></h2>
@@ -5617,7 +5603,7 @@ one.</p>
 <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">Foo</span>();
 <span class="comment">// error: `Foo` is a struct variant name, but this expression uses</span>
 <span class="comment">//        it like a function name</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%20a%3A%20bool%20%7D%3B%0A%0Alet%20f%20%3D%20Foo()%3B%0A%2F%2F%20error%3A%20%60Foo%60%20is%20a%20struct%20variant%20name%2C%20but%20this%20expression%20uses%0A%2F%2F%20%20%20%20%20%20%20%20it%20like%20a%20function%20name%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell the name of what you actually wanted to use
+<p>Please verify you didn't misspell the name of what you actually wanted to use
 here. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5639,8 +5625,8 @@ here. Example:</p>
         <span class="self">self</span>.<span class="ident">bar</span>(); <span class="comment">// error: `self` is not available in a static method.</span>
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3B%0A%0Aimpl%20Foo%20%7B%0A%20%20%20%20fn%20bar(self)%20%7B%7D%0A%0A%20%20%20%20fn%20foo()%20%7B%0A%20%20%20%20%20%20%20%20self.bar()%3B%20%2F%2F%20error%3A%20%60self%60%20is%20not%20available%20in%20a%20static%20method.%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-<p>Please check if the method&#39;s argument list should have contained <code>self</code>,
-<code>&amp;self</code>, or <code>&amp;mut self</code> (in case you didn&#39;t want to create a static
+<p>Please check if the method's argument list should have contained <code>self</code>,
+<code>&amp;self</code>, or <code>&amp;mut self</code> (in case you didn't want to create a static
 method), and add it if so. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5673,7 +5659,7 @@ method), and add it if so. Example:</p>
 <span class="comment">// or:</span>
 
 <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">unknown_variable</span>;  <span class="comment">// error: unresolved name `unknown_variable`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Asomething_that_doesnt_exist%3A%3Afoo%3B%0A%2F%2F%20error%3A%20unresolved%20name%20%60something_that_doesnt_exist%3A%3Afoo%60%0A%0A%2F%2F%20or%3A%0A%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar()%20%7B%0A%20%20%20%20%20%20%20%20Self%3B%20%2F%2F%20error%3A%20unresolved%20name%20%60Self%60%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20or%3A%0A%0Alet%20x%20%3D%20unknown_variable%3B%20%20%2F%2F%20error%3A%20unresolved%20name%20%60unknown_variable%60%0A%7D">Run</a></pre>
-<p>Please verify that the name wasn&#39;t misspelled and ensure that the
+<p>Please verify that the name wasn't misspelled and ensure that the
 identifier being referred to is valid for the given situation. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5724,7 +5710,7 @@ current module, then it must also be declared as public (e.g., <code>pub fn</cod
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Bar</span>;
 <span class="kw">struct</span> <span class="ident">Bar</span>; <span class="comment">// error: duplicate definition of value `Bar`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Bar%3B%0Astruct%20Bar%3B%20%2F%2F%20error%3A%20duplicate%20definition%20of%20value%20%60Bar%60%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell the type/module&#39;s name or remove/rename the
+<p>Please verify you didn't misspell the type/module's name or remove/rename the
 duplicated one. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5755,7 +5741,7 @@ as part of a brace-enclosed list of imports:</p>
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">something</span>::{<span class="self">self</span>, <span class="self">self</span>}; <span class="comment">// error: `self` import can only appear once in</span>
                              <span class="comment">//        the list</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20something%3A%3A%7Bself%2C%20self%7D%3B%20%2F%2F%20error%3A%20%60self%60%20import%20can%20only%20appear%20once%20in%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20the%20list%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell the import name or remove the duplicated
+<p>Please verify you didn't misspell the import name or remove the duplicated
 <code>self</code> import. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5769,7 +5755,7 @@ as part of a brace-enclosed list of imports:</p>
 <span class="kw">use</span> {<span class="self">self</span>}; <span class="comment">// error: `self` import can only appear in an import list with a</span>
             <span class="comment">//        non-empty prefix</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20%7Bself%7D%3B%20%2F%2F%20error%3A%20%60self%60%20import%20can%20only%20appear%20in%20an%20import%20list%20with%20a%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20non-empty%20prefix%0A%7D">Run</a></pre>
 <p>You cannot import the current module into itself, please remove this import
-or verify you didn&#39;t misspell it.</p>
+or verify you didn't misspell it.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0432" class="section-header"><a href="#E0432">E0432</a></h2>
 <p>An import was unresolved.</p>
@@ -5779,7 +5765,7 @@ or verify you didn&#39;t misspell it.</p>
 <span class="kw">use</span> <span class="ident">something</span>::<span class="ident">Foo</span>; <span class="comment">// error: unresolved import `something::Foo`.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20something%3A%3AFoo%3B%20%2F%2F%20error%3A%20unresolved%20import%20%60something%3A%3AFoo%60.%0A%7D">Run</a></pre>
 <p>Paths in <code>use</code> statements are relative to the crate root. To import items
 relative to the current and parent modules, use the <code>self::</code> and <code>super::</code>
-prefixes, respectively. Also verify that you didn&#39;t misspell the import
+prefixes, respectively. Also verify that you didn't misspell the import
 name and that the import exists in the module from where you tried to
 import it. Example:</p>
 
@@ -5804,7 +5790,7 @@ the <code>extern crate</code> declaration (which is usually placed in the crate 
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
 <span class="comment">// error: failed to resolve. Use of undeclared type or module `HashMap`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20map%20%3D%20HashMap%3A%3Anew()%3B%0A%2F%2F%20error%3A%20failed%20to%20resolve.%20Use%20of%20undeclared%20type%20or%20module%20%60HashMap%60%0A%7D">Run</a></pre>
-<p>Please verify you didn&#39;t misspell the type/module&#39;s name or that you didn&#39;t
+<p>Please verify you didn't misspell the type/module's name or that you didn't
 forgot to import it:</p>
 
 <pre class="rust rust-example-rendered">
@@ -5914,7 +5900,7 @@ match the name of any associated constant in the trait.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0439" class="section-header"><a href="#E0439">E0439</a></h2>
 <p>The length of the platform-intrinsic function <code>simd_shuffle</code>
-wasn&#39;t specified. Erroneous code example:</p>
+wasn't specified. Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">platform_intrinsics</span>)]</span>
@@ -5978,7 +5964,7 @@ code example:</p>
     <span class="kw">fn</span> <span class="ident">x86_mm_adds_ep16</span>(<span class="ident">x</span>: <span class="ident">i16x8</span>, <span class="ident">y</span>: <span class="ident">i16x8</span>) <span class="op">-&gt;</span> <span class="ident">i16x8</span>;
     <span class="comment">// error: unrecognized platform-specific intrinsic function</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(repr_simd)%5D%0A%23!%5Bfeature(platform_intrinsics)%5D%0A%0Afn%20main()%20%7B%0A%23%5Brepr(simd)%5D%0Astruct%20i16x8(i16%2C%20i16%2C%20i16%2C%20i16%2C%20i16%2C%20i16%2C%20i16%2C%20i16)%3B%0A%0Aextern%20%22platform-intrinsic%22%20%7B%0A%20%20%20%20fn%20x86_mm_adds_ep16(x%3A%20i16x8%2C%20y%3A%20i16x8)%20-%3E%20i16x8%3B%0A%20%20%20%20%2F%2F%20error%3A%20unrecognized%20platform-specific%20intrinsic%20function%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
-<p>Please verify that the function name wasn&#39;t misspelled, and ensure
+<p>Please verify that the function name wasn't misspelled, and ensure
 that it is declared in the rust source code (in the file
 src/librustc_platform_intrinsics/x86.rs). Example:</p>
 
@@ -6245,7 +6231,7 @@ attribute on an enclosing scope, or on the command line with the <code>-F</code>
 <p>The <code>forbid</code> lint setting, like <code>deny</code>, turns the corresponding compiler
 warning into a hard error. Unlike <code>deny</code>, <code>forbid</code> prevents itself from being
 overridden by inner attributes.</p>
-<p>If you&#39;re sure you want to override the lint check, you can change <code>forbid</code> to
+<p>If you're sure you want to override the lint check, you can change <code>forbid</code> to
 <code>deny</code> (or use <code>-D</code> instead of <code>-F</code> if the <code>forbid</code> setting was given as a
 command-line option) to allow the inner lint check attribute:</p>
 
@@ -6271,7 +6257,7 @@ attribute:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="attribute">#[<span class="ident">link</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>)]</span> <span class="kw">extern</span> {} <span class="comment">// error: #[link(name = &quot;&quot;)] given with empty name</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Blink(name%20%3D%20%22%22)%5D%20extern%20%7B%7D%20%2F%2F%20error%3A%20%23%5Blink(name%20%3D%20%22%22)%5D%20given%20with%20empty%20name%0A%7D">Run</a></pre>
-<p>The rust compiler cannot link to an external library if you don&#39;t give it its
+<p>The rust compiler cannot link to an external library if you don't give it its
 name. Example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -6437,7 +6423,7 @@ This will work:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23%5Bmacro_use(drink%2C%20be_merry)%5D%20%2F%2F%20error%3A%20imported%20macro%20not%20found%0Aextern%20crate%20collections%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20...%0A%7D%0A">Run</a></pre>
 <p>Either the listed macro is not contained in the imported crate, or it is not
 exported from the given crate.</p>
-<p>This could be caused by a typo. Did you misspell the macro&#39;s name?</p>
+<p>This could be caused by a typo. Did you misspell the macro's name?</p>
 <p>Double-check the names of the macros listed for import, and that the crate
 in question exports them.</p>
 <p>A working version would be:</p>
@@ -6471,7 +6457,7 @@ in question exports them.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23%5Bmacro_reexport(drink%2C%20be_merry)%5D%0Aextern%20crate%20collections%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20...%0A%7D%0A">Run</a></pre>
 <p>Either the listed macro is not contained in the imported crate, or it is not
 exported from the given crate.</p>
-<p>This could be caused by a typo. Did you misspell the macro&#39;s name?</p>
+<p>This could be caused by a typo. Did you misspell the macro's name?</p>
 <p>Double-check the names of the macros listed for reexport, and that the crate
 in question exports them.</p>
 <p>A working version:</p>
@@ -6521,8 +6507,8 @@ in question exports them.</p>
     <span class="ident">child</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Wedding</span><span class="op">&lt;</span><span class="lifetime">&#39;kiss</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;SnowWhite</span><span class="op">&gt;</span>,
     <span class="comment">// error: lifetime bound not satisfied</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20Check%20that%20the%20explicit%20lifetime%20bound%20(%60'SnowWhite%60%2C%20in%20this%20example)%20must%0A%2F%2F%20outlive%20all%20the%20superbounds%20from%20the%20trait%20(%60'kiss%60%2C%20in%20this%20example).%0A%0Atrait%20Wedding%3C't%3E%3A%20't%20%7B%20%7D%0A%0Astruct%20Prince%3C'kiss%2C%20'SnowWhite%3E%20%7B%0A%20%20%20%20child%3A%20Box%3CWedding%3C'kiss%3E%20%2B%20'SnowWhite%3E%2C%0A%20%20%20%20%2F%2F%20error%3A%20lifetime%20bound%20not%20satisfied%0A%7D%0A%7D">Run</a></pre>
-<p>In this example, the <code>&#39;SnowWhite</code> lifetime is supposed to outlive the <code>&#39;kiss</code>
-lifetime but the declaration of the <code>Prince</code> struct doesn&#39;t enforce it. To fix
+<p>In this example, the <code>'SnowWhite</code> lifetime is supposed to outlive the <code>'kiss</code>
+lifetime but the declaration of the <code>Prince</code> struct doesn't enforce it. To fix
 this issue, you need to specify it:</p>
 
 <pre class="rust rust-example-rendered">
@@ -6783,7 +6769,7 @@ has already been borrowed as immutable.</p>
     <span class="ident">bar</span>(<span class="ident">a</span>); <span class="comment">// error: cannot borrow `*a` as mutable because `a` is also borrowed</span>
             <span class="comment">//        as immutable</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20bar(x%3A%20%26mut%20i32)%20%7B%7D%0Afn%20foo(a%3A%20%26mut%20i32)%20%7B%0A%20%20%20%20let%20ref%20y%20%3D%20a%3B%20%2F%2F%20a%20is%20borrowed%20as%20immutable.%0A%20%20%20%20bar(a)%3B%20%2F%2F%20error%3A%20cannot%20borrow%20%60*a%60%20as%20mutable%20because%20%60a%60%20is%20also%20borrowed%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20as%20immutable%0A%7D%0A%7D">Run</a></pre>
-<p>To fix this error, ensure that you don&#39;t have any other references to the
+<p>To fix this error, ensure that you don't have any other references to the
 variable before trying to access it mutably:</p>
 
 <pre class="rust rust-example-rendered">
@@ -6810,7 +6796,7 @@ https://doc.rust-lang.org/stable/book/references-and-borrowing.html.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20value%20%3D%203%3B%0A%20%20%20%20%2F%2F%20Create%20a%20mutable%20borrow%20of%20%60value%60.%20This%20borrow%0A%20%20%20%20%2F%2F%20lives%20until%20the%20end%20of%20this%20function.%0A%20%20%20%20let%20_borrow%20%3D%20%26mut%20value%3B%0A%20%20%20%20let%20_sum%20%3D%20value%20%2B%201%3B%20%2F%2F%20error%3A%20cannot%20use%20%60value%60%20because%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20it%20was%20mutably%20borrowed%0A%7D%0A">Run</a></pre>
 <p>In this example, <code>value</code> is mutably borrowed by <code>borrow</code> and cannot be
 used to calculate <code>sum</code>. This is not possible because this would violate
-Rust&#39;s mutability rules.</p>
+Rust's mutability rules.</p>
 <p>You can fix this error by limiting the scope of the borrow:</p>
 
 <pre class="rust rust-example-rendered">
@@ -6867,7 +6853,7 @@ closure.</p>
 <p>Here, <code>fancy_num</code> is borrowed by <code>fancy_ref</code> and so cannot be moved into
 the closure <code>x</code>. There is no way to move a value into a closure while it is
 borrowed, as that would invalidate the borrow.</p>
-<p>If the closure can&#39;t outlive the value being moved, try using a reference
+<p>If the closure can't outlive the value being moved, try using a reference
 rather than moving:</p>
 
 <pre class="rust rust-example-rendered">
@@ -6912,7 +6898,7 @@ the borrow using a scoped block:</p>
 
     <span class="ident">x</span>();
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20FancyNum%20%7B%0A%20%20%20%20num%3A%20u8%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20fancy_num%20%3D%20FancyNum%20%7B%20num%3A%205%20%7D%3B%0A%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20let%20fancy_ref%20%3D%20%26fancy_num%3B%0A%20%20%20%20%20%20%20%20println!(%22main%20function%3A%20%7B%7D%22%2C%20fancy_ref.num)%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20%60fancy_ref%60%20goes%20out%20of%20scope%20here%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20x%20%3D%20move%20%7C%7C%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%60fancy_num%60%20can%20be%20moved%20now%20(no%20more%20references%20exist)%0A%20%20%20%20%20%20%20%20println!(%22child%20function%3A%20%7B%7D%22%2C%20fancy_num.num)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20x()%3B%0A%7D%0A">Run</a></pre>
-<p>If the lifetime of a reference isn&#39;t enough, such as in the case of threading,
+<p>If the lifetime of a reference isn't enough, such as in the case of threading,
 consider using an <code>Arc</code> to create a reference-counted value:</p>
 
 <pre class="rust rust-example-rendered">
@@ -7023,7 +7009,7 @@ http://doc.rust-lang.org/stable/book/references-and-borrowing.html</p>
 
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Num: {}, Ref: {}&quot;</span>, <span class="ident">fancy_num</span>.<span class="ident">num</span>, <span class="ident">fancy_ref</span>.<span class="ident">num</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20FancyNum%20%7B%0A%20%20%20%20num%3A%20u8%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20fancy_num%20%3D%20FancyNum%20%7B%20num%3A%205%20%7D%3B%0A%20%20%20%20let%20fancy_ref%20%3D%20%26fancy_num%3B%0A%20%20%20%20fancy_num%20%3D%20FancyNum%20%7B%20num%3A%206%20%7D%3B%0A%20%20%20%20%2F%2F%20error%3A%20cannot%20assign%20to%20%60fancy_num%60%20because%20it%20is%20borrowed%0A%0A%20%20%20%20println!(%22Num%3A%20%7B%7D%2C%20Ref%3A%20%7B%7D%22%2C%20fancy_num.num%2C%20fancy_ref.num)%3B%0A%7D%0A">Run</a></pre>
-<p>Because <code>fancy_ref</code> still holds a reference to <code>fancy_num</code>, <code>fancy_num</code> can&#39;t
+<p>Because <code>fancy_ref</code> still holds a reference to <code>fancy_num</code>, <code>fancy_num</code> can't
 be assigned to a new value as it would invalidate the reference.</p>
 <p>Alternatively, we can move out of <code>fancy_num</code> into a second <code>fancy_num</code>:</p>
 
@@ -7411,11 +7397,11 @@ with a constrained set of allowed values.</p>
 <p>Only C-like enums can be cast to numerical primitives, so this attribute will
 not apply to structs.</p>
 <p><code>#[repr(packed)]</code> reduces padding to make the struct size smaller. The
-representation of enums isn&#39;t strictly defined in Rust, and this attribute
-won&#39;t work on enums.</p>
+representation of enums isn't strictly defined in Rust, and this attribute
+won't work on enums.</p>
 <p><code>#[repr(simd)]</code> will give a struct consisting of a homogenous series of machine
 types (i.e. <code>u8</code>, <code>i32</code>, etc) a representation that permits vectorization via
-SIMD. This doesn&#39;t make much sense for enums since they don&#39;t consist of a
+SIMD. This doesn't make much sense for enums since they don't consist of a
 single list of data.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0518" class="section-header"><a href="#E0518">E0518</a></h2>
@@ -7434,7 +7420,7 @@ on something other than a function or method.</p>
 <p><code>#[inline]</code> hints the compiler whether or not to attempt to inline a method or
 function. By default, the compiler does a pretty good job of figuring this out
 itself, but if you feel the need for annotations, <code>#[inline(always)]</code> and
-<code>#[inline(never)]</code> can override or force the compiler&#39;s decision.</p>
+<code>#[inline(never)]</code> can override or force the compiler's decision.</p>
 <p>If you wish to apply this attribute to all methods in an impl, manually annotate
 each method; it is not possible to annotate the entire impl with an <code>#[inline]</code>
 attribute.</p>
@@ -7524,7 +7510,7 @@ Erroneous code example:</p>
 <p>No description.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0525" class="section-header"><a href="#E0525">E0525</a></h2>
-<p>A closure was used but didn&#39;t implement the expected trait.</p>
+<p>A closure was used but didn't implement the expected trait.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -7541,8 +7527,8 @@ Erroneous code example:</p>
     <span class="ident">bar</span>(<span class="ident">closure</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20X%3B%0A%0Afn%20foo%3CT%3E(_%3A%20T)%20%7B%7D%0Afn%20bar%3CT%3A%20Fn(u32)%3E(_%3A%20T)%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%20X%3B%0A%20%20%20%20let%20closure%20%3D%20%7C_%7C%20foo(x)%3B%20%2F%2F%20error%3A%20expected%20a%20closure%20that%20implements%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20the%20%60Fn%60%20trait%2C%20but%20this%20closure%20only%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20implements%20%60FnOnce%60%0A%20%20%20%20bar(closure)%3B%0A%7D%0A">Run</a></pre>
 <p>In the example above, <code>closure</code> is an <code>FnOnce</code> closure whereas the <code>bar</code>
-function expected an <code>Fn</code> closure. In this case, it&#39;s simple to fix the issue,
-you just have to implement <code>Copy</code> and <code>Clone</code> traits on <code>struct X</code> and it&#39;ll
+function expected an <code>Fn</code> closure. In this case, it's simple to fix the issue,
+you just have to implement <code>Copy</code> and <code>Clone</code> traits on <code>struct X</code> and it'll
 be ok:</p>
 
 <pre class="rust rust-example-rendered">
@@ -7644,7 +7630,7 @@ types:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(slice_patterns)%5D%0A%0Afn%20main()%20%7B%0Alet%20r%20%3D%20%5B1.0%2C%202.0%5D%3B%0Amatch%20r%20%7B%0A%20%20%20%20%5Ba%2C%20b%5D%20%3D%3E%20%7B%20%2F%2F%20ok!%0A%20%20%20%20%20%20%20%20println!(%22a%3D%7B%7D%2C%20b%3D%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20%7D%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0530" class="section-header"><a href="#E0530">E0530</a></h2>
-<p>A binding shadowed something it shouldn&#39;t.</p>
+<p>A binding shadowed something it shouldn't.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -7654,7 +7640,7 @@ types:</p>
 <span class="kw">match</span> <span class="ident">r</span> {
     <span class="ident">TEST</span> <span class="op">=&gt;</span> {} <span class="comment">// error: match bindings cannot shadow statics</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astatic%20TEST%3A%20i32%20%3D%200%3B%0A%0Alet%20r%3A%20(i32%2C%20i32)%20%3D%20(0%2C%200)%3B%0Amatch%20r%20%7B%0A%20%20%20%20TEST%20%3D%3E%20%7B%7D%20%2F%2F%20error%3A%20match%20bindings%20cannot%20shadow%20statics%0A%7D%0A%7D">Run</a></pre>
-<p>To fix this error, just change the binding&#39;s name in order to avoid shadowing
+<p>To fix this error, just change the binding's name in order to avoid shadowing
 one of the following:</p>
 <ul>
 <li>struct name</li>
@@ -7715,7 +7701,7 @@ matched.</p>
 <p>No description.</p>
 </div>
 <div class="error-described error-used"><h2 id="E0559" class="section-header"><a href="#E0559">E0559</a></h2>
-<p>An unknown field was specified into an enum&#39;s structure variant.</p>
+<p>An unknown field was specified into an enum's structure variant.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -7725,7 +7711,7 @@ matched.</p>
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Field</span>::<span class="ident">Fool</span> { <span class="ident">joke</span>: <span class="number">0</span> };
 <span class="comment">// error: struct variant `Field::Fool` has no field named `joke`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aenum%20Field%20%7B%0A%20%20%20%20Fool%20%7B%20x%3A%20u32%20%7D%2C%0A%7D%0A%0Alet%20s%20%3D%20Field%3A%3AFool%20%7B%20joke%3A%200%20%7D%3B%0A%2F%2F%20error%3A%20struct%20variant%20%60Field%3A%3AFool%60%20has%20no%20field%20named%20%60joke%60%0A%7D">Run</a></pre>
-<p>Verify you didn&#39;t misspell the field&#39;s name or that the field exists. Example:</p>
+<p>Verify you didn't misspell the field's name or that the field exists. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">enum</span> <span class="ident">Field</span> {
@@ -7745,7 +7731,7 @@ matched.</p>
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Simba</span> { <span class="ident">mother</span>: <span class="number">1</span>, <span class="ident">father</span>: <span class="number">0</span> };
 <span class="comment">// error: structure `Simba` has no field named `father`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Simba%20%7B%0A%20%20%20%20mother%3A%20u32%2C%0A%7D%0A%0Alet%20s%20%3D%20Simba%20%7B%20mother%3A%201%2C%20father%3A%200%20%7D%3B%0A%2F%2F%20error%3A%20structure%20%60Simba%60%20has%20no%20field%20named%20%60father%60%0A%7D">Run</a></pre>
-<p>Verify you didn&#39;t misspell the field&#39;s name or that the field exists. Example:</p>
+<p>Verify you didn't misspell the field's name or that the field exists. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">Simba</span> {
@@ -7866,7 +7852,7 @@ and not in the arguments types.</p>
     <span class="kw">let</span> <span class="ident">x</span>: <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">fn</span>() <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Here%2C%20%60'a%60%20appears%20only%20in%20the%20return%20type%3A%0A%20%20%20%20let%20x%3A%20for%3C'a%3E%20fn()%20-%3E%20%26'a%20i32%3B%0A%7D%0A">Run</a></pre>
 <p>To fix this issue, either use the lifetime in the arguments, or use
-<code>&#39;static</code>. Example:</p>
+<code>'static</code>. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">main</span>() {
@@ -7893,7 +7879,7 @@ and not in the input types to the trait.</p>
 
 <span class="kw">fn</span> <span class="ident">main</span>() { }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20bar%3CF%3E(t%3A%20F)%0A%20%20%20%20%2F%2F%20No%20type%20can%20satisfy%20this%20requirement%2C%20since%20%60'a%60%20does%20not%0A%20%20%20%20%2F%2F%20appear%20in%20any%20of%20the%20input%20types%20(here%2C%20%60i32%60)%3A%0A%20%20%20%20where%20F%3A%20for%3C'a%3E%20Fn(i32)%20-%3E%20Option%3C%26'a%20i32%3E%0A%7B%0A%7D%0A%0Afn%20main()%20%7B%20%7D%0A">Run</a></pre>
 <p>To fix this issue, either use the lifetime in the inputs, or use
-<code>&#39;static</code>. Example:</p>
+<code>'static</code>. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">bar</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">G</span><span class="op">&gt;</span>(<span class="ident">t</span>: <span class="ident">F</span>, <span class="ident">u</span>: <span class="ident">G</span>)
@@ -7924,10 +7910,10 @@ so you rarely notice this:</p>
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">x</span>: <span class="kw">fn</span>(<span class="ident">i32</span>) <span class="op">=</span> <span class="ident">foo</span>; <span class="comment">// OK, coerces</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20fn(i32)%20%3D%20foo%3B%20%2F%2F%20OK%2C%20coerces%0A%7D">Run</a></pre>
 <p>The reason that this matter is that the type <code>fn(i32)</code> is not specific to
-any particular function: it&#39;s a function <em>pointer</em>. So calling <code>x()</code> results
+any particular function: it's a function <em>pointer</em>. So calling <code>x()</code> results
 in a virtual call, whereas <code>foo()</code> is statically dispatched, because the type
 of <code>foo</code> tells us precisely what function is being called.</p>
-<p>As noted above, coercions mean that most code doesn&#39;t have to be
+<p>As noted above, coercions mean that most code doesn't have to be
 concerned with this distinction. However, you can tell the difference
 when using <strong>transmute</strong> to convert a fn item into a fn pointer.</p>
 <p>This is sometimes done as part of an FFI:</p>
