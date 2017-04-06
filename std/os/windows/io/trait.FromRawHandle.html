@@ -17,7 +17,7 @@
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc trait">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,19 +43,19 @@
         </form>
     </nav>
 
-    <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>io</a>::<wbr><a class='trait' href=''>FromRawHandle</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.1.0'>1.1.0</span><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>io</a>::<wbr><a class="trait" href=''>FromRawHandle</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.1.0'>1.1.0</span><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../../src/std/sys/windows/ext/io.rs.html#38-52' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait FromRawHandle {
-    unsafe fn <a href='#tymethod.from_raw_handle' class='fnname'>from_raw_handle</a>(handle: <a class='type' href='../../../../std/os/windows/io/type.RawHandle.html' title='std::os::windows::io::RawHandle'>RawHandle</a>) -&gt; Self;
+    unsafe fn <a href='#tymethod.from_raw_handle' class='fnname'>from_raw_handle</a>(handle: <a class="type" href="../../../../std/os/windows/io/type.RawHandle.html" title="type std::os::windows::io::RawHandle">RawHandle</a>) -&gt; Self;
 }</pre><div class='docblock'><p>Construct I/O objects from raw handles.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.from_raw_handle' class='method'><span id='from_raw_handle.v' class='invisible'><code>unsafe fn <a href='#tymethod.from_raw_handle' class='fnname'>from_raw_handle</a>(handle: <a class='type' href='../../../../std/os/windows/io/type.RawHandle.html' title='std::os::windows::io::RawHandle'>RawHandle</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Constructs a new I/O object from the specified raw handle.</p>
+        <h3 id='tymethod.from_raw_handle' class='method'><span id='from_raw_handle.v' class='invisible'><code>unsafe fn <a href='#tymethod.from_raw_handle' class='fnname'>from_raw_handle</a>(handle: <a class="type" href="../../../../std/os/windows/io/type.RawHandle.html" title="type std::os::windows::io::RawHandle">RawHandle</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Constructs a new I/O object from the specified raw handle.</p>
 
 <p>This function will <strong>consume ownership</strong> of the handle given,
 passing responsibility for closing the handle to the returned
@@ -69,8 +69,8 @@ unsafety in code that relies on it being true.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl FromRawHandle for <a class='struct' href='../../../../std/fs/struct.File.html' title='std::fs::File'>File</a></code></li>
-<li><code>impl FromRawHandle for <a class='struct' href='../../../../std/process/struct.Stdio.html' title='std::process::Stdio'>Stdio</a></code></li>
+    <li><code>impl FromRawHandle for <a class="struct" href="../../../../std/fs/struct.File.html" title="struct std::fs::File">File</a></code></li>
+<li><code>impl FromRawHandle for <a class="struct" href="../../../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></li>
 </ul><script type="text/javascript" async
                          src="../../../../implementors/std/os/windows/io/trait.FromRawHandle.js">
                  </script></section>

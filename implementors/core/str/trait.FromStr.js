@@ -1,5 +1,6 @@
 (function() {var implementors = {};
 implementors["core"] = [];
+implementors["proc_macro"] = ["impl <a class=\"trait\" href=\"core/str/trait.FromStr.html\" title=\"trait core::str::FromStr\">FromStr</a> for <a class=\"struct\" href=\"proc_macro/struct.TokenStream.html\" title=\"struct proc_macro::TokenStream\">TokenStream</a>",];
 implementors["std_unicode"] = [];
 
             if (window.register_implementors) {
