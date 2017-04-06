@@ -51,13 +51,11 @@
                </span><a class='srclink' href='../../src/std/io/buffered.rs.html#654-657' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct LineWriter&lt;W:&nbsp;<a class="trait" href="../../std/io/trait.Write.html" title="trait std::io::Write">Write</a>&gt; { /* fields omitted */ }</pre><div class='docblock'><p>Wraps a writer and buffers output to it, flushing whenever a newline
 (<code>0x0a</code>, <code>&#39;\n&#39;</code>) is detected.</p>
-
 <p>The <a href="struct.BufWriter.html"><code>BufWriter</code></a> struct wraps a writer and buffers its output.
 But it only does this batched write when it goes out of scope, or when the
 internal buffer is full. Sometimes, you&#39;d prefer to write each line as it&#39;s
 completed, rather than the entire buffer at once. Enter <code>LineWriter</code>. It
 does exactly that.</p>
-
 <p>If there&#39;s still a partial line in the buffer when the <code>LineWriter</code> is
 dropped, it will flush those contents.</p>
 
@@ -126,7 +124,6 @@ buffer.</p>
 <span class="kw">let</span> <span class="ident">reference</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">get_ref</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aio%3A%3ALineWriter%3B%0A%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Alet%20file%20%3D%20File%3A%3Acreate(%22poem.txt%22)%3F%3B%0Alet%20file%20%3D%20LineWriter%3A%3Anew(file)%3B%0A%0Alet%20reference%20%3D%20file.get_ref()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut W</code></span></h4>
 <div class='docblock'><p>Gets a mutable reference to the underlying writer.</p>
-
 <p>Caution must be taken when calling methods on the mutable reference
 returned as extra writes could corrupt the output stream.</p>
 
@@ -142,7 +139,6 @@ returned as extra writes could corrupt the output stream.</p>
 <span class="kw">let</span> <span class="ident">reference</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">get_mut</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aio%3A%3ALineWriter%3B%0A%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Alet%20file%20%3D%20File%3A%3Acreate(%22poem.txt%22)%3F%3B%0Alet%20mut%20file%20%3D%20LineWriter%3A%3Anew(file)%3B%0A%0A%2F%2F%20we%20can%20use%20reference%20just%20like%20file%0Alet%20reference%20%3D%20file.get_mut()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;W, <a class="struct" href="../../std/io/struct.IntoInnerError.html" title="struct std::io::IntoInnerError">IntoInnerError</a>&lt;<a class="struct" href="../../std/io/struct.LineWriter.html" title="struct std::io::LineWriter">LineWriter</a>&lt;W&gt;&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Unwraps this <code>LineWriter</code>, returning the underlying writer.</p>
-
 <p>The internal buffer is written out before returning the writer.</p>
 
 <h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>

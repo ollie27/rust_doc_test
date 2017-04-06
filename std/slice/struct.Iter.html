@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/core/slice/mod.rs.html#1306-1310' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iter&lt;'a, T&gt; <span class="where fmt-newline">where T: 'a</span> { /* fields omitted */ }</pre><div class='docblock'><p>Immutable slice iterator</p>
-
 <p>This struct is created by the <a href="../../std/primitive.slice.html#method.iter"><code>iter</code></a> method on <a href="../../std/primitive.slice.html">slices</a>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -67,7 +66,6 @@
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a, T&gt; <a class="struct" href="../../std/slice/struct.Iter.html" title="struct std::slice::Iter">Iter</a>&lt;'a, T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/slice/mod.rs.html#1326-1369' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.as_slice' class="method"><span id='as_slice.v' class='invisible'><code>fn <a href='#method.as_slice' class='fnname'>as_slice</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.slice.html">&amp;'a [T]</a></code><div class='since' title='Stable since Rust version 1.4.0'>1.4.0</div></span></h4>
 <div class='docblock'><p>View the underlying data as a subslice of the original data.</p>
-
 <p>This has the same lifetime as the original slice, and so the
 iterator can continue to be used while this exists.</p>
 

@@ -51,14 +51,12 @@
                </span><a class='srclink' href='../../src/core/str/mod.rs.html#167-170' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Utf8Error { /* fields omitted */ }</pre><div class='docblock'><p>Errors which can occur when attempting to interpret a sequence of <a href="../../std/primitive.u8.html"><code>u8</code></a>
 as a string.</p>
-
 <p>As such, the <code>from_utf8</code> family of functions and methods for both <a href="../../std/string/struct.String.html#method.from_utf8"><code>String</code></a>s
 and <a href="../../std/str/fn.from_utf8.html"><code>&amp;str</code></a>s make use of this error, for example.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#172-214' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.valid_up_to' class="method"><span id='valid_up_to.v' class='invisible'><code>fn <a href='#method.valid_up_to' class='fnname'>valid_up_to</a>(&amp;self) -&gt; usize</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns the index in the given string up to which valid UTF-8 was
 verified.</p>
-
 <p>It is the maximum index such that <code>from_utf8(&amp;input[..index])</code>
 would return <code>Ok(_)</code>.</p>
 
@@ -79,17 +77,20 @@ would return <code>Ok(_)</code>.</p>
 </div><h4 id='method.error_len' class="method"><span id='error_len.v' class='invisible'><code>fn <a href='#method.error_len' class='fnname'>error_len</a>(&amp;self) -&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;usize&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>utf8_error_error_len </code><a href="https://github.com/rust-lang/rust/issues/40494">#40494</a>)</summary><p>new</p>
 </details></div></div><div class='docblock'><p>Provide more information about the failure:</p>
-
 <ul>
-<li><p><code>None</code>: the end of the input was reached unexpectedly.
+<li>
+<p><code>None</code>: the end of the input was reached unexpectedly.
 <code>self.valid_up_to()</code> is 1 to 3 bytes from the end of the input.
 If a byte stream (such as a file or a network socket) is being decoded incrementally,
-this could be a valid <code>char</code> whose UTF-8 byte sequence is spanning multiple chunks.</p></li>
-<li><p><code>Some(len)</code>: an unexpected byte was encountered.
+this could be a valid <code>char</code> whose UTF-8 byte sequence is spanning multiple chunks.</p>
+</li>
+<li>
+<p><code>Some(len)</code>: an unexpected byte was encountered.
 The length provided is that of the invalid byte sequence
 that starts at the index given by <code>valid_up_to()</code>.
 Decoding should resume after that sequence
-(after inserting a U+FFFD REPLACEMENT CHARACTER) in case of lossy decoding.</p></li>
+(after inserting a U+FFFD REPLACEMENT CHARACTER) in case of lossy decoding.</p>
+</li>
 </ul>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#165' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#165' title='goto source code'>[src]</a></span></h3>

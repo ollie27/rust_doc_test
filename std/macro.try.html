@@ -55,18 +55,14 @@
 }</pre>
 <div class='docblock'><p>Helper macro for reducing boilerplate code for matching <code>Result</code> together
 with converting downstream errors.</p>
-
 <p>Prefer using <code>?</code> syntax to <code>try!</code>. <code>?</code> is built in to the language and is
 more succinct than <code>try!</code>. It is the standard method for error propagation.</p>
-
 <p><code>try!</code> matches the given <code>Result</code>. In case of the <code>Ok</code> variant, the
 expression has the value of the wrapped value.</p>
-
 <p>In case of the <code>Err</code> variant, it retrieves the inner error. <code>try!</code> then
 performs conversion using <code>From</code>. This provides automatic conversion
 between specialized errors and more general ones. The resulting
 error is then immediately returned.</p>
-
 <p>Because of the early return, <code>try!</code> can only be used in functions that
 return <code>Result</code>.</p>
 

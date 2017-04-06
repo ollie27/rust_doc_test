@@ -53,12 +53,10 @@
     Borrowed(&amp;'a B),
     Owned(B::<a class="trait" href="../../std/borrow/trait.ToOwned.html" title="trait std::borrow::ToOwned">Owned</a>),
 }</pre><div class='docblock'><p>A clone-on-write smart pointer.</p>
-
 <p>The type <code>Cow</code> is a smart pointer providing clone-on-write functionality: it
 can enclose and provide immutable access to borrowed data, and clone the
 data lazily when mutation or ownership is required. The type is designed to
 work with general borrowed data via the <code>Borrow</code> trait.</p>
-
 <p><code>Cow</code> implements <code>Deref</code>, which means that you can call
 non-mutating methods directly on the data it encloses. If mutation
 is desired, <code>to_mut</code> will obtain a mutable reference to an owned
@@ -97,7 +95,6 @@ value, cloning if necessary.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a, B&gt; <a class="enum" href="../../std/borrow/enum.Cow.html" title="enum std::borrow::Cow">Cow</a>&lt;'a, B&gt; <span class="where fmt-newline">where B: <a class="trait" href="../../std/borrow/trait.ToOwned.html" title="trait std::borrow::ToOwned">ToOwned</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/collections/borrow.rs.html#146-200' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.to_mut' class="method"><span id='to_mut.v' class='invisible'><code>fn <a href='#method.to_mut' class='fnname'>to_mut</a>(&amp;mut self) -&gt; &amp;mut B::<a class="trait" href="../../std/borrow/trait.ToOwned.html" title="trait std::borrow::ToOwned">Owned</a></code></span></h4>
 <div class='docblock'><p>Acquires a mutable reference to the owned form of the data.</p>
-
 <p>Clones the data if it is not already owned.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -111,7 +108,6 @@ value, cloning if necessary.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">hello</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aborrow%3A%3ACow%3B%0A%0Alet%20mut%20cow%3A%20Cow%3C%5B_%5D%3E%20%3D%20Cow%3A%3AOwned(vec!%5B1%2C%202%2C%203%5D)%3B%0A%0Alet%20hello%20%3D%20cow.to_mut()%3B%0A%0Aassert_eq!(hello%2C%20%26%5B1%2C%202%2C%203%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.into_owned' class="method"><span id='into_owned.v' class='invisible'><code>fn <a href='#method.into_owned' class='fnname'>into_owned</a>(self) -&gt; B::<a class="trait" href="../../std/borrow/trait.ToOwned.html" title="trait std::borrow::ToOwned">Owned</a></code></span></h4>
 <div class='docblock'><p>Extracts the owned data.</p>
-
 <p>Clones the data if it is not already owned.</p>
 
 <h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>

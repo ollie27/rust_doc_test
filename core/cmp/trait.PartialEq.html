@@ -56,18 +56,14 @@
     fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; bool { ... }
 }</pre><div class='docblock'><p>Trait for equality comparisons which are <a href="http://en.wikipedia.org/wiki/Partial_equivalence_relation">partial equivalence
 relations</a>.</p>
-
 <p>This trait allows for partial equality, for types that do not have a full
 equivalence relation.  For example, in floating point numbers <code>NaN != NaN</code>,
 so floating point types implement <code>PartialEq</code> but not <code>Eq</code>.</p>
-
 <p>Formally, the equality must be (for all <code>a</code>, <code>b</code> and <code>c</code>):</p>
-
 <ul>
 <li>symmetric: <code>a == b</code> implies <code>b == a</code>; and</li>
 <li>transitive: <code>a == b</code> and <code>b == c</code> implies <code>a == c</code>.</li>
 </ul>
-
 <p>Note that these requirements mean that the trait itself must be implemented
 symmetrically and transitively: if <code>T: PartialEq&lt;U&gt;</code> and <code>U: PartialEq&lt;V&gt;</code>
 then <code>U: PartialEq&lt;T&gt;</code> and <code>T: PartialEq&lt;V&gt;</code>.</p>
@@ -83,7 +79,6 @@ and not equal to the other variants.</p>
 in terms of it by default. Any manual implementation of <code>ne</code> <em>must</em> respect
 the rule that <code>eq</code> is a strict inverse of <code>ne</code>; that is, <code>!(a == b)</code> if and
 only if <code>a != b</code>.</p>
-
 <p>An example implementation for a domain in which two books are considered
 the same book if their ISBN matches, even if the formats differ:</p>
 

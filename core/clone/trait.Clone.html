@@ -54,12 +54,10 @@
 
     fn <a href='#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self) { ... }
 }</pre><div class='docblock'><p>A common trait for the ability to explicitly duplicate an object.</p>
-
 <p>Differs from <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a> in that <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a> is implicit and extremely inexpensive, while
 <code>Clone</code> is always explicit and may or may not be expensive. In order to enforce
 these characteristics, Rust does not allow you to reimplement <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a>, but you
 may reimplement <code>Clone</code> and run arbitrary code.</p>
-
 <p>Since <code>Clone</code> is more general than <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a>, you can automatically make anything
 <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a> be <code>Clone</code> as well.</p>
 
@@ -72,7 +70,6 @@ implementation of <a href="trait.Clone.html#tymethod.clone"><code>clone</code></
 if <code>T: Copy</code>, <code>x: T</code>, and <code>y: &amp;T</code>, then <code>let x = y.clone();</code> is equivalent to <code>let x = *y;</code>.
 Manual implementations should be careful to uphold this invariant; however, unsafe code
 must not rely on it to ensure memory safety.</p>
-
 <p>An example is an array holding more than 32 elements of a type that is <code>Clone</code>; the standard
 library only implements <code>Clone</code> up until arrays of size 32. In this case, the implementation of
 <code>Clone</code> cannot be <code>derive</code>d, but can be implemented as:</p>
@@ -100,7 +97,6 @@ library only implements <code>Clone</code> up until arrays of size 32. In this c
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
         <h3 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></span></h3><div class='docblock'><p>Performs copy-assignment from <code>source</code>.</p>
-
 <p><code>a.clone_from(&amp;b)</code> is equivalent to <code>a = b.clone()</code> in functionality,
 but can be overridden to reuse the resources of <code>a</code> to avoid unnecessary
 allocations.</p>

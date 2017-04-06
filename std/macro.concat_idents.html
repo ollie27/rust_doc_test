@@ -54,7 +54,6 @@
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">ident</span>),<span class="kw-2">*</span>) <span class="op">=&gt;</span> { ... };
 }</pre>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>concat_idents_macro </code><a href="https://github.com/rust-lang/rust/issues/29599">#29599</a>)</div></div><div class='docblock'><p>Concatenate identifiers into one identifier.</p>
-
 <p>This macro takes any number of comma-separated identifiers, and
 concatenates them all into one, yielding an expression which is a new
 identifier. Note that hygiene makes it such that this macro cannot

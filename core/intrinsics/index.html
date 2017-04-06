@@ -51,7 +51,6 @@
                </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1303' title='goto source code'>[src]</a></span></h1>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>core_intrinsics</code>)</summary><p>intrinsics are unlikely to ever be stabilized, instead they should be used through stabilized interfaces in the rest of the standard library</p>
 </details></div></div><div class='docblock'><p>rustc compiler intrinsics.</p>
-
 <p>The corresponding definitions are in librustc_trans/intrinsic.rs.</p>
 
 <h1 id='volatiles' class='section-header'><a href='#volatiles'>Volatiles</a></h1>
@@ -64,9 +63,7 @@ across other volatile intrinsics. See the LLVM documentation on
 <p>The atomic intrinsics provide common atomic operations on machine
 words, with multiple possible memory orderings. They obey the same
 semantics as C++11. See the LLVM documentation on [<a href="http://llvm.org/docs/Atomics.html">atomics</a>].</p>
-
 <p>A quick refresher on memory ordering:</p>
-
 <ul>
 <li>Acquire - a barrier for acquiring a lock. Subsequent reads and writes
 take place after the barrier.</li>
@@ -1165,7 +1162,7 @@ as the <code>order</code>. For example,
                            <td><a class="fn" href="fn.discriminant_value.html"
                                   title='fn core::intrinsics::discriminant_value'>discriminant_value</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Returns the value of the discriminant for the variant in &#39;v&#39;,
+                               [<div class='stab unstable'>Experimental</div>] <p>Returns the value of the discriminant for the variant in 'v',
 cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p>
                            </td>
                        </tr>
@@ -1577,7 +1574,7 @@ primitives via the <code>overflowing_sub</code> method. For example,
                            <td><a class="fn" href="fn.try.html"
                                   title='fn core::intrinsics::try'>try</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Rust&#39;s &quot;try catch&quot; construct which invokes the function pointer <code>f</code> with
+                               [<div class='stab unstable'>Experimental</div>] <p>Rust's &quot;try catch&quot; construct which invokes the function pointer <code>f</code> with
 the data pointer <code>data</code>.</p>
                            </td>
                        </tr>

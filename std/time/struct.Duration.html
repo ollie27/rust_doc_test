@@ -51,11 +51,9 @@
                </span><a class='srclink' href='../../src/std/time/duration.rs.html#47-50' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Duration { /* fields omitted */ }</pre><div class='docblock'><p>A <code>Duration</code> type to represent a span of time, typically used for system
 timeouts.</p>
-
 <p>Each <code>Duration</code> is composed of a number of seconds and nanosecond precision.
 APIs binding a system timeout will typically round up the nanosecond
 precision if the underlying system does not support that level of precision.</p>
-
 <p><code>Duration</code>s implement many common traits, including <a href="../../std/ops/trait.Add.html"><code>Add</code></a>, <a href="../../std/ops/trait.Sub.html"><code>Sub</code></a>, and other
 <a href="../../std/ops/index.html"><code>ops</code></a> traits.</p>
 
@@ -74,7 +72,6 @@ precision if the underlying system does not support that level of precision.</p>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(secs: <a class="primitive" href="../primitive.u64.html">u64</a>, nanos: <a class="primitive" href="../primitive.u32.html">u32</a>) -&gt; <a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a></code></span></h4>
 <div class='docblock'><p>Creates a new <code>Duration</code> from the specified number of seconds and
 additional nanosecond precision.</p>
-
 <p>If the nanoseconds is greater than 1 billion (the number of nanoseconds
 in a second), then it will carry over into the seconds provided.</p>
 
@@ -105,7 +102,6 @@ the seconds counter.</p>
 <span class="kw">let</span> <span class="ident">five_seconds</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">from_millis</span>(<span class="number">5000</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Atime%3A%3ADuration%3B%0A%0Alet%20five_seconds%20%3D%20Duration%3A%3Afrom_millis(5000)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.as_secs' class="method"><span id='as_secs.v' class='invisible'><code>fn <a href='#method.as_secs' class='fnname'>as_secs</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.u64.html">u64</a></code></span></h4>
 <div class='docblock'><p>Returns the number of whole seconds represented by this <code>Duration</code>.</p>
-
 <p>The extra precision represented by this duration is ignored (i.e. extra
 nanoseconds are not represented in the returned value).</p>
 
@@ -117,7 +113,6 @@ nanoseconds are not represented in the returned value).</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">five_seconds</span>.<span class="ident">as_secs</span>(), <span class="number">5</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Atime%3A%3ADuration%3B%0A%0Alet%20five_seconds%20%3D%20Duration%3A%3Anew(5%2C%200)%3B%0Aassert_eq!(five_seconds.as_secs()%2C%205)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.subsec_nanos' class="method"><span id='subsec_nanos.v' class='invisible'><code>fn <a href='#method.subsec_nanos' class='fnname'>subsec_nanos</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the nanosecond precision represented by this <code>Duration</code>.</p>
-
 <p>This method does <strong>not</strong> return the length of the duration when
 represented by nanoseconds. The returned number always represents a
 fractional portion of a second (i.e. it is less than one billion).</p>

@@ -50,14 +50,12 @@
                    </a>
                </span><a class='srclink' href='../../src/core/slice/mod.rs.html#2368-2370' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub unsafe fn from_raw_parts&lt;'a, T&gt;(p: *const T, len: usize) -&gt; &amp;'a [T]</pre><div class='docblock'><p>Forms a slice from a pointer and a length.</p>
-
 <p>The <code>len</code> argument is the number of <strong>elements</strong>, not the number of bytes.</p>
 
 <h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
 <p>This function is unsafe as there is no guarantee that the given pointer is
 valid for <code>len</code> elements, nor whether the lifetime inferred is a suitable
 lifetime for the returned slice.</p>
-
 <p><code>p</code> must be non-null, even for zero-length slices.</p>
 
 <h1 id='caveat' class='section-header'><a href='#caveat'>Caveat</a></h1>

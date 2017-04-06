@@ -50,13 +50,11 @@
                    </a>
                </span><a class='srclink' href='../../src/std/sync/condvar.rs.html#120-123' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Condvar { /* fields omitted */ }</pre><div class='docblock'><p>A Condition Variable</p>
-
 <p>Condition variables represent the ability to block a thread such that it
 consumes no CPU time while waiting for an event to occur. Condition
 variables are typically associated with a boolean predicate (a condition)
 and a mutex. The predicate is always verified inside of the mutex before
 determining that a thread must block.</p>
-
 <p>Functions in this module will block the current <strong>thread</strong> of execution and
 are bindings to system-provided condition variables where possible. Note
 that this module places one additional restriction over the system condition
@@ -101,13 +99,11 @@ notified.</p>
 </div><h4 id='method.wait' class="method"><span id='wait.v' class='invisible'><code>fn <a href='#method.wait' class='fnname'>wait</a>&lt;'a, T&gt;(&amp;self, guard: <a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;'a, T&gt;) -&gt; <a class="type" href="../../std/sync/type.LockResult.html" title="type std::sync::LockResult">LockResult</a>&lt;<a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;'a, T&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Blocks the current thread until this condition variable receives a
 notification.</p>
-
 <p>This function will atomically unlock the mutex specified (represented by
 <code>guard</code>) and block the current thread. This means that any calls
 to <a href="#method.notify_one"><code>notify_one</code></a> or <a href="#method.notify_all"><code>notify_all</code></a> which happen logically after the
 mutex is unlocked are candidates to wake this thread up. When this
 function call returns, the lock specified will have been re-acquired.</p>
-
 <p>Note that this function is susceptible to spurious wakeups. Condition
 variables normally have a boolean predicate associated with them, and
 the predicate must always be checked each time this function returns to
@@ -151,21 +147,17 @@ is not desired, then unsafe primitives in <code>sys</code> are provided.</p>
 <div class='stability'><div class='stab deprecated'>Deprecated since 1.6.0<p>: replaced by <code>std::sync::Condvar::wait_timeout</code></p>
 </div></div><div class='docblock'><p>Waits on this condition variable for a notification, timing out after a
 specified duration.</p>
-
 <p>The semantics of this function are equivalent to <a href="#method.wait"><code>wait</code></a>
 except that the thread will be blocked for roughly no longer
 than <code>ms</code> milliseconds. This method should not be used for
 precise timing due to anomalies such as preemption or platform
 differences that may not cause the maximum amount of time
 waited to be precisely <code>ms</code>.</p>
-
 <p>Note that the best effort is made to ensure that the time waited is
 measured with a monotonic clock, and not affected by the changes made to
 the system time.</p>
-
 <p>The returned boolean is <code>false</code> only if the timeout is known
 to have elapsed.</p>
-
 <p>Like <a href="#method.wait"><code>wait</code></a>, the lock specified will be re-acquired when this function
 returns, regardless of whether the timeout elapsed or not.</p>
 
@@ -201,20 +193,16 @@ returns, regardless of whether the timeout elapsed or not.</p>
 </div><h4 id='method.wait_timeout' class="method"><span id='wait_timeout.v' class='invisible'><code>fn <a href='#method.wait_timeout' class='fnname'>wait_timeout</a>&lt;'a, T&gt;(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; guard: <a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;'a, T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dur: <a class="struct" href="../../std/time/struct.Duration.html" title="struct std::time::Duration">Duration</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="type" href="../../std/sync/type.LockResult.html" title="type std::sync::LockResult">LockResult</a>&lt;<a class="primitive" href="../primitive.tuple.html">(</a><a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;'a, T&gt;, <a class="struct" href="../../std/sync/struct.WaitTimeoutResult.html" title="struct std::sync::WaitTimeoutResult">WaitTimeoutResult</a><a class="primitive" href="../primitive.tuple.html">)</a>&gt;</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Waits on this condition variable for a notification, timing out after a
 specified duration.</p>
-
 <p>The semantics of this function are equivalent to <a href="#method.wait"><code>wait</code></a> except that
 the thread will be blocked for roughly no longer than <code>dur</code>. This
 method should not be used for precise timing due to anomalies such as
 preemption or platform differences that may not cause the maximum
 amount of time waited to be precisely <code>dur</code>.</p>
-
 <p>Note that the best effort is made to ensure that the time waited is
 measured with a monotonic clock, and not affected by the changes made to
 the system time.</p>
-
 <p>The returned <a href="struct.WaitTimeoutResult.html"><code>WaitTimeoutResult</code></a> value indicates if the timeout is
 known to have elapsed.</p>
-
 <p>Like <a href="#method.wait"><code>wait</code></a>, the lock specified will be re-acquired when this function
 returns, regardless of whether the timeout elapsed or not.</p>
 
@@ -250,11 +238,9 @@ returns, regardless of whether the timeout elapsed or not.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3A%7BArc%2C%20Mutex%2C%20Condvar%7D%3B%0Ause%20std%3A%3Athread%3B%0Ause%20std%3A%3Atime%3A%3ADuration%3B%0A%0Alet%20pair%20%3D%20Arc%3A%3Anew((Mutex%3A%3Anew(false)%2C%20Condvar%3A%3Anew()))%3B%0Alet%20pair2%20%3D%20pair.clone()%3B%0A%0Athread%3A%3Aspawn(move%7C%7C%20%7B%0A%20%20%20%20let%20%26(ref%20lock%2C%20ref%20cvar)%20%3D%20%26*pair2%3B%0A%20%20%20%20let%20mut%20started%20%3D%20lock.lock().unwrap()%3B%0A%20%20%20%20*started%20%3D%20true%3B%0A%20%20%20%20%2F%2F%20We%20notify%20the%20condvar%20that%20the%20value%20has%20changed.%0A%20%20%20%20cvar.notify_one()%3B%0A%7D)%3B%0A%0A%2F%2F%20wait%20for%20the%20thread%20to%20start%20up%0Alet%20%26(ref%20lock%2C%20ref%20cvar)%20%3D%20%26*pair%3B%0Alet%20mut%20started%20%3D%20lock.lock().unwrap()%3B%0A%2F%2F%20as%20long%20as%20the%20value%20inside%20the%20%60Mutex%60%20is%20false%2C%20we%20wait%0Aloop%20%7B%0A%20%20%20%20let%20result%20%3D%20cvar.wait_timeout(started%2C%20Duration%3A%3Afrom_millis(10)).unwrap()%3B%0A%20%20%20%20%2F%2F%2010%20milliseconds%20have%20passed%2C%20or%20maybe%20the%20value%20changed!%0A%20%20%20%20started%20%3D%20result.0%3B%0A%20%20%20%20if%20*started%20%3D%3D%20true%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20We%20received%20the%20notification%20and%20the%20value%20has%20been%20updated%2C%20we%20can%20leave.%0A%20%20%20%20%20%20%20%20break%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.notify_one' class="method"><span id='notify_one.v' class='invisible'><code>fn <a href='#method.notify_one' class='fnname'>notify_one</a>(&amp;self)</code></span></h4>
 <div class='docblock'><p>Wakes up one blocked thread on this condvar.</p>
-
 <p>If there is a blocked thread on this condition variable, then it will
 be woken up from its call to <a href="#method.wait"><code>wait</code></a> or <a href="#method.wait_timeout"><code>wait_timeout</code></a>. Calls to
 <code>notify_one</code> are not buffered in any way.</p>
-
 <p>To wake up all threads, see <a href="#method.notify_all"><code>notify_all</code></a>.</p>
 
 <h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
@@ -282,11 +268,9 @@ be woken up from its call to <a href="#method.wait"><code>wait</code></a> or <a 
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3A%7BArc%2C%20Mutex%2C%20Condvar%7D%3B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20pair%20%3D%20Arc%3A%3Anew((Mutex%3A%3Anew(false)%2C%20Condvar%3A%3Anew()))%3B%0Alet%20pair2%20%3D%20pair.clone()%3B%0A%0Athread%3A%3Aspawn(move%7C%7C%20%7B%0A%20%20%20%20let%20%26(ref%20lock%2C%20ref%20cvar)%20%3D%20%26*pair2%3B%0A%20%20%20%20let%20mut%20started%20%3D%20lock.lock().unwrap()%3B%0A%20%20%20%20*started%20%3D%20true%3B%0A%20%20%20%20%2F%2F%20We%20notify%20the%20condvar%20that%20the%20value%20has%20changed.%0A%20%20%20%20cvar.notify_one()%3B%0A%7D)%3B%0A%0A%2F%2F%20Wait%20for%20the%20thread%20to%20start%20up.%0Alet%20%26(ref%20lock%2C%20ref%20cvar)%20%3D%20%26*pair%3B%0Alet%20mut%20started%20%3D%20lock.lock().unwrap()%3B%0A%2F%2F%20As%20long%20as%20the%20value%20inside%20the%20%60Mutex%60%20is%20false%2C%20we%20wait.%0Awhile%20!*started%20%7B%0A%20%20%20%20started%20%3D%20cvar.wait(started).unwrap()%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.notify_all' class="method"><span id='notify_all.v' class='invisible'><code>fn <a href='#method.notify_all' class='fnname'>notify_all</a>(&amp;self)</code></span></h4>
 <div class='docblock'><p>Wakes up all blocked threads on this condvar.</p>
-
 <p>This method will ensure that any current waiters on the condition
 variable are awoken. Calls to <code>notify_all()</code> are not buffered in any
 way.</p>
-
 <p>To wake up only one thread, see <a href="#method.notify_one"><code>notify_one</code></a>.</p>
 
 <h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>

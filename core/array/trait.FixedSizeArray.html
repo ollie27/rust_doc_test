@@ -54,15 +54,12 @@
     fn <a href='#tymethod.as_mut_slice' class='fnname'>as_mut_slice</a>(&amp;mut self) -&gt; &amp;mut [T];
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>fixed_size_array </code><a href="https://github.com/rust-lang/rust/issues/27778">#27778</a>)</summary><p>traits and impls are better expressed through generic integer constants</p>
 </details></div></div><div class='docblock'><p>Utility trait implemented only on arrays of fixed size</p>
-
 <p>This trait can be used to implement other traits on fixed-size arrays
 without causing much metadata bloat.</p>
-
 <p>The trait is marked unsafe in order to restrict implementors to fixed-size
 arrays. User of this trait can assume that implementors have the exact
 layout in memory of a fixed size array (for example, for unsafe
 initialization).</p>
-
 <p>Note that the traits AsRef and AsMut provide similar methods for types that
 may not be fixed-size arrays. Implementors should prefer those traits
 instead.</p>

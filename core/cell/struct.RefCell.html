@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/core/cell.rs.html#478-481' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct RefCell&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A mutable memory location with dynamically checked borrow rules</p>
-
 <p>See the <a href="index.html">module-level documentation</a> for more.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../core/cell/struct.RefCell.html" title="struct core::cell::RefCell">RefCell</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/cell.rs.html#543-582' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>const fn <a href='#method.new' class='fnname'>new</a>(value: T) -&gt; <a class="struct" href="../../core/cell/struct.RefCell.html" title="struct core::cell::RefCell">RefCell</a>&lt;T&gt;</code></span></h4>
@@ -75,7 +74,6 @@
 <div class='impl-items'><h4 id='method.borrow_state' class="method"><span id='borrow_state.v' class='invisible'><code>fn <a href='#method.borrow_state' class='fnname'>borrow_state</a>(&amp;self) -&gt; <a class="enum" href="../../core/cell/enum.BorrowState.html" title="enum core::cell::BorrowState">BorrowState</a></code></span></h4>
 <div class='stability'><div class='stab deprecated'>Deprecated since 1.15.0<p>: use <code>try_borrow</code> instead</p>
 </div><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>borrow_state </code><a href="https://github.com/rust-lang/rust/issues/27733">#27733</a>)</div></div><div class='docblock'><p>Query the current state of this <code>RefCell</code></p>
-
 <p>The returned value can be dispatched on to determine if a call to
 <code>borrow</code> or <code>borrow_mut</code> would succeed.</p>
 
@@ -94,7 +92,6 @@
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(borrow_state)%5D%0A%0Afn%20main()%20%7B%0Ause%20std%3A%3Acell%3A%3A%7BBorrowState%2C%20RefCell%7D%3B%0A%0Alet%20c%20%3D%20RefCell%3A%3Anew(5)%3B%0A%0Amatch%20c.borrow_state()%20%7B%0A%20%20%20%20BorrowState%3A%3AWriting%20%3D%3E%20println!(%22Cannot%20be%20borrowed%22)%2C%0A%20%20%20%20BorrowState%3A%3AReading%20%3D%3E%20println!(%22Cannot%20be%20borrowed%20mutably%22)%2C%0A%20%20%20%20BorrowState%3A%3AUnused%20%3D%3E%20println!(%22Can%20be%20borrowed%20(mutably%20as%20well)%22)%2C%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
 </div><h4 id='method.borrow' class="method"><span id='borrow.v' class='invisible'><code>fn <a href='#method.borrow' class='fnname'>borrow</a>(&amp;self) -&gt; <a class="struct" href="../../core/cell/struct.Ref.html" title="struct core::cell::Ref">Ref</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Immutably borrows the wrapped value.</p>
-
 <p>The borrow lasts until the returned <code>Ref</code> exits scope. Multiple
 immutable borrows can be taken out at the same time.</p>
 
@@ -110,7 +107,6 @@ immutable borrows can be taken out at the same time.</p>
 
 <span class="kw">let</span> <span class="ident">borrowed_five</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">borrow</span>();
 <span class="kw">let</span> <span class="ident">borrowed_five2</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">borrow</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Alet%20c%20%3D%20RefCell%3A%3Anew(5)%3B%0A%0Alet%20borrowed_five%20%3D%20c.borrow()%3B%0Alet%20borrowed_five2%20%3D%20c.borrow()%3B%0A%7D">Run</a></pre>
-
 <p>An example of panic:</p>
 
 <pre class="rust rust-example-rendered">
@@ -128,10 +124,8 @@ immutable borrows can be taken out at the same time.</p>
 </div><h4 id='method.try_borrow' class="method"><span id='try_borrow.v' class='invisible'><code>fn <a href='#method.try_borrow' class='fnname'>try_borrow</a>(&amp;self) -&gt; <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../core/cell/struct.Ref.html" title="struct core::cell::Ref">Ref</a>&lt;T&gt;, <a class="struct" href="../../core/cell/struct.BorrowError.html" title="struct core::cell::BorrowError">BorrowError</a>&gt;</code><div class='since' title='Stable since Rust version 1.13.0'>1.13.0</div></span></h4>
 <div class='docblock'><p>Immutably borrows the wrapped value, returning an error if the value is currently mutably
 borrowed.</p>
-
 <p>The borrow lasts until the returned <code>Ref</code> exits scope. Multiple immutable borrows can be
 taken out at the same time.</p>
-
 <p>This is the non-panicking variant of <a href="#method.borrow"><code>borrow</code></a>.</p>
 
 <h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
@@ -151,7 +145,6 @@ taken out at the same time.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Alet%20c%20%3D%20RefCell%3A%3Anew(5)%3B%0A%0A%7B%0A%20%20%20%20let%20m%20%3D%20c.borrow_mut()%3B%0A%20%20%20%20assert!(c.try_borrow().is_err())%3B%0A%7D%0A%0A%7B%0A%20%20%20%20let%20m%20%3D%20c.borrow()%3B%0A%20%20%20%20assert!(c.try_borrow().is_ok())%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.borrow_mut' class="method"><span id='borrow_mut.v' class='invisible'><code>fn <a href='#method.borrow_mut' class='fnname'>borrow_mut</a>(&amp;self) -&gt; <a class="struct" href="../../core/cell/struct.RefMut.html" title="struct core::cell::RefMut">RefMut</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Mutably borrows the wrapped value.</p>
-
 <p>The borrow lasts until the returned <code>RefMut</code> exits scope. The value
 cannot be borrowed while this borrow is active.</p>
 
@@ -168,7 +161,6 @@ cannot be borrowed while this borrow is active.</p>
 <span class="kw-2">*</span><span class="ident">c</span>.<span class="ident">borrow_mut</span>() <span class="op">=</span> <span class="number">7</span>;
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">c</span>.<span class="ident">borrow</span>(), <span class="number">7</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Alet%20c%20%3D%20RefCell%3A%3Anew(5)%3B%0A%0A*c.borrow_mut()%20%3D%207%3B%0A%0Aassert_eq!(*c.borrow()%2C%207)%3B%0A%7D">Run</a></pre>
-
 <p>An example of panic:</p>
 
 <pre class="rust rust-example-rendered">
@@ -185,10 +177,8 @@ cannot be borrowed while this borrow is active.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20result%20%3D%20thread%3A%3Aspawn(move%20%7C%7C%20%7B%0A%20%20%20let%20c%20%3D%20RefCell%3A%3Anew(5)%3B%0A%20%20%20let%20m%20%3D%20c.borrow()%3B%0A%0A%20%20%20let%20b%20%3D%20c.borrow_mut()%3B%20%2F%2F%20this%20causes%20a%20panic%0A%7D).join()%3B%0A%0Aassert!(result.is_err())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.try_borrow_mut' class="method"><span id='try_borrow_mut.v' class='invisible'><code>fn <a href='#method.try_borrow_mut' class='fnname'>try_borrow_mut</a>(&amp;self) -&gt; <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../core/cell/struct.RefMut.html" title="struct core::cell::RefMut">RefMut</a>&lt;T&gt;, <a class="struct" href="../../core/cell/struct.BorrowMutError.html" title="struct core::cell::BorrowMutError">BorrowMutError</a>&gt;</code><div class='since' title='Stable since Rust version 1.13.0'>1.13.0</div></span></h4>
 <div class='docblock'><p>Mutably borrows the wrapped value, returning an error if the value is currently borrowed.</p>
-
 <p>The borrow lasts until the returned <code>RefMut</code> exits scope. The value cannot be borrowed
 while this borrow is active.</p>
-
 <p>This is the non-panicking variant of <a href="#method.borrow_mut"><code>borrow_mut</code></a>.</p>
 
 <h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
@@ -206,9 +196,7 @@ while this borrow is active.</p>
 </div><h4 id='method.as_unsafe_cell' class="method"><span id='as_unsafe_cell.v' class='invisible'><code>unsafe fn <a href='#method.as_unsafe_cell' class='fnname'>as_unsafe_cell</a>(&amp;self) -&gt; &amp;<a class="struct" href="../../core/cell/struct.UnsafeCell.html" title="struct core::cell::UnsafeCell">UnsafeCell</a>&lt;T&gt;</code></span></h4>
 <div class='stability'><div class='stab deprecated'>Deprecated since 1.12.0<p>: renamed to as_ptr</p>
 </div><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>as_unsafe_cell </code><a href="https://github.com/rust-lang/rust/issues/27708">#27708</a>)</div></div><div class='docblock'><p>Returns a reference to the underlying <code>UnsafeCell</code>.</p>
-
 <p>This can be used to circumvent <code>RefCell</code>&#39;s safety checks.</p>
-
 <p>This function is <code>unsafe</code> because <code>UnsafeCell</code>&#39;s field is public.</p>
 
 <h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
@@ -231,7 +219,6 @@ while this borrow is active.</p>
 <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">as_ptr</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Alet%20c%20%3D%20RefCell%3A%3Anew(5)%3B%0A%0Alet%20ptr%20%3D%20c.as_ptr()%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut T</code><div class='since' title='Stable since Rust version 1.11.0'>1.11.0</div></span></h4>
 <div class='docblock'><p>Returns a mutable reference to the underlying data.</p>
-
 <p>This call borrows <code>RefCell</code> mutably (at compile-time) so there is no
 need for dynamic checks.</p>
 

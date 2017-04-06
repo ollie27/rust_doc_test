@@ -50,13 +50,11 @@
                    </a>
                </span><a class='srclink' href='../../src/core/str/mod.rs.html#395-397' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Chars&lt;'a&gt; { /* fields omitted */ }</pre><div class='docblock'><p>An iterator over the <a href="../../std/primitive.char.html"><code>char</code></a>s of a string slice.</p>
-
 <p>This struct is created by the <a href="../../std/primitive.str.html#method.chars"><code>chars</code></a> method on <a href="../../std/primitive.str.html"><code>str</code></a>.
 See its documentation for more.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class="struct" href="../../core/str/struct.Chars.html" title="struct core::str::Chars">Chars</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#547-570' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.as_str' class="method"><span id='as_str.v' class='invisible'><code>fn <a href='#method.as_str' class='fnname'>as_str</a>(&amp;self) -&gt; &amp;'a str</code><div class='since' title='Stable since Rust version 1.4.0'>1.4.0</div></span></h4>
 <div class='docblock'><p>View the underlying data as a subslice of the original data.</p>
-
 <p>This has the same lifetime as the original slice, and so the
 iterator can continue to be used while this exists.</p>
 

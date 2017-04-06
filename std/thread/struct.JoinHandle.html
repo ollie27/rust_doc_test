@@ -50,13 +50,10 @@
                    </a>
                </span><a class='srclink' href='../../src/std/thread/mod.rs.html#943' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct JoinHandle&lt;T&gt;(_);</pre><div class='docblock'><p>An owned permission to join on a thread (block on its termination).</p>
-
 <p>A <code>JoinHandle</code> <em>detaches</em> the child thread when it is dropped.</p>
-
 <p>Due to platform restrictions, it is not possible to <a href="../../std/clone/trait.Clone.html"><code>Clone</code></a> this
 handle: the ability to join a child thread is a uniquely-owned
 permission.</p>
-
 <p>This <code>struct</code> is created by the <a href="fn.spawn.html"><code>thread::spawn</code></a> function and the
 <a href="struct.Builder.html#method.spawn"><code>thread::Builder::spawn</code></a> method.</p>
 
@@ -69,7 +66,6 @@ permission.</p>
 <span class="kw">let</span> <span class="ident">join_handle</span>: <span class="ident">thread</span>::<span class="ident">JoinHandle</span><span class="op">&lt;</span>_<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="op">||</span> {
     <span class="comment">// some work here</span>
 });<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20join_handle%3A%20thread%3A%3AJoinHandle%3C_%3E%20%3D%20thread%3A%3Aspawn(%7C%7C%20%7B%0A%20%20%20%20%2F%2F%20some%20work%20here%0A%7D)%3B%0A%7D">Run</a></pre>
-
 <p>Creation from <a href="struct.Builder.html#method.spawn"><code>thread::Builder::spawn</code></a>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -100,7 +96,6 @@ permission.</p>
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;thread id: {:?}&quot;</span>, <span class="ident">thread</span>.<span class="ident">id</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(thread_id)%5D%0A%0Afn%20main()%20%7B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20builder%20%3D%20thread%3A%3ABuilder%3A%3Anew()%3B%0A%0Alet%20join_handle%3A%20thread%3A%3AJoinHandle%3C_%3E%20%3D%20builder.spawn(%7C%7C%20%7B%0A%20%20%20%20%2F%2F%20some%20work%20here%0A%7D).unwrap()%3B%0A%0Alet%20thread%20%3D%20join_handle.thread()%3B%0Aprintln!(%22thread%20id%3A%20%7B%3A%3F%7D%22%2C%20thread.id())%3B%0A%7D&amp;version=nightly">Run</a></pre>
 </div><h4 id='method.join' class="method"><span id='join.v' class='invisible'><code>fn <a href='#method.join' class='fnname'>join</a>(self) -&gt; <a class="type" href="../../std/thread/type.Result.html" title="type std::thread::Result">Result</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Waits for the associated thread to finish.</p>
-
 <p>If the child thread panics, <a href="../../std/result/enum.Result.html#variant.Err"><code>Err</code></a> is returned with the parameter given
 to <a href="../../std/macro.panic.html"><code>panic</code></a>.</p>
 

@@ -52,7 +52,6 @@
 <pre class='rust trait'>pub trait From&lt;T&gt; {
     fn <a href='#tymethod.from' class='fnname'>from</a>(T) -&gt; Self;
 }</pre><div class='docblock'><p>Construct <code>Self</code> via a conversion.</p>
-
 <p><strong>Note: this trait must not fail</strong>. If the conversion can fail, use <a href="trait.TryFrom.html"><code>TryFrom</code></a> or a dedicated
 method which returns an <a href="../../std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a> or a <a href="../../std/result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>.</p>
 

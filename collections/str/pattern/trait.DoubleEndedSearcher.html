@@ -52,10 +52,8 @@
 <pre class='rust trait'>pub trait DoubleEndedSearcher&lt;'a&gt;: <a class="trait" href="../../../collections/str/pattern/trait.ReverseSearcher.html" title="trait collections::str::pattern::ReverseSearcher">ReverseSearcher</a>&lt;'a&gt; { }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>pattern </code><a href="https://github.com/rust-lang/rust/issues/27721">#27721</a>)</summary><p>API not fully fleshed out and ready to be stabilized</p>
 </details></div></div><div class='docblock'><p>A marker trait to express that a <code>ReverseSearcher</code>
 can be used for a <code>DoubleEndedIterator</code> implementation.</p>
-
 <p>For this, the impl of <code>Searcher</code> and <code>ReverseSearcher</code> need
 to follow these conditions:</p>
-
 <ul>
 <li>All results of <code>next()</code> need to be identical
 to the results of <code>next_back()</code> in reverse order.</li>
@@ -68,7 +66,6 @@ can not &quot;walk past each other&quot;.</li>
 <p><code>char::Searcher</code> is a <code>DoubleEndedSearcher</code> because searching for a
 <code>char</code> only requires looking at one at a time, which behaves the same
 from both ends.</p>
-
 <p><code>(&amp;str)::Searcher</code> is not a <code>DoubleEndedSearcher</code> because
 the pattern <code>&quot;aa&quot;</code> in the haystack <code>&quot;aaa&quot;</code> matches as either
 <code>&quot;[aa]a&quot;</code> or <code>&quot;a[aa]&quot;</code>, depending from which side it is searched.</p>

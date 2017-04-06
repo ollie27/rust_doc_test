@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/std/fs.rs.html#192' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Permissions(_);</pre><div class='docblock'><p>Representation of the various permissions on a file.</p>
-
 <p>This module only currently provides one bit of information, <a href="struct.Permissions.html#method.readonly"><code>readonly</code></a>,
 which is exposed on all currently supported platforms. Unix-specific
 functionality, such as mode bits, is available through the
@@ -69,7 +68,6 @@ functionality, such as mode bits, is available through the
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="bool-val">false</span>, <span class="ident">metadata</span>.<span class="ident">permissions</span>().<span class="ident">readonly</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0A%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20f%20%3D%20File%3A%3Acreate(%22foo.txt%22)%3F%3B%0Alet%20metadata%20%3D%20f.metadata()%3F%3B%0A%0Aassert_eq!(false%2C%20metadata.permissions().readonly())%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.set_readonly' class="method"><span id='set_readonly.v' class='invisible'><code>fn <a href='#method.set_readonly' class='fnname'>set_readonly</a>(&amp;mut self, readonly: <a class="primitive" href="../primitive.bool.html">bool</a>)</code></span></h4>
 <div class='docblock'><p>Modifies the readonly flag for this set of permissions.</p>
-
 <p>This operation does <strong>not</strong> modify the filesystem. To modify the
 filesystem use the <code>fs::set_permissions</code> function.</p>
 

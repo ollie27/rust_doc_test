@@ -50,16 +50,13 @@
                    </a>
                </span><a class='srclink' href='../../src/std/path.rs.html#1401-1403' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Path { /* fields omitted */ }</pre><div class='docblock'><p>A slice of a path (akin to <a href="../primitive.str.html"><code>str</code></a>).</p>
-
 <p>This type supports a number of operations for inspecting a path, including
 breaking the path into its components (separated by <code>/</code> or <code>\</code>, depending on
 the platform), extracting the file name, determining whether the path is
 absolute, and so on.</p>
-
 <p>This is an <em>unsized</em> type, meaning that it must always be used behind a
 pointer like <code>&amp;</code> or <a href="../boxed/struct.Box.html"><code>Box</code></a>. For an owned version of this type,
 see <a href="struct.PathBuf.html"><code>PathBuf</code></a>.</p>
-
 <p>More details about the overall approach can be found in
 the module documentation.</p>
 
@@ -81,7 +78,6 @@ the module documentation.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/path.rs.html#1413-2105' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;S:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt; + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt;(s: &amp;S) -&gt; &amp;<a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a></code></span></h4>
 <div class='docblock'><p>Directly wrap a string slice as a <code>Path</code> slice.</p>
-
 <p>This is a cost-free conversion.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -89,7 +85,6 @@ the module documentation.</p>
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::<span class="ident">Path</span>;
 
 <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0APath%3A%3Anew(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
-
 <p>You can create <code>Path</code>s from <code>String</code>s, or even other <code>Path</code>s:</p>
 
 <pre class="rust rust-example-rendered">
@@ -110,7 +105,6 @@ the module documentation.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">os_str</span>, <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">OsStr</span>::<span class="ident">new</span>(<span class="string">&quot;foo.txt&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20os_str%20%3D%20Path%3A%3Anew(%22foo.txt%22).as_os_str()%3B%0Aassert_eq!(os_str%2C%20std%3A%3Affi%3A%3AOsStr%3A%3Anew(%22foo.txt%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.to_str' class="method"><span id='to_str.v' class='invisible'><code>fn <a href='#method.to_str' class='fnname'>to_str</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;<a class="primitive" href="../primitive.str.html">str</a>&gt;</code></span></h4>
 <div class='docblock'><p>Yields a <a href="../primitive.str.html"><code>&amp;str</code></a> slice if the <code>Path</code> is valid unicode.</p>
-
 <p>This conversion may entail doing a check for UTF-8 validity.</p>
 
 <h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
@@ -121,7 +115,6 @@ the module documentation.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path</span>.<span class="ident">to_str</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;foo.txt&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22foo.txt%22)%3B%0Aassert_eq!(path.to_str()%2C%20Some(%22foo.txt%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.to_string_lossy' class="method"><span id='to_string_lossy.v' class='invisible'><code>fn <a href='#method.to_string_lossy' class='fnname'>to_string_lossy</a>(&amp;self) -&gt; <a class="enum" href="../../std/borrow/enum.Cow.html" title="enum std::borrow::Cow">Cow</a>&lt;<a class="primitive" href="../primitive.str.html">str</a>&gt;</code></span></h4>
 <div class='docblock'><p>Converts a <code>Path</code> to a <a href="../borrow/enum.Cow.html"><code>Cow&lt;str&gt;</code></a>.</p>
-
 <p>Any non-Unicode sequences are replaced with U+FFFD REPLACEMENT CHARACTER.</p>
 
 <h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
@@ -132,7 +125,6 @@ the module documentation.</p>
 
 <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo.txt&quot;</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path</span>.<span class="ident">to_string_lossy</span>(), <span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22foo.txt%22)%3B%0Aassert_eq!(path.to_string_lossy()%2C%20%22foo.txt%22)%3B%0A%7D">Run</a></pre>
-
 <p>Had <code>path</code> contained invalid unicode, the <code>to_string_lossy</code> call might
 have returned <code>&quot;fo�.txt&quot;</code>.</p>
 </div><h4 id='method.to_path_buf' class="method"><span id='to_path_buf.v' class='invisible'><code>fn <a href='#method.to_path_buf' class='fnname'>to_path_buf</a>(&amp;self) -&gt; <a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a></code></span></h4>
@@ -146,12 +138,15 @@ have returned <code>&quot;fo�.txt&quot;</code>.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path_buf</span>, <span class="ident">std</span>::<span class="ident">path</span>::<span class="ident">PathBuf</span>::<span class="ident">from</span>(<span class="string">&quot;foo.txt&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path_buf%20%3D%20Path%3A%3Anew(%22foo.txt%22).to_path_buf()%3B%0Aassert_eq!(path_buf%2C%20std%3A%3Apath%3A%3APathBuf%3A%3Afrom(%22foo.txt%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_absolute' class="method"><span id='is_absolute.v' class='invisible'><code>fn <a href='#method.is_absolute' class='fnname'>is_absolute</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>A path is <em>absolute</em> if it is independent of the current directory.</p>
-
 <ul>
-<li><p>On Unix, a path is absolute if it starts with the root, so
-<code>is_absolute</code> and <code>has_root</code> are equivalent.</p></li>
-<li><p>On Windows, a path is absolute if it has a prefix and starts with the
-root: <code>c:\windows</code> is absolute, while <code>c:temp</code> and <code>\temp</code> are not.</p></li>
+<li>
+<p>On Unix, a path is absolute if it starts with the root, so
+<code>is_absolute</code> and <code>has_root</code> are equivalent.</p>
+</li>
+<li>
+<p>On Windows, a path is absolute if it has a prefix and starts with the
+root: <code>c:\windows</code> is absolute, while <code>c:temp</code> and <code>\temp</code> are not.</p>
+</li>
 </ul>
 
 <h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
@@ -169,16 +164,18 @@ root: <code>c:\windows</code> is absolute, while <code>c:temp</code> and <code>\
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo.txt&quot;</span>).<span class="ident">is_relative</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Aassert!(Path%3A%3Anew(%22foo.txt%22).is_relative())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.has_root' class="method"><span id='has_root.v' class='invisible'><code>fn <a href='#method.has_root' class='fnname'>has_root</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>A path has a root if the body of the path begins with the directory separator.</p>
-
 <ul>
-<li><p>On Unix, a path has a root if it begins with <code>/</code>.</p></li>
-<li><p>On Windows, a path has a root if it:</p>
-
+<li>
+<p>On Unix, a path has a root if it begins with <code>/</code>.</p>
+</li>
+<li>
+<p>On Windows, a path has a root if it:</p>
 <ul>
 <li>has no prefix and begins with a separator, e.g. <code>\\windows</code></li>
 <li>has a prefix followed by a separator, e.g. <code>c:\windows</code> but not <code>c:windows</code></li>
 <li>has any non-disk prefix, e.g. <code>\\server\share</code></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
 <h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
@@ -188,7 +185,6 @@ root: <code>c:\windows</code> is absolute, while <code>c:temp</code> and <code>\
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/etc/passwd&quot;</span>).<span class="ident">has_root</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Aassert!(Path%3A%3Anew(%22%2Fetc%2Fpasswd%22).has_root())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.parent' class="method"><span id='parent.v' class='invisible'><code>fn <a href='#method.parent' class='fnname'>parent</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;<a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;</code></span></h4>
 <div class='docblock'><p>The path without its final component, if any.</p>
-
 <p>Returns <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a> if the path terminates in a root or prefix.</p>
 
 <h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
@@ -204,7 +200,6 @@ root: <code>c:\windows</code> is absolute, while <code>c:temp</code> and <code>\
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">grand_parent</span>.<span class="ident">parent</span>(), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Ffoo%2Fbar%22)%3B%0Alet%20parent%20%3D%20path.parent().unwrap()%3B%0Aassert_eq!(parent%2C%20Path%3A%3Anew(%22%2Ffoo%22))%3B%0A%0Alet%20grand_parent%20%3D%20parent.parent().unwrap()%3B%0Aassert_eq!(grand_parent%2C%20Path%3A%3Anew(%22%2F%22))%3B%0Aassert_eq!(grand_parent.parent()%2C%20None)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.file_name' class="method"><span id='file_name.v' class='invisible'><code>fn <a href='#method.file_name' class='fnname'>file_name</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;</code></span></h4>
 <div class='docblock'><p>The final component of the path, if it is a normal file.</p>
-
 <p>If the path terminates in <code>..</code>, <code>file_name</code> will return <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>.</p>
 
 <h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>
@@ -243,7 +238,6 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path</span>.<span class="ident">strip_prefix</span>(<span class="string">&quot;/haha&quot;</span>).<span class="ident">is_ok</span>(), <span class="bool-val">false</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Ftest%2Fhaha%2Ffoo.txt%22)%3B%0A%0Aassert_eq!(path.strip_prefix(%22%2Ftest%22)%2C%20Ok(Path%3A%3Anew(%22haha%2Ffoo.txt%22)))%3B%0Aassert_eq!(path.strip_prefix(%22test%22).is_ok()%2C%20false)%3B%0Aassert_eq!(path.strip_prefix(%22%2Fhaha%22).is_ok()%2C%20false)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.starts_with' class="method"><span id='starts_with.v' class='invisible'><code>fn <a href='#method.starts_with' class='fnname'>starts_with</a>&lt;P:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;&gt;(&amp;self, base: P) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Determines whether <code>base</code> is a prefix of <code>self</code>.</p>
-
 <p>Only considers whole path components to match.</p>
 
 <h1 id='examples-12' class='section-header'><a href='#examples-12'>Examples</a></h1>
@@ -257,7 +251,6 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">path</span>.<span class="ident">starts_with</span>(<span class="string">&quot;/e&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Fetc%2Fpasswd%22)%3B%0A%0Aassert!(path.starts_with(%22%2Fetc%22))%3B%0A%0Aassert!(!path.starts_with(%22%2Fe%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.ends_with' class="method"><span id='ends_with.v' class='invisible'><code>fn <a href='#method.ends_with' class='fnname'>ends_with</a>&lt;P:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;&gt;(&amp;self, child: P) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Determines whether <code>child</code> is a suffix of <code>self</code>.</p>
-
 <p>Only considers whole path components to match.</p>
 
 <h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1>
@@ -269,9 +262,7 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">path</span>.<span class="ident">ends_with</span>(<span class="string">&quot;passwd&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Fetc%2Fpasswd%22)%3B%0A%0Aassert!(path.ends_with(%22passwd%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.file_stem' class="method"><span id='file_stem.v' class='invisible'><code>fn <a href='#method.file_stem' class='fnname'>file_stem</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;</code></span></h4>
 <div class='docblock'><p>Extracts the stem (non-extension) portion of <a href="struct.Path.html#method.file_name"><code>self.file_name</code></a>.</p>
-
 <p>The stem is:</p>
-
 <ul>
 <li><a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>, if there is no file name;</li>
 <li>The entire file name if there is no embedded <code>.</code>;</li>
@@ -288,9 +279,7 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&quot;foo&quot;</span>, <span class="ident">path</span>.<span class="ident">file_stem</span>().<span class="ident">unwrap</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22foo.rs%22)%3B%0A%0Aassert_eq!(%22foo%22%2C%20path.file_stem().unwrap())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.extension' class="method"><span id='extension.v' class='invisible'><code>fn <a href='#method.extension' class='fnname'>extension</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;</code></span></h4>
 <div class='docblock'><p>Extracts the extension of <a href="struct.Path.html#method.file_name"><code>self.file_name</code></a>, if possible.</p>
-
 <p>The extension is:</p>
-
 <ul>
 <li><a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>, if there is no file name;</li>
 <li><a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a>, if there is no embedded <code>.</code>;</li>
@@ -307,7 +296,6 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&quot;rs&quot;</span>, <span class="ident">path</span>.<span class="ident">extension</span>().<span class="ident">unwrap</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22foo.rs%22)%3B%0A%0Aassert_eq!(%22rs%22%2C%20path.extension().unwrap())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.join' class="method"><span id='join.v' class='invisible'><code>fn <a href='#method.join' class='fnname'>join</a>&lt;P:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;&gt;(&amp;self, path: P) -&gt; <a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a></code></span></h4>
 <div class='docblock'><p>Creates an owned <a href="struct.PathBuf.html"><code>PathBuf</code></a> with <code>path</code> adjoined to <code>self</code>.</p>
-
 <p>See <a href="struct.PathBuf.html#method.push"><code>PathBuf::push</code></a> for more details on what it means to adjoin a path.</p>
 
 <h1 id='examples-16' class='section-header'><a href='#examples-16'>Examples</a></h1>
@@ -317,7 +305,6 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/etc&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;passwd&quot;</span>), <span class="ident">PathBuf</span>::<span class="ident">from</span>(<span class="string">&quot;/etc/passwd&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3A%7BPath%2C%20PathBuf%7D%3B%0A%0Aassert_eq!(Path%3A%3Anew(%22%2Fetc%22).join(%22passwd%22)%2C%20PathBuf%3A%3Afrom(%22%2Fetc%2Fpasswd%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.with_file_name' class="method"><span id='with_file_name.v' class='invisible'><code>fn <a href='#method.with_file_name' class='fnname'>with_file_name</a>&lt;S:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;&gt;(&amp;self, file_name: S) -&gt; <a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a></code></span></h4>
 <div class='docblock'><p>Creates an owned <a href="struct.PathBuf.html"><code>PathBuf</code></a> like <code>self</code> but with the given file name.</p>
-
 <p>See <a href="struct.PathBuf.html#method.set_file_name"><code>PathBuf::set_file_name</code></a> for more details.</p>
 
 <h1 id='examples-17' class='section-header'><a href='#examples-17'>Examples</a></h1>
@@ -328,7 +315,6 @@ returns <code>false</code>), returns <a href="../../std/result/enum.Result.html#
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path</span>.<span class="ident">with_file_name</span>(<span class="string">&quot;bar.txt&quot;</span>), <span class="ident">PathBuf</span>::<span class="ident">from</span>(<span class="string">&quot;/tmp/bar.txt&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3A%7BPath%2C%20PathBuf%7D%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Ftmp%2Ffoo.txt%22)%3B%0Aassert_eq!(path.with_file_name(%22bar.txt%22)%2C%20PathBuf%3A%3Afrom(%22%2Ftmp%2Fbar.txt%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.with_extension' class="method"><span id='with_extension.v' class='invisible'><code>fn <a href='#method.with_extension' class='fnname'>with_extension</a>&lt;S:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;&gt;(&amp;self, extension: S) -&gt; <a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a></code></span></h4>
 <div class='docblock'><p>Creates an owned <a href="struct.PathBuf.html"><code>PathBuf</code></a> like <code>self</code> but with the given extension.</p>
-
 <p>See <a href="struct.PathBuf.html#method.set_extension"><code>PathBuf::set_extension</code></a> for more details.</p>
 
 <h1 id='examples-18' class='section-header'><a href='#examples-18'>Examples</a></h1>
@@ -377,10 +363,8 @@ that may contain non-Unicode data.</p>
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Ftmp%2Ffoo.rs%22)%3B%0A%0Aprintln!(%22%7B%7D%22%2C%20path.display())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.metadata' class="method"><span id='metadata.v' class='invisible'><code>fn <a href='#method.metadata' class='fnname'>metadata</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/fs/struct.Metadata.html" title="struct std::fs::Metadata">Metadata</a>&gt;</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Query the file system to get information about a file, directory, etc.</p>
-
 <p>This function will traverse symbolic links to query information about the
 destination file.</p>
-
 <p>This is an alias to <a href="../fs/fn.metadata.html"><code>fs::metadata</code></a>.</p>
 
 <h1 id='examples-22' class='section-header'><a href='#examples-22'>Examples</a></h1>
@@ -392,7 +376,6 @@ destination file.</p>
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">metadata</span>.<span class="ident">file_type</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2FMinas%2Ftirith%22)%3B%0Alet%20metadata%20%3D%20path.metadata().expect(%22metadata%20call%20failed%22)%3B%0Aprintln!(%22%7B%3A%3F%7D%22%2C%20metadata.file_type())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.symlink_metadata' class="method"><span id='symlink_metadata.v' class='invisible'><code>fn <a href='#method.symlink_metadata' class='fnname'>symlink_metadata</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/fs/struct.Metadata.html" title="struct std::fs::Metadata">Metadata</a>&gt;</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Query the metadata about a file without following symlinks.</p>
-
 <p>This is an alias to <a href="../fs/fn.symlink_metadata.html"><code>fs::symlink_metadata</code></a>.</p>
 
 <h1 id='examples-23' class='section-header'><a href='#examples-23'>Examples</a></h1>
@@ -405,7 +388,6 @@ destination file.</p>
 </div><h4 id='method.canonicalize' class="method"><span id='canonicalize.v' class='invisible'><code>fn <a href='#method.canonicalize' class='fnname'>canonicalize</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a>&gt;</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns the canonical form of the path with all intermediate components
 normalized and symbolic links resolved.</p>
-
 <p>This is an alias to <a href="../fs/fn.canonicalize.html"><code>fs::canonicalize</code></a>.</p>
 
 <h1 id='examples-24' class='section-header'><a href='#examples-24'>Examples</a></h1>
@@ -416,7 +398,6 @@ normalized and symbolic links resolved.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path</span>.<span class="ident">canonicalize</span>().<span class="ident">unwrap</span>(), <span class="ident">PathBuf</span>::<span class="ident">from</span>(<span class="string">&quot;/foo/test/bar.rs&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3A%7BPath%2C%20PathBuf%7D%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Ffoo%2Ftest%2F..%2Ftest%2Fbar.rs%22)%3B%0Aassert_eq!(path.canonicalize().unwrap()%2C%20PathBuf%3A%3Afrom(%22%2Ffoo%2Ftest%2Fbar.rs%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.read_link' class="method"><span id='read_link.v' class='invisible'><code>fn <a href='#method.read_link' class='fnname'>read_link</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a>&gt;</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Reads a symbolic link, returning the file that the link points to.</p>
-
 <p>This is an alias to <a href="../fs/fn.read_link.html"><code>fs::read_link</code></a>.</p>
 
 <h1 id='examples-25' class='section-header'><a href='#examples-25'>Examples</a></h1>
@@ -427,10 +408,8 @@ normalized and symbolic links resolved.</p>
 <span class="kw">let</span> <span class="ident">path_link</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">read_link</span>().<span class="ident">expect</span>(<span class="string">&quot;read_link call failed&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Flaputa%2Fsky_castle.rs%22)%3B%0Alet%20path_link%20%3D%20path.read_link().expect(%22read_link%20call%20failed%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.read_dir' class="method"><span id='read_dir.v' class='invisible'><code>fn <a href='#method.read_dir' class='fnname'>read_dir</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/fs/struct.ReadDir.html" title="struct std::fs::ReadDir">ReadDir</a>&gt;</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns an iterator over the entries within a directory.</p>
-
 <p>The iterator will yield instances of <a href="../io/type.Result.html"><code>io::Result</code></a><code>&lt;</code><a href="../fs/struct.DirEntry.html"><code>DirEntry</code></a><code>&gt;</code>. New
 errors may be encountered after an iterator is initially constructed.</p>
-
 <p>This is an alias to <a href="../fs/fn.read_dir.html"><code>fs::read_dir</code></a>.</p>
 
 <h1 id='examples-26' class='section-header'><a href='#examples-26'>Examples</a></h1>
@@ -445,7 +424,6 @@ errors may be encountered after an iterator is initially constructed.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20path%20%3D%20Path%3A%3Anew(%22%2Flaputa%22)%3B%0Afor%20entry%20in%20path.read_dir().expect(%22read_dir%20call%20failed%22)%20%7B%0A%20%20%20%20if%20let%20Ok(entry)%20%3D%20entry%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20entry.path())%3B%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.exists' class="method"><span id='exists.v' class='invisible'><code>fn <a href='#method.exists' class='fnname'>exists</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns whether the path points at an existing entity.</p>
-
 <p>This function will traverse symbolic links to query information about the
 destination file. In case of broken symbolic links this will return <code>false</code>.</p>
 
@@ -455,7 +433,6 @@ destination file. In case of broken symbolic links this will return <code>false<
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;does_not_exist.txt&quot;</span>).<span class="ident">exists</span>(), <span class="bool-val">false</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0Aassert_eq!(Path%3A%3Anew(%22does_not_exist.txt%22).exists()%2C%20false)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_file' class="method"><span id='is_file.v' class='invisible'><code>fn <a href='#method.is_file' class='fnname'>is_file</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns whether the path is pointing at a regular file.</p>
-
 <p>This function will traverse symbolic links to query information about the
 destination file. In case of broken symbolic links this will return <code>false</code>.</p>
 
@@ -466,7 +443,6 @@ destination file. In case of broken symbolic links this will return <code>false<
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;a_file.txt&quot;</span>).<span class="ident">is_file</span>(), <span class="bool-val">true</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apath%3A%3APath%3B%0Aassert_eq!(Path%3A%3Anew(%22.%2Fis_a_directory%2F%22).is_file()%2C%20false)%3B%0Aassert_eq!(Path%3A%3Anew(%22a_file.txt%22).is_file()%2C%20true)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_dir' class="method"><span id='is_dir.v' class='invisible'><code>fn <a href='#method.is_dir' class='fnname'>is_dir</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns whether the path is pointing at a directory.</p>
-
 <p>This function will traverse symbolic links to query information about the
 destination file. In case of broken symbolic links this will return <code>false</code>.</p>
 

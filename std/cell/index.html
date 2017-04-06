@@ -50,17 +50,14 @@
                    </a>
                </span><a class='srclink' href='../../src/core/cell.rs.html#11-1253' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Shareable mutable containers.</p>
-
 <p>Values of the <code>Cell&lt;T&gt;</code> and <code>RefCell&lt;T&gt;</code> types may be mutated through shared references (i.e.
 the common <code>&amp;T</code> type), whereas most Rust types can only be mutated through unique (<code>&amp;mut T</code>)
 references. We say that <code>Cell&lt;T&gt;</code> and <code>RefCell&lt;T&gt;</code> provide &#39;interior mutability&#39;, in contrast
 with typical Rust types that exhibit &#39;inherited mutability&#39;.</p>
-
 <p>Cell types come in two flavors: <code>Cell&lt;T&gt;</code> and <code>RefCell&lt;T&gt;</code>. <code>Cell&lt;T&gt;</code> implements interior
 mutability by moving values in and out of the <code>Cell&lt;T&gt;</code>. To use references instead of values,
 one must use the <code>RefCell&lt;T&gt;</code> type, acquiring a write lock before mutating. <code>Cell&lt;T&gt;</code> provides
 methods to retrieve and change the current interior value:</p>
-
 <ul>
 <li>For types that implement <code>Copy</code>, the <code>get</code> method retrieves the current interior value.</li>
 <li>For types that implement <code>Default</code>, the <code>take</code> method replaces the current interior value
@@ -70,7 +67,6 @@ replaced value and the <code>into_inner</code> method consumes the <code>Cell&lt
 value. Additionally, the <code>set</code> method replaces the interior value, dropping the replaced
 value.</li>
 </ul>
-
 <p><code>RefCell&lt;T&gt;</code> uses Rust&#39;s lifetimes to implement &#39;dynamic borrowing&#39;, a process whereby one can
 claim temporary, exclusive, mutable access to the inner value. Borrows for <code>RefCell&lt;T&gt;</code>s are
 tracked &#39;at runtime&#39;, unlike Rust&#39;s native reference types which are entirely tracked
@@ -85,7 +81,6 @@ statically preventing crash bugs. Because of that, inherited mutability is prefe
 interior mutability is something of a last resort. Since cell types enable mutation where it
 would otherwise be disallowed though, there are occasions when interior mutability might be
 appropriate, or even <em>must</em> be used, e.g.</p>
-
 <ul>
 <li>Introducing mutability &#39;inside&#39; of something immutable</li>
 <li>Implementation details of logically-immutable methods.</li>
@@ -97,7 +92,6 @@ appropriate, or even <em>must</em> be used, e.g.</p>
 cloned and shared between multiple parties. Because the contained values may be
 multiply-aliased, they can only be borrowed with <code>&amp;</code>, not <code>&amp;mut</code>. Without cells it would be
 impossible to mutate data inside of these smart pointers at all.</p>
-
 <p>It&#39;s very common then to put a <code>RefCell&lt;T&gt;</code> inside shared pointer types to reintroduce
 mutability:</p>
 
@@ -113,7 +107,6 @@ mutability:</p>
     <span class="ident">shared_map</span>.<span class="ident">borrow_mut</span>().<span class="ident">insert</span>(<span class="string">&quot;piccadilly&quot;</span>, <span class="number">11826</span>);
     <span class="ident">shared_map</span>.<span class="ident">borrow_mut</span>().<span class="ident">insert</span>(<span class="string">&quot;marbles&quot;</span>, <span class="number">38</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Acollections%3A%3AHashMap%3B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20shared_map%3A%20Rc%3CRefCell%3C_%3E%3E%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(HashMap%3A%3Anew()))%3B%0A%20%20%20%20shared_map.borrow_mut().insert(%22africa%22%2C%2092388)%3B%0A%20%20%20%20shared_map.borrow_mut().insert(%22kyoto%22%2C%2011837)%3B%0A%20%20%20%20shared_map.borrow_mut().insert(%22piccadilly%22%2C%2011826)%3B%0A%20%20%20%20shared_map.borrow_mut().insert(%22marbles%22%2C%2038)%3B%0A%7D%0A">Run</a></pre>
-
 <p>Note that this example uses <code>Rc&lt;T&gt;</code> and not <code>Arc&lt;T&gt;</code>. <code>RefCell&lt;T&gt;</code>s are for single-threaded
 scenarios. Consider using <code>RwLock&lt;T&gt;</code> or <code>Mutex&lt;T&gt;</code> if you need shared mutability in a
 multi-threaded situation.</p>

@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../../src/std/sync/mpsc/mod.rs.html#448' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SendError&lt;T&gt;(pub T);</pre><div class='docblock'><p>An error returned from the <a href="../../../std/sync/mpsc/struct.Sender.html#method.send"><code>send</code></a> function on channels.</p>
-
 <p>A <a href="../../../std/sync/mpsc/struct.Sender.html#method.send"><code>send</code></a> operation can only fail if the receiving end of a channel is
 disconnected, implying that the data could never be received. The error
 contains the data being sent as a payload so it can be recovered.</p>

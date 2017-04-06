@@ -51,7 +51,6 @@
                </span><a class='srclink' href='../../../src/std/sync/mpsc/mod.rs.html#410-412' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Sender&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>The sending-half of Rust&#39;s asynchronous channel type. This half can only be
 owned by one thread, but it can be cloned to send to other threads.</p>
-
 <p>Messages can be sent through this channel with <a href="../../../std/sync/mpsc/struct.Sender.html#method.send"><code>send</code></a>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -80,7 +79,6 @@ owned by one thread, but it can be cloned to send to other threads.</p>
 <div class='impl-items'><h4 id='method.send' class="method"><span id='send.v' class='invisible'><code>fn <a href='#method.send' class='fnname'>send</a>(&amp;self, t: T) -&gt; <a class="enum" href="../../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../../primitive.tuple.html">()</a>, <a class="struct" href="../../../std/sync/mpsc/struct.SendError.html" title="struct std::sync::mpsc::SendError">SendError</a>&lt;T&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Attempts to send a value on this channel, returning it back if it could
 not be sent.</p>
-
 <p>A successful send occurs when it is determined that the other end of
 the channel has not hung up already. An unsuccessful send would be one
 where the corresponding receiver has already been deallocated. Note
@@ -88,7 +86,6 @@ that a return value of <a href="../../../std/result/enum.Result.html#variant.Err
 received, but a return value of <a href="../../../std/result/enum.Result.html#variant.Ok"><code>Ok</code></a> does <em>not</em> mean that the data
 will be received.  It is possible for the corresponding receiver to
 hang up immediately after this function returns <a href="../../../std/result/enum.Result.html#variant.Ok"><code>Ok</code></a>.</p>
-
 <p>This method will never block the current thread.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>

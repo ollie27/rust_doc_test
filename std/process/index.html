@@ -66,7 +66,6 @@
                  .<span class="ident">expect</span>(<span class="string">&quot;failed to wait on child&quot;</span>);
 
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">ecode</span>.<span class="ident">success</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0Alet%20mut%20child%20%3D%20Command%3A%3Anew(%22%2Fbin%2Fcat%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.arg(%22file.txt%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.spawn()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.expect(%22failed%20to%20execute%20child%22)%3B%0A%0Alet%20ecode%20%3D%20child.wait()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.expect(%22failed%20to%20wait%20on%20child%22)%3B%0A%0Aassert!(ecode.success())%3B%0A%7D">Run</a></pre>
-
 <p>Calling a command with input and reading its output:</p>
 
 <pre class="rust rust-example-rendered">
@@ -103,7 +102,7 @@
                            <td><a class="struct" href="struct.ChildStderr.html"
                                   title='struct std::process::ChildStderr'>ChildStderr</a></td>
                            <td class='docblock-short'>
-                                <p>A handle to a child process&#39;s stderr. This struct is used in the <a href="struct.Child.html#structfield.stderr"><code>stderr</code></a>
+                                <p>A handle to a child process's stderr. This struct is used in the <a href="struct.Child.html#structfield.stderr"><code>stderr</code></a>
 field on <a href="struct.Child.html"><code>Child</code></a>.</p>
                            </td>
                        </tr>
@@ -111,7 +110,7 @@ field on <a href="struct.Child.html"><code>Child</code></a>.</p>
                            <td><a class="struct" href="struct.ChildStdin.html"
                                   title='struct std::process::ChildStdin'>ChildStdin</a></td>
                            <td class='docblock-short'>
-                                <p>A handle to a child process&#39;s stdin. This struct is used in the <a href="struct.Child.html#structfield.stdin"><code>stdin</code></a>
+                                <p>A handle to a child process's stdin. This struct is used in the <a href="struct.Child.html#structfield.stdin"><code>stdin</code></a>
 field on <a href="struct.Child.html"><code>Child</code></a>.</p>
                            </td>
                        </tr>
@@ -119,7 +118,7 @@ field on <a href="struct.Child.html"><code>Child</code></a>.</p>
                            <td><a class="struct" href="struct.ChildStdout.html"
                                   title='struct std::process::ChildStdout'>ChildStdout</a></td>
                            <td class='docblock-short'>
-                                <p>A handle to a child process&#39;s stdout. This struct is used in the <a href="struct.Child.html#structfield.stdout"><code>stdout</code></a>
+                                <p>A handle to a child process's stdout. This struct is used in the <a href="struct.Child.html#structfield.stdout"><code>stdout</code></a>
 field on <a href="struct.Child.html"><code>Child</code></a>.</p>
                            </td>
                        </tr>

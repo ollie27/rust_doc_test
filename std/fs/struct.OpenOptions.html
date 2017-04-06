@@ -50,12 +50,10 @@
                    </a>
                </span><a class='srclink' href='../../src/std/fs.rs.html#180' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct OpenOptions(_);</pre><div class='docblock'><p>Options and flags which can be used to configure how a file is opened.</p>
-
 <p>This builder exposes the ability to configure how a <a href="struct.File.html"><code>File</code></a> is opened and
 what operations are permitted on the open file. The <a href="struct.File.html#method.open"><code>File::open</code></a> and
 <a href="struct.File.html#method.create"><code>File::create</code></a> methods are aliases for commonly used options using this
 builder.</p>
-
 <p>Generally speaking, when using <code>OpenOptions</code>, you&#39;ll first call <a href="struct.OpenOptions.html#method.new"><code>new</code></a>,
 then chain calls to methods to set each option, then call <a href="struct.OpenOptions.html#method.open"><code>open</code></a>,
 passing the path of the file you&#39;re trying to open. This will give you a
@@ -69,7 +67,6 @@ operate on.</p>
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">OpenOptions</span>;
 
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">read</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20file%20%3D%20OpenOptions%3A%3Anew().read(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
-
 <p>Opening a file for both reading and writing, as well as creating it if it
 doesn&#39;t exist:</p>
 
@@ -84,7 +81,6 @@ doesn&#39;t exist:</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/fs.rs.html#489-678' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span></h4>
 <div class='docblock'><p>Creates a blank new set of options ready for configuration.</p>
-
 <p>All options are initially set to <code>false</code>.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -95,7 +91,6 @@ doesn&#39;t exist:</p>
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">options</span>.<span class="ident">read</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20mut%20options%20%3D%20OpenOptions%3A%3Anew()%3B%0Alet%20file%20%3D%20options.read(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.read' class="method"><span id='read.v' class='invisible'><code>fn <a href='#method.read' class='fnname'>read</a>(&amp;mut self, read: <a class="primitive" href="../primitive.bool.html">bool</a>) -&gt; &amp;mut <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span></h4>
 <div class='docblock'><p>Sets the option for read access.</p>
-
 <p>This option, when true, will indicate that the file should be
 <code>read</code>-able if opened.</p>
 
@@ -106,10 +101,8 @@ doesn&#39;t exist:</p>
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">read</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20file%20%3D%20OpenOptions%3A%3Anew().read(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.write' class="method"><span id='write.v' class='invisible'><code>fn <a href='#method.write' class='fnname'>write</a>(&amp;mut self, write: <a class="primitive" href="../primitive.bool.html">bool</a>) -&gt; &amp;mut <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span></h4>
 <div class='docblock'><p>Sets the option for write access.</p>
-
 <p>This option, when true, will indicate that the file should be
 <code>write</code>-able if opened.</p>
-
 <p>If the file already exists, any write calls on it will overwrite its
 contents, without truncating it.</p>
 
@@ -120,22 +113,18 @@ contents, without truncating it.</p>
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20file%20%3D%20OpenOptions%3A%3Anew().write(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.append' class="method"><span id='append.v' class='invisible'><code>fn <a href='#method.append' class='fnname'>append</a>(&amp;mut self, append: <a class="primitive" href="../primitive.bool.html">bool</a>) -&gt; &amp;mut <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span></h4>
 <div class='docblock'><p>Sets the option for the append mode.</p>
-
 <p>This option, when true, means that writes will append to a file instead
 of overwriting previous contents.
 Note that setting <code>.write(true).append(true)</code> has the same effect as
 setting only <code>.append(true)</code>.</p>
-
 <p>For most filesystems, the operating system guarantees that all writes are
 atomic: no writes get mangled because another process writes at the same
 time.</p>
-
 <p>One maybe obvious note when using append-mode: make sure that all data
 that belongs together is written to the file in one operation. This
 can be done by concatenating strings before passing them to <code>write()</code>,
 or using a buffered writer (with a buffer of adequate size),
 and calling <code>flush()</code> when the message is complete.</p>
-
 <p>If a file is opened with both read and append access, beware that after
 opening, and after every write, the position for reading may be set at the
 end of the file. So, before writing, save the current position (using
@@ -148,10 +137,8 @@ end of the file. So, before writing, save the current position (using
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">append</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20file%20%3D%20OpenOptions%3A%3Anew().append(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.truncate' class="method"><span id='truncate.v' class='invisible'><code>fn <a href='#method.truncate' class='fnname'>truncate</a>(&amp;mut self, truncate: <a class="primitive" href="../primitive.bool.html">bool</a>) -&gt; &amp;mut <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span></h4>
 <div class='docblock'><p>Sets the option for truncating a previous file.</p>
-
 <p>If a file is successfully opened with this option set it will truncate
 the file to 0 length if it already exists.</p>
-
 <p>The file must be opened with write access for truncate to work.</p>
 
 <h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
@@ -161,10 +148,8 @@ the file to 0 length if it already exists.</p>
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">truncate</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20file%20%3D%20OpenOptions%3A%3Anew().write(true).truncate(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.create' class="method"><span id='create.v' class='invisible'><code>fn <a href='#method.create' class='fnname'>create</a>(&amp;mut self, create: <a class="primitive" href="../primitive.bool.html">bool</a>) -&gt; &amp;mut <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code></span></h4>
 <div class='docblock'><p>Sets the option for creating a new file.</p>
-
 <p>This option indicates whether a new file will be created if the file
 does not yet already exist.</p>
-
 <p>In order for the file to be created, <code>write</code> or <code>append</code> access must
 be used.</p>
 
@@ -175,18 +160,14 @@ be used.</p>
 <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AOpenOptions%3B%0A%0Alet%20file%20%3D%20OpenOptions%3A%3Anew().write(true).create(true).open(%22foo.txt%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.create_new' class="method"><span id='create_new.v' class='invisible'><code>fn <a href='#method.create_new' class='fnname'>create_new</a>(&amp;mut self, create_new: <a class="primitive" href="../primitive.bool.html">bool</a>) -&gt; &amp;mut <a class="struct" href="../../std/fs/struct.OpenOptions.html" title="struct std::fs::OpenOptions">OpenOptions</a></code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Sets the option to always create a new file.</p>
-
 <p>This option indicates whether a new file will be created.
 No file is allowed to exist at the target location, also no (dangling)
 symlink.</p>
-
 <p>This option is useful because it is atomic. Otherwise between checking
 whether a file exists and creating a new one, the file may have been
 created by another process (a TOCTOU race condition / attack).</p>
-
 <p>If <code>.create_new(true)</code> is set, <code>.create()</code> and <code>.truncate()</code> are
 ignored.</p>
-
 <p>The file must be opened with write or append access in order to create
 a new file.</p>
 
@@ -203,7 +184,6 @@ a new file.</p>
 <h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
 <p>This function will return an error under a number of different
 circumstances, to include but not limited to:</p>
-
 <ul>
 <li>Opening a file that does not exist without setting <code>create</code> or
 <code>create_new</code>.</li>

@@ -53,9 +53,7 @@
     pub start: Idx,
 }</pre><div class='docblock'><p>A range which is only bounded below: { x | start &lt;= x }.
 Use <code>start..</code> for its shorthand.</p>
-
 <p>See the <a href="#method.contains"><code>contains</code></a> method for its characterization.</p>
-
 <p>Note: Currently, no overflow checking is done for the iterator
 implementation; if you use an integer range and the integer overflows, it
 might panic in debug mode or create an endless loop in release mode. This

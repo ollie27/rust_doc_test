@@ -50,11 +50,9 @@
                    </a>
                </span><a class='srclink' href='../../src/std/net/addr.rs.html#106' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SocketAddrV6 { /* fields omitted */ }</pre><div class='docblock'><p>An IPv6 socket address.</p>
-
 <p>IPv6 socket addresses consist of an <a href="../../std/net/struct.Ipv6Addr.html">Ipv6 address</a>, a 16-bit port number, as well
 as fields containing the traffic class, the flow label, and a scope identifier
 (see <a href="https://tools.ietf.org/html/rfc2553#section-3.3">IETF RFC 2553, Section 3.3</a> for more details).</p>
-
 <p>See <a href="../../std/net/enum.SocketAddr.html"><code>SocketAddr</code></a> for a type encompassing both IPv4 and IPv6 socket addresses.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -70,7 +68,6 @@ as fields containing the traffic class, the flow label, and a scope identifier
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(ip: <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a>, port: <a class="primitive" href="../primitive.u16.html">u16</a>, flowinfo: <a class="primitive" href="../primitive.u32.html">u32</a>, scope_id: <a class="primitive" href="../primitive.u32.html">u32</a>) -&gt; <a class="struct" href="../../std/net/struct.SocketAddrV6.html" title="struct std::net::SocketAddrV6">SocketAddrV6</a></code></span></h4>
 <div class='docblock'><p>Creates a new socket address from an <a href="../../std/net/struct.Ipv6Addr.html">IPv6 address</a>, a 16-bit port number,
 and the <code>flowinfo</code> and <code>scope_id</code> fields.</p>
-
 <p>For more information on the meaning and layout of the <code>flowinfo</code> and <code>scope_id</code>
 parameters, see <a href="https://tools.ietf.org/html/rfc2553#section-3.3">IETF RFC 2553, Section 3.3</a>.</p>
 
@@ -119,7 +116,6 @@ parameters, see <a href="https://tools.ietf.org/html/rfc2553#section-3.3">IETF R
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">socket</span>.<span class="ident">port</span>(), <span class="number">4242</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3A%7BSocketAddrV6%2C%20Ipv6Addr%7D%3B%0A%0Alet%20mut%20socket%20%3D%20SocketAddrV6%3A%3Anew(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%201)%2C%208080%2C%200%2C%200)%3B%0Asocket.set_port(4242)%3B%0Aassert_eq!(socket.port()%2C%204242)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.flowinfo' class="method"><span id='flowinfo.v' class='invisible'><code>fn <a href='#method.flowinfo' class='fnname'>flowinfo</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the flow information associated with this address.</p>
-
 <p>This information corresponds to the <code>sin6_flowinfo</code> field in C&#39;s <code>netinet/in.h</code>,
 as specified in <a href="https://tools.ietf.org/html/rfc2553#section-3.3">IETF RFC 2553, Section 3.3</a>.
 It combines information about the flow label and the traffic class as specified
@@ -133,7 +129,6 @@ in <a href="https://tools.ietf.org/html/rfc2460">IETF RFC 2460</a>, respectively
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">socket</span>.<span class="ident">flowinfo</span>(), <span class="number">10</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3A%7BSocketAddrV6%2C%20Ipv6Addr%7D%3B%0A%0Alet%20socket%20%3D%20SocketAddrV6%3A%3Anew(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%201)%2C%208080%2C%2010%2C%200)%3B%0Aassert_eq!(socket.flowinfo()%2C%2010)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.set_flowinfo' class="method"><span id='set_flowinfo.v' class='invisible'><code>fn <a href='#method.set_flowinfo' class='fnname'>set_flowinfo</a>(&amp;mut self, new_flowinfo: <a class="primitive" href="../primitive.u32.html">u32</a>)</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Changes the flow information associated with this socket address.</p>
-
 <p>See the <a href="#method.flowinfo"><code>flowinfo</code></a> method&#39;s documentation for more details.</p>
 
 <h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
@@ -145,7 +140,6 @@ in <a href="https://tools.ietf.org/html/rfc2460">IETF RFC 2460</a>, respectively
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">socket</span>.<span class="ident">flowinfo</span>(), <span class="number">56</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3A%7BSocketAddrV6%2C%20Ipv6Addr%7D%3B%0A%0Alet%20mut%20socket%20%3D%20SocketAddrV6%3A%3Anew(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%201)%2C%208080%2C%2010%2C%200)%3B%0Asocket.set_flowinfo(56)%3B%0Aassert_eq!(socket.flowinfo()%2C%2056)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.scope_id' class="method"><span id='scope_id.v' class='invisible'><code>fn <a href='#method.scope_id' class='fnname'>scope_id</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.u32.html">u32</a></code></span></h4>
 <div class='docblock'><p>Returns the scope ID associated with this address.</p>
-
 <p>This information corresponds to the <code>sin6_scope_id</code> field in C&#39;s <code>netinet/in.h</code>,
 as specified in <a href="https://tools.ietf.org/html/rfc2553#section-3.3">IETF RFC 2553, Section 3.3</a>.</p>
 
@@ -157,7 +151,6 @@ as specified in <a href="https://tools.ietf.org/html/rfc2553#section-3.3">IETF R
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">socket</span>.<span class="ident">scope_id</span>(), <span class="number">78</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3A%7BSocketAddrV6%2C%20Ipv6Addr%7D%3B%0A%0Alet%20socket%20%3D%20SocketAddrV6%3A%3Anew(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%201)%2C%208080%2C%200%2C%2078)%3B%0Aassert_eq!(socket.scope_id()%2C%2078)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.set_scope_id' class="method"><span id='set_scope_id.v' class='invisible'><code>fn <a href='#method.set_scope_id' class='fnname'>set_scope_id</a>(&amp;mut self, new_scope_id: <a class="primitive" href="../primitive.u32.html">u32</a>)</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Change the scope ID associated with this socket address.</p>
-
 <p>See the <a href="#method.scope_id"><code>scope_id</code></a> method&#39;s documentation for more details.</p>
 
 <h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>

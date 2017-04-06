@@ -70,10 +70,8 @@
     UnexpectedEof,
     // some variants omitted
 }</pre><div class='docblock'><p>A list specifying general categories of I/O error.</p>
-
 <p>This list is intended to grow over time and it is not recommended to
 exhaustively match against it.</p>
-
 <p>It is used with the <a href="struct.Error.html"><code>io::Error</code></a> type.</p>
 </div><h2 class='variants'>Variants</h2>
 <span id='variant.NotFound' class='variant'><span id='NotFound.v' class='invisible'><code>NotFound</code></span></span><div class='docblock'><p>An entity was not found, often a file.</p>
@@ -92,27 +90,22 @@ local.</p>
 requested to not occur.</p>
 </div><span id='variant.InvalidInput' class='variant'><span id='InvalidInput.v' class='invisible'><code>InvalidInput</code></span></span><div class='docblock'><p>A parameter was incorrect.</p>
 </div><span id='variant.InvalidData' class='variant'><span id='InvalidData.v' class='invisible'><code>InvalidData</code></span></span><div class='docblock'><p>Data not valid for the operation were encountered.</p>
-
 <p>Unlike <a href="#variant.InvalidInput"><code>InvalidInput</code></a>, this typically means that the operation
 parameters were valid, however the error was caused by malformed
 input data.</p>
-
 <p>For example, a function that reads a file into a string will error with
 <code>InvalidData</code> if the file&#39;s contents are not valid UTF-8.</p>
 </div><div class='since' title='Stable since Rust version 1.2.0'>1.2.0</div><span id='variant.TimedOut' class='variant'><span id='TimedOut.v' class='invisible'><code>TimedOut</code></span></span><div class='docblock'><p>The I/O operation&#39;s timeout expired, causing it to be canceled.</p>
 </div><span id='variant.WriteZero' class='variant'><span id='WriteZero.v' class='invisible'><code>WriteZero</code></span></span><div class='docblock'><p>An error returned when an operation could not be completed because a
 call to <a href="../../std/io/trait.Write.html#tymethod.write"><code>write</code></a> returned <a href="../../std/io/type.Result.html"><code>Ok(0)</code></a>.</p>
-
 <p>This typically means that an operation could only succeed if it wrote a
 particular number of bytes but only a smaller number of bytes could be
 written.</p>
 </div><span id='variant.Interrupted' class='variant'><span id='Interrupted.v' class='invisible'><code>Interrupted</code></span></span><div class='docblock'><p>This operation was interrupted.</p>
-
 <p>Interrupted operations can typically be retried.</p>
 </div><span id='variant.Other' class='variant'><span id='Other.v' class='invisible'><code>Other</code></span></span><div class='docblock'><p>Any I/O error not part of this list.</p>
 </div><span id='variant.UnexpectedEof' class='variant'><span id='UnexpectedEof.v' class='invisible'><code>UnexpectedEof</code></span></span><div class='docblock'><p>An error returned when an operation could not be completed because an
 &quot;end of file&quot; was reached prematurely.</p>
-
 <p>This typically means that an operation could only succeed if it read a
 particular number of bytes but only a smaller number of bytes could be
 read.</p>

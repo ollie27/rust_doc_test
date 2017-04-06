@@ -67,7 +67,6 @@
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/thread/struct.Thread.html" title="struct std::thread::Thread">Thread</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/thread/mod.rs.html#746-852' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.unpark' class="method"><span id='unpark.v' class='invisible'><code>fn <a href='#method.unpark' class='fnname'>unpark</a>(&amp;self)</code></span></h4>
 <div class='docblock'><p>Atomically makes the handle&#39;s token available if it is not already.</p>
-
 <p>See the module doc for more detail.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -115,7 +114,6 @@
 }).<span class="ident">unwrap</span>();
 
 <span class="ident">handler</span>.<span class="ident">join</span>().<span class="ident">unwrap</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20builder%20%3D%20thread%3A%3ABuilder%3A%3Anew()%3B%0A%0Alet%20handler%20%3D%20builder.spawn(%7C%7C%20%7B%0A%20%20%20%20assert!(thread%3A%3Acurrent().name().is_none())%3B%0A%7D).unwrap()%3B%0A%0Ahandler.join().unwrap()%3B%0A%7D">Run</a></pre>
-
 <p>Thread with a specified name:</p>
 
 <pre class="rust rust-example-rendered">

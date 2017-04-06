@@ -76,7 +76,6 @@ of some computation.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/sync/struct.Barrier.html" title="struct std::sync::Barrier">Barrier</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/sync/barrier.rs.html#77-160' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(n: <a class="primitive" href="../primitive.usize.html">usize</a>) -&gt; <a class="struct" href="../../std/sync/struct.Barrier.html" title="struct std::sync::Barrier">Barrier</a></code></span></h4>
 <div class='docblock'><p>Creates a new barrier that can block a given number of threads.</p>
-
 <p>A barrier will block <code>n</code>-1 threads which call <a href="#method.wait"><code>wait</code></a> and then wake up
 all threads at once when the <code>n</code>th thread calls <a href="#method.wait"><code>wait</code></a>.</p>
 
@@ -87,10 +86,8 @@ all threads at once when the <code>n</code>th thread calls <a href="#method.wait
 <span class="kw">let</span> <span class="ident">barrier</span> <span class="op">=</span> <span class="ident">Barrier</span>::<span class="ident">new</span>(<span class="number">10</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3ABarrier%3B%0A%0Alet%20barrier%20%3D%20Barrier%3A%3Anew(10)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.wait' class="method"><span id='wait.v' class='invisible'><code>fn <a href='#method.wait' class='fnname'>wait</a>(&amp;self) -&gt; <a class="struct" href="../../std/sync/struct.BarrierWaitResult.html" title="struct std::sync::BarrierWaitResult">BarrierWaitResult</a></code></span></h4>
 <div class='docblock'><p>Blocks the current thread until all threads have rendezvoused here.</p>
-
 <p>Barriers are re-usable after all threads have rendezvoused once, and can
 be used continuously.</p>
-
 <p>A single (arbitrary) thread will receive a <a href="struct.BarrierWaitResult.html"><code>BarrierWaitResult</code></a> that
 returns <code>true</code> from <a href="struct.BarrierWaitResult.html#method.is_leader"><code>is_leader</code></a> when returning from this function, and
 all other threads will receive a result that will return <code>false</code> from

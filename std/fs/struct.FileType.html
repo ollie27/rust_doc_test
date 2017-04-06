@@ -76,7 +76,6 @@ It is returned by <a href="struct.Metadata.html#method.file_type"><code>Metadata
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">file_type</span>.<span class="ident">is_file</span>(), <span class="bool-val">true</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Ause%20std%3A%3Afs%3B%0A%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0Alet%20file_type%20%3D%20metadata.file_type()%3B%0A%0Aassert_eq!(file_type.is_file()%2C%20true)%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.is_symlink' class="method"><span id='is_symlink.v' class='invisible'><code>fn <a href='#method.is_symlink' class='fnname'>is_symlink</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Test whether this file type represents a symbolic link.</p>
-
 <p>The underlying <a href="struct.Metadata.html"><code>Metadata</code></a> struct needs to be retrieved
 with the <a href="fn.symlink_metadata.html"><code>fs::symlink_metadata</code></a> function and not the
 <a href="fn.metadata.html"><code>fs::metadata</code></a> function. The <a href="fn.metadata.html"><code>fs::metadata</code></a> function

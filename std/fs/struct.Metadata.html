@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/std/fs.rs.html#102' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Metadata(_);</pre><div class='docblock'><p>Metadata information about a file.</p>
-
 <p>This structure is returned from the <a href="fn.metadata.html"><code>metadata</code></a> or
 <a href="fn.symlink_metadata.html"><code>symlink_metadata</code></a> function or method and represents known
 metadata about a file such as its permissions, size, modification
@@ -108,7 +107,6 @@ times, etc.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">metadata</span>.<span class="ident">permissions</span>().<span class="ident">readonly</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Ause%20std%3A%3Afs%3B%0A%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0A%0Aassert!(!metadata.permissions().readonly())%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.modified' class="method"><span id='modified.v' class='invisible'><code>fn <a href='#method.modified' class='fnname'>modified</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/time/struct.SystemTime.html" title="struct std::time::SystemTime">SystemTime</a>&gt;</code><div class='since' title='Stable since Rust version 1.10.0'>1.10.0</div></span></h4>
 <div class='docblock'><p>Returns the last modification time listed in this metadata.</p>
-
 <p>The returned value corresponds to the <code>mtime</code> field of <code>stat</code> on Unix
 platforms and the <code>ftLastWriteTime</code> field on Windows platforms.</p>
 
@@ -129,10 +127,8 @@ platforms and the <code>ftLastWriteTime</code> field on Windows platforms.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Ause%20std%3A%3Afs%3B%0A%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0A%0Aif%20let%20Ok(time)%20%3D%20metadata.modified()%20%7B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20time)%3B%0A%7D%20else%20%7B%0A%20%20%20%20println!(%22Not%20supported%20on%20this%20platform%22)%3B%0A%7D%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.accessed' class="method"><span id='accessed.v' class='invisible'><code>fn <a href='#method.accessed' class='fnname'>accessed</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/time/struct.SystemTime.html" title="struct std::time::SystemTime">SystemTime</a>&gt;</code><div class='since' title='Stable since Rust version 1.10.0'>1.10.0</div></span></h4>
 <div class='docblock'><p>Returns the last access time of this metadata.</p>
-
 <p>The returned value corresponds to the <code>atime</code> field of <code>stat</code> on Unix
 platforms and the <code>ftLastAccessTime</code> field on Windows platforms.</p>
-
 <p>Note that not all platforms will keep this field update in a file&#39;s
 metadata, for example Windows has an option to disable updating this
 time when files are accessed and Linux similarly has <code>noatime</code>.</p>
@@ -154,7 +150,6 @@ time when files are accessed and Linux similarly has <code>noatime</code>.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Ause%20std%3A%3Afs%3B%0A%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0A%0Aif%20let%20Ok(time)%20%3D%20metadata.accessed()%20%7B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20time)%3B%0A%7D%20else%20%7B%0A%20%20%20%20println!(%22Not%20supported%20on%20this%20platform%22)%3B%0A%7D%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.created' class="method"><span id='created.v' class='invisible'><code>fn <a href='#method.created' class='fnname'>created</a>(&amp;self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/time/struct.SystemTime.html" title="struct std::time::SystemTime">SystemTime</a>&gt;</code><div class='since' title='Stable since Rust version 1.10.0'>1.10.0</div></span></h4>
 <div class='docblock'><p>Returns the creation time listed in the this metadata.</p>
-
 <p>The returned value corresponds to the <code>birthtime</code> field of <code>stat</code> on
 Unix platforms and the <code>ftCreationTime</code> field on Windows platforms.</p>
 

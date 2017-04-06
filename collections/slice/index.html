@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/collections/slice.rs.html#11-1861' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A dynamically-sized view into a contiguous sequence, <code>[T]</code>.</p>
-
 <p>Slices are a view into a block of memory represented as a pointer and a
 length.</p>
 
@@ -60,7 +59,6 @@ length.</p>
 <span class="kw">let</span> <span class="ident">int_slice</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">vec</span>[..];
 <span class="comment">// coercing an array to a slice</span>
 <span class="kw">let</span> <span class="ident">str_slice</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>];<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20slicing%20a%20Vec%0Alet%20vec%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0Alet%20int_slice%20%3D%20%26vec%5B..%5D%3B%0A%2F%2F%20coercing%20an%20array%20to%20a%20slice%0Alet%20str_slice%3A%20%26%5B%26str%5D%20%3D%20%26%5B%22one%22%2C%20%22two%22%2C%20%22three%22%5D%3B%0A%7D">Run</a></pre>
-
 <p>Slices are either mutable or shared. The shared slice type is <code>&amp;[T]</code>,
 while the mutable slice type is <code>&amp;mut [T]</code>, where <code>T</code> represents the element
 type. For example, you can mutate the block of memory that a mutable slice
@@ -70,7 +68,6 @@ points to:</p>
 <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 <span class="ident">x</span>[<span class="number">1</span>] <span class="op">=</span> <span class="number">7</span>;
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%26mut%20%5B1%2C%202%2C%203%5D%3B%0Ax%5B1%5D%20%3D%207%3B%0Aassert_eq!(x%2C%20%26%5B1%2C%207%2C%203%5D)%3B%0A%7D">Run</a></pre>
-
 <p>Here are some of the things this module contains:</p>
 
 <h2 id='structs' class='section-header'><a href='#structs'>Structs</a></h2>
@@ -80,7 +77,6 @@ represents iteration over a slice.</p>
 <h2 id='trait-implementations' class='section-header'><a href='#trait-implementations'>Trait Implementations</a></h2>
 <p>There are several implementations of common traits for slices. Some examples
 include:</p>
-
 <ul>
 <li><a href="../../std/clone/trait.Clone.html"><code>Clone</code></a></li>
 <li><a href="../../std/cmp/trait.Eq.html"><code>Eq</code></a>, <a href="../../std/cmp/trait.Ord.html"><code>Ord</code></a> - for slices whose element type are <a href="../../std/cmp/trait.Eq.html"><code>Eq</code></a> or <a href="../../std/cmp/trait.Ord.html"><code>Ord</code></a>.</li>
@@ -96,7 +92,6 @@ slice elements.</p>
 <span class="kw">for</span> <span class="ident">n</span> <span class="kw">in</span> <span class="ident">numbers</span> {
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{} is a number!&quot;</span>, <span class="ident">n</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20numbers%20%3D%20%26%5B0%2C%201%2C%202%5D%3B%0Afor%20n%20in%20numbers%20%7B%0A%20%20%20%20println!(%22%7B%7D%20is%20a%20number!%22%2C%20n)%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>The mutable slice yields mutable references to the elements:</p>
 
 <pre class="rust rust-example-rendered">
@@ -104,18 +99,15 @@ slice elements.</p>
 <span class="kw">for</span> <span class="ident">score</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">scores</span>[..] {
     <span class="kw-2">*</span><span class="ident">score</span> <span class="op">+=</span> <span class="number">1</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20scores%20%3D%20%5B7%2C%208%2C%209%5D%3B%0Afor%20score%20in%20%26mut%20scores%5B..%5D%20%7B%0A%20%20%20%20*score%20%2B%3D%201%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>This iterator yields mutable references to the slice&#39;s elements, so while
 the element type of the slice is <code>i32</code>, the element type of the iterator is
 <code>&amp;mut i32</code>.</p>
-
 <ul>
 <li><a href="../../std/primitive.slice.html#method.iter"><code>.iter</code></a> and <a href="../../std/primitive.slice.html#method.iter_mut"><code>.iter_mut</code></a> are the explicit methods to return the default
 iterators.</li>
 <li>Further methods that return iterators are <a href="../../std/primitive.slice.html#method.split"><code>.split</code></a>, <a href="../../std/primitive.slice.html#method.splitn"><code>.splitn</code></a>,
 <a href="../../std/primitive.slice.html#method.chunks"><code>.chunks</code></a>, <a href="../../std/primitive.slice.html#method.windows"><code>.windows</code></a> and more.</li>
 </ul>
-
 <p><em><a href="../../std/primitive.slice.html">See also the slice primitive type</a>.</em></p>
 </div><h2 id='structs-1' class='section-header'><a href="#structs-1">Structs</a></h2>
 <table>

@@ -50,9 +50,7 @@
                    </a>
                </span><a class='srclink' href='../../src/collections/binary_heap.rs.html#217-219' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct BinaryHeap&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A priority queue implemented with a binary heap.</p>
-
 <p>This will be a max-heap.</p>
-
 <p>It is a logic error for an item to be modified in such a way that the
 item&#39;s ordering relative to any other item, as determined by the <code>Ord</code>
 trait, changes while it is in the heap. This is normally only possible
@@ -156,7 +154,6 @@ arbitrary order.</p>
 </div><h4 id='method.peek_mut' class="method"><span id='peek_mut.v' class='invisible'><code>fn <a href='#method.peek_mut' class='fnname'>peek_mut</a>(&amp;mut self) -&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../collections/binary_heap/struct.PeekMut.html" title="struct collections::binary_heap::PeekMut">PeekMut</a>&lt;T&gt;&gt;</code><div class='since' title='Stable since Rust version 1.12.0'>1.12.0</div></span></h4>
 <div class='docblock'><p>Returns a mutable reference to the greatest item in the binary heap, or
 <code>None</code> if it is empty.</p>
-
 <p>Note: If the <code>PeekMut</code> value is leaked, the heap may be in an
 inconsistent state.</p>
 
@@ -190,7 +187,6 @@ inconsistent state.</p>
 </div><h4 id='method.reserve_exact' class="method"><span id='reserve_exact.v' class='invisible'><code>fn <a href='#method.reserve_exact' class='fnname'>reserve_exact</a>(&amp;mut self, additional: usize)</code></span></h4>
 <div class='docblock'><p>Reserves the minimum capacity for exactly <code>additional</code> more elements to be inserted in the
 given <code>BinaryHeap</code>. Does nothing if the capacity is already sufficient.</p>
-
 <p>Note that the allocator may give the collection more space than it requests. Therefore
 capacity can not be relied upon to be precisely minimal. Prefer <code>reserve</code> if future
 insertions are expected.</p>
@@ -370,7 +366,6 @@ in arbitrary order.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">heap</span>.<span class="ident">is_empty</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20collections%3B%0Afn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABinaryHeap%3B%0Alet%20mut%20heap%20%3D%20BinaryHeap%3A%3Anew()%3B%0A%0Aassert!(heap.is_empty())%3B%0A%0Aheap.push(3)%3B%0Aheap.push(5)%3B%0Aheap.push(1)%3B%0A%0Aassert!(!heap.is_empty())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.drain' class="method"><span id='drain.v' class='invisible'><code>fn <a href='#method.drain' class='fnname'>drain</a>(&amp;mut self) -&gt; <a class="struct" href="../../collections/binary_heap/struct.Drain.html" title="struct collections::binary_heap::Drain">Drain</a>&lt;T&gt;</code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></span></h4>
 <div class='docblock'><p>Clears the binary heap, returning an iterator over the removed elements.</p>
-
 <p>The elements are removed in arbitrary order.</p>
 
 <h1 id='examples-18' class='section-header'><a href='#examples-18'>Examples</a></h1>

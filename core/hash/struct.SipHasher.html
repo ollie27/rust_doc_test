@@ -51,14 +51,11 @@
                </span><a class='srclink' href='../../src/core/hash/sip.rs.html#61' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SipHasher(_);</pre><div class='stability'><div class='stab deprecated'>Deprecated since 1.13.0<p>: use <code>std::collections::hash_map::DefaultHasher</code> instead</p>
 </div></div><div class='docblock'><p>An implementation of SipHash 2-4.</p>
-
-<p>See: <a href="https://131002.net/siphash/">https://131002.net/siphash/</a></p>
-
+<p>See: https://131002.net/siphash/</p>
 <p>SipHash is a general-purpose hashing function: it runs at a good
 speed (competitive with Spooky and City) and permits strong <em>keyed</em>
 hashing. This lets you key your hashtables from a strong RNG, such as
 <a href="https://doc.rust-lang.org/rand/rand/os/struct.OsRng.html"><code>rand::os::OsRng</code></a>.</p>
-
 <p>Although the SipHash algorithm is considered to be generally strong,
 it is not intended for cryptographic purposes. As such, all
 cryptographic uses of this implementation are <em>strongly discouraged</em>.</p>

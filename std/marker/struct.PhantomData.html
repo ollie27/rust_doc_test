@@ -51,11 +51,9 @@
                </span><a class='srclink' href='../../src/core/marker.rs.html#546' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'><div class="docblock attributes">#[lang = "phantom_data"]
 </div>pub struct PhantomData&lt;T&gt; <span class="where fmt-newline">where T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span>;</pre><div class='docblock'><p>Zero-sized type used to mark things that &quot;act like&quot; they own a <code>T</code>.</p>
-
 <p>Adding a <code>PhantomData&lt;T&gt;</code> field to your type tells the compiler that your
 type acts as though it stores a value of type <code>T</code>, even though it doesn&#39;t
 really. This information is used when computing certain safety properties.</p>
-
 <p>For a more in-depth explanation of how to use <code>PhantomData&lt;T&gt;</code>, please see
 <a href="../../nomicon/phantom-data.html">the Nomicon</a>.</p>
 
@@ -77,7 +75,6 @@ presumably pointing into an array somewhere:</p>
     <span class="ident">start</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>,
     <span class="ident">end</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>,
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Slice%3C'a%2C%20T%3E%20%7B%0A%20%20%20%20start%3A%20*const%20T%2C%0A%20%20%20%20end%3A%20*const%20T%2C%0A%7D%0A%7D">Run</a></pre>
-
 <p>The intention is that the underlying data is only valid for the
 lifetime <code>&#39;a</code>, so <code>Slice</code> should not outlive <code>&#39;a</code>. However, this
 intent is not expressed in the code, since there are no uses of
@@ -93,10 +90,8 @@ to. We can correct this by telling the compiler to act <em>as if</em> the
     <span class="ident">end</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>,
     <span class="ident">phantom</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span>,
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Amarker%3A%3APhantomData%3B%0A%0A%23%5Ballow(dead_code)%5D%0Astruct%20Slice%3C'a%2C%20T%3A%20'a%3E%20%7B%0A%20%20%20%20start%3A%20*const%20T%2C%0A%20%20%20%20end%3A%20*const%20T%2C%0A%20%20%20%20phantom%3A%20PhantomData%3C%26'a%20T%3E%2C%0A%7D%0A%7D">Run</a></pre>
-
 <p>This also in turn requires the annotation <code>T: &#39;a</code>, indicating
 that any references in <code>T</code> are valid over the lifetime <code>&#39;a</code>.</p>
-
 <p>When initializing a <code>Slice</code> you simply provide the value
 <code>PhantomData</code> for the field <code>phantom</code>:</p>
 
@@ -149,7 +144,6 @@ type owns data of type <code>T</code>. This in turn implies that when your
 type is dropped, it may drop one or more instances of the type
 <code>T</code>. This has bearing on the Rust compiler&#39;s <a href="../../nomicon/dropck.html">drop check</a>
 analysis.</p>
-
 <p>If your struct does not in fact <em>own</em> the data of type <code>T</code>, it is
 better to use a reference type, like <code>PhantomData&lt;&amp;&#39;a T&gt;</code>
 (ideally) or <code>PhantomData&lt;*const T&gt;</code> (if no lifetime applies), so

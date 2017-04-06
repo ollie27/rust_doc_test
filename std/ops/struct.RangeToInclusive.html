@@ -54,9 +54,7 @@
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>inclusive_range </code><a href="https://github.com/rust-lang/rust/issues/28237">#28237</a>)</summary><p>recently added, follows RFC</p>
 </details></div></div><div class='docblock'><p>An inclusive range which is only bounded above: { x | x &lt;= end }.
 Use <code>...end</code> (three dots) for its shorthand.</p>
-
 <p>See the <a href="#method.contains"><code>contains</code></a> method for its characterization.</p>
-
 <p>It cannot serve as an iterator because it doesn&#39;t have a starting point.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -65,7 +63,6 @@ Use <code>...end</code> (three dots) for its shorthand.</p>
 <pre class="rust rust-example-rendered">
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">inclusive_range</span>,<span class="ident">inclusive_range_syntax</span>)]</span>
 <span class="macro">assert_eq</span><span class="macro">!</span>((...<span class="number">5</span>), <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">RangeToInclusive</span>{ <span class="ident">end</span>: <span class="number">5</span> });<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(inclusive_range%2Cinclusive_range_syntax)%5D%0Afn%20main()%20%7B%0Aassert_eq!((...5)%2C%20std%3A%3Aops%3A%3ARangeToInclusive%7B%20end%3A%205%20%7D)%3B%0A%7D&amp;version=nightly">Run</a></pre>
-
 <p>It does not have an <code>IntoIterator</code> implementation, so you can&#39;t use it in a
 <code>for</code> loop directly. This won&#39;t compile:</p>
 
@@ -73,7 +70,6 @@ Use <code>...end</code> (three dots) for its shorthand.</p>
 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> ...<span class="number">5</span> {
     <span class="comment">// ...</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afor%20i%20in%20...5%20%7B%0A%20%20%20%20%2F%2F%20...%0A%7D%0A%7D">Run</a></pre>
-
 <p>When used as a slicing index, <code>RangeToInclusive</code> produces a slice of all
 array elements up to and including the index indicated by <code>end</code>.</p>
 

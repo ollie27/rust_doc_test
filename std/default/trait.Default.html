@@ -52,7 +52,6 @@
 <pre class='rust trait'>pub trait Default {
     fn <a href='#tymethod.default' class='fnname'>default</a>() -&gt; Self;
 }</pre><div class='docblock'><p>A trait for giving a type a useful default value.</p>
-
 <p>Sometimes, you want to fall back to some kind of default value, and
 don&#39;t particularly care what it is. This comes up often with <code>struct</code>s
 that define a set of options:</p>
@@ -62,7 +61,6 @@ that define a set of options:</p>
     <span class="ident">foo</span>: <span class="ident">i32</span>,
     <span class="ident">bar</span>: <span class="ident">f32</span>,
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Ballow(dead_code)%5D%0Astruct%20SomeOptions%20%7B%0A%20%20%20%20foo%3A%20i32%2C%0A%20%20%20%20bar%3A%20f32%2C%0A%7D%0A%7D">Run</a></pre>
-
 <p>How can we define some default values? You can use <code>Default</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -75,9 +73,7 @@ that define a set of options:</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">options</span>: <span class="ident">SomeOptions</span> <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23%5Ballow(dead_code)%5D%0A%23%5Bderive(Default)%5D%0Astruct%20SomeOptions%20%7B%0A%20%20%20%20foo%3A%20i32%2C%0A%20%20%20%20bar%3A%20f32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20options%3A%20SomeOptions%20%3D%20Default%3A%3Adefault()%3B%0A%7D%0A">Run</a></pre>
-
 <p>Now, you get all of the default values. Rust implements <code>Default</code> for various primitives types.</p>
-
 <p>If you want to override a particular option, but still retain the other defaults:</p>
 
 <pre class="rust rust-example-rendered">
@@ -115,7 +111,6 @@ your type that should be the default:</p>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.default' class='method'><span id='default.v' class='invisible'><code>fn <a href='#tymethod.default' class='fnname'>default</a>() -&gt; Self</code></span></h3><div class='docblock'><p>Returns the &quot;default value&quot; for a type.</p>
-
 <p>Default values are often some kind of initial value, identity value, or anything else that
 may make sense as a default.</p>
 
@@ -126,7 +121,6 @@ may make sense as a default.</p>
 <span class="kw">let</span> <span class="ident">i</span>: <span class="ident">i8</span> <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
 <span class="kw">let</span> (<span class="ident">x</span>, <span class="ident">y</span>): (<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">f64</span>) <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();
 <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>, (<span class="ident">c</span>, <span class="ident">d</span>)): (<span class="ident">i32</span>, <span class="ident">u32</span>, (<span class="ident">bool</span>, <span class="ident">bool</span>)) <span class="op">=</span> <span class="ident">Default</span>::<span class="ident">default</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20i%3A%20i8%20%3D%20Default%3A%3Adefault()%3B%0Alet%20(x%2C%20y)%3A%20(Option%3CString%3E%2C%20f64)%20%3D%20Default%3A%3Adefault()%3B%0Alet%20(a%2C%20b%2C%20(c%2C%20d))%3A%20(i32%2C%20u32%2C%20(bool%2C%20bool))%20%3D%20Default%3A%3Adefault()%3B%0A%7D">Run</a></pre>
-
 <p>Making your own:</p>
 
 <pre class="rust rust-example-rendered">

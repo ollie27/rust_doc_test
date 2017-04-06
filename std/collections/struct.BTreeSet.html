@@ -50,10 +50,8 @@
                    </a>
                </span><a class='srclink' href='../../src/collections/btree/set.rs.html#73-75' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct BTreeSet&lt;T&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A set based on a B-Tree.</p>
-
 <p>See <a href="struct.BTreeMap.html"><code>BTreeMap</code></a>&#39;s documentation for a detailed discussion of this collection&#39;s performance
 benefits and drawbacks.</p>
-
 <p>It is a logic error for an item to be modified in such a way that the item&#39;s ordering relative
 to any other item, as determined by the <a href="../../std/cmp/trait.Ord.html"><code>Ord</code></a> trait, changes while it is in the set. This is
 normally only possible through <a href="../../std/cell/struct.Cell.html"><code>Cell</code></a>, <a href="../../std/cell/struct.RefCell.html"><code>RefCell</code></a>, global state, I/O, or unsafe code.</p>
@@ -108,7 +106,6 @@ normally only possible through <a href="../../std/cell/struct.Cell.html"><code>C
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">set_iter</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">2</span>));
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">set_iter</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">3</span>));
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">set_iter</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeSet%3B%0A%0Alet%20set%3A%20BTreeSet%3Cusize%3E%20%3D%20%5B1%2C%202%2C%203%5D.iter().cloned().collect()%3B%0Alet%20mut%20set_iter%20%3D%20set.iter()%3B%0Aassert_eq!(set_iter.next()%2C%20Some(%261))%3B%0Aassert_eq!(set_iter.next()%2C%20Some(%262))%3B%0Aassert_eq!(set_iter.next()%2C%20Some(%263))%3B%0Aassert_eq!(set_iter.next()%2C%20None)%3B%0A%7D">Run</a></pre>
-
 <p>Values returned by the iterator are returned in ascending order:</p>
 
 <pre class="rust rust-example-rendered">
@@ -252,7 +249,6 @@ in ascending order.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span>.<span class="ident">is_empty</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeSet%3B%0A%0Alet%20mut%20v%20%3D%20BTreeSet%3A%3Anew()%3B%0Av.insert(1)%3B%0Av.clear()%3B%0Aassert!(v.is_empty())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.contains' class="method"><span id='contains.v' class='invisible'><code>fn <a href='#method.contains' class='fnname'>contains</a>&lt;Q&gt;(&amp;self, value: &amp;Q) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a> <span class="where fmt-newline">where Q: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>, T: <a class="trait" href="../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;</span></code></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the set contains a value.</p>
-
 <p>The value may be any borrowed form of the set&#39;s value type,
 but the ordering on the borrowed form <em>must</em> match the
 ordering on the value type.</p>
@@ -266,7 +262,6 @@ ordering on the value type.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">set</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="number">4</span>), <span class="bool-val">false</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeSet%3B%0A%0Alet%20set%3A%20BTreeSet%3C_%3E%20%3D%20%5B1%2C%202%2C%203%5D.iter().cloned().collect()%3B%0Aassert_eq!(set.contains(%261)%2C%20true)%3B%0Aassert_eq!(set.contains(%264)%2C%20false)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get' class="method"><span id='get.v' class='invisible'><code>fn <a href='#method.get' class='fnname'>get</a>&lt;Q&gt;(&amp;self, value: &amp;Q) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;T&gt; <span class="where fmt-newline">where Q: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>, T: <a class="trait" href="../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;</span></code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Returns a reference to the value in the set, if any, that is equal to the given value.</p>
-
 <p>The value may be any borrowed form of the set&#39;s value type,
 but the ordering on the borrowed form <em>must</em> match the
 ordering on the value type.</p>
@@ -323,9 +318,7 @@ i.e. <code>self</code> contains at least all the values in <code>other</code>.</
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">set</span>.<span class="ident">is_superset</span>(<span class="kw-2">&amp;</span><span class="ident">sub</span>), <span class="bool-val">true</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeSet%3B%0A%0Alet%20sub%3A%20BTreeSet%3C_%3E%20%3D%20%5B1%2C%202%5D.iter().cloned().collect()%3B%0Alet%20mut%20set%20%3D%20BTreeSet%3A%3Anew()%3B%0A%0Aassert_eq!(set.is_superset(%26sub)%2C%20false)%3B%0A%0Aset.insert(0)%3B%0Aset.insert(1)%3B%0Aassert_eq!(set.is_superset(%26sub)%2C%20false)%3B%0A%0Aset.insert(2)%3B%0Aassert_eq!(set.is_superset(%26sub)%2C%20true)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.insert' class="method"><span id='insert.v' class='invisible'><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, value: T) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Adds a value to the set.</p>
-
 <p>If the set did not have this value present, <code>true</code> is returned.</p>
-
 <p>If the set did have this value present, <code>false</code> is returned, and the
 entry is not updated. See the <a href="index.html#insert-and-complex-keys">module-level documentation</a> for more.</p>
 
@@ -344,7 +337,6 @@ one. Returns the replaced value.</p>
 </div><h4 id='method.remove' class="method"><span id='remove.v' class='invisible'><code>fn <a href='#method.remove' class='fnname'>remove</a>&lt;Q&gt;(&amp;mut self, value: &amp;Q) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a> <span class="where fmt-newline">where Q: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>, T: <a class="trait" href="../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;</span></code></span></h4>
 <div class='docblock'><p>Removes a value from the set. Returns <code>true</code> if the value was
 present in the set.</p>
-
 <p>The value may be any borrowed form of the set&#39;s value type,
 but the ordering on the borrowed form <em>must</em> match the
 ordering on the value type.</p>
@@ -360,7 +352,6 @@ ordering on the value type.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">set</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="number">2</span>), <span class="bool-val">false</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeSet%3B%0A%0Alet%20mut%20set%20%3D%20BTreeSet%3A%3Anew()%3B%0A%0Aset.insert(2)%3B%0Aassert_eq!(set.remove(%262)%2C%20true)%3B%0Aassert_eq!(set.remove(%262)%2C%20false)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.take' class="method"><span id='take.v' class='invisible'><code>fn <a href='#method.take' class='fnname'>take</a>&lt;Q&gt;(&amp;mut self, value: &amp;Q) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;T&gt; <span class="where fmt-newline">where Q: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>, T: <a class="trait" href="../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;</span></code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Removes and returns the value in the set, if any, that is equal to the given one.</p>
-
 <p>The value may be any borrowed form of the set&#39;s value type,
 but the ordering on the borrowed form <em>must</em> match the
 ordering on the value type.</p>

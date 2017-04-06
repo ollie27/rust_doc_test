@@ -59,7 +59,6 @@ If <code>T</code> is not <code>Copy</code>, then care must be taken to ensure th
 <code>src</code> is not used before the data is overwritten again (e.g. with <code>write</code>,
 <code>zero_memory</code>, or <code>copy_memory</code>). Note that <code>*src = foo</code> counts as a use
 because it will attempt to drop the value previously at <code>*src</code>.</p>
-
 <p>The pointer must be aligned; use <code>read_unaligned</code> if that is not the case.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>

@@ -52,7 +52,6 @@
 <pre class='rust trait'>pub trait ToString {
     fn <a href='#tymethod.to_string' class='fnname'>to_string</a>(&amp;self) -&gt; <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a>;
 }</pre><div class='docblock'><p>A trait for converting a value to a <code>String</code>.</p>
-
 <p>This trait is automatically implemented for any type which implements the
 <a href="../../std/fmt/trait.Display.html"><code>Display</code></a> trait. As such, <code>ToString</code> shouldn&#39;t be implemented directly:
 <a href="../../std/fmt/trait.Display.html"><code>Display</code></a> should be implemented instead, and you get the <code>ToString</code>

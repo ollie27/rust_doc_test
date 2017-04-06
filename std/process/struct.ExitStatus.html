@@ -71,7 +71,6 @@ and success is defined as a zero exit status.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0Alet%20status%20%3D%20Command%3A%3Anew(%22mkdir%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.arg(%22projects%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.status()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.expect(%22failed%20to%20execute%20mkdir%22)%3B%0A%0Aif%20status.success()%20%7B%0A%20%20%20%20println!(%22'projects%2F'%20directory%20created%22)%3B%0A%7D%20else%20%7B%0A%20%20%20%20println!(%22failed%20to%20create%20'projects%2F'%20directory%22)%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.code' class="method"><span id='code.v' class='invisible'><code>fn <a href='#method.code' class='fnname'>code</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="../primitive.i32.html">i32</a>&gt;</code></span></h4>
 <div class='docblock'><p>Returns the exit code of the process, if any.</p>
-
 <p>On Unix, this will return <code>None</code> if the process was terminated
 by a signal; <code>std::os::unix</code> provides an extension trait for
 extracting the signal and other details from the <code>ExitStatus</code>.</p>

@@ -50,14 +50,12 @@
                    </a>
                </span></span></h1>
 <div class='docblock'><p>The boolean type.</p>
-
 <p>The <code>bool</code> represents a value, which could only be either <code>true</code> or <code>false</code>. If you cast
 a <code>bool</code> into an integer, <code>true</code> will be 1 and <code>false</code> will be 0.</p>
 
 <h1 id='basic-usage' class='section-header'><a href='#basic-usage'>Basic usage</a></h1>
 <p><code>bool</code> implements various traits, such as <a href="ops/trait.BitAnd.html"><code>BitAnd</code></a>, <a href="ops/trait.BitOr.html"><code>BitOr</code></a>, <a href="ops/trait.Not.html"><code>Not</code></a>, etc.,
 which allow us to perform boolean operations using <code>&amp;</code>, <code>|</code> and <code>!</code>.</p>
-
 <p><a href="../book/first-edition/if.html"><code>if</code></a> always demands a <code>bool</code> value. <a href="macro.assert.html"><code>assert!</code></a>, being an important macro in testing,
 checks whether an expression returns <code>true</code>.</p>
 
@@ -83,10 +81,8 @@ checks whether an expression returns <code>true</code>.</p>
     <span class="bool-val">true</span> <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;keep praising!&quot;</span>),
     <span class="bool-val">false</span> <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;you should praise!&quot;</span>),
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20praise_the_borrow_checker%20%3D%20true%3B%0A%0A%2F%2F%20using%20the%20%60if%60%20conditional%0Aif%20praise_the_borrow_checker%20%7B%0A%20%20%20%20println!(%22oh%2C%20yeah!%22)%3B%0A%7D%20else%20%7B%0A%20%20%20%20println!(%22what%3F!!%22)%3B%0A%7D%0A%0A%2F%2F%20...%20or%2C%20a%20match%20pattern%0Amatch%20praise_the_borrow_checker%20%7B%0A%20%20%20%20true%20%3D%3E%20println!(%22keep%20praising!%22)%2C%0A%20%20%20%20false%20%3D%3E%20println!(%22you%20should%20praise!%22)%2C%0A%7D%0A%7D">Run</a></pre>
-
 <p>Also, since <code>bool</code> implements the <a href="marker/trait.Copy.html"><code>Copy</code></a> trait, we don&#39;t
 have to worry about the move semantics (just like the integer and float primitives).</p>
-
 <p>Now an example of <code>bool</code> cast to integer type:</p>
 
 <pre class="rust rust-example-rendered">
@@ -209,7 +205,6 @@ have to worry about the move semantics (just like the integer and float primitiv
 <div class='docblock'><p>The associated error which can be returned from parsing.</p>
 </div><h4 id='method.from_str' class="method"><span id='from_str.v' class='invisible'><code>fn <a href='../std/str/trait.FromStr.html#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;<a class="primitive" href="primitive.str.html">str</a>) -&gt; <a class="enum" href="../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="primitive.bool.html">bool</a>, <a class="struct" href="../std/str/struct.ParseBoolError.html" title="struct std::str::ParseBoolError">ParseBoolError</a>&gt;</code></span></h4>
 <div class='docblock'><p>Parse a <code>bool</code> from a string.</p>
-
 <p>Yields a <code>Result&lt;bool, ParseBoolError&gt;</code>, because <code>s</code> may or may not
 actually be parseable.</p>
 
@@ -220,7 +215,6 @@ actually be parseable.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">FromStr</span>::<span class="ident">from_str</span>(<span class="string">&quot;true&quot;</span>), <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>));
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">FromStr</span>::<span class="ident">from_str</span>(<span class="string">&quot;false&quot;</span>), <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>));
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">&lt;</span><span class="ident">bool</span> <span class="kw">as</span> <span class="ident">FromStr</span><span class="op">&gt;</span>::<span class="ident">from_str</span>(<span class="string">&quot;not even a boolean&quot;</span>).<span class="ident">is_err</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Astr%3A%3AFromStr%3B%0A%0Aassert_eq!(FromStr%3A%3Afrom_str(%22true%22)%2C%20Ok(true))%3B%0Aassert_eq!(FromStr%3A%3Afrom_str(%22false%22)%2C%20Ok(false))%3B%0Aassert!(%3Cbool%20as%20FromStr%3E%3A%3Afrom_str(%22not%20even%20a%20boolean%22).is_err())%3B%0A%7D">Run</a></pre>
-
 <p>Note, in many cases, the <code>.parse()</code> method on <code>str</code> is more proper.</p>
 
 <pre class="rust rust-example-rendered">

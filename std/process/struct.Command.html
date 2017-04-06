@@ -51,7 +51,6 @@
                </span><a class='srclink' href='../../src/std/process.rs.html#304-306' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Command { /* fields omitted */ }</pre><div class='docblock'><p>A process builder, providing fine-grained control
 over how a new process should be spawned.</p>
-
 <p>A default configuration can be
 generated using <code>Command::new(program)</code>, where <code>program</code> gives a path to the
 program to be executed. Additional builder methods allow the configuration
@@ -78,24 +77,20 @@ to be changed (for example, by adding arguments) prior to spawning:</p>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;S:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;&gt;(program: S) -&gt; <a class="struct" href="../../std/process/struct.Command.html" title="struct std::process::Command">Command</a></code></span></h4>
 <div class='docblock'><p>Constructs a new <code>Command</code> for launching the program at
 path <code>program</code>, with the following default configuration:</p>
-
 <ul>
 <li>No arguments to the program</li>
 <li>Inherit the current process&#39;s environment</li>
 <li>Inherit the current process&#39;s working directory</li>
 <li>Inherit stdin/stdout/stderr for <code>spawn</code> or <code>status</code>, but create pipes for <code>output</code></li>
 </ul>
-
 <p>Builder methods are provided to change these defaults and
 otherwise configure the process.</p>
-
 <p>If <code>program</code> is not an absolute path, the <code>PATH</code> will be searched in
 an OS-defined way.</p>
-
 <p>The search path to be used may be controlled by setting the
 <code>PATH</code> environment variable on the Command,
 but this has some implementation limitations on Windows
-(see <a href="https://github.com/rust-lang/rust/issues/37519">https://github.com/rust-lang/rust/issues/37519</a>).</p>
+(see https://github.com/rust-lang/rust/issues/37519).</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Basic usage:</p>
@@ -108,18 +103,15 @@ but this has some implementation limitations on Windows
         .<span class="ident">expect</span>(<span class="string">&quot;sh command failed to start&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0ACommand%3A%3Anew(%22sh%22)%0A%20%20%20%20%20%20%20%20.spawn()%0A%20%20%20%20%20%20%20%20.expect(%22sh%20command%20failed%20to%20start%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.arg' class="method"><span id='arg.v' class='invisible'><code>fn <a href='#method.arg' class='fnname'>arg</a>&lt;S:&nbsp;<a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;&gt;(&amp;mut self, arg: S) -&gt; &amp;mut <a class="struct" href="../../std/process/struct.Command.html" title="struct std::process::Command">Command</a></code></span></h4>
 <div class='docblock'><p>Add an argument to pass to the program.</p>
-
 <p>Only one argument can be passed per use. So instead of:</p>
 
 <pre class="rust rust-example-rendered">
 .<span class="ident">arg</span>(<span class="string">&quot;-C /path/to/repo&quot;</span>)<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A.arg(%22-C%20%2Fpath%2Fto%2Frepo%22)%0A%7D">Run</a></pre>
-
 <p>usage would be:</p>
 
 <pre class="rust rust-example-rendered">
 .<span class="ident">arg</span>(<span class="string">&quot;-C&quot;</span>)
 .<span class="ident">arg</span>(<span class="string">&quot;/path/to/repo&quot;</span>)<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A.arg(%22-C%22)%0A.arg(%22%2Fpath%2Fto%2Frepo%22)%0A%7D">Run</a></pre>
-
 <p>To pass multiple arguments see <a href="#method.args"><code>args</code></a>.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -135,7 +127,6 @@ but this has some implementation limitations on Windows
         .<span class="ident">expect</span>(<span class="string">&quot;ls command failed to start&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0ACommand%3A%3Anew(%22ls%22)%0A%20%20%20%20%20%20%20%20.arg(%22-l%22)%0A%20%20%20%20%20%20%20%20.arg(%22-a%22)%0A%20%20%20%20%20%20%20%20.spawn()%0A%20%20%20%20%20%20%20%20.expect(%22ls%20command%20failed%20to%20start%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.args' class="method"><span id='args.v' class='invisible'><code>fn <a href='#method.args' class='fnname'>args</a>&lt;I, S&gt;(&amp;mut self, args: I) -&gt; &amp;mut <a class="struct" href="../../std/process/struct.Command.html" title="struct std::process::Command">Command</a> <span class="where fmt-newline">where I: <a class="trait" href="../../std/iter/trait.IntoIterator.html" title="trait std::iter::IntoIterator">IntoIterator</a>&lt;Item = S&gt;, S: <a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;</span></code></span></h4>
 <div class='docblock'><p>Add multiple arguments to pass to the program.</p>
-
 <p>To pass a single argument see <a href="#method.arg"><code>arg</code></a>.</p>
 
 <h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
@@ -150,7 +141,6 @@ but this has some implementation limitations on Windows
         .<span class="ident">expect</span>(<span class="string">&quot;ls command failed to start&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3ACommand%3B%0A%0ACommand%3A%3Anew(%22ls%22)%0A%20%20%20%20%20%20%20%20.args(%26%5B%22-l%22%2C%20%22-a%22%5D)%0A%20%20%20%20%20%20%20%20.spawn()%0A%20%20%20%20%20%20%20%20.expect(%22ls%20command%20failed%20to%20start%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.env' class="method"><span id='env.v' class='invisible'><code>fn <a href='#method.env' class='fnname'>env</a>&lt;K, V&gt;(&amp;mut self, key: K, val: V) -&gt; &amp;mut <a class="struct" href="../../std/process/struct.Command.html" title="struct std::process::Command">Command</a> <span class="where fmt-newline">where K: <a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;, V: <a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;</span></code></span></h4>
 <div class='docblock'><p>Inserts or updates an environment variable mapping.</p>
-
 <p>Note that environment variable names are case-insensitive (but case-preserving) on Windows,
 and case-sensitive on all other platforms.</p>
 
@@ -269,7 +259,6 @@ and case-sensitive on all other platforms.</p>
         .<span class="ident">expect</span>(<span class="string">&quot;ls command failed to start&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3A%7BCommand%2C%20Stdio%7D%3B%0A%0ACommand%3A%3Anew(%22ls%22)%0A%20%20%20%20%20%20%20%20.stderr(Stdio%3A%3Anull())%0A%20%20%20%20%20%20%20%20.spawn()%0A%20%20%20%20%20%20%20%20.expect(%22ls%20command%20failed%20to%20start%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.spawn' class="method"><span id='spawn.v' class='invisible'><code>fn <a href='#method.spawn' class='fnname'>spawn</a>(&amp;mut self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/process/struct.Child.html" title="struct std::process::Child">Child</a>&gt;</code></span></h4>
 <div class='docblock'><p>Executes the command as a child process, returning a handle to it.</p>
-
 <p>By default, stdin, stdout and stderr are inherited from the parent.</p>
 
 <h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1>
@@ -284,7 +273,6 @@ and case-sensitive on all other platforms.</p>
 </div><h4 id='method.output' class="method"><span id='output.v' class='invisible'><code>fn <a href='#method.output' class='fnname'>output</a>(&amp;mut self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/process/struct.Output.html" title="struct std::process::Output">Output</a>&gt;</code></span></h4>
 <div class='docblock'><p>Executes the command as a child process, waiting for it to finish and
 collecting all of its output.</p>
-
 <p>By default, stdin, stdout and stderr are captured (and used to
 provide the resulting output).</p>
 
@@ -304,7 +292,6 @@ provide the resulting output).</p>
 </div><h4 id='method.status' class="method"><span id='status.v' class='invisible'><code>fn <a href='#method.status' class='fnname'>status</a>(&amp;mut self) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="struct" href="../../std/process/struct.ExitStatus.html" title="struct std::process::ExitStatus">ExitStatus</a>&gt;</code></span></h4>
 <div class='docblock'><p>Executes a command as a child process, waiting for it to finish and
 collecting its exit status.</p>
-
 <p>By default, stdin, stdout and stderr are inherited from the parent.</p>
 
 <h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1>

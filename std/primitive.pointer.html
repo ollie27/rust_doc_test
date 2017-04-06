@@ -50,10 +50,8 @@
                    </a>
                </span></span></h1>
 <div class='docblock'><p>Raw, unsafe pointers, <code>*const T</code>, and <code>*mut T</code>.</p>
-
 <p>Working with raw pointers in Rust is uncommon,
 typically limited to a few patterns.</p>
-
 <p>Use the <a href="../std/ptr/fn.null.html"><code>null</code></a> function to create null pointers, and the <a href="../std/primitive.pointer.html#method.is_null"><code>is_null</code></a> method
 of the <code>*const T</code> type  to check for null. The <code>*const T</code> type also defines
 the <a href="../std/primitive.pointer.html#method.offset"><code>offset</code></a> method, for pointer math.</p>
@@ -65,7 +63,6 @@ the <a href="../std/primitive.pointer.html#method.offset"><code>offset</code></a
 <span class="kw">let</span> <span class="ident">my_num_ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">i32</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">my_num</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">my_speed</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">88</span>;
 <span class="kw">let</span> <span class="ident">my_speed_ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i32</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">my_speed</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20my_num%3A%20i32%20%3D%2010%3B%0Alet%20my_num_ptr%3A%20*const%20i32%20%3D%20%26my_num%3B%0Alet%20mut%20my_speed%3A%20i32%20%3D%2088%3B%0Alet%20my_speed_ptr%3A%20*mut%20i32%20%3D%20%26mut%20my_speed%3B%0A%7D">Run</a></pre>
-
 <p>To get a pointer to a boxed value, dereference the box:</p>
 
 <pre class="rust rust-example-rendered">
@@ -73,7 +70,6 @@ the <a href="../std/primitive.pointer.html#method.offset"><code>offset</code></a
 <span class="kw">let</span> <span class="ident">my_num_ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">i32</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">my_num</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">my_speed</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="number">88</span>);
 <span class="kw">let</span> <span class="ident">my_speed_ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i32</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">my_speed</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20my_num%3A%20Box%3Ci32%3E%20%3D%20Box%3A%3Anew(10)%3B%0Alet%20my_num_ptr%3A%20*const%20i32%20%3D%20%26*my_num%3B%0Alet%20mut%20my_speed%3A%20Box%3Ci32%3E%20%3D%20Box%3A%3Anew(88)%3B%0Alet%20my_speed_ptr%3A%20*mut%20i32%20%3D%20%26mut%20*my_speed%3B%0A%7D">Run</a></pre>
-
 <p>This does not take ownership of the original allocation
 and requires no resource management later,
 but you must not use the pointer after its lifetime.</p>
@@ -91,7 +87,6 @@ the raw pointer. It doesn&#39;t destroy <code>T</code> or deallocate any memory.
 <span class="kw">unsafe</span> {
     <span class="ident">drop</span>(<span class="ident">Box</span>::<span class="ident">from_raw</span>(<span class="ident">my_speed</span>));
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20my_speed%3A%20Box%3Ci32%3E%20%3D%20Box%3A%3Anew(88)%3B%0Alet%20my_speed%3A%20*mut%20i32%20%3D%20Box%3A%3Ainto_raw(my_speed)%3B%0A%0A%2F%2F%20By%20taking%20ownership%20of%20the%20original%20%60Box%3CT%3E%60%20though%0A%2F%2F%20we%20are%20obligated%20to%20put%20it%20together%20later%20to%20be%20destroyed.%0Aunsafe%20%7B%0A%20%20%20%20drop(Box%3A%3Afrom_raw(my_speed))%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>Note that here the call to <a href="../std/mem/fn.drop.html"><code>drop</code></a> is for clarity - it indicates
 that we are done with the given value and it should be destroyed.</p>
 
@@ -110,11 +105,9 @@ that we are done with the given value and it should be destroyed.</p>
         <span class="ident">libc</span>::<span class="ident">free</span>(<span class="ident">my_num</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">libc</span>::<span class="ident">c_void</span>);
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(libc)%5D%0Aextern%20crate%20libc%3B%0A%0Ause%20std%3A%3Amem%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20let%20my_num%3A%20*mut%20i32%20%3D%20libc%3A%3Amalloc(mem%3A%3Asize_of%3A%3A%3Ci32%3E())%20as%20*mut%20i32%3B%0A%20%20%20%20%20%20%20%20if%20my_num.is_null()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20panic!(%22failed%20to%20allocate%20memory%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20libc%3A%3Afree(my_num%20as%20*mut%20libc%3A%3Ac_void)%3B%0A%20%20%20%20%7D%0A%7D%0A&amp;version=nightly">Run</a></pre>
-
 <p>Usually you wouldn&#39;t literally use <code>malloc</code> and <code>free</code> from Rust,
 but C APIs hand out a lot of pointers generally, so are a common source
 of raw pointers in Rust.</p>
-
 <p><em><a href="ptr/index.html">See also the <code>std::ptr</code> module</a>.</em></p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="primitive" href="primitive.pointer.html">*const T</a> <span class="where fmt-newline">where T: ?<a class="trait" href="../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/core/ptr.rs.html#382-541' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.is_null' class="method"><span id='is_null.v' class='invisible'><code>fn <a href='#method.is_null' class='fnname'>is_null</a>(self) -&gt; <a class="primitive" href="primitive.bool.html">bool</a></code></span></h4>
@@ -136,7 +129,6 @@ the value wrapped in <code>Some</code>.</p>
 null-safety, it is important to note that this is still an unsafe
 operation because the returned value could be pointing to invalid
 memory.</p>
-
 <p>Additionally, the lifetime <code>&#39;a</code> returned is arbitrarily chosen and does
 not necessarily reflect the actual lifetime of the data.</p>
 
@@ -180,7 +172,6 @@ offset of <code>3 * size_of::&lt;T&gt;()</code> bytes.</p>
 <h1 id='safety-2' class='section-header'><a href='#safety-2'>Safety</a></h1>
 <p>The resulting pointer does not need to be in bounds, but it is
 potentially hazardous to dereference (which requires <code>unsafe</code>).</p>
-
 <p>Always use <code>.offset(count)</code> instead when possible, because <code>offset</code>
 allows the compiler to optimize better.</p>
 
@@ -204,11 +195,9 @@ allows the compiler to optimize better.</p>
 </div><h4 id='method.offset_to' class="method"><span id='offset_to.v' class='invisible'><code>fn <a href='#method.offset_to' class='fnname'>offset_to</a>(self, other: <a class="primitive" href="primitive.pointer.html">*const T</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>offset_to </code><a href="https://github.com/rust-lang/rust/issues/41079">#41079</a>)</div></div><div class='docblock'><p>Calculates the distance between two pointers. The returned value is in
 units of T: the distance in bytes is divided by <code>mem::size_of::&lt;T&gt;()</code>.</p>
-
 <p>If the address different between the two pointers ia not a multiple of
 <code>mem::size_of::&lt;T&gt;()</code> then the result of the division is rounded towards
 zero.</p>
-
 <p>This function returns <code>None</code> if <code>T</code> is a zero-sized typed.</p>
 
 <h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
@@ -246,7 +235,6 @@ the value wrapped in <code>Some</code>.</p>
 null-safety, it is important to note that this is still an unsafe
 operation because the returned value could be pointing to invalid
 memory.</p>
-
 <p>Additionally, the lifetime <code>&#39;a</code> returned is arbitrarily chosen and does
 not necessarily reflect the actual lifetime of the data.</p>
 
@@ -289,7 +277,6 @@ offset of <code>3 * size_of::&lt;T&gt;()</code> bytes.</p>
 <h1 id='safety-5' class='section-header'><a href='#safety-5'>Safety</a></h1>
 <p>The resulting pointer does not need to be in bounds, but it is
 potentially hazardous to dereference (which requires <code>unsafe</code>).</p>
-
 <p>Always use <code>.offset(count)</code> instead when possible, because <code>offset</code>
 allows the compiler to optimize better.</p>
 
@@ -331,11 +318,9 @@ returned is indeed a valid lifetime for the contained data.</p>
 </div><h4 id='method.offset_to-1' class="method"><span id='offset_to.v-1' class='invisible'><code>fn <a href='#method.offset_to-1' class='fnname'>offset_to</a>(self, other: <a class="primitive" href="primitive.pointer.html">*const T</a>) -&gt; <a class="enum" href="../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="primitive.isize.html">isize</a>&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>offset_to </code><a href="https://github.com/rust-lang/rust/issues/41079">#41079</a>)</div></div><div class='docblock'><p>Calculates the distance between two pointers. The returned value is in
 units of T: the distance in bytes is divided by <code>mem::size_of::&lt;T&gt;()</code>.</p>
-
 <p>If the address different between the two pointers ia not a multiple of
 <code>mem::size_of::&lt;T&gt;()</code> then the result of the division is rounded towards
 zero.</p>
-
 <p>This function returns <code>None</code> if <code>T</code> is a zero-sized typed.</p>
 
 <h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>

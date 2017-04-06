@@ -54,24 +54,20 @@
     pub data: *mut (),
     pub vtable: *mut (),
 }</pre><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>raw </code><a href="https://github.com/rust-lang/rust/issues/27751">#27751</a>)</div></div><div class='docblock'><p>The representation of a trait object like <code>&amp;SomeTrait</code>.</p>
-
 <p>This struct has the same layout as types like <code>&amp;SomeTrait</code> and
 <code>Box&lt;AnotherTrait&gt;</code>. The <a href="../../book/first-edition/trait-objects.html#representation">Trait Objects chapter of the
 Book</a> contains more details about the precise nature of
 these internals.</p>
-
 <p><code>TraitObject</code> is guaranteed to match layouts, but it is not the
 type of trait objects (e.g. the fields are not directly accessible
 on a <code>&amp;SomeTrait</code>) nor does it control that layout (changing the
 definition will not change the layout of a <code>&amp;SomeTrait</code>). It is
 only designed to be used by unsafe code that needs to manipulate
 the low-level details.</p>
-
 <p>There is no way to refer to all trait objects generically, so the only
 way to create values of this type is with functions like
 <a href="../intrinsics/fn.transmute.html"><code>std::mem::transmute</code></a>. Similarly, the only way to create a true
 trait object from a <code>TraitObject</code> value is with <code>transmute</code>.</p>
-
 <p>Synthesizing a trait object with mismatched types—one where the
 vtable does not correspond to the type of the value to which the
 data pointer points—is highly likely to lead to undefined

@@ -69,7 +69,6 @@
     fn <a href='#method.is_ascii_whitespace' class='fnname'>is_ascii_whitespace</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a> { ... }
     fn <a href='#method.is_ascii_control' class='fnname'>is_ascii_control</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a> { ... }
 }</pre><div class='docblock'><p>Extension methods for ASCII-subset only operations.</p>
-
 <p>Be aware that operations on seemingly non-ASCII characters can sometimes
 have unexpected results. Consider this example:</p>
 
@@ -78,7 +77,6 @@ have unexpected results. Consider this example:</p>
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&quot;café&quot;</span>.<span class="ident">to_ascii_uppercase</span>(), <span class="string">&quot;CAFÉ&quot;</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&quot;café&quot;</span>.<span class="ident">to_ascii_uppercase</span>(), <span class="string">&quot;CAFé&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aascii%3A%3AAsciiExt%3B%0A%0Aassert_eq!(%22cafe%CC%81%22.to_ascii_uppercase()%2C%20%22CAFE%CC%81%22)%3B%0Aassert_eq!(%22caf%C3%A9%22.to_ascii_uppercase()%2C%20%22CAF%C3%A9%22)%3B%0A%7D">Run</a></pre>
-
 <p>In the first example, the lowercased string is represented <code>&quot;cafe\u{301}&quot;</code>
 (the last character is an acute accent <a href="https://en.wikipedia.org/wiki/Combining_character">combining character</a>). Unlike the
 other characters in the string, the combining character will not get mapped
@@ -108,12 +106,9 @@ it will not get mapped to an uppercase variant, resulting in <code>&quot;CAF\u{e
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">non_ascii</span>.<span class="ident">is_ascii</span>());
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">int_ascii</span>.<span class="ident">is_ascii</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aascii%3A%3AAsciiExt%3B%0A%0Alet%20ascii%20%3D%20'a'%3B%0Alet%20non_ascii%20%3D%20'%E2%9D%A4'%3B%0Alet%20int_ascii%20%3D%2097%3B%0A%0Aassert!(ascii.is_ascii())%3B%0Aassert!(!non_ascii.is_ascii())%3B%0Aassert!(int_ascii.is_ascii())%3B%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.to_ascii_uppercase' class='method'><span id='to_ascii_uppercase.v' class='invisible'><code>fn <a href='#tymethod.to_ascii_uppercase' class='fnname'>to_ascii_uppercase</a>(&amp;self) -&gt; Self::<a class="trait" href="../../std/ascii/trait.AsciiExt.html" title="trait std::ascii::AsciiExt">Owned</a></code></span></h3><div class='docblock'><p>Makes a copy of the value in its ASCII upper case equivalent.</p>
-
 <p>ASCII letters &#39;a&#39; to &#39;z&#39; are mapped to &#39;A&#39; to &#39;Z&#39;,
 but non-ASCII letters are unchanged.</p>
-
 <p>To uppercase the value in-place, use <a href="#tymethod.make_ascii_uppercase"><code>make_ascii_uppercase</code></a>.</p>
-
 <p>To uppercase ASCII characters in addition to non-ASCII characters, use
 <a href="../primitive.str.html#method.to_uppercase"><code>str::to_uppercase</code></a>.</p>
 
@@ -129,12 +124,9 @@ but non-ASCII letters are unchanged.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&#39;❤&#39;</span>, <span class="ident">non_ascii</span>.<span class="ident">to_ascii_uppercase</span>());
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">65</span>, <span class="ident">int_ascii</span>.<span class="ident">to_ascii_uppercase</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aascii%3A%3AAsciiExt%3B%0A%0Alet%20ascii%20%3D%20'a'%3B%0Alet%20non_ascii%20%3D%20'%E2%9D%A4'%3B%0Alet%20int_ascii%20%3D%2097%3B%0A%0Aassert_eq!('A'%2C%20ascii.to_ascii_uppercase())%3B%0Aassert_eq!('%E2%9D%A4'%2C%20non_ascii.to_ascii_uppercase())%3B%0Aassert_eq!(65%2C%20int_ascii.to_ascii_uppercase())%3B%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.to_ascii_lowercase' class='method'><span id='to_ascii_lowercase.v' class='invisible'><code>fn <a href='#tymethod.to_ascii_lowercase' class='fnname'>to_ascii_lowercase</a>(&amp;self) -&gt; Self::<a class="trait" href="../../std/ascii/trait.AsciiExt.html" title="trait std::ascii::AsciiExt">Owned</a></code></span></h3><div class='docblock'><p>Makes a copy of the value in its ASCII lower case equivalent.</p>
-
 <p>ASCII letters &#39;A&#39; to &#39;Z&#39; are mapped to &#39;a&#39; to &#39;z&#39;,
 but non-ASCII letters are unchanged.</p>
-
 <p>To lowercase the value in-place, use <a href="#tymethod.make_ascii_lowercase"><code>make_ascii_lowercase</code></a>.</p>
-
 <p>To lowercase ASCII characters in addition to non-ASCII characters, use
 <a href="../primitive.str.html#method.to_lowercase"><code>str::to_lowercase</code></a>.</p>
 
@@ -150,7 +142,6 @@ but non-ASCII letters are unchanged.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&#39;❤&#39;</span>, <span class="ident">non_ascii</span>.<span class="ident">to_ascii_lowercase</span>());
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">97</span>, <span class="ident">int_ascii</span>.<span class="ident">to_ascii_lowercase</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aascii%3A%3AAsciiExt%3B%0A%0Alet%20ascii%20%3D%20'A'%3B%0Alet%20non_ascii%20%3D%20'%E2%9D%A4'%3B%0Alet%20int_ascii%20%3D%2065%3B%0A%0Aassert_eq!('a'%2C%20ascii.to_ascii_lowercase())%3B%0Aassert_eq!('%E2%9D%A4'%2C%20non_ascii.to_ascii_lowercase())%3B%0Aassert_eq!(97%2C%20int_ascii.to_ascii_lowercase())%3B%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.eq_ignore_ascii_case' class='method'><span id='eq_ignore_ascii_case.v' class='invisible'><code>fn <a href='#tymethod.eq_ignore_ascii_case' class='fnname'>eq_ignore_ascii_case</a>(&amp;self, other: &amp;Self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h3><div class='docblock'><p>Checks that two values are an ASCII case-insensitive match.</p>
-
 <p>Same as <code>to_ascii_lowercase(a) == to_ascii_lowercase(b)</code>,
 but without allocating and copying temporaries.</p>
 
@@ -167,10 +158,8 @@ but without allocating and copying temporaries.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">ascii1</span>.<span class="ident">eq_ignore_ascii_case</span>(<span class="kw-2">&amp;</span><span class="ident">ascii3</span>));
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">ascii1</span>.<span class="ident">eq_ignore_ascii_case</span>(<span class="kw-2">&amp;</span><span class="ident">ascii4</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aascii%3A%3AAsciiExt%3B%0A%0Alet%20ascii1%20%3D%20'A'%3B%0Alet%20ascii2%20%3D%20'a'%3B%0Alet%20ascii3%20%3D%20'A'%3B%0Alet%20ascii4%20%3D%20'z'%3B%0A%0Aassert!(ascii1.eq_ignore_ascii_case(%26ascii2))%3B%0Aassert!(ascii1.eq_ignore_ascii_case(%26ascii3))%3B%0Aassert!(!ascii1.eq_ignore_ascii_case(%26ascii4))%3B%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.make_ascii_uppercase' class='method'><span id='make_ascii_uppercase.v' class='invisible'><code>fn <a href='#tymethod.make_ascii_uppercase' class='fnname'>make_ascii_uppercase</a>(&amp;mut self)</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h3><div class='docblock'><p>Converts this type to its ASCII upper case equivalent in-place.</p>
-
 <p>ASCII letters &#39;a&#39; to &#39;z&#39; are mapped to &#39;A&#39; to &#39;Z&#39;,
 but non-ASCII letters are unchanged.</p>
-
 <p>To return a new uppercased value without modifying the existing one, use
 <a href="#tymethod.to_ascii_uppercase"><code>to_ascii_uppercase</code></a>.</p>
 
@@ -184,10 +173,8 @@ but non-ASCII letters are unchanged.</p>
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&#39;A&#39;</span>, <span class="ident">ascii</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aascii%3A%3AAsciiExt%3B%0A%0Alet%20mut%20ascii%20%3D%20'a'%3B%0A%0Aascii.make_ascii_uppercase()%3B%0A%0Aassert_eq!('A'%2C%20ascii)%3B%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.make_ascii_lowercase' class='method'><span id='make_ascii_lowercase.v' class='invisible'><code>fn <a href='#tymethod.make_ascii_lowercase' class='fnname'>make_ascii_lowercase</a>(&amp;mut self)</code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h3><div class='docblock'><p>Converts this type to its ASCII lower case equivalent in-place.</p>
-
 <p>ASCII letters &#39;A&#39; to &#39;Z&#39; are mapped to &#39;a&#39; to &#39;z&#39;,
 but non-ASCII letters are unchanged.</p>
-
 <p>To return a new lowercased value without modifying the existing one, use
 <a href="#tymethod.to_ascii_lowercase"><code>to_ascii_lowercase</code></a>.</p>
 
@@ -376,7 +363,7 @@ ASCII hex digits.</p>
 </div><h3 id='method.is_ascii_punctuation' class='method'><span id='is_ascii_punctuation.v' class='invisible'><code>fn <a href='#method.is_ascii_punctuation' class='fnname'>is_ascii_punctuation</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h3><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ascii_ctype </code><a href="https://github.com/rust-lang/rust/issues/39658">#39658</a>)</div></div><div class='docblock'><p>Checks if the value is an ASCII punctuation character:
 U+0021 ... U+002F <code>! &quot; # $ % &amp; &#39; ( ) * + , - . /</code>
 U+003A ... U+0040 <code>: ; &lt; = &gt; ? @</code>
-U+005B ... U+0060 <code>[ \\ ] ^ _ \</code><code>U+007B ... U+007E</code>{ | } ~`
+U+005B ... U+0060 <code>[ \\ ] ^ _ \`` U+007B ... U+007E</code>{ | } ~`
 For strings, true if all characters in the string are
 ASCII punctuation.</p>
 
@@ -436,7 +423,6 @@ U+0020 SPACE, U+0009 HORIZONTAL TAB, U+000A LINE FEED,
 U+000C FORM FEED, or U+000D CARRIAGE RETURN.
 For strings, true if all characters in the string are
 ASCII whitespace.</p>
-
 <p>Rust uses the WhatWG Infra Standard&#39;s <a href="https://infra.spec.whatwg.org/#ascii-whitespace">definition of ASCII
 whitespace</a>.  There are several other definitions in
 wide use.  For instance, <a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap07.html#tag_07_03_01">the POSIX locale</a> includes
@@ -444,7 +430,6 @@ U+000B VERTICAL TAB as well as all the above characters,
 but—from the very same specification—<a href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_06_05">the default rule for
 &quot;field splitting&quot; in the Bourne shell</a> considers <em>only</em>
 SPACE, HORIZONTAL TAB, and LINE FEED as whitespace.</p>
-
 <p>If you are writing a program that will process an existing
 file format, check what that format&#39;s definition of whitespace is
 before using this function.</p>

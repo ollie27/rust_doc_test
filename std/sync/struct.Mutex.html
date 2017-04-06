@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/std/sync/mutex.rs.html#114-123' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Mutex&lt;T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A mutual exclusion primitive useful for protecting shared data</p>
-
 <p>This mutex will block threads waiting for the lock to become available. The
 mutex can also be statically initialized or created via a <code>new</code>
 constructor. Each mutex has a type parameter which represents the data that
@@ -64,12 +63,10 @@ mutex is considered poisoned whenever a thread panics while holding the
 mutex. Once a mutex is poisoned, all other threads are unable to access the
 data by default as it is likely tainted (some invariant is not being
 upheld).</p>
-
 <p>For a mutex, this means that the <code>lock</code> and <code>try_lock</code> methods return a
 <code>Result</code> which indicates whether a mutex has been poisoned or not. Most
 usage of a mutex will simply <code>unwrap()</code> these results, propagating panics
 among threads to ensure that a possibly invalid invariant is not witnessed.</p>
-
 <p>A poisoned mutex, however, does not prevent all access to the underlying
 data. The <code>PoisonError</code> type has an <code>into_inner</code> method which will return
 the guard that would have otherwise been returned on a successful lock. This
@@ -110,7 +107,6 @@ allows access to the data, despite the lock being poisoned.</p>
 }
 
 <span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3A%7BArc%2C%20Mutex%7D%3B%0Ause%20std%3A%3Athread%3B%0Ause%20std%3A%3Async%3A%3Ampsc%3A%3Achannel%3B%0A%0Aconst%20N%3A%20usize%20%3D%2010%3B%0A%0A%2F%2F%20Spawn%20a%20few%20threads%20to%20increment%20a%20shared%20variable%20(non-atomically)%2C%20and%0A%2F%2F%20let%20the%20main%20thread%20know%20once%20all%20increments%20are%20done.%0A%2F%2F%0A%2F%2F%20Here%20we're%20using%20an%20Arc%20to%20share%20memory%20among%20threads%2C%20and%20the%20data%20inside%0A%2F%2F%20the%20Arc%20is%20protected%20with%20a%20mutex.%0Alet%20data%20%3D%20Arc%3A%3Anew(Mutex%3A%3Anew(0))%3B%0A%0Alet%20(tx%2C%20rx)%20%3D%20channel()%3B%0Afor%20_%20in%200..10%20%7B%0A%20%20%20%20let%20(data%2C%20tx)%20%3D%20(data.clone()%2C%20tx.clone())%3B%0A%20%20%20%20thread%3A%3Aspawn(move%20%7C%7C%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20The%20shared%20state%20can%20only%20be%20accessed%20once%20the%20lock%20is%20held.%0A%20%20%20%20%20%20%20%20%2F%2F%20Our%20non-atomic%20increment%20is%20safe%20because%20we're%20the%20only%20thread%0A%20%20%20%20%20%20%20%20%2F%2F%20which%20can%20access%20the%20shared%20state%20when%20the%20lock%20is%20held.%0A%20%20%20%20%20%20%20%20%2F%2F%0A%20%20%20%20%20%20%20%20%2F%2F%20We%20unwrap()%20the%20return%20value%20to%20assert%20that%20we%20are%20not%20expecting%0A%20%20%20%20%20%20%20%20%2F%2F%20threads%20to%20ever%20fail%20while%20holding%20the%20lock.%0A%20%20%20%20%20%20%20%20let%20mut%20data%20%3D%20data.lock().unwrap()%3B%0A%20%20%20%20%20%20%20%20*data%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20*data%20%3D%3D%20N%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20tx.send(()).unwrap()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20the%20lock%20is%20unlocked%20here%20when%20%60data%60%20goes%20out%20of%20scope.%0A%20%20%20%20%7D)%3B%0A%7D%0A%0Arx.recv().unwrap()%3B%0A%7D">Run</a></pre>
-
 <p>To recover from a poisoned mutex:</p>
 
 <pre class="rust rust-example-rendered">
@@ -150,12 +146,10 @@ allows access to the data, despite the lock being poisoned.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; <a class="struct" href="../../std/sync/struct.Mutex.html" title="struct std::sync::Mutex">Mutex</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/sync/mutex.rs.html#182-360' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.lock' class="method"><span id='lock.v' class='invisible'><code>fn <a href='#method.lock' class='fnname'>lock</a>(&amp;self) -&gt; <a class="type" href="../../std/sync/type.LockResult.html" title="type std::sync::LockResult">LockResult</a>&lt;<a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;T&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Acquires a mutex, blocking the current thread until it is able to do so.</p>
-
 <p>This function will block the local thread until it is available to acquire
 the mutex. Upon returning, the thread is the only thread with the lock
 held. An RAII guard is returned to allow scoped unlock of the lock. When
 the guard goes out of scope, the mutex will be unlocked.</p>
-
 <p>The exact behavior on locking a mutex in the thread which already holds
 the lock is left unspecified. However, this function will not return on
 the second call (it might panic or deadlock, for example).</p>
@@ -182,11 +176,9 @@ the current thread.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">mutex</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>(), <span class="number">10</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3A%7BArc%2C%20Mutex%7D%3B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20mutex%20%3D%20Arc%3A%3Anew(Mutex%3A%3Anew(0))%3B%0Alet%20c_mutex%20%3D%20mutex.clone()%3B%0A%0Athread%3A%3Aspawn(move%20%7C%7C%20%7B%0A%20%20%20%20*c_mutex.lock().unwrap()%20%3D%2010%3B%0A%7D).join().expect(%22thread%3A%3Aspawn%20failed%22)%3B%0Aassert_eq!(*mutex.lock().unwrap()%2C%2010)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.try_lock' class="method"><span id='try_lock.v' class='invisible'><code>fn <a href='#method.try_lock' class='fnname'>try_lock</a>(&amp;self) -&gt; <a class="type" href="../../std/sync/type.TryLockResult.html" title="type std::sync::TryLockResult">TryLockResult</a>&lt;<a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;T&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Attempts to acquire this lock.</p>
-
 <p>If the lock could not be acquired at this time, then <code>Err</code> is returned.
 Otherwise, an RAII guard is returned. The lock will be unlocked when the
 guard is dropped.</p>
-
 <p>This function does not block.</p>
 
 <h1 id='errors-1' class='section-header'><a href='#errors-1'>Errors</a></h1>
@@ -213,7 +205,6 @@ acquired.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">mutex</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>(), <span class="number">10</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3A%7BArc%2C%20Mutex%7D%3B%0Ause%20std%3A%3Athread%3B%0A%0Alet%20mutex%20%3D%20Arc%3A%3Anew(Mutex%3A%3Anew(0))%3B%0Alet%20c_mutex%20%3D%20mutex.clone()%3B%0A%0Athread%3A%3Aspawn(move%20%7C%7C%20%7B%0A%20%20%20%20let%20mut%20lock%20%3D%20c_mutex.try_lock()%3B%0A%20%20%20%20if%20let%20Ok(ref%20mut%20mutex)%20%3D%20lock%20%7B%0A%20%20%20%20%20%20%20%20**mutex%20%3D%2010%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22try_lock%20failed%22)%3B%0A%20%20%20%20%7D%0A%7D).join().expect(%22thread%3A%3Aspawn%20failed%22)%3B%0Aassert_eq!(*mutex.lock().unwrap()%2C%2010)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_poisoned' class="method"><span id='is_poisoned.v' class='invisible'><code>fn <a href='#method.is_poisoned' class='fnname'>is_poisoned</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.2.0'>1.2.0</div></span></h4>
 <div class='docblock'><p>Determines whether the mutex is poisoned.</p>
-
 <p>If another thread is active, the mutex can still become poisoned at any
 time. You should not trust a <code>false</code> value for program correctness
 without additional synchronization.</p>
@@ -246,7 +237,6 @@ this call will return an error instead.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mutex</span>.<span class="ident">into_inner</span>().<span class="ident">unwrap</span>(), <span class="number">0</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3AMutex%3B%0A%0Alet%20mutex%20%3D%20Mutex%3A%3Anew(0)%3B%0Aassert_eq!(mutex.into_inner().unwrap()%2C%200)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; <a class="type" href="../../std/sync/type.LockResult.html" title="type std::sync::LockResult">LockResult</a>&lt;&amp;mut T&gt;</code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></span></h4>
 <div class='docblock'><p>Returns a mutable reference to the underlying data.</p>
-
 <p>Since this call borrows the <code>Mutex</code> mutably, no actual locking needs to
 take place---the mutable borrow statically guarantees no locks exist.</p>
 

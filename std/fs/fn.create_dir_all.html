@@ -60,14 +60,12 @@ Note that, this <a href="../io/index.html#platform-specific-behavior">may change
 <h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
 <p>This function will return an error in the following situations, but is not
 limited to just these cases:</p>
-
 <ul>
 <li>If any directory in the path specified by <code>path</code>
 does not already exist and it could not be created otherwise. The specific
 error conditions for when a directory is being created (after it is
 determined to not exist) are outlined by <code>fs::create_dir</code>.</li>
 </ul>
-
 <p>Notable exception is made for situations where any of the directories
 specified in the <code>path</code> could not be created as it was created concurrently.
 Such cases are considered success. In other words: calling <code>create_dir_all</code>

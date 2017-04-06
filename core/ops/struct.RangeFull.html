@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../src/core/ops.rs.html#2018' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct RangeFull;</pre><div class='docblock'><p>An unbounded range. Use <code>..</code> (two dots) for its shorthand.</p>
-
 <p>Its primary use case is slicing index. It cannot serve as an iterator
 because it doesn&#39;t have a starting point.</p>
 
@@ -59,7 +58,6 @@ because it doesn&#39;t have a starting point.</p>
 
 <pre class="rust rust-example-rendered">
 <span class="macro">assert_eq</span><span class="macro">!</span>((..), <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">RangeFull</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!((..)%2C%20std%3A%3Aops%3A%3ARangeFull)%3B%0A%7D">Run</a></pre>
-
 <p>It does not have an <code>IntoIterator</code> implementation, so you can&#39;t use it in a
 <code>for</code> loop directly. This won&#39;t compile:</p>
 
@@ -67,7 +65,6 @@ because it doesn&#39;t have a starting point.</p>
 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> .. {
    <span class="comment">// ...</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afor%20i%20in%20..%20%7B%0A%20%20%20%2F%2F%20...%0A%7D%0A%7D">Run</a></pre>
-
 <p>Used as a slicing index, <code>RangeFull</code> produces the full array as a slice.</p>
 
 <pre class="rust rust-example-rendered">

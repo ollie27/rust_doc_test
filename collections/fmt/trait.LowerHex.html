@@ -52,12 +52,9 @@
 <pre class='rust trait'>pub trait LowerHex {
     fn <a href='#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../collections/fmt/struct.Formatter.html" title="struct collections::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;(), <a class="struct" href="../../collections/fmt/struct.Error.html" title="struct collections::fmt::Error">Error</a>&gt;;
 }</pre><div class='docblock'><p>Format trait for the <code>x</code> character.</p>
-
 <p>The <code>LowerHex</code> trait should format its output as a number in hexadecimal, with <code>a</code> through <code>f</code>
 in lower case.</p>
-
 <p>The alternate flag, <code>#</code>, adds a <code>0x</code> in front of the output.</p>
-
 <p>For more information on formatters, see <a href="../../std/fmt/index.html">the module-level documentation</a>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -68,7 +65,6 @@ in lower case.</p>
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:x}&quot;</span>, <span class="ident">x</span>), <span class="string">&quot;2a&quot;</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:#x}&quot;</span>, <span class="ident">x</span>), <span class="string">&quot;0x2a&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%2042%3B%20%2F%2F%2042%20is%20'2a'%20in%20hex%0A%0Aassert_eq!(format!(%22%7B%3Ax%7D%22%2C%20x)%2C%20%222a%22)%3B%0Aassert_eq!(format!(%22%7B%3A%23x%7D%22%2C%20x)%2C%20%220x2a%22)%3B%0A%7D">Run</a></pre>
-
 <p>Implementing <code>LowerHex</code> on a type:</p>
 
 <pre class="rust rust-example-rendered">

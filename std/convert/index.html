@@ -50,14 +50,11 @@
                    </a>
                </span><a class='srclink' href='../../src/core/convert.rs.html#11-336' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Traits for conversions between types.</p>
-
 <p>The traits in this module provide a general way to talk about conversions
 from one type to another. They follow the standard Rust conventions of
 <code>as</code>/<code>into</code>/<code>from</code>.</p>
-
 <p>Like many traits, these are often used as bounds for generic functions, to
 support arguments of multiple types.</p>
-
 <ul>
 <li>Impl the <code>As*</code> traits for reference-to-reference conversions</li>
 <li>Impl the <a href="trait.Into.html"><code>Into</code></a> trait when you want to consume the value in the conversion</li>
@@ -65,7 +62,6 @@ support arguments of multiple types.</p>
 <li>The <a href="trait.TryFrom.html"><code>TryFrom</code></a> and <a href="trait.TryInto.html"><code>TryInto</code></a> traits behave like <a href="trait.From.html"><code>From</code></a> and <a href="trait.Into.html"><code>Into</code></a>, but allow for the
 conversion to fail</li>
 </ul>
-
 <p>As a library author, you should prefer implementing <a href="trait.From.html"><code>From&lt;T&gt;</code></a> or
 <a href="trait.TryFrom.html"><code>TryFrom&lt;T&gt;</code></a> rather than <a href="trait.Into.html"><code>Into&lt;U&gt;</code></a> or <a href="trait.TryInto.html"><code>TryInto&lt;U&gt;</code></a>,
 as <a href="trait.From.html"><code>From</code></a> and <a href="trait.TryFrom.html"><code>TryFrom</code></a> provide greater flexibility and offer
@@ -80,7 +76,6 @@ in the standard library.</p>
 <li><a href="trait.From.html"><code>From</code></a> and <a href="trait.Into.html"><code>Into</code></a> are reflexive, which means that all types can <code>into()</code>
 themselves and <code>from()</code> themselves</li>
 </ul>
-
 <p>See each trait for usage examples.</p>
 </div><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>

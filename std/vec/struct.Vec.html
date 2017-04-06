@@ -72,20 +72,17 @@
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">x</span>);
 }
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">7</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20Vec%3A%3Anew()%3B%0Avec.push(1)%3B%0Avec.push(2)%3B%0A%0Aassert_eq!(vec.len()%2C%202)%3B%0Aassert_eq!(vec%5B0%5D%2C%201)%3B%0A%0Aassert_eq!(vec.pop()%2C%20Some(2))%3B%0Aassert_eq!(vec.len()%2C%201)%3B%0A%0Avec%5B0%5D%20%3D%207%3B%0Aassert_eq!(vec%5B0%5D%2C%207)%3B%0A%0Avec.extend(%5B1%2C%202%2C%203%5D.iter().cloned())%3B%0A%0Afor%20x%20in%20%26vec%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0Aassert_eq!(vec%2C%20%5B7%2C%201%2C%202%2C%203%5D)%3B%0A%7D">Run</a></pre>
-
 <p>The <a href="../../std/macro.vec.html"><code>vec!</code></a> macro is provided to make initialization more convenient:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 <span class="ident">vec</span>.<span class="ident">push</span>(<span class="number">4</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0Avec.push(4)%3B%0Aassert_eq!(vec%2C%20%5B1%2C%202%2C%203%2C%204%5D)%3B%0A%7D">Run</a></pre>
-
 <p>It can also initialize each element of a <code>Vec&lt;T&gt;</code> with a given value:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>; <span class="number">5</span>];
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20vec%20%3D%20vec!%5B0%3B%205%5D%3B%0Aassert_eq!(vec%2C%20%5B0%2C%200%2C%200%2C%200%2C%200%5D)%3B%0A%7D">Run</a></pre>
-
 <p>Use a <code>Vec&lt;T&gt;</code> as an efficient stack:</p>
 
 <pre class="rust rust-example-rendered">
@@ -107,14 +104,12 @@
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>];
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">v</span>[<span class="number">1</span>]); <span class="comment">// it will display &#39;2&#39;</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20vec!%5B0%2C%202%2C%204%2C%206%5D%3B%0Aprintln!(%22%7B%7D%22%2C%20v%5B1%5D)%3B%20%2F%2F%20it%20will%20display%20'2'%0A%7D">Run</a></pre>
-
 <p>However be careful: if you try to access an index which isn&#39;t in the <code>Vec</code>,
 your software will panic! You cannot do this:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>];
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">v</span>[<span class="number">6</span>]); <span class="comment">// it will panic!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20vec!%5B0%2C%202%2C%204%2C%206%5D%3B%0Aprintln!(%22%7B%7D%22%2C%20v%5B6%5D)%3B%20%2F%2F%20it%20will%20panic!%0A%7D">Run</a></pre>
-
 <p>In conclusion: always check if the index you want to get really exists
 before doing it.</p>
 
@@ -133,7 +128,6 @@ To get a slice, use <code>&amp;</code>. Example:</p>
 <span class="comment">// ... and that&#39;s all!</span>
 <span class="comment">// you can also do it like this:</span>
 <span class="kw">let</span> <span class="ident">x</span> : <span class="kw-2">&amp;</span>[<span class="ident">usize</span>] <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">v</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20read_slice(slice%3A%20%26%5Busize%5D)%20%7B%0A%20%20%20%20%2F%2F%20...%0A%7D%0A%0Alet%20v%20%3D%20vec!%5B0%2C%201%5D%3B%0Aread_slice(%26v)%3B%0A%0A%2F%2F%20...%20and%20that's%20all!%0A%2F%2F%20you%20can%20also%20do%20it%20like%20this%3A%0Alet%20x%20%3A%20%26%5Busize%5D%20%3D%20%26v%3B%0A%7D">Run</a></pre>
-
 <p>In Rust, it&#39;s more common to pass slices as arguments rather than vectors
 when you just want to provide a read access. The same goes for <a href="../../std/string/struct.String.html"><code>String</code></a> and
 <a href="../../std/primitive.str.html"><code>&amp;str</code></a>.</p>
@@ -145,7 +139,6 @@ the <em>length</em> of a vector, which specifies the number of actual elements
 within the vector. If a vector&#39;s length exceeds its capacity, its capacity
 will automatically be increased, but its elements will have to be
 reallocated.</p>
-
 <p>For example, a vector with capacity 10 and length 0 would be an empty vector
 with space for 10 more elements. Pushing 10 or fewer elements onto the
 vector will not change its capacity or cause reallocation to occur. However,
@@ -160,12 +153,10 @@ the general case, and can be correctly manipulated in primitive ways
 by unsafe code. Note that these guarantees refer to an unqualified <code>Vec&lt;T&gt;</code>.
 If additional type parameters are added (e.g. to support custom allocators),
 overriding their defaults may change the behavior.</p>
-
 <p>Most fundamentally, <code>Vec</code> is and always will be a (pointer, capacity, length)
 triplet. No more, no less. The order of these fields is completely
 unspecified, and you should use the appropriate methods to modify these.
 The pointer will never be null, so this type is null-pointer-optimized.</p>
-
 <p>However, the pointer may not actually point to allocated memory. In particular,
 if you construct a <code>Vec</code> with capacity 0 via <a href="../../std/vec/struct.Vec.html#method.new"><code>Vec::new</code></a>, <a href="../../std/macro.vec.html"><code>vec![]</code></a>,
 <a href="../../std/vec/struct.Vec.html#method.with_capacity"><code>Vec::with_capacity(0)</code></a>, or by calling <a href="../../std/vec/struct.Vec.html#method.shrink_to_fit"><code>shrink_to_fit</code></a>
@@ -175,49 +166,45 @@ the <code>Vec</code> may not report a <a href="../../std/vec/struct.Vec.html#met
 if <a href="../../std/mem/fn.size_of.html"><code>mem::size_of::&lt;T&gt;</code></a><code>* capacity() &gt; 0</code>. In general, <code>Vec</code>&#39;s allocation
 details are subtle enough that it is strongly recommended that you only
 free memory allocated by a <code>Vec</code> by creating a new <code>Vec</code> and dropping it.</p>
-
 <p>If a <code>Vec</code> <em>has</em> allocated memory, then the memory it points to is on the heap
 (as defined by the allocator Rust is configured to use by default), and its
 pointer points to <a href="../../std/vec/struct.Vec.html#method.len"><code>len</code></a> initialized elements in order (what you would see
 if you coerced it to a slice), followed by <a href="../../std/vec/struct.Vec.html#method.capacity"><code>capacity</code></a><code>-</code><a href="../../std/vec/struct.Vec.html#method.len"><code>len</code></a>
 logically uninitialized elements.</p>
-
 <p><code>Vec</code> will never perform a &quot;small optimization&quot; where elements are actually
 stored on the stack for two reasons:</p>
-
 <ul>
-<li><p>It would make it more difficult for unsafe code to correctly manipulate
+<li>
+<p>It would make it more difficult for unsafe code to correctly manipulate
 a <code>Vec</code>. The contents of a <code>Vec</code> wouldn&#39;t have a stable address if it were
 only moved, and it would be more difficult to determine if a <code>Vec</code> had
-actually allocated memory.</p></li>
-<li><p>It would penalize the general case, incurring an additional branch
-on every access.</p></li>
+actually allocated memory.</p>
+</li>
+<li>
+<p>It would penalize the general case, incurring an additional branch
+on every access.</p>
+</li>
 </ul>
-
 <p><code>Vec</code> will never automatically shrink itself, even if completely empty. This
 ensures no unnecessary allocations or deallocations occur. Emptying a <code>Vec</code>
 and then filling it back up to the same <a href="../../std/vec/struct.Vec.html#method.len"><code>len</code></a> should incur no calls to
 the allocator. If you wish to free up unused memory, use
 <a href="../../std/vec/struct.Vec.html#method.shrink_to_fit"><code>shrink_to_fit</code></a>.</p>
-
 <p><a href="../../std/vec/struct.Vec.html#method.push"><code>push</code></a> and <a href="../../std/vec/struct.Vec.html#method.insert"><code>insert</code></a> will never (re)allocate if the reported capacity is
 sufficient. <a href="../../std/vec/struct.Vec.html#method.push"><code>push</code></a> and <a href="../../std/vec/struct.Vec.html#method.insert"><code>insert</code></a> <em>will</em> (re)allocate if
 <a href="../../std/vec/struct.Vec.html#method.len"><code>len</code></a><code>==</code><a href="../../std/vec/struct.Vec.html#method.capacity"><code>capacity</code></a>. That is, the reported capacity is completely
 accurate, and can be relied on. It can even be used to manually free the memory
 allocated by a <code>Vec</code> if desired. Bulk insertion methods <em>may</em> reallocate, even
 when not necessary.</p>
-
 <p><code>Vec</code> does not guarantee any particular growth strategy when reallocating
 when full, nor when <a href="../../std/vec/struct.Vec.html#method.reserve"><code>reserve</code></a> is called. The current strategy is basic
 and it may prove desirable to use a non-constant growth factor. Whatever
 strategy is used will of course guarantee <code>O(1)</code> amortized <a href="../../std/vec/struct.Vec.html#method.push"><code>push</code></a>.</p>
-
 <p><code>vec![x; n]</code>, <code>vec![a, b, c, d]</code>, and
 <a href="../../std/vec/struct.Vec.html#method.with_capacity"><code>Vec::with_capacity(n)</code></a>, will all produce a <code>Vec</code>
 with exactly the requested capacity. If <a href="../../std/vec/struct.Vec.html#method.len"><code>len</code></a><code>==</code><a href="../../std/vec/struct.Vec.html#method.capacity"><code>capacity</code></a>,
 (as is the case for the <a href="../../std/macro.vec.html"><code>vec!</code></a> macro), then a <code>Vec&lt;T&gt;</code> can be converted to
 and from a <a href="../../std/boxed/struct.Box.html"><code>Box&lt;[T]&gt;</code></a> without reallocating or moving the elements.</p>
-
 <p><code>Vec</code> will not specifically overwrite any data that is removed from it,
 but also won&#39;t specifically preserve it. Its uninitialized memory is
 scratch space that it may use however it wants. It will generally just do
@@ -226,13 +213,11 @@ removed data to be erased for security purposes. Even if you drop a <code>Vec</c
 buffer may simply be reused by another <code>Vec</code>. Even if you zero a <code>Vec</code>&#39;s memory
 first, that may not actually happen because the optimizer does not consider
 this a side-effect that must be preserved.</p>
-
 <p><code>Vec</code> does not currently guarantee the order in which elements are dropped
 (the order has changed in the past, and may change again).</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/collections/vec.rs.html#305-1212' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code>.</p>
-
 <p>The vector will not allocate until elements are pushed onto it.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -240,10 +225,8 @@ this a side-effect that must be preserved.</p>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused_mut)%5D%0Afn%20main()%20%7B%0Alet%20mut%20vec%3A%20Vec%3Ci32%3E%20%3D%20Vec%3A%3Anew()%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.with_capacity' class="method"><span id='with_capacity.v' class='invisible'><code>fn <a href='#method.with_capacity' class='fnname'>with_capacity</a>(capacity: <a class="primitive" href="../primitive.usize.html">usize</a>) -&gt; <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code> with the specified capacity.</p>
-
 <p>The vector will be able to hold exactly <code>capacity</code> elements without
 reallocating. If <code>capacity</code> is 0, the vector will not allocate.</p>
-
 <p>It is important to note that this function does not specify the <em>length</em>
 of the returned vector, but only the <em>capacity</em>. For an explanation of
 the difference between length and capacity, see <em><a href="#capacity-and-reallocation">Capacity and reallocation</a></em>.</p>
@@ -268,18 +251,15 @@ the difference between length and capacity, see <em><a href="#capacity-and-reall
 <h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
 <p>This is highly unsafe, due to the number of invariants that aren&#39;t
 checked:</p>
-
 <ul>
 <li><code>ptr</code> needs to have been previously allocated via <a href="../../std/string/struct.String.html"><code>String</code></a>/<code>Vec&lt;T&gt;</code>
 (at least, it&#39;s highly likely to be incorrect if it wasn&#39;t).</li>
 <li><code>length</code> needs to be less than or equal to <code>capacity</code>.</li>
 <li><code>capacity</code> needs to be the capacity that the pointer was allocated with.</li>
 </ul>
-
 <p>Violating these may cause problems like corrupting the allocator&#39;s
 internal datastructures. For example it is <strong>not</strong> safe
 to build a <code>Vec&lt;u8&gt;</code> from a pointer to a C <code>char</code> array and a <code>size_t</code>.</p>
-
 <p>The ownership of <code>ptr</code> is effectively transferred to the
 <code>Vec&lt;T&gt;</code> which may then deallocate, reallocate or change the
 contents of memory pointed to by the pointer at will. Ensure
@@ -342,7 +322,6 @@ capacity is already sufficient.</p>
 be inserted in the given <code>Vec&lt;T&gt;</code>. After calling <code>reserve_exact</code>,
 capacity will be greater than or equal to <code>self.len() + additional</code>.
 Does nothing if the capacity is already sufficient.</p>
-
 <p>Note that the allocator may give the collection more space than it
 requests. Therefore capacity can not be relied upon to be precisely
 minimal. Prefer <code>reserve</code> if future insertions are expected.</p>
@@ -357,7 +336,6 @@ minimal. Prefer <code>reserve</code> if future insertions are expected.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">vec</span>.<span class="ident">capacity</span>() <span class="op">&gt;=</span> <span class="number">11</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B1%5D%3B%0Avec.reserve_exact(10)%3B%0Aassert!(vec.capacity()%20%3E%3D%2011)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.shrink_to_fit' class="method"><span id='shrink_to_fit.v' class='invisible'><code>fn <a href='#method.shrink_to_fit' class='fnname'>shrink_to_fit</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>Shrinks the capacity of the vector as much as possible.</p>
-
 <p>It will drop down as close as possible to the length but the allocator
 may still inform the vector that there is space for a few more elements.</p>
 
@@ -370,7 +348,6 @@ may still inform the vector that there is space for a few more elements.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">vec</span>.<span class="ident">capacity</span>() <span class="op">&gt;=</span> <span class="number">3</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20Vec%3A%3Awith_capacity(10)%3B%0Avec.extend(%5B1%2C%202%2C%203%5D.iter().cloned())%3B%0Aassert_eq!(vec.capacity()%2C%2010)%3B%0Avec.shrink_to_fit()%3B%0Aassert!(vec.capacity()%20%3E%3D%203)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.into_boxed_slice' class="method"><span id='into_boxed_slice.v' class='invisible'><code>fn <a href='#method.into_boxed_slice' class='fnname'>into_boxed_slice</a>(self) -&gt; <a class="struct" href="../../std/boxed/struct.Box.html" title="struct std::boxed::Box">Box</a>&lt;<a class="primitive" href="../primitive.slice.html">[</a>T<a class="primitive" href="../primitive.slice.html">]</a>&gt;</code></span></h4>
 <div class='docblock'><p>Converts the vector into <a href="../../std/boxed/struct.Box.html"><code>Box&lt;[T]&gt;</code></a>.</p>
-
 <p>Note that this will drop any excess capacity. Calling this and
 converting back to a vector with <a href="../../std/primitive.slice.html#method.into_vec"><code>into_vec</code></a> is equivalent to calling
 <a href="#method.shrink_to_fit"><code>shrink_to_fit</code></a>.</p>
@@ -380,7 +357,6 @@ converting back to a vector with <a href="../../std/primitive.slice.html#method.
 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 
 <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">into_boxed_slice</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0A%0Alet%20slice%20%3D%20v.into_boxed_slice()%3B%0A%7D">Run</a></pre>
-
 <p>Any excess capacity is removed:</p>
 
 <pre class="rust rust-example-rendered">
@@ -393,13 +369,10 @@ converting back to a vector with <a href="../../std/primitive.slice.html#method.
 </div><h4 id='method.truncate' class="method"><span id='truncate.v' class='invisible'><code>fn <a href='#method.truncate' class='fnname'>truncate</a>(&amp;mut self, len: <a class="primitive" href="../primitive.usize.html">usize</a>)</code></span></h4>
 <div class='docblock'><p>Shortens the vector, keeping the first <code>len</code> elements and dropping
 the rest.</p>
-
 <p>If <code>len</code> is greater than the vector&#39;s current length, this has no
 effect.</p>
-
 <p>The <a href="#method.drain"><code>drain</code></a> method can emulate <code>truncate</code>, but causes the excess
 elements to be returned instead of dropped.</p>
-
 <p>Note that this method has no effect on the allocated capacity
 of the vector.</p>
 
@@ -410,7 +383,6 @@ of the vector.</p>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
 <span class="ident">vec</span>.<span class="ident">truncate</span>(<span class="number">2</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">1</span>, <span class="number">2</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B1%2C%202%2C%203%2C%204%2C%205%5D%3B%0Avec.truncate(2)%3B%0Aassert_eq!(vec%2C%20%5B1%2C%202%5D)%3B%0A%7D">Run</a></pre>
-
 <p>No truncation occurs when <code>len</code> is greater than the vector&#39;s current
 length:</p>
 
@@ -418,7 +390,6 @@ length:</p>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 <span class="ident">vec</span>.<span class="ident">truncate</span>(<span class="number">8</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0Avec.truncate(8)%3B%0Aassert_eq!(vec%2C%20%5B1%2C%202%2C%203%5D)%3B%0A%7D">Run</a></pre>
-
 <p>Truncating when <code>len == 0</code> is equivalent to calling the <a href="#method.clear"><code>clear</code></a>
 method.</p>
 
@@ -428,7 +399,6 @@ method.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, []);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0Avec.truncate(0)%3B%0Aassert_eq!(vec%2C%20%5B%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.as_slice' class="method"><span id='as_slice.v' class='invisible'><code>fn <a href='#method.as_slice' class='fnname'>as_slice</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.slice.html">&amp;[T]</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Extracts a slice containing the entire vector.</p>
-
 <p>Equivalent to <code>&amp;s[..]</code>.</p>
 
 <h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1>
@@ -438,7 +408,6 @@ method.</p>
 <span class="ident">io</span>::<span class="ident">sink</span>().<span class="ident">write</span>(<span class="ident">buffer</span>.<span class="ident">as_slice</span>()).<span class="ident">unwrap</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Write%7D%3B%0Alet%20buffer%20%3D%20vec!%5B1%2C%202%2C%203%2C%205%2C%208%5D%3B%0Aio%3A%3Asink().write(buffer.as_slice()).unwrap()%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.as_mut_slice' class="method"><span id='as_mut_slice.v' class='invisible'><code>fn <a href='#method.as_mut_slice' class='fnname'>as_mut_slice</a>(&amp;mut self) -&gt; <a class="primitive" href="../primitive.slice.html">&amp;mut [T]</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Extracts a mutable slice of the entire vector.</p>
-
 <p>Equivalent to <code>&amp;mut s[..]</code>.</p>
 
 <h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1>
@@ -448,7 +417,6 @@ method.</p>
 <span class="ident">io</span>::<span class="ident">repeat</span>(<span class="number">0b101</span>).<span class="ident">read_exact</span>(<span class="ident">buffer</span>.<span class="ident">as_mut_slice</span>()).<span class="ident">unwrap</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Read%7D%3B%0Alet%20mut%20buffer%20%3D%20vec!%5B0%3B%203%5D%3B%0Aio%3A%3Arepeat(0b101).read_exact(buffer.as_mut_slice()).unwrap()%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.set_len' class="method"><span id='set_len.v' class='invisible'><code>unsafe fn <a href='#method.set_len' class='fnname'>set_len</a>(&amp;mut self, len: <a class="primitive" href="../primitive.usize.html">usize</a>)</code></span></h4>
 <div class='docblock'><p>Sets the length of a vector.</p>
-
 <p>This will explicitly set the size of the vector, without actually
 modifying its buffers, so it is up to the caller to ensure that the
 vector is actually the specified size.</p>
@@ -464,7 +432,6 @@ vector is actually the specified size.</p>
     <span class="ident">vec</span>.<span class="ident">set_len</span>(<span class="number">3</span>);
 }
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="string">&#39;r&#39;</span>, <span class="string">&#39;u&#39;</span>, <span class="string">&#39;s&#39;</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aptr%3B%0A%0Alet%20mut%20vec%20%3D%20vec!%5B'r'%2C%20'u'%2C%20's'%2C%20't'%5D%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20ptr%3A%3Adrop_in_place(%26mut%20vec%5B3%5D)%3B%0A%20%20%20%20vec.set_len(3)%3B%0A%7D%0Aassert_eq!(vec%2C%20%5B'r'%2C%20'u'%2C%20's'%5D)%3B%0A%7D">Run</a></pre>
-
 <p>In this example, there is a memory leak since the memory locations
 owned by the inner vectors were not freed prior to the <code>set_len</code> call:</p>
 
@@ -475,7 +442,6 @@ owned by the inner vectors were not freed prior to the <code>set_len</code> call
 <span class="kw">unsafe</span> {
     <span class="ident">vec</span>.<span class="ident">set_len</span>(<span class="number">0</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5Bvec!%5B1%2C%200%2C%200%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vec!%5B0%2C%201%2C%200%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vec!%5B0%2C%200%2C%201%5D%5D%3B%0Aunsafe%20%7B%0A%20%20%20%20vec.set_len(0)%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>In this example, the vector gets expanded from zero to four items
 without any memory allocations occurring, resulting in vector
 values of unallocated memory:</p>
@@ -488,9 +454,7 @@ values of unallocated memory:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%3A%20Vec%3Cchar%3E%20%3D%20Vec%3A%3Anew()%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20vec.set_len(4)%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.swap_remove' class="method"><span id='swap_remove.v' class='invisible'><code>fn <a href='#method.swap_remove' class='fnname'>swap_remove</a>(&amp;mut self, index: <a class="primitive" href="../primitive.usize.html">usize</a>) -&gt; T</code></span></h4>
 <div class='docblock'><p>Removes an element from the vector and returns it.</p>
-
 <p>The removed element is replaced by the last element of the vector.</p>
-
 <p>This does not preserve ordering, but is O(1).</p>
 
 <h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
@@ -533,7 +497,6 @@ shifting all elements after it to the left.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">v</span>, [<span class="number">1</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20v%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0Aassert_eq!(v.remove(1)%2C%202)%3B%0Aassert_eq!(v%2C%20%5B1%2C%203%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.retain' class="method"><span id='retain.v' class='invisible'><code>fn <a href='#method.retain' class='fnname'>retain</a>&lt;F&gt;(&amp;mut self, f: F) <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;T) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></span></code></span></h4>
 <div class='docblock'><p>Retains only the elements specified by the predicate.</p>
-
 <p>In other words, remove all elements <code>e</code> such that <code>f(&amp;e)</code> returns <code>false</code>.
 This method operates in place and preserves the order of the retained
 elements.</p>
@@ -545,7 +508,6 @@ elements.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">2</span>, <span class="number">4</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B1%2C%202%2C%203%2C%204%5D%3B%0Avec.retain(%7C%26x%7C%20x%252%20%3D%3D%200)%3B%0Aassert_eq!(vec%2C%20%5B2%2C%204%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.dedup_by_key' class="method"><span id='dedup_by_key.v' class='invisible'><code>fn <a href='#method.dedup_by_key' class='fnname'>dedup_by_key</a>&lt;F, K&gt;(&amp;mut self, key: F) <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;mut T) -&gt; K, K: <a class="trait" href="../../std/cmp/trait.PartialEq.html" title="trait std::cmp::PartialEq">PartialEq</a>&lt;K&gt;</span></code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Removes consecutive elements in the vector that resolve to the same key.</p>
-
 <p>If the vector is sorted, this removes all duplicates.</p>
 
 <h1 id='examples-17' class='section-header'><a href='#examples-17'>Examples</a></h1>
@@ -557,11 +519,9 @@ elements.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">20</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B10%2C%2020%2C%2021%2C%2030%2C%2020%5D%3B%0A%0Avec.dedup_by_key(%7Ci%7C%20*i%20%2F%2010)%3B%0A%0Aassert_eq!(vec%2C%20%5B10%2C%2020%2C%2030%2C%2020%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.dedup_by' class="method"><span id='dedup_by.v' class='invisible'><code>fn <a href='#method.dedup_by' class='fnname'>dedup_by</a>&lt;F&gt;(&amp;mut self, same_bucket: F) <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;mut T, &amp;mut T) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></span></code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Removes consecutive elements in the vector according to a predicate.</p>
-
 <p>The <code>same_bucket</code> function is passed references to two elements from the vector, and
 returns <code>true</code> if the elements compare equal, or <code>false</code> if they do not. Only the first
 of adjacent equal items is kept.</p>
-
 <p>If the vector is sorted, this removes all duplicates.</p>
 
 <h1 id='examples-18' class='section-header'><a href='#examples-18'>Examples</a></h1>
@@ -587,7 +547,6 @@ of adjacent equal items is kept.</p>
 </div><h4 id='method.place_back' class="method"><span id='place_back.v' class='invisible'><code>fn <a href='#method.place_back' class='fnname'>place_back</a>(&amp;mut self) -&gt; <a class="struct" href="../../std/vec/struct.PlaceBack.html" title="struct std::vec::PlaceBack">PlaceBack</a>&lt;T&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>collection_placement </code><a href="https://github.com/rust-lang/rust/issues/30172">#30172</a>)</summary><p>placement protocol is subject to change</p>
 </details></div></div><div class='docblock'><p>Returns a place for insertion at the back of the <code>Vec</code>.</p>
-
 <p>Using this method with placement syntax is equivalent to <a href="#method.push"><code>push</code></a>,
 but may be more efficient.</p>
 
@@ -625,10 +584,8 @@ is empty.</p>
 </div><h4 id='method.drain' class="method"><span id='drain.v' class='invisible'><code>fn <a href='#method.drain' class='fnname'>drain</a>&lt;R&gt;(&amp;mut self, range: R) -&gt; <a class="struct" href="../../std/vec/struct.Drain.html" title="struct std::vec::Drain">Drain</a>&lt;T&gt; <span class="where fmt-newline">where R: <a class="trait" href="../../std/collections/range/trait.RangeArgument.html" title="trait std::collections::range::RangeArgument">RangeArgument</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>&gt;</span></code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></span></h4>
 <div class='docblock'><p>Create a draining iterator that removes the specified range in the vector
 and yields the removed items.</p>
-
 <p>Note 1: The element range is removed even if the iterator is only
 partially consumed or not consumed at all.</p>
-
 <p>Note 2: It is unspecified how many elements are removed from the vector,
 if the <code>Drain</code> value is leaked.</p>
 
@@ -648,7 +605,6 @@ the end point is greater than the length of the vector.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="kw-2">&amp;</span>[]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20v%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0Alet%20u%3A%20Vec%3C_%3E%20%3D%20v.drain(1..).collect()%3B%0Aassert_eq!(v%2C%20%26%5B1%5D)%3B%0Aassert_eq!(u%2C%20%26%5B2%2C%203%5D)%3B%0A%0A%2F%2F%20A%20full%20range%20clears%20the%20vector%0Av.drain(..)%3B%0Aassert_eq!(v%2C%20%26%5B%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.clear' class="method"><span id='clear.v' class='invisible'><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>Clears the vector, removing all values.</p>
-
 <p>Note that this method has no effect on the allocated capacity
 of the vector.</p>
 
@@ -678,10 +634,8 @@ of the vector.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">v</span>.<span class="ident">is_empty</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20v%20%3D%20Vec%3A%3Anew()%3B%0Aassert!(v.is_empty())%3B%0A%0Av.push(1)%3B%0Aassert!(!v.is_empty())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.split_off' class="method"><span id='split_off.v' class='invisible'><code>fn <a href='#method.split_off' class='fnname'>split_off</a>(&amp;mut self, at: <a class="primitive" href="../primitive.usize.html">usize</a>) -&gt; <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt;</code><div class='since' title='Stable since Rust version 1.4.0'>1.4.0</div></span></h4>
 <div class='docblock'><p>Splits the collection into two at the given index.</p>
-
 <p>Returns a newly allocated <code>Self</code>. <code>self</code> contains elements <code>[0, at)</code>,
 and the returned <code>Self</code> contains elements <code>[at, len)</code>.</p>
-
 <p>Note that the capacity of <code>self</code> does not change.</p>
 
 <h1 id='panics-8' class='section-header'><a href='#panics-8'>Panics</a></h1>
@@ -696,7 +650,6 @@ and the returned <code>Self</code> contains elements <code>[at, len)</code>.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../std/clone/trait.Clone.html" title="trait std::clone::Clone">Clone</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/collections/vec.rs.html#1214-1293' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.resize' class="method"><span id='resize.v' class='invisible'><code>fn <a href='#method.resize' class='fnname'>resize</a>(&amp;mut self, new_len: <a class="primitive" href="../primitive.usize.html">usize</a>, value: T)</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Resizes the <code>Vec</code> in-place so that <code>len()</code> is equal to <code>new_len</code>.</p>
-
 <p>If <code>new_len</code> is greater than <code>len()</code>, the <code>Vec</code> is extended by the
 difference, with each additional slot filled with <code>value</code>.
 If <code>new_len</code> is less than <code>len()</code>, the <code>Vec</code> is simply truncated.</p>
@@ -712,10 +665,8 @@ If <code>new_len</code> is less than <code>len()</code>, the <code>Vec</code> is
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">vec</span>, [<span class="number">1</span>, <span class="number">2</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20vec%20%3D%20vec!%5B%22hello%22%5D%3B%0Avec.resize(3%2C%20%22world%22)%3B%0Aassert_eq!(vec%2C%20%5B%22hello%22%2C%20%22world%22%2C%20%22world%22%5D)%3B%0A%0Alet%20mut%20vec%20%3D%20vec!%5B1%2C%202%2C%203%2C%204%5D%3B%0Avec.resize(2%2C%200)%3B%0Aassert_eq!(vec%2C%20%5B1%2C%202%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.extend_from_slice' class="method"><span id='extend_from_slice.v' class='invisible'><code>fn <a href='#method.extend_from_slice' class='fnname'>extend_from_slice</a>(&amp;mut self, other: <a class="primitive" href="../primitive.slice.html">&amp;[T]</a>)</code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></span></h4>
 <div class='docblock'><p>Clones and appends all elements in a slice to the <code>Vec</code>.</p>
-
 <p>Iterates over the slice <code>other</code>, clones each element, and then appends
 it to this <code>Vec</code>. The <code>other</code> vector is traversed in-order.</p>
-
 <p>Note that this function is same as <code>extend</code> except that it is
 specialized to work with slices instead. If and when Rust gets
 specialization this function will likely be deprecated (but still
@@ -729,7 +680,6 @@ available).</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../std/cmp/trait.PartialEq.html" title="trait std::cmp::PartialEq">PartialEq</a>&lt;T&gt;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/collections/vec.rs.html#1324-1364' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.dedup' class="method"><span id='dedup.v' class='invisible'><code>fn <a href='#method.dedup' class='fnname'>dedup</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>Removes consecutive repeated elements in the vector.</p>
-
 <p>If the vector is sorted, this removes all duplicates.</p>
 
 <h1 id='examples-30' class='section-header'><a href='#examples-30'>Examples</a></h1>
@@ -857,7 +807,6 @@ available).</p>
 </div><h4 id='method.get' class="method"><span id='get.v' class='invisible'><code>fn <a href='#method.get' class='fnname'>get</a>&lt;I&gt;(&amp;self, index: I) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;I::<a class="trait" href="../../std/slice/trait.SliceIndex.html" title="trait std::slice::SliceIndex">Output</a>&gt; <span class="where fmt-newline">where I: <a class="trait" href="../../std/slice/trait.SliceIndex.html" title="trait std::slice::SliceIndex">SliceIndex</a>&lt;<a class="primitive" href="../primitive.slice.html">[</a>T<a class="primitive" href="../primitive.slice.html">]</a>&gt;</span></code></span></h4>
 <div class='docblock'><p>Returns a reference to an element or subslice depending on the type of
 index.</p>
-
 <ul>
 <li>If given a position, returns a reference to the element at that
 position or <code>None</code> if out of bounds.</li>
@@ -910,10 +859,8 @@ bounds checking. So use it very carefully!</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">13</span>, <span class="number">4</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%26mut%20%5B1%2C%202%2C%204%5D%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20let%20elem%20%3D%20x.get_unchecked_mut(1)%3B%0A%20%20%20%20*elem%20%3D%2013%3B%0A%7D%0Aassert_eq!(x%2C%20%26%5B1%2C%2013%2C%204%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.as_ptr' class="method"><span id='as_ptr.v' class='invisible'><code>fn <a href='#method.as_ptr' class='fnname'>as_ptr</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.pointer.html">*const T</a></code></span></h4>
 <div class='docblock'><p>Returns a raw pointer to the slice&#39;s buffer.</p>
-
 <p>The caller must ensure that the slice outlives the pointer this
 function returns, or else it will end up pointing to garbage.</p>
-
 <p>Modifying the container referenced by this slice may cause its buffer
 to be reallocated, which would also make any pointers to it invalid.</p>
 
@@ -929,10 +876,8 @@ to be reallocated, which would also make any pointers to it invalid.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%26%5B1%2C%202%2C%204%5D%3B%0Alet%20x_ptr%20%3D%20x.as_ptr()%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20for%20i%20in%200..x.len()%20%7B%0A%20%20%20%20%20%20%20%20assert_eq!(x.get_unchecked(i)%2C%20%26*x_ptr.offset(i%20as%20isize))%3B%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.as_mut_ptr' class="method"><span id='as_mut_ptr.v' class='invisible'><code>fn <a href='#method.as_mut_ptr' class='fnname'>as_mut_ptr</a>(&amp;mut self) -&gt; <a class="primitive" href="../primitive.pointer.html">*mut T</a></code></span></h4>
 <div class='docblock'><p>Returns an unsafe mutable pointer to the slice&#39;s buffer.</p>
-
 <p>The caller must ensure that the slice outlives the pointer this
 function returns, or else it will end up pointing to garbage.</p>
-
 <p>Modifying the container referenced by this slice may cause its buffer
 to be reallocated, which would also make any pointers to it invalid.</p>
 
@@ -1010,7 +955,6 @@ to be reallocated, which would also make any pointers to it invalid.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="string">&#39;u&#39;</span>, <span class="string">&#39;s&#39;</span>]);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="string">&#39;s&#39;</span>, <span class="string">&#39;t&#39;</span>]);
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20slice%20%3D%20%5B'r'%2C%20'u'%2C%20's'%2C%20't'%5D%3B%0Alet%20mut%20iter%20%3D%20slice.windows(2)%3B%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B'r'%2C%20'u'%5D)%3B%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B'u'%2C%20's'%5D)%3B%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B's'%2C%20't'%5D)%3B%0Aassert!(iter.next().is_none())%3B%0A%7D">Run</a></pre>
-
 <p>If the slice is shorter than <code>size</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1057,7 +1001,6 @@ have length <code>chunk_size</code>.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20%26mut%20%5B0%2C%200%2C%200%2C%200%2C%200%5D%3B%0Alet%20mut%20count%20%3D%201%3B%0A%0Afor%20chunk%20in%20v.chunks_mut(2)%20%7B%0A%20%20%20%20for%20elem%20in%20chunk.iter_mut()%20%7B%0A%20%20%20%20%20%20%20%20*elem%20%2B%3D%20count%3B%0A%20%20%20%20%7D%0A%20%20%20%20count%20%2B%3D%201%3B%0A%7D%0Aassert_eq!(v%2C%20%26%5B1%2C%201%2C%202%2C%202%2C%203%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.split_at' class="method"><span id='split_at.v' class='invisible'><code>fn <a href='#method.split_at' class='fnname'>split_at</a>(&amp;self, mid: <a class="primitive" href="../primitive.usize.html">usize</a>) -&gt; <a class="primitive" href="../primitive.tuple.html">(</a><a class="primitive" href="../primitive.slice.html">&amp;[T]</a>, <a class="primitive" href="../primitive.slice.html">&amp;[T]</a><a class="primitive" href="../primitive.tuple.html">)</a></code></span></h4>
 <div class='docblock'><p>Divides one slice into two at an index.</p>
-
 <p>The first will contain all indices from <code>[0, mid)</code> (excluding
 the index <code>mid</code> itself) and the second will contain all
 indices from <code>[mid, len)</code> (excluding the index <code>len</code> itself).</p>
@@ -1073,7 +1016,6 @@ indices from <code>[mid, len)</code> (excluding the index <code>len</code> itsel
 <span class="macro">assert_eq</span><span class="macro">!</span>([<span class="number">30</span>, <span class="number">20</span>, <span class="number">50</span>], <span class="ident">v2</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20%5B10%2C%2040%2C%2030%2C%2020%2C%2050%5D%3B%0Alet%20(v1%2C%20v2)%20%3D%20v.split_at(2)%3B%0Aassert_eq!(%5B10%2C%2040%5D%2C%20v1)%3B%0Aassert_eq!(%5B30%2C%2020%2C%2050%5D%2C%20v2)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.split_at_mut' class="method"><span id='split_at_mut.v' class='invisible'><code>fn <a href='#method.split_at_mut' class='fnname'>split_at_mut</a>(&amp;mut self, mid: <a class="primitive" href="../primitive.usize.html">usize</a>) -&gt; <a class="primitive" href="../primitive.tuple.html">(</a><a class="primitive" href="../primitive.slice.html">&amp;mut [T]</a>, <a class="primitive" href="../primitive.slice.html">&amp;mut [T]</a><a class="primitive" href="../primitive.tuple.html">)</a></code></span></h4>
 <div class='docblock'><p>Divides one <code>&amp;mut</code> into two at an index.</p>
-
 <p>The first will contain all indices from <code>[0, mid)</code> (excluding
 the index <code>mid</code> itself) and the second will contain all
 indices from <code>[mid, len)</code> (excluding the index <code>len</code> itself).</p>
@@ -1115,7 +1057,6 @@ indices from <code>[mid, len)</code> (excluding the index <code>len</code> itsel
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="number">10</span>, <span class="number">40</span>]);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="number">20</span>]);
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20slice%20%3D%20%5B10%2C%2040%2C%2033%2C%2020%5D%3B%0Alet%20mut%20iter%20%3D%20slice.split(%7Cnum%7C%20num%20%25%203%20%3D%3D%200)%3B%0A%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B10%2C%2040%5D)%3B%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B20%5D)%3B%0Aassert!(iter.next().is_none())%3B%0A%7D">Run</a></pre>
-
 <p>If the first element is matched, an empty slice will be the first item
 returned by the iterator. Similarly, if the last element in the slice
 is matched, an empty slice will be the last item returned by the
@@ -1128,7 +1069,6 @@ iterator:</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="number">10</span>, <span class="number">40</span>]);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[]);
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20slice%20%3D%20%5B10%2C%2040%2C%2033%5D%3B%0Alet%20mut%20iter%20%3D%20slice.split(%7Cnum%7C%20num%20%25%203%20%3D%3D%200)%3B%0A%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B10%2C%2040%5D)%3B%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B%5D)%3B%0Aassert!(iter.next().is_none())%3B%0A%7D">Run</a></pre>
-
 <p>If two matched elements are directly adjacent, an empty slice will be
 present between them:</p>
 
@@ -1167,7 +1107,6 @@ The matched element is not contained in the subslices.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="number">44</span>, <span class="number">55</span>]);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>]);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">iter</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(slice_rsplit)%5D%0A%0Afn%20main()%20%7B%0Alet%20slice%20%3D%20%5B11%2C%2022%2C%2033%2C%200%2C%2044%2C%2055%5D%3B%0Alet%20mut%20iter%20%3D%20slice.rsplit(%7Cnum%7C%20*num%20%3D%3D%200)%3B%0A%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B44%2C%2055%5D)%3B%0Aassert_eq!(iter.next().unwrap()%2C%20%26%5B11%2C%2022%2C%2033%5D)%3B%0Aassert_eq!(iter.next()%2C%20None)%3B%0A%7D&amp;version=nightly">Run</a></pre>
-
 <p>As with <code>split()</code>, if the first or last element is matched, an empty
 slice will be the first (or last) item returned by the iterator.</p>
 
@@ -1202,7 +1141,6 @@ backwards. The matched element is not contained in the subslices.</p>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code>, limited to returning at most <code>n</code> items. The matched element is
 not contained in the subslices.</p>
-
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
 
@@ -1220,7 +1158,6 @@ slice.</p>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code>, limited to returning at most <code>n</code> items. The matched element is
 not contained in the subslices.</p>
-
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
 
@@ -1237,7 +1174,6 @@ slice.</p>
 <code>pred</code> limited to returning at most <code>n</code> items. This starts at the end of
 the slice and works backwards.  The matched element is not contained in
 the subslices.</p>
-
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
 
@@ -1256,7 +1192,6 @@ by 3 (i.e. <code>[50]</code>, <code>[10, 40, 30, 20]</code>):</p>
 <code>pred</code> limited to returning at most <code>n</code> items. This starts at the end of
 the slice and works backwards. The matched element is not contained in
 the subslices.</p>
-
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
 
@@ -1286,7 +1221,6 @@ slice.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span>.<span class="ident">starts_with</span>(<span class="kw-2">&amp;</span>[<span class="number">10</span>, <span class="number">40</span>]));
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">v</span>.<span class="ident">starts_with</span>(<span class="kw-2">&amp;</span>[<span class="number">50</span>]));
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">v</span>.<span class="ident">starts_with</span>(<span class="kw-2">&amp;</span>[<span class="number">10</span>, <span class="number">50</span>]));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20%5B10%2C%2040%2C%2030%5D%3B%0Aassert!(v.starts_with(%26%5B10%5D))%3B%0Aassert!(v.starts_with(%26%5B10%2C%2040%5D))%3B%0Aassert!(!v.starts_with(%26%5B50%5D))%3B%0Aassert!(!v.starts_with(%26%5B10%2C%2050%5D))%3B%0A%7D">Run</a></pre>
-
 <p>Always returns <code>true</code> if <code>needle</code> is an empty slice:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1304,7 +1238,6 @@ slice.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span>.<span class="ident">ends_with</span>(<span class="kw-2">&amp;</span>[<span class="number">40</span>, <span class="number">30</span>]));
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">v</span>.<span class="ident">ends_with</span>(<span class="kw-2">&amp;</span>[<span class="number">50</span>]));
 <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">v</span>.<span class="ident">ends_with</span>(<span class="kw-2">&amp;</span>[<span class="number">50</span>, <span class="number">30</span>]));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20%5B10%2C%2040%2C%2030%5D%3B%0Aassert!(v.ends_with(%26%5B30%5D))%3B%0Aassert!(v.ends_with(%26%5B40%2C%2030%5D))%3B%0Aassert!(!v.ends_with(%26%5B50%5D))%3B%0Aassert!(!v.ends_with(%26%5B50%2C%2030%5D))%3B%0A%7D">Run</a></pre>
-
 <p>Always returns <code>true</code> if <code>needle</code> is an empty slice:</p>
 
 <pre class="rust rust-example-rendered">
@@ -1314,7 +1247,6 @@ slice.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span>.<span class="ident">ends_with</span>(<span class="kw-2">&amp;</span>[]));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20%26%5B10%2C%2040%2C%2030%5D%3B%0Aassert!(v.ends_with(%26%5B%5D))%3B%0Alet%20v%3A%20%26%5Bu8%5D%20%3D%20%26%5B%5D%3B%0Aassert!(v.ends_with(%26%5B%5D))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.binary_search' class="method"><span id='binary_search.v' class='invisible'><code>fn <a href='#method.binary_search' class='fnname'>binary_search</a>(&amp;self, x: &amp;T) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>, <a class="primitive" href="../primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a></span></code></span></h4>
 <div class='docblock'><p>Binary searches this sorted slice for a given element.</p>
-
 <p>If the value is found then <code>Ok</code> is returned, containing the
 index of the matching element; if the value is not found then
 <code>Err</code> is returned, containing the index where a matching
@@ -1335,12 +1267,10 @@ found; the fourth could match any position in <code>[1, 4]</code>.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="kw">match</span> <span class="ident">r</span> { <span class="prelude-val">Ok</span>(<span class="number">1</span>...<span class="number">4</span>) <span class="op">=&gt;</span> <span class="bool-val">true</span>, _ <span class="op">=&gt;</span> <span class="bool-val">false</span>, });<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20s%20%3D%20%5B0%2C%201%2C%201%2C%201%2C%201%2C%202%2C%203%2C%205%2C%208%2C%2013%2C%2021%2C%2034%2C%2055%5D%3B%0A%0Aassert_eq!(s.binary_search(%2613)%2C%20%20Ok(9))%3B%0Aassert_eq!(s.binary_search(%264)%2C%20%20%20Err(7))%3B%0Aassert_eq!(s.binary_search(%26100)%2C%20Err(13))%3B%0Alet%20r%20%3D%20s.binary_search(%261)%3B%0Aassert!(match%20r%20%7B%20Ok(1...4)%20%3D%3E%20true%2C%20_%20%3D%3E%20false%2C%20%7D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.binary_search_by' class="method"><span id='binary_search_by.v' class='invisible'><code>fn <a href='#method.binary_search_by' class='fnname'>binary_search_by</a>&lt;'a, F&gt;(&amp;'a self, f: F) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>, <a class="primitive" href="../primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;'a T) -&gt; <a class="enum" href="../../std/cmp/enum.Ordering.html" title="enum std::cmp::Ordering">Ordering</a></span></code></span></h4>
 <div class='docblock'><p>Binary searches this sorted slice with a comparator function.</p>
-
 <p>The comparator function should implement an order consistent
 with the sort order of the underlying slice, returning an
 order code that indicates whether its argument is <code>Less</code>,
 <code>Equal</code> or <code>Greater</code> the desired target.</p>
-
 <p>If a matching value is found then returns <code>Ok</code>, containing
 the index for the matched element; if no match is found then
 <code>Err</code> is returned, containing the index where a matching
@@ -1365,10 +1295,8 @@ found; the fourth could match any position in <code>[1, 4]</code>.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="kw">match</span> <span class="ident">r</span> { <span class="prelude-val">Ok</span>(<span class="number">1</span>...<span class="number">4</span>) <span class="op">=&gt;</span> <span class="bool-val">true</span>, _ <span class="op">=&gt;</span> <span class="bool-val">false</span>, });<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20s%20%3D%20%5B0%2C%201%2C%201%2C%201%2C%201%2C%202%2C%203%2C%205%2C%208%2C%2013%2C%2021%2C%2034%2C%2055%5D%3B%0A%0Alet%20seek%20%3D%2013%3B%0Aassert_eq!(s.binary_search_by(%7Cprobe%7C%20probe.cmp(%26seek))%2C%20Ok(9))%3B%0Alet%20seek%20%3D%204%3B%0Aassert_eq!(s.binary_search_by(%7Cprobe%7C%20probe.cmp(%26seek))%2C%20Err(7))%3B%0Alet%20seek%20%3D%20100%3B%0Aassert_eq!(s.binary_search_by(%7Cprobe%7C%20probe.cmp(%26seek))%2C%20Err(13))%3B%0Alet%20seek%20%3D%201%3B%0Alet%20r%20%3D%20s.binary_search_by(%7Cprobe%7C%20probe.cmp(%26seek))%3B%0Aassert!(match%20r%20%7B%20Ok(1...4)%20%3D%3E%20true%2C%20_%20%3D%3E%20false%2C%20%7D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.binary_search_by_key' class="method"><span id='binary_search_by_key.v' class='invisible'><code>fn <a href='#method.binary_search_by_key' class='fnname'>binary_search_by_key</a>&lt;'a, B, F&gt;(&amp;'a self, b: &amp;B, f: F) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>, <a class="primitive" href="../primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where B: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a>, F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;'a T) -&gt; B</span></code><div class='since' title='Stable since Rust version 1.10.0'>1.10.0</div></span></h4>
 <div class='docblock'><p>Binary searches this sorted slice with a key extraction function.</p>
-
 <p>Assumes that the slice is sorted by the key, for instance with
 <a href="#method.sort_by_key"><code>sort_by_key</code></a> using the same key extraction function.</p>
-
 <p>If a matching value is found then returns <code>Ok</code>, containing the
 index for the matched element; if no match is found then <code>Err</code>
 is returned, containing the index where a matching element could
@@ -1392,7 +1320,6 @@ fourth could match any position in <code>[1, 4]</code>.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="kw">match</span> <span class="ident">r</span> { <span class="prelude-val">Ok</span>(<span class="number">1</span>...<span class="number">4</span>) <span class="op">=&gt;</span> <span class="bool-val">true</span>, _ <span class="op">=&gt;</span> <span class="bool-val">false</span>, });<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20s%20%3D%20%5B(0%2C%200)%2C%20(2%2C%201)%2C%20(4%2C%201)%2C%20(5%2C%201)%2C%20(3%2C%201)%2C%0A%20%20%20%20%20%20%20%20%20(1%2C%202)%2C%20(2%2C%203)%2C%20(4%2C%205)%2C%20(5%2C%208)%2C%20(3%2C%2013)%2C%0A%20%20%20%20%20%20%20%20%20(1%2C%2021)%2C%20(2%2C%2034)%2C%20(4%2C%2055)%5D%3B%0A%0Aassert_eq!(s.binary_search_by_key(%2613%2C%20%7C%26(a%2Cb)%7C%20b)%2C%20%20Ok(9))%3B%0Aassert_eq!(s.binary_search_by_key(%264%2C%20%7C%26(a%2Cb)%7C%20b)%2C%20%20%20Err(7))%3B%0Aassert_eq!(s.binary_search_by_key(%26100%2C%20%7C%26(a%2Cb)%7C%20b)%2C%20Err(13))%3B%0Alet%20r%20%3D%20s.binary_search_by_key(%261%2C%20%7C%26(a%2Cb)%7C%20b)%3B%0Aassert!(match%20r%20%7B%20Ok(1...4)%20%3D%3E%20true%2C%20_%20%3D%3E%20false%2C%20%7D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.sort' class="method"><span id='sort.v' class='invisible'><code>fn <a href='#method.sort' class='fnname'>sort</a>(&amp;mut self) <span class="where fmt-newline">where T: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a></span></code></span></h4>
 <div class='docblock'><p>Sorts the slice.</p>
-
 <p>This sort is stable (i.e. does not reorder equal elements) and <code>O(n log n)</code> worst-case.</p>
 
 <h1 id='current-implementation' class='section-header'><a href='#current-implementation'>Current implementation</a></h1>
@@ -1400,7 +1327,6 @@ fourth could match any position in <code>[1, 4]</code>.</p>
 <a href="https://en.wikipedia.org/wiki/Timsort">timsort</a>.
 It is designed to be very fast in cases where the slice is nearly sorted, or consists of
 two or more sorted sequences concatenated one after another.</p>
-
 <p>Also, it allocates temporary storage half the size of <code>self</code>, but for short slices a
 non-allocating insertion sort is used instead.</p>
 
@@ -1412,7 +1338,6 @@ non-allocating insertion sort is used instead.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span> <span class="op">==</span> [<span class="op">-</span><span class="number">5</span>, <span class="op">-</span><span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20v%20%3D%20%5B-5%2C%204%2C%201%2C%20-3%2C%202%5D%3B%0A%0Av.sort()%3B%0Aassert!(v%20%3D%3D%20%5B-5%2C%20-3%2C%201%2C%202%2C%204%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.sort_by' class="method"><span id='sort_by.v' class='invisible'><code>fn <a href='#method.sort_by' class='fnname'>sort_by</a>&lt;F&gt;(&amp;mut self, compare: F) <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;T, &amp;T) -&gt; <a class="enum" href="../../std/cmp/enum.Ordering.html" title="enum std::cmp::Ordering">Ordering</a></span></code></span></h4>
 <div class='docblock'><p>Sorts the slice with a comparator function.</p>
-
 <p>This sort is stable (i.e. does not reorder equal elements) and <code>O(n log n)</code> worst-case.</p>
 
 <h1 id='current-implementation-1' class='section-header'><a href='#current-implementation-1'>Current implementation</a></h1>
@@ -1420,7 +1345,6 @@ non-allocating insertion sort is used instead.</p>
 <a href="https://en.wikipedia.org/wiki/Timsort">timsort</a>.
 It is designed to be very fast in cases where the slice is nearly sorted, or consists of
 two or more sorted sequences concatenated one after another.</p>
-
 <p>Also, it allocates temporary storage half the size of <code>self</code>, but for short slices a
 non-allocating insertion sort is used instead.</p>
 
@@ -1435,7 +1359,6 @@ non-allocating insertion sort is used instead.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span> <span class="op">==</span> [<span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20v%20%3D%20%5B5%2C%204%2C%201%2C%203%2C%202%5D%3B%0Av.sort_by(%7Ca%2C%20b%7C%20a.cmp(b))%3B%0Aassert!(v%20%3D%3D%20%5B1%2C%202%2C%203%2C%204%2C%205%5D)%3B%0A%0A%2F%2F%20reverse%20sorting%0Av.sort_by(%7Ca%2C%20b%7C%20b.cmp(a))%3B%0Aassert!(v%20%3D%3D%20%5B5%2C%204%2C%203%2C%202%2C%201%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.sort_by_key' class="method"><span id='sort_by_key.v' class='invisible'><code>fn <a href='#method.sort_by_key' class='fnname'>sort_by_key</a>&lt;B, F&gt;(&amp;mut self, f: F) <span class="where fmt-newline">where B: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a>, F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;T) -&gt; B</span></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Sorts the slice with a key extraction function.</p>
-
 <p>This sort is stable (i.e. does not reorder equal elements) and <code>O(n log n)</code> worst-case.</p>
 
 <h1 id='current-implementation-2' class='section-header'><a href='#current-implementation-2'>Current implementation</a></h1>
@@ -1443,7 +1366,6 @@ non-allocating insertion sort is used instead.</p>
 <a href="https://en.wikipedia.org/wiki/Timsort">timsort</a>.
 It is designed to be very fast in cases where the slice is nearly sorted, or consists of
 two or more sorted sequences concatenated one after another.</p>
-
 <p>Also, it allocates temporary storage half the size of <code>self</code>, but for short slices a
 non-allocating insertion sort is used instead.</p>
 
@@ -1455,7 +1377,6 @@ non-allocating insertion sort is used instead.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span> <span class="op">==</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="op">-</span><span class="number">3</span>, <span class="number">4</span>, <span class="op">-</span><span class="number">5</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20v%20%3D%20%5B-5i32%2C%204%2C%201%2C%20-3%2C%202%5D%3B%0A%0Av.sort_by_key(%7Ck%7C%20k.abs())%3B%0Aassert!(v%20%3D%3D%20%5B1%2C%202%2C%20-3%2C%204%2C%20-5%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.sort_unstable' class="method"><span id='sort_unstable.v' class='invisible'><code>fn <a href='#method.sort_unstable' class='fnname'>sort_unstable</a>(&amp;mut self) <span class="where fmt-newline">where T: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a></span></code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>sort_unstable </code><a href="https://github.com/rust-lang/rust/issues/40585">#40585</a>)</div></div><div class='docblock'><p>Sorts the slice, but may not preserve the order of equal elements.</p>
-
 <p>This sort is unstable (i.e. may reorder equal elements), in-place (i.e. does not allocate),
 and <code>O(n log n)</code> worst-case.</p>
 
@@ -1464,7 +1385,6 @@ and <code>O(n log n)</code> worst-case.</p>
 which is a quicksort variant designed to be very fast on certain kinds of patterns,
 sometimes achieving linear time. It is randomized but deterministic, and falls back to
 heapsort on degenerate inputs.</p>
-
 <p>It is generally faster than stable sorting, except in a few special cases, e.g. when the
 slice consists of several concatenated sorted sequences.</p>
 
@@ -1479,7 +1399,6 @@ slice consists of several concatenated sorted sequences.</p>
 </div><h4 id='method.sort_unstable_by' class="method"><span id='sort_unstable_by.v' class='invisible'><code>fn <a href='#method.sort_unstable_by' class='fnname'>sort_unstable_by</a>&lt;F&gt;(&amp;mut self, compare: F) <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;T, &amp;T) -&gt; <a class="enum" href="../../std/cmp/enum.Ordering.html" title="enum std::cmp::Ordering">Ordering</a></span></code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>sort_unstable </code><a href="https://github.com/rust-lang/rust/issues/40585">#40585</a>)</div></div><div class='docblock'><p>Sorts the slice with a comparator function, but may not preserve the order of equal
 elements.</p>
-
 <p>This sort is unstable (i.e. may reorder equal elements), in-place (i.e. does not allocate),
 and <code>O(n log n)</code> worst-case.</p>
 
@@ -1488,7 +1407,6 @@ and <code>O(n log n)</code> worst-case.</p>
 which is a quicksort variant designed to be very fast on certain kinds of patterns,
 sometimes achieving linear time. It is randomized but deterministic, and falls back to
 heapsort on degenerate inputs.</p>
-
 <p>It is generally faster than stable sorting, except in a few special cases, e.g. when the
 slice consists of several concatenated sorted sequences.</p>
 
@@ -1506,7 +1424,6 @@ slice consists of several concatenated sorted sequences.</p>
 </div><h4 id='method.sort_unstable_by_key' class="method"><span id='sort_unstable_by_key.v' class='invisible'><code>fn <a href='#method.sort_unstable_by_key' class='fnname'>sort_unstable_by_key</a>&lt;B, F&gt;(&amp;mut self, f: F) <span class="where fmt-newline">where B: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a>, F: <a class="trait" href="../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(&amp;T) -&gt; B</span></code></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>sort_unstable </code><a href="https://github.com/rust-lang/rust/issues/40585">#40585</a>)</div></div><div class='docblock'><p>Sorts the slice with a key extraction function, but may not preserve the order of equal
 elements.</p>
-
 <p>This sort is unstable (i.e. may reorder equal elements), in-place (i.e. does not allocate),
 and <code>O(n log n)</code> worst-case.</p>
 
@@ -1515,7 +1432,6 @@ and <code>O(n log n)</code> worst-case.</p>
 which is a quicksort variant designed to be very fast on certain kinds of patterns,
 sometimes achieving linear time. It is randomized but deterministic, and falls back to
 heapsort on degenerate inputs.</p>
-
 <p>It is generally faster than stable sorting, except in a few special cases, e.g. when the
 slice consists of several concatenated sorted sequences.</p>
 
@@ -1529,7 +1445,6 @@ slice consists of several concatenated sorted sequences.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">v</span> <span class="op">==</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="op">-</span><span class="number">3</span>, <span class="number">4</span>, <span class="op">-</span><span class="number">5</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(sort_unstable)%5D%0A%0Afn%20main()%20%7B%0Alet%20mut%20v%20%3D%20%5B-5i32%2C%204%2C%201%2C%20-3%2C%202%5D%3B%0A%0Av.sort_unstable_by_key(%7Ck%7C%20k.abs())%3B%0Aassert!(v%20%3D%3D%20%5B1%2C%202%2C%20-3%2C%204%2C%20-5%5D)%3B%0A%7D&amp;version=nightly">Run</a></pre>
 </div><h4 id='method.clone_from_slice' class="method"><span id='clone_from_slice.v' class='invisible'><code>fn <a href='#method.clone_from_slice' class='fnname'>clone_from_slice</a>(&amp;mut self, src: <a class="primitive" href="../primitive.slice.html">&amp;[T]</a>) <span class="where fmt-newline">where T: <a class="trait" href="../../std/clone/trait.Clone.html" title="trait std::clone::Clone">Clone</a></span></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Copies the elements from <code>src</code> into <code>self</code>.</p>
-
 <p>The length of <code>src</code> must be the same as <code>self</code>.</p>
 
 <h1 id='panics-15' class='section-header'><a href='#panics-15'>Panics</a></h1>
@@ -1544,7 +1459,6 @@ slice consists of several concatenated sorted sequences.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">dst</span> <span class="op">==</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20dst%20%3D%20%5B0%2C%200%2C%200%5D%3B%0Alet%20src%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%0Adst.clone_from_slice(%26src)%3B%0Aassert!(dst%20%3D%3D%20%5B1%2C%202%2C%203%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.copy_from_slice' class="method"><span id='copy_from_slice.v' class='invisible'><code>fn <a href='#method.copy_from_slice' class='fnname'>copy_from_slice</a>(&amp;mut self, src: <a class="primitive" href="../primitive.slice.html">&amp;[T]</a>) <span class="where fmt-newline">where T: <a class="trait" href="../../std/marker/trait.Copy.html" title="trait std::marker::Copy">Copy</a></span></code><div class='since' title='Stable since Rust version 1.9.0'>1.9.0</div></span></h4>
 <div class='docblock'><p>Copies all elements from <code>src</code> into <code>self</code>, using a memcpy.</p>
-
 <p>The length of <code>src</code> must be the same as <code>self</code>.</p>
 
 <h1 id='panics-16' class='section-header'><a href='#panics-16'>Panics</a></h1>

@@ -51,12 +51,10 @@
                </span><a class='srclink' href='../../src/core/cell.rs.html#1157-1159' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'><div class="docblock attributes">#[lang = "unsafe_cell"]
 </div>pub struct UnsafeCell&lt;T&gt; <span class="where fmt-newline">where T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span> { /* fields omitted */ }</pre><div class='docblock'><p>The core primitive for interior mutability in Rust.</p>
-
 <p><code>UnsafeCell&lt;T&gt;</code> is a type that wraps some <code>T</code> and indicates unsafe interior operations on the
 wrapped type. Types with an <code>UnsafeCell&lt;T&gt;</code> field are considered to have an &#39;unsafe interior&#39;.
 The <code>UnsafeCell&lt;T&gt;</code> type is the only legal way to obtain aliasable data that is considered
 mutable. In general, transmuting an <code>&amp;T</code> type into an <code>&amp;mut T</code> is considered undefined behavior.</p>
-
 <p>The compiler makes optimizations based on the knowledge that <code>&amp;T</code> is not mutably aliased or
 mutated, and that <code>&amp;mut T</code> is unique. When building abstractions like <code>Cell</code>, <code>RefCell</code>,
 <code>Mutex</code>, etc, you need to turn these optimizations off. <code>UnsafeCell</code> is the only legal way
@@ -65,11 +63,9 @@ reference to its interior and/or to mutate it. However, it is up to the abstract
 to ensure that no two mutable references obtained this way are active at the same time, and
 that there are no active mutable references or mutations when an immutable reference is obtained
 from the cell. This is often done via runtime checks.</p>
-
 <p>Note that while mutating or mutably aliasing the contents of an <code>&amp; UnsafeCell&lt;T&gt;</code> is
 okay (provided you enforce the invariants some other way); it is still undefined behavior
 to have multiple <code>&amp;mut UnsafeCell&lt;T&gt;</code> aliases.</p>
-
 <p>Types like <code>Cell&lt;T&gt;</code> and <code>RefCell&lt;T&gt;</code> use this type to wrap their internal data.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -86,7 +82,6 @@ to have multiple <code>&amp;mut UnsafeCell&lt;T&gt;</code> aliases.</p>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>const fn <a href='#method.new' class='fnname'>new</a>(value: T) -&gt; <a class="struct" href="../../std/cell/struct.UnsafeCell.html" title="struct std::cell::UnsafeCell">UnsafeCell</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Constructs a new instance of <code>UnsafeCell</code> which will wrap the specified
 value.</p>
-
 <p>All access to the inner value through methods is <code>unsafe</code>.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -111,7 +106,6 @@ inspecting the inner value.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="struct" href="../../std/cell/struct.UnsafeCell.html" title="struct std::cell::UnsafeCell">UnsafeCell</a>&lt;T&gt; <span class="where fmt-newline">where T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/cell.rs.html#1206-1228' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.get' class="method"><span id='get.v' class='invisible'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.pointer.html">*mut T</a></code></span></h4>
 <div class='docblock'><p>Gets a mutable pointer to the wrapped value.</p>
-
 <p>This can be cast to a pointer of any kind.
 Ensure that the access is unique when casting to
 <code>&amp;mut T</code>, and ensure that there are no mutations or mutable

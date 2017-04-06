@@ -54,16 +54,12 @@
 
     fn <a href='#method.hash_slice' class='fnname'>hash_slice</a>&lt;H:&nbsp;<a class="trait" href="../../core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>&gt;(data: &amp;[Self], state: &amp;mut H) <span class="where fmt-newline">where Self: <a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span> { ... }
 }</pre><div class='docblock'><p>A hashable type.</p>
-
 <p>The <code>H</code> type parameter is an abstract hash state that is used by the <code>Hash</code>
 to compute the hash.</p>
-
 <p>If you are also implementing <a href="../../std/cmp/trait.Eq.html"><code>Eq</code></a>, there is an additional property that
 is important:</p>
-
 <pre><code class="language-text">k1 == k2 -&gt; hash(k1) == hash(k2)
 </code></pre>
-
 <p>In other words, if two keys are equal, their hashes should also be equal.
 <a href="../../std/collections/struct.HashMap.html"><code>HashMap</code></a> and <a href="../../std/collections/struct.HashSet.html"><code>HashSet</code></a> both rely on this behavior.</p>
 

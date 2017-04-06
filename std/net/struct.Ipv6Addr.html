@@ -50,10 +50,8 @@
                    </a>
                </span><a class='srclink' href='../../src/std/net/ip.rs.html#120-122' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Ipv6Addr { /* fields omitted */ }</pre><div class='docblock'><p>An IPv6 address.</p>
-
 <p>IPv6 addresses are defined as 128-bit integers in <a href="https://tools.ietf.org/html/rfc4291">IETF RFC 4291</a>.
 They are usually represented as eight 16-bit segments.</p>
-
 <p>See <a href="../../std/net/enum.IpAddr.html"><code>IpAddr</code></a> for a type encompassing both IPv4 and IPv6 addresses.</p>
 
 <h1 id='textual-representation' class='section-header'><a href='#textual-representation'>Textual representation</a></h1>
@@ -72,7 +70,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/net/ip.rs.html#764-1110' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(a: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; d: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; f: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g: <a class="primitive" href="../primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; h: <a class="primitive" href="../primitive.u16.html">u16</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a></code></span></h4>
 <div class='docblock'><p>Creates a new IPv6 address from eight 16-bit segments.</p>
-
 <p>The result will represent the IP address a:b:c:d:e:f:g:h.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
@@ -91,7 +88,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0xffff</span>, <span class="number">0xc00a</span>, <span class="number">0x2ff</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3AIpv6Addr%3B%0A%0Aassert_eq!(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200xffff%2C%200xc00a%2C%200x2ff).segments()%2C%0A%20%20%20%20%20%20%20%20%20%20%20%5B0%2C%200%2C%200%2C%200%2C%200%2C%200xffff%2C%200xc00a%2C%200x2ff%5D)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_unspecified' class="method"><span id='is_unspecified.v' class='invisible'><code>fn <a href='#method.is_unspecified' class='fnname'>is_unspecified</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> for the special &#39;unspecified&#39; address (::).</p>
-
 <p>This property is defined in <a href="https://tools.ietf.org/html/rfc4291">IETF RFC 4291</a>.</p>
 
 <h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
@@ -102,7 +98,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Ipv6Addr</span>::<span class="ident">new</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>).<span class="ident">is_unspecified</span>(), <span class="bool-val">true</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Anet%3A%3AIpv6Addr%3B%0A%0Aassert_eq!(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200xffff%2C%200xc00a%2C%200x2ff).is_unspecified()%2C%20false)%3B%0Aassert_eq!(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200).is_unspecified()%2C%20true)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.is_loopback' class="method"><span id='is_loopback.v' class='invisible'><code>fn <a href='#method.is_loopback' class='fnname'>is_loopback</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is a loopback address (::1).</p>
-
 <p>This property is defined in <a href="https://tools.ietf.org/html/rfc4291">IETF RFC 4291</a>.</p>
 
 <h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
@@ -114,9 +109,7 @@ notation, and segments are separated by <code>:</code>. For more information, se
 </div><h4 id='method.is_global' class="method"><span id='is_global.v' class='invisible'><code>fn <a href='#method.is_global' class='fnname'>is_global</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ip </code><a href="https://github.com/rust-lang/rust/issues/27709">#27709</a>)</summary><p>extra functionality has not been scrutinized to the level that it should be stable</p>
 </details></div></div><div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if the address appears to be globally routable.</p>
-
 <p>The following return <a href="../../std/primitive.bool.html"><code>false</code></a>:</p>
-
 <ul>
 <li>the loopback address</li>
 <li>link-local, site-local, and unique local unicast addresses</li>
@@ -137,7 +130,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 </div><h4 id='method.is_unique_local' class="method"><span id='is_unique_local.v' class='invisible'><code>fn <a href='#method.is_unique_local' class='fnname'>is_unique_local</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ip </code><a href="https://github.com/rust-lang/rust/issues/27709">#27709</a>)</summary><p>extra functionality has not been scrutinized to the level that it should be stable</p>
 </details></div></div><div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is a unique local address (fc00::/7).</p>
-
 <p>This property is defined in <a href="https://tools.ietf.org/html/rfc4193">IETF RFC 4193</a>.</p>
 
 <h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
@@ -154,7 +146,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 </div><h4 id='method.is_unicast_link_local' class="method"><span id='is_unicast_link_local.v' class='invisible'><code>fn <a href='#method.is_unicast_link_local' class='fnname'>is_unicast_link_local</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ip </code><a href="https://github.com/rust-lang/rust/issues/27709">#27709</a>)</summary><p>extra functionality has not been scrutinized to the level that it should be stable</p>
 </details></div></div><div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if the address is unicast and link-local (fe80::/10).</p>
-
 <p>This property is defined in <a href="https://tools.ietf.org/html/rfc4291">IETF RFC 4291</a>.</p>
 
 <h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1>
@@ -188,7 +179,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ip </code><a href="https://github.com/rust-lang/rust/issues/27709">#27709</a>)</summary><p>extra functionality has not been scrutinized to the level that it should be stable</p>
 </details></div></div><div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is an address reserved for documentation
 (2001:db8::/32).</p>
-
 <p>This property is defined in <a href="https://tools.ietf.org/html/rfc3849">IETF RFC 3849</a>.</p>
 
 <h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
@@ -205,9 +195,7 @@ notation, and segments are separated by <code>:</code>. For more information, se
 </div><h4 id='method.is_unicast_global' class="method"><span id='is_unicast_global.v' class='invisible'><code>fn <a href='#method.is_unicast_global' class='fnname'>is_unicast_global</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ip </code><a href="https://github.com/rust-lang/rust/issues/27709">#27709</a>)</summary><p>extra functionality has not been scrutinized to the level that it should be stable</p>
 </details></div></div><div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if the address is a globally routable unicast address.</p>
-
 <p>The following return false:</p>
-
 <ul>
 <li>the loopback address</li>
 <li>the link-local addresses</li>
@@ -245,7 +233,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(ip)%5D%0A%0Ause%20std%3A%3Anet%3A%3A%7BIpv6Addr%2C%20Ipv6MulticastScope%7D%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20assert_eq!(Ipv6Addr%3A%3Anew(0xff0e%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200).multicast_scope()%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Some(Ipv6MulticastScope%3A%3AGlobal))%3B%0A%20%20%20%20assert_eq!(Ipv6Addr%3A%3Anew(0%2C%200%2C%200%2C%200%2C%200%2C%200xffff%2C%200xc00a%2C%200x2ff).multicast_scope()%2C%20None)%3B%0A%7D%0A&amp;version=nightly">Run</a></pre>
 </div><h4 id='method.is_multicast' class="method"><span id='is_multicast.v' class='invisible'><code>fn <a href='#method.is_multicast' class='fnname'>is_multicast</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.bool.html">bool</a></code><div class='since' title='Stable since Rust version 1.7.0'>1.7.0</div></span></h4>
 <div class='docblock'><p>Returns <a href="../../std/primitive.bool.html"><code>true</code></a> if this is a multicast address (ff00::/8).</p>
-
 <p>This property is defined by <a href="https://tools.ietf.org/html/rfc4291">IETF RFC 4291</a>.</p>
 
 <h1 id='examples-12' class='section-header'><a href='#examples-12'>Examples</a></h1>
@@ -257,7 +244,6 @@ notation, and segments are separated by <code>:</code>. For more information, se
 </div><h4 id='method.to_ipv4' class="method"><span id='to_ipv4.v' class='invisible'><code>fn <a href='#method.to_ipv4' class='fnname'>to_ipv4</a>(&amp;self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="struct" href="../../std/net/struct.Ipv4Addr.html" title="struct std::net::Ipv4Addr">Ipv4Addr</a>&gt;</code></span></h4>
 <div class='docblock'><p>Converts this address to an <a href="../../std/net/struct.Ipv4Addr.html">IPv4 address</a>. Returns <a href="../../std/option/enum.Option.html#variant.None"><code>None</code></a> if this address is
 neither IPv4-compatible or IPv4-mapped.</p>
-
 <p>::a.b.c.d and ::ffff:a.b.c.d become a.b.c.d</p>
 
 <h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1>

@@ -50,13 +50,11 @@
                    </a>
                </span><a class='srclink' href='../../src/std/io/stdio.rs.html#486-488' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Stderr { /* fields omitted */ }</pre><div class='docblock'><p>A handle to the standard error stream of a process.</p>
-
 <p>For more information, see the <a href="fn.stderr.html"><code>io::stderr</code></a> method.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/io/struct.Stderr.html" title="struct std::io::Stderr">Stderr</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/io/stdio.rs.html#549-574' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.lock' class="method"><span id='lock.v' class='invisible'><code>fn <a href='#method.lock' class='fnname'>lock</a>(&amp;self) -&gt; <a class="struct" href="../../std/io/struct.StderrLock.html" title="struct std::io::StderrLock">StderrLock</a></code></span></h4>
 <div class='docblock'><p>Locks this handle to the standard error stream, returning a writable
 guard.</p>
-
 <p>The lock is released when the returned lock goes out of scope. The
 returned guard also implements the <code>Write</code> trait for writing data.</p>
 

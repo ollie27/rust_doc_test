@@ -50,13 +50,11 @@
                    </a>
                </span><a class='srclink' href='../../src/std/io/buffered.rs.html#310-317' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct BufWriter&lt;W:&nbsp;<a class="trait" href="../../std/io/trait.Write.html" title="trait std::io::Write">Write</a>&gt; { /* fields omitted */ }</pre><div class='docblock'><p>Wraps a writer and buffers its output.</p>
-
 <p>It can be excessively inefficient to work directly with something that
 implements <a href="../../std/io/trait.Write.html"><code>Write</code></a>. For example, every call to
 <a href="../../std/net/struct.TcpStream.html#method.write"><code>write</code></a> on <a href="../../std/net/struct.TcpStream.html"><code>TcpStream</code></a> results in a system call. A
 <code>BufWriter</code> keeps an in-memory buffer of data and writes it to an underlying
 writer in large, infrequent batches.</p>
-
 <p>The buffer will be written out when the writer is dropped.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -71,7 +69,6 @@ writer in large, infrequent batches.</p>
 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="number">10</span> {
     <span class="ident">stream</span>.<span class="ident">write</span>(<span class="kw-2">&amp;</span>[<span class="ident">i</span>]).<span class="ident">unwrap</span>();
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3Aprelude%3A%3A*%3B%0Ause%20std%3A%3Anet%3A%3ATcpStream%3B%0A%0Alet%20mut%20stream%20%3D%20TcpStream%3A%3Aconnect(%22127.0.0.1%3A34254%22).unwrap()%3B%0A%0Afor%20i%20in%201..10%20%7B%0A%20%20%20%20stream.write(%26%5Bi%5D).unwrap()%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>Because we&#39;re not buffering, we write each one in turn, incurring the
 overhead of a system call per byte written. We can fix this with a
 <code>BufWriter</code>:</p>
@@ -86,7 +83,6 @@ overhead of a system call per byte written. We can fix this with a
 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="number">10</span> {
     <span class="ident">stream</span>.<span class="ident">write</span>(<span class="kw-2">&amp;</span>[<span class="ident">i</span>]).<span class="ident">unwrap</span>();
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3Aprelude%3A%3A*%3B%0Ause%20std%3A%3Aio%3A%3ABufWriter%3B%0Ause%20std%3A%3Anet%3A%3ATcpStream%3B%0A%0Alet%20mut%20stream%20%3D%20BufWriter%3A%3Anew(TcpStream%3A%3Aconnect(%22127.0.0.1%3A34254%22).unwrap())%3B%0A%0Afor%20i%20in%201..10%20%7B%0A%20%20%20%20stream.write(%26%5Bi%5D).unwrap()%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>By wrapping the stream with a <code>BufWriter</code>, these ten writes are all grouped
 together by the buffer, and will all be written out in one system call when
 the <code>stream</code> is dropped.</p>
@@ -126,7 +122,6 @@ the <code>stream</code> is dropped.</p>
 <span class="kw">let</span> <span class="ident">reference</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">get_ref</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3ABufWriter%3B%0Ause%20std%3A%3Anet%3A%3ATcpStream%3B%0A%0Alet%20mut%20buffer%20%3D%20BufWriter%3A%3Anew(TcpStream%3A%3Aconnect(%22127.0.0.1%3A34254%22).unwrap())%3B%0A%0A%2F%2F%20we%20can%20use%20reference%20just%20like%20buffer%0Alet%20reference%20%3D%20buffer.get_ref()%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut W</code></span></h4>
 <div class='docblock'><p>Gets a mutable reference to the underlying writer.</p>
-
 <p>It is inadvisable to directly write to the underlying writer.</p>
 
 <h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
@@ -140,7 +135,6 @@ the <code>stream</code> is dropped.</p>
 <span class="kw">let</span> <span class="ident">reference</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">get_mut</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3ABufWriter%3B%0Ause%20std%3A%3Anet%3A%3ATcpStream%3B%0A%0Alet%20mut%20buffer%20%3D%20BufWriter%3A%3Anew(TcpStream%3A%3Aconnect(%22127.0.0.1%3A34254%22).unwrap())%3B%0A%0A%2F%2F%20we%20can%20use%20reference%20just%20like%20buffer%0Alet%20reference%20%3D%20buffer.get_mut()%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.into_inner' class="method"><span id='into_inner.v' class='invisible'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;W, <a class="struct" href="../../std/io/struct.IntoInnerError.html" title="struct std::io::IntoInnerError">IntoInnerError</a>&lt;<a class="struct" href="../../std/io/struct.BufWriter.html" title="struct std::io::BufWriter">BufWriter</a>&lt;W&gt;&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Unwraps this <code>BufWriter</code>, returning the underlying writer.</p>
-
 <p>The buffer is written out before returning the writer.</p>
 
 <h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
@@ -169,7 +163,6 @@ the <code>stream</code> is dropped.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;W:&nbsp;<a class="trait" href="../../std/io/trait.Write.html" title="trait std::io::Write">Write</a> + <a class="trait" href="../../std/io/trait.Seek.html" title="trait std::io::Seek">Seek</a>&gt; <a class="trait" href="../../std/io/trait.Seek.html" title="trait std::io::Seek">Seek</a> for <a class="struct" href="../../std/io/struct.BufWriter.html" title="struct std::io::BufWriter">BufWriter</a>&lt;W&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/io/buffered.rs.html#501-508' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.seek' class="method"><span id='seek.v' class='invisible'><code>fn <a href='../../std/io/trait.Seek.html#tymethod.seek' class='fnname'>seek</a>(&amp;mut self, pos: <a class="enum" href="../../std/io/enum.SeekFrom.html" title="enum std::io::SeekFrom">SeekFrom</a>) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../primitive.u64.html">u64</a>&gt;</code></span></h4>
 <div class='docblock'><p>Seek to the offset, in bytes, in the underlying writer.</p>
-
 <p>Seeking always writes out the internal buffer before seeking.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;W:&nbsp;<a class="trait" href="../../std/io/trait.Write.html" title="trait std::io::Write">Write</a>&gt; <a class="trait" href="../../std/ops/trait.Drop.html" title="trait std::ops::Drop">Drop</a> for <a class="struct" href="../../std/io/struct.BufWriter.html" title="struct std::io::BufWriter">BufWriter</a>&lt;W&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/io/buffered.rs.html#511-518' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='../../std/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h4>

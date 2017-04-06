@@ -76,7 +76,6 @@
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Scalar</span>(<span class="number">16</span>) <span class="op">&gt;&gt;</span> <span class="ident">Scalar</span>(<span class="number">2</span>), <span class="ident">Scalar</span>(<span class="number">4</span>));
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Aops%3A%3AShr%3B%0A%0A%23%5Bderive(PartialEq%2C%20Debug)%5D%0Astruct%20Scalar(usize)%3B%0A%0Aimpl%20Shr%3CScalar%3E%20for%20Scalar%20%7B%0A%20%20%20%20type%20Output%20%3D%20Self%3B%0A%0A%20%20%20%20fn%20shr(self%2C%20Scalar(rhs)%3A%20Self)%20-%3E%20Scalar%20%7B%0A%20%20%20%20%20%20%20%20let%20Scalar(lhs)%20%3D%20self%3B%0A%20%20%20%20%20%20%20%20Scalar(lhs%20%3E%3E%20rhs)%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20assert_eq!(Scalar(16)%20%3E%3E%20Scalar(2)%2C%20Scalar(4))%3B%0A%7D%0A">Run</a></pre>
-
 <p>An implementation of <code>Shr</code> that spins a vector rightward by a given amount.</p>
 
 <pre class="rust rust-example-rendered">

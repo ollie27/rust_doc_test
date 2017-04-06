@@ -52,9 +52,7 @@
 <pre class='rust trait'>pub trait LowerExp {
     fn <a href='#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../primitive.tuple.html">()</a>, <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;;
 }</pre><div class='docblock'><p>Format trait for the <code>e</code> character.</p>
-
 <p>The <code>LowerExp</code> trait should format its output in scientific notation with a lower-case <code>e</code>.</p>
-
 <p>For more information on formatters, see <a href="../../std/fmt/index.html">the module-level documentation</a>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -64,7 +62,6 @@
 <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">42.0</span>; <span class="comment">// 42.0 is &#39;4.2e1&#39; in scientific notation</span>
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:e}&quot;</span>, <span class="ident">x</span>), <span class="string">&quot;4.2e1&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%2042.0%3B%20%2F%2F%2042.0%20is%20'4.2e1'%20in%20scientific%20notation%0A%0Aassert_eq!(format!(%22%7B%3Ae%7D%22%2C%20x)%2C%20%224.2e1%22)%3B%0A%7D">Run</a></pre>
-
 <p>Implementing <code>LowerExp</code> on a type:</p>
 
 <pre class="rust rust-example-rendered">

@@ -50,11 +50,9 @@
                    </a>
                </span><a class='srclink' href='../../src/std/thread/local.rs.html#81-100' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct LocalKey&lt;T:&nbsp;'static&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A thread local storage key which owns its contents.</p>
-
 <p>This key uses the fastest possible implementation available to it for the
 target platform. It is instantiated with the <code>thread_local!</code> macro and the
 primary method is the <code>with</code> method.</p>
-
 <p>The <code>with</code> method yields a reference to the contained value which cannot be
 sent across threads or escape the given closure.</p>
 
@@ -93,7 +91,6 @@ thread exits. Some caveats apply, which are explained below.</p>
 stored in thread local storage are run, but not all platforms can guarantee
 that destructors will be run for all types in thread local storage. For
 example, there are a number of known caveats where destructors are not run:</p>
-
 <ol>
 <li>On Unix systems when pthread-based TLS is being used, destructors will
 not be run for TLS values on the main thread when it exits. Note that the
@@ -111,7 +108,6 @@ the slots have already had their destructors run or not.</li>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;'static&gt; <a class="struct" href="../../std/thread/struct.LocalKey.html" title="struct std::thread::LocalKey">LocalKey</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/thread/local.rs.html#223-319' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.with' class="method"><span id='with.v' class='invisible'><code>fn <a href='#method.with' class='fnname'>with</a>&lt;F, R&gt;(&amp;'static self, f: F) -&gt; R <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnOnce.html" title="trait std::ops::FnOnce">FnOnce</a>(&amp;T) -&gt; R</span></code></span></h4>
 <div class='docblock'><p>Acquires a reference to the value in this TLS key.</p>
-
 <p>This will lazily initialize the value if this thread has not referenced
 this key yet.</p>
 
@@ -122,21 +118,17 @@ previously been run for this thread.</p>
 </div><h4 id='method.state' class="method"><span id='state.v' class='invisible'><code>fn <a href='#method.state' class='fnname'>state</a>(&amp;'static self) -&gt; <a class="enum" href="../../std/thread/enum.LocalKeyState.html" title="enum std::thread::LocalKeyState">LocalKeyState</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>thread_local_state </code><a href="https://github.com/rust-lang/rust/issues/27716">#27716</a>)</summary><p>state querying was recently added</p>
 </details></div></div><div class='docblock'><p>Query the current state of this key.</p>
-
 <p>A key is initially in the <code>Uninitialized</code> state whenever a thread
 starts. It will remain in this state up until the first call to <code>with</code>
 within a thread has run the initialization expression successfully.</p>
-
 <p>Once the initialization expression succeeds, the key transitions to the
 <code>Valid</code> state which will guarantee that future calls to <code>with</code> will
 succeed within the thread.</p>
-
 <p>When a thread exits, each key will be destroyed in turn, and as keys are
 destroyed they will enter the <code>Destroyed</code> state just before the
 destructor starts to run. Keys may remain in the <code>Destroyed</code> state after
 destruction has completed. Keys without destructors (e.g. with types
 that are <code>Copy</code>), may never enter the <code>Destroyed</code> state.</p>
-
 <p>Keys in the <code>Uninitialized</code> state can be accessed so long as the
 initialization does not panic. Keys in the <code>Valid</code> state are guaranteed
 to be able to be accessed. Keys in the <code>Destroyed</code> state will panic on

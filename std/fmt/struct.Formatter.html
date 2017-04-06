@@ -65,22 +65,19 @@ integer, that will be added by this method.</p>
 is the prefix to put in front of the number.</li>
 <li>buf - the byte array that the number has been formatted into</li>
 </ul>
-
 <p>This function will correctly account for the flags provided as well as
 the minimum width. It will not take precision into account.</p>
 </div><h4 id='method.pad' class="method"><span id='pad.v' class='invisible'><code>fn <a href='#method.pad' class='fnname'>pad</a>(&amp;mut self, s: &amp;<a class="primitive" href="../primitive.str.html">str</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../primitive.tuple.html">()</a>, <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span></h4>
 <div class='docblock'><p>This function takes a string slice and emits it to the internal buffer
 after applying the relevant formatting flags specified. The flags
 recognized for generic strings are:</p>
-
 <ul>
 <li>width - the minimum width of what to emit</li>
 <li>fill/align - what to emit and where to emit it if the string
-           provided needs to be padded</li>
+provided needs to be padded</li>
 <li>precision - the maximum length to emit, the string is truncated if it
-          is longer than this length</li>
+is longer than this length</li>
 </ul>
-
 <p>Notably this function ignores the <code>flag</code> parameters.</p>
 </div><h4 id='method.write_str' class="method"><span id='write_str.v' class='invisible'><code>fn <a href='#method.write_str' class='fnname'>write_str</a>(&amp;mut self, data: &amp;<a class="primitive" href="../primitive.str.html">str</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="primitive" href="../primitive.tuple.html">()</a>, <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span></h4>
 <div class='docblock'><p>Writes some data to the underlying buffer contained within this

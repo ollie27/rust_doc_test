@@ -50,11 +50,9 @@
                    </a>
                </span><a class='srclink' href='../../src/std/ffi/c_str.rs.html#139-145' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct CStr { /* fields omitted */ }</pre><div class='docblock'><p>Representation of a borrowed C string.</p>
-
 <p>This dynamically sized type is only safely constructed via a borrowed
 version of an instance of <code>CString</code>. This type can be constructed from a raw
 C string as well and represents a C string borrowed from another location.</p>
-
 <p>Note that this structure is <strong>not</strong> <code>repr(C)</code> and is not recommended to be
 placed in the signatures of FFI functions. Instead safe wrappers of FFI
 functions may leverage the unsafe <code>from_ptr</code> constructor to provide a safe
@@ -73,7 +71,6 @@ interface to other consumers.</p>
     <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">my_string</span>());
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;string length: {}&quot;</span>, <span class="ident">slice</span>.<span class="ident">to_bytes</span>().<span class="ident">len</span>());
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3ACStr%3B%0Ause%20std%3A%3Aos%3A%3Araw%3A%3Ac_char%3B%0A%0Aextern%20%7B%20fn%20my_string()%20-%3E%20*const%20c_char%3B%20%7D%0A%0Aunsafe%20%7B%0A%20%20%20%20let%20slice%20%3D%20CStr%3A%3Afrom_ptr(my_string())%3B%0A%20%20%20%20println!(%22string%20length%3A%20%7B%7D%22%2C%20slice.to_bytes().len())%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>Passing a Rust-originating C string</p>
 
 <pre class="rust rust-example-rendered">
@@ -88,7 +85,6 @@ interface to other consumers.</p>
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;data data data data&quot;</span>).<span class="ident">unwrap</span>();
 <span class="ident">work</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3A%7BCString%2C%20CStr%7D%3B%0Ause%20std%3A%3Aos%3A%3Araw%3A%3Ac_char%3B%0A%0Afn%20work(data%3A%20%26CStr)%20%7B%0A%20%20%20%20extern%20%7B%20fn%20work_with(data%3A%20*const%20c_char)%3B%20%7D%0A%0A%20%20%20%20unsafe%20%7B%20work_with(data.as_ptr())%20%7D%0A%7D%0A%0Alet%20s%20%3D%20CString%3A%3Anew(%22data%20data%20data%20data%22).unwrap()%3B%0Awork(%26s)%3B%0A%7D">Run</a></pre>
-
 <p>Converting a foreign C string into a Rust <code>String</code></p>
 
 <pre class="rust rust-example-rendered">
@@ -107,11 +103,9 @@ interface to other consumers.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/ffi/struct.CStr.html" title="struct std::ffi::CStr">CStr</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/ffi/c_str.rs.html#549-751' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.from_ptr' class="method"><span id='from_ptr.v' class='invisible'><code>unsafe fn <a href='#method.from_ptr' class='fnname'>from_ptr</a>&lt;'a&gt;(ptr: <a class="primitive" href="../primitive.pointer.html">*const </a><a class="type" href="../../std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a>) -&gt; &amp;'a <a class="struct" href="../../std/ffi/struct.CStr.html" title="struct std::ffi::CStr">CStr</a></code></span></h4>
 <div class='docblock'><p>Casts a raw C string to a safe C string wrapper.</p>
-
 <p>This function will cast the provided <code>ptr</code> to the <code>CStr</code> wrapper which
 allows inspection and interoperation of non-owned C strings. This method
 is unsafe for a number of reasons:</p>
-
 <ul>
 <li>There is no guarantee to the validity of <code>ptr</code></li>
 <li>The returned lifetime is not guaranteed to be the actual lifetime of
@@ -119,7 +113,6 @@ is unsafe for a number of reasons:</p>
 <li>There is no guarantee that the memory pointed to by <code>ptr</code> contains a
 valid nul terminator byte at the end of the string.</li>
 </ul>
-
 <blockquote>
 <p><strong>Note</strong>: This operation is intended to be a 0-cost cast but it is
 currently implemented with an up-front calculation of the length of
@@ -141,7 +134,6 @@ the string. This is not guaranteed to always be the case.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3ACStr%3B%0Ause%20std%3A%3Aos%3A%3Araw%3A%3Ac_char%3B%0A%0Aextern%20%7B%0A%20%20%20%20fn%20my_string()%20-%3E%20*const%20c_char%3B%0A%7D%0A%0Aunsafe%20%7B%0A%20%20%20%20let%20slice%20%3D%20CStr%3A%3Afrom_ptr(my_string())%3B%0A%20%20%20%20println!(%22string%20returned%3A%20%7B%7D%22%2C%20slice.to_str().unwrap())%3B%0A%7D%0A%7D%0A">Run</a></pre>
 </div><h4 id='method.from_bytes_with_nul' class="method"><span id='from_bytes_with_nul.v' class='invisible'><code>fn <a href='#method.from_bytes_with_nul' class='fnname'>from_bytes_with_nul</a>(bytes: <a class="primitive" href="../primitive.slice.html">&amp;[</a><a class="primitive" href="../primitive.u8.html">u8</a><a class="primitive" href="../primitive.slice.html">]</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;&amp;<a class="struct" href="../../std/ffi/struct.CStr.html" title="struct std::ffi::CStr">CStr</a>, <a class="struct" href="../../std/ffi/struct.FromBytesWithNulError.html" title="struct std::ffi::FromBytesWithNulError">FromBytesWithNulError</a>&gt;</code><div class='since' title='Stable since Rust version 1.10.0'>1.10.0</div></span></h4>
 <div class='docblock'><p>Creates a C string wrapper from a byte slice.</p>
-
 <p>This function will cast the provided <code>bytes</code> to a <code>CStr</code> wrapper after
 ensuring that it is null terminated and does not contain any interior
 nul bytes.</p>
@@ -154,7 +146,6 @@ nul bytes.</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">cstr</span>.<span class="ident">is_ok</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3ACStr%3B%0A%0Alet%20cstr%20%3D%20CStr%3A%3Afrom_bytes_with_nul(b%22hello%5C0%22)%3B%0Aassert!(cstr.is_ok())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.from_bytes_with_nul_unchecked' class="method"><span id='from_bytes_with_nul_unchecked.v' class='invisible'><code>unsafe fn <a href='#method.from_bytes_with_nul_unchecked' class='fnname'>from_bytes_with_nul_unchecked</a>(bytes: <a class="primitive" href="../primitive.slice.html">&amp;[</a><a class="primitive" href="../primitive.u8.html">u8</a><a class="primitive" href="../primitive.slice.html">]</a>) -&gt; &amp;<a class="struct" href="../../std/ffi/struct.CStr.html" title="struct std::ffi::CStr">CStr</a></code><div class='since' title='Stable since Rust version 1.10.0'>1.10.0</div></span></h4>
 <div class='docblock'><p>Unsafely creates a C string wrapper from a byte slice.</p>
-
 <p>This function will cast the provided <code>bytes</code> to a <code>CStr</code> wrapper without
 performing any sanity checks. The provided slice must be null terminated
 and not contain any interior nul bytes.</p>
@@ -170,13 +161,10 @@ and not contain any interior nul bytes.</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3A%7BCStr%2C%20CString%7D%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20let%20cstring%20%3D%20CString%3A%3Anew(%22hello%22).unwrap()%3B%0A%20%20%20%20let%20cstr%20%3D%20CStr%3A%3Afrom_bytes_with_nul_unchecked(cstring.to_bytes_with_nul())%3B%0A%20%20%20%20assert_eq!(cstr%2C%20%26*cstring)%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.as_ptr' class="method"><span id='as_ptr.v' class='invisible'><code>fn <a href='#method.as_ptr' class='fnname'>as_ptr</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.pointer.html">*const </a><a class="type" href="../../std/os/raw/type.c_char.html" title="type std::os::raw::c_char">c_char</a></code></span></h4>
 <div class='docblock'><p>Returns the inner pointer to this C string.</p>
-
 <p>The returned pointer will be valid for as long as <code>self</code> is and points
 to a contiguous region of memory terminated with a 0 byte to represent
 the end of the string.</p>
-
 <p><strong>WARNING</strong></p>
-
 <p>It is your responsibility to make sure that the underlying memory is not
 freed too early. For example, the following code will cause undefined
 behaviour when <code>ptr</code> is used inside the <code>unsafe</code> block:</p>
@@ -189,7 +177,6 @@ behaviour when <code>ptr</code> is used inside the <code>unsafe</code> block:</p
     <span class="comment">// `ptr` is dangling</span>
     <span class="kw-2">*</span><span class="ident">ptr</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3A%7BCString%7D%3B%0A%0Alet%20ptr%20%3D%20CString%3A%3Anew(%22Hello%22).unwrap().as_ptr()%3B%0Aunsafe%20%7B%0A%20%20%20%20%2F%2F%20%60ptr%60%20is%20dangling%0A%20%20%20%20*ptr%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>This happens because the pointer returned by <code>as_ptr</code> does not carry any
 lifetime information and the string is deallocated immediately after
 the <code>CString::new(&quot;Hello&quot;).unwrap().as_ptr()</code> expression is evaluated.
@@ -206,14 +193,11 @@ To fix the problem, bind the string to a local variable:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Affi%3A%3A%7BCString%7D%3B%0A%0Alet%20hello%20%3D%20CString%3A%3Anew(%22Hello%22).unwrap()%3B%0Alet%20ptr%20%3D%20hello.as_ptr()%3B%0Aunsafe%20%7B%0A%20%20%20%20%2F%2F%20%60ptr%60%20is%20valid%20because%20%60hello%60%20is%20in%20scope%0A%20%20%20%20*ptr%3B%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.to_bytes' class="method"><span id='to_bytes.v' class='invisible'><code>fn <a href='#method.to_bytes' class='fnname'>to_bytes</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.slice.html">&amp;[</a><a class="primitive" href="../primitive.u8.html">u8</a><a class="primitive" href="../primitive.slice.html">]</a></code></span></h4>
 <div class='docblock'><p>Converts this C string to a byte slice.</p>
-
 <p>This function will calculate the length of this string (which normally
 requires a linear amount of work to be done) and then return the
 resulting slice of <code>u8</code> elements.</p>
-
 <p>The returned slice will <strong>not</strong> contain the trailing nul that this C
 string has.</p>
-
 <blockquote>
 <p><strong>Note</strong>: This method is currently implemented as a 0-cost cast, but
 it is planned to alter its definition in the future to perform the
@@ -221,10 +205,8 @@ length calculation whenever this method is called.</p>
 </blockquote>
 </div><h4 id='method.to_bytes_with_nul' class="method"><span id='to_bytes_with_nul.v' class='invisible'><code>fn <a href='#method.to_bytes_with_nul' class='fnname'>to_bytes_with_nul</a>(&amp;self) -&gt; <a class="primitive" href="../primitive.slice.html">&amp;[</a><a class="primitive" href="../primitive.u8.html">u8</a><a class="primitive" href="../primitive.slice.html">]</a></code></span></h4>
 <div class='docblock'><p>Converts this C string to a byte slice containing the trailing 0 byte.</p>
-
 <p>This function is the equivalent of <code>to_bytes</code> except that it will retain
 the trailing nul instead of chopping it off.</p>
-
 <blockquote>
 <p><strong>Note</strong>: This method is currently implemented as a 0-cost cast, but
 it is planned to alter its definition in the future to perform the
@@ -232,10 +214,8 @@ length calculation whenever this method is called.</p>
 </blockquote>
 </div><h4 id='method.to_str' class="method"><span id='to_str.v' class='invisible'><code>fn <a href='#method.to_str' class='fnname'>to_str</a>(&amp;self) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;&amp;<a class="primitive" href="../primitive.str.html">str</a>, <a class="struct" href="../../std/str/struct.Utf8Error.html" title="struct std::str::Utf8Error">Utf8Error</a>&gt;</code><div class='since' title='Stable since Rust version 1.4.0'>1.4.0</div></span></h4>
 <div class='docblock'><p>Yields a <code>&amp;str</code> slice if the <code>CStr</code> contains valid UTF-8.</p>
-
 <p>This function will calculate the length of this string and check for
 UTF-8 validity, and then return the <code>&amp;str</code> if it&#39;s valid.</p>
-
 <blockquote>
 <p><strong>Note</strong>: This method is currently implemented to check for validity
 after a 0-cost cast, but it is planned to alter its definition in the
@@ -244,12 +224,10 @@ check whenever this method is called.</p>
 </blockquote>
 </div><h4 id='method.to_string_lossy' class="method"><span id='to_string_lossy.v' class='invisible'><code>fn <a href='#method.to_string_lossy' class='fnname'>to_string_lossy</a>(&amp;self) -&gt; <a class="enum" href="../../std/borrow/enum.Cow.html" title="enum std::borrow::Cow">Cow</a>&lt;<a class="primitive" href="../primitive.str.html">str</a>&gt;</code><div class='since' title='Stable since Rust version 1.4.0'>1.4.0</div></span></h4>
 <div class='docblock'><p>Converts a <code>CStr</code> into a <code>Cow&lt;str&gt;</code>.</p>
-
 <p>This function will calculate the length of this string (which normally
 requires a linear amount of work to be done) and then return the
 resulting slice as a <code>Cow&lt;str&gt;</code>, replacing any invalid UTF-8 sequences
 with <code>U+FFFD REPLACEMENT CHARACTER</code>.</p>
-
 <blockquote>
 <p><strong>Note</strong>: This method is currently implemented to check for validity
 after a 0-cost cast, but it is planned to alter its definition in the

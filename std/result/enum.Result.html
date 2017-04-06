@@ -54,7 +54,6 @@
     Ok(T),
     Err(E),
 }</pre><div class='docblock'><p><code>Result</code> is a type that represents either success (<code>Ok</code>) or failure (<code>Err</code>).</p>
-
 <p>See the <a href="index.html"><code>std::result</code></a> module documentation for details.</p>
 </div><h2 class='variants'>Variants</h2>
 <span id='variant.Ok' class='variant'><span id='Ok.v' class='invisible'><code>Ok(T)</code></span></span><div class='docblock'><p>Contains the success value</p>
@@ -86,7 +85,6 @@
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">is_err</span>(), <span class="bool-val">true</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Result%3Ci32%2C%20%26str%3E%20%3D%20Ok(-3)%3B%0Aassert_eq!(x.is_err()%2C%20false)%3B%0A%0Alet%20x%3A%20Result%3Ci32%2C%20%26str%3E%20%3D%20Err(%22Some%20error%20message%22)%3B%0Aassert_eq!(x.is_err()%2C%20true)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.ok' class="method"><span id='ok.v' class='invisible'><code>fn <a href='#method.ok' class='fnname'>ok</a>(self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Converts from <code>Result&lt;T, E&gt;</code> to <a href="../../std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a>.</p>
-
 <p>Converts <code>self</code> into an <a href="../../std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a>, consuming <code>self</code>,
 and discarding the error, if any.</p>
 
@@ -101,7 +99,6 @@ and discarding the error, if any.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">ok</span>(), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Aassert_eq!(x.ok()%2C%20Some(2))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22Nothing%20here%22)%3B%0Aassert_eq!(x.ok()%2C%20None)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.err' class="method"><span id='err.v' class='invisible'><code>fn <a href='#method.err' class='fnname'>err</a>(self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;E&gt;</code></span></h4>
 <div class='docblock'><p>Converts from <code>Result&lt;T, E&gt;</code> to <a href="../../std/option/enum.Option.html"><code>Option&lt;E&gt;</code></a>.</p>
-
 <p>Converts <code>self</code> into an <a href="../../std/option/enum.Option.html"><code>Option&lt;E&gt;</code></a>, consuming <code>self</code>,
 and discarding the success value, if any.</p>
 
@@ -116,7 +113,6 @@ and discarding the success value, if any.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">err</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;Nothing here&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Aassert_eq!(x.err()%2C%20None)%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22Nothing%20here%22)%3B%0Aassert_eq!(x.err()%2C%20Some(%22Nothing%20here%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.as_ref' class="method"><span id='as_ref.v' class='invisible'><code>fn <a href='#method.as_ref' class='fnname'>as_ref</a>(&amp;self) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;&amp;T, &amp;E&gt;</code></span></h4>
 <div class='docblock'><p>Converts from <code>Result&lt;T, E&gt;</code> to <code>Result&lt;&amp;T, &amp;E&gt;</code>.</p>
-
 <p>Produces a new <code>Result</code>, containing a reference
 into the original, leaving the original in place.</p>
 
@@ -153,7 +149,6 @@ into the original, leaving the original in place.</p>
 </div><h4 id='method.map' class="method"><span id='map.v' class='invisible'><code>fn <a href='#method.map' class='fnname'>map</a>&lt;U, F&gt;(self, op: F) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;U, E&gt; <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnOnce.html" title="trait std::ops::FnOnce">FnOnce</a>(T) -&gt; U</span></code></span></h4>
 <div class='docblock'><p>Maps a <code>Result&lt;T, E&gt;</code> to <code>Result&lt;U, E&gt;</code> by applying a function to a
 contained <code>Ok</code> value, leaving an <code>Err</code> value untouched.</p>
-
 <p>This function can be used to compose the results of two functions.</p>
 
 <h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
@@ -171,7 +166,6 @@ contained <code>Ok</code> value, leaving an <code>Err</code> value untouched.</p
 </div><h4 id='method.map_err' class="method"><span id='map_err.v' class='invisible'><code>fn <a href='#method.map_err' class='fnname'>map_err</a>&lt;F, O&gt;(self, op: O) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, F&gt; <span class="where fmt-newline">where O: <a class="trait" href="../../std/ops/trait.FnOnce.html" title="trait std::ops::FnOnce">FnOnce</a>(E) -&gt; F</span></code></span></h4>
 <div class='docblock'><p>Maps a <code>Result&lt;T, E&gt;</code> to <code>Result&lt;T, F&gt;</code> by applying a function to a
 contained <code>Err</code> value, leaving an <code>Ok</code> value untouched.</p>
-
 <p>This function can be used to pass through a successful result while handling
 an error.</p>
 
@@ -188,7 +182,6 @@ an error.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">map_err</span>(<span class="ident">stringify</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;error code: 13&quot;</span>.<span class="ident">to_string</span>()));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20stringify(x%3A%20u32)%20-%3E%20String%20%7B%20format!(%22error%20code%3A%20%7B%7D%22%2C%20x)%20%7D%0A%0Alet%20x%3A%20Result%3Cu32%2C%20u32%3E%20%3D%20Ok(2)%3B%0Aassert_eq!(x.map_err(stringify)%2C%20Ok(2))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20u32%3E%20%3D%20Err(13)%3B%0Aassert_eq!(x.map_err(stringify)%2C%20Err(%22error%20code%3A%2013%22.to_string()))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.iter' class="method"><span id='iter.v' class='invisible'><code>fn <a href='#method.iter' class='fnname'>iter</a>(&amp;self) -&gt; <a class="struct" href="../../std/result/struct.Iter.html" title="struct std::result::Iter">Iter</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Returns an iterator over the possibly contained value.</p>
-
 <p>The iterator yields one value if the result is <a href="enum.Result.html#variant.Ok"><code>Ok</code></a>, otherwise none.</p>
 
 <h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1>
@@ -202,7 +195,6 @@ an error.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">iter</span>().<span class="ident">next</span>(), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(7)%3B%0Aassert_eq!(x.iter().next()%2C%20Some(%267))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22nothing!%22)%3B%0Aassert_eq!(x.iter().next()%2C%20None)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.iter_mut' class="method"><span id='iter_mut.v' class='invisible'><code>fn <a href='#method.iter_mut' class='fnname'>iter_mut</a>(&amp;mut self) -&gt; <a class="struct" href="../../std/result/struct.IterMut.html" title="struct std::result::IterMut">IterMut</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Returns a mutable iterator over the possibly contained value.</p>
-
 <p>The iterator yields one value if the result is <a href="enum.Result.html#variant.Ok"><code>Ok</code></a>, otherwise none.</p>
 
 <h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1>
@@ -242,7 +234,6 @@ an error.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">and</span>(<span class="ident">y</span>), <span class="prelude-val">Ok</span>(<span class="string">&quot;different result type&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Alet%20y%3A%20Result%3C%26str%2C%20%26str%3E%20%3D%20Err(%22late%20error%22)%3B%0Aassert_eq!(x.and(y)%2C%20Err(%22late%20error%22))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22early%20error%22)%3B%0Alet%20y%3A%20Result%3C%26str%2C%20%26str%3E%20%3D%20Ok(%22foo%22)%3B%0Aassert_eq!(x.and(y)%2C%20Err(%22early%20error%22))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22not%20a%202%22)%3B%0Alet%20y%3A%20Result%3C%26str%2C%20%26str%3E%20%3D%20Err(%22late%20error%22)%3B%0Aassert_eq!(x.and(y)%2C%20Err(%22not%20a%202%22))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Alet%20y%3A%20Result%3C%26str%2C%20%26str%3E%20%3D%20Ok(%22different%20result%20type%22)%3B%0Aassert_eq!(x.and(y)%2C%20Ok(%22different%20result%20type%22))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.and_then' class="method"><span id='and_then.v' class='invisible'><code>fn <a href='#method.and_then' class='fnname'>and_then</a>&lt;U, F&gt;(self, op: F) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;U, E&gt; <span class="where fmt-newline">where F: <a class="trait" href="../../std/ops/trait.FnOnce.html" title="trait std::ops::FnOnce">FnOnce</a>(T) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;U, E&gt;</span></code></span></h4>
 <div class='docblock'><p>Calls <code>op</code> if the result is <code>Ok</code>, otherwise returns the <code>Err</code> value of <code>self</code>.</p>
-
 <p>This function can be used for control flow based on <code>Result</code> values.</p>
 
 <h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1>
@@ -280,7 +271,6 @@ an error.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>.<span class="ident">or</span>(<span class="ident">y</span>), <span class="prelude-val">Ok</span>(<span class="number">2</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Alet%20y%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22late%20error%22)%3B%0Aassert_eq!(x.or(y)%2C%20Ok(2))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22early%20error%22)%3B%0Alet%20y%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Aassert_eq!(x.or(y)%2C%20Ok(2))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22not%20a%202%22)%3B%0Alet%20y%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Err(%22late%20error%22)%3B%0Aassert_eq!(x.or(y)%2C%20Err(%22late%20error%22))%3B%0A%0Alet%20x%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(2)%3B%0Alet%20y%3A%20Result%3Cu32%2C%20%26str%3E%20%3D%20Ok(100)%3B%0Aassert_eq!(x.or(y)%2C%20Ok(2))%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.or_else' class="method"><span id='or_else.v' class='invisible'><code>fn <a href='#method.or_else' class='fnname'>or_else</a>&lt;F, O&gt;(self, op: O) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, F&gt; <span class="where fmt-newline">where O: <a class="trait" href="../../std/ops/trait.FnOnce.html" title="trait std::ops::FnOnce">FnOnce</a>(E) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, F&gt;</span></code></span></h4>
 <div class='docblock'><p>Calls <code>op</code> if the result is <code>Err</code>, otherwise returns the <code>Ok</code> value of <code>self</code>.</p>
-
 <p>This function can be used for control flow based on result values.</p>
 
 <h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1>
@@ -383,7 +373,6 @@ passed message, and the content of the <code>Ok</code>.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T, E&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, E&gt; <span class="where fmt-newline">where T: <a class="trait" href="../../std/default/trait.Default.html" title="trait std::default::Default">Default</a></span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/result.rs.html#819-853' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.unwrap_or_default' class="method"><span id='unwrap_or_default.v' class='invisible'><code>fn <a href='#method.unwrap_or_default' class='fnname'>unwrap_or_default</a>(self) -&gt; T</code><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div></span></h4>
 <div class='docblock'><p>Returns the contained value or a default</p>
-
 <p>Consumes the <code>self</code> argument then, if <code>Ok</code>, returns the contained
 value, otherwise if <code>Err</code>, returns the default value for that
 type.</p>
@@ -440,7 +429,6 @@ a string to any other type that implements <a href="../../std/str/trait.FromStr.
 <div class='docblock'><p>Takes each element in the <code>Iterator</code>: if it is an <code>Err</code>, no further
 elements are taken, and the <code>Err</code> is returned. Should no <code>Err</code> occur, a
 container with the values of each <code>Result</code> is returned.</p>
-
 <p>Here is an example which increments every integer in a vector,
 checking for overflow:</p>
 
@@ -463,7 +451,6 @@ checking for overflow:</p>
 <div class='docblock'><p>Which kind of iterator are we turning this into?</p>
 </div><h4 id='method.into_iter' class="method"><span id='into_iter.v' class='invisible'><code>fn <a href='../../std/iter/trait.IntoIterator.html#tymethod.into_iter' class='fnname'>into_iter</a>(self) -&gt; <a class="struct" href="../../std/result/struct.IntoIter.html" title="struct std::result::IntoIter">IntoIter</a>&lt;T&gt;</code></span></h4>
 <div class='docblock'><p>Returns a consuming iterator over the possibly contained value.</p>
-
 <p>The iterator yields one value if the result is <a href="enum.Result.html#variant.Ok"><code>Ok</code></a>, otherwise none.</p>
 
 <h1 id='examples-21' class='section-header'><a href='#examples-21'>Examples</a></h1>

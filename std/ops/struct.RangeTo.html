@@ -53,9 +53,7 @@
     pub end: Idx,
 }</pre><div class='docblock'><p>A range which is only bounded above: { x | x &lt; end }.
 Use <code>..end</code> (two dots) for its shorthand.</p>
-
 <p>See the <a href="#method.contains"><code>contains</code></a> method for its characterization.</p>
-
 <p>It cannot serve as an iterator because it doesn&#39;t have a starting point.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -63,7 +61,6 @@ Use <code>..end</code> (two dots) for its shorthand.</p>
 
 <pre class="rust rust-example-rendered">
 <span class="macro">assert_eq</span><span class="macro">!</span>((..<span class="number">5</span>), <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">RangeTo</span>{ <span class="ident">end</span>: <span class="number">5</span> });<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aassert_eq!((..5)%2C%20std%3A%3Aops%3A%3ARangeTo%7B%20end%3A%205%20%7D)%3B%0A%7D">Run</a></pre>
-
 <p>It does not have an <code>IntoIterator</code> implementation, so you can&#39;t use it in a
 <code>for</code> loop directly. This won&#39;t compile:</p>
 
@@ -71,7 +68,6 @@ Use <code>..end</code> (two dots) for its shorthand.</p>
 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> ..<span class="number">5</span> {
     <span class="comment">// ...</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afor%20i%20in%20..5%20%7B%0A%20%20%20%20%2F%2F%20...%0A%7D%0A%7D">Run</a></pre>
-
 <p>When used as a slicing index, <code>RangeTo</code> produces a slice of all array
 elements before the index indicated by <code>end</code>.</p>
 

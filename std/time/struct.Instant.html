@@ -51,22 +51,18 @@
                </span><a class='srclink' href='../../src/std/time/mod.rs.html#71' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Instant(_);</pre><div class='docblock'><p>A measurement of a monotonically increasing clock.
 Opaque and useful only with <code>Duration</code>.</p>
-
 <p>Instants are always guaranteed to be greater than any previously measured
 instant when created, and are often useful for tasks such as measuring
 benchmarks or timing how long an operation takes.</p>
-
 <p>Note, however, that instants are not guaranteed to be <strong>steady</strong>.  In other
 words, each tick of the underlying clock may not be the same length (e.g.
 some seconds may be longer than others). An instant may jump forwards or
 experience time dilation (slow down or speed up), but it will never go
 backwards.</p>
-
 <p>Instants are opaque types that can only be compared to one another. There is
 no method to get &quot;the number of seconds&quot; from an instant. Instead, it only
 allows measuring the duration between two instants (or comparing two
 instants).</p>
-
 <p>Example:</p>
 
 <pre class="rust rust-example-rendered">

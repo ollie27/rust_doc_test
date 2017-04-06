@@ -53,15 +53,10 @@
 </div>pub trait Debug {
     fn <a href='#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../collections/fmt/struct.Formatter.html" title="struct collections::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;(), <a class="struct" href="../../collections/fmt/struct.Error.html" title="struct collections::fmt::Error">Error</a>&gt;;
 }</pre><div class='docblock'><p>Format trait for the <code>?</code> character.</p>
-
 <p><code>Debug</code> should format the output in a programmer-facing, debugging context.</p>
-
 <p>Generally speaking, you should just <code>derive</code> a <code>Debug</code> implementation.</p>
-
 <p>When used with the alternate format specifier <code>#?</code>, the output is pretty-printed.</p>
-
 <p>For more information on formatters, see <a href="../../std/fmt/index.html">the module-level documentation</a>.</p>
-
 <p>This trait can be used with <code>#[derive]</code> if all fields implement <code>Debug</code>. When
 <code>derive</code>d for structs, it will use the name of the <code>struct</code>, then <code>{</code>, then a
 comma-separated list of each field&#39;s name and <code>Debug</code> value, then <code>}</code>. For
@@ -81,7 +76,6 @@ comma-separated list of each field&#39;s name and <code>Debug</code> value, then
 <span class="kw">let</span> <span class="ident">origin</span> <span class="op">=</span> <span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">0</span>, <span class="ident">y</span>: <span class="number">0</span> };
 
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;The origin is: {:?}&quot;</span>, <span class="ident">origin</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Bderive(Debug)%5D%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Alet%20origin%20%3D%20Point%20%7B%20x%3A%200%2C%20y%3A%200%20%7D%3B%0A%0Aprintln!(%22The%20origin%20is%3A%20%7B%3A%3F%7D%22%2C%20origin)%3B%0A%7D">Run</a></pre>
-
 <p>Manually implementing:</p>
 
 <pre class="rust rust-example-rendered">
@@ -101,18 +95,13 @@ comma-separated list of each field&#39;s name and <code>Debug</code> value, then
 <span class="kw">let</span> <span class="ident">origin</span> <span class="op">=</span> <span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">0</span>, <span class="ident">y</span>: <span class="number">0</span> };
 
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;The origin is: {:?}&quot;</span>, <span class="ident">origin</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afmt%3B%0A%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Aimpl%20fmt%3A%3ADebug%20for%20Point%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter)%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22Point%20%7B%7B%20x%3A%20%7B%7D%2C%20y%3A%20%7B%7D%20%7D%7D%22%2C%20self.x%2C%20self.y)%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20origin%20%3D%20Point%20%7B%20x%3A%200%2C%20y%3A%200%20%7D%3B%0A%0Aprintln!(%22The%20origin%20is%3A%20%7B%3A%3F%7D%22%2C%20origin)%3B%0A%7D">Run</a></pre>
-
 <p>This outputs:</p>
-
 <pre><code class="language-text">The origin is: Point { x: 0, y: 0 }
 </code></pre>
-
 <p>There are a number of <code>debug_*</code> methods on <code>Formatter</code> to help you with manual
 implementations, such as <a href="../../std/fmt/struct.Formatter.html#method.debug_struct"><code>debug_struct</code></a>.</p>
-
 <p><code>Debug</code> implementations using either <code>derive</code> or the debug builder API
 on <code>Formatter</code> support pretty printing using the alternate flag: <code>{:#?}</code>.</p>
-
 <p>Pretty printing with <code>#?</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -125,9 +114,7 @@ on <code>Formatter</code> support pretty printing using the alternate flag: <cod
 <span class="kw">let</span> <span class="ident">origin</span> <span class="op">=</span> <span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">0</span>, <span class="ident">y</span>: <span class="number">0</span> };
 
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;The origin is: {:#?}&quot;</span>, <span class="ident">origin</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Bderive(Debug)%5D%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Alet%20origin%20%3D%20Point%20%7B%20x%3A%200%2C%20y%3A%200%20%7D%3B%0A%0Aprintln!(%22The%20origin%20is%3A%20%7B%3A%23%3F%7D%22%2C%20origin)%3B%0A%7D">Run</a></pre>
-
 <p>This outputs:</p>
-
 <pre><code class="language-text">The origin is: Point {
     x: 0,
     y: 0

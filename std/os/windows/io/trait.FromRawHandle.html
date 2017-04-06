@@ -56,11 +56,9 @@
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.from_raw_handle' class='method'><span id='from_raw_handle.v' class='invisible'><code>unsafe fn <a href='#tymethod.from_raw_handle' class='fnname'>from_raw_handle</a>(handle: <a class="type" href="../../../../std/os/windows/io/type.RawHandle.html" title="type std::os::windows::io::RawHandle">RawHandle</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Constructs a new I/O object from the specified raw handle.</p>
-
 <p>This function will <strong>consume ownership</strong> of the handle given,
 passing responsibility for closing the handle to the returned
 object.</p>
-
 <p>This function is also unsafe as the primitives currently returned
 have the contract that they are the sole owner of the file
 descriptor they are wrapping. Usage of this function could

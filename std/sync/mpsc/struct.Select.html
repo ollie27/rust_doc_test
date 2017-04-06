@@ -56,7 +56,6 @@ a set of receivers which are being selected over.</p>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../../std/sync/mpsc/struct.Select.html" title="struct std::sync::mpsc::Select">Select</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>mpsc_select </code><a href="https://github.com/rust-lang/rust/issues/27800">#27800</a>)</summary><p>This implementation, while likely sufficient, is unsafe and likely to be error prone. At some point in the future this module will likely be replaced, and it is currently unknown how much API breakage that will cause. The ability to select over a number of channels will remain forever, but no guarantees beyond this are being made</p>
 </details></div></div><div class='docblock'><p>Creates a new selection structure. This set is initially empty.</p>
-
 <p>Usage of this struct directly can sometimes be burdensome, and usage is much easier through
 the <code>select!</code> macro.</p>
 

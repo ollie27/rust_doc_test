@@ -55,17 +55,14 @@
 that allocate an intermediate &quot;place&quot; that holds uninitialized
 state.  The desugaring evaluates EXPR, and writes the result at
 the address returned by the <code>pointer</code> method of this trait.</p>
-
 <p>A <code>Place</code> can be thought of as a special representation for a
 hypothetical <code>&amp;uninit</code> reference (which Rust cannot currently
 express directly). That is, it represents a pointer to
 uninitialized storage.</p>
-
 <p>The client is responsible for two steps: First, initializing the
 payload (it can access its address via <code>pointer</code>). Second,
 converting the agent to an instance of the owning pointer, via the
 appropriate <code>finalize</code> method (see the <code>InPlace</code>.</p>
-
 <p>If evaluating EXPR fails, then it is up to the destructor for the
 implementation of Place to clean up any intermediate state
 (e.g. deallocate box storage, pop a stack, etc).</p>

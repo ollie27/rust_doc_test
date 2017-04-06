@@ -58,14 +58,11 @@
     fn <a href='#method.gt' class='fnname'>gt</a>(&amp;self, other: &amp;Rhs) -&gt; bool { ... }
     fn <a href='#method.ge' class='fnname'>ge</a>(&amp;self, other: &amp;Rhs) -&gt; bool { ... }
 }</pre><div class='docblock'><p>Trait for values that can be compared for a sort-order.</p>
-
 <p>The comparison must satisfy, for all <code>a</code>, <code>b</code> and <code>c</code>:</p>
-
 <ul>
 <li>antisymmetry: if <code>a &lt; b</code> then <code>!(a &gt; b)</code>, as well as <code>a &gt; b</code> implying <code>!(a &lt; b)</code>; and</li>
 <li>transitivity: <code>a &lt; b</code> and <code>b &lt; c</code> implies <code>a &lt; c</code>. The same must hold for both <code>==</code> and <code>&gt;</code>.</li>
 </ul>
-
 <p>Note that these requirements mean that the trait itself must be implemented symmetrically and
 transitively: if <code>T: PartialOrd&lt;U&gt;</code> and <code>U: PartialOrd&lt;V&gt;</code> then <code>U: PartialOrd&lt;T&gt;</code> and <code>T: PartialOrd&lt;V&gt;</code>.</p>
 
@@ -76,12 +73,9 @@ ordering based on the top-to-bottom declaration order of the struct&#39;s member
 <h2 id='how-can-i-implement-partialord' class='section-header'><a href='#how-can-i-implement-partialord'>How can I implement <code>PartialOrd</code>?</a></h2>
 <p>PartialOrd only requires implementation of the <code>partial_cmp</code> method, with the others generated
 from default implementations.</p>
-
 <p>However it remains possible to implement the others separately for types which do not have a
 total order. For example, for floating point numbers, <code>NaN &lt; 0 == false</code> and <code>NaN &gt;= 0 == false</code> (cf. IEEE 754-2008 section 5.11).</p>
-
 <p><code>PartialOrd</code> requires your type to be <code>PartialEq</code>.</p>
-
 <p>If your type is <code>Ord</code>, you can implement <code>partial_cmp()</code> by using <code>cmp()</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -111,7 +105,6 @@ total order. For example, for floating point numbers, <code>NaN &lt; 0 == false<
         <span class="self">self</span>.<span class="ident">height</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">height</span>
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acmp%3A%3AOrdering%3B%0A%0A%23%5Bderive(Eq)%5D%0Astruct%20Person%20%7B%0A%20%20%20%20id%3A%20u32%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20height%3A%20u32%2C%0A%7D%0A%0Aimpl%20PartialOrd%20for%20Person%20%7B%0A%20%20%20%20fn%20partial_cmp(%26self%2C%20other%3A%20%26Person)%20-%3E%20Option%3COrdering%3E%20%7B%0A%20%20%20%20%20%20%20%20Some(self.cmp(other))%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Ord%20for%20Person%20%7B%0A%20%20%20%20fn%20cmp(%26self%2C%20other%3A%20%26Person)%20-%3E%20Ordering%20%7B%0A%20%20%20%20%20%20%20%20self.height.cmp(%26other.height)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20PartialEq%20for%20Person%20%7B%0A%20%20%20%20fn%20eq(%26self%2C%20other%3A%20%26Person)%20-%3E%20bool%20%7B%0A%20%20%20%20%20%20%20%20self.height%20%3D%3D%20other.height%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-
 <p>You may also find it useful to use <code>partial_cmp()</code> on your type&#39;s fields. Here
 is an example of <code>Person</code> types who have a floating-point <code>height</code> field that
 is the only field to be used for sorting:</p>
@@ -161,7 +154,6 @@ is the only field to be used for sorting:</p>
 
 <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="number">2.0</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="number">1.0</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">result</span>, <span class="prelude-val">Some</span>(<span class="ident">Ordering</span>::<span class="ident">Greater</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acmp%3A%3AOrdering%3B%0A%0Alet%20result%20%3D%201.0.partial_cmp(%262.0)%3B%0Aassert_eq!(result%2C%20Some(Ordering%3A%3ALess))%3B%0A%0Alet%20result%20%3D%201.0.partial_cmp(%261.0)%3B%0Aassert_eq!(result%2C%20Some(Ordering%3A%3AEqual))%3B%0A%0Alet%20result%20%3D%202.0.partial_cmp(%261.0)%3B%0Aassert_eq!(result%2C%20Some(Ordering%3A%3AGreater))%3B%0A%7D">Run</a></pre>
-
 <p>When comparison is impossible:</p>
 
 <pre class="rust rust-example-rendered">

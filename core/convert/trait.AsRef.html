@@ -52,10 +52,8 @@
 <pre class='rust trait'>pub trait AsRef&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; {
     fn <a href='#tymethod.as_ref' class='fnname'>as_ref</a>(&amp;self) -&gt; &amp;T;
 }</pre><div class='docblock'><p>A cheap, reference-to-reference conversion.</p>
-
 <p><code>AsRef</code> is very similar to, but different than, <a href="../../std/borrow/trait.Borrow.html"><code>Borrow</code></a>. See
 <a href="../../book/borrow-and-asref.html">the book</a> for more.</p>
-
 <p><strong>Note: this trait must not fail</strong>. If the conversion can fail, use a dedicated method which
 returns an <a href="../../std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a> or a <a href="../../std/result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>.</p>
 

@@ -54,10 +54,8 @@
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>Macro for printing to the standard output.</p>
-
 <p>Equivalent to the <code>println!</code> macro except that a newline is not printed at
 the end of the message.</p>
-
 <p>Note that stdout is frequently line-buffered by default so it may be
 necessary to use <code>io::stdout().flush()</code> to ensure the output is emitted
 immediately.</p>

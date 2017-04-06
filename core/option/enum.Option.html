@@ -120,7 +120,6 @@ to the value inside the original.</p>
 <span class="ident">x</span>.<span class="ident">expect</span>(<span class="string">&quot;the world is ending&quot;</span>); <span class="comment">// panics with `the world is ending`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20Option%3C%26str%3E%20%3D%20None%3B%0Ax.expect(%22the%20world%20is%20ending%22)%3B%20%2F%2F%20panics%20with%20%60the%20world%20is%20ending%60%0A%7D">Run</a></pre>
 </div><h4 id='method.unwrap' class="method"><span id='unwrap.v' class='invisible'><code>fn <a href='#method.unwrap' class='fnname'>unwrap</a>(self) -&gt; T</code></span></h4>
 <div class='docblock'><p>Moves the value <code>v</code> out of the <code>Option&lt;T&gt;</code> if it is <code>Some(v)</code>.</p>
-
 <p>In general, because this function may panic, its use is discouraged.
 Instead, prefer to use pattern matching and handle the <code>None</code>
 case explicitly.</p>
@@ -256,7 +255,6 @@ or computes a <code>default</code> (if not).</p>
 </div><h4 id='method.and_then' class="method"><span id='and_then.v' class='invisible'><code>fn <a href='#method.and_then' class='fnname'>and_then</a>&lt;U, F:&nbsp;<a class="trait" href="../../core/ops/trait.FnOnce.html" title="trait core::ops::FnOnce">FnOnce</a>(T) -&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;U&gt;&gt;(self, f: F) -&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;U&gt;</code></span></h4>
 <div class='docblock'><p>Returns <code>None</code> if the option is <code>None</code>, otherwise calls <code>f</code> with the
 wrapped value and returns the result.</p>
-
 <p>Some languages call this operation flatmap.</p>
 
 <h1 id='examples-16' class='section-header'><a href='#examples-16'>Examples</a></h1>
@@ -363,7 +361,6 @@ option.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="../../core/default/trait.Default.html" title="trait core::default::Default">Default</a>&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/option.rs.html#757-788' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.unwrap_or_default' class="method"><span id='unwrap_or_default.v' class='invisible'><code>fn <a href='#method.unwrap_or_default' class='fnname'>unwrap_or_default</a>(self) -&gt; T</code></span></h4>
 <div class='docblock'><p>Returns the contained value or a default</p>
-
 <p>Consumes the <code>self</code> argument then, if <code>Some</code>, returns the contained
 value, otherwise if <code>None</code>, returns the default value for that
 type.</p>
@@ -458,7 +455,6 @@ a string to any other type that implements <code>FromStr</code>, returning
 <div class='docblock'><p>Takes each element in the <code>Iterator</code>: if it is <code>None</code>, no further
 elements are taken, and the <code>None</code> is returned. Should no <code>None</code> occur, a
 container with the values of each <code>Option</code> is returned.</p>
-
 <p>Here is an example which increments every integer in a vector,
 checking for overflow:</p>
 

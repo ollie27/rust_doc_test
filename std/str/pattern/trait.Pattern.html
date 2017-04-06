@@ -58,13 +58,10 @@
     fn <a href='#method.is_suffix_of' class='fnname'>is_suffix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> <span class="where fmt-newline">where Self::<a class="trait" href="../../../std/str/pattern/trait.Pattern.html" title="trait std::str::pattern::Pattern">Searcher</a>: <a class="trait" href="../../../std/str/pattern/trait.ReverseSearcher.html" title="trait std::str::pattern::ReverseSearcher">ReverseSearcher</a>&lt;'a&gt;</span> { ... }
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>pattern </code><a href="https://github.com/rust-lang/rust/issues/27721">#27721</a>)</summary><p>API not fully fleshed out and ready to be stabilized</p>
 </details></div></div><div class='docblock'><p>A string pattern.</p>
-
 <p>A <code>Pattern&lt;&#39;a&gt;</code> expresses that the implementing type
 can be used as a string pattern for searching in a <code>&amp;&#39;a str</code>.</p>
-
 <p>For example, both <code>&#39;a&#39;</code> and <code>&quot;aa&quot;</code> are patterns that
 would match at index <code>1</code> in the string <code>&quot;baaaab&quot;</code>.</p>
-
 <p>The trait itself acts as a builder for an associated
 <code>Searcher</code> type, which does the actual work of finding
 occurrences of the pattern in a string.</p>

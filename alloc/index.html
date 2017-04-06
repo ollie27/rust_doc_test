@@ -54,19 +54,16 @@
 <h1 id='the-rust-core-allocation-library' class='section-header'><a href='#the-rust-core-allocation-library'>The Rust core allocation library</a></h1>
 <p>This is the lowest level library through which allocation in Rust can be
 performed.</p>
-
 <p>This library, like libcore, is not intended for general usage, but rather as
 a building block of other libraries. The types and interfaces in this
 library are reexported through the <a href="../std/index.html">standard library</a>,
 and should not be used through this library.</p>
-
 <p>Currently, there are four major definitions in this library.</p>
 
 <h2 id='boxed-values' class='section-header'><a href='#boxed-values'>Boxed values</a></h2>
 <p>The <a href="boxed/index.html"><code>Box</code></a> type is a smart pointer type. There can
 only be one owner of a <code>Box</code>, and the owner can decide to mutate the
 contents, which live on the heap.</p>
-
 <p>This type can be sent among threads efficiently as the size of a <code>Box</code> value
 is the same as that of a pointer. Tree-like data structures are often built
 with boxes because each node often has only one owner, the parent.</p>
@@ -75,7 +72,6 @@ with boxes because each node often has only one owner, the parent.</p>
 <p>The <a href="rc/index.html"><code>Rc</code></a> type is a non-threadsafe reference-counted pointer
 type intended for sharing memory within a thread. An <code>Rc</code> pointer wraps a
 type, <code>T</code>, and only allows access to <code>&amp;T</code>, a shared reference.</p>
-
 <p>This type is useful when inherited mutability (such as using <code>Box</code>) is too
 constraining for an application, and is often paired with the <code>Cell</code> or
 <code>RefCell</code> types in order to allow mutation.</p>
@@ -85,7 +81,6 @@ constraining for an application, and is often paired with the <code>Cell</code> 
 type. It provides all the same functionality of <code>Rc</code>, except it requires
 that the contained type <code>T</code> is shareable. Additionally, <code>Arc&lt;T&gt;</code> is itself
 sendable while <code>Rc&lt;T&gt;</code> is not.</p>
-
 <p>This type allows for shared access to the contained data, and is often
 paired with synchronization primitives such as mutexes to allow mutation of
 shared resources.</p>

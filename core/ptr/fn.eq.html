@@ -50,11 +50,9 @@
                    </a>
                </span><a class='srclink' href='../../src/core/ptr.rs.html#782-784' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn eq&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt;(a: *const T, b: *const T) -&gt; bool</pre><div class='docblock'><p>Compare raw pointers for equality.</p>
-
 <p>This is the same as using the <code>==</code> operator, but less generic:
 the arguments have to be <code>*const T</code> raw pointers,
 not anything that implements <code>PartialEq</code>.</p>
-
 <p>This can be used to compare <code>&amp;T</code> references (which coerce to <code>*const T</code> implicitly)
 by their address rather than comparing the values they point to
 (which is what the <code>PartialEq for &amp;T</code> implementation does).</p>

@@ -50,21 +50,17 @@
                    </a>
                </span><a class='srclink' href='../../src/std/io/stdio.rs.html#151-153' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Stdin { /* fields omitted */ }</pre><div class='docblock'><p>A handle to the standard input stream of a process.</p>
-
 <p>Each handle is a shared reference to a global buffer of input data to this
 process. A handle can be <code>lock</code>&#39;d to gain full access to <a href="trait.BufRead.html"><code>BufRead</code></a> methods
 (e.g. <code>.lines()</code>). Reads to this handle are otherwise locked with respect
 to other reads.</p>
-
 <p>This handle implements the <code>Read</code> trait, but beware that concurrent reads
 of <code>Stdin</code> must be executed with care.</p>
-
 <p>Created by the <a href="fn.stdin.html"><code>io::stdin</code></a> method.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/io/struct.Stdin.html" title="struct std::io::Stdin">Stdin</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/io/stdio.rs.html#221-283' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.lock' class="method"><span id='lock.v' class='invisible'><code>fn <a href='#method.lock' class='fnname'>lock</a>(&amp;self) -&gt; <a class="struct" href="../../std/io/struct.StdinLock.html" title="struct std::io::StdinLock">StdinLock</a></code></span></h4>
 <div class='docblock'><p>Locks this handle to the standard input stream, returning a readable
 guard.</p>
-
 <p>The lock is released when the returned lock goes out of scope. The
 returned guard also implements the <a href="trait.Read.html"><code>Read</code></a> and <a href="trait.BufRead.html"><code>BufRead</code></a> traits for
 accessing the underlying data.</p>
@@ -80,7 +76,6 @@ accessing the underlying data.</p>
 <span class="ident">handle</span>.<span class="ident">read_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Read%7D%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3CString%3E%20%7B%0Alet%20mut%20buffer%20%3D%20String%3A%3Anew()%3B%0Alet%20stdin%20%3D%20io%3A%3Astdin()%3B%0Alet%20mut%20handle%20%3D%20stdin.lock()%3B%0A%0Ahandle.read_to_string(%26mut%20buffer)%3F%3B%0AOk(buffer)%0A%7D%0A%7D">Run</a></pre>
 </div><h4 id='method.read_line' class="method"><span id='read_line.v' class='invisible'><code>fn <a href='#method.read_line' class='fnname'>read_line</a>(&amp;self, buf: &amp;mut <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a>) -&gt; <a class="type" href="../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>&gt;</code></span></h4>
 <div class='docblock'><p>Locks this handle and reads a line of input into the specified buffer.</p>
-
 <p>For detailed semantics of this method, see the documentation on
 <a href="trait.BufRead.html#method.read_line"><code>BufRead::read_line</code></a>.</p>
 
@@ -96,9 +91,7 @@ accessing the underlying data.</p>
     }
     <span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;error: {}&quot;</span>, <span class="ident">error</span>),
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0A%0Alet%20mut%20input%20%3D%20String%3A%3Anew()%3B%0Amatch%20io%3A%3Astdin().read_line(%26mut%20input)%20%7B%0A%20%20%20%20Ok(n)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20bytes%20read%22%2C%20n)%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20input)%3B%0A%20%20%20%20%7D%0A%20%20%20%20Err(error)%20%3D%3E%20println!(%22error%3A%20%7B%7D%22%2C%20error)%2C%0A%7D%0A%7D">Run</a></pre>
-
 <p>You can run the example one of two ways:</p>
-
 <ul>
 <li>Pipe some text to it, e.g. <code>printf foo | path/to/executable</code></li>
 <li>Give it text interactively by running the executable directly,

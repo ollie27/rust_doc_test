@@ -50,12 +50,10 @@
                    </a>
                </span><a class='srclink' href='../../src/core/option.rs.html#11-1075' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Optional values.</p>
-
 <p>Type <a href="enum.Option.html"><code>Option</code></a> represents an optional value: every <a href="enum.Option.html"><code>Option</code></a>
 is either <a href="enum.Option.html#variant.Some"><code>Some</code></a> and contains a value, or <a href="enum.Option.html#variant.None"><code>None</code></a>, and
 does not. <a href="enum.Option.html"><code>Option</code></a> types are very common in Rust code, as
 they have a number of uses:</p>
-
 <ul>
 <li>Initial values</li>
 <li>Return values for functions that are not defined
@@ -68,7 +66,6 @@ returned on error</li>
 <li>Nullable pointers</li>
 <li>Swapping things out of difficult situations</li>
 </ul>
-
 <p><a href="enum.Option.html"><code>Option</code></a>s are commonly paired with pattern matching to query the presence
 of a value and take action, always accounting for the <a href="enum.Option.html#variant.None"><code>None</code></a> case.</p>
 
@@ -96,7 +93,6 @@ of a value and take action, always accounting for the <a href="enum.Option.html#
 <p>Rust&#39;s pointer types must always point to a valid location; there are
 no &quot;null&quot; pointers. Instead, Rust has <em>optional</em> pointers, like
 the optional owned box, <a href="enum.Option.html"><code>Option</code></a><code>&lt;</code><a href="../../std/boxed/struct.Box.html"><code>Box&lt;T&gt;</code></a><code>&gt;</code>.</p>
-
 <p>The following example uses <a href="enum.Option.html"><code>Option</code></a> to create an optional box of
 <a href="../../std/primitive.i32.html"><code>i32</code></a>. Notice that in order to use the inner <a href="../../std/primitive.i32.html"><code>i32</code></a> value first, the
 <code>check_optional</code> function needs to use pattern matching to
@@ -116,7 +112,6 @@ not (<a href="enum.Option.html#variant.None"><code>None</code></a>).</p>
         <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;has no value&quot;</span>),
     }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20optional%3A%20Option%3CBox%3Ci32%3E%3E%20%3D%20None%3B%0Acheck_optional(%26optional)%3B%0A%0Alet%20optional%3A%20Option%3CBox%3Ci32%3E%3E%20%3D%20Some(Box%3A%3Anew(9000))%3B%0Acheck_optional(%26optional)%3B%0A%0Afn%20check_optional(optional%3A%20%26Option%3CBox%3Ci32%3E%3E)%20%7B%0A%20%20%20%20match%20*optional%20%7B%0A%20%20%20%20%20%20%20%20Some(ref%20p)%20%3D%3E%20println!(%22has%20value%20%7B%7D%22%2C%20p)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22has%20no%20value%22)%2C%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
-
 <p>This usage of <a href="enum.Option.html"><code>Option</code></a> to create safe nullable pointers is so
 common that Rust does special optimizations to make the
 representation of <a href="enum.Option.html"><code>Option</code></a><code>&lt;</code><a href="../../std/boxed/struct.Box.html"><code>Box&lt;T&gt;</code></a><code>&gt;</code> a single pointer. Optional pointers
@@ -135,7 +130,6 @@ in Rust are stored as efficiently as any other pointer type.</p>
 
 <span class="comment">// Remove the contained string, destroying the Option</span>
 <span class="kw">let</span> <span class="ident">unwrapped_msg</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">unwrap_or</span>(<span class="string">&quot;default message&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20msg%20%3D%20Some(%22howdy%22)%3B%0A%0A%2F%2F%20Take%20a%20reference%20to%20the%20contained%20string%0Aif%20let%20Some(ref%20m)%20%3D%20msg%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20*m)%3B%0A%7D%0A%0A%2F%2F%20Remove%20the%20contained%20string%2C%20destroying%20the%20Option%0Alet%20unwrapped_msg%20%3D%20msg.unwrap_or(%22default%20message%22)%3B%0A%7D">Run</a></pre>
-
 <p>Initialize a result to <a href="enum.Option.html#variant.None"><code>None</code></a> before a loop:</p>
 
 <pre class="rust rust-example-rendered">

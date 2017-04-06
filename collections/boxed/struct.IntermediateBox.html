@@ -51,13 +51,11 @@
                </span><a class='srclink' href='../../src/alloc/boxed.rs.html#131-136' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct IntermediateBox&lt;T&gt; <span class="where fmt-newline">where T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span> { /* fields omitted */ }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>placement_in </code><a href="https://github.com/rust-lang/rust/issues/27779">#27779</a>)</summary><p>placement box design is still being worked out.</p>
 </details></div></div><div class='docblock'><p><code>IntermediateBox</code> represents uninitialized backing storage for <code>Box</code>.</p>
-
 <p>FIXME (pnkfelix): Ideally we would just reuse <code>Box&lt;T&gt;</code> instead of
 introducing a separate <code>IntermediateBox&lt;T&gt;</code>; but then you hit
 issues when you e.g. attempt to destructure an instance of <code>Box</code>,
 since it is a lang item and so it gets special handling by the
 compiler.  Easier just to make this parallel type for now.</p>
-
 <p>FIXME (pnkfelix): Currently the <code>box</code> protocol only supports
 creating instances of sized types. This IntermediateBox is
 designed to be forward-compatible with a future protocol that

@@ -54,7 +54,6 @@
 a buffer of memory on the heap without having to worry about all the corner cases
 involved. This type is excellent for building your own data structures like Vec and VecDeque.
 In particular:</p>
-
 <ul>
 <li>Produces heap::EMPTY on zero-sized types</li>
 <li>Produces heap::EMPTY on zero-length allocations</li>
@@ -65,15 +64,12 @@ In particular:</p>
 <li>Avoids freeing heap::EMPTY</li>
 <li>Contains a ptr::Unique and thus endows the user with all related benefits</li>
 </ul>
-
 <p>This type does not in anyway inspect the memory that it manages. When dropped it <em>will</em>
 free its memory, but it <em>won&#39;t</em> try to Drop its contents. It is up to the user of RawVec
 to handle the actual things <em>stored</em> inside of a RawVec.</p>
-
 <p>Note that a RawVec always forces its capacity to be usize::MAX for zero-sized types.
 This enables you to use capacity growing logic catch the overflows in your length
 that might occur with zero-sized types.</p>
-
 <p>However this means that you need to be careful when roundtripping this type
 with a <code>Box&lt;[T]&gt;</code>: <code>cap()</code> won&#39;t yield the len. However <code>with_capacity</code>,
 <code>shrink_to_fit</code>, and <code>from_box</code> will actually set RawVec&#39;s private capacity
@@ -122,14 +118,12 @@ be careful.</p>
 </div><h4 id='method.cap' class="method"><span id='cap.v' class='invisible'><code>fn <a href='#method.cap' class='fnname'>cap</a>(&amp;self) -&gt; usize</code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>alloc </code><a href="https://github.com/rust-lang/rust/issues/27783">#27783</a>)</summary><p>this library is unlikely to be stabilized in its current form or name</p>
 </details></div></div><div class='docblock'><p>Gets the capacity of the allocation.</p>
-
 <p>This will always be <code>usize::MAX</code> if <code>T</code> is zero-sized.</p>
 </div><h4 id='method.double' class="method"><span id='double.v' class='invisible'><code>fn <a href='#method.double' class='fnname'>double</a>(&amp;mut self)</code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>alloc </code><a href="https://github.com/rust-lang/rust/issues/27783">#27783</a>)</summary><p>this library is unlikely to be stabilized in its current form or name</p>
 </details></div></div><div class='docblock'><p>Doubles the size of the type&#39;s backing allocation. This is common enough
 to want to do that it&#39;s easiest to just have a dedicated method. Slightly
 more efficient logic can be provided for this than the general case.</p>
-
 <p>This function is ideal for when pushing elements one-at-a-time because
 you don&#39;t need to incur the costs of the more general computations
 reserve needs to do to guard against overflow. You do however need to
@@ -169,7 +163,6 @@ all <code>usize::MAX</code> slots in your imaginary buffer.</li>
 </details></div></div><div class='docblock'><p>Attempts to double the size of the type&#39;s backing allocation in place. This is common
 enough to want to do that it&#39;s easiest to just have a dedicated method. Slightly
 more efficient logic can be provided for this than the general case.</p>
-
 <p>Returns true if the reallocation attempt has succeeded, or false otherwise.</p>
 
 <h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
@@ -187,7 +180,6 @@ will reallocate the minimum possible amount of memory necessary.
 Generally this will be exactly the amount of memory necessary,
 but in principle the allocator is free to give back more than
 we asked for.</p>
-
 <p>If <code>used_cap</code> exceeds <code>self.cap()</code>, this may fail to actually allocate
 the requested space. This is not really unsafe, but the unsafe
 code <em>you</em> write that relies on the behavior of this function may break.</p>
@@ -208,11 +200,9 @@ code <em>you</em> write that relies on the behavior of this function may break.<
 enough capacity, will reallocate enough space plus comfortable slack
 space to get amortized <code>O(1)</code> behavior. Will limit this behavior
 if it would needlessly cause itself to panic.</p>
-
 <p>If <code>used_cap</code> exceeds <code>self.cap()</code>, this may fail to actually allocate
 the requested space. This is not really unsafe, but the unsafe
 code <em>you</em> write that relies on the behavior of this function may break.</p>
-
 <p>This is ideal for implementing a bulk-push operation like <code>extend</code>.</p>
 
 <h1 id='panics-4' class='section-header'><a href='#panics-4'>Panics</a></h1>
@@ -252,11 +242,9 @@ code <em>you</em> write that relies on the behavior of this function may break.<
 enough capacity, will reallocate in place enough space plus comfortable slack
 space to get amortized <code>O(1)</code> behaviour. Will limit this behaviour
 if it would needlessly cause itself to panic.</p>
-
 <p>If <code>used_cap</code> exceeds <code>self.cap()</code>, this may fail to actually allocate
 the requested space. This is not really unsafe, but the unsafe
 code <em>you</em> write that relies on the behaviour of this function may break.</p>
-
 <p>Returns true if the reallocation attempt has succeeded, or false otherwise.</p>
 
 <h1 id='panics-5' class='section-header'><a href='#panics-5'>Panics</a></h1>
@@ -278,11 +266,9 @@ is 0, actually completely deallocates.</p>
 </div><h4 id='method.into_box' class="method"><span id='into_box.v' class='invisible'><code>unsafe fn <a href='#method.into_box' class='fnname'>into_box</a>(self) -&gt; <a class="struct" href="../../alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;[T]&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>alloc </code><a href="https://github.com/rust-lang/rust/issues/27783">#27783</a>)</summary><p>this library is unlikely to be stabilized in its current form or name</p>
 </details></div></div><div class='docblock'><p>Converts the entire buffer into <code>Box&lt;[T]&gt;</code>.</p>
-
 <p>While it is not <em>strictly</em> Undefined Behavior to call
 this procedure while some of the RawVec is uninitialized,
 it certainly makes it trivial to trigger it.</p>
-
 <p>Note that this will correctly reconstitute any <code>cap</code> changes
 that may have been performed. (see description of type for details)</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="trait" href="../../core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../alloc/raw_vec/struct.RawVec.html" title="struct alloc::raw_vec::RawVec">RawVec</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/alloc/raw_vec.rs.html#542-555' title='goto source code'>[src]</a></span></h3>

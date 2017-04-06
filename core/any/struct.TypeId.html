@@ -50,14 +50,11 @@
                    </a>
                </span><a class='srclink' href='../../src/core/any.rs.html#347-349' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct TypeId { /* fields omitted */ }</pre><div class='docblock'><p>A <code>TypeId</code> represents a globally unique identifier for a type.</p>
-
 <p>Each <code>TypeId</code> is an opaque object which does not allow inspection of what&#39;s
 inside but does allow basic operations such as cloning, comparison,
 printing, and showing.</p>
-
 <p>A <code>TypeId</code> is currently only available for types which ascribe to <code>&#39;static</code>,
 but this limitation may be removed in the future.</p>
-
 <p>While <code>TypeId</code> implements <code>Hash</code>, <code>PartialOrd</code>, and <code>Ord</code>, it is worth
 noting that the hashes and ordering will vary between Rust releases. Beware
 of relying on them outside of your code!</p>

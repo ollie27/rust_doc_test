@@ -50,7 +50,6 @@
                    </a>
                </span><a class='srclink' href='../../../src/collections/btree/map.rs.html#135-138' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct BTreeMap&lt;K, V&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A map based on a B-Tree.</p>
-
 <p>B-Trees represent a fundamental compromise between cache-efficiency and actually minimizing
 the amount of work performed in a search. In theory, a binary search tree (BST) is the optimal
 choice for a sorted map, as a perfectly balanced BST performs the theoretical minimum amount of
@@ -60,7 +59,6 @@ is stored in its own individually heap-allocated node. This means that every sin
 triggers a heap-allocation, and every single comparison should be a cache-miss. Since these
 are both notably expensive things to do in practice, we are forced to at very least reconsider
 the BST strategy.</p>
-
 <p>A B-Tree instead makes each node contain B-1 to 2B-1 elements in a contiguous array. By doing
 this, we reduce the number of allocations by a factor of B, and improve cache efficiency in
 searches. However, this does mean that searches will have to do <em>more</em> comparisons on average.
@@ -68,14 +66,12 @@ The precise number of comparisons depends on the node search strategy used. For 
 efficiency, one could search the nodes linearly. For optimal comparisons, one could search
 the node using binary search. As a compromise, one could also perform a linear search
 that initially only checks every i<sup>th</sup> element for some choice of i.</p>
-
 <p>Currently, our implementation simply performs naive linear search. This provides excellent
 performance on <em>small</em> nodes of elements which are cheap to compare. However in the future we
 would like to further explore choosing the optimal search strategy based on the choice of B,
 and possibly other factors. Using linear search, searching for a random element is expected
 to take O(B log<sub>B</sub>n) comparisons, which is generally worse than a BST. In practice,
 however, performance is excellent.</p>
-
 <p>It is a logic error for a key to be modified in such a way that the key&#39;s ordering relative to
 any other key, as determined by the <a href="../../std/cmp/trait.Ord.html"><code>Ord</code></a> trait, changes while it is in the map. This is
 normally only possible through <a href="../../std/cell/struct.Cell.html"><code>Cell</code></a>, <a href="../../std/cell/struct.RefCell.html"><code>RefCell</code></a>, global state, I/O, or unsafe code.</p>
@@ -116,7 +112,6 @@ normally only possible through <a href="../../std/cell/struct.Cell.html"><code>C
 <span class="kw">for</span> (<span class="ident">movie</span>, <span class="ident">review</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">movie_reviews</span> {
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}: \&quot;{}\&quot;&quot;</span>, <span class="ident">movie</span>, <span class="ident">review</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeMap%3B%0A%0A%2F%2F%20type%20inference%20lets%20us%20omit%20an%20explicit%20type%20signature%20(which%0A%2F%2F%20would%20be%20%60BTreeMap%3C%26str%2C%20%26str%3E%60%20in%20this%20example).%0Alet%20mut%20movie_reviews%20%3D%20BTreeMap%3A%3Anew()%3B%0A%0A%2F%2F%20review%20some%20movies.%0Amovie_reviews.insert(%22Office%20Space%22%2C%20%20%20%20%20%20%20%22Deals%20with%20real%20issues%20in%20the%20workplace.%22)%3B%0Amovie_reviews.insert(%22Pulp%20Fiction%22%2C%20%20%20%20%20%20%20%22Masterpiece.%22)%3B%0Amovie_reviews.insert(%22The%20Godfather%22%2C%20%20%20%20%20%20%22Very%20enjoyable.%22)%3B%0Amovie_reviews.insert(%22The%20Blues%20Brothers%22%2C%20%22Eye%20lyked%20it%20alot.%22)%3B%0A%0A%2F%2F%20check%20for%20a%20specific%20one.%0Aif%20!movie_reviews.contains_key(%22Les%20Mis%C3%A9rables%22)%20%7B%0A%20%20%20%20println!(%22We've%20got%20%7B%7D%20reviews%2C%20but%20Les%20Mis%C3%A9rables%20ain't%20one.%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20movie_reviews.len())%3B%0A%7D%0A%0A%2F%2F%20oops%2C%20this%20review%20has%20a%20lot%20of%20spelling%20mistakes%2C%20let's%20delete%20it.%0Amovie_reviews.remove(%22The%20Blues%20Brothers%22)%3B%0A%0A%2F%2F%20look%20up%20the%20values%20associated%20with%20some%20keys.%0Alet%20to_find%20%3D%20%5B%22Up!%22%2C%20%22Office%20Space%22%5D%3B%0Afor%20book%20in%20%26to_find%20%7B%0A%20%20%20%20match%20movie_reviews.get(book)%20%7B%0A%20%20%20%20%20%20%20Some(review)%20%3D%3E%20println!(%22%7B%7D%3A%20%7B%7D%22%2C%20book%2C%20review)%2C%0A%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22%7B%7D%20is%20unreviewed.%22%2C%20book)%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20iterate%20over%20everything.%0Afor%20(movie%2C%20review)%20in%20%26movie_reviews%20%7B%0A%20%20%20%20println!(%22%7B%7D%3A%20%5C%22%7B%7D%5C%22%22%2C%20movie%2C%20review)%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p><code>BTreeMap</code> also implements an <a href="#method.entry"><code>Entry API</code></a>, which allows
 for more complex methods of getting, setting, updating and removing keys and
 their values:</p>
@@ -173,7 +168,6 @@ their values:</p>
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">a</span>.<span class="ident">is_empty</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeMap%3B%0A%0Alet%20mut%20a%20%3D%20BTreeMap%3A%3Anew()%3B%0Aa.insert(1%2C%20%22a%22)%3B%0Aa.clear()%3B%0Aassert!(a.is_empty())%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get' class="method"><span id='get.v' class='invisible'><code>fn <a href='#method.get' class='fnname'>get</a>&lt;Q&gt;(&amp;self, key: &amp;Q) -&gt; <a class="enum" href="../../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;V&gt; <span class="where fmt-newline">where K: <a class="trait" href="../../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;, Q: <a class="trait" href="../../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span></h4>
 <div class='docblock'><p>Returns a reference to the value corresponding to the key.</p>
-
 <p>The key may be any borrowed form of the map&#39;s key type, but the ordering
 on the borrowed form <em>must</em> match the ordering on the key type.</p>
 
@@ -189,7 +183,6 @@ on the borrowed form <em>must</em> match the ordering on the key type.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">map</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="number">2</span>), <span class="prelude-val">None</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeMap%3B%0A%0Alet%20mut%20map%20%3D%20BTreeMap%3A%3Anew()%3B%0Amap.insert(1%2C%20%22a%22)%3B%0Aassert_eq!(map.get(%261)%2C%20Some(%26%22a%22))%3B%0Aassert_eq!(map.get(%262)%2C%20None)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.contains_key' class="method"><span id='contains_key.v' class='invisible'><code>fn <a href='#method.contains_key' class='fnname'>contains_key</a>&lt;Q&gt;(&amp;self, key: &amp;Q) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> <span class="where fmt-newline">where K: <a class="trait" href="../../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;, Q: <a class="trait" href="../../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span></h4>
 <div class='docblock'><p>Returns <code>true</code> if the map contains a value for the specified key.</p>
-
 <p>The key may be any borrowed form of the map&#39;s key type, but the ordering
 on the borrowed form <em>must</em> match the ordering on the key type.</p>
 
@@ -205,7 +198,6 @@ on the borrowed form <em>must</em> match the ordering on the key type.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">map</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="number">2</span>), <span class="bool-val">false</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeMap%3B%0A%0Alet%20mut%20map%20%3D%20BTreeMap%3A%3Anew()%3B%0Amap.insert(1%2C%20%22a%22)%3B%0Aassert_eq!(map.contains_key(%261)%2C%20true)%3B%0Aassert_eq!(map.contains_key(%262)%2C%20false)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.get_mut' class="method"><span id='get_mut.v' class='invisible'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>&lt;Q&gt;(&amp;mut self, key: &amp;Q) -&gt; <a class="enum" href="../../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;&amp;mut V&gt; <span class="where fmt-newline">where K: <a class="trait" href="../../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;, Q: <a class="trait" href="../../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span></h4>
 <div class='docblock'><p>Returns a mutable reference to the value corresponding to the key.</p>
-
 <p>The key may be any borrowed form of the map&#39;s key type, but the ordering
 on the borrowed form <em>must</em> match the ordering on the key type.</p>
 
@@ -223,9 +215,7 @@ on the borrowed form <em>must</em> match the ordering on the key type.</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">map</span>[<span class="kw-2">&amp;</span><span class="number">1</span>], <span class="string">&quot;b&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acollections%3A%3ABTreeMap%3B%0A%0Alet%20mut%20map%20%3D%20BTreeMap%3A%3Anew()%3B%0Amap.insert(1%2C%20%22a%22)%3B%0Aif%20let%20Some(x)%20%3D%20map.get_mut(%261)%20%7B%0A%20%20%20%20*x%20%3D%20%22b%22%3B%0A%7D%0Aassert_eq!(map%5B%261%5D%2C%20%22b%22)%3B%0A%7D">Run</a></pre>
 </div><h4 id='method.insert' class="method"><span id='insert.v' class='invisible'><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, key: K, value: V) -&gt; <a class="enum" href="../../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;V&gt;</code></span></h4>
 <div class='docblock'><p>Inserts a key-value pair into the map.</p>
-
 <p>If the map did not have this key present, <code>None</code> is returned.</p>
-
 <p>If the map did have this key present, the value is updated, and the old
 value is returned. The key is not updated, though; this matters for
 types that can be <code>==</code> without being identical. See the <a href="index.html#insert-and-complex-keys">module-level
@@ -247,7 +237,6 @@ documentation</a> for more.</p>
 </div><h4 id='method.remove' class="method"><span id='remove.v' class='invisible'><code>fn <a href='#method.remove' class='fnname'>remove</a>&lt;Q&gt;(&amp;mut self, key: &amp;Q) -&gt; <a class="enum" href="../../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;V&gt; <span class="where fmt-newline">where K: <a class="trait" href="../../../std/borrow/trait.Borrow.html" title="trait std::borrow::Borrow">Borrow</a>&lt;Q&gt;, Q: <a class="trait" href="../../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a> + ?<a class="trait" href="../../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a></span></code></span></h4>
 <div class='docblock'><p>Removes a key from the map, returning the value at the key if the key
 was previously in the map.</p>
-
 <p>The key may be any borrowed form of the map&#39;s key type, but the ordering
 on the borrowed form <em>must</em> match the ordering on the key type.</p>
 
