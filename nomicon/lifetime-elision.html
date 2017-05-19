@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="lifetime-elision.html#lifetime-elision" name="lifetime-elision"><h1>Lifetime Elision</h1></a>
+                    <a class="header" href="lifetime-elision.html#lifetime-elision" id="lifetime-elision"><h1>Lifetime Elision</h1></a>
 <p>In order to make common patterns more ergonomic, Rust allows lifetimes to be
 <em>elided</em> in function signatures.</p>
 <p>A <em>lifetime position</em> is anywhere you can write a lifetime in a type:</p>
@@ -112,11 +113,11 @@ is assigned to <em>all</em> elided output lifetimes.</p>
 <pre><code class="language-rust ignore">fn print(s: &amp;str);                                      // elided
 fn print&lt;'a&gt;(s: &amp;'a str);                               // expanded
 
-fn debug(lvl: uint, s: &amp;str);                           // elided
-fn debug&lt;'a&gt;(lvl: uint, s: &amp;'a str);                    // expanded
+fn debug(lvl: usize, s: &amp;str);                          // elided
+fn debug&lt;'a&gt;(lvl: usize, s: &amp;'a str);                   // expanded
 
-fn substr(s: &amp;str, until: uint) -&gt; &amp;str;                // elided
-fn substr&lt;'a&gt;(s: &amp;'a str, until: uint) -&gt; &amp;'a str;      // expanded
+fn substr(s: &amp;str, until: usize) -&gt; &amp;str;               // elided
+fn substr&lt;'a&gt;(s: &amp;'a str, until: usize) -&gt; &amp;'a str;     // expanded
 
 fn get_str() -&gt; &amp;str;                                   // ILLEGAL
 

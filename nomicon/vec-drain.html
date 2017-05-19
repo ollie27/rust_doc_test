@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-drain.html#drain" name="drain"><h1>Drain</h1></a>
+                    <a class="header" href="vec-drain.html#drain" id="drain"><h1>Drain</h1></a>
 <p>Let's move on to Drain. Drain is largely the same as IntoIter, except that
 instead of consuming the Vec, it borrows the Vec and leaves its allocation
 untouched. For now we'll only implement the &quot;basic&quot; full-range version.</p>
@@ -91,7 +92,6 @@ impl&lt;'a, T&gt; Iterator for Drain&lt;'a, T&gt; {
 <p>-- wait, this is seeming familiar. Let's do some more compression. Both
 IntoIter and Drain have the exact same structure, let's just factor it out.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct RawValIter&lt;T&gt; {
     start: *const T,

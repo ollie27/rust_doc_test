@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="drop-flags.html#drop-flags" name="drop-flags"><h1>Drop Flags</h1></a>
+                    <a class="header" href="drop-flags.html#drop-flags" id="drop-flags"><h1>Drop Flags</h1></a>
 <p>The examples in the previous section introduce an interesting problem for Rust.
 We have seen that it's possible to conditionally initialize, deinitialize, and
 reinitialize locations of memory totally safely. For Copy types, this isn't
@@ -93,7 +94,6 @@ statically known at every point in the program. If this is the case, then the
 compiler can theoretically generate more efficient code! For instance, straight-
 line code has such <em>static drop semantics</em>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let mut x = Box::new(0); // x was uninit; just overwrite.
 let mut y = x;           // y was uninit; just overwrite and make x uninit.
@@ -106,7 +106,6 @@ y = x;                   // y was init; Drop y, overwrite it, and make x uninit!
 <p>Similarly, branched code where all branches have the same behavior with respect
 to initialization has static drop semantics:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let condition = true;
 let mut x = Box::new(0);    // x was uninit; just overwrite.
@@ -122,7 +121,6 @@ x = Box::new(0);            // x was uninit; just overwrite.
 #}</code></pre></pre>
 <p>However code like this <em>requires</em> runtime information to correctly Drop:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let condition = true;
 let x;
@@ -136,7 +134,6 @@ if condition {
 #}</code></pre></pre>
 <p>Of course, in this case it's trivial to retrieve static drop semantics:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let condition = true;
 if condition {

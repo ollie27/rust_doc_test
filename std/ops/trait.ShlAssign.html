@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'ShlAssign', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait ShlAssign</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'ShlAssign', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,12 +48,13 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#1732-1736' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#1787-1791' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "shl_assign"]
 </div>pub trait ShlAssign&lt;Rhs&gt; {
     fn <a href='#tymethod.shl_assign' class='fnname'>shl_assign</a>(&amp;mut self, rhs: Rhs);
 }</pre><div class='docblock'><p>The left shift assignment operator <code>&lt;&lt;=</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>A trivial implementation of <code>ShlAssign</code>. When <code>Foo &lt;&lt;= Foo</code> happens, it ends up
 calling <code>shl_assign</code>, and therefore, <code>main</code> prints <code>Shifting left!</code>.</p>
 
@@ -292,7 +293,6 @@ calling <code>shl_assign</code>, and therefore, <code>main</code> prints <code>S
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

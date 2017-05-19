@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../../index.html'>std</a>::<wbr><a href='../index.html'>sync</a>::<wbr><a href='index.html'>mpsc</a></p><script>window.sidebarCurrent = {name: 'Select', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Select</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>std</a>::<wbr><a href='../index.html'>sync</a>::<wbr><a href='index.html'>mpsc</a></p><script>window.sidebarCurrent = {name: 'Select', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -56,9 +56,11 @@ a set of receivers which are being selected over.</p>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="struct" href="../../../std/sync/mpsc/struct.Select.html" title="struct std::sync::mpsc::Select">Select</a></code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>mpsc_select </code><a href="https://github.com/rust-lang/rust/issues/27800">#27800</a>)</summary><p>This implementation, while likely sufficient, is unsafe and likely to be error prone. At some point in the future this module will likely be replaced, and it is currently unknown how much API breakage that will cause. The ability to select over a number of channels will remain forever, but no guarantees beyond this are being made</p>
 </details></div></div><div class='docblock'><p>Creates a new selection structure. This set is initially empty.</p>
+
 <p>Usage of this struct directly can sometimes be burdensome, and usage is much easier through
 the <code>select!</code> macro.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">mpsc_select</span>)]</span>
 
@@ -142,7 +144,6 @@ channel has been closed.</p>
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

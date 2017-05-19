@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="races.html#data-races-and-race-conditions" name="data-races-and-race-conditions"><h1>Data Races and Race Conditions</h1></a>
+                    <a class="header" href="races.html#data-races-and-race-conditions" id="data-races-and-race-conditions"><h1>Data Races and Race Conditions</h1></a>
 <p>Safe Rust guarantees an absence of data races, which are defined as:</p>
 <ul>
 <li>two or more threads concurrently accessing a location of memory</li>
@@ -92,7 +93,6 @@ condition can't violate memory safety in a Rust program on its own. Only in
 conjunction with some other unsafe code can a race condition actually violate
 memory safety. For instance:</p>
 <pre><pre class="playpen"><code class="language-rust no_run"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -125,7 +125,6 @@ println!(&quot;{}&quot;, data[idx.load(Ordering::SeqCst)]);
 
 #}</code></pre></pre>
 <pre><pre class="playpen"><code class="language-rust no_run"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};

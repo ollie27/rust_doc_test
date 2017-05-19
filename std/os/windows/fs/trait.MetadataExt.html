@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>fs</a></p><script>window.sidebarCurrent = {name: 'MetadataExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait MetadataExt</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>fs</a></p><script>window.sidebarCurrent = {name: 'MetadataExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -61,19 +61,24 @@ within.</p>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.file_attributes' class='method'><span id='file_attributes.v' class='invisible'><code>fn <a href='#tymethod.file_attributes' class='fnname'>file_attributes</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u32.html">u32</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>dwFileAttributes</code> field of this metadata.</p>
+
 <p>This field contains the file system attribute information for a file
 or directory.</p>
 </div><h3 id='tymethod.creation_time' class='method'><span id='creation_time.v' class='invisible'><code>fn <a href='#tymethod.creation_time' class='fnname'>creation_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>ftCreationTime</code> field of this metadata.</p>
+
 <p>The returned 64-bit value represents the number of 100-nanosecond
 intervals since January 1, 1601 (UTC).</p>
 </div><h3 id='tymethod.last_access_time' class='method'><span id='last_access_time.v' class='invisible'><code>fn <a href='#tymethod.last_access_time' class='fnname'>last_access_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>ftLastAccessTime</code> field of this metadata.</p>
+
 <p>The returned 64-bit value represents the number of 100-nanosecond
 intervals since January 1, 1601 (UTC).</p>
 </div><h3 id='tymethod.last_write_time' class='method'><span id='last_write_time.v' class='invisible'><code>fn <a href='#tymethod.last_write_time' class='fnname'>last_write_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>ftLastWriteTime</code> field of this metadata.</p>
+
 <p>The returned 64-bit value represents the number of 100-nanosecond
 intervals since January 1, 1601 (UTC).</p>
 </div><h3 id='tymethod.file_size' class='method'><span id='file_size.v' class='invisible'><code>fn <a href='#tymethod.file_size' class='fnname'>file_size</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>nFileSize{High,Low}</code> fields of this
 metadata.</p>
+
 <p>The returned value does not have meaning for directories.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
@@ -138,7 +143,6 @@ metadata.</p>
         window.rootPath = "../../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>

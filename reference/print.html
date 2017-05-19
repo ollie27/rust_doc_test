@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Appendix: Influences - The Rust Reference</title>
+        <title>Appendix: As-yet-undocumented Features - The Rust Reference</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -47,7 +48,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="notation.html"><strong>1.</strong> Notation</a></li><li><ul class="section"><li><a href="unicode-productions.html"><strong>1.1.</strong> Unicode productions</a></li><li><a href="string-table-productions.html"><strong>1.2.</strong> String table productions</a></li></ul></li><li><a href="lexical-structure.html"><strong>2.</strong> Lexical structure</a></li><li><ul class="section"><li><a href="input-format.html"><strong>2.1.</strong> Input format</a></li><li><a href="identifiers.html"><strong>2.2.</strong> Identifiers</a></li><li><a href="comments.html"><strong>2.3.</strong> Comments</a></li><li><a href="whitespace.html"><strong>2.4.</strong> Whitespace</a></li><li><a href="tokens.html"><strong>2.5.</strong> Tokens</a></li><li><a href="paths.html"><strong>2.6.</strong> Paths</a></li></ul></li><li><a href="macros.html"><strong>3.</strong> Macros</a></li><li><ul class="section"><li><a href="macros-by-example.html"><strong>3.1.</strong> Macros By Example</a></li><li><a href="procedural-macros.html"><strong>3.2.</strong> Procedrual Macros</a></li></ul></li><li><a href="crates-and-source-files.html"><strong>4.</strong> Crates and source files</a></li><li><a href="items-and-attributes.html"><strong>5.</strong> Items and attributes</a></li><li><ul class="section"><li><a href="items.html"><strong>5.1.</strong> Items</a></li><li><a href="visibility-and-privacy.html"><strong>5.2.</strong> Visibility and Privacy</a></li><li><a href="attributes.html"><strong>5.3.</strong> Attributes</a></li></ul></li><li><a href="statements-and-expressions.html"><strong>6.</strong> Statements and expressions</a></li><li><ul class="section"><li><a href="statements.html"><strong>6.1.</strong> Statements</a></li><li><a href="expressions.html"><strong>6.2.</strong> Expressions</a></li></ul></li><li><a href="type-system.html"><strong>7.</strong> Type system</a></li><li><ul class="section"><li><a href="types.html"><strong>7.1.</strong> Types</a></li><li><a href="subtyping.html"><strong>7.2.</strong> Subtyping</a></li><li><a href="type-coercions.html"><strong>7.3.</strong> Type coercions</a></li></ul></li><li><a href="special-traits.html"><strong>8.</strong> Special traits</a></li><li><ul class="section"><li><a href="the-copy-trait.html"><strong>8.1.</strong> The Copy trait</a></li><li><a href="the-sized-trait.html"><strong>8.2.</strong> The Sized trait</a></li><li><a href="the-drop-trait.html"><strong>8.3.</strong> The Drop trait</a></li><li><a href="the-deref-trait.html"><strong>8.4.</strong> The Deref trait</a></li><li><a href="the-send-trait.html"><strong>8.5.</strong> The Send trait</a></li><li><a href="the-sync-trait.html"><strong>8.6.</strong> The Sync trait</a></li></ul></li><li><a href="memory-model.html"><strong>9.</strong> Memory model</a></li><li><ul class="section"><li><a href="memory-allocation-and-lifetime.html"><strong>9.1.</strong> Memory allocation and lifetime</a></li><li><a href="memory-ownership.html"><strong>9.2.</strong> Memory ownership</a></li><li><a href="variables.html"><strong>9.3.</strong> Variables</a></li></ul></li><li><a href="linkage.html"><strong>10.</strong> Linkage</a></li><li><a href="unsafety.html"><strong>11.</strong> Unsafety</a></li><li><ul class="section"><li><a href="unsafe-functions.html"><strong>11.1.</strong> Unsafe functions</a></li><li><a href="unsafe-blocks.html"><strong>11.2.</strong> Unsafe blocks</a></li><li><a href="behavior-considered-undefined.html"><strong>11.3.</strong> Behavior considered undefined</a></li><li><a href="behavior-not-considered-unsafe.html"><strong>11.4.</strong> Behavior not considered unsafe</a></li></ul></li><li><a href="influences.html">Appendix: Influences</a></li></ul>
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="notation.html"><strong>1.</strong> Notation</a></li><li><ul class="section"><li><a href="unicode-productions.html"><strong>1.1.</strong> Unicode productions</a></li><li><a href="string-table-productions.html"><strong>1.2.</strong> String table productions</a></li></ul></li><li><a href="lexical-structure.html"><strong>2.</strong> Lexical structure</a></li><li><ul class="section"><li><a href="input-format.html"><strong>2.1.</strong> Input format</a></li><li><a href="identifiers.html"><strong>2.2.</strong> Identifiers</a></li><li><a href="comments.html"><strong>2.3.</strong> Comments</a></li><li><a href="whitespace.html"><strong>2.4.</strong> Whitespace</a></li><li><a href="tokens.html"><strong>2.5.</strong> Tokens</a></li><li><a href="paths.html"><strong>2.6.</strong> Paths</a></li></ul></li><li><a href="macros.html"><strong>3.</strong> Macros</a></li><li><ul class="section"><li><a href="macros-by-example.html"><strong>3.1.</strong> Macros By Example</a></li><li><a href="procedural-macros.html"><strong>3.2.</strong> Procedural Macros</a></li></ul></li><li><a href="crates-and-source-files.html"><strong>4.</strong> Crates and source files</a></li><li><a href="items-and-attributes.html"><strong>5.</strong> Items and attributes</a></li><li><ul class="section"><li><a href="items.html"><strong>5.1.</strong> Items</a></li><li><a href="visibility-and-privacy.html"><strong>5.2.</strong> Visibility and Privacy</a></li><li><a href="attributes.html"><strong>5.3.</strong> Attributes</a></li></ul></li><li><a href="statements-and-expressions.html"><strong>6.</strong> Statements and expressions</a></li><li><ul class="section"><li><a href="statements.html"><strong>6.1.</strong> Statements</a></li><li><a href="expressions.html"><strong>6.2.</strong> Expressions</a></li></ul></li><li><a href="type-system.html"><strong>7.</strong> Type system</a></li><li><ul class="section"><li><a href="types.html"><strong>7.1.</strong> Types</a></li><li><a href="subtyping.html"><strong>7.2.</strong> Subtyping</a></li><li><a href="type-coercions.html"><strong>7.3.</strong> Type coercions</a></li></ul></li><li><a href="special-traits.html"><strong>8.</strong> Special traits</a></li><li><ul class="section"><li><a href="the-copy-trait.html"><strong>8.1.</strong> The Copy trait</a></li><li><a href="the-sized-trait.html"><strong>8.2.</strong> The Sized trait</a></li><li><a href="the-drop-trait.html"><strong>8.3.</strong> The Drop trait</a></li><li><a href="the-deref-trait.html"><strong>8.4.</strong> The Deref trait</a></li><li><a href="the-send-trait.html"><strong>8.5.</strong> The Send trait</a></li><li><a href="the-sync-trait.html"><strong>8.6.</strong> The Sync trait</a></li></ul></li><li><a href="memory-model.html"><strong>9.</strong> Memory model</a></li><li><ul class="section"><li><a href="memory-allocation-and-lifetime.html"><strong>9.1.</strong> Memory allocation and lifetime</a></li><li><a href="memory-ownership.html"><strong>9.2.</strong> Memory ownership</a></li><li><a href="variables.html"><strong>9.3.</strong> Variables</a></li></ul></li><li><a href="linkage.html"><strong>10.</strong> Linkage</a></li><li><a href="unsafety.html"><strong>11.</strong> Unsafety</a></li><li><ul class="section"><li><a href="unsafe-functions.html"><strong>11.1.</strong> Unsafe functions</a></li><li><a href="unsafe-blocks.html"><strong>11.2.</strong> Unsafe blocks</a></li><li><a href="behavior-considered-undefined.html"><strong>11.3.</strong> Behavior considered undefined</a></li><li><a href="behavior-not-considered-unsafe.html"><strong>11.4.</strong> Behavior not considered unsafe</a></li></ul></li><li><a href="influences.html">Appendix: Influences</a></li><li class="affix"><a href="undocumented.html">Appendix: As-yet-undocumented Features</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="print.html#introduction" name="introduction"><h1>Introduction</h1></a>
+                    <a class="header" href="print.html#introduction" id="introduction"><h1>Introduction</h1></a>
 <p>This document is the primary reference for the Rust programming language. It
 provides three kinds of material:</p>
 <ul>
@@ -90,14 +91,17 @@ specific to <code>rustc</code> itself, and should not be taken as a specificatio
 the Rust language. We intend to produce such a document someday, but this
 is what we have for now.</p>
 <p>You may also be interested in the <a href="../grammar.html">grammar</a>.</p>
-<a class="header" href="print.html#notation" name="notation"><h1>Notation</h1></a>
-<a class="header" href="print.html#unicode-productions" name="unicode-productions"><h1>Unicode productions</h1></a>
+<p>N. B. This document may be incomplete. Documenting everything might take a
+while. We have a <a href="https://github.com/rust-lang-nursery/reference/issues/9">big issue</a> to track documentation for every Rust feature,
+so check that out if you can't find something here.</p>
+<a class="header" href="print.html#notation" id="notation"><h1>Notation</h1></a>
+<a class="header" href="print.html#unicode-productions" id="unicode-productions"><h1>Unicode productions</h1></a>
 <p>A few productions in Rust's grammar permit Unicode code points outside the
 ASCII range. We define these productions in terms of character properties
 specified in the Unicode standard, rather than in terms of ASCII-range code
 points. The grammar has a <a href="../grammar.html#special-unicode-productions">Special Unicode Productions</a>
 section that lists these productions.</p>
-<a class="header" href="print.html#string-table-productions" name="string-table-productions"><h1>String table productions</h1></a>
+<a class="header" href="print.html#string-table-productions" id="string-table-productions"><h1>String table productions</h1></a>
 <p>Some rules in the grammar — notably <a href="expressions.html#unary-operator-expressions">unary
 operators</a>, <a href="expressions.html#binary-operator-expressions">binary operators</a>, and <a href="../grammar.html#keywords">keywords</a> — are
 given in a simplified form: as a listing of a table of unquoted, printable
@@ -108,8 +112,8 @@ disjunction of all such string table entries.</p>
 <p>When such a string enclosed in double-quotes (<code>&quot;</code>) occurs inside the grammar,
 it is an implicit reference to a single member of such a string table
 production. See <a href="tokens.html">tokens</a> for more information.</p>
-<a class="header" href="print.html#lexical-structure" name="lexical-structure"><h1>Lexical structure</h1></a>
-<a class="header" href="print.html#input-format" name="input-format"><h1>Input format</h1></a>
+<a class="header" href="print.html#lexical-structure" id="lexical-structure"><h1>Lexical structure</h1></a>
+<a class="header" href="print.html#input-format" id="input-format"><h1>Input format</h1></a>
 <p>Rust input is interpreted as a sequence of Unicode code points encoded in UTF-8.
 Most Rust grammar rules are defined in terms of printable ASCII-range
 code points, but a small number are defined in terms of Unicode properties or
@@ -119,7 +123,7 @@ explicit code point lists. <sup class="footnote-reference"><a href="print.html#i
 provided to the grammar verifier, restricted to ASCII range, when verifying the
 grammar in this document.</p>
 </div>
-<a class="header" href="print.html#identifiers" name="identifiers"><h1>Identifiers</h1></a>
+<a class="header" href="print.html#identifiers" id="identifiers"><h1>Identifiers</h1></a>
 <p>An identifier is any nonempty Unicode<sup class="footnote-reference"><a href="print.html#non_ascii_idents">1</a></sup> string of the following form:</p>
 <p>Either</p>
 <ul>
@@ -142,7 +146,7 @@ identifiers.</p>
 <p>Non-ASCII characters in identifiers are currently feature
 gated. This is expected to improve soon.</p>
 </div>
-<a class="header" href="print.html#comments" name="comments"><h1>Comments</h1></a>
+<a class="header" href="print.html#comments" id="comments"><h1>Comments</h1></a>
 <p>Comments in Rust code follow the general C++ style of line (<code>//</code>) and
 block (<code>/* ... */</code>) comment forms. Nested block comments are supported.</p>
 <p>Line comments beginning with exactly <em>three</em> slashes (<code>///</code>), and block
@@ -156,7 +160,7 @@ that follows.  That is, they are equivalent to writing <code>#![doc=&quot;...&qu
 the body of the comment. <code>//!</code> comments are usually used to document
 modules that occupy a source file.</p>
 <p>Non-doc comments are interpreted as a form of whitespace.</p>
-<a class="header" href="print.html#whitespace" name="whitespace"><h1>Whitespace</h1></a>
+<a class="header" href="print.html#whitespace" id="whitespace"><h1>Whitespace</h1></a>
 <p>Whitespace is any non-empty string containing only characters that have the
 <code>Pattern_White_Space</code> Unicode property, namely:</p>
 <ul>
@@ -176,18 +180,18 @@ modules that occupy a source file.</p>
 to separate <em>tokens</em> in the grammar, and have no semantic significance.</p>
 <p>A Rust program has identical meaning if each whitespace element is replaced
 with any other legal whitespace element, such as a single space character.</p>
-<a class="header" href="print.html#tokens" name="tokens"><h1>Tokens</h1></a>
+<a class="header" href="print.html#tokens" id="tokens"><h1>Tokens</h1></a>
 <p>Tokens are primitive productions in the grammar defined by regular
 (non-recursive) languages. &quot;Simple&quot; tokens are given in <a href="string-table-productions.html">string table
 production</a> form, and occur in the rest of the
 grammar as double-quoted strings. Other tokens have exact rules given.</p>
-<a class="header" href="print.html#literals" name="literals"><h2>Literals</h2></a>
+<a class="header" href="print.html#literals" id="literals"><h2>Literals</h2></a>
 <p>A literal is an expression consisting of a single token, rather than a sequence
 of tokens, that immediately and directly denotes the value it evaluates to,
 rather than referring to it by name or some other evaluation rule. A literal is
 a form of constant expression, so is evaluated (primarily) at compile time.</p>
-<a class="header" href="print.html#examples" name="examples"><h3>Examples</h3></a>
-<a class="header" href="print.html#characters-and-strings" name="characters-and-strings"><h4>Characters and strings</h4></a>
+<a class="header" href="print.html#examples" id="examples"><h3>Examples</h3></a>
+<a class="header" href="print.html#characters-and-strings" id="characters-and-strings"><h4>Characters and strings</h4></a>
 <table><thead><tr><td>                                              </td><td> Example         </td><td> <code>#</code> sets   </td><td> Characters  </td><td> Escapes             </td></tr></thead>
 <tr><td> <a href="print.html#character-literals">Character</a>             </td><td> <code>'H'</code>           </td><td> <code>N/A</code>      </td><td> All Unicode </td><td> <a href="print.html#quote-escapes">Quote</a> &amp; <a href="print.html#byte-escapes">Byte</a> &amp; <a href="print.html#unicode-escapes">Unicode</a> </td></tr>
 <tr><td> <a href="print.html#string-literals">String</a>                   </td><td> <code>&quot;hello&quot;</code>       </td><td> <code>N/A</code>      </td><td> All Unicode </td><td> <a href="print.html#quote-escapes">Quote</a> &amp; <a href="print.html#byte-escapes">Byte</a> &amp; <a href="print.html#unicode-escapes">Unicode</a> </td></tr>
@@ -196,7 +200,7 @@ a form of constant expression, so is evaluated (primarily) at compile time.</p>
 <tr><td> <a href="print.html#byte-string-literals">Byte string</a>         </td><td> <code>b&quot;hello&quot;</code>      </td><td> <code>N/A</code>      </td><td> All ASCII   </td><td> <a href="print.html#quote-escapes">Quote</a> &amp; <a href="print.html#byte-escapes">Byte</a>                               </td></tr>
 <tr><td> <a href="print.html#raw-byte-string-literals">Raw byte string</a> </td><td> <code>br#&quot;hello&quot;#</code>   </td><td> <code>0...</code>     </td><td> All ASCII   </td><td> <code>N/A</code>                                                      </td></tr>
 </table>
-<a class="header" href="print.html#byte-escapes" name="byte-escapes"><h4>Byte escapes</h4></a>
+<a class="header" href="print.html#byte-escapes" id="byte-escapes"><h4>Byte escapes</h4></a>
 <table><thead><tr><td>   </td><td> Name </td></tr></thead>
 <tr><td> <code>\x7F</code> </td><td> 8-bit character code (exactly 2 digits) </td></tr>
 <tr><td> <code>\n</code> </td><td> Newline </td></tr>
@@ -205,16 +209,16 @@ a form of constant expression, so is evaluated (primarily) at compile time.</p>
 <tr><td> <code>\\</code> </td><td> Backslash </td></tr>
 <tr><td> <code>\0</code> </td><td> Null </td></tr>
 </table>
-<a class="header" href="print.html#unicode-escapes" name="unicode-escapes"><h4>Unicode escapes</h4></a>
+<a class="header" href="print.html#unicode-escapes" id="unicode-escapes"><h4>Unicode escapes</h4></a>
 <table><thead><tr><td>   </td><td> Name </td></tr></thead>
 <tr><td> <code>\u{7FFF}</code> </td><td> 24-bit Unicode character code (up to 6 digits) </td></tr>
 </table>
-<a class="header" href="print.html#quote-escapes" name="quote-escapes"><h4>Quote escapes</h4></a>
+<a class="header" href="print.html#quote-escapes" id="quote-escapes"><h4>Quote escapes</h4></a>
 <table><thead><tr><td>   </td><td> Name </td></tr></thead>
 <tr><td> <code>\'</code> </td><td> Single quote </td></tr>
 <tr><td> <code>\&quot;</code> </td><td> Double quote </td></tr>
 </table>
-<a class="header" href="print.html#numbers" name="numbers"><h4>Numbers</h4></a>
+<a class="header" href="print.html#numbers" id="numbers"><h4>Numbers</h4></a>
 <table><thead><tr><td> <a href="print.html#number-literals">Number literals</a><code>*</code> </td><td> Example </td><td> Exponentiation </td><td> Suffixes </td></tr></thead>
 <tr><td> Decimal integer </td><td> <code>98_222</code> </td><td> <code>N/A</code> </td><td> Integer suffixes </td></tr>
 <tr><td> Hex integer </td><td> <code>0xff</code> </td><td> <code>N/A</code> </td><td> Integer suffixes </td></tr>
@@ -223,16 +227,16 @@ a form of constant expression, so is evaluated (primarily) at compile time.</p>
 <tr><td> Floating-point </td><td> <code>123.0E+77</code> </td><td> <code>Optional</code> </td><td> Floating-point suffixes </td></tr>
 </table>
 <p><code>*</code> All number literals allow <code>_</code> as a visual separator: <code>1_234.0E+18f64</code></p>
-<a class="header" href="print.html#suffixes" name="suffixes"><h4>Suffixes</h4></a>
+<a class="header" href="print.html#suffixes" id="suffixes"><h4>Suffixes</h4></a>
 <table><thead><tr><td> Integer </td><td> Floating-point </td></tr></thead>
 <tr><td> <code>u8</code>, <code>i8</code>, <code>u16</code>, <code>i16</code>, <code>u32</code>, <code>i32</code>, <code>u64</code>, <code>i64</code>, <code>isize</code>, <code>usize</code> </td><td> <code>f32</code>, <code>f64</code> </td></tr>
 </table>
-<a class="header" href="print.html#character-and-string-literals" name="character-and-string-literals"><h3>Character and string literals</h3></a>
-<a class="header" href="print.html#character-literals" name="character-literals"><h4>Character literals</h4></a>
+<a class="header" href="print.html#character-and-string-literals" id="character-and-string-literals"><h3>Character and string literals</h3></a>
+<a class="header" href="print.html#character-literals" id="character-literals"><h4>Character literals</h4></a>
 <p>A <em>character literal</em> is a single Unicode character enclosed within two
 <code>U+0027</code> (single-quote) characters, with the exception of <code>U+0027</code> itself,
 which must be <em>escaped</em> by a preceding <code>U+005C</code> character (<code>\</code>).</p>
-<a class="header" href="print.html#string-literals" name="string-literals"><h4>String literals</h4></a>
+<a class="header" href="print.html#string-literals" id="string-literals"><h4>String literals</h4></a>
 <p>A <em>string literal</em> is a sequence of any Unicode characters enclosed within two
 <code>U+0022</code> (double-quote) characters, with the exception of <code>U+0022</code> itself,
 which must be <em>escaped</em> by a preceding <code>U+005C</code> character (<code>\</code>).</p>
@@ -242,7 +246,6 @@ themselves (i.e. no translation), but as a special exception, when an unescaped
 <code>U+005C</code> character, the newline, and all whitespace at the beginning of the
 next line are ignored. Thus <code>a</code> and <code>b</code> are equal:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let a = &quot;foobar&quot;;
 let b = &quot;foo\
@@ -251,7 +254,7 @@ let b = &quot;foo\
 assert_eq!(a,b);
 
 #}</code></pre></pre>
-<a class="header" href="print.html#character-escapes" name="character-escapes"><h4>Character escapes</h4></a>
+<a class="header" href="print.html#character-escapes" id="character-escapes"><h4>Character escapes</h4></a>
 <p>Some additional <em>escapes</em> are available in either character or non-raw string
 literals. An escape starts with a <code>U+005C</code> (<code>\</code>) and continues with one of the
 following forms:</p>
@@ -270,7 +273,7 @@ value <code>U+0000</code> (NUL).</li>
 <li>The <em>backslash escape</em> is the character <code>U+005C</code> (<code>\</code>) which must be
 escaped in order to denote <em>itself</em>.</li>
 </ul>
-<a class="header" href="print.html#raw-string-literals" name="raw-string-literals"><h4>Raw string literals</h4></a>
+<a class="header" href="print.html#raw-string-literals" id="raw-string-literals"><h4>Raw string literals</h4></a>
 <p>Raw string literals do not process any escapes. They start with the character
 <code>U+0072</code> (<code>r</code>), followed by zero or more of the character <code>U+0023</code> (<code>#</code>) and a
 <code>U+0022</code> (double-quote) character. The <em>raw string body</em> can contain any sequence
@@ -283,7 +286,6 @@ many <code>U+0023</code> (<code>#</code>) characters as were used to start the r
 <code>U+005C</code> (<code>\</code>) do not have any special meaning.</p>
 <p>Examples for string literals:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 &quot;foo&quot;; r&quot;foo&quot;;                     // foo
 &quot;\&quot;foo\&quot;&quot;; r#&quot;&quot;foo&quot;&quot;#;             // &quot;foo&quot;
@@ -295,15 +297,15 @@ r##&quot;foo #&quot;# bar&quot;##;                // foo #&quot;# bar
 &quot;\\x52&quot;; r&quot;\x52&quot;;                  // \x52
 
 #}</code></pre></pre>
-<a class="header" href="print.html#byte-and-byte-string-literals" name="byte-and-byte-string-literals"><h3>Byte and byte string literals</h3></a>
-<a class="header" href="print.html#byte-literals" name="byte-literals"><h4>Byte literals</h4></a>
+<a class="header" href="print.html#byte-and-byte-string-literals" id="byte-and-byte-string-literals"><h3>Byte and byte string literals</h3></a>
+<a class="header" href="print.html#byte-literals" id="byte-literals"><h4>Byte literals</h4></a>
 <p>A <em>byte literal</em> is a single ASCII character (in the <code>U+0000</code> to <code>U+007F</code>
 range) or a single <em>escape</em> preceded by the characters <code>U+0062</code> (<code>b</code>) and
 <code>U+0027</code> (single-quote), and followed by the character <code>U+0027</code>. If the character
 <code>U+0027</code> is present within the literal, it must be <em>escaped</em> by a preceding
 <code>U+005C</code> (<code>\</code>) character. It is equivalent to a <code>u8</code> unsigned 8-bit integer
 <em>number literal</em>.</p>
-<a class="header" href="print.html#byte-string-literals" name="byte-string-literals"><h4>Byte string literals</h4></a>
+<a class="header" href="print.html#byte-string-literals" id="byte-string-literals"><h4>Byte string literals</h4></a>
 <p>A non-raw <em>byte string literal</em> is a sequence of ASCII characters and <em>escapes</em>,
 preceded by the characters <code>U+0062</code> (<code>b</code>) and <code>U+0022</code> (double-quote), and
 followed by the character <code>U+0022</code>. If the character <code>U+0022</code> is present within
@@ -326,7 +328,7 @@ value <code>0x00</code> (ASCII NUL).</li>
 <li>The <em>backslash escape</em> is the character <code>U+005C</code> (<code>\</code>) which must be
 escaped in order to denote its ASCII encoding <code>0x5C</code>.</li>
 </ul>
-<a class="header" href="print.html#raw-byte-string-literals" name="raw-byte-string-literals"><h4>Raw byte string literals</h4></a>
+<a class="header" href="print.html#raw-byte-string-literals" id="raw-byte-string-literals"><h4>Raw byte string literals</h4></a>
 <p>Raw byte string literals do not process any escapes. They start with the
 character <code>U+0062</code> (<code>b</code>), followed by <code>U+0072</code> (<code>r</code>), followed by zero or more
 of the character <code>U+0023</code> (<code>#</code>), and a <code>U+0022</code> (double-quote) character. The
@@ -340,7 +342,6 @@ many <code>U+0023</code> (<code>#</code>) characters as were used to start the r
 <code>U+005C</code> (<code>\</code>) do not have any special meaning.</p>
 <p>Examples for byte string literals:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 b&quot;foo&quot;; br&quot;foo&quot;;                     // foo
 b&quot;\&quot;foo\&quot;&quot;; br#&quot;&quot;foo&quot;&quot;#;             // &quot;foo&quot;
@@ -352,10 +353,10 @@ b&quot;\x52&quot;; b&quot;R&quot;; br&quot;R&quot;;                // R
 b&quot;\\x52&quot;; br&quot;\x52&quot;;                  // \x52
 
 #}</code></pre></pre>
-<a class="header" href="print.html#number-literals" name="number-literals"><h3>Number literals</h3></a>
+<a class="header" href="print.html#number-literals" id="number-literals"><h3>Number literals</h3></a>
 <p>A <em>number literal</em> is either an <em>integer literal</em> or a <em>floating-point
 literal</em>. The grammar for recognizing the two kinds of literals is mixed.</p>
-<a class="header" href="print.html#integer-literals" name="integer-literals"><h4>Integer literals</h4></a>
+<a class="header" href="print.html#integer-literals" id="integer-literals"><h4>Integer literals</h4></a>
 <p>An <em>integer literal</em> has one of four forms:</p>
 <ul>
 <li>A <em>decimal literal</em> starts with a <em>decimal digit</em> and continues with any
@@ -389,7 +390,6 @@ static type error.</p>
 </ul>
 <p>Examples of integer literals of various forms:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 123i32;                            // type i32
 123u32;                            // type u32
@@ -403,7 +403,7 @@ static type error.</p>
 <p>Note that the Rust syntax considers <code>-1i8</code> as an application of the <a href="expressions.html#unary-operator-expressions">unary minus
 operator</a> to an integer literal <code>1i8</code>, rather than
 a single integer literal.</p>
-<a class="header" href="print.html#floating-point-literals" name="floating-point-literals"><h4>Floating-point literals</h4></a>
+<a class="header" href="print.html#floating-point-literals" id="floating-point-literals"><h4>Floating-point literals</h4></a>
 <p>A <em>floating-point literal</em> has one of two forms:</p>
 <ul>
 <li>A <em>decimal literal</em> followed by a period character <code>U+002E</code> (<code>.</code>). This is
@@ -433,7 +433,6 @@ static type error.</p>
 </ul>
 <p>Examples of floating-point literals of various forms:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 123.0f64;        // type f64
 0.1f64;          // type f64
@@ -447,16 +446,16 @@ syntax with a floating point literal ending in a period. <code>2.f64</code> woul
 to call a method named <code>f64</code> on <code>2</code>.</p>
 <p>The representation semantics of floating-point numbers are described in
 <a href="types.html#machine-types">&quot;Machine Types&quot;</a>.</p>
-<a class="header" href="print.html#boolean-literals" name="boolean-literals"><h3>Boolean literals</h3></a>
+<a class="header" href="print.html#boolean-literals" id="boolean-literals"><h3>Boolean literals</h3></a>
 <p>The two values of the boolean type are written <code>true</code> and <code>false</code>.</p>
-<a class="header" href="print.html#symbols" name="symbols"><h2>Symbols</h2></a>
+<a class="header" href="print.html#symbols" id="symbols"><h2>Symbols</h2></a>
 <p>Symbols are a general class of printable <a href="print.html#tokens">tokens</a> that play structural
 roles in a variety of grammar productions. They are a
 set of remaining miscellaneous printable tokens that do not
 otherwise appear as <a href="expressions.html#unary-operator-expressions">unary operators</a>, <a href="expressions.html#binary-operator-expressions">binary
 operators</a>, or <a href="../grammar.html#keywords">keywords</a>.
 They are catalogued in <a href="../grammar.html#symbols">the Symbols section</a> of the Grammar document.</p>
-<a class="header" href="print.html#paths" name="paths"><h1>Paths</h1></a>
+<a class="header" href="print.html#paths" id="paths"><h1>Paths</h1></a>
 <p>A <em>path</em> is a sequence of one or more path components <em>logically</em> separated by
 a namespace qualifier (<code>::</code>). If a path consists of only one component, it may
 refer to either an <a href="items.html">item</a> or a <a href="variables.html">variable</a> in a local control
@@ -476,7 +475,6 @@ relational expression involving the less-than symbol (<code>&lt;</code>). In typ
 expression context, the final namespace qualifier is omitted.</p>
 <p>Two examples of paths with type arguments:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct HashMap&lt;K, V&gt;(K,V);
 # fn f() {
@@ -543,7 +541,7 @@ fn bar() {
 }
 # fn main() {}
 </code></pre></pre>
-<a class="header" href="print.html#macros" name="macros"><h1>Macros</h1></a>
+<a class="header" href="print.html#macros" id="macros"><h1>Macros</h1></a>
 <p>A number of minor features of Rust are not central enough to have their own
 syntax, and yet are not implementable as functions. Instead, they are given
 names, and invoked through a consistent syntax: <code>some_extension!(...)</code>.</p>
@@ -553,8 +551,8 @@ names, and invoked through a consistent syntax: <code>some_extension!(...)</code
 declarative way.</li>
 <li><a href="../book/procedural-macros.html">Procedural Macros</a> can be used to implement custom derive.</li>
 </ul>
-<p>And one unstable way: <a href="../unstable-book/plugin.html">compiler plugins</a>.</p>
-<a class="header" href="print.html#macros-by-example" name="macros-by-example"><h1>Macros By Example</h1></a>
+<p>And one unstable way: <a href="../unstable-book/language-features/plugin.html">compiler plugins</a>.</p>
+<a class="header" href="print.html#macros-by-example" id="macros-by-example"><h1>Macros By Example</h1></a>
 <p><code>macro_rules</code> allows users to define syntax extension in a declarative way.  We
 call such extensions &quot;macros by example&quot; or simply &quot;macros&quot;.</p>
 <p>Currently, macros can expand to expressions, statements, items, or patterns.</p>
@@ -601,7 +599,7 @@ the same number of times, so <code>( $( $i:ident ),* ; $( $j:ident ),* ) =&gt; (
 <code>(a,b,c ; d,e)</code>. The repetition walks through the choices at that layer in
 lockstep, so the former input transcribes to <code>(a,d), (b,e), (c,f)</code>.</p>
 <p>Nested repetitions are allowed.</p>
-<a class="header" href="print.html#parsing-limitations" name="parsing-limitations"><h3>Parsing limitations</h3></a>
+<a class="header" href="print.html#parsing-limitations" id="parsing-limitations"><h3>Parsing limitations</h3></a>
 <p>The parser used by the macro system is reasonably powerful, but the parsing of
 Rust syntax is restricted in two ways:</p>
 <ol>
@@ -615,7 +613,7 @@ however, because <code>,</code> and <code>;</code> are legal separators. See <a 
 pairs when they occur at the beginning of, or immediately after, a <code>$(...)*</code>;
 requiring a distinctive token in front can solve the problem.</li>
 </ol>
-<a class="header" href="print.html#procedural-macros" name="procedural-macros"><h2>Procedural Macros</h2></a>
+<a class="header" href="print.html#procedural-macros" id="procedural-macros"><h2>Procedural Macros</h2></a>
 <p>&quot;Procedural macros&quot; are the second way to implement a macro. For now, the only
 thing they can be used for is to implement derive on your own types. See
 <a href="../book/procedural-macros.html">the book</a> for a tutorial.</p>
@@ -631,7 +629,7 @@ pub fn hello_world(input: TokenStream) -&gt; TokenStream
 </code></pre>
 <p>Finally, procedural macros must be in their own crate, with the <code>proc-macro</code>
 crate type.</p>
-<a class="header" href="print.html#crates-and-source-files" name="crates-and-source-files"><h1>Crates and source files</h1></a>
+<a class="header" href="print.html#crates-and-source-files" id="crates-and-source-files"><h1>Crates and source files</h1></a>
 <p>Although Rust, like any other language, can be implemented by an interpreter as
 well as a compiler, the only existing implementation is a compiler,
 and the language has
@@ -669,7 +667,6 @@ that apply to the containing module, most of which influence the behavior of
 the compiler. The anonymous crate module can have additional attributes that
 apply to the crate as a whole.</p>
 <pre><pre class="playpen"><code class="language-rust no_run"># #![allow(unused_variables)]
-# 
 #fn main() {
 // Specify the crate name.
 #![crate_name = &quot;projx&quot;]
@@ -695,10 +692,10 @@ happen before the program is executed regardless of when it is executed.</p>
 ECMA-335 CLI model, a <em>library</em> in the SML/NJ Compilation Manager, a <em>unit</em>
 in the Owens and Flatt module system, or a <em>configuration</em> in Mesa.</p>
 </div>
-<a class="header" href="print.html#items-and-attributes" name="items-and-attributes"><h1>Items and attributes</h1></a>
+<a class="header" href="print.html#items-and-attributes" id="items-and-attributes"><h1>Items and attributes</h1></a>
 <p>Crates contain <a href="items.html">items</a>, each of which may have some number of
 <a href="attributes.html">attributes</a> attached to it.</p>
-<a class="header" href="print.html#items" name="items"><h1>Items</h1></a>
+<a class="header" href="print.html#items" id="items"><h1>Items</h1></a>
 <p>An <em>item</em> is a component of a crate. Items are organized within a crate by a
 nested set of <a href="print.html#modules">modules</a>. Every crate has a single &quot;outermost&quot;
 anonymous module; all further items within the crate have <a href="paths.html">paths</a>
@@ -729,7 +726,7 @@ as if the item was declared outside the scope — it is still a static item
 qualified by the name of the enclosing item, or is private to the enclosing
 item (in the case of functions). The grammar specifies the exact locations in
 which sub-item declarations may appear.</p>
-<a class="header" href="print.html#type-parameters" name="type-parameters"><h2>Type Parameters</h2></a>
+<a class="header" href="print.html#type-parameters" id="type-parameters"><h2>Type Parameters</h2></a>
 <p>All items except modules, constants and statics may be <em>parameterized</em> by type.
 Type parameters are given as a comma-separated list of identifiers enclosed in
 angle brackets (<code>&lt;...&gt;</code>), after the name of the item and before its definition.
@@ -741,14 +738,13 @@ type-inference system can usually infer such argument types from context. There
 are no general type-parametric types, only type-parametric items. That is, Rust
 has no notion of type abstraction: there are no higher-ranked (or &quot;forall&quot;) types
 abstracted over other types, though higher-ranked types do exist for lifetimes.</p>
-<a class="header" href="print.html#modules" name="modules"><h2>Modules</h2></a>
+<a class="header" href="print.html#modules" id="modules"><h2>Modules</h2></a>
 <p>A module is a container for zero or more <a href="items.html">items</a>.</p>
 <p>A <em>module item</em> is a module, surrounded in braces, named, and prefixed with the
 keyword <code>mod</code>. A module item introduces a new, named module into the tree of
 modules making up a crate. Modules can nest arbitrarily.</p>
 <p>An example of a module:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 mod math {
     type Complex = (f64, f64);
@@ -793,7 +789,7 @@ mod thread {
     mod local_data;
 }
 </code></pre>
-<a class="header" href="print.html#extern-crate-declarations" name="extern-crate-declarations"><h3>Extern crate declarations</h3></a>
+<a class="header" href="print.html#extern-crate-declarations" id="extern-crate-declarations"><h3>Extern crate declarations</h3></a>
 <p>An <em><code>extern crate</code> declaration</em> specifies a dependency on an external crate.
 The external crate is then bound into the declaring scope as the <code>ident</code>
 provided in the <code>extern_crate_decl</code>.</p>
@@ -819,7 +815,7 @@ details).</p>
 <pre><code class="language-rust ignore">// Importing the Cargo package hello-world
 extern crate hello_world; // hyphen replaced with an underscore
 </code></pre>
-<a class="header" href="print.html#use-declarations" name="use-declarations"><h3>Use declarations</h3></a>
+<a class="header" href="print.html#use-declarations" id="use-declarations"><h3>Use declarations</h3></a>
 <p>A <em>use declaration</em> creates one or more local name bindings synonymous with
 some other <a href="paths.html">path</a>. Usually a <code>use</code> declaration is used to shorten the
 path required to refer to a module item. These declarations may appear in
@@ -913,7 +909,7 @@ mod foo {
 
 fn main() {}
 </code></pre></pre>
-<a class="header" href="print.html#functions" name="functions"><h2>Functions</h2></a>
+<a class="header" href="print.html#functions" id="functions"><h2>Functions</h2></a>
 <p>A <em>function item</em> defines a sequence of <a href="statements.html">statements</a> and a
 final <a href="expressions.html">expression</a>, along with a name and a set of
 parameters. Other than a name, all these are optional.
@@ -931,7 +927,6 @@ value-producing expression in its final-expression position, that expression is
 interpreted as an implicit <code>return</code> expression applied to the final-expression.</p>
 <p>An example of a function:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn add(x: i32, y: i32) -&gt; i32 {
     x + y
@@ -941,12 +936,11 @@ fn add(x: i32, y: i32) -&gt; i32 {
 <p>As with <code>let</code> bindings, function arguments are irrefutable patterns, so any
 pattern that is valid in a let binding is also valid as an argument.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn first((value, _): (i32, i32)) -&gt; i32 { value }
 
 #}</code></pre></pre>
-<a class="header" href="print.html#generic-functions" name="generic-functions"><h3>Generic functions</h3></a>
+<a class="header" href="print.html#generic-functions" id="generic-functions"><h3>Generic functions</h3></a>
 <p>A <em>generic function</em> allows one or more <em>parameterized types</em> to appear in its
 signature. Each type parameter must be explicitly declared in an
 angle-bracket-enclosed and comma-separated list, following the function name.</p>
@@ -963,7 +957,6 @@ specified using the <code>where</code> syntax:</p>
 <p>When a generic function is referenced, its type is instantiated based on the
 context of the reference. For example, calling the <code>foo</code> function here:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::fmt::Debug;
 
@@ -980,11 +973,10 @@ foo(&amp;[1, 2]);
 <a href="paths.html">path</a> component after the function name. This might be necessary if
 there is not sufficient context to determine the type parameters. For example,
 <code>mem::size_of::&lt;u32&gt;() == 4</code>.</p>
-<a class="header" href="print.html#diverging-functions" name="diverging-functions"><h3>Diverging functions</h3></a>
+<a class="header" href="print.html#diverging-functions" id="diverging-functions"><h3>Diverging functions</h3></a>
 <p>A special kind of function can be declared with a <code>!</code> character where the
 output type would normally be. For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn my_err(s: &amp;str) -&gt; ! {
     println!(&quot;{}&quot;, s);
@@ -1002,7 +994,6 @@ with a <a href="expressions.html#return-expressions"><code>return</code></a> or 
 were declared without the <code>!</code> annotation, the following code would not
 typecheck:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # fn my_err(s: &amp;str) -&gt; ! { panic!() }
 
@@ -1023,7 +1014,7 @@ typechecker that, should control ever enter <code>my_err</code>, no further type
 about <code>f</code> need to hold, since control will never resume in any context that
 relies on those judgments. Thus the return type on <code>f</code> only needs to reflect
 the <code>if</code> branch of the conditional.</p>
-<a class="header" href="print.html#extern-functions" name="extern-functions"><h3>Extern functions</h3></a>
+<a class="header" href="print.html#extern-functions" id="extern-functions"><h3>Extern functions</h3></a>
 <p>Extern functions are part of Rust's foreign function interface, providing the
 opposite functionality to <a href="print.html#external-blocks">external blocks</a>. Whereas
 external blocks allow Rust code to call foreign code, extern functions with
@@ -1031,7 +1022,6 @@ bodies defined in Rust code <em>can be called by foreign code</em>. They are def
 in the same way as any other Rust function, except that they have the <code>extern</code>
 modifier.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 // Declares an extern fn, the ABI defaults to &quot;C&quot;
 extern fn new_i32() -&gt; i32 { 0 }
@@ -1043,7 +1033,6 @@ extern &quot;stdcall&quot; fn new_i32_stdcall() -&gt; i32 { 0 }
 <p>Unlike normal functions, extern fns have type <code>extern &quot;ABI&quot; fn()</code>. This is the
 same type as the functions declared in an extern block.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # extern fn new_i32() -&gt; i32 { 0 }
 let fptr: extern &quot;C&quot; fn() -&gt; i32 = new_i32;
@@ -1051,7 +1040,7 @@ let fptr: extern &quot;C&quot; fn() -&gt; i32 = new_i32;
 #}</code></pre></pre>
 <p>Extern functions may be called directly from Rust code as Rust uses large,
 contiguous stack segments like C.</p>
-<a class="header" href="print.html#type-aliases" name="type-aliases"><h2>Type aliases</h2></a>
+<a class="header" href="print.html#type-aliases" id="type-aliases"><h2>Type aliases</h2></a>
 <p>A <em>type alias</em> defines a new name for an existing <a href="types.html">type</a>. Type
 aliases are declared with the keyword <code>type</code>. Every value has a single,
 specific type, but may implement several different traits, or be compatible with
@@ -1059,7 +1048,6 @@ several different type constraints.</p>
 <p>For example, the following defines the type <code>Point</code> as a synonym for the type
 <code>(u8, u8)</code>, the type of pairs of unsigned 8 bit integers:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 type Point = (u8, u8);
 let p: Point = (41, 68);
@@ -1068,7 +1056,6 @@ let p: Point = (41, 68);
 <p>Currently a type alias to an enum type cannot be used to qualify the
 constructors:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum E { A }
 type F = E;
@@ -1076,12 +1063,11 @@ let _: F = E::A;  // OK
 // let _: F = F::A;  // Doesn't work
 
 #}</code></pre></pre>
-<a class="header" href="print.html#structs" name="structs"><h2>Structs</h2></a>
+<a class="header" href="print.html#structs" id="structs"><h2>Structs</h2></a>
 <p>A <em>struct</em> is a nominal <a href="types.html#struct-types">struct type</a> defined with the
 keyword <code>struct</code>.</p>
 <p>An example of a <code>struct</code> item and its use:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Point {x: i32, y: i32}
 let p = Point {x: 10, y: 11};
@@ -1091,7 +1077,6 @@ let px: i32 = p.x;
 <p>A <em>tuple struct</em> is a nominal <a href="types.html#tuple-types">tuple type</a>, also defined with
 the keyword <code>struct</code>. For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Point(i32, i32);
 let p = Point(10, 11);
@@ -1102,7 +1087,6 @@ let px: i32 = match p { Point(x, _) =&gt; x };
 the list of fields entirely. Such a struct implicitly defines a constant of
 its type with the same name. For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Cookie;
 let c = [Cookie, Cookie {}, Cookie, Cookie {}];
@@ -1110,7 +1094,6 @@ let c = [Cookie, Cookie {}, Cookie, Cookie {}];
 #}</code></pre></pre>
 <p>is equivalent to</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Cookie {}
 const Cookie: Cookie = Cookie {};
@@ -1119,14 +1102,13 @@ let c = [Cookie, Cookie {}, Cookie, Cookie {}];
 #}</code></pre></pre>
 <p>The precise memory layout of a struct is not specified. One can specify a
 particular layout using the <a href="attributes.html#ffi-attributes"><code>repr</code> attribute</a>.</p>
-<a class="header" href="print.html#enumerations" name="enumerations"><h2>Enumerations</h2></a>
+<a class="header" href="print.html#enumerations" id="enumerations"><h2>Enumerations</h2></a>
 <p>An <em>enumeration</em> is a simultaneous definition of a nominal <a href="types.html#enumerated-types">enumerated
 type</a> as well as a set of <em>constructors</em>, that can be used
 to create or pattern-match values of the corresponding enumerated type.</p>
 <p>Enumerations are declared with the keyword <code>enum</code>.</p>
 <p>An example of an <code>enum</code> item and its use:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Animal {
     Dog,
@@ -1139,7 +1121,6 @@ a = Animal::Cat;
 #}</code></pre></pre>
 <p>Enumeration constructors can have either named or unnamed fields:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Animal {
     Dog (String, f64),
@@ -1155,7 +1136,6 @@ whereas <code>Dog</code> is simply called an enum variant.</p>
 <p>Each enum value has a <em>discriminant</em> which is an integer associated to it. You
 can specify it explicitly:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Foo {
     Bar = 123,
@@ -1170,7 +1150,6 @@ the type of the right hand side and specify the memory layout.</p>
 variant, in order.</p>
 <p>You can cast an enum to get its discriminant:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # enum Foo { Bar = 123 }
 let x = Foo::Bar as u32; // x is now 123u32
@@ -1178,7 +1157,7 @@ let x = Foo::Bar as u32; // x is now 123u32
 #}</code></pre></pre>
 <p>This only works as long as none of the variants have data attached. If
 it were <code>Bar(i32)</code>, this is disallowed.</p>
-<a class="header" href="print.html#constant-items" name="constant-items"><h2>Constant items</h2></a>
+<a class="header" href="print.html#constant-items" id="constant-items"><h2>Constant items</h2></a>
 <p>A <em>constant item</em> is a named <em>constant value</em> which is not associated with a
 specific memory location in the program. Constants are essentially inlined
 wherever they are used, meaning that they are copied directly into the relevant
@@ -1194,7 +1173,6 @@ so the address referred to may not be stable.</p>
 a type derived from those primitive types. The derived types are references with
 the <code>static</code> lifetime, fixed-size arrays, tuples, enum variants, and structs.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 const BIT1: u32 = 1 &lt;&lt; 0;
 const BIT2: u32 = 1 &lt;&lt; 1;
@@ -1213,7 +1191,7 @@ const BITS_N_STRINGS: BitsNStrings&lt;'static&gt; = BitsNStrings {
 };
 
 #}</code></pre></pre>
-<a class="header" href="print.html#static-items" name="static-items"><h2>Static items</h2></a>
+<a class="header" href="print.html#static-items" id="static-items"><h2>Static items</h2></a>
 <p>A <em>static item</em> is similar to a <em>constant</em>, except that it represents a precise
 memory location in the program. A static is never &quot;inlined&quot; at the usage site,
 and all references to it refer to the same memory location. Static items have
@@ -1231,7 +1209,7 @@ statics:</p>
 </ul>
 <p>Constants should in general be preferred over statics, unless large amounts of
 data are being stored, or single-address and mutability properties are required.</p>
-<a class="header" href="print.html#mutable-statics" name="mutable-statics"><h3>Mutable statics</h3></a>
+<a class="header" href="print.html#mutable-statics" id="mutable-statics"><h3>Mutable statics</h3></a>
 <p>If a static item is declared with the <code>mut</code> keyword, then it is allowed to
 be modified by the program. One of Rust's goals is to make concurrency bugs
 hard to run into, and this is obviously a very large source of race conditions
@@ -1242,7 +1220,6 @@ running in the same process.</p>
 <p>Mutable statics are still very useful, however. They can be used with C
 libraries and can also be bound from C libraries (in an <code>extern</code> block).</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # fn atomic_add(_: &amp;mut u32, _: u32) -&gt; u32 { 2 }
 
@@ -1266,13 +1243,12 @@ unsafe fn bump_levels_unsafe2() -&gt; u32 {
 #}</code></pre></pre>
 <p>Mutable statics have the same restrictions as normal statics, except that the
 type of the value is not required to ascribe to <code>Sync</code>.</p>
-<a class="header" href="print.html#static-lifetime-elision" name="static-lifetime-elision"><h4><code>'static</code> lifetime elision</h4></a>
+<a class="header" href="print.html#static-lifetime-elision" id="static-lifetime-elision"><h4><code>'static</code> lifetime elision</h4></a>
 <p>Both constant and static declarations of reference types have <em>implicit</em>
 <code>'static</code> lifetimes unless an explicit lifetime is specified. As such, the
 constant declarations involving <code>'static</code> above may be written without the
 lifetimes. Returning to our previous example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 const BIT1: u32 = 1 &lt;&lt; 0;
 const BIT2: u32 = 1 &lt;&lt; 1;
@@ -1307,7 +1283,7 @@ const RESOLVED_MULTIPLE: Fn(&amp;Foo, &amp;Bar, &amp;Baz) -&gt; usize = ..
 // `Fn(&amp;'static Foo, &amp;'static Bar) -&gt; &amp;'static Baz`.
 const RESOLVED_STATIC: Fn(&amp;Foo, &amp;Bar) -&gt; &amp;Baz = ..
 </code></pre>
-<a class="header" href="print.html#traits" name="traits"><h3>Traits</h3></a>
+<a class="header" href="print.html#traits" id="traits"><h3>Traits</h3></a>
 <p>A <em>trait</em> describes an abstract interface that types can
 implement. This interface consists of associated items, which come in
 three varieties:</p>
@@ -1330,7 +1306,6 @@ vtable when the trait is used as a <a href="types.html#trait-objects">trait obje
 <a href="print.html#implementations">implementations</a>.</p>
 <p>Consider the following trait:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # type Surface = i32;
 # type BoundingBox = i32;
@@ -1346,7 +1321,6 @@ trait Shape {
 <a href="expressions.html#method-call-expressions">syntax</a>.</p>
 <p>Traits can include default implementations of methods, as in:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Foo {
     fn bar(&amp;self);
@@ -1361,7 +1335,6 @@ to override a method that has a default implementation.</p>
 after the trait name, using the same syntax used in <a href="print.html#generic-functions">generic
 functions</a>.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Seq&lt;T&gt; {
     fn len(&amp;self) -&gt; u32;
@@ -1374,7 +1347,6 @@ trait Seq&lt;T&gt; {
 following example of a <code>Container</code> trait. Notice how the type is available
 for use in the method signatures:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Container {
     type E;
@@ -1387,7 +1359,6 @@ trait Container {
 implementations for every method, but it must specify the type <code>E</code>. Here's
 an implementation of <code>Container</code> for the standard library type <code>Vec</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # trait Container {
 #     type E;
@@ -1410,7 +1381,6 @@ called on values that have the parameter's type.</li>
 </ul>
 <p>For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # type Surface = i32;
 # trait Shape { fn draw(&amp;self, Surface); }
@@ -1428,7 +1398,6 @@ for <code>Box&lt;T&gt;</code>). This coercion can either be implicit or
 <a href="expressions.html#type-cast-expressions">explicit</a>. Here is an example of an explicit
 coercion:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Shape { }
 impl Shape for i32 { }
@@ -1447,7 +1416,6 @@ not method call syntax (<code>obj.f()</code>). The way to refer to the name of a
 method is to qualify it with the trait name, treating the trait name like a
 module. For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Num {
     fn from_i32(n: i32) -&gt; Self;
@@ -1460,7 +1428,6 @@ let x: f64 = Num::from_i32(42);
 #}</code></pre></pre>
 <p>Traits may inherit from other traits. Consider the following example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Shape { fn area(&amp;self) -&gt; f64; }
 trait Circle : Shape { fn radius(&amp;self) -&gt; f64; }
@@ -1473,7 +1440,6 @@ given type <code>T</code>, methods can refer to <code>Shape</code> methods, sinc
 checks that any type with an implementation of <code>Circle</code> also has an
 implementation of <code>Shape</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo;
 
@@ -1500,7 +1466,6 @@ c.radius();
 values of subtrait-bound type parameters. Referring to the previous example of
 <code>trait Circle : Shape</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # trait Shape { fn area(&amp;self) -&gt; f64; }
 # trait Circle : Shape { fn radius(&amp;self) -&gt; f64; }
@@ -1519,12 +1484,11 @@ fn radius_times_area&lt;T: Circle&gt;(c: T) -&gt; f64 {
 let mycircle = Box::new(mycircle) as Box&lt;Circle&gt;;
 let nonsense = mycircle.radius() * mycircle.area();
 </code></pre>
-<a class="header" href="print.html#implementations" name="implementations"><h3>Implementations</h3></a>
+<a class="header" href="print.html#implementations" id="implementations"><h3>Implementations</h3></a>
 <p>An <em>implementation</em> is an item that implements a <a href="print.html#traits">trait</a> for a
 specific type.</p>
 <p>Implementations are defined with the keyword <code>impl</code>.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # #[derive(Copy, Clone)]
 # struct Point {x: f64, y: f64};
@@ -1564,7 +1528,6 @@ trait type and <code>for</code> after <code>impl</code> are omitted. Such implem
 to nominal types (enums, structs, trait objects), and the implementation must
 appear in the same crate as the <code>self</code> type:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Point {x: i32, y: i32}
 
@@ -1584,7 +1547,6 @@ trait must be implemented, with matching types and type parameter counts.</p>
 type parameters taken by the trait it implements. Implementation parameters
 are written after the <code>impl</code> keyword.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # trait Seq&lt;T&gt; { fn dummy(&amp;self, _: T) { } }
 impl&lt;T&gt; Seq&lt;T&gt; for Vec&lt;T&gt; {
@@ -1595,7 +1557,7 @@ impl Seq&lt;bool&gt; for u32 {
 }
 
 #}</code></pre></pre>
-<a class="header" href="print.html#external-blocks" name="external-blocks"><h3>External blocks</h3></a>
+<a class="header" href="print.html#external-blocks" id="external-blocks"><h3>External blocks</h3></a>
 <p>External blocks form the basis for Rust's foreign function interface.
 Declarations in an external block describe symbols in external, non-Rust
 libraries.</p>
@@ -1659,7 +1621,7 @@ the declared return type.</p>
 <p>It is valid to add the <code>link</code> attribute on an empty extern block. You can use
 this to satisfy the linking requirements of extern blocks elsewhere in your code
 (including upstream crates) instead of adding the attribute to each extern block.</p>
-<a class="header" href="print.html#visibility-and-privacy" name="visibility-and-privacy"><h1>Visibility and Privacy</h1></a>
+<a class="header" href="print.html#visibility-and-privacy" id="visibility-and-privacy"><h1>Visibility and Privacy</h1></a>
 <p>These two terms are often used interchangeably, and what they are attempting to
 convey is the answer to the question &quot;Can this item be used at this location?&quot;</p>
 <p>Rust's name resolution operates on a global hierarchy of namespaces. Each level
@@ -1787,7 +1749,7 @@ pub mod submodule {
 <p>For a Rust program to pass the privacy checking pass, all paths must be valid
 accesses given the two rules above. This includes all use statements,
 expressions, types, etc.</p>
-<a class="header" href="print.html#pubin-path-pubcrate-pubsuper-and-pubself" name="pubin-path-pubcrate-pubsuper-and-pubself"><h2><code>pub(in path)</code>, <code>pub(crate)</code>, <code>pub(super)</code>, and <code>pub(self)</code></h2></a>
+<a class="header" href="print.html#pubin-path-pubcrate-pubsuper-and-pubself" id="pubin-path-pubcrate-pubsuper-and-pubself"><h2><code>pub(in path)</code>, <code>pub(crate)</code>, <code>pub(super)</code>, and <code>pub(self)</code></h2></a>
 <p>In addition to public and private, Rust allows users to declare an item as
 visible within a given scope. The rules for <code>pub</code> restrictions are as follows:</p>
 <ul>
@@ -1845,7 +1807,7 @@ fn bar() {
 
 fn main() { bar() }
 </code></pre></pre>
-<a class="header" href="print.html#re-exporting-and-visibility" name="re-exporting-and-visibility"><h2>Re-exporting and Visibility</h2></a>
+<a class="header" href="print.html#re-exporting-and-visibility" id="re-exporting-and-visibility"><h2>Re-exporting and Visibility</h2></a>
 <p>Rust allows publicly re-exporting items through a <code>pub use</code> directive. Because
 this is a public directive, this allows the item to be used in the current
 module through the rules above. It essentially allows public access into the
@@ -1865,7 +1827,7 @@ receive a privacy violation, while the path <code>api::f</code> would be allowed
 <p>When re-exporting a private item, it can be thought of as allowing the &quot;privacy
 chain&quot; being short-circuited through the reexport instead of passing through
 the namespace hierarchy as it normally would.</p>
-<a class="header" href="print.html#attributes" name="attributes"><h1>Attributes</h1></a>
+<a class="header" href="print.html#attributes" id="attributes"><h1>Attributes</h1></a>
 <p>Any item declaration may have an <em>attribute</em> applied to it. Attributes in Rust
 are modeled on Attributes in ECMA-335, with the syntax coming from ECMA-334
 (C#). An attribute is a general, free-form metadatum that is interpreted
@@ -1882,7 +1844,6 @@ attribute is declared within. Attributes that do not have a bang after the hash
 apply to the item that follows the attribute.</p>
 <p>An example of attributes:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 // General metadata applied to the enclosing module or crate.
 #![crate_type = &quot;lib&quot;]
@@ -1910,7 +1871,7 @@ language-reserved and user-available attributes. Until then, there is
 effectively no difference between an attribute handled by a loadable syntax
 extension and the compiler.</p>
 </blockquote>
-<a class="header" href="print.html#crate-only-attributes" name="crate-only-attributes"><h2>Crate-only attributes</h2></a>
+<a class="header" href="print.html#crate-only-attributes" id="crate-only-attributes"><h2>Crate-only attributes</h2></a>
 <ul>
 <li><code>crate_name</code> - specify the crate's crate name.</li>
 <li><code>crate_type</code> - see <a href="linkage.html">linkage</a>.</li>
@@ -1939,14 +1900,14 @@ those two respective subsystems. More subsystems may be
 allowed in the future, and this attribute is ignored on
 non-Windows targets.</li>
 </ul>
-<a class="header" href="print.html#module-only-attributes" name="module-only-attributes"><h3>Module-only attributes</h3></a>
+<a class="header" href="print.html#module-only-attributes" id="module-only-attributes"><h3>Module-only attributes</h3></a>
 <ul>
 <li><code>no_implicit_prelude</code> - disable injecting <code>use std::prelude::*</code> in this
 module.</li>
 <li><code>path</code> - specifies the file to load the module from. <code>#[path=&quot;foo.rs&quot;] mod bar;</code> is equivalent to <code>mod bar { /* contents of foo.rs */ }</code>. The path is
 taken relative to the directory that the current module is in.</li>
 </ul>
-<a class="header" href="print.html#function-only-attributes" name="function-only-attributes"><h2>Function-only attributes</h2></a>
+<a class="header" href="print.html#function-only-attributes" id="function-only-attributes"><h2>Function-only attributes</h2></a>
 <ul>
 <li><code>main</code> - indicates that this function should be passed to the entry point,
 rather than the function in the crate root named <code>main</code>.</li>
@@ -1956,20 +1917,24 @@ rather than the function in the crate root named <code>main</code>.</li>
 overriding the &quot;start&quot; language item. See the &quot;start&quot; <a href="print.html#language-items">language
 item</a> for more details.</li>
 <li><code>test</code> - indicates that this function is a test function, to only be compiled
-in case of <code>--test</code>.</li>
+in case of <code>--test</code>.
+<ul>
+<li><code>ignore</code> - indicates that this test function is disabled.</li>
+</ul>
+</li>
 <li><code>should_panic</code> - indicates that this test function should panic, inverting the success condition.</li>
 <li><code>cold</code> - The function is unlikely to be executed, so optimize it (and calls
 to it) differently.</li>
 <li><code>naked</code> - The function utilizes a custom ABI or custom inline ASM that requires
 epilogue and prologue to be skipped.</li>
 </ul>
-<a class="header" href="print.html#static-only-attributes" name="static-only-attributes"><h2>Static-only attributes</h2></a>
+<a class="header" href="print.html#static-only-attributes" id="static-only-attributes"><h2>Static-only attributes</h2></a>
 <ul>
 <li><code>thread_local</code> - on a <code>static mut</code>, this signals that the value of this
 static may change depending on the current thread. The exact consequences of
 this are implementation-defined.</li>
 </ul>
-<a class="header" href="print.html#ffi-attributes" name="ffi-attributes"><h2>FFI attributes</h2></a>
+<a class="header" href="print.html#ffi-attributes" id="ffi-attributes"><h2>FFI attributes</h2></a>
 <p>On an <code>extern</code> block, the following attributes are interpreted:</p>
 <ul>
 <li><code>link_args</code> - specify arguments to the linker, rather than just the library
@@ -2012,7 +1977,7 @@ combined. <code>C</code> will use a C ABI compatible struct layout, and <code>pa
 remove any padding between fields (note that this is very fragile and may
 break platforms which require aligned access).</li>
 </ul>
-<a class="header" href="print.html#macro-related-attributes" name="macro-related-attributes"><h2>Macro-related attributes</h2></a>
+<a class="header" href="print.html#macro-related-attributes" id="macro-related-attributes"><h2>Macro-related attributes</h2></a>
 <ul>
 <li>
 <p><code>macro_use</code> on a <code>mod</code> — macros defined in this module will be visible in the
@@ -2039,7 +2004,7 @@ link it into the output.</p>
 <p>See the <a href="../book/first-edition/macros.html#scoping-and-macro-importexport">macros section of the
 book</a> for more information on
 macro scope.</p>
-<a class="header" href="print.html#miscellaneous-attributes" name="miscellaneous-attributes"><h2>Miscellaneous attributes</h2></a>
+<a class="header" href="print.html#miscellaneous-attributes" id="miscellaneous-attributes"><h2>Miscellaneous attributes</h2></a>
 <ul>
 <li><code>deprecated</code> - mark the item as deprecated; the full attribute is
 <code>#[deprecated(since = &quot;crate version&quot;, note = &quot;...&quot;)</code>, where both arguments
@@ -2079,7 +2044,7 @@ must be enabled.</li>
 assigned to a variable. You may also include an optional message by using
 <code>#[must_use = &quot;message&quot;]</code> which will be given alongside the warning.</li>
 </ul>
-<a class="header" href="print.html#conditional-compilation" name="conditional-compilation"><h3>Conditional compilation</h3></a>
+<a class="header" href="print.html#conditional-compilation" id="conditional-compilation"><h3>Conditional compilation</h3></a>
 <p>Sometimes one wants to have different compiler outputs from the same code,
 depending on build target, such as targeted operating system, or to enable
 release builds.</p>
@@ -2092,7 +2057,6 @@ or unset independently.</p>
 command line using <code>--cfg</code> (e.g. <code>rustc main.rs --cfg foo --cfg 'bar=&quot;baz&quot;'</code>).
 Rust code then checks for their presence using the <code>#[cfg(...)]</code> attribute:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 // The function is only included in the build when compiling for macOS
 #[cfg(target_os = &quot;macos&quot;)]
@@ -2169,7 +2133,7 @@ production.  For example, it controls the behavior of the standard library's
 <p>This is the same as <code>#[b]</code> if <code>a</code> is set by <code>cfg</code>, and nothing otherwise.</p>
 <p>Lastly, configuration options can be used in expressions by invoking the <code>cfg!</code>
 macro: <code>cfg!(a)</code> evaluates to <code>true</code> if <code>a</code> is set, and <code>false</code> otherwise.</p>
-<a class="header" href="print.html#lint-check-attributes" name="lint-check-attributes"><h3>Lint check attributes</h3></a>
+<a class="header" href="print.html#lint-check-attributes" id="lint-check-attributes"><h3>Lint check attributes</h3></a>
 <p>A lint check names a potentially undesirable coding pattern, such as
 unreachable code or omitted documentation, for the static entity to which the
 attribute applies.</p>
@@ -2183,9 +2147,8 @@ level afterwards,</li>
 <li><code>warn(C)</code> warns about violations of <code>C</code> but continues compilation.</li>
 </ul>
 <p>The lint checks supported by the compiler can be found via <code>rustc -W help</code>,
-along with their default settings.  <a href="../unstable-book/plugin.html#lint-plugins">Compiler
-plugins</a> can provide additional
-lint checks.</p>
+along with their default settings.  <a href="../unstable-book/language-features/plugin.html#lint-plugins">Compiler
+plugins</a> can provide additional lint checks.</p>
 <pre><code class="language-rust ignore">pub mod m1 {
     // Missing documentation is ignored here
     #[allow(missing_docs)]
@@ -2203,7 +2166,6 @@ lint checks.</p>
 <p>This example shows how one can use <code>allow</code> and <code>warn</code> to toggle a particular
 check on and off:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 #[warn(missing_docs)]
 pub mod m2{
@@ -2233,7 +2195,7 @@ pub mod m3 {
     pub fn undocumented_too() -&gt; i32 { 2 }
 }
 </code></pre>
-<a class="header" href="print.html#language-items" name="language-items"><h3>Language items</h3></a>
+<a class="header" href="print.html#language-items" id="language-items"><h3>Language items</h3></a>
 <p>Some primitive Rust operations are defined in Rust code, rather than being
 implemented directly in C or assembly language. The definitions of these
 operations have to be easy for the compiler to find. The <code>lang</code> attribute
@@ -2249,7 +2211,7 @@ of this definition means that it will use this definition when generating calls
 to the string equality function.</p>
 <p>The set of language items is currently considered unstable. A complete
 list of the built-in language items will be added in the future.</p>
-<a class="header" href="print.html#inline-attributes" name="inline-attributes"><h3>Inline attributes</h3></a>
+<a class="header" href="print.html#inline-attributes" id="inline-attributes"><h3>Inline attributes</h3></a>
 <p>The inline attribute suggests that the compiler should place a copy of
 the function or static in the caller, rather than generating code to
 call the function or access the static where it is defined.</p>
@@ -2264,13 +2226,12 @@ into the crate metadata to allow cross-crate inlining.</p>
 <li><code>#[inline(always)]</code> asks the compiler to always perform an inline expansion.</li>
 <li><code>#[inline(never)]</code> asks the compiler to never perform an inline expansion.</li>
 </ul>
-<a class="header" href="print.html#derive" name="derive"><h3><code>derive</code></h3></a>
+<a class="header" href="print.html#derive" id="derive"><h3><code>derive</code></h3></a>
 <p>The <code>derive</code> attribute allows certain traits to be automatically implemented
 for data structures. For example, the following will create an <code>impl</code> for the
 <code>PartialEq</code> and <code>Clone</code> traits for <code>Foo</code>, the type parameter <code>T</code> will be given
 the <code>PartialEq</code> or <code>Clone</code> constraints for the appropriate <code>impl</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 #[derive(PartialEq, Clone)]
 struct Foo&lt;T&gt; {
@@ -2281,7 +2242,6 @@ struct Foo&lt;T&gt; {
 #}</code></pre></pre>
 <p>The generated <code>impl</code> for <code>PartialEq</code> is equivalent to</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct Foo&lt;T&gt; { a: i32, b: T }
 impl&lt;T: PartialEq&gt; PartialEq for Foo&lt;T&gt; {
@@ -2297,7 +2257,7 @@ impl&lt;T: PartialEq&gt; PartialEq for Foo&lt;T&gt; {
 #}</code></pre></pre>
 <p>You can implement <code>derive</code> for your own type through <a href="procedural-macros.html">procedural
 macros</a>.</p>
-<a class="header" href="print.html#compiler-features" name="compiler-features"><h3>Compiler Features</h3></a>
+<a class="header" href="print.html#compiler-features" id="compiler-features"><h3>Compiler Features</h3></a>
 <p>Certain aspects of Rust may be implemented in the compiler, but they're not
 necessarily ready for every-day use. These features are often of &quot;prototype
 quality&quot; or &quot;almost production ready&quot;, but may not be stable enough to be
@@ -2309,204 +2269,8 @@ considered a full-fledged language feature.</p>
 <code>feature2</code>, and <code>feature3</code> should all be enabled. This is only recognized at a
 crate-level, not at a module-level. Without this directive, all features are
 considered off, and using the features will result in a compiler error.</p>
-<p>The currently implemented features of the reference compiler are:</p>
-<ul>
-<li>
-<p><code>advanced_slice_patterns</code> - See the <a href="expressions.html#match-expressions">match
-expressions</a>
-section for discussion; the exact semantics of
-slice patterns are subject to change, so some types are still unstable.</p>
-</li>
-<li>
-<p><code>slice_patterns</code> - OK, actually, slice patterns are just scary and
-completely unstable.</p>
-</li>
-<li>
-<p><code>asm</code> - The <code>asm!</code> macro provides a means for inline assembly. This is often
-useful, but the exact syntax for this feature along with its
-semantics are likely to change, so this macro usage must be opted
-into.</p>
-</li>
-<li>
-<p><code>associated_consts</code> - Allows constants to be defined in <code>impl</code> and <code>trait</code>
-blocks, so that they can be associated with a type or
-trait in a similar manner to methods and associated
-types.</p>
-</li>
-<li>
-<p><code>box_patterns</code> - Allows <code>box</code> patterns, the exact semantics of which
-is subject to change.</p>
-</li>
-<li>
-<p><code>box_syntax</code> - Allows use of <code>box</code> expressions, the exact semantics of which
-is subject to change.</p>
-</li>
-<li>
-<p><code>cfg_target_vendor</code> - Allows conditional compilation using the <code>target_vendor</code>
-matcher which is subject to change.</p>
-</li>
-<li>
-<p><code>cfg_target_has_atomic</code> - Allows conditional compilation using the <code>target_has_atomic</code>
-matcher which is subject to change.</p>
-</li>
-<li>
-<p><code>concat_idents</code> - Allows use of the <code>concat_idents</code> macro, which is in many
-ways insufficient for concatenating identifiers, and may be
-removed entirely for something more wholesome.</p>
-</li>
-<li>
-<p><code>custom_attribute</code> - Allows the usage of attributes unknown to the compiler
-so that new attributes can be added in a backwards compatible
-manner (RFC 572).</p>
-</li>
-<li>
-<p><code>custom_derive</code> - Allows the use of <code>#[derive(Foo,Bar)]</code> as sugar for
-<code>#[derive_Foo] #[derive_Bar]</code>, which can be user-defined syntax
-extensions.</p>
-</li>
-<li>
-<p><code>inclusive_range_syntax</code> - Allows use of the <code>a...b</code> and <code>...b</code> syntax for inclusive ranges.</p>
-</li>
-<li>
-<p><code>inclusive_range</code> - Allows use of the types that represent desugared inclusive ranges.</p>
-</li>
-<li>
-<p><code>intrinsics</code> - Allows use of the &quot;rust-intrinsics&quot; ABI. Compiler intrinsics
-are inherently unstable and no promise about them is made.</p>
-</li>
-<li>
-<p><code>lang_items</code> - Allows use of the <code>#[lang]</code> attribute. Like <code>intrinsics</code>,
-lang items are inherently unstable and no promise about them
-is made.</p>
-</li>
-<li>
-<p><code>link_args</code> - This attribute is used to specify custom flags to the linker,
-but usage is strongly discouraged. The compiler's usage of the
-system linker is not guaranteed to continue in the future, and
-if the system linker is not used then specifying custom flags
-doesn't have much meaning.</p>
-</li>
-<li>
-<p><code>link_llvm_intrinsics</code> - Allows linking to LLVM intrinsics via
-<code>#[link_name=&quot;llvm.*&quot;]</code>.</p>
-</li>
-<li>
-<p><code>linkage</code> - Allows use of the <code>linkage</code> attribute, which is not portable.</p>
-</li>
-<li>
-<p><code>log_syntax</code> - Allows use of the <code>log_syntax</code> macro attribute, which is a
-nasty hack that will certainly be removed.</p>
-</li>
-<li>
-<p><code>main</code> - Allows use of the <code>#[main]</code> attribute, which changes the entry point
-into a Rust program. This capability is subject to change.</p>
-</li>
-<li>
-<p><code>macro_reexport</code> - Allows macros to be re-exported from one crate after being imported
-from another. This feature was originally designed with the sole
-use case of the Rust standard library in mind, and is subject to
-change.</p>
-</li>
-<li>
-<p><code>non_ascii_idents</code> - The compiler supports the use of non-ascii identifiers,
-but the implementation is a little rough around the
-edges, so this can be seen as an experimental feature
-for now until the specification of identifiers is fully
-fleshed out.</p>
-</li>
-<li>
-<p><code>no_std</code> - Allows the <code>#![no_std]</code> crate attribute, which disables the implicit
-<code>extern crate std</code>. This typically requires use of the unstable APIs
-behind the libstd &quot;facade&quot;, such as libcore and libcollections. It
-may also cause problems when using syntax extensions, including
-<code>#[derive]</code>.</p>
-</li>
-<li>
-<p><code>on_unimplemented</code> - Allows the <code>#[rustc_on_unimplemented]</code> attribute, which allows
-trait definitions to add specialized notes to error messages
-when an implementation was expected but not found.</p>
-</li>
-<li>
-<p><code>optin_builtin_traits</code> - Allows the definition of default and negative trait
-implementations. Experimental.</p>
-</li>
-<li>
-<p><code>plugin</code> - Usage of [compiler plugins][plugin] for custom lints or syntax extensions.
-These depend on compiler internals and are subject to change.</p>
-</li>
-<li>
-<p><code>plugin_registrar</code> - Indicates that a crate provides [compiler plugins][plugin].</p>
-</li>
-<li>
-<p><code>quote</code> - Allows use of the <code>quote_*!</code> family of macros, which are
-implemented very poorly and will likely change significantly
-with a proper implementation.</p>
-</li>
-<li>
-<p><code>rustc_attrs</code> - Gates internal <code>#[rustc_*]</code> attributes which may be
-for internal use only or have meaning added to them in the future.</p>
-</li>
-<li>
-<p><code>rustc_diagnostic_macros</code>- A mysterious feature, used in the implementation
-of rustc, not meant for mortals.</p>
-</li>
-<li>
-<p><code>simd</code> - Allows use of the <code>#[simd]</code> attribute, which is overly simple and
-not the SIMD interface we want to expose in the long term.</p>
-</li>
-<li>
-<p><code>simd_ffi</code> - Allows use of SIMD vectors in signatures for foreign functions.
-The SIMD interface is subject to change.</p>
-</li>
-<li>
-<p><code>start</code> - Allows use of the <code>#[start]</code> attribute, which changes the entry point
-into a Rust program. This capability, especially the signature for the
-annotated function, is subject to change.</p>
-</li>
-<li>
-<p><code>thread_local</code> - The usage of the <code>#[thread_local]</code> attribute is experimental
-and should be seen as unstable. This attribute is used to
-declare a <code>static</code> as being unique per-thread leveraging
-LLVM's implementation which works in concert with the kernel
-loader and dynamic linker. This is not necessarily available
-on all platforms, and usage of it is discouraged.</p>
-</li>
-<li>
-<p><code>trace_macros</code> - Allows use of the <code>trace_macros</code> macro, which is a nasty
-hack that will certainly be removed.</p>
-</li>
-<li>
-<p><code>unboxed_closures</code> - Rust's new closure design, which is currently a work in
-progress feature with many known bugs.</p>
-</li>
-<li>
-<p><code>allow_internal_unstable</code> - Allows <code>macro_rules!</code> macros to be tagged with the
-<code>#[allow_internal_unstable]</code> attribute, designed
-to allow <code>std</code> macros to call
-<code>#[unstable]</code>/feature-gated functionality
-internally without imposing on callers
-(i.e. making them behave like function calls in
-terms of encapsulation).</p>
-</li>
-<li>
-<p><code>default_type_parameter_fallback</code> - Allows type parameter defaults to
-influence type inference.</p>
-</li>
-<li>
-<p><code>stmt_expr_attributes</code> - Allows attributes on expressions.</p>
-</li>
-<li>
-<p><code>type_ascription</code> - Allows type ascription expressions <code>expr: Type</code>.</p>
-</li>
-<li>
-<p><code>abi_vectorcall</code> - Allows the usage of the vectorcall calling convention
-(e.g. <code>extern &quot;vectorcall&quot; func fn_();</code>)</p>
-</li>
-<li>
-<p><code>abi_sysv64</code> - Allows the usage of the system V AMD64 calling convention
-(e.g. <code>extern &quot;sysv64&quot; func fn_();</code>)</p>
-</li>
-</ul>
+<p>The currently implemented features of the reference compiler are documented in
+<a href="https://doc.rust-lang.org/nightly/unstable-book/">The Unstable Book</a>.</p>
 <p>If a feature is promoted to a language feature, then all existing programs will
 start to receive compilation warnings about <code>#![feature]</code> directives which enabled
 the new feature (because the directive is no longer necessary). However, if a
@@ -2516,7 +2280,7 @@ necessary, and it's likely that existing code will break if the feature isn't
 removed.</p>
 <p>If an unknown feature is found in a directive, it results in a compiler error.
 An unknown feature is one which has never been recognized by the compiler.</p>
-<a class="header" href="print.html#statements-and-expressions" name="statements-and-expressions"><h1>Statements and expressions</h1></a>
+<a class="header" href="print.html#statements-and-expressions" id="statements-and-expressions"><h1>Statements and expressions</h1></a>
 <p>Rust is <em>primarily</em> an expression language. This means that most forms of
 value-producing or effect-causing evaluation are directed by the uniform syntax
 category of <em>expressions</em>. Each kind of expression can typically <em>nest</em> within
@@ -2525,17 +2289,17 @@ specifying both the value produced by the expression and the order in which its
 sub-expressions are themselves evaluated.</p>
 <p>In contrast, statements in Rust serve <em>mostly</em> to contain and explicitly
 sequence expression evaluation.</p>
-<a class="header" href="print.html#statements" name="statements"><h1>Statements</h1></a>
+<a class="header" href="print.html#statements" id="statements"><h1>Statements</h1></a>
 <p>A <em>statement</em> is a component of a block, which is in turn a component of an
 outer <a href="expressions.html">expression</a> or <a href="items.html#functions">function</a>.</p>
 <p>Rust has two kinds of statement: <a href="print.html#declaration-statements">declaration
 statements</a> and <a href="print.html#expression-statements">expression
 statements</a>.</p>
-<a class="header" href="print.html#declaration-statements" name="declaration-statements"><h2>Declaration statements</h2></a>
+<a class="header" href="print.html#declaration-statements" id="declaration-statements"><h2>Declaration statements</h2></a>
 <p>A <em>declaration statement</em> is one that introduces one or more <em>names</em> into the
 enclosing statement block. The declared names may denote new variables or new
 items.</p>
-<a class="header" href="print.html#item-declarations" name="item-declarations"><h3>Item declarations</h3></a>
+<a class="header" href="print.html#item-declarations" id="item-declarations"><h3>Item declarations</h3></a>
 <p>An <em>item declaration statement</em> has a syntactic form identical to an
 <a href="items.html">item</a> declaration within a module. Declaring an item — a
 function, enumeration, struct, type, static, trait, implementation or module
@@ -2546,19 +2310,19 @@ in meaning to declaring the item outside the statement block.</p>
 <p><strong>Note</strong>: there is no implicit capture of the function's dynamic environment when
 declaring a function-local item.</p>
 </blockquote>
-<a class="header" href="print.html#let-statements" name="let-statements"><h3><code>let</code> statements</h3></a>
+<a class="header" href="print.html#let-statements" id="let-statements"><h3><code>let</code> statements</h3></a>
 <p>A <em><code>let</code> statement</em> introduces a new set of variables, given by a pattern. The
 pattern may be followed by a type annotation, and/or an initializer expression.
 When no type annotation is given, the compiler will infer the type, or signal
 an error if insufficient type information is available for definite inference.
 Any variables introduced by a variable declaration are visible from the point of
 declaration until the end of the enclosing block scope.</p>
-<a class="header" href="print.html#expression-statements" name="expression-statements"><h2>Expression statements</h2></a>
+<a class="header" href="print.html#expression-statements" id="expression-statements"><h2>Expression statements</h2></a>
 <p>An <em>expression statement</em> is one that evaluates an <a href="expressions.html">expression</a>
 and ignores its result. The type of an expression statement <code>e;</code> is always
 <code>()</code>, regardless of the type of <code>e</code>. As a rule, an expression statement's
 purpose is to trigger the effects of evaluating its expression.</p>
-<a class="header" href="print.html#expressions" name="expressions"><h1>Expressions</h1></a>
+<a class="header" href="print.html#expressions" id="expressions"><h1>Expressions</h1></a>
 <p>An expression may have two roles: it always produces a <em>value</em>, and it may have
 <em>effects</em> (otherwise known as &quot;side effects&quot;). An expression <em>evaluates to</em> a
 value, and has effects during <em>evaluation</em>. Many expressions contain
@@ -2572,7 +2336,7 @@ several things:</p>
 <p>In this way, the structure of expressions dictates the structure of execution.
 Blocks are just another kind of expression, so blocks, statements, expressions,
 and blocks again can recursively nest inside each other to an arbitrary depth.</p>
-<a class="header" href="print.html#lvalues-rvalues-and-temporaries" name="lvalues-rvalues-and-temporaries"><h3>Lvalues, rvalues and temporaries</h3></a>
+<a class="header" href="print.html#lvalues-rvalues-and-temporaries" id="lvalues-rvalues-and-temporaries"><h3>Lvalues, rvalues and temporaries</h3></a>
 <p>Expressions are divided into two main categories: <em>lvalues</em> and <em>rvalues</em>.
 Likewise within each expression, sub-expressions may occur in <em>lvalue context</em>
 or <em>rvalue context</em>. The evaluation of an expression depends both on its own
@@ -2592,7 +2356,7 @@ expression contexts are rvalue contexts.</p>
 <p>When an lvalue is evaluated in an <em>lvalue context</em>, it denotes a memory
 location; when evaluated in an <em>rvalue context</em>, it denotes the value held <em>in</em>
 that memory location.</p>
-<a class="header" href="print.html#temporary-lifetimes" name="temporary-lifetimes"><h4>Temporary lifetimes</h4></a>
+<a class="header" href="print.html#temporary-lifetimes" id="temporary-lifetimes"><h4>Temporary lifetimes</h4></a>
 <p>When an rvalue is used in an lvalue context, a temporary un-named
 lvalue is created and used instead. The lifetime of temporary values
 is typically the innermost enclosing statement; the tail expression of
@@ -2627,16 +2391,15 @@ binding, and hence it is given the lifetime of the enclosing block.</li>
 <li><code>let ref x = temp()</code>. In this case, the temporary is created using a ref binding,
 but the result is the same: the lifetime is extended to the enclosing block.</li>
 </ul>
-<a class="header" href="print.html#moved-and-copied-types" name="moved-and-copied-types"><h3>Moved and copied types</h3></a>
+<a class="header" href="print.html#moved-and-copied-types" id="moved-and-copied-types"><h3>Moved and copied types</h3></a>
 <p>When a <a href="variables.html">local variable</a> is used as an
 <a href="expressions.html#lvalues-rvalues-and-temporaries">rvalue</a>, the variable will
 be copied if its type implements <code>Copy</code>. All others are moved.</p>
-<a class="header" href="print.html#literal-expressions" name="literal-expressions"><h2>Literal expressions</h2></a>
+<a class="header" href="print.html#literal-expressions" id="literal-expressions"><h2>Literal expressions</h2></a>
 <p>A <em>literal expression</em> consists of one of the <a href="tokens.html#literals">literal</a> forms
 described earlier. It directly describes a number, character, string, boolean
 value, or the unit value.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 ();        // unit type
 &quot;hello&quot;;   // string type
@@ -2644,16 +2407,15 @@ value, or the unit value.</p>
 5;         // integer type
 
 #}</code></pre></pre>
-<a class="header" href="print.html#path-expressions" name="path-expressions"><h2>Path expressions</h2></a>
+<a class="header" href="print.html#path-expressions" id="path-expressions"><h2>Path expressions</h2></a>
 <p>A <a href="paths.html">path</a> used as an expression context denotes either a local
 variable or an item. Path expressions are
 <a href="expressions.html#lvalues-rvalues-and-temporaries">lvalues</a>.</p>
-<a class="header" href="print.html#tuple-expressions" name="tuple-expressions"><h2>Tuple expressions</h2></a>
+<a class="header" href="print.html#tuple-expressions" id="tuple-expressions"><h2>Tuple expressions</h2></a>
 <p>Tuples are written by enclosing zero or more comma-separated expressions in
 parentheses. They are used to create <a href="types.html#tuple-types">tuple-typed</a>
 values.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 (0.0, 4.5);
 (&quot;a&quot;, 4usize, true);
@@ -2662,13 +2424,12 @@ values.</p>
 <p>You can disambiguate a single-element tuple from a value in parentheses with a
 comma:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 (0,); // single-element tuple
 (0); // zero in parentheses
 
 #}</code></pre></pre>
-<a class="header" href="print.html#struct-expressions" name="struct-expressions"><h2>Struct expressions</h2></a>
+<a class="header" href="print.html#struct-expressions" id="struct-expressions"><h2>Struct expressions</h2></a>
 <p>There are several forms of struct expressions. A <em>struct expression</em>
 consists of the <a href="paths.html">path</a> of a <a href="items.html#structs">struct item</a>, followed
 by a brace-enclosed list of zero or more comma-separated name-value pairs,
@@ -2684,7 +2445,6 @@ by a tuple expression). The struct item must be a tuple struct item.</p>
 <a href="items.html#structs">struct item</a>.</p>
 <p>The following are examples of struct expressions:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct Point { x: f64, y: f64 }
 # struct NothingInMe { }
@@ -2709,20 +2469,18 @@ the same type as the base expression) with the given values for the fields that
 were explicitly specified and the values in the base expression for all other
 fields.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct Point3d { x: i32, y: i32, z: i32 }
 let base = Point3d {x: 1, y: 2, z: 3};
 Point3d {y: 0, z: 10, .. base};
 
 #}</code></pre></pre>
-<a class="header" href="print.html#struct-field-init-shorthand" name="struct-field-init-shorthand"><h4>Struct field init shorthand</h4></a>
+<a class="header" href="print.html#struct-field-init-shorthand" id="struct-field-init-shorthand"><h4>Struct field init shorthand</h4></a>
 <p>When initializing a data structure (struct, enum, union) with named fields,
 it is allowed to write <code>fieldname</code> as a shorthand for <code>fieldname: fieldname</code>.
 This allows a compact syntax with less duplication.</p>
 <p>Example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct Point3d { x: i32, y: i32, z: i32 }
 # let x = 0;
@@ -2732,7 +2490,7 @@ Point3d { x: x, y: y_value, z: z };
 Point3d { x, y: y_value, z };
 
 #}</code></pre></pre>
-<a class="header" href="print.html#block-expressions" name="block-expressions"><h2>Block expressions</h2></a>
+<a class="header" href="print.html#block-expressions" id="block-expressions"><h2>Block expressions</h2></a>
 <p>A <em>block expression</em> is similar to a module in terms of the declarations that
 are possible. Each block conceptually introduces a new namespace scope. Use
 items can bring new names into scopes and declared items are in scope for only
@@ -2740,28 +2498,26 @@ the block itself.</p>
 <p>A block will execute each statement sequentially, and then execute the
 expression (if given). If the block ends in a statement, its value is <code>()</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x: () = { println!(&quot;Hello.&quot;); };
 
 #}</code></pre></pre>
 <p>If it ends in an expression, its value and type are that of the expression:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x: i32 = { println!(&quot;Hello.&quot;); 5 };
 
 assert_eq!(5, x);
 
 #}</code></pre></pre>
-<a class="header" href="print.html#method-call-expressions" name="method-call-expressions"><h2>Method-call expressions</h2></a>
+<a class="header" href="print.html#method-call-expressions" id="method-call-expressions"><h2>Method-call expressions</h2></a>
 <p>A <em>method call</em> consists of an expression followed by a single dot, an
 identifier, and a parenthesized expression-list. Method calls are resolved to
 methods on specific traits, either statically dispatching to a method if the
 exact <code>self</code>-type of the left-hand-side is known, or dynamically dispatching if
 the left-hand-side expression is an indirect <a href="types.html#trait-objects">trait
 object</a>.</p>
-<a class="header" href="print.html#field-expressions" name="field-expressions"><h2>Field expressions</h2></a>
+<a class="header" href="print.html#field-expressions" id="field-expressions"><h2>Field expressions</h2></a>
 <p>A <em>field expression</em> consists of an expression followed by a single dot and an
 identifier, when not immediately followed by a parenthesized expression-list
 (the latter is a <a href="print.html#method-call-expressions">method call expression</a>). A field
@@ -2777,7 +2533,7 @@ inherits mutability, it can be <a href="print.html#assignment-expressions">assig
 pointer, it is automatically dereferenced as many times as necessary
 to make the field access possible. In cases of ambiguity, we prefer
 fewer autoderefs to more.</p>
-<a class="header" href="print.html#array-expressions" name="array-expressions"><h2>Array expressions</h2></a>
+<a class="header" href="print.html#array-expressions" id="array-expressions"><h2>Array expressions</h2></a>
 <p>An <a href="types.html#array-and-slice-types">array</a> <em>expression</em> is written by
 enclosing zero or more comma-separated expressions of uniform type in square
 brackets.</p>
@@ -2785,7 +2541,6 @@ brackets.</p>
 constant expression that can be evaluated at compile time, such as a
 <a href="tokens.html#literals">literal</a> or a <a href="items.html#static-items">static item</a>.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 [1, 2, 3, 4];
 [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];
@@ -2793,7 +2548,7 @@ constant expression that can be evaluated at compile time, such as a
 [0u8, 0u8, 0u8, 0u8];
 
 #}</code></pre></pre>
-<a class="header" href="print.html#index-expressions" name="index-expressions"><h2>Index expressions</h2></a>
+<a class="header" href="print.html#index-expressions" id="index-expressions"><h2>Index expressions</h2></a>
 <p><a href="types.html#array-and-slice-types">Array</a>-typed expressions can be indexed by
 writing a square-bracket-enclosed expression (the index) after them. When the
 array is mutable, the resulting
@@ -2803,7 +2558,6 @@ bounds-checked at compile-time for constant arrays being accessed with a
 constant index value.  Otherwise a check will be performed at run-time that
 will put the thread in a <em>panicked state</em> if it fails.</p>
 <pre><pre class="playpen"><code class="language-rust should_panic"># #![allow(unused_variables)]
-# 
 #fn main() {
 ([1, 2, 3, 4])[0];
 
@@ -2820,10 +2574,9 @@ arr[10]; // panics
 pointer, it is automatically dereferenced as many times as necessary
 to make the indexing possible. In cases of ambiguity, we prefer fewer
 autoderefs to more.</p>
-<a class="header" href="print.html#range-expressions" name="range-expressions"><h2>Range expressions</h2></a>
+<a class="header" href="print.html#range-expressions" id="range-expressions"><h2>Range expressions</h2></a>
 <p>The <code>..</code> operator will construct an object of one of the <code>std::ops::Range</code> variants.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 1..2;   // std::ops::Range
 3..;    // std::ops::RangeFrom
@@ -2833,7 +2586,6 @@ autoderefs to more.</p>
 #}</code></pre></pre>
 <p>The following expressions are equivalent.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = std::ops::Range {start: 0, end: 10};
 let y = 0..10;
@@ -2841,7 +2593,7 @@ let y = 0..10;
 assert_eq!(x, y);
 
 #}</code></pre></pre>
-<a class="header" href="print.html#unary-operator-expressions" name="unary-operator-expressions"><h2>Unary operator expressions</h2></a>
+<a class="header" href="print.html#unary-operator-expressions" id="unary-operator-expressions"><h2>Unary operator expressions</h2></a>
 <p>Rust defines the following unary operators. With the exception of <code>?</code>, they are
 all written as prefix operators, before the expression they apply to.</p>
 <ul>
@@ -2878,10 +2630,10 @@ is defined by <a href="print.html#temporary-lifetimes">syntactic rules</a>.</li>
 applied to <code>Ok(_)</code>. Only works on the <code>Result&lt;T, E&gt;</code> type,
 and written in postfix notation.</li>
 </ul>
-<a class="header" href="print.html#binary-operator-expressions" name="binary-operator-expressions"><h2>Binary operator expressions</h2></a>
+<a class="header" href="print.html#binary-operator-expressions" id="binary-operator-expressions"><h2>Binary operator expressions</h2></a>
 <p>Binary operators expressions are given in terms of <a href="print.html#operator-precedence">operator
 precedence</a>.</p>
-<a class="header" href="print.html#arithmetic-operators" name="arithmetic-operators"><h3>Arithmetic operators</h3></a>
+<a class="header" href="print.html#arithmetic-operators" id="arithmetic-operators"><h3>Arithmetic operators</h3></a>
 <p>Binary arithmetic expressions are syntactic sugar for calls to built-in traits,
 defined in the <code>std::ops</code> module of the <code>std</code> library. This means that
 arithmetic operators can be overridden for user-defined types. The default
@@ -2903,7 +2655,7 @@ Calls the <code>div</code> method on the <code>std::ops::Div</code> trait.</li>
 : Remainder.
 Calls the <code>rem</code> method on the <code>std::ops::Rem</code> trait.</li>
 </ul>
-<a class="header" href="print.html#bitwise-operators" name="bitwise-operators"><h3>Bitwise operators</h3></a>
+<a class="header" href="print.html#bitwise-operators" id="bitwise-operators"><h3>Bitwise operators</h3></a>
 <p>Like the <a href="print.html#arithmetic-operators">arithmetic operators</a>, bitwise operators are
 syntactic sugar for calls to methods of built-in traits. This means that
 bitwise operators can be overridden for user-defined types. The default
@@ -2927,7 +2679,7 @@ Calls the <code>shl</code> method of the <code>std::ops::Shl</code> trait.</li>
 : Right shift (arithmetic).
 Calls the <code>shr</code> method of the <code>std::ops::Shr</code> trait.</li>
 </ul>
-<a class="header" href="print.html#lazy-boolean-operators" name="lazy-boolean-operators"><h3>Lazy boolean operators</h3></a>
+<a class="header" href="print.html#lazy-boolean-operators" id="lazy-boolean-operators"><h3>Lazy boolean operators</h3></a>
 <p>The operators <code>||</code> and <code>&amp;&amp;</code> may be applied to operands of boolean type. The
 <code>||</code> operator denotes logical 'or', and the <code>&amp;&amp;</code> operator denotes logical
 'and'. They differ from <code>|</code> and <code>&amp;</code> in that the right-hand operand is only
@@ -2935,7 +2687,7 @@ evaluated when the left-hand operand does not already determine the result of
 the expression. That is, <code>||</code> only evaluates its right-hand operand when the
 left-hand operand evaluates to <code>false</code>, and <code>&amp;&amp;</code> only when it evaluates to
 <code>true</code>.</p>
-<a class="header" href="print.html#comparison-operators" name="comparison-operators"><h3>Comparison operators</h3></a>
+<a class="header" href="print.html#comparison-operators" id="comparison-operators"><h3>Comparison operators</h3></a>
 <p>Comparison operators are, like the <a href="print.html#arithmetic-operators">arithmetic
 operators</a>, and <a href="print.html#bitwise-operators">bitwise operators</a>,
 syntactic sugar for calls to built-in traits. This means that comparison
@@ -2961,13 +2713,14 @@ Calls the <code>le</code> method on the <code>std::cmp::PartialOrd</code> trait.
 : Greater than or equal.
 Calls the <code>ge</code> method on the <code>std::cmp::PartialOrd</code> trait.</li>
 </ul>
-<a class="header" href="print.html#type-cast-expressions" name="type-cast-expressions"><h3>Type cast expressions</h3></a>
+<p>Parentheses are required when chaining comparison operators. For example, the
+expression <code>a == b == c</code> is invalid and may be written as <code>(a == b) == c</code>.</p>
+<a class="header" href="print.html#type-cast-expressions" id="type-cast-expressions"><h3>Type cast expressions</h3></a>
 <p>A type cast expression is denoted with the binary operator <code>as</code>.</p>
 <p>Executing an <code>as</code> expression casts the value on the left-hand side to the type
 on the right-hand side.</p>
 <p>An example of an <code>as</code> expression:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # fn sum(values: &amp;[f64]) -&gt; f64 { 0.0 }
 # fn len(values: &amp;[f64]) -&gt; i32 { 0 }
@@ -2985,7 +2738,7 @@ argument passing and assignment to a <code>let</code> binding with an explicit
 type. Implicit conversions are limited to &quot;harmless&quot; conversions that
 do not lose information and which have minimal or no risk of
 surprising side-effects on the dynamic execution semantics.</p>
-<a class="header" href="print.html#assignment-expressions" name="assignment-expressions"><h3>Assignment expressions</h3></a>
+<a class="header" href="print.html#assignment-expressions" id="assignment-expressions"><h3>Assignment expressions</h3></a>
 <p>An <em>assignment expression</em> consists of an
 <a href="expressions.html#lvalues-rvalues-and-temporaries">lvalue</a> expression followed
 by an equals sign (<code>=</code>) and an
@@ -2994,19 +2747,18 @@ by an equals sign (<code>=</code>) and an
 moves</a> its right-hand operand to its left-hand
 operand.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let mut x = 0;
 # let y = 0;
 x = y;
 
 #}</code></pre></pre>
-<a class="header" href="print.html#compound-assignment-expressions" name="compound-assignment-expressions"><h3>Compound assignment expressions</h3></a>
+<a class="header" href="print.html#compound-assignment-expressions" id="compound-assignment-expressions"><h3>Compound assignment expressions</h3></a>
 <p>The <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, and <code>&gt;&gt;</code> operators may be
 composed with the <code>=</code> operator. The expression <code>lval OP= val</code> is equivalent to
 <code>lval = lval OP val</code>. For example, <code>x = x + 1</code> may be written as <code>x += 1</code>.</p>
 <p>Any such expression always has the <a href="types.html#tuple-types"><code>unit</code></a> type.</p>
-<a class="header" href="print.html#operator-precedence" name="operator-precedence"><h3>Operator precedence</h3></a>
+<a class="header" href="print.html#operator-precedence" id="operator-precedence"><h3>Operator precedence</h3></a>
 <p>The precedence of Rust binary operators is ordered as follows, going from
 strong to weak:</p>
 <pre><code class="language-text">as :
@@ -3026,24 +2778,22 @@ strong to weak:</p>
 <p>Operators at the same precedence level are evaluated left-to-right. <a href="print.html#unary-operator-expressions">Unary
 operators</a> have the same precedence level and are
 stronger than any of the binary operators.</p>
-<a class="header" href="print.html#grouped-expressions" name="grouped-expressions"><h2>Grouped expressions</h2></a>
+<a class="header" href="print.html#grouped-expressions" id="grouped-expressions"><h2>Grouped expressions</h2></a>
 <p>An expression enclosed in parentheses evaluates to the result of the enclosed
 expression. Parentheses can be used to explicitly specify evaluation order
 within an expression.</p>
 <p>An example of a parenthesized expression:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x: i32 = (2 + 3) * 4;
 
 #}</code></pre></pre>
-<a class="header" href="print.html#call-expressions" name="call-expressions"><h2>Call expressions</h2></a>
+<a class="header" href="print.html#call-expressions" id="call-expressions"><h2>Call expressions</h2></a>
 <p>A <em>call expression</em> invokes a function, providing zero or more input variables
 and an optional location to move the function's output into. If the function
 eventually returns, then the expression completes.</p>
 <p>Some examples of call expressions:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # fn add(x: i32, y: i32) -&gt; i32 { 0 }
 
@@ -3051,7 +2801,7 @@ let x: i32 = add(1i32, 2i32);
 let pi: Result&lt;f32, _&gt; = &quot;3.14&quot;.parse();
 
 #}</code></pre></pre>
-<a class="header" href="print.html#lambda-expressions" name="lambda-expressions"><h2>Lambda expressions</h2></a>
+<a class="header" href="print.html#lambda-expressions" id="lambda-expressions"><h2>Lambda expressions</h2></a>
 <p>A <em>lambda expression</em> (sometimes called an &quot;anonymous function expression&quot;)
 defines a function and denotes it as a value, in a single expression. A lambda
 expression is a pipe-symbol-delimited (<code>|</code>) list of identifiers followed by an
@@ -3078,7 +2828,6 @@ forced to capture its environment by moving values by prefixing it with the
 function argument, and we then call it with a lambda expression as an argument,
 followed by a lambda expression that moves values from its environment.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn ten_times&lt;F&gt;(f: F) where F: Fn(i32) {
     for index in 0..10 {
@@ -3092,7 +2841,7 @@ let word = &quot;konnichiwa&quot;.to_owned();
 ten_times(move |j| println!(&quot;{}, {}&quot;, word, j));
 
 #}</code></pre></pre>
-<a class="header" href="print.html#infinite-loops" name="infinite-loops"><h2>Infinite loops</h2></a>
+<a class="header" href="print.html#infinite-loops" id="infinite-loops"><h2>Infinite loops</h2></a>
 <p>A <code>loop</code> expression denotes an infinite loop.</p>
 <p>A <code>loop</code> expression may optionally have a <em>label</em>. The label is written as
 a lifetime preceding the loop expression, as in <code>'foo: loop{ }</code>. If a
@@ -3100,13 +2849,13 @@ label is present, then labeled <code>break</code> and <code>continue</code> expr
 within this loop may exit out of this loop or return control to its head.
 See <a href="print.html#break-expressions">break expressions</a> and <a href="print.html#continue-expressions">continue
 expressions</a>.</p>
-<a class="header" href="print.html#break-expressions" name="break-expressions"><h2><code>break</code> expressions</h2></a>
+<a class="header" href="print.html#break-expressions" id="break-expressions"><h2><code>break</code> expressions</h2></a>
 <p>A <code>break</code> expression has an optional <em>label</em>. If the label is absent, then
 executing a <code>break</code> expression immediately terminates the innermost loop
 enclosing it. It is only permitted in the body of a loop. If the label is
 present, then <code>break 'foo</code> terminates the loop with label <code>'foo</code>, which need not
 be the innermost label enclosing the <code>break</code> expression, but must enclose it.</p>
-<a class="header" href="print.html#continue-expressions" name="continue-expressions"><h2><code>continue</code> expressions</h2></a>
+<a class="header" href="print.html#continue-expressions" id="continue-expressions"><h2><code>continue</code> expressions</h2></a>
 <p>A <code>continue</code> expression has an optional <em>label</em>. If the label is absent, then
 executing a <code>continue</code> expression immediately terminates the current iteration
 of the innermost loop enclosing it, returning control to the loop <em>head</em>. In
@@ -3116,14 +2865,13 @@ controlling the loop. If the label is present, then <code>continue 'foo</code> r
 control to the head of the loop with label <code>'foo</code>, which need not be the
 innermost label enclosing the <code>continue</code> expression, but must enclose it.</p>
 <p>A <code>continue</code> expression is only permitted in the body of a loop.</p>
-<a class="header" href="print.html#while-loops" name="while-loops"><h2><code>while</code> loops</h2></a>
+<a class="header" href="print.html#while-loops" id="while-loops"><h2><code>while</code> loops</h2></a>
 <p>A <code>while</code> loop begins by evaluating the boolean loop conditional expression.
 If the loop conditional expression evaluates to <code>true</code>, the loop body block
 executes and control returns to the loop conditional expression. If the loop
 conditional expression evaluates to <code>false</code>, the <code>while</code> expression completes.</p>
 <p>An example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let mut i = 0;
 
@@ -3137,12 +2885,11 @@ while i &lt; 10 {
 <code>continue</code>, and may optionally have a <em>label</em>. See <a href="print.html#infinite-loops">infinite
 loops</a>, <a href="print.html#break-expressions">break expressions</a>, and
 <a href="print.html#continue-expressions">continue expressions</a> for more information.</p>
-<a class="header" href="print.html#for-expressions" name="for-expressions"><h2><code>for</code> expressions</h2></a>
+<a class="header" href="print.html#for-expressions" id="for-expressions"><h2><code>for</code> expressions</h2></a>
 <p>A <code>for</code> expression is a syntactic construct for looping over elements provided
 by an implementation of <code>std::iter::IntoIterator</code>.</p>
 <p>An example of a <code>for</code> loop over the contents of an array:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # type Foo = i32;
 # fn bar(f: &amp;Foo) { }
@@ -3159,7 +2906,6 @@ for e in v {
 #}</code></pre></pre>
 <p>An example of a for loop over a series of integers:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # fn bar(b:usize) { }
 for i in 0..256 {
@@ -3171,7 +2917,7 @@ for i in 0..256 {
 <code>continue</code>, and may optionally have a <em>label</em>. See <a href="print.html#infinite-loops">infinite
 loops</a>, <a href="print.html#break-expressions">break expressions</a>, and
 <a href="print.html#continue-expressions">continue expressions</a> for more information.</p>
-<a class="header" href="print.html#if-expressions" name="if-expressions"><h2><code>if</code> expressions</h2></a>
+<a class="header" href="print.html#if-expressions" id="if-expressions"><h2><code>if</code> expressions</h2></a>
 <p>An <code>if</code> expression is a conditional branch in program control. The form of an
 <code>if</code> expression is a condition expression, followed by a consequent block, any
 number of <code>else if</code> conditions and blocks, and an optional trailing <code>else</code>
@@ -3180,7 +2926,7 @@ expression evaluates to <code>true</code>, the consequent block is executed and 
 subsequent <code>else if</code> or <code>else</code> block is skipped. If a condition expression
 evaluates to <code>false</code>, the consequent block is skipped and any subsequent <code>else if</code> condition is evaluated. If all <code>if</code> and <code>else if</code> conditions evaluate to
 <code>false</code> then any <code>else</code> block is executed.</p>
-<a class="header" href="print.html#match-expressions" name="match-expressions"><h2><code>match</code> expressions</h2></a>
+<a class="header" href="print.html#match-expressions" id="match-expressions"><h2><code>match</code> expressions</h2></a>
 <p>A <code>match</code> expression branches on a <em>pattern</em>. The exact form of matching that
 occurs depends on the pattern. Patterns consist of some combination of
 literals, destructured arrays or enum constructors, structs and tuples,
@@ -3206,7 +2952,6 @@ matches inherits the lifetime of the lvalue, rather than being restricted to
 the inside of the match.</p>
 <p>An example of a <code>match</code> expression:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = 1;
 
@@ -3226,7 +2971,6 @@ bind to a reference by using the <code>ref</code> keyword, or to a mutable refer
 <code>ref mut</code>.</p>
 <p>Subpatterns can also be bound to variables by the use of the syntax <code>variable @ subpattern</code>. For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = 1;
 
@@ -3240,7 +2984,6 @@ match x {
 symbols, as appropriate. For example, these two matches on <code>x: &amp;i32</code> are
 equivalent:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let x = &amp;3;
 let y = match *x { 0 =&gt; &quot;zero&quot;, _ =&gt; &quot;some&quot; };
@@ -3252,7 +2995,6 @@ assert_eq!(y, z);
 <p>Multiple match patterns may be joined with the <code>|</code> operator. A range of values
 may be specified with <code>...</code>. For example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let x = 2;
 
@@ -3271,7 +3013,6 @@ criteria for matching a case. Pattern guards appear after the pattern and
 consist of a bool-typed expression following the <code>if</code> keyword. A pattern guard
 may refer to the variables bound within the pattern they follow.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let maybe_digit = Some(0);
 # fn process_digit(i: i32) { }
@@ -3284,14 +3025,13 @@ let message = match maybe_digit {
 };
 
 #}</code></pre></pre>
-<a class="header" href="print.html#if-let-expressions" name="if-let-expressions"><h2><code>if let</code> expressions</h2></a>
+<a class="header" href="print.html#if-let-expressions" id="if-let-expressions"><h2><code>if let</code> expressions</h2></a>
 <p>An <code>if let</code> expression is semantically identical to an <code>if</code> expression but in
 place of a condition expression it expects a <code>let</code> statement with a refutable
 pattern. If the value of the expression on the right hand side of the <code>let</code>
 statement matches the pattern, the corresponding block will execute, otherwise
 flow proceeds to the first <code>else</code> block that follows.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let dish = (&quot;Ham&quot;, &quot;Eggs&quot;);
 
@@ -3306,20 +3046,19 @@ if let (&quot;Ham&quot;, b) = dish {
 }
 
 #}</code></pre></pre>
-<a class="header" href="print.html#while-let-loops" name="while-let-loops"><h2><code>while let</code> loops</h2></a>
+<a class="header" href="print.html#while-let-loops" id="while-let-loops"><h2><code>while let</code> loops</h2></a>
 <p>A <code>while let</code> loop is semantically identical to a <code>while</code> loop but in place of
 a condition expression it expects <code>let</code> statement with a refutable pattern. If
 the value of the expression on the right hand side of the <code>let</code> statement
 matches the pattern, the loop body block executes and control returns to the
 pattern matching statement. Otherwise, the while expression completes.</p>
-<a class="header" href="print.html#return-expressions" name="return-expressions"><h2><code>return</code> expressions</h2></a>
+<a class="header" href="print.html#return-expressions" id="return-expressions"><h2><code>return</code> expressions</h2></a>
 <p>Return expressions are denoted with the keyword <code>return</code>. Evaluating a <code>return</code>
 expression moves its argument into the designated output location for the
 current function call, destroys the current function activation frame, and
 transfers control to the caller frame.</p>
 <p>An example of a <code>return</code> expression:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn max(a: i32, b: i32) -&gt; i32 {
     if a &gt; b {
@@ -3329,14 +3068,14 @@ fn max(a: i32, b: i32) -&gt; i32 {
 }
 
 #}</code></pre></pre>
-<a class="header" href="print.html#type-system" name="type-system"><h1>Type system</h1></a>
-<a class="header" href="print.html#types" name="types"><h1>Types</h1></a>
+<a class="header" href="print.html#type-system" id="type-system"><h1>Type system</h1></a>
+<a class="header" href="print.html#types" id="types"><h1>Types</h1></a>
 <p>Every variable, item and value in a Rust program has a type. The <em>type</em> of a
 <em>value</em> defines the interpretation of the memory holding it.</p>
 <p>Built-in types and type-constructors are tightly integrated into the language,
 in nontrivial ways that are not possible to emulate in user-defined types.
 User-defined types have limited capabilities.</p>
-<a class="header" href="print.html#primitive-types" name="primitive-types"><h2>Primitive types</h2></a>
+<a class="header" href="print.html#primitive-types" id="primitive-types"><h2>Primitive types</h2></a>
 <p>The primitive types are the following:</p>
 <ul>
 <li>The boolean type <code>bool</code> with values <code>true</code> and <code>false</code>.</li>
@@ -3347,7 +3086,7 @@ User-defined types have limited capabilities.</p>
 <li>Slices</li>
 <li>Function pointers</li>
 </ul>
-<a class="header" href="print.html#machine-types" name="machine-types"><h3>Machine types</h3></a>
+<a class="header" href="print.html#machine-types" id="machine-types"><h3>Machine types</h3></a>
 <p>The machine types are the following:</p>
 <ul>
 <li>
@@ -3366,7 +3105,7 @@ respectively.</p>
 <code>f64</code>, respectively.</p>
 </li>
 </ul>
-<a class="header" href="print.html#machine-dependent-integer-types" name="machine-dependent-integer-types"><h3>Machine-dependent integer types</h3></a>
+<a class="header" href="print.html#machine-dependent-integer-types" id="machine-dependent-integer-types"><h3>Machine-dependent integer types</h3></a>
 <p>The <code>usize</code> type is an unsigned integer type with the same number of bits as the
 platform's pointer type. It can represent every memory address in the process.</p>
 <p>The <code>isize</code> type is a signed integer type with the same number of bits as the
@@ -3374,7 +3113,7 @@ platform's pointer type. The theoretical upper bound on object and array size
 is the maximum <code>isize</code> value. This ensures that <code>isize</code> can be used to calculate
 differences between pointers into an object or array and can address every byte
 within an object along with one byte past the end.</p>
-<a class="header" href="print.html#textual-types" name="textual-types"><h2>Textual types</h2></a>
+<a class="header" href="print.html#textual-types" id="textual-types"><h2>Textual types</h2></a>
 <p>The types <code>char</code> and <code>str</code> hold textual data.</p>
 <p>A value of type <code>char</code> is a <a href="http://www.unicode.org/glossary/#unicode_scalar_value">Unicode scalar value</a> (i.e. a code point that
 is not a surrogate), represented as a 32-bit unsigned word in the 0x0000 to
@@ -3384,7 +3123,7 @@ UTF-32 string.</p>
 unsigned bytes holding a sequence of UTF-8 code points. Since <code>str</code> is of
 unknown size, it is not a <em>first-class</em> type, but can only be instantiated
 through a pointer type, such as <code>&amp;str</code>.</p>
-<a class="header" href="print.html#tuple-types" name="tuple-types"><h2>Tuple types</h2></a>
+<a class="header" href="print.html#tuple-types" id="tuple-types"><h2>Tuple types</h2></a>
 <p>A tuple <em>type</em> is a heterogeneous product of other types, called the <em>elements</em>
 of the tuple. It has no nominal name and is instead structurally typed.</p>
 <p>Tuple types and values are denoted by listing the types or values of their
@@ -3394,7 +3133,6 @@ pattern-matching or by using <code>N</code> directly as a field to access the
 <code>N</code>th element.</p>
 <p>An example of a tuple type and its use:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 type Pair&lt;'a&gt; = (i32, &amp;'a str);
 let p: Pair&lt;'static&gt; = (10, &quot;ten&quot;);
@@ -3408,7 +3146,7 @@ assert_eq!(p.1, &quot;ten&quot;);
 #}</code></pre></pre>
 <p>For historical reasons and convenience, the tuple type with no elements (<code>()</code>)
 is often called ‘unit’ or ‘the unit type’.</p>
-<a class="header" href="print.html#array-and-slice-types" name="array-and-slice-types"><h2>Array, and Slice types</h2></a>
+<a class="header" href="print.html#array-and-slice-types" id="array-and-slice-types"><h2>Array, and Slice types</h2></a>
 <p>Rust has two different types for a list of items:</p>
 <ul>
 <li><code>[T; N]</code>, an 'array'</li>
@@ -3420,7 +3158,6 @@ heap.</p>
 to, it borrows it.</p>
 <p>Examples:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 // A stack-allocated array
 let array: [i32; 3] = [1, 2, 3];
@@ -3436,7 +3173,7 @@ let slice: &amp;[i32] = &amp;vector[..];
 <code>vec!</code> macro is also part of the standard library, rather than the language.</p>
 <p>All in-bounds elements of arrays and slices are always initialized, and access
 to an array or slice is always bounds-checked.</p>
-<a class="header" href="print.html#struct-types" name="struct-types"><h2>Struct types</h2></a>
+<a class="header" href="print.html#struct-types" id="struct-types"><h2>Struct types</h2></a>
 <p>A <code>struct</code> <em>type</em> is a heterogeneous product of other types, called the
 <em>fields</em> of the type.<sup class="footnote-reference"><a href="print.html#structtype">1</a></sup></p>
 <div class="footnote-definition" id="structtype"><sup class="footnote-definition-label">1</sup>
@@ -3459,7 +3196,7 @@ anonymous.</p>
 fields. The one value constructed by the associated <a href="expressions.html#struct-expressions">struct
 expression</a> is the only value that inhabits such a
 type.</p>
-<a class="header" href="print.html#enumerated-types" name="enumerated-types"><h2>Enumerated types</h2></a>
+<a class="header" href="print.html#enumerated-types" id="enumerated-types"><h2>Enumerated types</h2></a>
 <p>An <em>enumerated type</em> is a nominal, heterogeneous disjoint union type, denoted
 by the name of an <a href="items.html#enumerations"><code>enum</code> item</a>. <sup class="footnote-reference"><a href="print.html#enumtype">2</a></sup></p>
 </div>
@@ -3475,7 +3212,7 @@ constructors, in a <a href="expressions.html#call-expressions">call expression</
 its corresponding <code>enum</code> type.</p>
 <p>Enum types cannot be denoted <em>structurally</em> as types, but must be denoted by
 named reference to an <a href="items.html#enumerations"><code>enum</code> item</a>.</p>
-<a class="header" href="print.html#recursive-types" name="recursive-types"><h2>Recursive types</h2></a>
+<a class="header" href="print.html#recursive-types" id="recursive-types"><h2>Recursive types</h2></a>
 <p>Nominal types — <a href="print.html#enumerated-types">enumerations</a> and
 <a href="print.html#struct-types">structs</a> — may be recursive. That is, each <code>enum</code>
 constructor or <code>struct</code> field may refer, directly or indirectly, to the
@@ -3493,7 +3230,6 @@ or crate boundaries (in order to simplify the module system and type checker).</
 </ul>
 <p>An example of a <em>recursive</em> type and its use:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum List&lt;T&gt; {
     Nil,
@@ -3503,7 +3239,7 @@ enum List&lt;T&gt; {
 let a: List&lt;i32&gt; = List::Cons(7, Box::new(List::Cons(13, Box::new(List::Nil))));
 
 #}</code></pre></pre>
-<a class="header" href="print.html#pointer-types" name="pointer-types"><h2>Pointer types</h2></a>
+<a class="header" href="print.html#pointer-types" id="pointer-types"><h2>Pointer types</h2></a>
 <p>All pointers in Rust are explicit first-class values. They can be copied,
 stored into data structs, and returned from functions. There are two
 varieties of pointer in Rust:</p>
@@ -3534,13 +3270,12 @@ and writing performance-critical or low-level functions.</p>
 </ul>
 <p>The standard library contains additional 'smart pointer' types beyond references
 and raw pointers.</p>
-<a class="header" href="print.html#function-types" name="function-types"><h2>Function types</h2></a>
+<a class="header" href="print.html#function-types" id="function-types"><h2>Function types</h2></a>
 <p>The function type constructor <code>fn</code> forms new function types. A function type
 consists of a possibly-empty set of function-type modifiers (such as <code>unsafe</code>
 or <code>extern</code>), a sequence of input types and an output type.</p>
 <p>An example of a <code>fn</code> type:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn add(x: i32, y: i32) -&gt; i32 {
     x + y
@@ -3553,12 +3288,11 @@ let bo: Binop = add;
 x = bo(5,7);
 
 #}</code></pre></pre>
-<a class="header" href="print.html#function-types-for-specific-items" name="function-types-for-specific-items"><h3>Function types for specific items</h3></a>
+<a class="header" href="print.html#function-types-for-specific-items" id="function-types-for-specific-items"><h3>Function types for specific items</h3></a>
 <p>Internal to the compiler, there are also function types that are specific to a particular
 function item. In the following snippet, for example, the internal types of the functions
 <code>foo</code> and <code>bar</code> are different, despite the fact that they have the same signature:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn foo() { }
 fn bar() { }
@@ -3568,7 +3302,7 @@ fn bar() { }
 pointer type <code>fn()</code>. There is currently no syntax for unique fn types,
 though the compiler will emit a type like <code>fn() {foo}</code> in error
 messages to indicate &quot;the unique fn type for the function <code>foo</code>&quot;.</p>
-<a class="header" href="print.html#closure-types" name="closure-types"><h2>Closure types</h2></a>
+<a class="header" href="print.html#closure-types" id="closure-types"><h2>Closure types</h2></a>
 <p>A <a href="expressions.html#lambda-expressions">lambda expression</a> produces a closure
 value with a unique, anonymous type that cannot be written out.</p>
 <p>Depending on the requirements of the closure, its type implements one or
@@ -3594,7 +3328,7 @@ inherits from <code>FnOnce</code>.</p>
 </li>
 </ul>
 </div>
-<a class="header" href="print.html#trait-objects" name="trait-objects"><h2>Trait objects</h2></a>
+<a class="header" href="print.html#trait-objects" id="trait-objects"><h2>Trait objects</h2></a>
 <p>In Rust, a type like <code>&amp;SomeTrait</code> or <code>Box&lt;SomeTrait&gt;</code> is called a <em>trait object</em>.
 Each instance of a trait object includes:</p>
 <ul>
@@ -3634,11 +3368,10 @@ fn main() {
 </code></pre></pre>
 <p>In this example, the trait <code>Printable</code> occurs as a trait object in both the
 type signature of <code>print</code>, and the cast expression in <code>main</code>.</p>
-<a class="header" href="print.html#type-parameters" name="type-parameters"><h3>Type parameters</h3></a>
+<a class="header" href="print.html#type-parameters-1" id="type-parameters-1"><h3>Type parameters</h3></a>
 <p>Within the body of an item that has type parameter declarations, the names of
 its type parameters are types:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn to_vec&lt;A: Clone&gt;(xs: &amp;[A]) -&gt; Vec&lt;A&gt; {
     if xs.is_empty() {
@@ -3653,12 +3386,11 @@ fn to_vec&lt;A: Clone&gt;(xs: &amp;[A]) -&gt; Vec&lt;A&gt; {
 #}</code></pre></pre>
 <p>Here, <code>first</code> has type <code>A</code>, referring to <code>to_vec</code>'s <code>A</code> type parameter; and <code>rest</code>
 has type <code>Vec&lt;A&gt;</code>, a vector with element type <code>A</code>.</p>
-<a class="header" href="print.html#self-types" name="self-types"><h2>Self types</h2></a>
+<a class="header" href="print.html#self-types" id="self-types"><h2>Self types</h2></a>
 <p>The special type <code>Self</code> has a meaning within traits and impls. In a trait definition, it refers
 to an implicit type parameter representing the &quot;implementing&quot; type. In an impl,
 it is an alias for the implementing type. For example, in:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 pub trait From&lt;T&gt; {
     fn from(T) -&gt; Self;
@@ -3674,7 +3406,6 @@ impl From&lt;i32&gt; for String {
 <p>The notation <code>Self</code> in the impl refers to the implementing type: <code>String</code>. In another
 example:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Printable {
     fn make_string(&amp;self) -&gt; String;
@@ -3690,7 +3421,7 @@ impl Printable for String {
 <p>The notation <code>&amp;self</code> is a shorthand for <code>self: &amp;Self</code>. In this case,
 in the impl, <code>Self</code> refers to the value of type <code>String</code> that is the
 receiver for a call to the method <code>make_string</code>.</p>
-<a class="header" href="print.html#subtyping" name="subtyping"><h1>Subtyping</h1></a>
+<a class="header" href="print.html#subtyping" id="subtyping"><h1>Subtyping</h1></a>
 <p>Subtyping is implicit and can occur at any stage in type checking or
 inference. Subtyping in Rust is very restricted and occurs only due to
 variance with respect to lifetimes and between types with higher ranked
@@ -3699,7 +3430,6 @@ would be due to type equality.</p>
 <p>Consider the following example: string literals always have <code>'static</code>
 lifetime. Nevertheless, we can assign <code>s</code> to <code>t</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn bar&lt;'a&gt;() {
     let s: &amp;'static str = &quot;hi&quot;;
@@ -3709,9 +3439,9 @@ fn bar&lt;'a&gt;() {
 #}</code></pre></pre>
 <p>Since <code>'static</code> &quot;lives longer&quot; than <code>'a</code>, <code>&amp;'static str</code> is a subtype of
 <code>&amp;'a str</code>.</p>
-<a class="header" href="print.html#type-coercions" name="type-coercions"><h1>Type coercions</h1></a>
+<a class="header" href="print.html#type-coercions" id="type-coercions"><h1>Type coercions</h1></a>
 <p>Coercions are defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0401-coercions.md">RFC 401</a>. A coercion is implicit and has no syntax.</p>
-<a class="header" href="print.html#coercion-sites" name="coercion-sites"><h2>Coercion sites</h2></a>
+<a class="header" href="print.html#coercion-sites" id="coercion-sites"><h2>Coercion sites</h2></a>
 <p>A coercion can only occur at certain coercion sites in a program; these are
 typically places where the desired type is explicit or can be derived by
 propagation from explicit types (without type inference). Possible coercion
@@ -3721,7 +3451,6 @@ sites are:</p>
 <p><code>let</code> statements where an explicit type is given.</p>
 <p>For example, <code>42</code> is coerced to have type <code>i8</code> in the following:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let _: i8 = 42;
 
@@ -3757,7 +3486,6 @@ fn main() {
 semicolon-terminated or any expression in a <code>return</code> statement</p>
 <p>For example, <code>42</code> is coerced to have type <code>i8</code> in the following:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn foo() -&gt; i8 {
     42
@@ -3795,7 +3523,7 @@ blocks which are part of control flow statements, such as <code>if</code>/<code>
 the block has a known type.</p>
 </li>
 </ul>
-<a class="header" href="print.html#coercion-types" name="coercion-types"><h2>Coercion types</h2></a>
+<a class="header" href="print.html#coercion-types" id="coercion-types"><h2>Coercion types</h2></a>
 <p>Coercion is allowed between the following types:</p>
 <ul>
 <li>
@@ -3865,29 +3593,29 @@ structs. In addition, coercions from sub-traits to super-traits will be
 added. See <a href="https://github.com/rust-lang/rfcs/blob/master/text/0401-coercions.md">RFC 401</a> for more details.</p>
 </li>
 </ul>
-<a class="header" href="print.html#special-traits" name="special-traits"><h1>Special traits</h1></a>
+<a class="header" href="print.html#special-traits" id="special-traits"><h1>Special traits</h1></a>
 <p>Several traits define special evaluation behavior.</p>
-<a class="header" href="print.html#the-copy-trait" name="the-copy-trait"><h1>The <code>Copy</code> trait</h1></a>
+<a class="header" href="print.html#the-copy-trait" id="the-copy-trait"><h1>The <code>Copy</code> trait</h1></a>
 <p>The <code>Copy</code> trait changes the semantics of a type implementing it. Values whose
 type implements <code>Copy</code> are copied rather than moved upon assignment.</p>
-<a class="header" href="print.html#the-sized-trait" name="the-sized-trait"><h1>The <code>Sized</code> trait</h1></a>
+<a class="header" href="print.html#the-sized-trait" id="the-sized-trait"><h1>The <code>Sized</code> trait</h1></a>
 <p>The <code>Sized</code> trait indicates that the size of this type is known at compile-time.</p>
-<a class="header" href="print.html#the-drop-trait" name="the-drop-trait"><h1>The <code>Drop</code> trait</h1></a>
+<a class="header" href="print.html#the-drop-trait" id="the-drop-trait"><h1>The <code>Drop</code> trait</h1></a>
 <p>The <code>Drop</code> trait provides a destructor, to be run whenever a value of this type
 is to be destroyed.</p>
-<a class="header" href="print.html#the-deref-trait" name="the-deref-trait"><h1>The <code>Deref</code> trait</h1></a>
+<a class="header" href="print.html#the-deref-trait" id="the-deref-trait"><h1>The <code>Deref</code> trait</h1></a>
 <p>The <code>Deref&lt;Target = U&gt;</code> trait allows a type to implicitly implement all the methods
 of the type <code>U</code>. When attempting to resolve a method call, the compiler will search
 the top-level type for the implementation of the called method. If no such method is
 found, <code>.deref()</code> is called and the compiler continues to search for the method
 implementation in the returned type <code>U</code>.</p>
-<a class="header" href="print.html#the-send-trait" name="the-send-trait"><h1>The <code>Send</code> trait</h1></a>
+<a class="header" href="print.html#the-send-trait" id="the-send-trait"><h1>The <code>Send</code> trait</h1></a>
 <p>The <code>Send</code> trait indicates that a value of this type is safe to send from one
 thread to another.</p>
-<a class="header" href="print.html#the-sync-trait" name="the-sync-trait"><h1>The <code>Sync</code> trait</h1></a>
+<a class="header" href="print.html#the-sync-trait" id="the-sync-trait"><h1>The <code>Sync</code> trait</h1></a>
 <p>The <code>Sync</code> trait indicates that a value of this type is safe to share between
 multiple threads.</p>
-<a class="header" href="print.html#memory-model" name="memory-model"><h1>Memory model</h1></a>
+<a class="header" href="print.html#memory-model" id="memory-model"><h1>Memory model</h1></a>
 <p>A Rust program's memory consists of a static set of <em>items</em> and a <em>heap</em>.
 Immutable portions of the heap may be safely shared between threads, mutable
 portions may not be safely shared, but several mechanisms for effectively-safe
@@ -3895,7 +3623,7 @@ sharing of mutable values, built on unsafe code but enforcing a safe locking
 discipline, exist in the standard library.</p>
 <p>Allocations in the stack consist of <em>variables</em>, and allocations in the heap
 consist of <em>boxes</em>.</p>
-<a class="header" href="print.html#memory-allocation-and-lifetime" name="memory-allocation-and-lifetime"><h1>Memory allocation and lifetime</h1></a>
+<a class="header" href="print.html#memory-allocation-and-lifetime" id="memory-allocation-and-lifetime"><h1>Memory allocation and lifetime</h1></a>
 <p>The <em>items</em> of a program are those functions, modules and types that have their
 value calculated at compile-time and stored uniquely in the memory image of the
 rust process. Items are neither dynamically allocated nor freed.</p>
@@ -3906,10 +3634,10 @@ in the heap, heap allocations may outlive the frame they are allocated within.
 An allocation in the heap is guaranteed to reside at a single location in the
 heap for the whole lifetime of the allocation - it will never be relocated as
 a result of moving a box value.</p>
-<a class="header" href="print.html#memory-ownership" name="memory-ownership"><h2>Memory ownership</h2></a>
+<a class="header" href="print.html#memory-ownership" id="memory-ownership"><h2>Memory ownership</h2></a>
 <p>When a stack frame is exited, its local allocations are all released, and its
 references to boxes are dropped.</p>
-<a class="header" href="print.html#variables" name="variables"><h1>Variables</h1></a>
+<a class="header" href="print.html#variables" id="variables"><h1>Variables</h1></a>
 <p>A <em>variable</em> is a component of a stack frame, either a named function parameter,
 an anonymous <a href="expressions.html#lvalues-rvalues-and-temporaries">temporary</a>, or a named local
 variable.</p>
@@ -3922,7 +3650,6 @@ variable <code>y</code>).</p>
 <p>Methods that take either <code>self</code> or <code>Box&lt;Self&gt;</code> can optionally place them in a
 mutable variable by prefixing them with <code>mut</code> (similar to regular arguments):</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Changer: Sized {
     fn change(mut self) {}
@@ -3935,7 +3662,7 @@ local variables are allocated at once, on frame-entry, in an uninitialized
 state. Subsequent statements within a function may or may not initialize the
 local variables. Local variables can be used only after they have been
 initialized; this is enforced by the compiler.</p>
-<a class="header" href="print.html#linkage" name="linkage"><h1>Linkage</h1></a>
+<a class="header" href="print.html#linkage" id="linkage"><h1>Linkage</h1></a>
 <p>The Rust compiler supports various methods to link crates together both
 statically and dynamically. This section will explore the various methods to
 link Rust crates together, and more information about native libraries can be
@@ -4065,7 +3792,7 @@ warning if it is unable to determine which formats to link each library with.</p
 <p>In general, <code>--crate-type=bin</code> or <code>--crate-type=lib</code> should be sufficient for
 all compilation needs, and the other options are just available if more
 fine-grained control is desired over the output format of a Rust crate.</p>
-<a class="header" href="print.html#static-and-dynamic-c-runtimes" name="static-and-dynamic-c-runtimes"><h2>Static and dynamic C runtimes</h2></a>
+<a class="header" href="print.html#static-and-dynamic-c-runtimes" id="static-and-dynamic-c-runtimes"><h2>Static and dynamic C runtimes</h2></a>
 <p>The standard library in general strives to support both statically linked and
 dynamically linked C runtimes for targets as appropriate. For example the
 <code>x86_64-pc-windows-msvc</code> and <code>x86_64-unknown-linux-musl</code> targets typically come
@@ -4126,7 +3853,7 @@ variable to specify flags to the compiler through Cargo. For example to compile
 a statically linked binary on MSVC you would execute:</p>
 <pre><code class="language-ignore notrust">RUSTFLAGS='-C target-feature=+crt-static' cargo build --target x86_64-pc-windows-msvc
 </code></pre>
-<a class="header" href="print.html#unsafety" name="unsafety"><h1>Unsafety</h1></a>
+<a class="header" href="print.html#unsafety" id="unsafety"><h1>Unsafety</h1></a>
 <p>Unsafe operations are those that potentially violate the memory-safety
 guarantees of Rust's static semantics.</p>
 <p>The following language level features cannot be used in the safe subset of
@@ -4136,11 +3863,11 @@ Rust:</p>
 <li>Reading or writing a <a href="items.html#mutable-statics">mutable static variable</a>.</li>
 <li>Calling an unsafe function (including an intrinsic or foreign function).</li>
 </ul>
-<a class="header" href="print.html#unsafe-functions" name="unsafe-functions"><h1>Unsafe functions</h1></a>
+<a class="header" href="print.html#unsafe-functions" id="unsafe-functions"><h1>Unsafe functions</h1></a>
 <p>Unsafe functions are functions that are not safe in all contexts and/or for all
 possible inputs. Such a function must be prefixed with the keyword <code>unsafe</code> and
 can only be called from an <code>unsafe</code> block or another <code>unsafe</code> function.</p>
-<a class="header" href="print.html#unsafe-blocks" name="unsafe-blocks"><h1>Unsafe blocks</h1></a>
+<a class="header" href="print.html#unsafe-blocks" id="unsafe-blocks"><h1>Unsafe blocks</h1></a>
 <p>A block of code can be prefixed with the <code>unsafe</code> keyword, to permit calling
 <code>unsafe</code> functions or dereferencing raw pointers within a safe function.</p>
 <p>When a programmer has sufficient conviction that a sequence of potentially
@@ -4158,7 +3885,7 @@ For example, a doubly-linked list is not a tree structure and can only be
 represented with reference-counted pointers in safe code. By using <code>unsafe</code>
 blocks to represent the reverse links as raw pointers, it can be implemented
 with only boxes.</p>
-<a class="header" href="print.html#behavior-considered-undefined" name="behavior-considered-undefined"><h2>Behavior considered undefined</h2></a>
+<a class="header" href="print.html#behavior-considered-undefined" id="behavior-considered-undefined"><h2>Behavior considered undefined</h2></a>
 <p>The following is a list of behavior which is forbidden in all Rust code,
 including within <code>unsafe</code> blocks and <code>unsafe</code> functions. Type checking provides
 the guarantee that these issues are never caused by safe code.</p>
@@ -4197,7 +3924,7 @@ intrinsics) on overlapping buffers</li>
 code. Rust's failure system is not compatible with exception handling in
 other languages. Unwinding must be caught and handled at FFI boundaries.</li>
 </ul>
-<a class="header" href="print.html#behavior-not-considered-unsafe" name="behavior-not-considered-unsafe"><h2>Behavior not considered unsafe</h2></a>
+<a class="header" href="print.html#behavior-not-considered-unsafe" id="behavior-not-considered-unsafe"><h2>Behavior not considered unsafe</h2></a>
 <p>This is a list of behavior not considered <em>unsafe</em> in Rust terms, but that may
 be undesired.</p>
 <ul>
@@ -4213,7 +3940,7 @@ instead results in wrapped values. See <a href="https://github.com/rust-lang/rfc
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#influences" name="influences"><h1>Influences</h1></a>
+<a class="header" href="print.html#influences" id="influences"><h1>Influences</h1></a>
 <p>Rust is not a particularly original language, with design elements coming from
 a wide range of sources. Some of these are listed below (including elements
 that have since been removed):</p>
@@ -4234,6 +3961,29 @@ memory model</li>
 <li>NIL, Hermes: <strike>typestate</strike></li>
 <li><a href="http://www.unicode.org/reports/tr31/">Unicode Annex #31</a>: identifier and
 pattern syntax</li>
+</ul>
+<a class="header" href="print.html#as-yet-undocumented-features" id="as-yet-undocumented-features"><h1>As-yet-undocumented Features</h1></a>
+<p>Several accepted, stabilized, and implemented RFCs lack documentation in this
+reference, The Book, <em>Rust by Example</em>, or some combination of those three.
+Until we have written reference documentation for these features, we provide
+links to other sources of information about them. Therefore, expect this list
+to shrink!</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rfcs/pull/40"><code>libstd</code> facade</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/48">Trait reform</a> – some partial documentation exists (the use of <code>Self</code>), but
+not for everything: e.g. coherence and orphan rules.</li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/49">Attributes on <code>match</code> arms</a> – the underlying idea is documented in the
+[Attributes] section, but the applicability to internal items is never
+specified.</li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/131">Flexible target specification</a> - Some---but not all---flags are documented
+in <a href="attributes.html#conditional-compilation">Conditional compilation</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/132">Unambiguous function call syntax</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/558">Require parentheses for chained comparisons</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/560">Integer overflow not <code>unsafe</code></a> - documented with a reference to the RFC, but
+requires further details</li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/1717"><code>dllimport</code></a> - one element mentioned but not explained at <a href="attributes.html#ffi-attributes">FFI attributes</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/1721">define <code>crt_link</code></a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/1725">define <code>unaligned_access</code></a></li>
 </ul>
 
                 </div>

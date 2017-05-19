@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-final.html#the-final-code" name="the-final-code"><h1>The Final Code</h1></a>
+                    <a class="header" href="vec-final.html#the-final-code" id="the-final-code"><h1>The Final Code</h1></a>
 <pre><pre class="playpen"><code class="language-rust">#![feature(unique)]
 #![feature(alloc, heap_api)]
 
@@ -87,13 +88,11 @@ struct RawVec&lt;T&gt; {
 
 impl&lt;T&gt; RawVec&lt;T&gt; {
     fn new() -&gt; Self {
-        unsafe {
-            // !0 is usize::MAX. This branch should be stripped at compile time.
-            let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
+        // !0 is usize::MAX. This branch should be stripped at compile time.
+        let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
 
-            // heap::EMPTY doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
-            RawVec { ptr: Unique::new(heap::EMPTY as *mut T), cap: cap }
-        }
+        // Unique::empty() doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
+        RawVec { ptr: Unique::empty(), cap: cap }
     }
 
     fn grow(&amp;mut self) {
@@ -111,7 +110,7 @@ impl&lt;T&gt; RawVec&lt;T&gt; {
                 (1, ptr)
             } else {
                 let new_cap = 2 * self.cap;
-                let ptr = heap::reallocate(*self.ptr as *mut _,
+                let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                             self.cap * elem_size,
                                             new_cap * elem_size,
                                             align);
@@ -135,7 +134,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }
@@ -151,7 +150,7 @@ pub struct Vec&lt;T&gt; {
 }
 
 impl&lt;T&gt; Vec&lt;T&gt; {
-    fn ptr(&amp;self) -&gt; *mut T { *self.buf.ptr }
+    fn ptr(&amp;self) -&gt; *mut T { self.buf.ptr.as_ptr() }
 
     fn cap(&amp;self) -&gt; usize { self.buf.cap }
 

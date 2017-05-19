@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-zsts.html#handling-zero-sized-types" name="handling-zero-sized-types"><h1>Handling Zero-Sized Types</h1></a>
+                    <a class="header" href="vec-zsts.html#handling-zero-sized-types" id="handling-zero-sized-types"><h1>Handling Zero-Sized Types</h1></a>
 <p>It's time. We're going to fight the specter that is zero-sized types. Safe Rust
 <em>never</em> needs to care about this, but Vec is very intensive on raw pointers and
 raw allocations, which are exactly the two things that care about
@@ -80,9 +81,9 @@ C-style pointer iterator.</li>
 </ul>
 <p>Thankfully we abstracted out pointer-iterators and allocating handling into
 RawValIter and RawVec respectively. How mysteriously convenient.</p>
-<a class="header" href="vec-zsts.html#allocating-zero-sized-types" name="allocating-zero-sized-types"><h2>Allocating Zero-Sized Types</h2></a>
+<a class="header" href="vec-zsts.html#allocating-zero-sized-types" id="allocating-zero-sized-types"><h2>Allocating Zero-Sized Types</h2></a>
 <p>So if the allocator API doesn't support zero-sized allocations, what on earth
-do we store as our allocation? Why, <code>heap::EMPTY</code> of course! Almost every operation
+do we store as our allocation? <code>Unique::empty()</code> of course! Almost every operation
 with a ZST is a no-op since ZSTs have exactly one value, and therefore no state needs
 to be considered to store or load them. This actually extends to <code>ptr::read</code> and
 <code>ptr::write</code>: they won't actually look at the pointer at all. As such we never need
@@ -94,13 +95,11 @@ overflow for zero-sized types.</p>
 method of RawVec.</p>
 <pre><code class="language-rust ignore">impl&lt;T&gt; RawVec&lt;T&gt; {
     fn new() -&gt; Self {
-        unsafe {
-            // !0 is usize::MAX. This branch should be stripped at compile time.
-            let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
+        // !0 is usize::MAX. This branch should be stripped at compile time.
+        let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
 
-            // heap::EMPTY doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
-            RawVec { ptr: Unique::new(heap::EMPTY as *mut T), cap: cap }
-        }
+        // Unique::empty() doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
+        RawVec { ptr: Unique::empty(), cap: cap }
     }
 
     fn grow(&amp;mut self) {
@@ -118,7 +117,7 @@ method of RawVec.</p>
                 (1, ptr)
             } else {
                 let new_cap = 2 * self.cap;
-                let ptr = heap::reallocate(*self.ptr as *mut _,
+                let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                             self.cap * elem_size,
                                             new_cap * elem_size,
                                             align);
@@ -144,7 +143,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }
@@ -152,7 +151,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 </code></pre>
 <p>That's it. We support pushing and popping zero-sized types now. Our iterators
 (that aren't provided by slice Deref) are still busted, though.</p>
-<a class="header" href="vec-zsts.html#iterating-zero-sized-types" name="iterating-zero-sized-types"><h2>Iterating Zero-Sized Types</h2></a>
+<a class="header" href="vec-zsts.html#iterating-zero-sized-types" id="iterating-zero-sized-types"><h2>Iterating Zero-Sized Types</h2></a>
 <p>Zero-sized offsets are no-ops. This means that our current design will always
 initialize <code>start</code> and <code>end</code> as the same value, and our iterators will yield
 nothing. The current solution to this is to cast the pointers to integers,

@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'ops', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module ops</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'ops', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,9 +48,11 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#11-2913' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#11-2969' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Overloadable operators.</p>
+
 <p>Implementing these traits allows you to overload certain operators.</p>
+
 <p>Some of these traits are imported by the prelude, so they are available in
 every Rust program. Only operators backed by traits can be overloaded. For
 example, the addition operator (<code>+</code>) can be overloaded through the <a href="trait.Add.html"><code>Add</code></a>
@@ -58,11 +60,13 @@ trait, but since the assignment operator (<code>=</code>) has no backing trait, 
 is no way of overloading its semantics. Additionally, this module does not
 provide any mechanism to create new operators. If traitless overloading or
 custom operators are required, you should look toward macros or compiler
-plugins to extend Rust's syntax.</p>
+plugins to extend Rust&#39;s syntax.</p>
+
 <p>Note that the <code>&amp;&amp;</code> and <code>||</code> operators short-circuit, i.e. they only
 evaluate their second operand if it contributes to the result. Since this
 behavior is not enforceable by traits, <code>&amp;&amp;</code> and <code>||</code> are not supported as
 overloadable operators.</p>
+
 <p>Many of the operators take their operands by value. In non-generic
 contexts involving built-in types, this is usually not a problem.
 However, using these operators in generic code, requires some
@@ -74,7 +78,8 @@ type <code>T</code> which is supposed to support addition, it is probably a good
 idea to have both <code>T</code> and <code>&amp;T</code> implement the traits <a href="trait.Add.html"><code>Add&lt;T&gt;</code></a> and
 <a href="trait.Add.html"><code>Add&lt;&amp;T&gt;</code></a> so that generic code can be written without unnecessary
 cloning.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>This example creates a <code>Point</code> struct that implements <a href="trait.Add.html"><code>Add</code></a> and <a href="trait.Sub.html"><code>Sub</code></a>,
 and then demonstrates adding and subtracting two <code>Point</code>s.</p>
 
@@ -106,13 +111,16 @@ and then demonstrates adding and subtracting two <code>Point</code>s.</p>
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">Point</span> {<span class="ident">x</span>: <span class="number">1</span>, <span class="ident">y</span>: <span class="number">0</span>} <span class="op">+</span> <span class="ident">Point</span> {<span class="ident">x</span>: <span class="number">2</span>, <span class="ident">y</span>: <span class="number">3</span>});
     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">Point</span> {<span class="ident">x</span>: <span class="number">1</span>, <span class="ident">y</span>: <span class="number">0</span>} <span class="op">-</span> <span class="ident">Point</span> {<span class="ident">x</span>: <span class="number">2</span>, <span class="ident">y</span>: <span class="number">3</span>});
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Aops%3A%3A%7BAdd%2C%20Sub%7D%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Aimpl%20Add%20for%20Point%20%7B%0A%20%20%20%20type%20Output%20%3D%20Point%3B%0A%0A%20%20%20%20fn%20add(self%2C%20other%3A%20Point)%20-%3E%20Point%20%7B%0A%20%20%20%20%20%20%20%20Point%20%7Bx%3A%20self.x%20%2B%20other.x%2C%20y%3A%20self.y%20%2B%20other.y%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Sub%20for%20Point%20%7B%0A%20%20%20%20type%20Output%20%3D%20Point%3B%0A%0A%20%20%20%20fn%20sub(self%2C%20other%3A%20Point)%20-%3E%20Point%20%7B%0A%20%20%20%20%20%20%20%20Point%20%7Bx%3A%20self.x%20-%20other.x%2C%20y%3A%20self.y%20-%20other.y%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20Point%20%7Bx%3A%201%2C%20y%3A%200%7D%20%2B%20Point%20%7Bx%3A%202%2C%20y%3A%203%7D)%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20Point%20%7Bx%3A%201%2C%20y%3A%200%7D%20-%20Point%20%7Bx%3A%202%2C%20y%3A%203%7D)%3B%0A%7D%0A">Run</a></pre>
+
 <p>See the documentation for each trait for an example implementation.</p>
+
 <p>The <a href="trait.Fn.html"><code>Fn</code></a>, <a href="trait.FnMut.html"><code>FnMut</code></a>, and <a href="trait.FnOnce.html"><code>FnOnce</code></a> traits are implemented by types that can be
 invoked like functions. Note that <a href="trait.Fn.html"><code>Fn</code></a> takes <code>&amp;self</code>, <a href="trait.FnMut.html"><code>FnMut</code></a> takes <code>&amp;mut self</code> and <a href="trait.FnOnce.html"><code>FnOnce</code></a> takes <code>self</code>. These correspond to the three kinds of
 methods that can be invoked on an instance: call-by-reference,
 call-by-mutable-reference, and call-by-value. The most common use of these
 traits is to act as bounds to higher-level functions that take functions or
 closures as arguments.</p>
+
 <p>Taking a <a href="trait.Fn.html"><code>Fn</code></a> as a parameter:</p>
 
 <pre class="rust rust-example-rendered">
@@ -124,6 +132,7 @@ closures as arguments.</p>
 
 <span class="kw">let</span> <span class="ident">double</span> <span class="op">=</span> <span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">2</span>;
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">call_with_one</span>(<span class="ident">double</span>), <span class="number">2</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20call_with_one%3CF%3E(func%3A%20F)%20-%3E%20usize%0A%20%20%20%20where%20F%3A%20Fn(usize)%20-%3E%20usize%0A%7B%0A%20%20%20%20func(1)%0A%7D%0A%0Alet%20double%20%3D%20%7Cx%7C%20x%20*%202%3B%0Aassert_eq!(call_with_one(double)%2C%202)%3B%0A%7D">Run</a></pre>
+
 <p>Taking a <a href="trait.FnMut.html"><code>FnMut</code></a> as a parameter:</p>
 
 <pre class="rust rust-example-rendered">
@@ -141,6 +150,7 @@ closures as arguments.</p>
 }
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>, <span class="number">5</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20do_twice%3CF%3E(mut%20func%3A%20F)%0A%20%20%20%20where%20F%3A%20FnMut()%0A%7B%0A%20%20%20%20func()%3B%0A%20%20%20%20func()%3B%0A%7D%0A%0Alet%20mut%20x%3A%20usize%20%3D%201%3B%0A%7B%0A%20%20%20%20let%20add_two_to_x%20%3D%20%7C%7C%20x%20%2B%3D%202%3B%0A%20%20%20%20do_twice(add_two_to_x)%3B%0A%7D%0A%0Aassert_eq!(x%2C%205)%3B%0A%7D">Run</a></pre>
+
 <p>Taking a <a href="trait.FnOnce.html"><code>FnOnce</code></a> as a parameter:</p>
 
 <pre class="rust rust-example-rendered">
@@ -304,7 +314,7 @@ mutably like <code>*v = 1;</code></p>
                                   title='trait core::ops::Drop'>Drop</a></td>
                            <td class='docblock-short'>
                                 <p>The <code>Drop</code> trait is used to run some code when a value goes out of scope.
-This is sometimes called a 'destructor'.</p>
+This is sometimes called a &#39;destructor&#39;.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -540,7 +550,6 @@ the address returned by the <code>pointer</code> method of this trait.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

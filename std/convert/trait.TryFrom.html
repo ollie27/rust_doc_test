@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>convert</a></p><script>window.sidebarCurrent = {name: 'TryFrom', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait TryFrom</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>convert</a></p><script>window.sidebarCurrent = {name: 'TryFrom', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/convert.rs.html#225-231' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/convert.rs.html#302-308' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait TryFrom&lt;T&gt; {
     type <a href='#associatedtype.Error' class="type">Error</a>;
     fn <a href='#tymethod.try_from' class='fnname'>try_from</a>(value: T) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;Self, Self::<a class="trait" href="../../std/convert/trait.TryFrom.html" title="trait std::convert::TryFrom">Error</a>&gt;;
@@ -64,7 +64,7 @@
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'a, T&gt; TryFrom&lt;&amp;'a <a class="primitive" href="../primitive.str.html">str</a>&gt; for T <span class="where fmt-newline">where T: <a class="trait" href="../../std/str/trait.FromStr.html" title="trait std::str::FromStr">FromStr</a></span></code></li>
+    <li><code>impl&lt;'a, T&gt; TryFrom&lt;&amp;'a <a class="primitive" href="../primitive.str.html">str</a>&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/str/trait.FromStr.html" title="trait std::str::FromStr">FromStr</a>,&nbsp;</span></code></li>
 <li><code>impl TryFrom&lt;<a class="primitive" href="../primitive.u32.html">u32</a>&gt; for <a class="primitive" href="../primitive.char.html">char</a></code></li>
 <li><code>impl TryFrom&lt;<a class="primitive" href="../primitive.u8.html">u8</a>&gt; for <a class="primitive" href="../primitive.u8.html">u8</a></code></li>
 <li><code>impl TryFrom&lt;<a class="primitive" href="../primitive.u16.html">u16</a>&gt; for <a class="primitive" href="../primitive.u8.html">u8</a></code></li>
@@ -269,7 +269,6 @@
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

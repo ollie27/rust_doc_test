@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../collections/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>collections</a>::<wbr><a href='index.html'>str</a></p><script>window.sidebarCurrent = {name: 'FromStr', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait FromStr</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>collections</a>::<wbr><a href='index.html'>str</a></p><script>window.sidebarCurrent = {name: 'FromStr', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -54,9 +54,11 @@
     fn <a href='#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;str) -&gt; <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;Self, Self::<a class="trait" href="../../collections/str/trait.FromStr.html" title="trait collections::str::FromStr">Err</a>&gt;;
 }</pre><div class='docblock'><p>A trait to abstract the idea of creating a new instance of a type from a
 string.</p>
-<p><code>FromStr</code>'s <a href="#tymethod.from_str"><code>from_str</code></a> method is often used implicitly, through
-<a href="../../std/primitive.str.html"><code>str</code></a>'s <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a> method. See <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a>'s documentation for examples.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<p><code>FromStr</code>&#39;s <a href="#tymethod.from_str"><code>from_str</code></a> method is often used implicitly, through
+<a href="../../std/primitive.str.html"><code>str</code></a>&#39;s <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a> method. See <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a>&#39;s documentation for examples.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Basic implementation of <code>FromStr</code> on an example <code>Point</code> type:</p>
 
 <pre class="rust rust-example-rendered">
@@ -94,10 +96,12 @@ string.</p>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.from_str' class='method'><span id='from_str.v' class='invisible'><code>fn <a href='#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;str) -&gt; <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;Self, Self::<a class="trait" href="../../collections/str/trait.FromStr.html" title="trait collections::str::FromStr">Err</a>&gt;</code></span></h3><div class='docblock'><p>Parses a string <code>s</code> to return a value of this type.</p>
+
 <p>If parsing succeeds, return the value inside <code>Ok</code>, otherwise
 when the string is ill-formatted return an error specific to the
 inside <code>Err</code>. The error type is specific to implementation of the trait.</p>
-<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
 <p>Basic usage with <a href="../../std/primitive.i32.html"><code>i32</code></a>, a type that implements <code>FromStr</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -185,7 +189,6 @@ inside <code>Err</code>. The error type is specific to implementation of the tra
         window.rootPath = "../../";
         window.currentCrate = "collections";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

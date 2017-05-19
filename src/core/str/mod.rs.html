@@ -2491,6 +2491,34 @@
 <span id="2446">2446</span>
 <span id="2447">2447</span>
 <span id="2448">2448</span>
+<span id="2449">2449</span>
+<span id="2450">2450</span>
+<span id="2451">2451</span>
+<span id="2452">2452</span>
+<span id="2453">2453</span>
+<span id="2454">2454</span>
+<span id="2455">2455</span>
+<span id="2456">2456</span>
+<span id="2457">2457</span>
+<span id="2458">2458</span>
+<span id="2459">2459</span>
+<span id="2460">2460</span>
+<span id="2461">2461</span>
+<span id="2462">2462</span>
+<span id="2463">2463</span>
+<span id="2464">2464</span>
+<span id="2465">2465</span>
+<span id="2466">2466</span>
+<span id="2467">2467</span>
+<span id="2468">2468</span>
+<span id="2469">2469</span>
+<span id="2470">2470</span>
+<span id="2471">2471</span>
+<span id="2472">2472</span>
+<span id="2473">2473</span>
+<span id="2474">2474</span>
+<span id="2475">2475</span>
+<span id="2476">2476</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2515,8 +2543,8 @@
 <span class="kw">use</span> <span class="ident">convert</span>::<span class="ident">TryFrom</span>;
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">iter</span>::{<span class="ident">Map</span>, <span class="ident">Cloned</span>, <span class="ident">FusedIterator</span>};
-<span class="kw">use</span> <span class="ident">mem</span>;
 <span class="kw">use</span> <span class="ident">slice</span>::{<span class="self">self</span>, <span class="ident">SliceIndex</span>};
+<span class="kw">use</span> <span class="ident">mem</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">pattern</span>;
 
@@ -2794,6 +2822,13 @@ Section: Creating a string
     <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">from_utf8_unchecked</span>(<span class="ident">v</span>) })
 }
 
+<span class="doccomment">/// Converts a mutable slice of bytes to a mutable string slice.</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_mut_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41119&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_utf8_mut</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span>, <span class="ident">Utf8Error</span><span class="op">&gt;</span> {
+    <span class="ident">run_utf8_validation</span>(<span class="ident">v</span>)<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">v</span>) })
+}
+
 <span class="doccomment">/// Forms a str from a pointer and a length.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `len` argument is the number of bytes in the string.</span>
@@ -2806,7 +2841,10 @@ Section: Creating a string
 <span class="doccomment">///</span>
 <span class="doccomment">/// The data must be valid UTF-8</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// `p` must be non-null, even for zero-length str.</span>
+<span class="doccomment">/// `p` must be non-null, even for zero-length strs, because non-zero bits</span>
+<span class="doccomment">/// are required to distinguish between a zero-length str within `Some()`</span>
+<span class="doccomment">/// from `None`. `p` can be a bogus non-dereferencable pointer, such as `0x1`,</span>
+<span class="doccomment">/// for zero-length strs, though.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Caveat</span>
 <span class="doccomment">///</span>
@@ -2819,7 +2857,7 @@ Section: Creating a string
 <span class="doccomment">/// str is returned.</span>
 <span class="doccomment">///</span>
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_parts_mut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">p</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">len</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">str</span> {
-    <span class="ident">mem</span>::<span class="ident">transmute</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span><span class="op">&gt;</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">p</span>, <span class="ident">len</span>))
+    <span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">p</span>, <span class="ident">len</span>))
 }
 
 <span class="doccomment">/// Converts a slice of bytes to a string slice without checking</span>
@@ -2856,6 +2894,18 @@ Section: Creating a string
 <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_utf8_unchecked</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">v</span>)
+}
+
+<span class="doccomment">/// Converts a slice of bytes to a string slice without checking</span>
+<span class="doccomment">/// that the string contains valid UTF-8; mutable version.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// See the immutable version, [`from_utf8_unchecked()`][fromutf8], for more information.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [fromutf8]: fn.from_utf8_unchecked.html</span>
+<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_mut_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41119&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span> {
     <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">v</span>)
 }
 
@@ -3968,7 +4018,6 @@ Section: Trait implementations
 <span class="kw">mod</span> <span class="ident">traits</span> {
     <span class="kw">use</span> <span class="ident">cmp</span>::<span class="ident">Ordering</span>;
     <span class="kw">use</span> <span class="ident">ops</span>;
-    <span class="kw">use</span> <span class="ident">mem</span>;
     <span class="kw">use</span> <span class="ident">slice</span>::{<span class="self">self</span>, <span class="ident">SliceIndex</span>};
     <span class="kw">use</span> <span class="ident">str</span>::<span class="ident">eq_slice</span>;
 
@@ -4305,7 +4354,7 @@ Section: Trait implementations
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked_mut</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Output</span> {
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">as_ptr</span>().<span class="ident">offset</span>(<span class="self">self</span>.<span class="ident">start</span> <span class="kw">as</span> <span class="ident">isize</span>);
             <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">start</span>;
-            <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">len</span>))
+            <span class="kw">super</span>::<span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">len</span>))
         }
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Output</span> {
@@ -4353,7 +4402,7 @@ Section: Trait implementations
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked_mut</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Output</span> {
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">as_ptr</span>();
-            <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="self">self</span>.<span class="ident">end</span>))
+            <span class="kw">super</span>::<span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="self">self</span>.<span class="ident">end</span>))
         }
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Output</span> {
@@ -4399,7 +4448,7 @@ Section: Trait implementations
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked_mut</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Output</span> {
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">as_ptr</span>().<span class="ident">offset</span>(<span class="self">self</span>.<span class="ident">start</span> <span class="kw">as</span> <span class="ident">isize</span>);
             <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">start</span>;
-            <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">len</span>))
+            <span class="kw">super</span>::<span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">len</span>))
         }
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Output</span> {
@@ -4492,7 +4541,7 @@ Section: Trait implementations
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked_mut</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Output</span> {
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">as_ptr</span>();
-            <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="self">self</span>.<span class="ident">end</span> <span class="op">+</span> <span class="number">1</span>))
+            <span class="kw">super</span>::<span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="self">self</span>.<span class="ident">end</span> <span class="op">+</span> <span class="number">1</span>))
         }
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Output</span> {
@@ -4590,6 +4639,8 @@ Section: Trait implementations
     <span class="kw">fn</span> <span class="ident">is_char_boundary</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;core&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>];
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_mut_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_bytes_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>];
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;core&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">find</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span>: <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">pat</span>: <span class="ident">P</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>;
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;core&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
@@ -4867,6 +4918,11 @@ Section: Trait implementations
         <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>) }
     }
 
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_bytes_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] {
+        <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>)
+    }
+
     <span class="kw">fn</span> <span class="ident">find</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span>: <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">pat</span>: <span class="ident">P</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="ident">pat</span>.<span class="ident">into_searcher</span>(<span class="self">self</span>).<span class="ident">next_match</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">i</span>, _)<span class="op">|</span> <span class="ident">i</span>)
     }
@@ -4998,7 +5054,6 @@ Section: Trait implementations
         window.rootPath = "../../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

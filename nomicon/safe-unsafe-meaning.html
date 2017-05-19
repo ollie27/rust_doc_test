@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="safe-unsafe-meaning.html#how-safe-and-unsafe-interact" name="how-safe-and-unsafe-interact"><h1>How Safe and Unsafe Interact</h1></a>
+                    <a class="header" href="safe-unsafe-meaning.html#how-safe-and-unsafe-interact" id="how-safe-and-unsafe-interact"><h1>How Safe and Unsafe Interact</h1></a>
 <p>What's the relationship between Safe Rust and Unsafe Rust? How do they
 interact?</p>
 <p>The separation between Safe Rust and Unsafe Rust is controlled with the
@@ -138,7 +139,6 @@ guarantees.</p>
 type could theoretically require that keys implement a new trait called
 <code>UnsafeOrd</code>, rather than <code>Ord</code>, that might look like this:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::cmp::Ordering;
 

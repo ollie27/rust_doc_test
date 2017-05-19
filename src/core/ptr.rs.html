@@ -1159,6 +1159,83 @@
 <span id="1114">1114</span>
 <span id="1115">1115</span>
 <span id="1116">1116</span>
+<span id="1117">1117</span>
+<span id="1118">1118</span>
+<span id="1119">1119</span>
+<span id="1120">1120</span>
+<span id="1121">1121</span>
+<span id="1122">1122</span>
+<span id="1123">1123</span>
+<span id="1124">1124</span>
+<span id="1125">1125</span>
+<span id="1126">1126</span>
+<span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
+<span id="1130">1130</span>
+<span id="1131">1131</span>
+<span id="1132">1132</span>
+<span id="1133">1133</span>
+<span id="1134">1134</span>
+<span id="1135">1135</span>
+<span id="1136">1136</span>
+<span id="1137">1137</span>
+<span id="1138">1138</span>
+<span id="1139">1139</span>
+<span id="1140">1140</span>
+<span id="1141">1141</span>
+<span id="1142">1142</span>
+<span id="1143">1143</span>
+<span id="1144">1144</span>
+<span id="1145">1145</span>
+<span id="1146">1146</span>
+<span id="1147">1147</span>
+<span id="1148">1148</span>
+<span id="1149">1149</span>
+<span id="1150">1150</span>
+<span id="1151">1151</span>
+<span id="1152">1152</span>
+<span id="1153">1153</span>
+<span id="1154">1154</span>
+<span id="1155">1155</span>
+<span id="1156">1156</span>
+<span id="1157">1157</span>
+<span id="1158">1158</span>
+<span id="1159">1159</span>
+<span id="1160">1160</span>
+<span id="1161">1161</span>
+<span id="1162">1162</span>
+<span id="1163">1163</span>
+<span id="1164">1164</span>
+<span id="1165">1165</span>
+<span id="1166">1166</span>
+<span id="1167">1167</span>
+<span id="1168">1168</span>
+<span id="1169">1169</span>
+<span id="1170">1170</span>
+<span id="1171">1171</span>
+<span id="1172">1172</span>
+<span id="1173">1173</span>
+<span id="1174">1174</span>
+<span id="1175">1175</span>
+<span id="1176">1176</span>
+<span id="1177">1177</span>
+<span id="1178">1178</span>
+<span id="1179">1179</span>
+<span id="1180">1180</span>
+<span id="1181">1181</span>
+<span id="1182">1182</span>
+<span id="1183">1183</span>
+<span id="1184">1184</span>
+<span id="1185">1185</span>
+<span id="1186">1186</span>
+<span id="1187">1187</span>
+<span id="1188">1188</span>
+<span id="1189">1189</span>
+<span id="1190">1190</span>
+<span id="1191">1191</span>
+<span id="1192">1192</span>
+<span id="1193">1193</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1179,7 +1256,7 @@
 <span class="attribute">#<span class="op">!</span>[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">intrinsics</span>;
-<span class="kw">use</span> <span class="ident">ops</span>::{<span class="ident">CoerceUnsized</span>, <span class="ident">Deref</span>};
+<span class="kw">use</span> <span class="ident">ops</span>::<span class="ident">CoerceUnsized</span>;
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">hash</span>;
 <span class="kw">use</span> <span class="ident">marker</span>::{<span class="ident">PhantomData</span>, <span class="ident">Unsize</span>};
@@ -1199,11 +1276,6 @@
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">intrinsics</span>::<span class="ident">write_bytes</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;drop_in_place&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">intrinsics</span>::<span class="ident">drop_in_place</span>;
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
 <span class="doccomment">/// Executes the destructor (if any) of the pointed-to value.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This has two use cases:</span>
@@ -1223,7 +1295,6 @@
 <span class="doccomment">/// invalid pointers, types, and double drops.</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;drop_in_place&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">lang</span><span class="op">=</span><span class="string">&quot;drop_in_place&quot;</span>]</span>
-<span class="attribute">#[<span class="ident">inline</span>]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unconditional_recursion</span>)]</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">drop_in_place</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">to_drop</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>) {
     <span class="comment">// Code here does not matter - this is replaced by the</span>
@@ -2124,13 +2195,25 @@
 }
 
 <span class="doccomment">/// A wrapper around a raw non-null `*mut T` that indicates that the possessor</span>
-<span class="doccomment">/// of this wrapper owns the referent. This in turn implies that the</span>
-<span class="doccomment">/// `Unique&lt;T&gt;` is `Send`/`Sync` if `T` is `Send`/`Sync`, unlike a raw</span>
-<span class="doccomment">/// `*mut T` (which conveys no particular ownership semantics).  It</span>
-<span class="doccomment">/// also implies that the referent of the pointer should not be</span>
-<span class="doccomment">/// modified without a unique path to the `Unique` reference. Useful</span>
-<span class="doccomment">/// for building abstractions like `Vec&lt;T&gt;` or `Box&lt;T&gt;`, which</span>
-<span class="doccomment">/// internally use raw pointers to manage the memory that they own.</span>
+<span class="doccomment">/// of this wrapper owns the referent. Useful for building abstractions like</span>
+<span class="doccomment">/// `Box&lt;T&gt;`, `Vec&lt;T&gt;`, `String`, and `HashMap&lt;K, V&gt;`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Unlike `*mut T`, `Unique&lt;T&gt;` behaves &quot;as if&quot; it were an instance of `T`.</span>
+<span class="doccomment">/// It implements `Send`/`Sync` if `T` is `Send`/`Sync`. It also implies</span>
+<span class="doccomment">/// the kind of strong aliasing guarantees an instance of `T` can expect:</span>
+<span class="doccomment">/// the referent of the pointer should not be modified without a unique path to</span>
+<span class="doccomment">/// its owning Unique.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If you&#39;re uncertain of whether it&#39;s correct to use `Unique` for your purposes,</span>
+<span class="doccomment">/// consider using `Shared`, which has weaker semantics.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Unlike `*mut T`, the pointer must always be non-null, even if the pointer</span>
+<span class="doccomment">/// is never dereferenced. This is so that enums may use this forbidden value</span>
+<span class="doccomment">/// as a discriminant -- `Option&lt;Unique&lt;T&gt;&gt;` has the same size as `Unique&lt;T&gt;`.</span>
+<span class="doccomment">/// However the pointer may still dangle if it isn&#39;t dereferenced.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Unlike `*mut T`, `Unique&lt;T&gt;` is covariant over `T`. This should always be correct</span>
+<span class="doccomment">/// for any type which upholds Unique&#39;s aliasing requirements.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_debug_implementations</span>)]</span>
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unique&quot;</span>, <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;needs an RFC to flesh out design&quot;</span>,
            <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
@@ -2159,6 +2242,20 @@
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sync</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { }
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unique&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Creates a new `Unique` that is dangling, but well-aligned.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is useful for initializing types which lazily allocate, like</span>
+    <span class="doccomment">/// `Vec::new` does.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">empty</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">unsafe</span> {
+            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>;
+            <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">ptr</span>)
+        }
+    }
+}
+
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unique&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Creates a new `Unique`.</span>
     <span class="doccomment">///</span>
@@ -2169,41 +2266,72 @@
         <span class="ident">Unique</span> { <span class="ident">pointer</span>: <span class="ident">NonZero</span>::<span class="ident">new</span>(<span class="ident">ptr</span>), <span class="ident">_marker</span>: <span class="ident">PhantomData</span> }
     }
 
+    <span class="doccomment">/// Acquires the underlying `*mut` pointer.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+        <span class="self">self</span>.<span class="ident">pointer</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>
+    }
+
     <span class="doccomment">/// Dereferences the content.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
-        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">pointer</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The resulting lifetime is bound to self so this behaves &quot;as if&quot;</span>
+    <span class="doccomment">/// it were actually an instance of T that is getting borrowed. If a longer</span>
+    <span class="doccomment">/// (unbound) lifetime is needed, use `&amp;*my_ptr.ptr()`.</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
+        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">as_ptr</span>()
     }
 
     <span class="doccomment">/// Mutably dereferences the content.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The resulting lifetime is bound to self so this behaves &quot;as if&quot;</span>
+    <span class="doccomment">/// it were actually an instance of T that is getting borrowed. If a longer</span>
+    <span class="doccomment">/// (unbound) lifetime is needed, use `&amp;mut *my_ptr.ptr()`.</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">as_ptr</span>()
     }
 }
+
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw-2">*</span><span class="self">self</span>
+    }
+}
+
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { }
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unique&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span>, <span class="ident">U</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">CoerceUnsized</span><span class="op">&lt;</span><span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Unsize</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> { }
 
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unique&quot;</span>, <span class="ident">issue</span><span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>:<span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
-        <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">pointer</span>) }
-    }
-}
-
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unique&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Pointer</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Pointer</span> <span class="kw">for</span> <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="ident">fmt</span>::<span class="ident">Pointer</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">pointer</span>, <span class="ident">f</span>)
+        <span class="ident">fmt</span>::<span class="ident">Pointer</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">as_ptr</span>(), <span class="ident">f</span>)
     }
 }
 
-<span class="doccomment">/// A wrapper around a raw non-null `*mut T` that indicates that the possessor</span>
+<span class="doccomment">/// A wrapper around a raw `*mut T` that indicates that the possessor</span>
 <span class="doccomment">/// of this wrapper has shared ownership of the referent. Useful for</span>
-<span class="doccomment">/// building abstractions like `Rc&lt;T&gt;` or `Arc&lt;T&gt;`, which internally</span>
-<span class="doccomment">/// use raw pointers to manage the memory that they own.</span>
+<span class="doccomment">/// building abstractions like `Rc&lt;T&gt;`, `Arc&lt;T&gt;`, or doubly-linked lists, which</span>
+<span class="doccomment">/// internally use aliased raw pointers to manage the memory that they own.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This is similar to `Unique`, except that it doesn&#39;t make any aliasing</span>
+<span class="doccomment">/// guarantees, and doesn&#39;t derive Send and Sync. Note that unlike `&amp;T`,</span>
+<span class="doccomment">/// Shared has no special mutability requirements. Shared may mutate data</span>
+<span class="doccomment">/// aliased by other Shared pointers. More precise rules require Rust to</span>
+<span class="doccomment">/// develop an actual aliasing model.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Unlike `*mut T`, the pointer must always be non-null, even if the pointer</span>
+<span class="doccomment">/// is never dereferenced. This is so that enums may use this forbidden value</span>
+<span class="doccomment">/// as a discriminant -- `Option&lt;Shared&lt;T&gt;&gt;` has the same size as `Shared&lt;T&gt;`.</span>
+<span class="doccomment">/// However the pointer may still dangle if it isn&#39;t dereferenced.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Unlike `*mut T`, `Shared&lt;T&gt;` is covariant over `T`. If this is incorrect</span>
+<span class="doccomment">/// for your use case, you should include some PhantomData in your type to</span>
+<span class="doccomment">/// provide invariance, such as `PhantomData&lt;Cell&lt;T&gt;&gt;` or `PhantomData&lt;&amp;&#39;a mut T&gt;`.</span>
+<span class="doccomment">/// Usually this won&#39;t be necessary; covariance is correct for Rc, Arc, and LinkedList</span>
+<span class="doccomment">/// because they provide a public API that follows the normal shared XOR mutable</span>
+<span class="doccomment">/// rules of Rust.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_debug_implementations</span>)]</span>
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;needs an RFC to flesh out design&quot;</span>,
            <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
@@ -2228,22 +2356,58 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="op">!</span><span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { }
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Creates a new `Shared` that is dangling, but well-aligned.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is useful for initializing types which lazily allocate, like</span>
+    <span class="doccomment">/// `Vec::new` does.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">empty</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">unsafe</span> {
+            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>;
+            <span class="ident">Shared</span>::<span class="ident">new</span>(<span class="ident">ptr</span>)
+        }
+    }
+}
+
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Creates a new `Shared`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// `ptr` must be non-null.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">Shared</span> { <span class="ident">pointer</span>: <span class="ident">NonZero</span>::<span class="ident">new</span>(<span class="ident">ptr</span>), <span class="ident">_marker</span>: <span class="ident">PhantomData</span> }
     }
-}
 
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Acquires the underlying `*mut` pointer.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+        <span class="self">self</span>.<span class="ident">pointer</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>
+    }
+
+    <span class="doccomment">/// Dereferences the content.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The resulting lifetime is bound to self so this behaves &quot;as if&quot;</span>
+    <span class="doccomment">/// it were actually an instance of T that is getting borrowed. If a longer</span>
+    <span class="doccomment">/// (unbound) lifetime is needed, use `&amp;*my_ptr.ptr()`.</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
+        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">as_ptr</span>()
+    }
+
+    <span class="doccomment">/// Mutably dereferences the content.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The resulting lifetime is bound to self so this behaves &quot;as if&quot;</span>
+    <span class="doccomment">/// it were actually an instance of T that is getting borrowed. If a longer</span>
+    <span class="doccomment">/// (unbound) lifetime is needed, use `&amp;mut *my_ptr.ptr_mut()`.</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">as_ptr</span>()
+    }
+
     <span class="doccomment">/// Acquires the underlying pointer as a `*mut` pointer.</span>
+    <span class="attribute">#[<span class="ident">rustc_deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.19&quot;</span>, <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;renamed to `as_ptr` for ergonomics/consistency&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
-        <span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> _
+        <span class="self">self</span>.<span class="ident">as_ptr</span>()
     }
 }
 
@@ -2261,19 +2425,9 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span>, <span class="ident">U</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">CoerceUnsized</span><span class="op">&lt;</span><span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Unsize</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> { }
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
-        <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">pointer</span>) }
-    }
-}
-
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;shared&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27730&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Pointer</span> <span class="kw">for</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Pointer</span> <span class="kw">for</span> <span class="ident">Shared</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="ident">fmt</span>::<span class="ident">Pointer</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">pointer</span>, <span class="ident">f</span>)
+        <span class="ident">fmt</span>::<span class="ident">Pointer</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">as_ptr</span>(), <span class="ident">f</span>)
     }
 }
 </pre>
@@ -2334,7 +2488,6 @@
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

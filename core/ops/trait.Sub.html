@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Sub', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Sub</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Sub', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,13 +48,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#318-326' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#356-364' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "sub"]
 </div>pub trait Sub&lt;RHS&nbsp;=&nbsp;Self&gt; {
     type <a href='#associatedtype.Output' class="type">Output</a>;
     fn <a href='#tymethod.sub' class='fnname'>sub</a>(self, rhs: RHS) -&gt; Self::<a class="trait" href="../../core/ops/trait.Sub.html" title="trait core::ops::Sub">Output</a>;
 }</pre><div class='docblock'><p>The subtraction operator <code>-</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>This example creates a <code>Point</code> struct that implements the <code>Sub</code> trait, and
 then demonstrates subtracting two <code>Point</code>s.</p>
 
@@ -88,6 +89,7 @@ then demonstrates subtracting two <code>Point</code>s.</p>
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">3</span>, <span class="ident">y</span>: <span class="number">3</span> } <span class="op">-</span> <span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">2</span>, <span class="ident">y</span>: <span class="number">3</span> },
                <span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">1</span>, <span class="ident">y</span>: <span class="number">0</span> });
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Aops%3A%3ASub%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Aimpl%20Sub%20for%20Point%20%7B%0A%20%20%20%20type%20Output%20%3D%20Point%3B%0A%0A%20%20%20%20fn%20sub(self%2C%20other%3A%20Point)%20-%3E%20Point%20%7B%0A%20%20%20%20%20%20%20%20Point%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20x%3A%20self.x%20-%20other.x%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20y%3A%20self.y%20-%20other.y%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20PartialEq%20for%20Point%20%7B%0A%20%20%20%20fn%20eq(%26self%2C%20other%3A%20%26Self)%20-%3E%20bool%20%7B%0A%20%20%20%20%20%20%20%20self.x%20%3D%3D%20other.x%20%26%26%20self.y%20%3D%3D%20other.y%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20assert_eq!(Point%20%7B%20x%3A%203%2C%20y%3A%203%20%7D%20-%20Point%20%7B%20x%3A%202%2C%20y%3A%203%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Point%20%7B%20x%3A%201%2C%20y%3A%200%20%7D)%3B%0A%7D%0A">Run</a></pre>
+
 <p>Note that <code>RHS = Self</code> by default, but this is not mandatory. For example,
 <a href="../../std/time/struct.SystemTime.html">std::time::SystemTime</a> implements <code>Sub&lt;Duration&gt;</code>, which permits
 operations of the form <code>SystemTime = SystemTime - Duration</code>.</p>
@@ -265,7 +267,6 @@ operations of the form <code>SystemTime = SystemTime - Duration</code>.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

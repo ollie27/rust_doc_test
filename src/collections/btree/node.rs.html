@@ -1754,12 +1754,12 @@
     }
 
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_ptr</span>(<span class="ident">ptr</span>: <span class="ident">NonZero</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="ident">BoxedNode</span> { <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="kw-2">*</span><span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>) }
+        <span class="ident">BoxedNode</span> { <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">ptr</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>) }
     }
 
     <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">NonZero</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="ident">NonZero</span>::<span class="ident">new</span>(<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
+            <span class="ident">NonZero</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>())
         }
     }
 }
@@ -1843,7 +1843,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_level</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">height</span> <span class="op">&gt;</span> <span class="number">0</span>);
 
-        <span class="kw">let</span> <span class="ident">top</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">node</span>.<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+        <span class="kw">let</span> <span class="ident">top</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">node</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
 
         <span class="self">self</span>.<span class="ident">node</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">BoxedNode</span>::<span class="ident">from_ptr</span>(<span class="self">self</span>.<span class="ident">as_mut</span>()
@@ -1910,7 +1910,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">BorrowType</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> <span class="ident">NodeRef</span><span class="op">&lt;</span><span class="ident">BorrowType</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">marker</span>::<span class="ident">Internal</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">as_internal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">node</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
+            <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span>.<span class="ident">node</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
         }
     }
 }
@@ -1918,7 +1918,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> <span class="ident">NodeRef</span><span class="op">&lt;</span><span class="ident">marker</span>::<span class="ident">Mut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">K</span>, <span class="ident">V</span>, <span class="ident">marker</span>::<span class="ident">Internal</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">as_internal_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">node</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
+            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="self">self</span>.<span class="ident">node</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
         }
     }
 }
@@ -1960,7 +1960,7 @@
 
     <span class="kw">fn</span> <span class="ident">as_leaf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">node</span>
+            <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">node</span>.<span class="ident">get</span>()
         }
     }
 
@@ -2112,7 +2112,7 @@
 
     <span class="kw">fn</span> <span class="ident">as_leaf_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">node</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
+            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="self">self</span>.<span class="ident">node</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>)
         }
     }
 
@@ -2855,13 +2855,13 @@
                 }
 
                 <span class="ident">heap</span>::<span class="ident">deallocate</span>(
-                    <span class="kw-2">*</span><span class="ident">right_node</span>.<span class="ident">node</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
+                    <span class="ident">right_node</span>.<span class="ident">node</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
                     <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;&gt;</span>(),
                     <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">InternalNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;&gt;</span>()
                 );
             } <span class="kw">else</span> {
                 <span class="ident">heap</span>::<span class="ident">deallocate</span>(
-                    <span class="kw-2">*</span><span class="ident">right_node</span>.<span class="ident">node</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
+                    <span class="ident">right_node</span>.<span class="ident">node</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
                     <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;&gt;</span>(),
                     <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">LeafNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;&gt;</span>()
                 );
@@ -3214,7 +3214,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "collections";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

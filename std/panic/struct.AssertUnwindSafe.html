@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>panic</a></p><script>window.sidebarCurrent = {name: 'AssertUnwindSafe', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct AssertUnwindSafe</p><div class="block items"><ul><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>panic</a></p><script>window.sidebarCurrent = {name: 'AssertUnwindSafe', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -50,6 +50,7 @@
                    </a>
                </span><a class='srclink' href='../../src/std/panic.rs.html#178-181' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct AssertUnwindSafe&lt;T&gt;(pub T);</pre><div class='docblock'><p>A simple wrapper around a type to assert that it is unwind safe.</p>
+
 <p>When using <code>catch_unwind</code> it may be the case that some of the closed over
 variables are not unwind safe. For example if <code>&amp;mut T</code> is captured the
 compiler will generate a warning indicating that it is not unwind safe. It
@@ -57,7 +58,8 @@ may not be the case, however, that this is actually a problem due to the
 specific usage of <code>catch_unwind</code> if unwind safety is specifically taken into
 account. This wrapper struct is useful for a quick and lightweight
 annotation that a variable is indeed unwind safe.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>One way to use <code>AssertUnwindSafe</code> is to assert that the entire closure
 itself is unwind safe, bypassing all checks for all variables:</p>
 
@@ -78,6 +80,7 @@ itself is unwind safe, bypassing all checks for all variables:</p>
     <span class="ident">variable</span> <span class="op">+=</span> <span class="number">3</span>;
 }));
 <span class="comment">// ...</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apanic%3A%3A%7Bself%2C%20AssertUnwindSafe%7D%3B%0A%0Alet%20mut%20variable%20%3D%204%3B%0A%0A%2F%2F%20This%20code%20will%20not%20compile%20because%20the%20closure%20captures%20%60%26mut%20variable%60%0A%2F%2F%20which%20is%20not%20considered%20unwind%20safe%20by%20default.%0A%0A%2F%2F%20panic%3A%3Acatch_unwind(%7C%7C%20%7B%0A%2F%2F%20%20%20%20%20variable%20%2B%3D%203%3B%0A%2F%2F%20%7D)%3B%0A%0A%2F%2F%20This%2C%20however%2C%20will%20compile%20due%20to%20the%20%60AssertUnwindSafe%60%20wrapper%0Alet%20result%20%3D%20panic%3A%3Acatch_unwind(AssertUnwindSafe(%7C%7C%20%7B%0A%20%20%20%20variable%20%2B%3D%203%3B%0A%7D))%3B%0A%2F%2F%20...%0A%7D">Run</a></pre>
+
 <p>Wrapping the entire closure amounts to a blanket assertion that all captured
 variables are unwind safe. This has the downside that if new captures are
 added in the future, they will also be considered unwind safe. Therefore,
@@ -175,7 +178,6 @@ not.</p>
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

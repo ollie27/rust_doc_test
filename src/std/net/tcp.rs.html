@@ -1546,6 +1546,12 @@
 <span id="1501">1501</span>
 <span id="1502">1502</span>
 <span id="1503">1503</span>
+<span id="1504">1504</span>
+<span id="1505">1505</span>
+<span id="1506">1506</span>
+<span id="1507">1507</span>
+<span id="1508">1508</span>
+<span id="1509">1509</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1621,24 +1627,23 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```no_run</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// # use std::io;</span>
 <span class="doccomment">/// use std::net::{TcpListener, TcpStream};</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let listener = TcpListener::bind(&quot;127.0.0.1:80&quot;).unwrap();</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// fn handle_client(stream: TcpStream) {</span>
 <span class="doccomment">///     // ...</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// # fn process() -&gt; io::Result&lt;()&gt; {</span>
+<span class="doccomment">/// let listener = TcpListener::bind(&quot;127.0.0.1:80&quot;).unwrap();</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// // accept connections and process them serially</span>
 <span class="doccomment">/// for stream in listener.incoming() {</span>
-<span class="doccomment">///     match stream {</span>
-<span class="doccomment">///         Ok(stream) =&gt; {</span>
-<span class="doccomment">///             handle_client(stream);</span>
-<span class="doccomment">///         }</span>
-<span class="doccomment">///         Err(e) =&gt; { /* connection failed */ }</span>
-<span class="doccomment">///     }</span>
+<span class="doccomment">///     handle_client(stream?);</span>
 <span class="doccomment">/// }</span>
+<span class="doccomment">/// # Ok(())</span>
+<span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TcpListener</span>(<span class="ident">net_imp</span>::<span class="ident">TcpListener</span>);
@@ -1725,6 +1730,13 @@
     <span class="doccomment">/// documentation of [`Shutdown`]).</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Shutdown`]: ../../std/net/enum.Shutdown.html</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Platform-specific behavior</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Calling this function multiple times may result in different behavior,</span>
+    <span class="doccomment">/// depending on the operating system. On Linux, the second call will</span>
+    <span class="doccomment">/// return `Ok(())`, but on macOS, it will return `ErrorKind::NotConnected`.</span>
+    <span class="doccomment">/// This may change in the future.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -3108,7 +3120,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

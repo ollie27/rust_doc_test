@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,9 +68,9 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="send-and-sync.html#send-and-sync" name="send-and-sync"><h1>Send and Sync</h1></a>
+                    <a class="header" href="send-and-sync.html#send-and-sync" id="send-and-sync"><h1>Send and Sync</h1></a>
 <p>Not everything obeys inherited mutability, though. Some types allow you to
-multiply alias a location in memory while mutating it. Unless these types use
+have multiple aliases of a location in memory while mutating it. Unless these types use
 synchronization to manage this access, they are absolutely not thread safe. Rust
 captures this through the <code>Send</code> and <code>Sync</code> traits.</p>
 <ul>
@@ -107,7 +108,6 @@ necessarily thinking hard about thread safety. In the case of Rc, we have a nice
 example of a type that contains a <code>*mut</code> that is definitely not thread safe.</p>
 <p>Types that aren't automatically derived can simply implement them if desired:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct MyBox(*mut u8);
 
@@ -118,10 +118,9 @@ unsafe impl Sync for MyBox {}
 <p>In the <em>incredibly rare</em> case that a type is inappropriately automatically
 derived to be Send or Sync, then one can also unimplement Send and Sync:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
-#fn main() {
 #![feature(optin_builtin_traits)]
 
+#fn main() {
 // I have some magic semantics for some synchronization primitive!
 struct SpecialThreadToken(u8);
 

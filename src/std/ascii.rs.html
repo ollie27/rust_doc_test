@@ -1565,7 +1565,6 @@
 <span id="1520">1520</span>
 <span id="1521">1521</span>
 <span id="1522">1522</span>
-<span id="1523">1523</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1596,7 +1595,6 @@
 <span class="attribute">#<span class="op">!</span>[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">mem</span>;
 <span class="kw">use</span> <span class="ident">ops</span>::<span class="ident">Range</span>;
 <span class="kw">use</span> <span class="ident">iter</span>::<span class="ident">FusedIterator</span>;
 
@@ -2168,12 +2166,12 @@
     }
 
     <span class="kw">fn</span> <span class="ident">make_ascii_uppercase</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">me</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>) };
+        <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">as_bytes_mut</span>() };
         <span class="ident">me</span>.<span class="ident">make_ascii_uppercase</span>()
     }
 
     <span class="kw">fn</span> <span class="ident">make_ascii_lowercase</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">me</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>) };
+        <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">as_bytes_mut</span>() };
         <span class="ident">me</span>.<span class="ident">make_ascii_lowercase</span>()
     }
 
@@ -3148,7 +3146,6 @@
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

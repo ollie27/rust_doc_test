@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'BitAndAssign', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait BitAndAssign</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'BitAndAssign', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,12 +48,13 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#1600-1604' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#1652-1656' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "bitand_assign"]
 </div>pub trait BitAndAssign&lt;Rhs&nbsp;=&nbsp;Self&gt; {
     fn <a href='#tymethod.bitand_assign' class='fnname'>bitand_assign</a>(&amp;mut self, rhs: Rhs);
 }</pre><div class='docblock'><p>The bitwise AND assignment operator <code>&amp;=</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>In this example, the <code>&amp;=</code> operator is lifted to a trivial <code>Scalar</code> type.</p>
 
 <pre class="rust rust-example-rendered">
@@ -86,6 +87,7 @@
     <span class="ident">scalar</span> <span class="op">&amp;=</span> <span class="ident">Scalar</span>(<span class="bool-val">false</span>);
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">scalar</span>, <span class="ident">Scalar</span>(<span class="bool-val">false</span>));
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Aops%3A%3ABitAndAssign%3B%0A%0A%23%5Bderive(Debug%2C%20PartialEq)%5D%0Astruct%20Scalar(bool)%3B%0A%0Aimpl%20BitAndAssign%20for%20Scalar%20%7B%0A%20%20%20%20%2F%2F%20rhs%20is%20the%20%22right-hand%20side%22%20of%20the%20expression%20%60a%20%26%3D%20b%60%0A%20%20%20%20fn%20bitand_assign(%26mut%20self%2C%20rhs%3A%20Self)%20%7B%0A%20%20%20%20%20%20%20%20*self%20%3D%20Scalar(self.0%20%26%20rhs.0)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20scalar%20%3D%20Scalar(true)%3B%0A%20%20%20%20scalar%20%26%3D%20Scalar(true)%3B%0A%20%20%20%20assert_eq!(scalar%2C%20Scalar(true))%3B%0A%0A%20%20%20%20let%20mut%20scalar%20%3D%20Scalar(true)%3B%0A%20%20%20%20scalar%20%26%3D%20Scalar(false)%3B%0A%20%20%20%20assert_eq!(scalar%2C%20Scalar(false))%3B%0A%0A%20%20%20%20let%20mut%20scalar%20%3D%20Scalar(false)%3B%0A%20%20%20%20scalar%20%26%3D%20Scalar(true)%3B%0A%20%20%20%20assert_eq!(scalar%2C%20Scalar(false))%3B%0A%0A%20%20%20%20let%20mut%20scalar%20%3D%20Scalar(false)%3B%0A%20%20%20%20scalar%20%26%3D%20Scalar(false)%3B%0A%20%20%20%20assert_eq!(scalar%2C%20Scalar(false))%3B%0A%7D%0A">Run</a></pre>
+
 <p>In this example, the <code>BitAndAssign</code> trait is implemented for a
 <code>BooleanVector</code> struct.</p>
 
@@ -204,7 +206,6 @@
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

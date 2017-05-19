@@ -539,6 +539,51 @@
 <span id="494">494</span>
 <span id="495">495</span>
 <span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -610,6 +655,9 @@
 <span class="doccomment">/// necessary to use `io::stdout().flush()` to ensure the output is emitted</span>
 <span class="doccomment">/// immediately.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Use `print!` only for the primary output of your program.  Use</span>
+<span class="doccomment">/// `eprint!` instead to print error and progress messages.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Panics</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Panics if writing to `io::stdout()` fails.</span>
@@ -647,9 +695,12 @@
 <span class="doccomment">/// Use the `format!` syntax to write data to the standard output.</span>
 <span class="doccomment">/// See `std::fmt` for more information.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Use `println!` only for the primary output of your program.  Use</span>
+<span class="doccomment">/// `eprintln!` instead to print error and progress messages.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Panics</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Panics if writing to `io::stdout()` fails.</span>
+<span class="doccomment">/// Panics if writing to `io::stdout` fails.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -664,6 +715,45 @@
     () <span class="op">=&gt;</span> (<span class="macro">print</span><span class="macro">!</span>(<span class="string">&quot;\n&quot;</span>));
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> (<span class="macro">print</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>, <span class="string">&quot;\n&quot;</span>)));
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> (<span class="macro">print</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>, <span class="string">&quot;\n&quot;</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>));
+}
+
+<span class="doccomment">/// Macro for printing to the standard error.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Equivalent to the `print!` macro, except that output goes to</span>
+<span class="doccomment">/// `io::stderr` instead of `io::stdout`.  See `print!` for</span>
+<span class="doccomment">/// example usage.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Use `eprint!` only for error and progress messages.  Use `print!`</span>
+<span class="doccomment">/// instead for the primary output of your program.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Panics</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Panics if writing to `io::stderr` fails.</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eprint&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.18.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">allow_internal_unstable</span>]</span>
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">eprint</span> {
+    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> (<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">io</span>::<span class="ident">_eprint</span>(<span class="macro">format_args</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>)));
+}
+
+<span class="doccomment">/// Macro for printing to the standard error, with a newline.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Equivalent to the `println!` macro, except that output goes to</span>
+<span class="doccomment">/// `io::stderr` instead of `io::stdout`.  See `println!` for</span>
+<span class="doccomment">/// example usage.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Use `eprintln!` only for error and progress messages.  Use `println!`</span>
+<span class="doccomment">/// instead for the primary output of your program.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Panics</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Panics if writing to `io::stderr` fails.</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eprint&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.18.0&quot;</span>)]</span>
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">eprintln</span> {
+    () <span class="op">=&gt;</span> (<span class="macro">eprint</span><span class="macro">!</span>(<span class="string">&quot;\n&quot;</span>));
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> (<span class="macro">eprint</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>, <span class="string">&quot;\n&quot;</span>)));
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> (<span class="macro">eprint</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>, <span class="string">&quot;\n&quot;</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>));
 }
 
 <span class="doccomment">/// A macro to select an event from a number of receivers.</span>
@@ -1094,7 +1184,6 @@
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

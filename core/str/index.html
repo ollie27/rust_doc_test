@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'str', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module str</p><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'str', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,8 +48,9 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/str/mod.rs.html#11-2448' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/str/mod.rs.html#11-2476' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>String manipulation</p>
+
 <p>For more details, see std::str</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
@@ -207,6 +208,21 @@ that the string contains valid UTF-8.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.from_utf8_mut.html"
+                                  title='fn core::str::from_utf8_mut'>from_utf8_mut</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Converts a mutable slice of bytes to a mutable string slice.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.from_utf8_unchecked_mut.html"
+                                  title='fn core::str::from_utf8_unchecked_mut'>from_utf8_unchecked_mut</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Converts a slice of bytes to a string slice without checking
+that the string contains valid UTF-8; mutable version.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
                            <td><a class="fn" href="fn.next_code_point.html"
                                   title='fn core::str::next_code_point'>next_code_point</a></td>
                            <td class='docblock-short'>
@@ -277,7 +293,6 @@ UTF-8-like encoding).</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

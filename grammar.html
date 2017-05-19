@@ -22,9 +22,9 @@
 
     <div id="versioninfo">
   <img src="https://www.rust-lang.org/logos/rust-logo-32x32-blk.png" width="32" height="32" alt="Rust logo"><br>
-  <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.18.0-dev</span><br>
-  <a href="https://github.com/rust-lang/rust/commit/e5e92753cc3e12c3c468b6badaf340fe4443145c"
-    class="hash white-sticker">e5e92753c</a>
+  <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.19.0-dev</span><br>
+  <a href="https://github.com/rust-lang/rust/commit/9f15631c36665911eb8e6f594ebcfe93e65a461c"
+    class="hash white-sticker">9f15631c3</a>
 </div>
 
 
@@ -136,7 +136,8 @@
 <li><a href="#never-type">8.1.10 Never type</a><ul></ul></li>
 <li><a href="#object-types">8.1.11 Object types</a><ul></ul></li>
 <li><a href="#type-parameters-1">8.1.12 Type parameters</a><ul></ul></li>
-<li><a href="#self-types">8.1.13 Self types</a><ul></ul></li></ul></li>
+<li><a href="#type-parameter-bounds">8.1.13 Type parameter bounds</a><ul></ul></li>
+<li><a href="#self-types">8.1.14 Self types</a><ul></ul></li></ul></li>
 <li><a href="#type-kinds">8.2 Type kinds</a><ul></ul></li></ul></li>
 <li><a href="#memory-and-concurrency-models">9 Memory and concurrency models</a><ul>
 <li><a href="#memory-model">9.1 Memory model</a><ul>
@@ -827,8 +828,6 @@ match_pat : pat [ &#39;|&#39; pat ] * [ &quot;if&quot; expr ] ? ;
                 [ &#39;:&#39; bound-list ] [ &#39;-&gt;&#39; type ]
 lifetime-list := lifetime | lifetime &#39;,&#39; lifetime-list
 arg-list := ident &#39;:&#39; type | ident &#39;:&#39; type &#39;,&#39; arg-list
-bound-list := bound | bound &#39;+&#39; bound-list
-bound := path | lifetime
 </code></pre>
 
 <h3 id='never-type' class='section-header'><a href='#never-type'>8.1.10 Never type</a></h3>
@@ -843,7 +842,15 @@ bound := path | lifetime
 <h3 id='type-parameters-1' class='section-header'><a href='#type-parameters-1'>8.1.12 Type parameters</a></h3>
 <p><strong>FIXME:</strong> grammar?</p>
 
-<h3 id='self-types' class='section-header'><a href='#self-types'>8.1.13 Self types</a></h3>
+<h3 id='type-parameter-bounds' class='section-header'><a href='#type-parameter-bounds'>8.1.13 Type parameter bounds</a></h3>
+<pre><code class="language-antlr">bound-list := bound | bound &#39;+&#39; bound-list &#39;+&#39; ?
+bound := ty_bound | lt_bound
+lt_bound := lifetime
+ty_bound := ty_bound_noparen | (ty_bound_noparen)
+ty_bound_noparen := [?] [ for&lt;lt_param_defs&gt; ] simple_path
+</code></pre>
+
+<h3 id='self-types' class='section-header'><a href='#self-types'>8.1.14 Self types</a></h3>
 <p><strong>FIXME:</strong> grammar?</p>
 
 <h2 id='type-kinds' class='section-header'><a href='#type-kinds'>8.2 Type kinds</a></h2>

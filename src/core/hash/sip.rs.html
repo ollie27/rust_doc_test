@@ -893,8 +893,8 @@
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">trait</span> <span class="ident">Sip</span> {
-    <span class="kw">fn</span> <span class="ident">c_rounds</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span>);
-    <span class="kw">fn</span> <span class="ident">d_rounds</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span>);
+    <span class="kw">fn</span> <span class="ident">c_rounds</span>(_: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span>);
+    <span class="kw">fn</span> <span class="ident">d_rounds</span>(_: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span>);
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
@@ -990,7 +990,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

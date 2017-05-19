@@ -530,6 +530,16 @@
 <span id="485">485</span>
 <span id="486">486</span>
 <span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -626,6 +636,17 @@
 <span class="doccomment">//! macros are defined by the standard library - some are defined by the</span>
 <span class="doccomment">//! compiler - but they are documented here the same). Like the prelude, the</span>
 <span class="doccomment">//! standard macros are imported by default into all crates.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Contributing changes to the documentation</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Check out the rust contribution guidelines [here](</span>
+<span class="doccomment">//! https://github.com/rust-lang/rust/blob/master/CONTRIBUTING.md).</span>
+<span class="doccomment">//! The source for this documentation can be found on [Github](https://github.com/rust-lang).</span>
+<span class="doccomment">//! To contribute changes, make sure you read the guidelines first, then submit</span>
+<span class="doccomment">//! pull-requests for your suggested changes.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Contributions are appreciated! If you see a part of the docs that can be</span>
+<span class="doccomment">//! improved, submit a PR, or chat with us first on irc.mozilla.org #rust-docs.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # A Tour of The Rust Standard Library</span>
 <span class="doccomment">//!</span>
@@ -770,7 +791,6 @@
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">allow_internal_unstable</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">asm</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">associated_consts</span>)]</span>
-<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">borrow_state</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">box_syntax</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">cfg_target_has_atomic</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">cfg_target_thread_local</span>)]</span>
@@ -785,7 +805,6 @@
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">core_intrinsics</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">dropck_eyepatch</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">exact_size_is_empty</span>)]</span>
-<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">float_extras</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">float_from_str_radix</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">fn_traits</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">fnbox</span>)]</span>
@@ -829,9 +848,11 @@
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">stmt_expr_attributes</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">str_char</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">str_internals</span>)]</span>
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">str_mut_extras</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">str_utf16</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">test</span>, <span class="ident">rustc_private</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">thread_local</span>)]</span>
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">toowned_clone_into</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">try_from</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">unboxed_closures</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">unicode</span>)]</span>
@@ -839,9 +860,8 @@
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">untagged_unions</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">unwind_attributes</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">vec_push_all</span>)]</span>
-<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">zero_one</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">feature</span>(<span class="ident">update_panic_count</span>))]</span>
-<span class="attribute">#<span class="op">!</span>[<span class="ident">cfg_attr</span>(<span class="ident">stage0</span>, <span class="ident">feature</span>(<span class="ident">pub_restricted</span>))]</span>
+<span class="attribute">#<span class="op">!</span>[<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">feature</span>(<span class="ident">float_bits_conv</span>))]</span>
 
 <span class="comment">// Explicitly import the prelude. The compiler uses this same unstable attribute</span>
 <span class="comment">// to import the prelude implicitly when building crates that depend on std.</span>
@@ -1076,7 +1096,6 @@
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

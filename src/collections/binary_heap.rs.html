@@ -1276,57 +1276,6 @@
 <span id="1231">1231</span>
 <span id="1232">1232</span>
 <span id="1233">1233</span>
-<span id="1234">1234</span>
-<span id="1235">1235</span>
-<span id="1236">1236</span>
-<span id="1237">1237</span>
-<span id="1238">1238</span>
-<span id="1239">1239</span>
-<span id="1240">1240</span>
-<span id="1241">1241</span>
-<span id="1242">1242</span>
-<span id="1243">1243</span>
-<span id="1244">1244</span>
-<span id="1245">1245</span>
-<span id="1246">1246</span>
-<span id="1247">1247</span>
-<span id="1248">1248</span>
-<span id="1249">1249</span>
-<span id="1250">1250</span>
-<span id="1251">1251</span>
-<span id="1252">1252</span>
-<span id="1253">1253</span>
-<span id="1254">1254</span>
-<span id="1255">1255</span>
-<span id="1256">1256</span>
-<span id="1257">1257</span>
-<span id="1258">1258</span>
-<span id="1259">1259</span>
-<span id="1260">1260</span>
-<span id="1261">1261</span>
-<span id="1262">1262</span>
-<span id="1263">1263</span>
-<span id="1264">1264</span>
-<span id="1265">1265</span>
-<span id="1266">1266</span>
-<span id="1267">1267</span>
-<span id="1268">1268</span>
-<span id="1269">1269</span>
-<span id="1270">1270</span>
-<span id="1271">1271</span>
-<span id="1272">1272</span>
-<span id="1273">1273</span>
-<span id="1274">1274</span>
-<span id="1275">1275</span>
-<span id="1276">1276</span>
-<span id="1277">1277</span>
-<span id="1278">1278</span>
-<span id="1279">1279</span>
-<span id="1280">1280</span>
-<span id="1281">1281</span>
-<span id="1282">1282</span>
-<span id="1283">1283</span>
-<span id="1284">1284</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1350,11 +1299,12 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This is a larger example that implements [Dijkstra&#39;s algorithm][dijkstra]</span>
 <span class="doccomment">//! to solve the [shortest path problem][sssp] on a [directed graph][dir_graph].</span>
-<span class="doccomment">//! It shows how to use `BinaryHeap` with custom types.</span>
+<span class="doccomment">//! It shows how to use [`BinaryHeap`] with custom types.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [dijkstra]: http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm</span>
 <span class="doccomment">//! [sssp]: http://en.wikipedia.org/wiki/Shortest_path_problem</span>
 <span class="doccomment">//! [dir_graph]: http://en.wikipedia.org/wiki/Directed_graph</span>
+<span class="doccomment">//! [`BinaryHeap`]: struct.BinaryHeap.html</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! use std::cmp::Ordering;</span>
@@ -1548,10 +1498,14 @@
     <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }
 
-<span class="doccomment">/// A container object that represents the result of the [`peek_mut`] method</span>
-<span class="doccomment">/// on `BinaryHeap`. See its documentation for details.</span>
+<span class="doccomment">/// Structure wrapping a mutable reference to the greatest item on a</span>
+<span class="doccomment">/// `BinaryHeap`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This `struct` is created by the [`peek_mut`] method on [`BinaryHeap`]. See</span>
+<span class="doccomment">/// its documentation for more.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`peek_mut`]: struct.BinaryHeap.html#method.peek_mut</span>
+<span class="doccomment">/// [`BinaryHeap`]: struct.BinaryHeap.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;binary_heap_peek_mut&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.12.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PeekMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Ord</span><span class="op">&gt;</span> {
     <span class="ident">heap</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">BinaryHeap</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
@@ -1764,7 +1718,7 @@
     <span class="doccomment">/// given `BinaryHeap`. Does nothing if the capacity is already sufficient.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that the allocator may give the collection more space than it requests. Therefore</span>
-    <span class="doccomment">/// capacity can not be relied upon to be precisely minimal. Prefer `reserve` if future</span>
+    <span class="doccomment">/// capacity can not be relied upon to be precisely minimal. Prefer [`reserve`] if future</span>
     <span class="doccomment">/// insertions are expected.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Panics</span>
@@ -1782,6 +1736,8 @@
     <span class="doccomment">/// assert!(heap.capacity() &gt;= 100);</span>
     <span class="doccomment">/// heap.push(4);</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`reserve`]: #method.reserve</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve_exact</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">additional</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">reserve_exact</span>(<span class="ident">additional</span>);
@@ -1876,82 +1832,6 @@
         <span class="kw">let</span> <span class="ident">old_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">item</span>);
         <span class="self">self</span>.<span class="ident">sift_up</span>(<span class="number">0</span>, <span class="ident">old_len</span>);
-    }
-
-    <span class="doccomment">/// Pushes an item onto the binary heap, then pops the greatest item off the queue in</span>
-    <span class="doccomment">/// an optimized fashion.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Basic usage:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(binary_heap_extras)]</span>
-    <span class="doccomment">/// #![allow(deprecated)]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// use std::collections::BinaryHeap;</span>
-    <span class="doccomment">/// let mut heap = BinaryHeap::new();</span>
-    <span class="doccomment">/// heap.push(1);</span>
-    <span class="doccomment">/// heap.push(5);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(heap.push_pop(3), 5);</span>
-    <span class="doccomment">/// assert_eq!(heap.push_pop(9), 9);</span>
-    <span class="doccomment">/// assert_eq!(heap.len(), 2);</span>
-    <span class="doccomment">/// assert_eq!(heap.peek(), Some(&amp;3));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;binary_heap_extras&quot;</span>,
-               <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;needs to be audited&quot;</span>,
-               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;28147&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">rustc_deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.13.0&quot;</span>, <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;use `peek_mut` instead&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_pop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">item</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">get_mut</span>(<span class="number">0</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="ident">item</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">top</span>) <span class="op">=&gt;</span> {
-                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">top</span> <span class="op">&gt;</span> <span class="ident">item</span> {
-                    <span class="ident">swap</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">item</span>, <span class="ident">top</span>);
-                } <span class="kw">else</span> {
-                    <span class="kw">return</span> <span class="ident">item</span>;
-                }
-            }
-        }
-
-        <span class="self">self</span>.<span class="ident">sift_down</span>(<span class="number">0</span>);
-        <span class="ident">item</span>
-    }
-
-    <span class="doccomment">/// Pops the greatest item off the binary heap, then pushes an item onto the queue in</span>
-    <span class="doccomment">/// an optimized fashion. The push is done regardless of whether the binary heap</span>
-    <span class="doccomment">/// was empty.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Basic usage:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(binary_heap_extras)]</span>
-    <span class="doccomment">/// #![allow(deprecated)]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// use std::collections::BinaryHeap;</span>
-    <span class="doccomment">/// let mut heap = BinaryHeap::new();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(heap.replace(1), None);</span>
-    <span class="doccomment">/// assert_eq!(heap.replace(3), Some(1));</span>
-    <span class="doccomment">/// assert_eq!(heap.len(), 1);</span>
-    <span class="doccomment">/// assert_eq!(heap.peek(), Some(&amp;3));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;binary_heap_extras&quot;</span>,
-               <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;needs to be audited&quot;</span>,
-               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;28147&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">rustc_deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.13.0&quot;</span>, <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;use `peek_mut` instead&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">item</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_empty</span>() {
-            <span class="ident">swap</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">item</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[<span class="number">0</span>]);
-            <span class="self">self</span>.<span class="ident">sift_down</span>(<span class="number">0</span>);
-            <span class="prelude-val">Some</span>(<span class="ident">item</span>)
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">item</span>);
-            <span class="prelude-val">None</span>
-        }
     }
 
     <span class="doccomment">/// Consumes the `BinaryHeap` and returns the underlying vector</span>
@@ -2301,7 +2181,13 @@
     }
 }
 
-<span class="doccomment">/// `BinaryHeap` iterator.</span>
+<span class="doccomment">/// An iterator over the elements of a `BinaryHeap`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This `struct` is created by the [`iter`] method on [`BinaryHeap`]. See its</span>
+<span class="doccomment">/// documentation for more.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`iter`]: struct.BinaryHeap.html#method.iter</span>
+<span class="doccomment">/// [`BinaryHeap`]: struct.BinaryHeap.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">iter</span>: <span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>,
@@ -2357,7 +2243,13 @@
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fused&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35602&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">FusedIterator</span> <span class="kw">for</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {}
 
-<span class="doccomment">/// An iterator that moves out of a `BinaryHeap`.</span>
+<span class="doccomment">/// An owning iterator over the elements of a `BinaryHeap`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This `struct` is created by the [`into_iter`] method on [`BinaryHeap`][`BinaryHeap`]</span>
+<span class="doccomment">/// (provided by the `IntoIterator` trait). See its documentation for more.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`into_iter`]: struct.BinaryHeap.html#method.into_iter</span>
+<span class="doccomment">/// [`BinaryHeap`]: struct.BinaryHeap.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IntoIter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -2406,7 +2298,13 @@
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fused&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35602&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">FusedIterator</span> <span class="kw">for</span> <span class="ident">IntoIter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 
-<span class="doccomment">/// An iterator that drains a `BinaryHeap`.</span>
+<span class="doccomment">/// A draining iterator over the elements of a `BinaryHeap`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This `struct` is created by the [`drain`] method on [`BinaryHeap`]. See its</span>
+<span class="doccomment">/// documentation for more.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`drain`]: struct.BinaryHeap.html#method.drain</span>
+<span class="doccomment">/// [`BinaryHeap`]: struct.BinaryHeap.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;drain&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Drain</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -2670,7 +2568,6 @@
         window.rootPath = "../../";
         window.currentCrate = "collections";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

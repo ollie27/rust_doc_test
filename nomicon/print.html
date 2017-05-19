@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,9 +68,9 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="print.html#the-rustonomicon" name="the-rustonomicon"><h1>The Rustonomicon</h1></a>
-<a class="header" href="print.html#the-dark-arts-of-advanced-and-unsafe-rust-programming" name="the-dark-arts-of-advanced-and-unsafe-rust-programming"><h4>The Dark Arts of Advanced and Unsafe Rust Programming</h4></a>
-<a class="header" href="print.html#note-this-is-a-draft-document-and-may-contain-serious-errors" name="note-this-is-a-draft-document-and-may-contain-serious-errors"><h1>NOTE: This is a draft document, and may contain serious errors</h1></a>
+                    <a class="header" href="print.html#the-rustonomicon" id="the-rustonomicon"><h1>The Rustonomicon</h1></a>
+<a class="header" href="print.html#the-dark-arts-of-advanced-and-unsafe-rust-programming" id="the-dark-arts-of-advanced-and-unsafe-rust-programming"><h4>The Dark Arts of Advanced and Unsafe Rust Programming</h4></a>
+<a class="header" href="print.html#note-this-is-a-draft-document-and-may-contain-serious-errors" id="note-this-is-a-draft-document-and-may-contain-serious-errors"><h1>NOTE: This is a draft document, and may contain serious errors</h1></a>
 <blockquote>
 <p>Instead of the programs I had hoped for, there came only a shuddering blackness
 and ineffable loneliness; and I saw at last a fearful truth which no one had
@@ -98,7 +99,8 @@ explaining everything from the ground up.</p>
 exception-safety, pointer aliasing, memory models, and even some type-theory.
 We will also be spending a lot of time talking about the different kinds
 of safety and guarantees.</p>
-<a class="header" href="print.html#meet-safe-and-unsafe" name="meet-safe-and-unsafe"><h1>Meet Safe and Unsafe</h1></a>
+<a class="header" href="print.html#meet-safe-and-unsafe" id="meet-safe-and-unsafe"><h1>Meet Safe and Unsafe</h1></a>
+<p><img src="img/safeandunsafe.svg" alt="safe and unsafe" /></p>
 <p>Programmers in safe &quot;high-level&quot; languages face a fundamental dilemma. On one
 hand, it would be <em>really</em> great to just say what you want and not worry about
 how it's done. On the other hand, that can lead to unacceptably poor
@@ -182,7 +184,7 @@ Rust considers it &quot;safe&quot; to:</p>
 <p>However any program that actually manages to do such a thing is <em>probably</em>
 incorrect. Rust provides lots of tools to make these things rare, but
 these problems are considered impractical to categorically prevent.</p>
-<a class="header" href="print.html#how-safe-and-unsafe-interact" name="how-safe-and-unsafe-interact"><h1>How Safe and Unsafe Interact</h1></a>
+<a class="header" href="print.html#how-safe-and-unsafe-interact" id="how-safe-and-unsafe-interact"><h1>How Safe and Unsafe Interact</h1></a>
 <p>What's the relationship between Safe Rust and Unsafe Rust? How do they
 interact?</p>
 <p>The separation between Safe Rust and Unsafe Rust is controlled with the
@@ -253,7 +255,6 @@ guarantees.</p>
 type could theoretically require that keys implement a new trait called
 <code>UnsafeOrd</code>, rather than <code>Ord</code>, that might look like this:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::cmp::Ordering;
 
@@ -287,12 +288,11 @@ Safe Rust as ergonomic as possible, but requires extra effort and care when
 writing Unsafe Rust. The rest of the book is largely a discussion of the sort
 of care that must be taken, and what contracts it is expected of Unsafe Rust
 to uphold.</p>
-<a class="header" href="print.html#working-with-unsafe" name="working-with-unsafe"><h1>Working with Unsafe</h1></a>
+<a class="header" href="print.html#working-with-unsafe" id="working-with-unsafe"><h1>Working with Unsafe</h1></a>
 <p>Rust generally only gives us the tools to talk about Unsafe Rust in a scoped and
 binary manner. Unfortunately, reality is significantly more complicated than
 that. For instance, consider the following toy function:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn index(idx: usize, arr: &amp;[u8]) -&gt; Option&lt;u8&gt; {
     if idx &lt; arr.len() {
@@ -310,7 +310,6 @@ is, index into the array in an unchecked manner. But even in such a trivial
 function, the scope of the unsafe block is questionable. Consider changing the
 <code>&lt;</code> to a <code>&lt;=</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn index(idx: usize, arr: &amp;[u8]) -&gt; Option&lt;u8&gt; {
     if idx &lt;= arr.len() {
@@ -393,11 +392,11 @@ well-behaved in a way that safe code doesn't care about.</p>
 state in arbitrary ways, safety would be a lost cause. Thankfully, it <em>can</em>
 prevent arbitrary code from messing with critical state due to privacy.</p>
 <p>Safety lives!</p>
-<a class="header" href="print.html#data-representation-in-rust" name="data-representation-in-rust"><h1>Data Representation in Rust</h1></a>
+<a class="header" href="print.html#data-representation-in-rust" id="data-representation-in-rust"><h1>Data Representation in Rust</h1></a>
 <p>Low-level programming cares a lot about data layout. It's a big deal. It also
 pervasively influences the rest of the language, so we're going to start by
 digging into how data is represented in Rust.</p>
-<a class="header" href="print.html#reprrust" name="reprrust"><h1>repr(Rust)</h1></a>
+<a class="header" href="print.html#reprrust" id="reprrust"><h1>repr(Rust)</h1></a>
 <p>First and foremost, all types have an alignment specified in bytes. The
 alignment of a type specifies what addresses are valid to store the value at. A
 value of alignment <code>n</code> must only be stored at an address that is a multiple of
@@ -425,7 +424,6 @@ of their fields' alignment. Rust will consequently insert padding where
 necessary to ensure that all fields are properly aligned and that the overall
 type's size is a multiple of its alignment. For instance:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct A {
     a: u8,
@@ -438,7 +436,6 @@ struct A {
 respective sizes. The whole struct will therefore have a size that is a multiple
 of 32-bits. It will potentially become:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct A {
     a: u8,
@@ -454,7 +451,6 @@ as you would expect in C. However with the exception of arrays (which are
 densely packed and in-order), the layout of data is not by default specified in
 Rust. Given the two following struct definitions:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct A {
     a: i32,
@@ -476,7 +472,6 @@ features of Rust make it desirable for the language to play with data layout in
 complex ways.</p>
 <p>For instance, consider this struct:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo&lt;T, U&gt; {
     count: u16,
@@ -509,7 +504,6 @@ requires different monomorphizations to have <em>different field orderings</em>.
 1.0</strong></p>
 <p>Enums make this consideration even more complicated. Naively, an enum such as:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Foo {
     A(u32),
@@ -520,7 +514,6 @@ enum Foo {
 #}</code></pre></pre>
 <p>would be laid out as:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct FooRepr {
     data: u64, // this is either a u64, u32, or u8 based on `tag`
@@ -543,10 +536,10 @@ definition known to have a limited range of valid values. In principle enums cou
 use fairly elaborate algorithms to cache bits throughout nested types with
 special constrained representations. As such it is <em>especially</em> desirable that
 we leave enum layout unspecified today.</p>
-<a class="header" href="print.html#exotically-sized-types" name="exotically-sized-types"><h1>Exotically Sized Types</h1></a>
+<a class="header" href="print.html#exotically-sized-types" id="exotically-sized-types"><h1>Exotically Sized Types</h1></a>
 <p>Most of the time, we think in terms of types with a fixed, positive size. This
 is not always the case, however.</p>
-<a class="header" href="print.html#dynamically-sized-types-dsts" name="dynamically-sized-types-dsts"><h1>Dynamically Sized Types (DSTs)</h1></a>
+<a class="header" href="print.html#dynamically-sized-types-dsts" id="dynamically-sized-types-dsts"><h1>Dynamically Sized Types (DSTs)</h1></a>
 <p>Rust in fact supports Dynamically Sized Types (DSTs): types without a statically
 known size or alignment. On the surface, this is a bit nonsensical: Rust <em>must</em>
 know the size and alignment of something in order to correctly work with it! In
@@ -565,7 +558,6 @@ it points to.</p>
 <p>Structs can actually store a single DST directly as their last field, but this
 makes them a DST as well:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 // Can't be stored on the stack directly
 struct Foo {
@@ -576,10 +568,9 @@ struct Foo {
 #}</code></pre></pre>
 <p><strong>NOTE: <a href="https://github.com/rust-lang/rust/issues/26403">As of Rust 1.0 struct DSTs are broken if the last field has
 a variable position based on its alignment</a>.</strong></p>
-<a class="header" href="print.html#zero-sized-types-zsts" name="zero-sized-types-zsts"><h1>Zero Sized Types (ZSTs)</h1></a>
+<a class="header" href="print.html#zero-sized-types-zsts" id="zero-sized-types-zsts"><h1>Zero Sized Types (ZSTs)</h1></a>
 <p>Rust actually allows types to be specified that occupy no space:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo; // No fields = no size
 
@@ -614,12 +605,11 @@ consequence of types with no size. In particular, pointer offsets are no-ops,
 and standard allocators (including jemalloc, the one used by default in Rust)
 may return <code>nullptr</code> when a zero-sized allocation is requested, which is
 indistinguishable from out of memory.</p>
-<a class="header" href="print.html#empty-types" name="empty-types"><h1>Empty Types</h1></a>
+<a class="header" href="print.html#empty-types" id="empty-types"><h1>Empty Types</h1></a>
 <p>Rust also enables types to be declared that <em>cannot even be instantiated</em>. These
 types can only be talked about at the type level, and never at the value level.
 Empty types can be declared by specifying an enum with no variants:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Void {} // No variants = EMPTY
 
@@ -649,9 +639,9 @@ actually valid to construct, but dereferencing them is Undefined Behavior
 because that doesn't actually make sense. That is, you could model C's <code>void *</code>
 type with <code>*const Void</code>, but this doesn't necessarily gain anything over using
 e.g. <code>*const ()</code>, which <em>is</em> safe to randomly dereference.</p>
-<a class="header" href="print.html#alternative-representations" name="alternative-representations"><h1>Alternative representations</h1></a>
+<a class="header" href="print.html#alternative-representations" id="alternative-representations"><h1>Alternative representations</h1></a>
 <p>Rust allows you to specify alternative data layout strategies from the default.</p>
-<a class="header" href="print.html#reprc" name="reprc"><h1>repr(C)</h1></a>
+<a class="header" href="print.html#reprc" id="reprc"><h1>repr(C)</h1></a>
 <p>This is the most important <code>repr</code>. It has fairly simple intent: do what C does.
 The order, size, and alignment of fields is exactly what you would expect from C
 or C++. Any type you expect to pass through an FFI boundary should have
@@ -687,7 +677,7 @@ guess&quot;. In particular, this may be incorrect when the C code of interest is
 compiled with certain flags.</p>
 </li>
 </ul>
-<a class="header" href="print.html#repru8-repru16-repru32-repru64" name="repru8-repru16-repru32-repru64"><h1>repr(u8), repr(u16), repr(u32), repr(u64)</h1></a>
+<a class="header" href="print.html#repru8-repru16-repru32-repru64" id="repru8-repru16-repru32-repru64"><h1>repr(u8), repr(u16), repr(u32), repr(u64)</h1></a>
 <p>These specify the size to make a C-like enum. If the discriminant overflows the
 integer it has to fit in, it will produce a compile-time error. You can manually
 ask Rust to allow this by setting the overflowing element to explicitly be 0.
@@ -696,7 +686,7 @@ same discriminant.</p>
 <p>On non-C-like enums, this will inhibit certain optimizations like the null-
 pointer optimization.</p>
 <p>These reprs have no effect on a struct.</p>
-<a class="header" href="print.html#reprpacked" name="reprpacked"><h1>repr(packed)</h1></a>
+<a class="header" href="print.html#reprpacked" id="reprpacked"><h1>repr(packed)</h1></a>
 <p><code>repr(packed)</code> forces Rust to strip any padding, and only align the type to a
 byte. This may improve the memory footprint, but will likely have other negative
 side-effects.</p>
@@ -710,7 +700,7 @@ compiler will be able to emit code to avoid an unaligned load.</p>
 <p><code>repr(packed)</code> is not to be used lightly. Unless you have extreme requirements,
 this should not be used.</p>
 <p>This repr is a modifier on <code>repr(C)</code> and <code>repr(rust)</code>.</p>
-<a class="header" href="print.html#ownership-and-lifetimes" name="ownership-and-lifetimes"><h1>Ownership and Lifetimes</h1></a>
+<a class="header" href="print.html#ownership-and-lifetimes" id="ownership-and-lifetimes"><h1>Ownership and Lifetimes</h1></a>
 <p>Ownership is the breakout feature of Rust. It allows Rust to be completely
 memory-safe and efficient, while avoiding garbage collection. Before getting
 into the ownership system in detail, we will consider the motivation of this
@@ -764,7 +754,7 @@ println!(&quot;{}&quot;, x);
 does in fact live as long as we needed. However it was <em>changed</em> while we had
 a reference into it. This is why Rust requires any references to freeze the
 referent and its owners.</p>
-<a class="header" href="print.html#references" name="references"><h1>References</h1></a>
+<a class="header" href="print.html#references" id="references"><h1>References</h1></a>
 <p>This section gives a high-level view of the memory model that <em>all</em> Rust
 programs must satisfy to be correct. Safe code is statically verified
 to obey this model by the borrow checker. Unsafe code may go above
@@ -788,7 +778,7 @@ what <em>aliased</em> means. To define aliasing, we must define the notion of
 issues. It's ok-ish as an intuitive model, but fails to capture the desired
 semantics. We leave this here to be able to use notions introduced here in later
 sections. This will be significantly changed in the future. TODO: do that.</strong></p>
-<a class="header" href="print.html#paths" name="paths"><h1>Paths</h1></a>
+<a class="header" href="print.html#paths" id="paths"><h1>Paths</h1></a>
 <p>If all Rust had were values (no pointers), then every value would be uniquely
 owned by a variable or composite structure. From this we naturally derive a
 <em>tree</em> of ownership. The stack itself is the root of the tree, with every
@@ -830,7 +820,7 @@ refcount itself uses interior mutability.</p>
 a struct can have interior mutability, it must be wrapped in an UnsafeCell. This
 does not in itself make it safe to perform interior mutability operations on
 that value. You still must yourself ensure that mutual exclusion is upheld.</p>
-<a class="header" href="print.html#liveness" name="liveness"><h1>Liveness</h1></a>
+<a class="header" href="print.html#liveness" id="liveness"><h1>Liveness</h1></a>
 <p>Note: Liveness is not the same thing as a <em>lifetime</em>, which will be explained
 in detail in the next section of this chapter.</p>
 <p>Roughly, a reference is <em>live</em> at some point in a program if it can be
@@ -842,7 +832,6 @@ one of its descendants. A reborrowed reference will only be live again once all
 reborrows derived from it expire. For instance, a mutable reference can be
 reborrowed to point to a field of its referent:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = &amp;mut (1, 2);
 {
@@ -860,7 +849,6 @@ they are <em>disjoint</em>: no reference is an ancestor of another. Rust
 explicitly enables this to be done with disjoint struct fields, because
 disjointness can be statically proven:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = &amp;mut (1, 2);
 {
@@ -891,7 +879,7 @@ as <code>mut</code> can be borrowed mutably.</p>
 <p>It is interesting to note that Box behaves exactly like an owned reference. It
 can be moved out of, and Rust understands it sufficiently to reason about its
 paths like a normal variable.</p>
-<a class="header" href="print.html#aliasing" name="aliasing"><h1>Aliasing</h1></a>
+<a class="header" href="print.html#aliasing" id="aliasing"><h1>Aliasing</h1></a>
 <p>With liveness and paths defined, we can now properly define <em>aliasing</em>:</p>
 <p><strong>A mutable reference is aliased if there exists another live reference to one
 of its ancestors or descendants.</strong></p>
@@ -907,7 +895,7 @@ track that they are used correctly, and they are wildly unsafe.</p>
 <p><strong>It is an open question to what degree raw pointers have alias semantics.
 However it is important for these definitions to be sound that the existence of
 a raw pointer does not imply some kind of live path.</strong></p>
-<a class="header" href="print.html#lifetimes" name="lifetimes"><h1>Lifetimes</h1></a>
+<a class="header" href="print.html#lifetimes" id="lifetimes"><h1>Lifetimes</h1></a>
 <p>Rust enforces these rules through <em>lifetimes</em>. Lifetimes are effectively
 just names for scopes somewhere in the program. Each reference,
 and anything that contains a reference, is tagged with a lifetime specifying
@@ -932,7 +920,6 @@ introduces a scope. For the most part, this doesn't really matter. However it
 does matter for variables that refer to each other. As a simple example, let's
 completely desugar this simple piece of Rust code:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = 0;
 let y = &amp;x;
@@ -958,7 +945,6 @@ likely desugar to the following:</p>
 <p>Actually passing references to outer scopes will cause Rust to infer
 a larger lifetime:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x = 0;
 let z;
@@ -979,7 +965,7 @@ z = y;
     }
 }
 </code></pre>
-<a class="header" href="print.html#example-references-that-outlive-referents" name="example-references-that-outlive-referents"><h1>Example: references that outlive referents</h1></a>
+<a class="header" href="print.html#example-references-that-outlive-referents" id="example-references-that-outlive-referents"><h1>Example: references that outlive referents</h1></a>
 <p>Alright, let's look at some of those examples from before:</p>
 <pre><code class="language-rust ignore">fn as_str(data: &amp;u32) -&gt; &amp;str {
     let s = format!(&quot;{}&quot;, data);
@@ -1032,7 +1018,6 @@ fn main() {
 <p>Shoot!</p>
 <p>Of course, the right way to write this function is as follows:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn to_string(data: &amp;u32) -&gt; String {
     format!(&quot;{}&quot;, data)
@@ -1045,7 +1030,7 @@ we could have returned an <code>&amp;'a str</code> would have been if it was in 
 <p>(Actually we could have also just returned a string literal, which as a global
 can be considered to reside at the bottom of the stack; though this limits
 our implementation <em>just a bit</em>.)</p>
-<a class="header" href="print.html#example-aliasing-a-mutable-reference" name="example-aliasing-a-mutable-reference"><h1>Example: aliasing a mutable reference</h1></a>
+<a class="header" href="print.html#example-aliasing-a-mutable-reference" id="example-aliasing-a-mutable-reference"><h1>Example: aliasing a mutable reference</h1></a>
 <p>How about the other example:</p>
 <pre><code class="language-rust ignore">let mut data = vec![1, 2, 3];
 let x = &amp;data[0];
@@ -1085,7 +1070,7 @@ totally ok</em>, because it keeps us from spending all day explaining our progra
 to the compiler. However it does mean that several programs that are totally
 correct with respect to Rust's <em>true</em> semantics are rejected because lifetimes
 are too dumb.</p>
-<a class="header" href="print.html#limits-of-lifetimes" name="limits-of-lifetimes"><h1>Limits of Lifetimes</h1></a>
+<a class="header" href="print.html#limits-of-lifetimes" id="limits-of-lifetimes"><h1>Limits of Lifetimes</h1></a>
 <p>Given the following code:</p>
 <pre><code class="language-rust ignore">struct Foo;
 
@@ -1147,7 +1132,7 @@ blows up in our face!</p>
 <p>This program is clearly correct according to the reference semantics we actually
 care about, but the lifetime system is too coarse-grained to handle that.</p>
 <p>TODO: other common problems? SEME regions stuff, mostly?</p>
-<a class="header" href="print.html#lifetime-elision" name="lifetime-elision"><h1>Lifetime Elision</h1></a>
+<a class="header" href="print.html#lifetime-elision" id="lifetime-elision"><h1>Lifetime Elision</h1></a>
 <p>In order to make common patterns more ergonomic, Rust allows lifetimes to be
 <em>elided</em> in function signatures.</p>
 <p>A <em>lifetime position</em> is anywhere you can write a lifetime in a type:</p>
@@ -1192,11 +1177,11 @@ is assigned to <em>all</em> elided output lifetimes.</p>
 <pre><code class="language-rust ignore">fn print(s: &amp;str);                                      // elided
 fn print&lt;'a&gt;(s: &amp;'a str);                               // expanded
 
-fn debug(lvl: uint, s: &amp;str);                           // elided
-fn debug&lt;'a&gt;(lvl: uint, s: &amp;'a str);                    // expanded
+fn debug(lvl: usize, s: &amp;str);                          // elided
+fn debug&lt;'a&gt;(lvl: usize, s: &amp;'a str);                   // expanded
 
-fn substr(s: &amp;str, until: uint) -&gt; &amp;str;                // elided
-fn substr&lt;'a&gt;(s: &amp;'a str, until: uint) -&gt; &amp;'a str;      // expanded
+fn substr(s: &amp;str, until: usize) -&gt; &amp;str;               // elided
+fn substr&lt;'a&gt;(s: &amp;'a str, until: usize) -&gt; &amp;'a str;     // expanded
 
 fn get_str() -&gt; &amp;str;                                   // ILLEGAL
 
@@ -1212,7 +1197,7 @@ fn new(buf: &amp;mut [u8]) -&gt; BufWriter;                    // elided
 fn new&lt;'a&gt;(buf: &amp;'a mut [u8]) -&gt; BufWriter&lt;'a&gt;          // expanded
 
 </code></pre>
-<a class="header" href="print.html#unbounded-lifetimes" name="unbounded-lifetimes"><h1>Unbounded Lifetimes</h1></a>
+<a class="header" href="print.html#unbounded-lifetimes" id="unbounded-lifetimes"><h1>Unbounded Lifetimes</h1></a>
 <p>Unsafe code can often end up producing references or lifetimes out of thin air.
 Such lifetimes come into the world as <em>unbounded</em>. The most common source of this
 is dereferencing a raw pointer, which produces a reference with an unbounded lifetime.
@@ -1240,7 +1225,7 @@ way to bound a lifetime is to return it from a function with a bound lifetime.
 However if this is unacceptable, the reference can be placed in a location with
 a specific lifetime. Unfortunately it's impossible to name all lifetimes involved
 in a function.</p>
-<a class="header" href="print.html#higher-rank-trait-bounds-hrtbs" name="higher-rank-trait-bounds-hrtbs"><h1>Higher-Rank Trait Bounds (HRTBs)</h1></a>
+<a class="header" href="print.html#higher-rank-trait-bounds-hrtbs" id="higher-rank-trait-bounds-hrtbs"><h1>Higher-Rank Trait Bounds (HRTBs)</h1></a>
 <p>Rust's <code>Fn</code> traits are a little bit magic. For instance, we can write the
 following code:</p>
 <pre><pre class="playpen"><code class="language-rust">struct Closure&lt;F&gt; {
@@ -1301,7 +1286,7 @@ trait)</p>
 <em>infinite list</em> of trait bounds that F must satisfy. Intense. There aren't many
 places outside of the <code>Fn</code> traits where we encounter HRTBs, and even for
 those we have a nice magic sugar for the common cases.</p>
-<a class="header" href="print.html#subtyping-and-variance" name="subtyping-and-variance"><h1>Subtyping and Variance</h1></a>
+<a class="header" href="print.html#subtyping-and-variance" id="subtyping-and-variance"><h1>Subtyping and Variance</h1></a>
 <p>Although Rust doesn't have any notion of structural inheritance, it <em>does</em>
 include subtyping. In Rust, subtyping derives entirely from lifetimes. Since
 lifetimes are scopes, we can partially order them based on the <em>contains</em>
@@ -1320,7 +1305,7 @@ to treat lifetimes and types uniformly.)</p>
 <p>Higher-ranked lifetimes are also subtypes of every concrete lifetime. This is
 because taking an arbitrary lifetime is strictly more general than taking a
 specific one.</p>
-<a class="header" href="print.html#variance" name="variance"><h1>Variance</h1></a>
+<a class="header" href="print.html#variance" id="variance"><h1>Variance</h1></a>
 <p>Variance is where things get a bit complicated.</p>
 <p>Variance is a property that <em>type constructors</em> have with respect to their
 arguments. A type constructor in Rust is a generic type with unbound arguments.
@@ -1404,7 +1389,6 @@ expected.</p>
 <p>However what should happen when passing <em>by-value</em> is less obvious. It turns out
 that, yes, you can use subtyping when passing by-value. That is, this works:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn get_box&lt;'a&gt;(str: &amp;'a str) -&gt; Box&lt;&amp;'a str&gt; {
     // string literals are `&amp;'static str`s
@@ -1459,7 +1443,6 @@ in multiple fields.</p>
 <li>Otherwise, Foo is invariant over A</li>
 </ul>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::cell::Cell;
 
@@ -1476,7 +1459,7 @@ struct Foo&lt;'a, 'b, A: 'a, B: 'b, C, D, E, F, G, H&gt; {
 }
 
 #}</code></pre></pre>
-<a class="header" href="print.html#drop-check" name="drop-check"><h1>Drop Check</h1></a>
+<a class="header" href="print.html#drop-check" id="drop-check"><h1>Drop Check</h1></a>
 <p>We have seen how lifetimes provide us some fairly simple rules for ensuring
 that we never read dangling references. However up to this point we have only ever
 interacted with the <em>outlives</em> relationship in an inclusive manner. That is,
@@ -1625,7 +1608,7 @@ far as the borrow checker knows while it is analyzing <code>main</code>, the bod
 of an inspector's destructor might access that borrowed data.</p>
 <p>Therefore, the drop checker forces all borrowed data in a value to
 strictly outlive that value.</p>
-<a class="header" href="print.html#an-escape-hatch" name="an-escape-hatch"><h1>An Escape Hatch</h1></a>
+<a class="header" href="print.html#an-escape-hatch" id="an-escape-hatch"><h1>An Escape Hatch</h1></a>
 <p>The precise rules that govern drop checking may be less restrictive in
 the future.</p>
 <p>The current analysis is deliberately conservative and trivial; it forces all
@@ -1709,12 +1692,12 @@ destructor, adding the <code>#[may_dangle]</code>
 attribute makes the type vulnerable to misuse that the borrower
 checker will not catch, inviting havoc. It is better to avoid adding
 the attribute.</p>
-<a class="header" href="print.html#is-that-all-about-drop-checker" name="is-that-all-about-drop-checker"><h1>Is that all about drop checker?</h1></a>
+<a class="header" href="print.html#is-that-all-about-drop-checker" id="is-that-all-about-drop-checker"><h1>Is that all about drop checker?</h1></a>
 <p>It turns out that when writing unsafe code, we generally don't need to
 worry at all about doing the right thing for the drop checker. However there
 is one special case that you need to worry about, which we will look at in
 the next section.</p>
-<a class="header" href="print.html#phantomdata" name="phantomdata"><h1>PhantomData</h1></a>
+<a class="header" href="print.html#phantomdata" id="phantomdata"><h1>PhantomData</h1></a>
 <p>When working with unsafe code, we can often end up in a situation where
 types or lifetimes are logically associated with a struct, but not actually
 part of a field. This most commonly occurs with lifetimes. For instance, the
@@ -1782,7 +1765,7 @@ standard library made a utility for itself called <code>Unique&lt;T&gt;</code> w
 <li>auto-derives <code>Send</code>/<code>Sync</code> as if T was contained</li>
 <li>marks the pointer as <code>NonZero</code> for the null-pointer optimization</li>
 </ul>
-<a class="header" href="print.html#table-of-phantomdata-patterns" name="table-of-phantomdata-patterns"><h2>Table of <code>PhantomData</code> patterns</h2></a>
+<a class="header" href="print.html#table-of-phantomdata-patterns" id="table-of-phantomdata-patterns"><h2>Table of <code>PhantomData</code> patterns</h2></a>
 <p>Here’s a table of all the wonderful ways <code>PhantomData</code> could be used:</p>
 <table><thead><tr><td> Phantom type                </td><td> <code>'a</code>      </td><td> <code>T</code>                       </td></tr></thead>
 <tr><td> <code>PhantomData&lt;T&gt;</code>            </td><td> -         </td><td> variant (with drop check) </td></tr>
@@ -1796,14 +1779,13 @@ standard library made a utility for itself called <code>Unique&lt;T&gt;</code> w
 <tr><td> <code>PhantomData&lt;Cell&lt;&amp;'a ()&gt;&gt;</code> </td><td> invariant </td><td> -                         </td></tr>
 </table>
 <p>(*) If contravariance gets scrapped, this would be invariant.</p>
-<a class="header" href="print.html#splitting-borrows" name="splitting-borrows"><h1>Splitting Borrows</h1></a>
+<a class="header" href="print.html#splitting-borrows" id="splitting-borrows"><h1>Splitting Borrows</h1></a>
 <p>The mutual exclusion property of mutable references can be very limiting when
 working with a composite structure. The borrow checker understands some basic
 stuff, but will fall over pretty easily. It does understand structs
 sufficiently to know that it's possible to borrow disjoint fields of a struct
 simultaneously. So this works today:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo {
     a: i32,
@@ -1869,7 +1851,6 @@ same value, we explicitly construct brand-new slices through raw pointers.</p>
 <p>However more subtle is how iterators that yield mutable references work.
 The iterator trait is defined as follows:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 trait Iterator {
     type Item;
@@ -2065,7 +2046,7 @@ falls out of the simple struct case we saw before: Rust understands that you
 can safely split a mutable reference into subfields. We can then encode
 permanently consuming a reference via Options (or in the case of slices,
 replacing with an empty slice).</p>
-<a class="header" href="print.html#type-conversions" name="type-conversions"><h1>Type Conversions</h1></a>
+<a class="header" href="print.html#type-conversions" id="type-conversions"><h1>Type Conversions</h1></a>
 <p>At the end of the day, everything is just a pile of bits somewhere, and type
 systems are just there to help us use those bits right. There are two common
 problems with typing bits: needing to reinterpret those exact bits as a
@@ -2077,7 +2058,6 @@ consequently gives you several ways to solve them.</p>
 The most trivial way to do this is to just destructure a value into its
 constituent parts and then build a new type out of them. e.g.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo {
     x: u32,
@@ -2097,7 +2077,7 @@ fn reinterpret(foo: Foo) -&gt; Bar {
 #}</code></pre></pre>
 <p>But this is, at best, annoying. For common conversions, Rust provides
 more ergonomic alternatives.</p>
-<a class="header" href="print.html#coercions" name="coercions"><h1>Coercions</h1></a>
+<a class="header" href="print.html#coercions" id="coercions"><h1>Coercions</h1></a>
 <p>Types can implicitly be coerced to change in certain contexts. These changes are
 generally just <em>weakening</em> of types, largely focused around pointers and
 lifetimes. They mostly exist to make Rust &quot;just work&quot; in more cases, and are
@@ -2168,11 +2148,11 @@ fn main() {
 &lt;anon&gt;:10     foo(t);
               ^~~
 </code></pre>
-<a class="header" href="print.html#the-dot-operator" name="the-dot-operator"><h1>The Dot Operator</h1></a>
+<a class="header" href="print.html#the-dot-operator" id="the-dot-operator"><h1>The Dot Operator</h1></a>
 <p>The dot operator will perform a lot of magic to convert types. It will perform
 auto-referencing, auto-dereferencing, and coercion until types match.</p>
 <p>TODO: steal information from http://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules/28552082#28552082</p>
-<a class="header" href="print.html#casts" name="casts"><h1>Casts</h1></a>
+<a class="header" href="print.html#casts" id="casts"><h1>Casts</h1></a>
 <p>Casts are a superset of coercions: every coercion can be explicitly
 invoked via a cast. However some conversions require a cast.
 While coercions are pervasive and largely harmless, these &quot;true casts&quot;
@@ -2243,7 +2223,7 @@ be fixed.</li>
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#transmutes" name="transmutes"><h1>Transmutes</h1></a>
+<a class="header" href="print.html#transmutes" id="transmutes"><h1>Transmutes</h1></a>
 <p>Get out of our way type system! We're going to reinterpret these bits or die
 trying! Even though this book is all about doing things that are unsafe, I
 really can't emphasize that you should deeply think about finding Another Way
@@ -2275,7 +2255,7 @@ The size check that <code>mem::transmute</code> has is gone (as it may be valid 
 out a prefix), though it is Undefined Behavior for <code>U</code> to be larger than <code>T</code>.</p>
 <p>Also of course you can get most of the functionality of these functions using
 pointer casts.</p>
-<a class="header" href="print.html#working-with-uninitialized-memory" name="working-with-uninitialized-memory"><h1>Working With Uninitialized Memory</h1></a>
+<a class="header" href="print.html#working-with-uninitialized-memory" id="working-with-uninitialized-memory"><h1>Working With Uninitialized Memory</h1></a>
 <p>All runtime-allocated memory in a Rust program begins its life as
 <em>uninitialized</em>. In this state the value of the memory is an indeterminate pile
 of bits that may or may not even reflect a valid state for the type that is
@@ -2283,7 +2263,7 @@ supposed to inhabit that location of memory. Attempting to interpret this memory
 as a value of <em>any</em> type will cause Undefined Behavior. Do Not Do This.</p>
 <p>Rust provides mechanisms to work with uninitialized memory in checked (safe) and
 unchecked (unsafe) ways.</p>
-<a class="header" href="print.html#checked-uninitialized-memory" name="checked-uninitialized-memory"><h1>Checked Uninitialized Memory</h1></a>
+<a class="header" href="print.html#checked-uninitialized-memory" id="checked-uninitialized-memory"><h1>Checked Uninitialized Memory</h1></a>
 <p>Like C, all stack variables in Rust are uninitialized until a value is
 explicitly assigned to them. Unlike C, Rust statically prevents you from ever
 reading them until you do:</p>
@@ -2340,7 +2320,6 @@ src/main.rs:6   println!(&quot;{}&quot;, x);
 have a relatively sophisticated understanding of dependencies and control
 flow. For instance, this works:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x: i32;
 
@@ -2378,7 +2357,7 @@ mutable, as a Safe Rust program could observe that the value of <code>y</code> c
 }
 </code></pre></pre>
 <p>Otherwise it's like <code>y</code> is a brand new variable.</p>
-<a class="header" href="print.html#drop-flags" name="drop-flags"><h1>Drop Flags</h1></a>
+<a class="header" href="print.html#drop-flags" id="drop-flags"><h1>Drop Flags</h1></a>
 <p>The examples in the previous section introduce an interesting problem for Rust.
 We have seen that it's possible to conditionally initialize, deinitialize, and
 reinitialize locations of memory totally safely. For Copy types, this isn't
@@ -2404,7 +2383,6 @@ statically known at every point in the program. If this is the case, then the
 compiler can theoretically generate more efficient code! For instance, straight-
 line code has such <em>static drop semantics</em>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let mut x = Box::new(0); // x was uninit; just overwrite.
 let mut y = x;           // y was uninit; just overwrite and make x uninit.
@@ -2417,7 +2395,6 @@ y = x;                   // y was init; Drop y, overwrite it, and make x uninit!
 <p>Similarly, branched code where all branches have the same behavior with respect
 to initialization has static drop semantics:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let condition = true;
 let mut x = Box::new(0);    // x was uninit; just overwrite.
@@ -2433,7 +2410,6 @@ x = Box::new(0);            // x was uninit; just overwrite.
 #}</code></pre></pre>
 <p>However code like this <em>requires</em> runtime information to correctly Drop:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let condition = true;
 let x;
@@ -2447,7 +2423,6 @@ if condition {
 #}</code></pre></pre>
 <p>Of course, in this case it's trivial to retrieve static drop semantics:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let condition = true;
 if condition {
@@ -2458,7 +2433,7 @@ if condition {
 #}</code></pre></pre>
 <p>The drop flags are tracked on the stack and no longer stashed in types that
 implement drop.</p>
-<a class="header" href="print.html#unchecked-uninitialized-memory" name="unchecked-uninitialized-memory"><h1>Unchecked Uninitialized Memory</h1></a>
+<a class="header" href="print.html#unchecked-uninitialized-memory" id="unchecked-uninitialized-memory"><h1>Unchecked Uninitialized Memory</h1></a>
 <p>One interesting exception to this rule is working with arrays. Safe Rust doesn't
 permit you to partially initialize an array. When you initialize an array, you
 can either set every value to the same thing with <code>let x = [val; N]</code>, or you can
@@ -2499,7 +2474,6 @@ are allocated. However the ways writing arbitrary bits to arbitrary
 locations of memory can break things are basically uncountable!</p>
 <p>Putting this all together, we get the following:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::mem;
 use std::ptr;
@@ -2536,7 +2510,7 @@ before it ends, if it has a destructor.
 <p>And that's about it for working with uninitialized memory! Basically nothing
 anywhere expects to be handed uninitialized memory, so if you're going to pass
 it around at all, be sure to be <em>really</em> careful.</p>
-<a class="header" href="print.html#the-perils-of-ownership-based-resource-management-obrm" name="the-perils-of-ownership-based-resource-management-obrm"><h1>The Perils Of Ownership Based Resource Management (OBRM)</h1></a>
+<a class="header" href="print.html#the-perils-of-ownership-based-resource-management-obrm" id="the-perils-of-ownership-based-resource-management-obrm"><h1>The Perils Of Ownership Based Resource Management (OBRM)</h1></a>
 <p>OBRM (AKA RAII: Resource Acquisition Is Initialization) is something you'll
 interact with a lot in Rust. Especially if you use the standard library.</p>
 <p>Roughly speaking the pattern is as follows: to acquire a resource, you create an
@@ -2548,11 +2522,10 @@ particularly important in Rust because we have no pervasive GC to rely on for
 memory management. Which is the point, really: Rust is about control. However we
 are not limited to just memory. Pretty much every other system resource like a
 thread, file, or socket is exposed through this kind of API.</p>
-<a class="header" href="print.html#constructors" name="constructors"><h1>Constructors</h1></a>
+<a class="header" href="print.html#constructors" id="constructors"><h1>Constructors</h1></a>
 <p>There is exactly one way to create an instance of a user-defined type: name it,
 and initialize all its fields at once:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo {
     a: u8,
@@ -2600,7 +2573,7 @@ static <code>new</code> method for any kind of &quot;default&quot; constructor. 
 to <code>new</code> in other languages and has no special meaning. It's just a naming
 convention.</p>
 <p>TODO: talk about &quot;placement new&quot;?</p>
-<a class="header" href="print.html#destructors" name="destructors"><h1>Destructors</h1></a>
+<a class="header" href="print.html#destructors" id="destructors"><h1>Destructors</h1></a>
 <p>What the language <em>does</em> provide is full-blown automatic destructors through the
 <code>Drop</code> trait, which provides the following method:</p>
 <pre><code class="language-rust ignore">fn drop(&amp;mut self);
@@ -2631,8 +2604,8 @@ struct Box&lt;T&gt;{ ptr: Unique&lt;T&gt; }
 impl&lt;T&gt; Drop for Box&lt;T&gt; {
     fn drop(&amp;mut self) {
         unsafe {
-            drop_in_place(*self.ptr);
-            heap::deallocate((*self.ptr) as *mut u8,
+            drop_in_place(self.ptr.as_ptr());
+            heap::deallocate(self.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -2658,8 +2631,8 @@ struct Box&lt;T&gt;{ ptr: Unique&lt;T&gt; }
 impl&lt;T&gt; Drop for Box&lt;T&gt; {
     fn drop(&amp;mut self) {
         unsafe {
-            drop_in_place(*self.ptr);
-            heap::deallocate((*self.ptr) as *mut u8,
+            drop_in_place(self.ptr.as_ptr());
+            heap::deallocate(self.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -2673,7 +2646,7 @@ impl&lt;T&gt; Drop for SuperBox&lt;T&gt; {
         unsafe {
             // Hyper-optimized: deallocate the box's contents for it
             // without `drop`ing the contents
-            heap::deallocate((*self.my_box.ptr) as *mut u8,
+            heap::deallocate(self.my_box.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -2687,7 +2660,6 @@ use-after-frees and double-frees.</p>
 <p>Note that the recursive drop behavior applies to all structs and enums
 regardless of whether they implement Drop. Therefore something like</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Boxy&lt;T&gt; {
     data1: Box&lt;T&gt;,
@@ -2701,7 +2673,6 @@ dropped, even though it itself doesn't implement Drop. We say that such a type
 <em>needs Drop</em>, even though it is not itself Drop.</p>
 <p>Similarly,</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Link {
     Next(Box&lt;Link&gt;),
@@ -2731,8 +2702,8 @@ struct Box&lt;T&gt;{ ptr: Unique&lt;T&gt; }
 impl&lt;T&gt; Drop for Box&lt;T&gt; {
     fn drop(&amp;mut self) {
         unsafe {
-            drop_in_place(*self.ptr);
-            heap::deallocate((*self.ptr) as *mut u8,
+            drop_in_place(self.ptr.as_ptr());
+            heap::deallocate(self.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -2748,7 +2719,7 @@ impl&lt;T&gt; Drop for SuperBox&lt;T&gt; {
             // without `drop`ing the contents. Need to set the `box`
             // field as `None` to prevent Rust from trying to Drop it.
             let my_box = self.my_box.take().unwrap();
-            heap::deallocate((*my_box.ptr) as *mut u8,
+            heap::deallocate(my_box.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
             mem::forget(my_box);
@@ -2766,7 +2737,7 @@ arbitrarily invalid state in there.</p>
 <p>On balance this is an ok choice. Certainly what you should reach for by default.
 However, in the future we expect there to be a first-class way to announce that
 a field shouldn't be automatically dropped.</p>
-<a class="header" href="print.html#leaking" name="leaking"><h1>Leaking</h1></a>
+<a class="header" href="print.html#leaking" id="leaking"><h1>Leaking</h1></a>
 <p>Ownership-based resource management is intended to simplify composition. You
 acquire resources when you create the object, and you release the resources when
 it gets destroyed. Since destruction is handled for you, it means you can't
@@ -2809,7 +2780,7 @@ library:</p>
 <li><code>Rc</code></li>
 <li><code>thread::scoped::JoinGuard</code></li>
 </ul>
-<a class="header" href="print.html#drain" name="drain"><h2>Drain</h2></a>
+<a class="header" href="print.html#drain" id="drain"><h2>Drain</h2></a>
 <p><code>drain</code> is a collections API that moves data out of the container without
 consuming the container. This enables us to reuse the allocation of a <code>Vec</code>
 after claiming ownership over all of its contents. It produces an iterator
@@ -2854,7 +2825,7 @@ mem::forget us in the middle of the iteration, all that does is <em>leak even mo
 (and possibly leave the Vec in an unexpected but otherwise consistent state).
 Since we've accepted that mem::forget is safe, this is definitely safe. We call
 leaks causing more leaks a <em>leak amplification</em>.</p>
-<a class="header" href="print.html#rc" name="rc"><h2>Rc</h2></a>
+<a class="header" href="print.html#rc" id="rc"><h2>Rc</h2></a>
 <p>Rc is an interesting case because at first glance it doesn't appear to be a
 proxy value at all. After all, it manages the data it points to, and dropping
 all the Rcs for a value will drop that value. Leaking an Rc doesn't seem like it
@@ -2915,7 +2886,7 @@ we can happily use-after-free the inner data. Bad Bad Not Good.</p>
 <p>This can be solved by just checking the <code>ref_count</code> and doing <em>something</em>. The
 standard library's stance is to just abort, because your program has become
 horribly degenerate. Also <em>oh my gosh</em> it's such a ridiculous corner case.</p>
-<a class="header" href="print.html#threadscopedjoinguard" name="threadscopedjoinguard"><h2>thread::scoped::JoinGuard</h2></a>
+<a class="header" href="print.html#threadscopedjoinguard" id="threadscopedjoinguard"><h2>thread::scoped::JoinGuard</h2></a>
 <p>The thread::scoped API intends to allow threads to be spawned that reference
 data on their parent's stack without any synchronization over that data by
 ensuring the parent joins the thread before any of the shared data goes out
@@ -2972,7 +2943,7 @@ of the closed-over data goes out of scope in the parent.</p>
 </code></pre>
 <p>Dang. Here the destructor running was pretty fundamental to the API, and it had
 to be scrapped in favor of a completely different design.</p>
-<a class="header" href="print.html#unwinding" name="unwinding"><h1>Unwinding</h1></a>
+<a class="header" href="print.html#unwinding" id="unwinding"><h1>Unwinding</h1></a>
 <p>Rust has a <em>tiered</em> error-handling scheme:</p>
 <ul>
 <li>If something might reasonably be absent, Option is used.</li>
@@ -3015,7 +2986,7 @@ You must <em>absolutely</em> catch any panics at the FFI boundary! What you do a
 point is up to you, but <em>something</em> must be done. If you fail to do this,
 at best, your application will crash and burn. At worst, your application <em>won't</em>
 crash and burn, and will proceed with completely clobbered state.</p>
-<a class="header" href="print.html#exception-safety" name="exception-safety"><h1>Exception Safety</h1></a>
+<a class="header" href="print.html#exception-safety" id="exception-safety"><h1>Exception Safety</h1></a>
 <p>Although programs should use unwinding sparingly, there's a lot of code that
 <em>can</em> panic. If you unwrap a None, index out of bounds, or divide by 0, your
 program will panic. On debug builds, every arithmetic operation can panic
@@ -3046,7 +3017,7 @@ It controls all the code that runs, and most of that code can't panic. However
 it is not uncommon for Unsafe code to work with arrays of temporarily
 uninitialized data while repeatedly invoking caller-provided code. Such code
 needs to be careful and consider exception safety.</p>
-<a class="header" href="print.html#vecpush_all" name="vecpush_all"><h2>Vec::push_all</h2></a>
+<a class="header" href="print.html#vecpush_all" id="vecpush_all"><h2>Vec::push_all</h2></a>
 <p><code>Vec::push_all</code> is a temporary hack to get extending a Vec by a slice reliably
 efficient without specialization. Here's a simple implementation:</p>
 <pre><code class="language-rust ignore">impl&lt;T: Clone&gt; Vec&lt;T&gt; {
@@ -3074,7 +3045,7 @@ the Vec is looked at or dropped, uninitialized memory will be read!</p>
 we <em>did</em> clone are dropped, we can set the <code>len</code> every loop iteration. If we
 just want to guarantee that uninitialized memory can't be observed, we can set
 the <code>len</code> after the loop.</p>
-<a class="header" href="print.html#binaryheapsift_up" name="binaryheapsift_up"><h2>BinaryHeap::sift_up</h2></a>
+<a class="header" href="print.html#binaryheapsift_up" id="binaryheapsift_up"><h2>BinaryHeap::sift_up</h2></a>
 <p>Bubbling an element up a heap is a bit more complicated than extending a Vec.
 The pseudocode is as follows:</p>
 <pre><code class="language-text">bubble_up(heap, index):
@@ -3197,7 +3168,7 @@ impl&lt;T: Ord&gt; BinaryHeap&lt;T&gt; {
     }
 }
 </code></pre>
-<a class="header" href="print.html#poisoning" name="poisoning"><h1>Poisoning</h1></a>
+<a class="header" href="print.html#poisoning" id="poisoning"><h1>Poisoning</h1></a>
 <p>Although all unsafe code <em>must</em> ensure it has minimal exception safety, not all
 types ensure <em>maximal</em> exception safety. Even if the type does, your code may
 ascribe additional meaning to it. For instance, an integer is certainly
@@ -3227,7 +3198,7 @@ what the author intended. As such, the program should not proceed normally.
 Still, if you're double-plus-sure that you can do <em>something</em> with the value,
 the Mutex exposes a method to get the lock anyway. It <em>is</em> safe, after all.
 Just maybe nonsense.</p>
-<a class="header" href="print.html#concurrency-and-parallelism" name="concurrency-and-parallelism"><h1>Concurrency and Parallelism</h1></a>
+<a class="header" href="print.html#concurrency-and-parallelism" id="concurrency-and-parallelism"><h1>Concurrency and Parallelism</h1></a>
 <p>Rust as a language doesn't <em>really</em> have an opinion on how to do concurrency or
 parallelism. The standard library exposes OS threads and blocking sys-calls
 because everyone has those, and they're uniform enough that you can provide
@@ -3238,7 +3209,7 @@ them tends to involve trade-offs that we weren't willing to commit to for 1.0.</
 concurrency paradigm as a library and have everyone else's code Just Work
 with yours. Just require the right lifetimes and Send and Sync where appropriate
 and you're off to the races. Or rather, off to the... not... having... races.</p>
-<a class="header" href="print.html#data-races-and-race-conditions" name="data-races-and-race-conditions"><h1>Data Races and Race Conditions</h1></a>
+<a class="header" href="print.html#data-races-and-race-conditions" id="data-races-and-race-conditions"><h1>Data Races and Race Conditions</h1></a>
 <p>Safe Rust guarantees an absence of data races, which are defined as:</p>
 <ul>
 <li>two or more threads concurrently accessing a location of memory</li>
@@ -3263,7 +3234,6 @@ condition can't violate memory safety in a Rust program on its own. Only in
 conjunction with some other unsafe code can a race condition actually violate
 memory safety. For instance:</p>
 <pre><pre class="playpen"><code class="language-rust no_run"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -3296,7 +3266,6 @@ println!(&quot;{}&quot;, data[idx.load(Ordering::SeqCst)]);
 
 #}</code></pre></pre>
 <pre><pre class="playpen"><code class="language-rust no_run"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -3324,9 +3293,9 @@ if idx.load(Ordering::SeqCst) &lt; data.len() {
 }
 
 #}</code></pre></pre>
-<a class="header" href="print.html#send-and-sync" name="send-and-sync"><h1>Send and Sync</h1></a>
+<a class="header" href="print.html#send-and-sync" id="send-and-sync"><h1>Send and Sync</h1></a>
 <p>Not everything obeys inherited mutability, though. Some types allow you to
-multiply alias a location in memory while mutating it. Unless these types use
+have multiple aliases of a location in memory while mutating it. Unless these types use
 synchronization to manage this access, they are absolutely not thread safe. Rust
 captures this through the <code>Send</code> and <code>Sync</code> traits.</p>
 <ul>
@@ -3364,7 +3333,6 @@ necessarily thinking hard about thread safety. In the case of Rc, we have a nice
 example of a type that contains a <code>*mut</code> that is definitely not thread safe.</p>
 <p>Types that aren't automatically derived can simply implement them if desired:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct MyBox(*mut u8);
 
@@ -3375,10 +3343,9 @@ unsafe impl Sync for MyBox {}
 <p>In the <em>incredibly rare</em> case that a type is inappropriately automatically
 derived to be Send or Sync, then one can also unimplement Send and Sync:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
-#fn main() {
 #![feature(optin_builtin_traits)]
 
+#fn main() {
 // I have some magic semantics for some synchronization primitive!
 struct SpecialThreadToken(u8);
 
@@ -3397,7 +3364,7 @@ Similarly, most iterators into these collections are Send and Sync because they
 largely behave like an <code>&amp;</code> or <code>&amp;mut</code> into the collection.</p>
 <p>TODO: better explain what can or can't be Send or Sync. Sufficient to appeal
 only to data races?</p>
-<a class="header" href="print.html#atomics" name="atomics"><h1>Atomics</h1></a>
+<a class="header" href="print.html#atomics" id="atomics"><h1>Atomics</h1></a>
 <p>Rust pretty blatantly just inherits C11's memory model for atomics. This is not
 due to this model being particularly excellent or easy to understand. Indeed,
 this model is quite complex and known to have <a href="http://plv.mpi-sws.org/c11comp/popl15.pdf">several flaws</a>.
@@ -3414,7 +3381,7 @@ face.</p>
 semantics we want, the optimizations compilers want, and the inconsistent chaos
 our hardware wants. <em>We</em> would like to just write programs and have them do
 exactly what we said but, you know, fast. Wouldn't that be great?</p>
-<a class="header" href="print.html#compiler-reordering" name="compiler-reordering"><h1>Compiler Reordering</h1></a>
+<a class="header" href="print.html#compiler-reordering" id="compiler-reordering"><h1>Compiler Reordering</h1></a>
 <p>Compilers fundamentally want to be able to do all sorts of complicated
 transformations to reduce data dependencies and eliminate dead code. In
 particular, they may radically change the actual order of events, or make events
@@ -3435,7 +3402,7 @@ assigned to 1 before <code>y</code> was assigned. We would like the compiler to 
 able to make these kinds of optimizations, because they can seriously improve
 performance. On the other hand, we'd also like to be able to depend on our
 program <em>doing the thing we said</em>.</p>
-<a class="header" href="print.html#hardware-reordering" name="hardware-reordering"><h1>Hardware Reordering</h1></a>
+<a class="header" href="print.html#hardware-reordering" id="hardware-reordering"><h1>Hardware Reordering</h1></a>
 <p>On the other hand, even if the compiler totally understood what we wanted and
 respected our wishes, our hardware might instead get us in trouble. Trouble
 comes from CPUs in the form of memory hierarchies. There is indeed a global
@@ -3485,7 +3452,7 @@ incorrect. If possible, concurrent algorithms should be tested on
 weakly-ordered hardware.</p>
 </li>
 </ul>
-<a class="header" href="print.html#data-accesses" name="data-accesses"><h1>Data Accesses</h1></a>
+<a class="header" href="print.html#data-accesses" id="data-accesses"><h1>Data Accesses</h1></a>
 <p>The C11 memory model attempts to bridge the gap by allowing us to talk about the
 <em>causality</em> of our program. Generally, this is by establishing a <em>happens
 before</em> relationship between parts of the program and the threads that are
@@ -3521,7 +3488,7 @@ propagated to other threads. The set of orderings Rust exposes are:</p>
 <p>(Note: We explicitly do not expose the C11 <em>consume</em> ordering)</p>
 <p>TODO: negative reasoning vs positive reasoning? TODO: &quot;can't forget to
 synchronize&quot;</p>
-<a class="header" href="print.html#sequentially-consistent" name="sequentially-consistent"><h1>Sequentially Consistent</h1></a>
+<a class="header" href="print.html#sequentially-consistent" id="sequentially-consistent"><h1>Sequentially Consistent</h1></a>
 <p>Sequentially Consistent is the most powerful of all, implying the restrictions
 of all other orderings. Intuitively, a sequentially consistent operation
 cannot be reordered: all accesses on one thread that happen before and after a
@@ -3541,7 +3508,7 @@ than it needs to is certainly better than it running incorrectly! It's also
 mechanically trivial to downgrade atomic operations to have a weaker
 consistency later on. Just change <code>SeqCst</code> to <code>Relaxed</code> and you're done! Of
 course, proving that this transformation is <em>correct</em> is a whole other matter.</p>
-<a class="header" href="print.html#acquire-release" name="acquire-release"><h1>Acquire-Release</h1></a>
+<a class="header" href="print.html#acquire-release" id="acquire-release"><h1>Acquire-Release</h1></a>
 <p>Acquire and Release are largely intended to be paired. Their names hint at their
 use case: they're perfectly suited for acquiring and releasing locks, and
 ensuring that critical sections don't overlap.</p>
@@ -3552,7 +3519,7 @@ stays before it. However operations that occur after a release are free to be
 reordered to occur before it.</p>
 <p>When thread A releases a location in memory and then thread B subsequently
 acquires <em>the same</em> location in memory, causality is established. Every write
-that happened before A's release will be observed by B after its release.
+that happened before A's release will be observed by B after its acquisition.
 However no causality is established with any other threads. Similarly, no
 causality is established if A and B access <em>different</em> locations in memory.</p>
 <p>Basic use of release-acquire is therefore simple: you acquire a location of
@@ -3580,7 +3547,7 @@ fn main() {
 <p>On strongly-ordered platforms most accesses have release or acquire semantics,
 making release and acquire often totally free. This is not the case on
 weakly-ordered platforms.</p>
-<a class="header" href="print.html#relaxed" name="relaxed"><h1>Relaxed</h1></a>
+<a class="header" href="print.html#relaxed" id="relaxed"><h1>Relaxed</h1></a>
 <p>Relaxed accesses are the absolute weakest. They can be freely re-ordered and
 provide no happens-before relationship. Still, relaxed operations are still
 atomic. That is, they don't count as data accesses and any read-modify-write
@@ -3592,7 +3559,7 @@ synchronize any other accesses.</p>
 <p>There's rarely a benefit in making an operation relaxed on strongly-ordered
 platforms, since they usually provide release-acquire semantics anyway. However
 relaxed operations can be cheaper on weakly-ordered platforms.</p>
-<a class="header" href="print.html#example-implementing-vec" name="example-implementing-vec"><h1>Example: Implementing Vec</h1></a>
+<a class="header" href="print.html#example-implementing-vec" id="example-implementing-vec"><h1>Example: Implementing Vec</h1></a>
 <p>To bring everything together, we're going to write <code>std::Vec</code> from scratch.
 Because all the best tools for writing unsafe code are unstable, this
 project will only work on nightly (as of Rust 1.9.0). With the exception of the
@@ -3608,7 +3575,7 @@ possible optimizations, though it will be by no means <em>naive</em>. We will
 definitely get into the weeds over nitty-gritty details, even
 when the problem doesn't <em>really</em> merit it.</p>
 <p>You wanted advanced. We're gonna go advanced.</p>
-<a class="header" href="print.html#layout" name="layout"><h1>Layout</h1></a>
+<a class="header" href="print.html#layout" id="layout"><h1>Layout</h1></a>
 <p>First off, we need to come up with the struct layout. A Vec has three parts:
 a pointer to the allocation, the size of the allocation, and the number of
 elements that have been initialized.</p>
@@ -3635,7 +3602,6 @@ so we'd like to not use it if possible, though.</p>
 <li>We are variant over <code>T</code></li>
 <li>We may own a value of type <code>T</code> (for drop check)</li>
 <li>We are Send/Sync if <code>T</code> is Send/Sync</li>
-<li>We deref to <code>*mut T</code> (so it largely acts like a <code>*mut</code> in our code)</li>
 <li>Our pointer is never null (so <code>Option&lt;Vec&lt;T&gt;&gt;</code> is null-pointer-optimized)</li>
 </ul>
 <p>We can implement all of the above requirements except for the last
@@ -3658,17 +3624,12 @@ impl&lt;T&gt; Unique&lt;T&gt; {
     pub fn new(ptr: *mut T) -&gt; Self {
         Unique { ptr: ptr, _marker: PhantomData }
     }
-}
 
-impl&lt;T&gt; Deref for Unique&lt;T&gt; {
-    type Target = *mut T;
-    fn deref(&amp;self) -&gt; &amp;*mut T {
-        // There's no way to cast the *const to a *mut
-        // while also taking a reference. So we just
-        // transmute it since it's all &quot;just pointers&quot;.
-        unsafe { mem::transmute(&amp;self.ptr) }
+    pub fn as_ptr(&amp;self) -&gt; *mut T {
+        self.ptr as *mut T
     }
 }
+
 # fn main() {}
 </code></pre></pre>
 <p>Unfortunately the mechanism for stating that your value is non-zero is
@@ -3688,40 +3649,31 @@ pub struct Vec&lt;T&gt; {
 </code></pre></pre>
 <p>If you don't care about the null-pointer optimization, then you can use the
 stable code. However we will be designing the rest of the code around enabling
-the optimization. In particular, <code>Unique::new</code> is unsafe to call, because
+this optimization. It should be noted that <code>Unique::new</code> is unsafe to call, because
 putting <code>null</code> inside of it is Undefined Behavior. Our stable Unique doesn't
 need <code>new</code> to be unsafe because it doesn't make any interesting guarantees about
 its contents.</p>
-<a class="header" href="print.html#allocating-memory" name="allocating-memory"><h1>Allocating Memory</h1></a>
+<a class="header" href="print.html#allocating-memory" id="allocating-memory"><h1>Allocating Memory</h1></a>
 <p>Using Unique throws a wrench in an important feature of Vec (and indeed all of
 the std collections): an empty Vec doesn't actually allocate at all. So if we
 can't allocate, but also can't put a null pointer in <code>ptr</code>, what do we do in
 <code>Vec::new</code>? Well, we just put some other garbage in there!</p>
 <p>This is perfectly fine because we already have <code>cap == 0</code> as our sentinel for no
 allocation. We don't even need to handle it specially in almost any code because
-we usually need to check if <code>cap &gt; len</code> or <code>len &gt; 0</code> anyway. The traditional
-Rust value to put here is <code>0x01</code>. The standard library actually exposes this
-as <code>alloc::heap::EMPTY</code>. There are quite a few places where we'll
-want to use <code>heap::EMPTY</code> because there's no real allocation to talk about but
+we usually need to check if <code>cap &gt; len</code> or <code>len &gt; 0</code> anyway. The recommended
+Rust value to put here is <code>mem::align_of::&lt;T&gt;()</code>. Unique provides a convenience
+for this: <code>Unique::empty()</code>. There are quite a few places where we'll
+want to use <code>empty</code> because there's no real allocation to talk about but
 <code>null</code> would make the compiler do bad things.</p>
-<p>All of the <code>heap</code> API is totally unstable under the <code>heap_api</code> feature, though.
-We could trivially define <code>heap::EMPTY</code> ourselves, but we'll want the rest of
-the <code>heap</code> API anyway, so let's just get that dependency over with.</p>
 <p>So:</p>
 <pre><code class="language-rust ignore">#![feature(alloc, heap_api)]
 
 use std::mem;
 
-use alloc::heap::EMPTY;
-
 impl&lt;T&gt; Vec&lt;T&gt; {
     fn new() -&gt; Self {
         assert!(mem::size_of::&lt;T&gt;() != 0, &quot;We're not ready to handle ZSTs&quot;);
-        unsafe {
-            // need to cast EMPTY to the actual ptr type we want, let
-            // inference handle it.
-            Vec { ptr: Unique::new(heap::EMPTY as *mut _), len: 0, cap: 0 }
-        }
+        Vec { ptr: Unique::empty(), len: 0, cap: 0 }
     }
 }
 </code></pre>
@@ -3747,7 +3699,6 @@ program.</p>
 <p>We said we don't want to use intrinsics, so doing exactly what <code>std</code> does is
 out. Instead, we'll call <code>std::process::exit</code> with some random number.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn oom() {
     ::std::process::exit(-9999);
@@ -3772,7 +3723,6 @@ analysis, alias analysis, alias analysis. It's super important to an optimizing
 compiler to be able to reason about data dependencies and aliasing.</p>
 <p>As a simple example, consider the following fragment of code:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let x = &amp;mut 0;
 # let y = &amp;mut 0;
@@ -3869,7 +3819,7 @@ such we will guard against this case explicitly.</p>
                     &quot;capacity overflow&quot;);
 
             let new_num_bytes = old_num_bytes * 2;
-            let ptr = heap::reallocate(*self.ptr as *mut _,
+            let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                         old_num_bytes,
                                         new_num_bytes,
                                         align);
@@ -3886,7 +3836,7 @@ such we will guard against this case explicitly.</p>
 </code></pre>
 <p>Nothing particularly tricky here. Just computing sizes and alignments and doing
 some careful multiplication checks.</p>
-<a class="header" href="print.html#push-and-pop" name="push-and-pop"><h1>Push and Pop</h1></a>
+<a class="header" href="print.html#push-and-pop" id="push-and-pop"><h1>Push and Pop</h1></a>
 <p>Alright. We can initialize. We can allocate. Let's actually implement some
 functionality! Let's start with <code>push</code>. All it needs to do is check if we're
 full to grow, unconditionally write to the next index, and then increment our
@@ -3931,7 +3881,7 @@ should offset by the new len.</p>
     }
 }
 </code></pre>
-<a class="header" href="print.html#deallocating" name="deallocating"><h1>Deallocating</h1></a>
+<a class="header" href="print.html#deallocating" id="deallocating"><h1>Deallocating</h1></a>
 <p>Next we should implement Drop so that we don't massively leak tons of resources.
 The easiest way is to just call <code>pop</code> until it yields None, and then deallocate
 our buffer. Note that calling <code>pop</code> is unneeded if <code>T: !Drop</code>. In theory we can
@@ -3949,13 +3899,13 @@ haven't actually allocated any memory.</p>
             let elem_size = mem::size_of::&lt;T&gt;();
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }
 }
 </code></pre>
-<a class="header" href="print.html#deref" name="deref"><h1>Deref</h1></a>
+<a class="header" href="print.html#deref" id="deref"><h1>Deref</h1></a>
 <p>Alright! We've got a decent minimal stack implemented. We can push, we can
 pop, and we can clean up after ourselves. However there's a whole mess of
 functionality we'd reasonably want. In particular, we have a proper array, but
@@ -3971,7 +3921,7 @@ impl&lt;T&gt; Deref for Vec&lt;T&gt; {
     type Target = [T];
     fn deref(&amp;self) -&gt; &amp;[T] {
         unsafe {
-            ::std::slice::from_raw_parts(*self.ptr, self.len)
+            ::std::slice::from_raw_parts(self.ptr.as_ptr(), self.len)
         }
     }
 }
@@ -3982,14 +3932,14 @@ impl&lt;T&gt; Deref for Vec&lt;T&gt; {
 impl&lt;T&gt; DerefMut for Vec&lt;T&gt; {
     fn deref_mut(&amp;mut self) -&gt; &amp;mut [T] {
         unsafe {
-            ::std::slice::from_raw_parts_mut(*self.ptr, self.len)
+            ::std::slice::from_raw_parts_mut(self.ptr.as_ptr(), self.len)
         }
     }
 }
 </code></pre>
 <p>Now we have <code>len</code>, <code>first</code>, <code>last</code>, indexing, slicing, sorting, <code>iter</code>,
 <code>iter_mut</code>, and all other sorts of bells and whistles provided by slice. Sweet!</p>
-<a class="header" href="print.html#insert-and-remove" name="insert-and-remove"><h1>Insert and Remove</h1></a>
+<a class="header" href="print.html#insert-and-remove" id="insert-and-remove"><h1>Insert and Remove</h1></a>
 <p>Something <em>not</em> provided by slice is <code>insert</code> and <code>remove</code>, so let's do those
 next.</p>
 <p>Insert needs to shift all the elements at the target index to the right by one.
@@ -4032,7 +3982,7 @@ using the old len.</p>
     }
 }
 </code></pre>
-<a class="header" href="print.html#intoiter" name="intoiter"><h1>IntoIter</h1></a>
+<a class="header" href="print.html#intoiter" id="intoiter"><h1>IntoIter</h1></a>
 <p>Let's move on to writing iterators. <code>iter</code> and <code>iter_mut</code> have already been
 written for us thanks to The Magic of Deref. However there's two interesting
 iterators that Vec provides that slices can't: <code>into_iter</code> and <code>drain</code>.</p>
@@ -4147,13 +4097,13 @@ contains that weren't yielded.</p>
             let elem_size = mem::size_of::&lt;T&gt;();
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.buf as *mut _, num_bytes, align);
+                heap::deallocate(self.buf.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }
 }
 </code></pre>
-<a class="header" href="print.html#rawvec" name="rawvec"><h1>RawVec</h1></a>
+<a class="header" href="print.html#rawvec" id="rawvec"><h1>RawVec</h1></a>
 <p>We've actually reached an interesting situation here: we've duplicated the logic
 for specifying a buffer and freeing its memory in Vec and IntoIter. Now that
 we've implemented it and identified <em>actual</em> logic duplication, this is a good
@@ -4168,9 +4118,7 @@ allocating, growing, and freeing:</p>
 impl&lt;T&gt; RawVec&lt;T&gt; {
     fn new() -&gt; Self {
         assert!(mem::size_of::&lt;T&gt;() != 0, &quot;TODO: implement ZST support&quot;);
-        unsafe {
-            RawVec { ptr: Unique::new(heap::EMPTY as *mut T), cap: 0 }
-        }
+        RawVec { ptr: Unique::empty(), cap: 0 }
     }
 
     // unchanged from Vec
@@ -4184,7 +4132,7 @@ impl&lt;T&gt; RawVec&lt;T&gt; {
                 (1, ptr)
             } else {
                 let new_cap = 2 * self.cap;
-                let ptr = heap::reallocate(*self.ptr as *mut _,
+                let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                             self.cap * elem_size,
                                             new_cap * elem_size,
                                             align);
@@ -4208,7 +4156,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
             let elem_size = mem::size_of::&lt;T&gt;();
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_mut() as *mut _, num_bytes, align);
             }
         }
     }
@@ -4221,7 +4169,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 }
 
 impl&lt;T&gt; Vec&lt;T&gt; {
-    fn ptr(&amp;self) -&gt; *mut T { *self.buf.ptr }
+    fn ptr(&amp;self) -&gt; *mut T { self.buf.ptr.as_ptr() }
 
     fn cap(&amp;self) -&gt; usize { self.buf.cap }
 
@@ -4278,7 +4226,7 @@ impl&lt;T&gt; Vec&lt;T&gt; {
 }
 </code></pre>
 <p>Much better.</p>
-<a class="header" href="print.html#drain" name="drain"><h1>Drain</h1></a>
+<a class="header" href="print.html#drain-1" id="drain-1"><h1>Drain</h1></a>
 <p>Let's move on to Drain. Drain is largely the same as IntoIter, except that
 instead of consuming the Vec, it borrows the Vec and leaves its allocation
 untouched. For now we'll only implement the &quot;basic&quot; full-range version.</p>
@@ -4302,7 +4250,6 @@ impl&lt;'a, T&gt; Iterator for Drain&lt;'a, T&gt; {
 <p>-- wait, this is seeming familiar. Let's do some more compression. Both
 IntoIter and Drain have the exact same structure, let's just factor it out.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct RawValIter&lt;T&gt; {
     start: *const T,
@@ -4418,7 +4365,7 @@ impl&lt;T&gt; Vec&lt;T&gt; {
 </code></pre>
 <p>For more details on the <code>mem::forget</code> problem, see the
 <a href="leaking.html">section on leaks</a>.</p>
-<a class="header" href="print.html#handling-zero-sized-types" name="handling-zero-sized-types"><h1>Handling Zero-Sized Types</h1></a>
+<a class="header" href="print.html#handling-zero-sized-types" id="handling-zero-sized-types"><h1>Handling Zero-Sized Types</h1></a>
 <p>It's time. We're going to fight the specter that is zero-sized types. Safe Rust
 <em>never</em> needs to care about this, but Vec is very intensive on raw pointers and
 raw allocations, which are exactly the two things that care about
@@ -4431,9 +4378,9 @@ C-style pointer iterator.</li>
 </ul>
 <p>Thankfully we abstracted out pointer-iterators and allocating handling into
 RawValIter and RawVec respectively. How mysteriously convenient.</p>
-<a class="header" href="print.html#allocating-zero-sized-types" name="allocating-zero-sized-types"><h2>Allocating Zero-Sized Types</h2></a>
+<a class="header" href="print.html#allocating-zero-sized-types" id="allocating-zero-sized-types"><h2>Allocating Zero-Sized Types</h2></a>
 <p>So if the allocator API doesn't support zero-sized allocations, what on earth
-do we store as our allocation? Why, <code>heap::EMPTY</code> of course! Almost every operation
+do we store as our allocation? <code>Unique::empty()</code> of course! Almost every operation
 with a ZST is a no-op since ZSTs have exactly one value, and therefore no state needs
 to be considered to store or load them. This actually extends to <code>ptr::read</code> and
 <code>ptr::write</code>: they won't actually look at the pointer at all. As such we never need
@@ -4445,13 +4392,11 @@ overflow for zero-sized types.</p>
 method of RawVec.</p>
 <pre><code class="language-rust ignore">impl&lt;T&gt; RawVec&lt;T&gt; {
     fn new() -&gt; Self {
-        unsafe {
-            // !0 is usize::MAX. This branch should be stripped at compile time.
-            let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
+        // !0 is usize::MAX. This branch should be stripped at compile time.
+        let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
 
-            // heap::EMPTY doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
-            RawVec { ptr: Unique::new(heap::EMPTY as *mut T), cap: cap }
-        }
+        // Unique::empty() doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
+        RawVec { ptr: Unique::empty(), cap: cap }
     }
 
     fn grow(&amp;mut self) {
@@ -4469,7 +4414,7 @@ method of RawVec.</p>
                 (1, ptr)
             } else {
                 let new_cap = 2 * self.cap;
-                let ptr = heap::reallocate(*self.ptr as *mut _,
+                let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                             self.cap * elem_size,
                                             new_cap * elem_size,
                                             align);
@@ -4495,7 +4440,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }
@@ -4503,7 +4448,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 </code></pre>
 <p>That's it. We support pushing and popping zero-sized types now. Our iterators
 (that aren't provided by slice Deref) are still busted, though.</p>
-<a class="header" href="print.html#iterating-zero-sized-types" name="iterating-zero-sized-types"><h2>Iterating Zero-Sized Types</h2></a>
+<a class="header" href="print.html#iterating-zero-sized-types" id="iterating-zero-sized-types"><h2>Iterating Zero-Sized Types</h2></a>
 <p>Zero-sized offsets are no-ops. This means that our current design will always
 initialize <code>start</code> and <code>end</code> as the same value, and our iterators will yield
 nothing. The current solution to this is to cast the pointers to integers,
@@ -4572,7 +4517,7 @@ impl&lt;T&gt; DoubleEndedIterator for RawValIter&lt;T&gt; {
 }
 </code></pre>
 <p>And that's it. Iteration works!</p>
-<a class="header" href="print.html#the-final-code" name="the-final-code"><h1>The Final Code</h1></a>
+<a class="header" href="print.html#the-final-code" id="the-final-code"><h1>The Final Code</h1></a>
 <pre><pre class="playpen"><code class="language-rust">#![feature(unique)]
 #![feature(alloc, heap_api)]
 
@@ -4592,13 +4537,11 @@ struct RawVec&lt;T&gt; {
 
 impl&lt;T&gt; RawVec&lt;T&gt; {
     fn new() -&gt; Self {
-        unsafe {
-            // !0 is usize::MAX. This branch should be stripped at compile time.
-            let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
+        // !0 is usize::MAX. This branch should be stripped at compile time.
+        let cap = if mem::size_of::&lt;T&gt;() == 0 { !0 } else { 0 };
 
-            // heap::EMPTY doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
-            RawVec { ptr: Unique::new(heap::EMPTY as *mut T), cap: cap }
-        }
+        // Unique::empty() doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;
+        RawVec { ptr: Unique::empty(), cap: cap }
     }
 
     fn grow(&amp;mut self) {
@@ -4616,7 +4559,7 @@ impl&lt;T&gt; RawVec&lt;T&gt; {
                 (1, ptr)
             } else {
                 let new_cap = 2 * self.cap;
-                let ptr = heap::reallocate(*self.ptr as *mut _,
+                let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                             self.cap * elem_size,
                                             new_cap * elem_size,
                                             align);
@@ -4640,7 +4583,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }
@@ -4656,7 +4599,7 @@ pub struct Vec&lt;T&gt; {
 }
 
 impl&lt;T&gt; Vec&lt;T&gt; {
-    fn ptr(&amp;self) -&gt; *mut T { *self.buf.ptr }
+    fn ptr(&amp;self) -&gt; *mut T { self.buf.ptr.as_ptr() }
 
     fn cap(&amp;self) -&gt; usize { self.buf.cap }
 
@@ -4891,7 +4834,7 @@ fn oom() {
 
 # fn main() {}
 </code></pre></pre>
-<a class="header" href="print.html#implementing-arc-and-mutex" name="implementing-arc-and-mutex"><h1>Implementing Arc and Mutex</h1></a>
+<a class="header" href="print.html#implementing-arc-and-mutex" id="implementing-arc-and-mutex"><h1>Implementing Arc and Mutex</h1></a>
 <p>Knowing the theory is all fine and good, but the <em>best</em> way to understand
 something is to use it. To better understand atomics and interior mutability,
 we'll be implementing versions of the standard library's Arc and Mutex types.</p>

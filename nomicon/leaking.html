@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="leaking.html#leaking" name="leaking"><h1>Leaking</h1></a>
+                    <a class="header" href="leaking.html#leaking" id="leaking"><h1>Leaking</h1></a>
 <p>Ownership-based resource management is intended to simplify composition. You
 acquire resources when you create the object, and you release the resources when
 it gets destroyed. Since destruction is handled for you, it means you can't
@@ -110,7 +111,7 @@ library:</p>
 <li><code>Rc</code></li>
 <li><code>thread::scoped::JoinGuard</code></li>
 </ul>
-<a class="header" href="leaking.html#drain" name="drain"><h2>Drain</h2></a>
+<a class="header" href="leaking.html#drain" id="drain"><h2>Drain</h2></a>
 <p><code>drain</code> is a collections API that moves data out of the container without
 consuming the container. This enables us to reuse the allocation of a <code>Vec</code>
 after claiming ownership over all of its contents. It produces an iterator
@@ -155,7 +156,7 @@ mem::forget us in the middle of the iteration, all that does is <em>leak even mo
 (and possibly leave the Vec in an unexpected but otherwise consistent state).
 Since we've accepted that mem::forget is safe, this is definitely safe. We call
 leaks causing more leaks a <em>leak amplification</em>.</p>
-<a class="header" href="leaking.html#rc" name="rc"><h2>Rc</h2></a>
+<a class="header" href="leaking.html#rc" id="rc"><h2>Rc</h2></a>
 <p>Rc is an interesting case because at first glance it doesn't appear to be a
 proxy value at all. After all, it manages the data it points to, and dropping
 all the Rcs for a value will drop that value. Leaking an Rc doesn't seem like it
@@ -216,7 +217,7 @@ we can happily use-after-free the inner data. Bad Bad Not Good.</p>
 <p>This can be solved by just checking the <code>ref_count</code> and doing <em>something</em>. The
 standard library's stance is to just abort, because your program has become
 horribly degenerate. Also <em>oh my gosh</em> it's such a ridiculous corner case.</p>
-<a class="header" href="leaking.html#threadscopedjoinguard" name="threadscopedjoinguard"><h2>thread::scoped::JoinGuard</h2></a>
+<a class="header" href="leaking.html#threadscopedjoinguard" id="threadscopedjoinguard"><h2>thread::scoped::JoinGuard</h2></a>
 <p>The thread::scoped API intends to allow threads to be spawned that reference
 data on their parent's stack without any synchronization over that data by
 ensuring the parent joins the thread before any of the shared data goes out

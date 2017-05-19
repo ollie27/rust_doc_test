@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="repr-rust.html#reprrust" name="reprrust"><h1>repr(Rust)</h1></a>
+                    <a class="header" href="repr-rust.html#reprrust" id="reprrust"><h1>repr(Rust)</h1></a>
 <p>First and foremost, all types have an alignment specified in bytes. The
 alignment of a type specifies what addresses are valid to store the value at. A
 value of alignment <code>n</code> must only be stored at an address that is a multiple of
@@ -95,7 +96,6 @@ of their fields' alignment. Rust will consequently insert padding where
 necessary to ensure that all fields are properly aligned and that the overall
 type's size is a multiple of its alignment. For instance:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct A {
     a: u8,
@@ -108,7 +108,6 @@ struct A {
 respective sizes. The whole struct will therefore have a size that is a multiple
 of 32-bits. It will potentially become:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct A {
     a: u8,
@@ -124,7 +123,6 @@ as you would expect in C. However with the exception of arrays (which are
 densely packed and in-order), the layout of data is not by default specified in
 Rust. Given the two following struct definitions:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct A {
     a: i32,
@@ -146,7 +144,6 @@ features of Rust make it desirable for the language to play with data layout in
 complex ways.</p>
 <p>For instance, consider this struct:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo&lt;T, U&gt; {
     count: u16,
@@ -179,7 +176,6 @@ requires different monomorphizations to have <em>different field orderings</em>.
 1.0</strong></p>
 <p>Enums make this consideration even more complicated. Naively, an enum such as:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Foo {
     A(u32),
@@ -190,7 +186,6 @@ enum Foo {
 #}</code></pre></pre>
 <p>would be laid out as:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct FooRepr {
     data: u64, // this is either a u64, u32, or u8 based on `tag`

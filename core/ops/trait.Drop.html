@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Drop', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Drop</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Drop', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -53,8 +53,9 @@
 </div>pub trait Drop {
     fn <a href='#tymethod.drop' class='fnname'>drop</a>(&amp;mut self);
 }</pre><div class='docblock'><p>The <code>Drop</code> trait is used to run some code when a value goes out of scope.
-This is sometimes called a 'destructor'.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+This is sometimes called a &#39;destructor&#39;.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>A trivial implementation of <code>Drop</code>. The <code>drop</code> method is called when <code>_x</code>
 goes out of scope, and therefore <code>main</code> prints <code>Dropping!</code>.</p>
 
@@ -74,13 +75,17 @@ goes out of scope, and therefore <code>main</code> prints <code>Dropping!</code>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.drop' class='method'><span id='drop.v' class='invisible'><code>fn <a href='#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h3><div class='docblock'><p>A method called when the value goes out of scope.</p>
+
 <p>When this method has been called, <code>self</code> has not yet been deallocated.
 If it were, <code>self</code> would be a dangling reference.</p>
+
 <p>After this function is over, the memory of <code>self</code> will be deallocated.</p>
+
 <p>This function cannot be called explicitly. This is compiler error
 <a href="../../error-index.html#E0040">E0040</a>. However, the <a href="../../std/mem/fn.drop.html"><code>std::mem::drop</code></a> function in the prelude can be
-used to call the argument's <code>Drop</code> implementation.</p>
-<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
+used to call the argument&#39;s <code>Drop</code> implementation.</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
 <p>Given that a <code>panic!</code> will call <code>drop()</code> as it unwinds, any <code>panic!</code> in
 a <code>drop()</code> implementation will likely abort.</p>
 </div></div>
@@ -145,7 +150,6 @@ a <code>drop()</code> implementation will likely abort.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

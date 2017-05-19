@@ -1000,6 +1000,11 @@
 <span id="955">955</span>
 <span id="956">956</span>
 <span id="957">957</span>
+<span id="958">958</span>
+<span id="959">959</span>
+<span id="960">960</span>
+<span id="961">961</span>
+<span id="962">962</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1033,12 +1038,10 @@
 <span class="doccomment">/// type is a static guarantee that the underlying bytes contain no interior 0</span>
 <span class="doccomment">/// bytes and the final byte is 0.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A `CString` is created from either a byte slice or a byte vector. After</span>
-<span class="doccomment">/// being created, a `CString` predominately inherits all of its methods from</span>
-<span class="doccomment">/// the `Deref` implementation to `[c_char]`. Note that the underlying array</span>
-<span class="doccomment">/// is represented as an array of `c_char` as opposed to `u8`. A `u8` slice</span>
-<span class="doccomment">/// can be obtained with the `as_bytes` method.  Slices produced from a `CString`</span>
-<span class="doccomment">/// do *not* contain the trailing nul terminator unless otherwise specified.</span>
+<span class="doccomment">/// A `CString` is created from either a byte slice or a byte vector.  A `u8`</span>
+<span class="doccomment">/// slice can be obtained with the `as_bytes` method.  Slices produced from a</span>
+<span class="doccomment">/// `CString` do *not* contain the trailing nul terminator unless otherwise</span>
+<span class="doccomment">/// specified.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -1327,6 +1330,12 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>
     }
 
+    <span class="doccomment">/// Extracts a `CStr` slice containing the entire string.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;as_c_str&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;40380&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_c_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">CStr</span> {
+        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>
+    }
+
     <span class="doccomment">/// Converts this `CString` into a boxed `CStr`.</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;into_boxed_c_str&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;40380&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_boxed_c_str</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">CStr</span><span class="op">&gt;</span> {
@@ -1359,7 +1368,7 @@
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">CStr</span>;
 
     <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">CStr</span> {
-        <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>.<span class="ident">as_bytes_with_nul</span>()) }
+        <span class="kw">unsafe</span> { <span class="ident">CStr</span>::<span class="ident">from_bytes_with_nul_unchecked</span>(<span class="self">self</span>.<span class="ident">as_bytes_with_nul</span>()) }
     }
 }
 
@@ -1586,7 +1595,8 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_ptr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">CStr</span> {
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">strlen</span>(<span class="ident">ptr</span>);
-        <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>))
+        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>;
+        <span class="ident">CStr</span>::<span class="ident">from_bytes_with_nul_unchecked</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>))
     }
 
     <span class="doccomment">/// Creates a C string wrapper from a byte slice.</span>
@@ -2016,7 +2026,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

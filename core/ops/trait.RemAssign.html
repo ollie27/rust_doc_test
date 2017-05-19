@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'RemAssign', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait RemAssign</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'RemAssign', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,12 +48,13 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#1514-1518' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#1565-1569' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "rem_assign"]
 </div>pub trait RemAssign&lt;Rhs&nbsp;=&nbsp;Self&gt; {
     fn <a href='#tymethod.rem_assign' class='fnname'>rem_assign</a>(&amp;mut self, rhs: Rhs);
 }</pre><div class='docblock'><p>The remainder assignment operator <code>%=</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>A trivial implementation of <code>RemAssign</code>. When <code>Foo %= Foo</code> happens, it ends up
 calling <code>rem_assign</code>, and therefore, <code>main</code> prints <code>Remainder-ing!</code>.</p>
 
@@ -164,7 +165,6 @@ calling <code>rem_assign</code>, and therefore, <code>main</code> prints <code>R
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

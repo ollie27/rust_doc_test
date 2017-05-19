@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="subtyping.html#subtyping-and-variance" name="subtyping-and-variance"><h1>Subtyping and Variance</h1></a>
+                    <a class="header" href="subtyping.html#subtyping-and-variance" id="subtyping-and-variance"><h1>Subtyping and Variance</h1></a>
 <p>Although Rust doesn't have any notion of structural inheritance, it <em>does</em>
 include subtyping. In Rust, subtyping derives entirely from lifetimes. Since
 lifetimes are scopes, we can partially order them based on the <em>contains</em>
@@ -86,7 +87,7 @@ to treat lifetimes and types uniformly.)</p>
 <p>Higher-ranked lifetimes are also subtypes of every concrete lifetime. This is
 because taking an arbitrary lifetime is strictly more general than taking a
 specific one.</p>
-<a class="header" href="subtyping.html#variance" name="variance"><h1>Variance</h1></a>
+<a class="header" href="subtyping.html#variance" id="variance"><h1>Variance</h1></a>
 <p>Variance is where things get a bit complicated.</p>
 <p>Variance is a property that <em>type constructors</em> have with respect to their
 arguments. A type constructor in Rust is a generic type with unbound arguments.
@@ -170,7 +171,6 @@ expected.</p>
 <p>However what should happen when passing <em>by-value</em> is less obvious. It turns out
 that, yes, you can use subtyping when passing by-value. That is, this works:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn get_box&lt;'a&gt;(str: &amp;'a str) -&gt; Box&lt;&amp;'a str&gt; {
     // string literals are `&amp;'static str`s
@@ -225,7 +225,6 @@ in multiple fields.</p>
 <li>Otherwise, Foo is invariant over A</li>
 </ul>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::cell::Cell;
 

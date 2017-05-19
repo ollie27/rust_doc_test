@@ -176,6 +176,8 @@
 <span id="131">131</span>
 <span id="132">132</span>
 <span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -307,6 +309,8 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">arc</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">rc</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">raw_vec</span>;
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_box_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41119&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">str</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">oom</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">oom</span>::<span class="ident">oom</span>;
@@ -368,7 +372,6 @@
         window.rootPath = "../../";
         window.currentCrate = "alloc";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

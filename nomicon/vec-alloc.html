@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,36 +68,27 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-alloc.html#allocating-memory" name="allocating-memory"><h1>Allocating Memory</h1></a>
+                    <a class="header" href="vec-alloc.html#allocating-memory" id="allocating-memory"><h1>Allocating Memory</h1></a>
 <p>Using Unique throws a wrench in an important feature of Vec (and indeed all of
 the std collections): an empty Vec doesn't actually allocate at all. So if we
 can't allocate, but also can't put a null pointer in <code>ptr</code>, what do we do in
 <code>Vec::new</code>? Well, we just put some other garbage in there!</p>
 <p>This is perfectly fine because we already have <code>cap == 0</code> as our sentinel for no
 allocation. We don't even need to handle it specially in almost any code because
-we usually need to check if <code>cap &gt; len</code> or <code>len &gt; 0</code> anyway. The traditional
-Rust value to put here is <code>0x01</code>. The standard library actually exposes this
-as <code>alloc::heap::EMPTY</code>. There are quite a few places where we'll
-want to use <code>heap::EMPTY</code> because there's no real allocation to talk about but
+we usually need to check if <code>cap &gt; len</code> or <code>len &gt; 0</code> anyway. The recommended
+Rust value to put here is <code>mem::align_of::&lt;T&gt;()</code>. Unique provides a convenience
+for this: <code>Unique::empty()</code>. There are quite a few places where we'll
+want to use <code>empty</code> because there's no real allocation to talk about but
 <code>null</code> would make the compiler do bad things.</p>
-<p>All of the <code>heap</code> API is totally unstable under the <code>heap_api</code> feature, though.
-We could trivially define <code>heap::EMPTY</code> ourselves, but we'll want the rest of
-the <code>heap</code> API anyway, so let's just get that dependency over with.</p>
 <p>So:</p>
 <pre><code class="language-rust ignore">#![feature(alloc, heap_api)]
 
 use std::mem;
 
-use alloc::heap::EMPTY;
-
 impl&lt;T&gt; Vec&lt;T&gt; {
     fn new() -&gt; Self {
         assert!(mem::size_of::&lt;T&gt;() != 0, &quot;We're not ready to handle ZSTs&quot;);
-        unsafe {
-            // need to cast EMPTY to the actual ptr type we want, let
-            // inference handle it.
-            Vec { ptr: Unique::new(heap::EMPTY as *mut _), len: 0, cap: 0 }
-        }
+        Vec { ptr: Unique::empty(), len: 0, cap: 0 }
     }
 }
 </code></pre>
@@ -122,7 +114,6 @@ program.</p>
 <p>We said we don't want to use intrinsics, so doing exactly what <code>std</code> does is
 out. Instead, we'll call <code>std::process::exit</code> with some random number.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn oom() {
     ::std::process::exit(-9999);
@@ -147,7 +138,6 @@ analysis, alias analysis, alias analysis. It's super important to an optimizing
 compiler to be able to reason about data dependencies and aliasing.</p>
 <p>As a simple example, consider the following fragment of code:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # let x = &amp;mut 0;
 # let y = &amp;mut 0;
@@ -244,7 +234,7 @@ such we will guard against this case explicitly.</p>
                     &quot;capacity overflow&quot;);
 
             let new_num_bytes = old_num_bytes * 2;
-            let ptr = heap::reallocate(*self.ptr as *mut _,
+            let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                         old_num_bytes,
                                         new_num_bytes,
                                         align);

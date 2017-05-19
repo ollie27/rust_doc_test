@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-raw.html#rawvec" name="rawvec"><h1>RawVec</h1></a>
+                    <a class="header" href="vec-raw.html#rawvec" id="rawvec"><h1>RawVec</h1></a>
 <p>We've actually reached an interesting situation here: we've duplicated the logic
 for specifying a buffer and freeing its memory in Vec and IntoIter. Now that
 we've implemented it and identified <em>actual</em> logic duplication, this is a good
@@ -82,9 +83,7 @@ allocating, growing, and freeing:</p>
 impl&lt;T&gt; RawVec&lt;T&gt; {
     fn new() -&gt; Self {
         assert!(mem::size_of::&lt;T&gt;() != 0, &quot;TODO: implement ZST support&quot;);
-        unsafe {
-            RawVec { ptr: Unique::new(heap::EMPTY as *mut T), cap: 0 }
-        }
+        RawVec { ptr: Unique::empty(), cap: 0 }
     }
 
     // unchanged from Vec
@@ -98,7 +97,7 @@ impl&lt;T&gt; RawVec&lt;T&gt; {
                 (1, ptr)
             } else {
                 let new_cap = 2 * self.cap;
-                let ptr = heap::reallocate(*self.ptr as *mut _,
+                let ptr = heap::reallocate(self.ptr.as_ptr() as *mut _,
                                             self.cap * elem_size,
                                             new_cap * elem_size,
                                             align);
@@ -122,7 +121,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
             let elem_size = mem::size_of::&lt;T&gt;();
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_mut() as *mut _, num_bytes, align);
             }
         }
     }
@@ -135,7 +134,7 @@ impl&lt;T&gt; Drop for RawVec&lt;T&gt; {
 }
 
 impl&lt;T&gt; Vec&lt;T&gt; {
-    fn ptr(&amp;self) -&gt; *mut T { *self.buf.ptr }
+    fn ptr(&amp;self) -&gt; *mut T { self.buf.ptr.as_ptr() }
 
     fn cap(&amp;self) -&gt; usize { self.buf.cap }
 

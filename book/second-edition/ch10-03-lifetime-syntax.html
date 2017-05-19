@@ -19,6 +19,47 @@
 
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
+        <style>
+            p.warning {	
+                background-color: rgb(242, 222, 222);
+                border-bottom-color: rgb(238, 211, 215);
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+                border-bottom-style: solid;
+                border-bottom-width: 0.666667px;
+                border-image-outset: 0 0 0 0;
+                border-image-repeat: stretch stretch;
+                border-image-slice: 100% 100% 100% 100%;
+                border-image-source: none;
+                border-image-width: 1 1 1 1;
+                border-left-color: rgb(238, 211, 215);
+                border-left-style: solid;
+                border-left-width: 0.666667px;
+                border-right-color: rgb(238, 211, 215);
+                border-right-style: solid;
+                border-right-width: 0.666667px;
+                border-top-color: rgb(238, 211, 215);
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border-top-style: solid;
+                border-top-width: 0.666667px;
+                color: rgb(185, 74, 72);
+                margin-bottom: 0px;
+                margin-left: 0px;
+                margin-right: 0px;
+                margin-top: 30px;
+                padding-bottom: 8px;
+                padding-left: 14px;
+                padding-right: 35px;
+                padding-top: 8px;
+            }
+            p.warning strong {
+                color: rgb(185, 74, 72)
+            }
+            p.warning a {
+                color: rgb(0, 136, 204)
+            }
+        </style>
 
         <!-- MathJax -->
         <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -47,12 +88,13 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li><a href="ch01-00-introduction.html"><strong>1.</strong> Introduction</a></li><li><ul class="section"><li><a href="ch01-01-installation.html"><strong>1.1.</strong> Installation</a></li><li><a href="ch01-02-hello-world.html"><strong>1.2.</strong> Hello, World!</a></li></ul></li><li><a href="ch02-00-guessing-game-tutorial.html"><strong>2.</strong> Guessing Game Tutorial</a></li><li><a href="ch03-00-common-programming-concepts.html"><strong>3.</strong> Common Programming Concepts</a></li><li><ul class="section"><li><a href="ch03-01-variables-and-mutability.html"><strong>3.1.</strong> Variables and Mutability</a></li><li><a href="ch03-02-data-types.html"><strong>3.2.</strong> Data Types</a></li><li><a href="ch03-03-how-functions-work.html"><strong>3.3.</strong> How Functions Work</a></li><li><a href="ch03-04-comments.html"><strong>3.4.</strong> Comments</a></li><li><a href="ch03-05-control-flow.html"><strong>3.5.</strong> Control Flow</a></li></ul></li><li><a href="ch04-00-understanding-ownership.html"><strong>4.</strong> Understanding Ownership</a></li><li><ul class="section"><li><a href="ch04-01-what-is-ownership.html"><strong>4.1.</strong> What is Ownership?</a></li><li><a href="ch04-02-references-and-borrowing.html"><strong>4.2.</strong> References &amp; Borrowing</a></li><li><a href="ch04-03-slices.html"><strong>4.3.</strong> Slices</a></li></ul></li><li><a href="ch05-00-structs.html"><strong>5.</strong> Structs</a></li><li><ul class="section"><li><a href="ch05-01-method-syntax.html"><strong>5.1.</strong> Method Syntax</a></li></ul></li><li><a href="ch06-00-enums.html"><strong>6.</strong> Enums and Pattern Matching</a></li><li><ul class="section"><li><a href="ch06-01-defining-an-enum.html"><strong>6.1.</strong> Defining an Enum</a></li><li><a href="ch06-02-match.html"><strong>6.2.</strong> The <code>match</code> Control Flow Operator</a></li><li><a href="ch06-03-if-let.html"><strong>6.3.</strong> Concise Control Flow with <code>if let</code></a></li></ul></li><li><a href="ch07-00-modules.html"><strong>7.</strong> Modules</a></li><li><ul class="section"><li><a href="ch07-01-mod-and-the-filesystem.html"><strong>7.1.</strong> <code>mod</code> and the Filesystem</a></li><li><a href="ch07-02-controlling-visibility-with-pub.html"><strong>7.2.</strong> Controlling Visibility with <code>pub</code></a></li><li><a href="ch07-03-importing-names-with-use.html"><strong>7.3.</strong> Importing Names with <code>use</code></a></li></ul></li><li><a href="ch08-00-common-collections.html"><strong>8.</strong> Common Collections</a></li><li><ul class="section"><li><a href="ch08-01-vectors.html"><strong>8.1.</strong> Vectors</a></li><li><a href="ch08-02-strings.html"><strong>8.2.</strong> Strings</a></li><li><a href="ch08-03-hash-maps.html"><strong>8.3.</strong> Hash Maps</a></li></ul></li><li><a href="ch09-00-error-handling.html"><strong>9.</strong> Error Handling</a></li><li><ul class="section"><li><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong>9.1.</strong> Unrecoverable Errors with <code>panic!</code></a></li><li><a href="ch09-02-recoverable-errors-with-result.html"><strong>9.2.</strong> Recoverable Errors with <code>Result</code></a></li><li><a href="ch09-03-to-panic-or-not-to-panic.html"><strong>9.3.</strong> To <code>panic!</code> or Not To <code>panic!</code></a></li></ul></li><li><a href="ch10-00-generics.html"><strong>10.</strong> Generic Types, Traits, and Lifetimes</a></li><li><ul class="section"><li><a href="ch10-01-syntax.html"><strong>10.1.</strong> Generic Data Types</a></li><li><a href="ch10-02-traits.html"><strong>10.2.</strong> Traits: Defining Shared Behavior</a></li><li><a href="ch10-03-lifetime-syntax.html" class="active"><strong>10.3.</strong> Validating References with Lifetimes</a></li></ul></li><li><a href="ch11-00-testing.html"><strong>11.</strong> Testing</a></li><li><ul class="section"><li><a href="ch11-01-writing-tests.html"><strong>11.1.</strong> Writing tests</a></li><li><a href="ch11-02-running-tests.html"><strong>11.2.</strong> Running tests</a></li><li><a href="ch11-03-test-organization.html"><strong>11.3.</strong> Test Organization</a></li></ul></li><li><a href="ch12-00-an-io-project.html"><strong>12.</strong> An I/O Project</a></li><li><ul class="section"><li><a href="ch12-01-accepting-command-line-arguments.html"><strong>12.1.</strong> Accepting Command Line Arguments</a></li><li><a href="ch12-02-reading-a-file.html"><strong>12.2.</strong> Reading a File</a></li><li><a href="ch12-03-improving-error-handling-and-modularity.html"><strong>12.3.</strong> Improving Error Handling and Modularity</a></li><li><a href="ch12-04-testing-the-librarys-functionality.html"><strong>12.4.</strong> Testing the Library's Functionality</a></li><li><a href="ch12-05-working-with-environment-variables.html"><strong>12.5.</strong> Working with Environment Variables</a></li><li><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong>12.6.</strong> Writing to <code>stderr</code> instead of <code>stdout</code></a></li></ul></li><li><a href="ch13-00-functional-features.html"><strong>13.</strong> Functional Language Features in Rust</a></li><li><ul class="section"><li><a href="ch13-01-closures.html"><strong>13.1.</strong> Closures</a></li><li><a href="ch13-02-iterators.html"><strong>13.2.</strong> Iterators</a></li><li><a href="ch13-03-improving-our-io-project.html"><strong>13.3.</strong> Improving our I/O Project</a></li><li><a href="ch13-04-performance.html"><strong>13.4.</strong> Performance</a></li></ul></li><li><a href="ch14-00-more-about-cargo.html"><strong>14.</strong> More about Cargo and Crates.io</a></li><li><ul class="section"><li><a href="ch14-01-release-profiles.html"><strong>14.1.</strong> Release Profiles</a></li><li><a href="ch14-02-publishing-to-crates-io.html"><strong>14.2.</strong> Publishing a Crate to Crates.io</a></li><li><a href="ch14-03-cargo-workspaces.html"><strong>14.3.</strong> Cargo Workspaces</a></li><li><a href="ch14-04-installing-binaries.html"><strong>14.4.</strong> Installing Binaries from Crates.io with <code>cargo install</code></a></li><li><a href="ch14-05-extending-cargo.html"><strong>14.5.</strong> Extending Cargo with Custom Commands</a></li></ul></li><li><a href="ch15-00-smart-pointers.html"><strong>15.</strong> Smart Pointers</a></li><li><ul class="section"><li><a href="ch15-01-box.html"><strong>15.1.</strong> <code>Box&lt;T&gt;</code> Points to Data on the Heap and Has a Known Size</a></li><li><a href="ch15-02-deref.html"><strong>15.2.</strong> The <code>Deref</code> Trait Allows Access to the Data Through a Reference</a></li><li><a href="ch15-03-drop.html"><strong>15.3.</strong> The <code>Drop</code> Trait Runs Code on Cleanup</a></li><li><a href="ch15-04-rc.html"><strong>15.4.</strong> <code>Rc&lt;T&gt;</code>, the Reference Counted Smart Pointer</a></li><li><a href="ch15-05-interior-mutability.html"><strong>15.5.</strong> <code>RefCell&lt;T&gt;</code> and the Interior Mutability Pattern</a></li><li><a href="ch15-06-reference-cycles.html"><strong>15.6.</strong> Creating Reference Cycles and Leaking Memory is Safe</a></li></ul></li><li><a href="ch16-00-concurrency.html"><strong>16.</strong> Fearless Concurrency</a></li><li><ul class="section"><li><a href="ch16-01-threads.html"><strong>16.1.</strong> Threads</a></li><li><a href="ch16-02-message-passing.html"><strong>16.2.</strong> Message Passing</a></li><li><a href="ch16-03-shared-state.html"><strong>16.3.</strong> Shared State</a></li><li><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong>16.4.</strong> Extensible Concurrency: <code>Sync</code> and <code>Send</code></a></li></ul></li><li><a href="ch17-00-oop.html"><strong>17.</strong> Is Rust OOP?</a></li><li><a href="ch18-00-patterns.html"><strong>18.</strong> Patterns</a></li><li><a href="ch19-00-advanced-features.html"><strong>19.</strong> Advanced Features</a></li><li><ul class="section"><li><a href="ch19-01-unsafe-rust.html"><strong>19.1.</strong> Unsafe Rust</a></li><li><a href="ch19-02-advanced-lifetimes.html"><strong>19.2.</strong> Advanced Lifetimes</a></li><li><a href="ch19-03-advanced-traits.html"><strong>19.3.</strong> Advanced Traits</a></li></ul></li><li><a href="ch20-00-unnamed-project.html"><strong>20.</strong> Un-named project</a></li><li><a href="appendix-00.html"><strong>21.</strong> Appendix</a></li><li><ul class="section"><li><a href="appendix-01-keywords.html"><strong>21.1.</strong> A - Keywords</a></li><li><a href="appendix-02-operators.html"><strong>21.2.</strong> B - Operators</a></li><li><a href="appendix-03-derivable-traits.html"><strong>21.3.</strong> C - Derivable Traits</a></li><li><a href="appendix-04-nightly-rust.html"><strong>21.4.</strong> D - Nightly Rust</a></li><li><a href="appendix-05-macros.html"><strong>21.5.</strong> E - Macros</a></li><li><a href="appendix-06-translation.html"><strong>21.6.</strong> F - Translations</a></li><li><a href="appendix-07-newest-features.html"><strong>21.7.</strong> G - Newest Features</a></li></ul></li></ul>
+            <ul class="chapter"><li><a href="ch01-00-introduction.html"><strong>1.</strong> Introduction</a></li><li><ul class="section"><li><a href="ch01-01-installation.html"><strong>1.1.</strong> Installation</a></li><li><a href="ch01-02-hello-world.html"><strong>1.2.</strong> Hello, World!</a></li></ul></li><li><a href="ch02-00-guessing-game-tutorial.html"><strong>2.</strong> Guessing Game Tutorial</a></li><li><a href="ch03-00-common-programming-concepts.html"><strong>3.</strong> Common Programming Concepts</a></li><li><ul class="section"><li><a href="ch03-01-variables-and-mutability.html"><strong>3.1.</strong> Variables and Mutability</a></li><li><a href="ch03-02-data-types.html"><strong>3.2.</strong> Data Types</a></li><li><a href="ch03-03-how-functions-work.html"><strong>3.3.</strong> How Functions Work</a></li><li><a href="ch03-04-comments.html"><strong>3.4.</strong> Comments</a></li><li><a href="ch03-05-control-flow.html"><strong>3.5.</strong> Control Flow</a></li></ul></li><li><a href="ch04-00-understanding-ownership.html"><strong>4.</strong> Understanding Ownership</a></li><li><ul class="section"><li><a href="ch04-01-what-is-ownership.html"><strong>4.1.</strong> What is Ownership?</a></li><li><a href="ch04-02-references-and-borrowing.html"><strong>4.2.</strong> References &amp; Borrowing</a></li><li><a href="ch04-03-slices.html"><strong>4.3.</strong> Slices</a></li></ul></li><li><a href="ch05-00-structs.html"><strong>5.</strong> Structs</a></li><li><ul class="section"><li><a href="ch05-01-method-syntax.html"><strong>5.1.</strong> Method Syntax</a></li></ul></li><li><a href="ch06-00-enums.html"><strong>6.</strong> Enums and Pattern Matching</a></li><li><ul class="section"><li><a href="ch06-01-defining-an-enum.html"><strong>6.1.</strong> Defining an Enum</a></li><li><a href="ch06-02-match.html"><strong>6.2.</strong> The <code>match</code> Control Flow Operator</a></li><li><a href="ch06-03-if-let.html"><strong>6.3.</strong> Concise Control Flow with <code>if let</code></a></li></ul></li><li><a href="ch07-00-modules.html"><strong>7.</strong> Modules</a></li><li><ul class="section"><li><a href="ch07-01-mod-and-the-filesystem.html"><strong>7.1.</strong> <code>mod</code> and the Filesystem</a></li><li><a href="ch07-02-controlling-visibility-with-pub.html"><strong>7.2.</strong> Controlling Visibility with <code>pub</code></a></li><li><a href="ch07-03-importing-names-with-use.html"><strong>7.3.</strong> Importing Names with <code>use</code></a></li></ul></li><li><a href="ch08-00-common-collections.html"><strong>8.</strong> Common Collections</a></li><li><ul class="section"><li><a href="ch08-01-vectors.html"><strong>8.1.</strong> Vectors</a></li><li><a href="ch08-02-strings.html"><strong>8.2.</strong> Strings</a></li><li><a href="ch08-03-hash-maps.html"><strong>8.3.</strong> Hash Maps</a></li></ul></li><li><a href="ch09-00-error-handling.html"><strong>9.</strong> Error Handling</a></li><li><ul class="section"><li><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong>9.1.</strong> Unrecoverable Errors with <code>panic!</code></a></li><li><a href="ch09-02-recoverable-errors-with-result.html"><strong>9.2.</strong> Recoverable Errors with <code>Result</code></a></li><li><a href="ch09-03-to-panic-or-not-to-panic.html"><strong>9.3.</strong> To <code>panic!</code> or Not To <code>panic!</code></a></li></ul></li><li><a href="ch10-00-generics.html"><strong>10.</strong> Generic Types, Traits, and Lifetimes</a></li><li><ul class="section"><li><a href="ch10-01-syntax.html"><strong>10.1.</strong> Generic Data Types</a></li><li><a href="ch10-02-traits.html"><strong>10.2.</strong> Traits: Defining Shared Behavior</a></li><li><a href="ch10-03-lifetime-syntax.html" class="active"><strong>10.3.</strong> Validating References with Lifetimes</a></li></ul></li><li><a href="ch11-00-testing.html"><strong>11.</strong> Testing</a></li><li><ul class="section"><li><a href="ch11-01-writing-tests.html"><strong>11.1.</strong> Writing tests</a></li><li><a href="ch11-02-running-tests.html"><strong>11.2.</strong> Running tests</a></li><li><a href="ch11-03-test-organization.html"><strong>11.3.</strong> Test Organization</a></li></ul></li><li><a href="ch12-00-an-io-project.html"><strong>12.</strong> An I/O Project</a></li><li><ul class="section"><li><a href="ch12-01-accepting-command-line-arguments.html"><strong>12.1.</strong> Accepting Command Line Arguments</a></li><li><a href="ch12-02-reading-a-file.html"><strong>12.2.</strong> Reading a File</a></li><li><a href="ch12-03-improving-error-handling-and-modularity.html"><strong>12.3.</strong> Improving Error Handling and Modularity</a></li><li><a href="ch12-04-testing-the-librarys-functionality.html"><strong>12.4.</strong> Testing the Library's Functionality</a></li><li><a href="ch12-05-working-with-environment-variables.html"><strong>12.5.</strong> Working with Environment Variables</a></li><li><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong>12.6.</strong> Writing to <code>stderr</code> instead of <code>stdout</code></a></li></ul></li><li><a href="ch13-00-functional-features.html"><strong>13.</strong> Functional Language Features in Rust</a></li><li><ul class="section"><li><a href="ch13-01-closures.html"><strong>13.1.</strong> Closures</a></li><li><a href="ch13-02-iterators.html"><strong>13.2.</strong> Iterators</a></li><li><a href="ch13-03-improving-our-io-project.html"><strong>13.3.</strong> Improving our I/O Project</a></li><li><a href="ch13-04-performance.html"><strong>13.4.</strong> Performance</a></li></ul></li><li><a href="ch14-00-more-about-cargo.html"><strong>14.</strong> More about Cargo and Crates.io</a></li><li><ul class="section"><li><a href="ch14-01-release-profiles.html"><strong>14.1.</strong> Release Profiles</a></li><li><a href="ch14-02-publishing-to-crates-io.html"><strong>14.2.</strong> Publishing a Crate to Crates.io</a></li><li><a href="ch14-03-cargo-workspaces.html"><strong>14.3.</strong> Cargo Workspaces</a></li><li><a href="ch14-04-installing-binaries.html"><strong>14.4.</strong> Installing Binaries from Crates.io with <code>cargo install</code></a></li><li><a href="ch14-05-extending-cargo.html"><strong>14.5.</strong> Extending Cargo with Custom Commands</a></li></ul></li><li><a href="ch15-00-smart-pointers.html"><strong>15.</strong> Smart Pointers</a></li><li><ul class="section"><li><a href="ch15-01-box.html"><strong>15.1.</strong> <code>Box&lt;T&gt;</code> Points to Data on the Heap and Has a Known Size</a></li><li><a href="ch15-02-deref.html"><strong>15.2.</strong> The <code>Deref</code> Trait Allows Access to the Data Through a Reference</a></li><li><a href="ch15-03-drop.html"><strong>15.3.</strong> The <code>Drop</code> Trait Runs Code on Cleanup</a></li><li><a href="ch15-04-rc.html"><strong>15.4.</strong> <code>Rc&lt;T&gt;</code>, the Reference Counted Smart Pointer</a></li><li><a href="ch15-05-interior-mutability.html"><strong>15.5.</strong> <code>RefCell&lt;T&gt;</code> and the Interior Mutability Pattern</a></li><li><a href="ch15-06-reference-cycles.html"><strong>15.6.</strong> Creating Reference Cycles and Leaking Memory is Safe</a></li></ul></li><li><a href="ch16-00-concurrency.html"><strong>16.</strong> Fearless Concurrency</a></li><li><ul class="section"><li><a href="ch16-01-threads.html"><strong>16.1.</strong> Threads</a></li><li><a href="ch16-02-message-passing.html"><strong>16.2.</strong> Message Passing</a></li><li><a href="ch16-03-shared-state.html"><strong>16.3.</strong> Shared State</a></li><li><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong>16.4.</strong> Extensible Concurrency: <code>Sync</code> and <code>Send</code></a></li></ul></li><li><a href="ch17-00-oop.html"><strong>17.</strong> Is Rust an Object-Oriented Programming Language?</a></li><li><ul class="section"><li><a href="ch17-01-what-is-oo.html"><strong>17.1.</strong> What Does Object-Oriented Mean?</a></li><li><a href="ch17-02-trait-objects.html"><strong>17.2.</strong> Trait Objects for Using Values of Different Types</a></li><li><a href="ch17-03-oo-design-patterns.html"><strong>17.3.</strong> Object-Oriented Design Pattern Implementations</a></li></ul></li><li><a href="ch18-00-patterns.html"><strong>18.</strong> Patterns Match the Structure of Values</a></li><li><ul class="section"><li><a href="ch18-01-all-the-places-for-patterns.html"><strong>18.1.</strong> All the Places Patterns May be Used</a></li><li><a href="ch18-02-refutability.html"><strong>18.2.</strong> Refutability: Whether a Pattern Might Fail to Match</a></li><li><a href="ch18-03-pattern-syntax.html"><strong>18.3.</strong> All the Pattern Syntax</a></li></ul></li><li><a href="ch19-00-advanced-features.html"><strong>19.</strong> Advanced Features</a></li><li><ul class="section"><li><a href="ch19-01-unsafe-rust.html"><strong>19.1.</strong> Unsafe Rust</a></li><li><a href="ch19-02-advanced-lifetimes.html"><strong>19.2.</strong> Advanced Lifetimes</a></li><li><a href="ch19-03-advanced-traits.html"><strong>19.3.</strong> Advanced Traits</a></li><li><a href="ch19-04-advanced-types.html"><strong>19.4.</strong> Advanced Types</a></li><li><a href="ch19-05-advanced-functions-and-closures.html"><strong>19.5.</strong> Advanced Functions &amp; Closures</a></li></ul></li><li><a href="ch20-00-final-project-a-web-server.html"><strong>20.</strong> Final project: a web server</a></li><li><a href="appendix-00.html"><strong>21.</strong> Appendix</a></li><li><ul class="section"><li><a href="appendix-01-keywords.html"><strong>21.1.</strong> A - Keywords</a></li><li><a href="appendix-02-operators.html"><strong>21.2.</strong> B - Operators</a></li><li><strong>21.3.</strong> C - Derivable Traits</li><li><strong>21.4.</strong> D - Nightly Rust</li><li><strong>21.5.</strong> E - Macros</li><li><strong>21.6.</strong> F - Translations</li><li><a href="appendix-07-newest-features.html"><strong>21.7.</strong> G - Newest Features</a></li></ul></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
+                <header><p class="warning">You are reading a <strong>draft</strong> of the next edition of TRPL. For more, go <a href="../index.html">here</a>.</p></header>
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
                         <i id="sidebar-toggle" class="fa fa-bars"></i>
@@ -66,8 +108,9 @@
                     </div>
                 </div>
 
+
                 <div id="content" class="content">
-                    <a class="header" href="ch10-03-lifetime-syntax.html#validating-references-with-lifetimes" name="validating-references-with-lifetimes"><h2>Validating References with Lifetimes</h2></a>
+                    <a class="header" href="ch10-03-lifetime-syntax.html#validating-references-with-lifetimes" id="validating-references-with-lifetimes"><h2>Validating References with Lifetimes</h2></a>
 <p>When we talked about references in Chapter 4, we left out an important detail:
 every reference in Rust has a <em>lifetime</em>, which is the scope for which that
 reference is valid. Most of the time lifetimes are implicit and inferred, just
@@ -83,7 +126,7 @@ feature.</p>
 we'll cover common ways you might encounter lifetime syntax in this chapter to
 get you familiar with the concepts. Chapter 19 will contain more advanced
 information about everything lifetimes can do.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#lifetimes-prevent-dangling-references" name="lifetimes-prevent-dangling-references"><h3>Lifetimes Prevent Dangling References</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#lifetimes-prevent-dangling-references" id="lifetimes-prevent-dangling-references"><h3>Lifetimes Prevent Dangling References</h3></a>
 <p>The main aim of lifetimes is to prevent dangling references, which will cause a
 program to reference data other than the data we're intending to reference.
 Consider the program in Listing 10-16, with an outer scope and an inner scope.
@@ -105,7 +148,7 @@ the inner scope ends, and we attempt to print out the value in <code>r</code>:</
 <p><span class="caption">Listing 10-16: An attempt to use a reference whose value
 has gone out of scope</span></p>
 <blockquote>
-<a class="header" href="ch10-03-lifetime-syntax.html#uninitialized-variables-cannot-be-used" name="uninitialized-variables-cannot-be-used"><h4>Uninitialized Variables Cannot Be Used</h4></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#uninitialized-variables-cannot-be-used" id="uninitialized-variables-cannot-be-used"><h4>Uninitialized Variables Cannot Be Used</h4></a>
 <p>The next few examples declare variables without giving them an initial value,
 so that the variable name exists in the outer scope. This might appear to be
 in conflict with Rust not having null. However, if we try to use a variable
@@ -129,7 +172,7 @@ that it &quot;lives longer.&quot; If Rust allowed this code to work, <code>r</co
 referencing memory that was deallocated when <code>x</code> went out of scope, and
 anything we tried to do with <code>r</code> wouldn't work correctly. So how does Rust
 determine that this code should not be allowed?</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#the-borrow-checker" name="the-borrow-checker"><h4>The Borrow Checker</h4></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#the-borrow-checker" id="the-borrow-checker"><h4>The Borrow Checker</h4></a>
 <p>The part of the compiler called the <em>borrow checker</em> compares scopes to
 determine that all borrows are valid. Listing 10-17 shows the same example from
 Listing 10-16 with annotations showing the lifetimes of the variables:</p>
@@ -165,7 +208,6 @@ as long as the reference.</p>
 <p>Let's look at an example in Listing 10-18 that doesn't try to make a dangling
 reference and compiles without any errors:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 {
     let x = 5;            // -----+-- 'b
@@ -186,7 +228,7 @@ be valid while <code>x</code> is valid.</p>
 example and discussed how Rust analyzes lifetimes to ensure references will
 always be valid, let's talk about generic lifetimes of parameters and return
 values in the context of functions.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#generic-lifetimes-in-functions" name="generic-lifetimes-in-functions"><h3>Generic Lifetimes in Functions</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#generic-lifetimes-in-functions" id="generic-lifetimes-in-functions"><h3>Generic Lifetimes in Functions</h3></a>
 <p>Let's write a function that will return the longest of two string slices. We
 want to be able to call this function by passing it two string slices, and we
 want to get back a string slice. The code in Listing 10-19 should print <code>The longest string is abcd</code> once we've implemented the <code>longest</code> function:</p>
@@ -262,7 +304,7 @@ know how the lifetimes of <code>x</code> and <code>y</code> relate to the lifeti
 value. We're going to add generic lifetime parameters that will define the
 relationship between the references so that the borrow checker can perform its
 analysis.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotation-syntax" name="lifetime-annotation-syntax"><h3>Lifetime Annotation Syntax</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotation-syntax" id="lifetime-annotation-syntax"><h3>Lifetime Annotation Syntax</h3></a>
 <p>Lifetime annotations don't change how long any of the references involved live.
 In the same way that functions can accept any type when the signature specifies
 a generic type parameter, functions can accept references with any lifetime
@@ -289,7 +331,7 @@ function has another parameter named <code>second</code> that is another referen
 <code>i32</code> that also has the lifetime <code>'a</code>, these two lifetime annotations that have
 the same name indicate that the references <code>first</code> and <code>second</code> must both live
 as long as the same generic lifetime.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotations-in-function-signatures" name="lifetime-annotations-in-function-signatures"><h3>Lifetime Annotations in Function Signatures</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotations-in-function-signatures" id="lifetime-annotations-in-function-signatures"><h3>Lifetime Annotations in Function Signatures</h3></a>
 <p>Let's look at lifetime annotations in the context of the <code>longest</code> function
 we're working on. Just like generic type parameters, generic lifetime
 parameters need to be declared within angle brackets between the function name
@@ -299,7 +341,6 @@ the same lifetime, which we'll name <code>'a</code> and add to each reference as
 Listing 10-21:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
     if x.len() &gt; y.len() {
@@ -345,7 +386,7 @@ references that have different concrete lifetimes. Listing 10-22 is a
 straightforward example that should match your intuition from any language:
 <code>string1</code> is valid until the end of the outer scope, <code>string2</code> is valid until
 the end of the inner scope, and <code>result</code> references something that is valid
-until the end of the outer scope. The borrow checker approves of this code; it
+until the end of the inner scope. The borrow checker approves of this code; it
 will compile and print <code>The longest string is long string is long</code> when run:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
@@ -414,14 +455,13 @@ reference.</p>
 references passed in to the <code>longest</code> function and how the returned reference
 is used. Make hypotheses about whether your experiments will pass the borrow
 checker or not before you compile, then check to see if you're right!</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#thinking-in-terms-of-lifetimes" name="thinking-in-terms-of-lifetimes"><h3>Thinking in Terms of Lifetimes</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#thinking-in-terms-of-lifetimes" id="thinking-in-terms-of-lifetimes"><h3>Thinking in Terms of Lifetimes</h3></a>
 <p>The exact way to specify lifetime parameters depends on what your function is
 doing. For example, if we changed the implementation of the <code>longest</code> function
 to always return the first argument rather than the longest string slice, we
 wouldn't need to specify a lifetime on the <code>y</code> parameter. This code compiles:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;str) -&gt; &amp;'a str {
     x
@@ -472,7 +512,7 @@ cleaning up the value.</p>
 arguments and return values of functions. Once they're connected, Rust has
 enough information to allow memory-safe operations and disallow operations that
 would create dangling pointers or otherwise violate memory safety.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotations-in-struct-definitions" name="lifetime-annotations-in-struct-definitions"><h3>Lifetime Annotations in Struct Definitions</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotations-in-struct-definitions" id="lifetime-annotations-in-struct-definitions"><h3>Lifetime Annotations in Struct Definitions</h3></a>
 <p>Up until now, we've only defined structs to hold owned types. It is possible
 for structs to hold references, but we need to add a lifetime annotation on
 every reference in the struct's definition. Listing 10-24 has a struct named
@@ -500,14 +540,13 @@ definition.</p>
 <p>The <code>main</code> function here creates an instance of the <code>ImportantExcerpt</code> struct
 that holds a reference to the first sentence of the <code>String</code> owned by the
 variable <code>novel</code>.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-elision" name="lifetime-elision"><h3>Lifetime Elision</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-elision" id="lifetime-elision"><h3>Lifetime Elision</h3></a>
 <p>In this section, we've learned that every reference has a lifetime, and we need
 to specify lifetime parameters for functions or structs that use references.
 However, in Chapter 4 we had a function in the &quot;String Slices&quot; section, shown
 again in Listing 10-25, that compiled without lifetime annotations:</p>
 <p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn first_word(s: &amp;str) -&gt; &amp;str {
     let bytes = s.as_bytes();
@@ -611,7 +650,7 @@ figure out all the lifetimes of the references in the signature.</p>
 <p>Because the third rule only really applies in method signatures, let's look at
 lifetimes in that context now, and see why the third rule means we don't have
 to annotate lifetimes in method signatures very often.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotations-in-method-definitions" name="lifetime-annotations-in-method-definitions"><h3>Lifetime Annotations in Method Definitions</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#lifetime-annotations-in-method-definitions" id="lifetime-annotations-in-method-definitions"><h3>Lifetime Annotations in Method Definitions</h3></a>
 <!-- Is this different to the reference lifetime annotations, or just a
 finalized explanation? -->
 <!-- This is about lifetimes on references in method signatures, which is where
@@ -635,7 +674,6 @@ struct named <code>ImportantExcerpt</code> that we defined in Listing 10-24.</p>
 <p>First, here's a method named <code>level</code>. The only parameter is a reference to
 <code>self</code>, and the return value is just an <code>i32</code>, not a reference to anything:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct ImportantExcerpt&lt;'a&gt; {
 #     part: &amp;'a str,
@@ -653,7 +691,6 @@ required, but we're not required to annotate the lifetime of the reference to
 <code>self</code> because of the first elision rule.</p>
 <p>Here's an example where the third lifetime elision rule applies:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 # struct ImportantExcerpt&lt;'a&gt; {
 #     part: &amp;'a str,
@@ -671,12 +708,11 @@ impl&lt;'a&gt; ImportantExcerpt&lt;'a&gt; {
 and gives both <code>&amp;self</code> and <code>announcement</code> their own lifetimes. Then, because
 one of the parameters is <code>&amp;self</code>, the return type gets the lifetime of <code>&amp;self</code>,
 and all lifetimes have been accounted for.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#the-static-lifetime" name="the-static-lifetime"><h3>The Static Lifetime</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#the-static-lifetime" id="the-static-lifetime"><h3>The Static Lifetime</h3></a>
 <p>There is <em>one</em> special lifetime we need to discuss: <code>'static</code>. The <code>'static</code>
 lifetime is the entire duration of the program. All string literals have the
 <code>'static</code> lifetime, which we can choose to annotate as follows:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let s: &amp;'static str = &quot;I have a static lifetime.&quot;;
 
@@ -693,11 +729,10 @@ lifetime of your program or not (or even if you want it to live that long, if
 it could). Most of the time, the problem in the code is an attempt to create a
 dangling reference or a mismatch of the available lifetimes, and the solution
 is fixing those problems, not specifying the <code>'static</code> lifetime.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#generic-type-parameters-trait-bounds-and-lifetimes-together" name="generic-type-parameters-trait-bounds-and-lifetimes-together"><h3>Generic Type Parameters, Trait Bounds, and Lifetimes Together</h3></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#generic-type-parameters-trait-bounds-and-lifetimes-together" id="generic-type-parameters-trait-bounds-and-lifetimes-together"><h3>Generic Type Parameters, Trait Bounds, and Lifetimes Together</h3></a>
 <p>Let's briefly look at the syntax of specifying generic type parameters, trait
 bounds, and lifetimes all in one function!</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 use std::fmt::Display;
 
@@ -722,7 +757,7 @@ which is why the <code>Display</code> trait bound is necessary. Because lifetime
 type of generic, the declarations of both the lifetime parameter <code>'a</code> and the
 generic type parameter <code>T</code> go in the same list within the angle brackets after
 the function name.</p>
-<a class="header" href="ch10-03-lifetime-syntax.html#summary" name="summary"><h2>Summary</h2></a>
+<a class="header" href="ch10-03-lifetime-syntax.html#summary" id="summary"><h2>Summary</h2></a>
 <p>We covered a lot in this chapter! Now that you know about generic type
 parameters, traits and trait bounds, and generic lifetime parameters, you're
 ready to write code that isn't duplicated but can be used in many different

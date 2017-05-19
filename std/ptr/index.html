@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'ptr', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module ptr</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'ptr', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,8 +48,9 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ptr.rs.html#13-1116' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ptr.rs.html#13-1193' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Raw, unsafe pointers, <code>*const T</code>, and <code>*mut T</code>.</p>
+
 <p><em><a href="../../std/primitive.pointer.html">See also the pointer primitive types</a>.</em></p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -57,10 +58,10 @@
                            <td><a class="struct" href="struct.Shared.html"
                                   title='struct std::ptr::Shared'>Shared</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>A wrapper around a raw non-null <code>*mut T</code> that indicates that the possessor
+                               [<div class='stab unstable'>Experimental</div>] <p>A wrapper around a raw <code>*mut T</code> that indicates that the possessor
 of this wrapper has shared ownership of the referent. Useful for
-building abstractions like <code>Rc&lt;T&gt;</code> or <code>Arc&lt;T&gt;</code>, which internally
-use raw pointers to manage the memory that they own.</p>
+building abstractions like <code>Rc&lt;T&gt;</code>, <code>Arc&lt;T&gt;</code>, or doubly-linked lists, which
+internally use aliased raw pointers to manage the memory that they own.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -68,13 +69,8 @@ use raw pointers to manage the memory that they own.</p>
                                   title='struct std::ptr::Unique'>Unique</a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>A wrapper around a raw non-null <code>*mut T</code> that indicates that the possessor
-of this wrapper owns the referent. This in turn implies that the
-<code>Unique&lt;T&gt;</code> is <code>Send</code>/<code>Sync</code> if <code>T</code> is <code>Send</code>/<code>Sync</code>, unlike a raw
-<code>*mut T</code> (which conveys no particular ownership semantics).  It
-also implies that the referent of the pointer should not be
-modified without a unique path to the <code>Unique</code> reference. Useful
-for building abstractions like <code>Vec&lt;T&gt;</code> or <code>Box&lt;T&gt;</code>, which
-internally use raw pointers to manage the memory that they own.</p>
+of this wrapper owns the referent. Useful for building abstractions like
+<code>Box&lt;T&gt;</code>, <code>Vec&lt;T&gt;</code>, <code>String</code>, and <code>HashMap&lt;K, V&gt;</code>.</p>
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
@@ -251,7 +247,6 @@ reading or dropping the old value.</p>
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

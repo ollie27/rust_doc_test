@@ -55,11 +55,13 @@
 }</pre>
 <div class='docblock'><p>Use the syntax described in <code>std::fmt</code> to create a value of type <code>String</code>.
 See <a href="../std/fmt/index.html"><code>std::fmt</code></a> for more information.</p>
-<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
 <p><code>format!</code> panics if a formatting trait implementation returns an error.
 This indicates an incorrect implementation
 since <code>fmt::Write for String</code> never returns an error itself.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;test&quot;</span>);
 <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;hello {}&quot;</span>, <span class="string">&quot;world!&quot;</span>);
@@ -121,7 +123,6 @@ since <code>fmt::Write for String</code> never returns an error itself.</p>
         window.rootPath = "../";
         window.currentCrate = "std";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     <script defer src="../search-index.js"></script>
 </body>

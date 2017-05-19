@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>iter</a></p><script>window.sidebarCurrent = {name: 'IntoIterator', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait IntoIterator</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>iter</a></p><script>window.sidebarCurrent = {name: 'IntoIterator', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -54,13 +54,17 @@
     type <a href='#associatedtype.IntoIter' class="type">IntoIter</a>: <a class="trait" href="../../core/iter/trait.Iterator.html" title="trait core::iter::Iterator">Iterator</a>&lt;Item = Self::<a class="trait" href="../../core/iter/trait.IntoIterator.html" title="trait core::iter::IntoIterator">Item</a>&gt;;
     fn <a href='#tymethod.into_iter' class='fnname'>into_iter</a>(self) -&gt; Self::<a class="trait" href="../../core/iter/trait.IntoIterator.html" title="trait core::iter::IntoIterator">IntoIter</a>;
 }</pre><div class='docblock'><p>Conversion into an <code>Iterator</code>.</p>
+
 <p>By implementing <code>IntoIterator</code> for a type, you define how it will be
 converted to an iterator. This is common for types which describe a
 collection of some kind.</p>
+
 <p>One benefit of implementing <code>IntoIterator</code> is that your type will <a href="index.html#for-loops-and-intoiterator">work
-with Rust's <code>for</code> loop syntax</a>.</p>
+with Rust&#39;s <code>for</code> loop syntax</a>.</p>
+
 <p>See also: <a href="trait.FromIterator.html"><code>FromIterator</code></a>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -79,6 +83,7 @@ with Rust's <code>for</code> loop syntax</a>.</p>
 
 <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">next</span>();
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">n</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0A%0Alet%20mut%20iter%20%3D%20v.into_iter()%3B%0A%0Alet%20n%20%3D%20iter.next()%3B%0Aassert_eq!(Some(1)%2C%20n)%3B%0A%0Alet%20n%20%3D%20iter.next()%3B%0Aassert_eq!(Some(2)%2C%20n)%3B%0A%0Alet%20n%20%3D%20iter.next()%3B%0Aassert_eq!(Some(3)%2C%20n)%3B%0A%0Alet%20n%20%3D%20iter.next()%3B%0Aassert_eq!(None%2C%20n)%3B%0A%7D">Run</a></pre>
+
 <p>Implementing <code>IntoIterator</code> for your type:</p>
 
 <pre class="rust rust-example-rendered">
@@ -129,8 +134,10 @@ with Rust's <code>for</code> loop syntax</a>.</p>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.into_iter' class='method'><span id='into_iter.v' class='invisible'><code>fn <a href='#tymethod.into_iter' class='fnname'>into_iter</a>(self) -&gt; Self::<a class="trait" href="../../core/iter/trait.IntoIterator.html" title="trait core::iter::IntoIterator">IntoIter</a></code></span></h3><div class='docblock'><p>Creates an iterator from a value.</p>
+
 <p>See the <a href="trait.IntoIterator.html">module-level documentation</a> for more.</p>
-<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -286,7 +293,6 @@ with Rust's <code>for</code> loop syntax</a>.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

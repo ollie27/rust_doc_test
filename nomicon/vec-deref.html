@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-deref.html#deref" name="deref"><h1>Deref</h1></a>
+                    <a class="header" href="vec-deref.html#deref" id="deref"><h1>Deref</h1></a>
 <p>Alright! We've got a decent minimal stack implemented. We can push, we can
 pop, and we can clean up after ourselves. However there's a whole mess of
 functionality we'd reasonably want. In particular, we have a proper array, but
@@ -83,7 +84,7 @@ impl&lt;T&gt; Deref for Vec&lt;T&gt; {
     type Target = [T];
     fn deref(&amp;self) -&gt; &amp;[T] {
         unsafe {
-            ::std::slice::from_raw_parts(*self.ptr, self.len)
+            ::std::slice::from_raw_parts(self.ptr.as_ptr(), self.len)
         }
     }
 }
@@ -94,7 +95,7 @@ impl&lt;T&gt; Deref for Vec&lt;T&gt; {
 impl&lt;T&gt; DerefMut for Vec&lt;T&gt; {
     fn deref_mut(&amp;mut self) -&gt; &amp;mut [T] {
         unsafe {
-            ::std::slice::from_raw_parts_mut(*self.ptr, self.len)
+            ::std::slice::from_raw_parts_mut(self.ptr.as_ptr(), self.len)
         }
     }
 }

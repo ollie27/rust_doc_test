@@ -5487,7 +5487,7 @@
 
         <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tmpdir</span>();
         <span class="kw">let</span> <span class="ident">unicode</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>();
-        <span class="kw">let</span> <span class="ident">unicode</span> <span class="op">=</span> <span class="ident">unicode</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;test-각丁ー再见&quot;</span>));
+        <span class="kw">let</span> <span class="ident">unicode</span> <span class="op">=</span> <span class="ident">unicode</span>.<span class="ident">join</span>(<span class="string">&quot;test-각丁ー再见&quot;</span>);
         <span class="macro">check</span><span class="macro">!</span>(<span class="ident">fs</span>::<span class="ident">create_dir</span>(<span class="kw-2">&amp;</span><span class="ident">unicode</span>));
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">unicode</span>.<span class="ident">exists</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;test/unicode-bogus-path-각丁ー再见&quot;</span>).<span class="ident">exists</span>());
@@ -6160,7 +6160,6 @@
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

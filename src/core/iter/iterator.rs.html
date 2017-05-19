@@ -2245,6 +2245,11 @@
 <span id="2200">2200</span>
 <span id="2201">2201</span>
 <span id="2202">2202</span>
+<span id="2203">2203</span>
+<span id="2204">2204</span>
+<span id="2205">2205</span>
+<span id="2206">2206</span>
+<span id="2207">2207</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2016 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2367,7 +2372,7 @@
     <span class="doccomment">/// // exactly wouldn&#39;t be possible without executing filter().</span>
     <span class="doccomment">/// assert_eq!((0, Some(10)), iter.size_hint());</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// // Let&#39;s add one five more numbers with chain()</span>
+    <span class="doccomment">/// // Let&#39;s add five more numbers with chain()</span>
     <span class="doccomment">/// let iter = (0..10).filter(|x| x % 2 == 0).chain(15..20);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // now both bounds are increased by five</span>
@@ -2877,8 +2882,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that the underlying iterator is still advanced when [`peek`] is</span>
     <span class="doccomment">/// called for the first time: In order to retrieve the next element,</span>
-    <span class="doccomment">/// [`next`] is called on the underlying iterator, hence any side effects of</span>
-    <span class="doccomment">/// the [`next`] method will occur.</span>
+    <span class="doccomment">/// [`next`] is called on the underlying iterator, hence any side effects (i.e.</span>
+    <span class="doccomment">/// anything other than fetching the next value) of the [`next`] method</span>
+    <span class="doccomment">/// will occur.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`peek`]: struct.Peekable.html#method.peek</span>
     <span class="doccomment">/// [`next`]: ../../std/iter/trait.Iterator.html#tymethod.next</span>
@@ -3780,14 +3786,18 @@
     <span class="doccomment">/// Stopping at the first `true`:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// let a = [1, 2, 3];</span>
+    <span class="doccomment">/// let a = [1, 2, 3, 4];</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let mut iter = a.iter();</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(iter.position(|&amp;x| x == 2), Some(1));</span>
+    <span class="doccomment">/// assert_eq!(iter.position(|&amp;x| x &gt;= 2), Some(1));</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // we can still use `iter`, as there are more elements.</span>
     <span class="doccomment">/// assert_eq!(iter.next(), Some(&amp;3));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // The returned index depends on iterator state</span>
+    <span class="doccomment">/// assert_eq!(iter.position(|&amp;x| x == 4), Some(0));</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -4408,16 +4418,16 @@
     }
 }
 
-<span class="doccomment">/// Select an element from an iterator based on the given projection</span>
+<span class="doccomment">/// Select an element from an iterator based on the given &quot;projection&quot;</span>
 <span class="doccomment">/// and &quot;comparison&quot; function.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This is an idiosyncratic helper to try to factor out the</span>
 <span class="doccomment">/// commonalities of {max,min}{,_by}. In particular, this avoids</span>
 <span class="doccomment">/// having to implement optimizations several times.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">select_fold1</span><span class="op">&lt;</span><span class="ident">I</span>,<span class="ident">B</span>, <span class="ident">FProj</span>, <span class="ident">FCmp</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">it</span>: <span class="ident">I</span>,
-                                  <span class="kw-2">mut</span> <span class="ident">f_proj</span>: <span class="ident">FProj</span>,
-                                  <span class="kw-2">mut</span> <span class="ident">f_cmp</span>: <span class="ident">FCmp</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">B</span>, <span class="ident">I</span>::<span class="ident">Item</span>)<span class="op">&gt;</span>
+<span class="kw">fn</span> <span class="ident">select_fold1</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">B</span>, <span class="ident">FProj</span>, <span class="ident">FCmp</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">it</span>: <span class="ident">I</span>,
+                                   <span class="kw-2">mut</span> <span class="ident">f_proj</span>: <span class="ident">FProj</span>,
+                                   <span class="kw-2">mut</span> <span class="ident">f_cmp</span>: <span class="ident">FCmp</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">B</span>, <span class="ident">I</span>::<span class="ident">Item</span>)<span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">Iterator</span>,
           <span class="ident">FProj</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">I</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="ident">B</span>,
           <span class="ident">FCmp</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">B</span>, <span class="kw-2">&amp;</span><span class="ident">I</span>::<span class="ident">Item</span>, <span class="kw-2">&amp;</span><span class="ident">B</span>, <span class="kw-2">&amp;</span><span class="ident">I</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>
@@ -4430,7 +4440,7 @@
 
         <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="ident">it</span> {
             <span class="kw">let</span> <span class="ident">x_p</span> <span class="op">=</span> <span class="ident">f_proj</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>);
-            <span class="kw">if</span> <span class="ident">f_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">sel_p</span>,  <span class="kw-2">&amp;</span><span class="ident">sel</span>, <span class="kw-2">&amp;</span><span class="ident">x_p</span>, <span class="kw-2">&amp;</span><span class="ident">x</span>) {
+            <span class="kw">if</span> <span class="ident">f_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">sel_p</span>, <span class="kw-2">&amp;</span><span class="ident">sel</span>, <span class="kw-2">&amp;</span><span class="ident">x_p</span>, <span class="kw-2">&amp;</span><span class="ident">x</span>) {
                 <span class="ident">sel</span> <span class="op">=</span> <span class="ident">x</span>;
                 <span class="ident">sel_p</span> <span class="op">=</span> <span class="ident">x_p</span>;
             }
@@ -4506,7 +4516,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../../index.html'>std</a>::<wbr><a href='../index.html'>str</a>::<wbr><a href='index.html'>pattern</a></p><script>window.sidebarCurrent = {name: 'Pattern', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Pattern</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#provided-methods">Provided Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../../index.html'>std</a>::<wbr><a href='../index.html'>str</a>::<wbr><a href='index.html'>pattern</a></p><script>window.sidebarCurrent = {name: 'Pattern', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -55,13 +55,17 @@
 
     fn <a href='#method.is_contained_in' class='fnname'>is_contained_in</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> { ... }
     fn <a href='#method.is_prefix_of' class='fnname'>is_prefix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> { ... }
-    fn <a href='#method.is_suffix_of' class='fnname'>is_suffix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> <span class="where fmt-newline">where Self::<a class="trait" href="../../../std/str/pattern/trait.Pattern.html" title="trait std::str::pattern::Pattern">Searcher</a>: <a class="trait" href="../../../std/str/pattern/trait.ReverseSearcher.html" title="trait std::str::pattern::ReverseSearcher">ReverseSearcher</a>&lt;'a&gt;</span> { ... }
+    fn <a href='#method.is_suffix_of' class='fnname'>is_suffix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a><br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Self::<a class="trait" href="../../../std/str/pattern/trait.Pattern.html" title="trait std::str::pattern::Pattern">Searcher</a>: <a class="trait" href="../../../std/str/pattern/trait.ReverseSearcher.html" title="trait std::str::pattern::ReverseSearcher">ReverseSearcher</a>&lt;'a&gt;</span>,
+    { ... }
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>pattern </code><a href="https://github.com/rust-lang/rust/issues/27721">#27721</a>)</summary><p>API not fully fleshed out and ready to be stabilized</p>
 </details></div></div><div class='docblock'><p>A string pattern.</p>
-<p>A <code>Pattern&lt;'a&gt;</code> expresses that the implementing type
-can be used as a string pattern for searching in a <code>&amp;'a str</code>.</p>
-<p>For example, both <code>'a'</code> and <code>&quot;aa&quot;</code> are patterns that
+
+<p>A <code>Pattern&lt;&#39;a&gt;</code> expresses that the implementing type
+can be used as a string pattern for searching in a <code>&amp;&#39;a str</code>.</p>
+
+<p>For example, both <code>&#39;a&#39;</code> and <code>&quot;aa&quot;</code> are patterns that
 would match at index <code>1</code> in the string <code>&quot;baaaab&quot;</code>.</p>
+
 <p>The trait itself acts as a builder for an associated
 <code>Searcher</code> type, which does the actual work of finding
 occurrences of the pattern in a string.</p>
@@ -83,7 +87,7 @@ occurrences of the pattern in a string.</p>
 </details></div></div><div class='docblock'><p>Checks whether the pattern matches anywhere in the haystack</p>
 </div><h3 id='method.is_prefix_of' class='method'><span id='is_prefix_of.v' class='invisible'><code>fn <a href='#method.is_prefix_of' class='fnname'>is_prefix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a></code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>pattern </code><a href="https://github.com/rust-lang/rust/issues/27721">#27721</a>)</summary><p>API not fully fleshed out and ready to be stabilized</p>
 </details></div></div><div class='docblock'><p>Checks whether the pattern matches at the front of the haystack</p>
-</div><h3 id='method.is_suffix_of' class='method'><span id='is_suffix_of.v' class='invisible'><code>fn <a href='#method.is_suffix_of' class='fnname'>is_suffix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> <span class="where fmt-newline">where Self::<a class="trait" href="../../../std/str/pattern/trait.Pattern.html" title="trait std::str::pattern::Pattern">Searcher</a>: <a class="trait" href="../../../std/str/pattern/trait.ReverseSearcher.html" title="trait std::str::pattern::ReverseSearcher">ReverseSearcher</a>&lt;'a&gt;</span></code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>pattern </code><a href="https://github.com/rust-lang/rust/issues/27721">#27721</a>)</summary><p>API not fully fleshed out and ready to be stabilized</p>
+</div><h3 id='method.is_suffix_of' class='method'><span id='is_suffix_of.v' class='invisible'><code>fn <a href='#method.is_suffix_of' class='fnname'>is_suffix_of</a>(self, haystack: &amp;'a <a class="primitive" href="../../primitive.str.html">str</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Self::<a class="trait" href="../../../std/str/pattern/trait.Pattern.html" title="trait std::str::pattern::Pattern">Searcher</a>: <a class="trait" href="../../../std/str/pattern/trait.ReverseSearcher.html" title="trait std::str::pattern::ReverseSearcher">ReverseSearcher</a>&lt;'a&gt;,&nbsp;</span></code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>pattern </code><a href="https://github.com/rust-lang/rust/issues/27721">#27721</a>)</summary><p>API not fully fleshed out and ready to be stabilized</p>
 </details></div></div><div class='docblock'><p>Checks whether the pattern matches at the back of the haystack</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
@@ -91,7 +95,7 @@ occurrences of the pattern in a string.</p>
     <li><code>impl&lt;'a, 'b&gt; Pattern&lt;'a&gt; for &amp;'b <a class="struct" href="../../../std/string/struct.String.html" title="struct std::string::String">String</a></code></li>
 <li><code>impl&lt;'a&gt; Pattern&lt;'a&gt; for <a class="primitive" href="../../primitive.char.html">char</a></code></li>
 <li><code>impl&lt;'a, 'b&gt; Pattern&lt;'a&gt; for <a class="primitive" href="../../primitive.slice.html">&amp;'b [</a><a class="primitive" href="../../primitive.char.html">char</a><a class="primitive" href="../../primitive.slice.html">]</a></code></li>
-<li><code>impl&lt;'a, F&gt; Pattern&lt;'a&gt; for F <span class="where fmt-newline">where F: <a class="trait" href="../../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(<a class="primitive" href="../../primitive.char.html">char</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a></span></code></li>
+<li><code>impl&lt;'a, F&gt; Pattern&lt;'a&gt; for F <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="../../../std/ops/trait.FnMut.html" title="trait std::ops::FnMut">FnMut</a>(<a class="primitive" href="../../primitive.char.html">char</a>) -&gt; <a class="primitive" href="../../primitive.bool.html">bool</a>,&nbsp;</span></code></li>
 <li><code>impl&lt;'a, 'b, 'c&gt; Pattern&lt;'a&gt; for &amp;'c &amp;'b <a class="primitive" href="../../primitive.str.html">str</a></code></li>
 <li><code>impl&lt;'a, 'b&gt; Pattern&lt;'a&gt; for &amp;'b <a class="primitive" href="../../primitive.str.html">str</a></code></li>
 </ul><script type="text/javascript" async
@@ -153,7 +157,6 @@ occurrences of the pattern in a string.</p>
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

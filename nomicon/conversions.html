@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="conversions.html#type-conversions" name="type-conversions"><h1>Type Conversions</h1></a>
+                    <a class="header" href="conversions.html#type-conversions" id="type-conversions"><h1>Type Conversions</h1></a>
 <p>At the end of the day, everything is just a pile of bits somewhere, and type
 systems are just there to help us use those bits right. There are two common
 problems with typing bits: needing to reinterpret those exact bits as a
@@ -79,7 +80,6 @@ consequently gives you several ways to solve them.</p>
 The most trivial way to do this is to just destructure a value into its
 constituent parts and then build a new type out of them. e.g.</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo {
     x: u32,

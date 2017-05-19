@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>str</a></p><script>window.sidebarCurrent = {name: 'Utf8Error', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Utf8Error</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>str</a></p><script>window.sidebarCurrent = {name: 'Utf8Error', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -51,15 +51,18 @@
                </span><a class='srclink' href='../../src/core/str/mod.rs.html#167-170' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Utf8Error { /* fields omitted */ }</pre><div class='docblock'><p>Errors which can occur when attempting to interpret a sequence of <a href="../../std/primitive.u8.html"><code>u8</code></a>
 as a string.</p>
+
 <p>As such, the <code>from_utf8</code> family of functions and methods for both <a href="../../std/string/struct.String.html#method.from_utf8"><code>String</code></a>s
 and <a href="../../std/str/fn.from_utf8.html"><code>&amp;str</code></a>s make use of this error, for example.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#172-214' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.valid_up_to' class="method"><span id='valid_up_to.v' class='invisible'><code>fn <a href='#method.valid_up_to' class='fnname'>valid_up_to</a>(&amp;self) -&gt; usize</code><div class='since' title='Stable since Rust version 1.5.0'>1.5.0</div></span></h4>
 <div class='docblock'><p>Returns the index in the given string up to which valid UTF-8 was
 verified.</p>
+
 <p>It is the maximum index such that <code>from_utf8(&amp;input[..index])</code>
 would return <code>Ok(_)</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -76,20 +79,17 @@ would return <code>Ok(_)</code>.</p>
 </div><h4 id='method.error_len' class="method"><span id='error_len.v' class='invisible'><code>fn <a href='#method.error_len' class='fnname'>error_len</a>(&amp;self) -&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;usize&gt;</code></span></h4>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>utf8_error_error_len </code><a href="https://github.com/rust-lang/rust/issues/40494">#40494</a>)</summary><p>new</p>
 </details></div></div><div class='docblock'><p>Provide more information about the failure:</p>
+
 <ul>
-<li>
-<p><code>None</code>: the end of the input was reached unexpectedly.
+<li><p><code>None</code>: the end of the input was reached unexpectedly.
 <code>self.valid_up_to()</code> is 1 to 3 bytes from the end of the input.
 If a byte stream (such as a file or a network socket) is being decoded incrementally,
-this could be a valid <code>char</code> whose UTF-8 byte sequence is spanning multiple chunks.</p>
-</li>
-<li>
-<p><code>Some(len)</code>: an unexpected byte was encountered.
+this could be a valid <code>char</code> whose UTF-8 byte sequence is spanning multiple chunks.</p></li>
+<li><p><code>Some(len)</code>: an unexpected byte was encountered.
 The length provided is that of the invalid byte sequence
 that starts at the index given by <code>valid_up_to()</code>.
 Decoding should resume after that sequence
-(after inserting a U+FFFD REPLACEMENT CHARACTER) in case of lossy decoding.</p>
-</li>
+(after inserting a U+FFFD REPLACEMENT CHARACTER) in case of lossy decoding.</p></li>
 </ul>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#165' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#165' title='goto source code'>[src]</a></span></h3>
@@ -106,7 +106,7 @@ Decoding should resume after that sequence
 </div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#165' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='../../core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="../../core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="../../core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/fmt/trait.Display.html" title="trait core::fmt::Display">Display</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#369-378' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../core/fmt/trait.Display.html" title="trait core::fmt::Display">Display</a> for <a class="struct" href="../../core/str/struct.Utf8Error.html" title="struct core::str::Utf8Error">Utf8Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/core/str/mod.rs.html#391-400' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt-1' class="method"><span id='fmt.v-1' class='invisible'><code>fn <a href='../../core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="../../core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter. <a href="../../core/fmt/trait.Display.html#tymethod.fmt">Read more</a></p>
 </div></div></section>
@@ -166,7 +166,6 @@ Decoding should resume after that sequence
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

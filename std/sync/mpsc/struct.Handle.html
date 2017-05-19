@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../../index.html'>std</a>::<wbr><a href='../index.html'>sync</a>::<wbr><a href='index.html'>mpsc</a></p><script>window.sidebarCurrent = {name: 'Handle', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Handle</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>std</a>::<wbr><a href='../index.html'>sync</a>::<wbr><a href='index.html'>mpsc</a></p><script>window.sidebarCurrent = {name: 'Handle', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -67,6 +67,7 @@ semantics as <code>Receiver.recv</code></p>
 </details></div></div><div class='docblock'><p>Adds this handle to the receiver set that the handle was created from. This
 method can be called multiple times, but it has no effect if <code>add</code> was
 called previously.</p>
+
 <p>This method is unsafe because it requires that the <code>Handle</code> is not moved
 while it is added to the <code>Select</code> set.</p>
 </div><h4 id='method.remove' class="method"><span id='remove.v' class='invisible'><code>unsafe fn <a href='#method.remove' class='fnname'>remove</a>(&amp;mut self)</code></span></h4>
@@ -137,7 +138,6 @@ called.</p>
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

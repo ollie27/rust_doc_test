@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>ffi</a></p><script>window.sidebarCurrent = {name: 'OsStringExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait OsStringExt</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>ffi</a></p><script>window.sidebarCurrent = {name: 'OsStringExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -57,6 +57,7 @@
             <div class='methods'>
         <h3 id='tymethod.from_wide' class='method'><span id='from_wide.v' class='invisible'><code>fn <a href='#tymethod.from_wide' class='fnname'>from_wide</a>(wide: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u16.html">u16</a><a class="primitive" href="../../../primitive.slice.html">]</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Creates an <code>OsString</code> from a potentially ill-formed UTF-16 slice of
 16-bit code units.</p>
+
 <p>This is lossless: calling <code>.encode_wide()</code> on the resulting string
 will always return the original code units.</p>
 </div></div>
@@ -122,7 +123,6 @@ will always return the original code units.</p>
         window.rootPath = "../../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>

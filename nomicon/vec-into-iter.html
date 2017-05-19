@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-into-iter.html#intoiter" name="intoiter"><h1>IntoIter</h1></a>
+                    <a class="header" href="vec-into-iter.html#intoiter" id="intoiter"><h1>IntoIter</h1></a>
 <p>Let's move on to writing iterators. <code>iter</code> and <code>iter_mut</code> have already been
 written for us thanks to The Magic of Deref. However there's two interesting
 iterators that Vec provides that slices can't: <code>into_iter</code> and <code>drain</code>.</p>
@@ -182,7 +183,7 @@ contains that weren't yielded.</p>
             let elem_size = mem::size_of::&lt;T&gt;();
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.buf as *mut _, num_bytes, align);
+                heap::deallocate(self.buf.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }

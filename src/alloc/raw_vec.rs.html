@@ -656,6 +656,19 @@
 <span id="611">611</span>
 <span id="612">612</span>
 <span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -681,13 +694,13 @@
 <span class="doccomment">/// involved. This type is excellent for building your own data structures like Vec and VecDeque.</span>
 <span class="doccomment">/// In particular:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// * Produces heap::EMPTY on zero-sized types</span>
-<span class="doccomment">/// * Produces heap::EMPTY on zero-length allocations</span>
+<span class="doccomment">/// * Produces Unique::empty() on zero-sized types</span>
+<span class="doccomment">/// * Produces Unique::empty() on zero-length allocations</span>
 <span class="doccomment">/// * Catches all overflows in capacity computations (promotes them to &quot;capacity overflow&quot; panics)</span>
 <span class="doccomment">/// * Guards against 32-bit systems allocating more than isize::MAX bytes</span>
 <span class="doccomment">/// * Guards against overflowing your length</span>
 <span class="doccomment">/// * Aborts on OOM</span>
-<span class="doccomment">/// * Avoids freeing heap::EMPTY</span>
+<span class="doccomment">/// * Avoids freeing Unique::empty()</span>
 <span class="doccomment">/// * Contains a ptr::Unique and thus endows the user with all related benefits</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This type does not in anyway inspect the memory that it manages. When dropped it *will*</span>
@@ -714,15 +727,13 @@
     <span class="doccomment">/// it makes a RawVec with capacity `usize::MAX`. Useful for implementing</span>
     <span class="doccomment">/// delayed allocation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="kw">unsafe</span> {
-            <span class="comment">// !0 is usize::MAX. This branch should be stripped at compile time.</span>
-            <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span> { <span class="op">!</span><span class="number">0</span> } <span class="kw">else</span> { <span class="number">0</span> };
+        <span class="comment">// !0 is usize::MAX. This branch should be stripped at compile time.</span>
+        <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span> { <span class="op">!</span><span class="number">0</span> } <span class="kw">else</span> { <span class="number">0</span> };
 
-            <span class="comment">// heap::EMPTY doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;</span>
-            <span class="ident">RawVec</span> {
-                <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">heap</span>::<span class="ident">EMPTY</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>),
-                <span class="ident">cap</span>: <span class="ident">cap</span>,
-            }
+        <span class="comment">// Unique::empty() doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;</span>
+        <span class="ident">RawVec</span> {
+            <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">empty</span>(),
+            <span class="ident">cap</span>: <span class="ident">cap</span>,
         }
     }
 
@@ -740,7 +751,18 @@
     <span class="doccomment">/// # Aborts</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Aborts on OOM</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity</span>(<span class="ident">cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">RawVec</span>::<span class="ident">allocate</span>(<span class="ident">cap</span>, <span class="bool-val">false</span>)
+    }
+
+    <span class="doccomment">/// Like `with_capacity` but guarantees the buffer is zeroed.</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity_zeroed</span>(<span class="ident">cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">RawVec</span>::<span class="ident">allocate</span>(<span class="ident">cap</span>, <span class="bool-val">true</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">allocate</span>(<span class="ident">cap</span>: <span class="ident">usize</span>, <span class="ident">zeroed</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">elem_size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
 
@@ -749,10 +771,14 @@
 
             <span class="comment">// handles ZSTs and `cap = 0` alike</span>
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">alloc_size</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="ident">heap</span>::<span class="ident">EMPTY</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>
+                <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>
             } <span class="kw">else</span> {
                 <span class="kw">let</span> <span class="ident">align</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
-                <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">heap</span>::<span class="ident">allocate</span>(<span class="ident">alloc_size</span>, <span class="ident">align</span>);
+                <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">zeroed</span> {
+                    <span class="ident">heap</span>::<span class="ident">allocate_zeroed</span>(<span class="ident">alloc_size</span>, <span class="ident">align</span>)
+                } <span class="kw">else</span> {
+                    <span class="ident">heap</span>::<span class="ident">allocate</span>(<span class="ident">alloc_size</span>, <span class="ident">align</span>)
+                };
                 <span class="kw">if</span> <span class="ident">ptr</span>.<span class="ident">is_null</span>() {
                     <span class="ident">oom</span>()
                 }
@@ -792,10 +818,10 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Gets a raw pointer to the start of the allocation. Note that this is</span>
-    <span class="doccomment">/// heap::EMPTY if `cap = 0` or T is zero-sized. In the former case, you must</span>
+    <span class="doccomment">/// Unique::empty() if `cap = 0` or T is zero-sized. In the former case, you must</span>
     <span class="doccomment">/// be careful.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
-        <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">ptr</span>
+        <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>()
     }
 
     <span class="doccomment">/// Gets the capacity of the allocation.</span>
@@ -1207,7 +1233,7 @@
 
             <span class="kw">let</span> <span class="ident">num_bytes</span> <span class="op">=</span> <span class="ident">elem_size</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">cap</span>;
             <span class="kw">unsafe</span> {
-                <span class="ident">heap</span>::<span class="ident">deallocate</span>(<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _, <span class="ident">num_bytes</span>, <span class="ident">align</span>);
+                <span class="ident">heap</span>::<span class="ident">deallocate</span>(<span class="self">self</span>.<span class="ident">ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">num_bytes</span>, <span class="ident">align</span>);
             }
         }
     }
@@ -1328,7 +1354,6 @@
         window.rootPath = "../../";
         window.currentCrate = "alloc";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

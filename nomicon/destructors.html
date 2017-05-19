@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="destructors.html#destructors" name="destructors"><h1>Destructors</h1></a>
+                    <a class="header" href="destructors.html#destructors" id="destructors"><h1>Destructors</h1></a>
 <p>What the language <em>does</em> provide is full-blown automatic destructors through the
 <code>Drop</code> trait, which provides the following method:</p>
 <pre><code class="language-rust ignore">fn drop(&amp;mut self);
@@ -98,8 +99,8 @@ struct Box&lt;T&gt;{ ptr: Unique&lt;T&gt; }
 impl&lt;T&gt; Drop for Box&lt;T&gt; {
     fn drop(&amp;mut self) {
         unsafe {
-            drop_in_place(*self.ptr);
-            heap::deallocate((*self.ptr) as *mut u8,
+            drop_in_place(self.ptr.as_ptr());
+            heap::deallocate(self.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -125,8 +126,8 @@ struct Box&lt;T&gt;{ ptr: Unique&lt;T&gt; }
 impl&lt;T&gt; Drop for Box&lt;T&gt; {
     fn drop(&amp;mut self) {
         unsafe {
-            drop_in_place(*self.ptr);
-            heap::deallocate((*self.ptr) as *mut u8,
+            drop_in_place(self.ptr.as_ptr());
+            heap::deallocate(self.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -140,7 +141,7 @@ impl&lt;T&gt; Drop for SuperBox&lt;T&gt; {
         unsafe {
             // Hyper-optimized: deallocate the box's contents for it
             // without `drop`ing the contents
-            heap::deallocate((*self.my_box.ptr) as *mut u8,
+            heap::deallocate(self.my_box.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -154,7 +155,6 @@ use-after-frees and double-frees.</p>
 <p>Note that the recursive drop behavior applies to all structs and enums
 regardless of whether they implement Drop. Therefore something like</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Boxy&lt;T&gt; {
     data1: Box&lt;T&gt;,
@@ -168,7 +168,6 @@ dropped, even though it itself doesn't implement Drop. We say that such a type
 <em>needs Drop</em>, even though it is not itself Drop.</p>
 <p>Similarly,</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Link {
     Next(Box&lt;Link&gt;),
@@ -198,8 +197,8 @@ struct Box&lt;T&gt;{ ptr: Unique&lt;T&gt; }
 impl&lt;T&gt; Drop for Box&lt;T&gt; {
     fn drop(&amp;mut self) {
         unsafe {
-            drop_in_place(*self.ptr);
-            heap::deallocate((*self.ptr) as *mut u8,
+            drop_in_place(self.ptr.as_ptr());
+            heap::deallocate(self.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
         }
@@ -215,7 +214,7 @@ impl&lt;T&gt; Drop for SuperBox&lt;T&gt; {
             // without `drop`ing the contents. Need to set the `box`
             // field as `None` to prevent Rust from trying to Drop it.
             let my_box = self.my_box.take().unwrap();
-            heap::deallocate((*my_box.ptr) as *mut u8,
+            heap::deallocate(my_box.ptr.as_ptr() as *mut u8,
                              mem::size_of::&lt;T&gt;(),
                              mem::align_of::&lt;T&gt;());
             mem::forget(my_box);

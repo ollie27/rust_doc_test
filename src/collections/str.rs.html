@@ -1994,6 +1994,27 @@
 <span id="1949">1949</span>
 <span id="1950">1950</span>
 <span id="1951">1951</span>
+<span id="1952">1952</span>
+<span id="1953">1953</span>
+<span id="1954">1954</span>
+<span id="1955">1955</span>
+<span id="1956">1956</span>
+<span id="1957">1957</span>
+<span id="1958">1958</span>
+<span id="1959">1959</span>
+<span id="1960">1960</span>
+<span id="1961">1961</span>
+<span id="1962">1962</span>
+<span id="1963">1963</span>
+<span id="1964">1964</span>
+<span id="1965">1965</span>
+<span id="1966">1966</span>
+<span id="1967">1967</span>
+<span id="1968">1968</span>
+<span id="1969">1969</span>
+<span id="1970">1970</span>
+<span id="1971">1971</span>
+<span id="1972">1972</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2067,13 +2088,16 @@
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>::{<span class="ident">MatchIndices</span>, <span class="ident">RMatchIndices</span>};
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>::{<span class="ident">from_utf8</span>, <span class="ident">Chars</span>, <span class="ident">CharIndices</span>, <span class="ident">Bytes</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>::{<span class="ident">from_utf8</span>, <span class="ident">from_utf8_mut</span>, <span class="ident">Chars</span>, <span class="ident">CharIndices</span>, <span class="ident">Bytes</span>};
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>::{<span class="ident">from_utf8_unchecked</span>, <span class="ident">ParseBoolError</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>::{<span class="ident">from_utf8_unchecked</span>, <span class="ident">from_utf8_unchecked_mut</span>, <span class="ident">ParseBoolError</span>};
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_box_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41119&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">str</span>::<span class="ident">from_boxed_utf8_unchecked</span>;
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">std_unicode</span>::<span class="ident">str</span>::<span class="ident">SplitWhitespace</span>;
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>::<span class="ident">pattern</span>;
+
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;slice_concat_ext&quot;</span>,
            <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;trait should not have to exist&quot;</span>,
@@ -2170,18 +2194,6 @@
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fused&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35602&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">FusedIterator</span> <span class="kw">for</span> <span class="ident">EncodeUtf16</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {}
 
-<span class="comment">// Return the initial codepoint accumulator for the first byte.</span>
-<span class="comment">// The first byte is special, only want bottom 5 bits for width 2, 4 bits</span>
-<span class="comment">// for width 3, and 3 bits for width 4</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">utf8_first_byte</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">byte</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">width</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> ((<span class="macro-nonterminal">$</span><span class="macro-nonterminal">byte</span> <span class="op">&amp;</span> (<span class="number">0x7F</span> <span class="op">&gt;&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">width</span>)) <span class="kw">as</span> <span class="ident">u32</span>)
-}
-
-<span class="comment">// return the value of $ch updated with continuation byte $byte</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">utf8_acc_cont_byte</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ch</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">byte</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> ((<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ch</span> <span class="op">&lt;&lt;</span> <span class="number">6</span>) <span class="op">|</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">byte</span> <span class="op">&amp;</span> <span class="number">63</span>) <span class="kw">as</span> <span class="ident">u32</span>)
-}
-
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2195,6 +2207,12 @@
     <span class="kw">type</span> <span class="ident">Owned</span> <span class="op">=</span> <span class="ident">String</span>;
     <span class="kw">fn</span> <span class="ident">to_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
         <span class="kw">unsafe</span> { <span class="ident">String</span>::<span class="ident">from_utf8_unchecked</span>(<span class="self">self</span>.<span class="ident">as_bytes</span>().<span class="ident">to_owned</span>()) }
+    }
+
+    <span class="kw">fn</span> <span class="ident">clone_into</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>) {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="ident">target</span>, <span class="ident">String</span>::<span class="ident">new</span>()).<span class="ident">into_bytes</span>();
+        <span class="self">self</span>.<span class="ident">as_bytes</span>().<span class="ident">clone_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">b</span>);
+        <span class="kw-2">*</span><span class="ident">target</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">String</span>::<span class="ident">from_utf8_unchecked</span>(<span class="ident">b</span>) }
     }
 }
 
@@ -2291,6 +2309,13 @@
         <span class="ident">core_str</span>::<span class="ident">StrExt</span>::<span class="ident">as_bytes</span>(<span class="self">self</span>)
     }
 
+    <span class="doccomment">/// Converts a mutable string slice to a mutable byte slice.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_mut_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41119&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_bytes_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] {
+        <span class="ident">core_str</span>::<span class="ident">StrExt</span>::<span class="ident">as_bytes_mut</span>(<span class="self">self</span>)
+    }
+
     <span class="doccomment">/// Converts a string slice to a raw pointer.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// As string slices are a slice of bytes, the raw pointer points to a</span>
@@ -2315,8 +2340,10 @@
 
     <span class="doccomment">/// Returns a subslice of `str`.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This is the non-panicking alternative to indexing the `str`. Returns `None` whenever</span>
-    <span class="doccomment">/// equivalent indexing operation would panic.</span>
+    <span class="doccomment">/// This is the non-panicking alternative to indexing the `str`. Returns</span>
+    <span class="doccomment">/// [`None`] whenever equivalent indexing operation would panic.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: option/enum.Option.html#variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -2336,8 +2363,10 @@
 
     <span class="doccomment">/// Returns a mutable subslice of `str`.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This is the non-panicking alternative to indexing the `str`. Returns `None` whenever</span>
-    <span class="doccomment">/// equivalent indexing operation would panic.</span>
+    <span class="doccomment">/// This is the non-panicking alternative to indexing the `str`. Returns</span>
+    <span class="doccomment">/// [`None`] whenever equivalent indexing operation would panic.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: option/enum.Option.html#variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -2560,7 +2589,7 @@
         <span class="ident">core_str</span>::<span class="ident">StrExt</span>::<span class="ident">split_at_mut</span>(<span class="self">self</span>, <span class="ident">mid</span>)
     }
 
-    <span class="doccomment">/// Returns an iterator over the `char`s of a string slice.</span>
+    <span class="doccomment">/// Returns an iterator over the [`char`]s of a string slice.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// As a string slice consists of valid UTF-8, we can iterate through a</span>
     <span class="doccomment">/// string slice by [`char`]. This method returns such an iterator.</span>
@@ -3647,13 +3676,13 @@
 
     <span class="doccomment">/// Parses this string slice into another type.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Because `parse()` is so general, it can cause problems with type</span>
-    <span class="doccomment">/// inference. As such, `parse()` is one of the few times you&#39;ll see</span>
+    <span class="doccomment">/// Because `parse` is so general, it can cause problems with type</span>
+    <span class="doccomment">/// inference. As such, `parse` is one of the few times you&#39;ll see</span>
     <span class="doccomment">/// the syntax affectionately known as the &#39;turbofish&#39;: `::&lt;&gt;`. This</span>
     <span class="doccomment">/// helps the inference algorithm understand specifically which type</span>
     <span class="doccomment">/// you&#39;re trying to parse into.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// `parse()` can parse any type that implements the [`FromStr`] trait.</span>
+    <span class="doccomment">/// `parse` can parse any type that implements the [`FromStr`] trait.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`FromStr`]: str/trait.FromStr.html</span>
     <span class="doccomment">///</span>
@@ -3693,6 +3722,12 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FromStr</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">F</span>::<span class="prelude-val">Err</span><span class="op">&gt;</span> {
         <span class="ident">core_str</span>::<span class="ident">StrExt</span>::<span class="ident">parse</span>(<span class="self">self</span>)
+    }
+
+    <span class="doccomment">/// Converts a `Box&lt;str&gt;` into a `Box&lt;[u8]&gt;` without copying or allocating.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_box_extras&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41119&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_boxed_bytes</span>(<span class="self">self</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
     }
 
     <span class="doccomment">/// Replaces all matches of a pattern with another string.</span>
@@ -3736,7 +3771,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// `replacen` creates a new [`String`], and copies the data from this string slice into it.</span>
     <span class="doccomment">/// While doing so, it attempts to find matches of a pattern. If it finds any, it</span>
-    <span class="doccomment">/// replaces them with the replacement string slice at most `N` times.</span>
+    <span class="doccomment">/// replaces them with the replacement string slice at most `count` times.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`String`]: string/struct.String.html</span>
     <span class="doccomment">///</span>
@@ -3882,7 +3917,9 @@
         <span class="kw">return</span> <span class="ident">s</span>;
     }
 
-    <span class="doccomment">/// Escapes each char in `s` with `char::escape_debug`.</span>
+    <span class="doccomment">/// Escapes each char in `s` with [`char::escape_debug`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`char::escape_debug`]: primitive.char.html#method.escape_debug</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_escape&quot;</span>,
                <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;return type may change to be an iterator&quot;</span>,
                <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27791&quot;</span>)]</span>
@@ -3890,7 +3927,9 @@
         <span class="self">self</span>.<span class="ident">chars</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">escape_debug</span>()).<span class="ident">collect</span>()
     }
 
-    <span class="doccomment">/// Escapes each char in `s` with `char::escape_default`.</span>
+    <span class="doccomment">/// Escapes each char in `s` with [`char::escape_default`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`char::escape_default`]: primitive.char.html#method.escape_default</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_escape&quot;</span>,
                <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;return type may change to be an iterator&quot;</span>,
                <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27791&quot;</span>)]</span>
@@ -3898,7 +3937,9 @@
         <span class="self">self</span>.<span class="ident">chars</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">escape_default</span>()).<span class="ident">collect</span>()
     }
 
-    <span class="doccomment">/// Escapes each char in `s` with `char::escape_unicode`.</span>
+    <span class="doccomment">/// Escapes each char in `s` with [`char::escape_unicode`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`char::escape_unicode`]: primitive.char.html#method.escape_unicode</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;str_escape&quot;</span>,
                <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;return type may change to be an iterator&quot;</span>,
                <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27791&quot;</span>)]</span>
@@ -3906,9 +3947,10 @@
         <span class="self">self</span>.<span class="ident">chars</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">escape_unicode</span>()).<span class="ident">collect</span>()
     }
 
-    <span class="doccomment">/// Converts a `Box&lt;str&gt;` into a [`String`] without copying or allocating.</span>
+    <span class="doccomment">/// Converts a [`Box&lt;str&gt;`] into a [`String`] without copying or allocating.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`String`]: string/struct.String.html</span>
+    <span class="doccomment">/// [`Box&lt;str&gt;`]: boxed/struct.Box.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -4004,7 +4046,6 @@
         window.rootPath = "../../";
         window.currentCrate = "collections";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

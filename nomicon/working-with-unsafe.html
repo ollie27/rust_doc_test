@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,12 +68,11 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="working-with-unsafe.html#working-with-unsafe" name="working-with-unsafe"><h1>Working with Unsafe</h1></a>
+                    <a class="header" href="working-with-unsafe.html#working-with-unsafe" id="working-with-unsafe"><h1>Working with Unsafe</h1></a>
 <p>Rust generally only gives us the tools to talk about Unsafe Rust in a scoped and
 binary manner. Unfortunately, reality is significantly more complicated than
 that. For instance, consider the following toy function:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn index(idx: usize, arr: &amp;[u8]) -&gt; Option&lt;u8&gt; {
     if idx &lt; arr.len() {
@@ -90,7 +90,6 @@ is, index into the array in an unchecked manner. But even in such a trivial
 function, the scope of the unsafe block is questionable. Consider changing the
 <code>&lt;</code> to a <code>&lt;=</code>:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 fn index(idx: usize, arr: &amp;[u8]) -&gt; Option&lt;u8&gt; {
     if idx &lt;= arr.len() {

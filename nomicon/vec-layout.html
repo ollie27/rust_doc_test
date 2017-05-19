@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-layout.html#layout" name="layout"><h1>Layout</h1></a>
+                    <a class="header" href="vec-layout.html#layout" id="layout"><h1>Layout</h1></a>
 <p>First off, we need to come up with the struct layout. A Vec has three parts:
 a pointer to the allocation, the size of the allocation, and the number of
 elements that have been initialized.</p>
@@ -94,7 +95,6 @@ so we'd like to not use it if possible, though.</p>
 <li>We are variant over <code>T</code></li>
 <li>We may own a value of type <code>T</code> (for drop check)</li>
 <li>We are Send/Sync if <code>T</code> is Send/Sync</li>
-<li>We deref to <code>*mut T</code> (so it largely acts like a <code>*mut</code> in our code)</li>
 <li>Our pointer is never null (so <code>Option&lt;Vec&lt;T&gt;&gt;</code> is null-pointer-optimized)</li>
 </ul>
 <p>We can implement all of the above requirements except for the last
@@ -117,17 +117,12 @@ impl&lt;T&gt; Unique&lt;T&gt; {
     pub fn new(ptr: *mut T) -&gt; Self {
         Unique { ptr: ptr, _marker: PhantomData }
     }
-}
 
-impl&lt;T&gt; Deref for Unique&lt;T&gt; {
-    type Target = *mut T;
-    fn deref(&amp;self) -&gt; &amp;*mut T {
-        // There's no way to cast the *const to a *mut
-        // while also taking a reference. So we just
-        // transmute it since it's all &quot;just pointers&quot;.
-        unsafe { mem::transmute(&amp;self.ptr) }
+    pub fn as_ptr(&amp;self) -&gt; *mut T {
+        self.ptr as *mut T
     }
 }
+
 # fn main() {}
 </code></pre></pre>
 <p>Unfortunately the mechanism for stating that your value is non-zero is
@@ -147,7 +142,7 @@ pub struct Vec&lt;T&gt; {
 </code></pre></pre>
 <p>If you don't care about the null-pointer optimization, then you can use the
 stable code. However we will be designing the rest of the code around enabling
-the optimization. In particular, <code>Unique::new</code> is unsafe to call, because
+this optimization. It should be noted that <code>Unique::new</code> is unsafe to call, because
 putting <code>null</code> inside of it is Undefined Behavior. Our stable Unique doesn't
 need <code>new</code> to be unsafe because it doesn't make any interesting guarantees about
 its contents.</p>

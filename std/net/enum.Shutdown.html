@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>net</a></p><script>window.sidebarCurrent = {name: 'Shutdown', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum Shutdown</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>net</a></p><script>window.sidebarCurrent = {name: 'Shutdown', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -55,12 +55,15 @@
     Both,
 }</pre><div class='docblock'><p>Possible values which can be passed to the <a href="struct.TcpStream.html#method.shutdown"><code>shutdown</code></a> method of
 <a href="struct.TcpStream.html"><code>TcpStream</code></a>.</p>
-</div><h2 class='variants'>Variants</h2>
+</div><h2 id='variants' class='variants'>Variants</h2>
 <span id='variant.Read' class='variant'><span id='Read.v' class='invisible'><code>Read</code></span></span><div class='docblock'><p>The reading portion of the <a href="../../std/net/struct.TcpStream.html"><code>TcpStream</code></a> should be shut down.</p>
+
 <p>All currently blocked and future <a href="../../std/io/trait.Read.html">reads</a> will return <a href="../../std/result/enum.Result.html#variant.Ok"><code>Ok(0)</code></a>.</p>
 </div><span id='variant.Write' class='variant'><span id='Write.v' class='invisible'><code>Write</code></span></span><div class='docblock'><p>The writing portion of the <a href="../../std/net/struct.TcpStream.html"><code>TcpStream</code></a> should be shut down.</p>
+
 <p>All currently blocked and future <a href="../../std/io/trait.Write.html">writes</a> will return an error.</p>
 </div><span id='variant.Both' class='variant'><span id='Both.v' class='invisible'><code>Both</code></span></span><div class='docblock'><p>Both the reading and the writing portions of the <a href="../../std/net/struct.TcpStream.html"><code>TcpStream</code></a> should be shut down.</p>
+
 <p>See <a href="#variant.Read"><code>Shutdown::Read</code></a> and <a href="#variant.Write"><code>Shutdown::Write</code></a> for more information.</p>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/marker/trait.Copy.html" title="trait std::marker::Copy">Copy</a> for <a class="enum" href="../../std/net/enum.Shutdown.html" title="enum std::net::Shutdown">Shutdown</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/net/mod.rs.html#69' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/clone/trait.Clone.html" title="trait std::clone::Clone">Clone</a> for <a class="enum" href="../../std/net/enum.Shutdown.html" title="enum std::net::Shutdown">Shutdown</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/net/mod.rs.html#69' title='goto source code'>[src]</a></span></h3>
@@ -134,7 +137,6 @@
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

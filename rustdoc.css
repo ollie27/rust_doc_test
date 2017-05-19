@@ -193,6 +193,7 @@ nav.sub {
 	font-size: 17px;
 	margin: 30px 0 20px 0;
 	text-align: center;
+	word-wrap: break-word;
 }
 
 .location:empty {
@@ -235,6 +236,9 @@ nav.sub {
 	white-space: pre;
 	overflow: auto;
 	padding-left: 0;
+}
+#search {
+	margin-left: 230px;
 }
 .content pre.line-numbers {
 	float: left;
@@ -379,12 +383,6 @@ h4 > code, h3 > code, .invisible > code {
 .content .where.fmt-newline {
 	display: block;
 }
-/* Bit of whitespace to indent it */
-.content .method .where::before,
-.content .fn .where::before,
-.content .where.fmt-newline::before {
-	content: '  ';
-}
 
 .content .methods > div { margin-left: 40px; }
 
@@ -397,11 +395,6 @@ h4 > code, h3 > code, .invisible > code {
 
 .content .stability code {
 	font-size: 90%;
-}
-
-/* Shift where in trait listing down a line */
-pre.trait .where::before {
-	content: '\a         ';
 }
 
 nav {

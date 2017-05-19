@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="checked-uninit.html#checked-uninitialized-memory" name="checked-uninitialized-memory"><h1>Checked Uninitialized Memory</h1></a>
+                    <a class="header" href="checked-uninit.html#checked-uninitialized-memory" id="checked-uninitialized-memory"><h1>Checked Uninitialized Memory</h1></a>
 <p>Like C, all stack variables in Rust are uninitialized until a value is
 explicitly assigned to them. Unlike C, Rust statically prevents you from ever
 reading them until you do:</p>
@@ -124,7 +125,6 @@ src/main.rs:6   println!(&quot;{}&quot;, x);
 have a relatively sophisticated understanding of dependencies and control
 flow. For instance, this works:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 let x: i32;
 

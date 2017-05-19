@@ -48,18 +48,21 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ptr.rs.html#202-208' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ptr.rs.html#196-202' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub unsafe fn read_unaligned&lt;T&gt;(src: *const T) -&gt; T</pre><div class='docblock'><p>Reads the value from <code>src</code> without moving it. This leaves the
 memory in <code>src</code> unchanged.</p>
+
 <p>Unlike <code>read</code>, the pointer may be unaligned.</p>
-<h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
+
+<h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
 <p>Beyond accepting a raw pointer, this is unsafe because it semantically
 moves the value out of <code>src</code> without preventing further usage of <code>src</code>.
 If <code>T</code> is not <code>Copy</code>, then care must be taken to ensure that the value at
 <code>src</code> is not used before the data is overwritten again (e.g. with <code>write</code>,
 <code>zero_memory</code>, or <code>copy_memory</code>). Note that <code>*src = foo</code> counts as a use
 because it will attempt to drop the value previously at <code>*src</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
@@ -126,7 +129,6 @@ because it will attempt to drop the value previously at <code>*src</code>.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

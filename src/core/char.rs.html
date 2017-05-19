@@ -893,6 +893,7 @@
 <span id="848">848</span>
 <span id="849">849</span>
 <span id="850">850</span>
+<span id="851">851</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -915,6 +916,7 @@
 <span class="kw">use</span> <span class="ident">convert</span>::<span class="ident">TryFrom</span>;
 <span class="kw">use</span> <span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
 <span class="kw">use</span> <span class="ident">slice</span>;
+<span class="kw">use</span> <span class="ident">str</span>::<span class="ident">from_utf8_unchecked_mut</span>;
 <span class="kw">use</span> <span class="ident">iter</span>::<span class="ident">FusedIterator</span>;
 <span class="kw">use</span> <span class="ident">mem</span>::<span class="ident">transmute</span>;
 
@@ -1344,7 +1346,7 @@
                     <span class="ident">code</span>,
                     <span class="ident">dst</span>.<span class="ident">len</span>())
             };
-            <span class="ident">transmute</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">dst</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">len</span>))
+            <span class="ident">from_utf8_unchecked_mut</span>(<span class="ident">dst</span>.<span class="ident">get_unchecked_mut</span>(..<span class="ident">len</span>))
         }
     }
 
@@ -1802,7 +1804,6 @@
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

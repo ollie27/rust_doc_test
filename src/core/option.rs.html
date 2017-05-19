@@ -1187,14 +1187,14 @@
 <span class="doccomment">//! not ([`None`]).</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
-<span class="doccomment">//! let optional: Option&lt;Box&lt;i32&gt;&gt; = None;</span>
-<span class="doccomment">//! check_optional(&amp;optional);</span>
+<span class="doccomment">//! let optional = None;</span>
+<span class="doccomment">//! check_optional(optional);</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! let optional: Option&lt;Box&lt;i32&gt;&gt; = Some(Box::new(9000));</span>
-<span class="doccomment">//! check_optional(&amp;optional);</span>
+<span class="doccomment">//! let optional = Some(Box::new(9000));</span>
+<span class="doccomment">//! check_optional(optional);</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! fn check_optional(optional: &amp;Option&lt;Box&lt;i32&gt;&gt;) {</span>
-<span class="doccomment">//!     match *optional {</span>
+<span class="doccomment">//! fn check_optional(optional: Option&lt;Box&lt;i32&gt;&gt;) {</span>
+<span class="doccomment">//!     match optional {</span>
 <span class="doccomment">//!         Some(ref p) =&gt; println!(&quot;has value {}&quot;, p),</span>
 <span class="doccomment">//!         None =&gt; println!(&quot;has no value&quot;),</span>
 <span class="doccomment">//!     }</span>
@@ -2252,7 +2252,6 @@
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

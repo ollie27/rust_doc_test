@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>iter</a></p><script>window.sidebarCurrent = {name: 'Step', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Step</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>iter</a></p><script>window.sidebarCurrent = {name: 'Step', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -60,6 +60,7 @@
     fn <a href='#tymethod.sub_one' class='fnname'>sub_one</a>(&amp;self) -&gt; Self;
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>step_trait </code><a href="https://github.com/rust-lang/rust/issues/27741">#27741</a>)</summary><p>likely to be replaced by finer-grained traits</p>
 </details></div></div><div class='docblock'><p>Objects that can be stepped over in both directions.</p>
+
 <p>The <code>steps_between</code> function provides a way to efficiently compare
 two <code>Step</code> objects.</p>
 </div>
@@ -70,6 +71,7 @@ two <code>Step</code> objects.</p>
 </div><h3 id='tymethod.steps_between' class='method'><span id='steps_between.v' class='invisible'><code>fn <a href='#tymethod.steps_between' class='fnname'>steps_between</a>(start: &amp;Self, end: &amp;Self, by: &amp;Self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>step_trait </code><a href="https://github.com/rust-lang/rust/issues/27741">#27741</a>)</summary><p>likely to be replaced by finer-grained traits</p>
 </details></div></div><div class='docblock'><p>Returns the number of steps between two step objects. The count is
 inclusive of <code>start</code> and exclusive of <code>end</code>.</p>
+
 <p>Returns <code>None</code> if it is not possible to calculate <code>steps_between</code>
 without overflow.</p>
 </div><h3 id='tymethod.steps_between_by_one' class='method'><span id='steps_between_by_one.v' class='invisible'><code>fn <a href='#tymethod.steps_between_by_one' class='fnname'>steps_between_by_one</a>(start: &amp;Self, end: &amp;Self) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="primitive" href="../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>step_trait </code><a href="https://github.com/rust-lang/rust/issues/27741">#27741</a>)</summary><p>likely to be replaced by finer-grained traits</p>
@@ -158,7 +160,6 @@ without overflow.</p>
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

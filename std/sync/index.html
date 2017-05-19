@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'sync', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module sync</p><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#constants">Constants</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'sync', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -50,6 +50,7 @@
                    </a>
                </span><a class='srclink' href='../../src/std/sync/mod.rs.html#11-44' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Useful synchronization primitives.</p>
+
 <p>This module contains useful safe and unsafe synchronization primitives.
 Most of the primitives in this module do not provide any sort of locking
 and/or blocking at all, but rather provide the necessary tools to build
@@ -168,7 +169,9 @@ due to a time out or not.</p>
                            <td><a class="struct" href="struct.Weak.html"
                                   title='struct std::sync::Weak'>Weak</a></td>
                            <td class='docblock-short'>
-                                <p>A weak version of <a href="struct.Arc.html"><code>Arc</code></a>.</p>
+                                <p><code>Weak</code> is a version of <a href="struct.Arc.html"><code>Arc</code></a> that holds a non-owning reference to the
+managed value. The value is accessed by calling <a href="struct.Weak.html#method.upgrade"><code>upgrade</code></a> on the <code>Weak</code>
+pointer, which returns an <a href="../../std/option/enum.Option.html"><code>Option</code></a><code>&lt;</code><a href="struct.Arc.html"><code>Arc</code></a><code>&lt;T&gt;&gt;</code>.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -185,7 +188,7 @@ whether the <a href="struct.Once.html"><code>Once</code></a> was previously pois
                                   title='enum std::sync::TryLockError'>TryLockError</a></td>
                            <td class='docblock-short'>
                                 <p>An enumeration of possible errors which can occur while calling the
-<code>try_lock</code> method.</p>
+<a href="struct.Mutex.html#method.try_lock"><code>try_lock</code></a> method.</p>
                            </td>
                        </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
@@ -267,7 +270,6 @@ whether the <a href="struct.Once.html"><code>Once</code></a> was previously pois
         window.rootPath = "../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

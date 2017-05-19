@@ -1241,6 +1241,10 @@
 <span id="1196">1196</span>
 <span id="1197">1197</span>
 <span id="1198">1198</span>
+<span id="1199">1199</span>
+<span id="1200">1200</span>
+<span id="1201">1201</span>
+<span id="1202">1202</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1252,7 +1256,7 @@
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">heap</span>::{<span class="ident">EMPTY</span>, <span class="ident">allocate</span>, <span class="ident">deallocate</span>};
+<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">heap</span>::{<span class="ident">allocate</span>, <span class="ident">deallocate</span>};
 
 <span class="kw">use</span> <span class="ident">cmp</span>;
 <span class="kw">use</span> <span class="ident">hash</span>::{<span class="ident">BuildHasher</span>, <span class="ident">Hash</span>, <span class="ident">Hasher</span>};
@@ -1277,6 +1281,7 @@
 <span class="kw">type</span> <span class="ident">HashUint</span> <span class="op">=</span> <span class="ident">usize</span>;
 
 <span class="kw">const</span> <span class="ident">EMPTY_BUCKET</span>: <span class="ident">HashUint</span> <span class="op">=</span> <span class="number">0</span>;
+<span class="kw">const</span> <span class="ident">EMPTY</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span>;
 
 <span class="doccomment">/// Special `Unique&lt;HashUint&gt;` that uses the lower bit of the pointer</span>
 <span class="doccomment">/// to expose a boolean tag.</span>
@@ -1293,24 +1298,25 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">set_tag</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) {
-        <span class="kw">let</span> <span class="ident">usize_ptr</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">HashUint</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">usize</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">usize_ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span>;
         <span class="kw">unsafe</span> {
             <span class="kw">if</span> <span class="ident">value</span> {
-                <span class="kw-2">*</span><span class="ident">usize_ptr</span> <span class="op">|=</span> <span class="number">1</span>;
+                <span class="ident">usize_ptr</span> <span class="op">|=</span> <span class="number">1</span>;
             } <span class="kw">else</span> {
-                <span class="kw-2">*</span><span class="ident">usize_ptr</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="number">1</span>;
+                <span class="ident">usize_ptr</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="number">1</span>;
             }
+            <span class="self">self</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">usize_ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">HashUint</span>)
         }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">tag</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">&amp;</span> <span class="number">1</span> <span class="op">==</span> <span class="number">1</span>
+        (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">&amp;</span> <span class="number">1</span> <span class="op">==</span> <span class="number">1</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">HashUint</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="op">!</span><span class="number">1</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">HashUint</span>
+        (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="op">!</span><span class="number">1</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">HashUint</span>
     }
 }
 
@@ -2356,10 +2362,12 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">SafeHash</span>, <span class="ident">K</span>, <span class="ident">V</span>)<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">raw</span><span class="op">|</span> <span class="kw">unsafe</span> {
-            (<span class="kw-2">*</span><span class="self">self</span>.<span class="ident">table</span>.<span class="ident">as_mut_ptr</span>()).<span class="ident">size</span> <span class="op">-=</span> <span class="number">1</span>;
-            <span class="kw">let</span> (<span class="ident">k</span>, <span class="ident">v</span>) <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">raw</span>.<span class="ident">pair</span>());
-            (<span class="ident">SafeHash</span> { <span class="ident">hash</span>: <span class="ident">ptr</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">raw</span>.<span class="ident">hash</span>(), <span class="ident">EMPTY_BUCKET</span>) }, <span class="ident">k</span>, <span class="ident">v</span>)
+        <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">raw</span><span class="op">|</span> {
+            <span class="kw">unsafe</span> {
+                <span class="self">self</span>.<span class="ident">table</span>.<span class="ident">as_mut</span>().<span class="ident">size</span> <span class="op">-=</span> <span class="number">1</span>;
+                <span class="kw">let</span> (<span class="ident">k</span>, <span class="ident">v</span>) <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="ident">raw</span>.<span class="ident">pair</span>());
+                (<span class="ident">SafeHash</span> { <span class="ident">hash</span>: <span class="ident">ptr</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">raw</span>.<span class="ident">hash</span>(), <span class="ident">EMPTY_BUCKET</span>) }, <span class="ident">k</span>, <span class="ident">v</span>)
+            }
         })
     }
 
@@ -2498,7 +2506,6 @@
         window.rootPath = "../../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>

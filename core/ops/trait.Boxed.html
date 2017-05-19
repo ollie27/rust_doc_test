@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Boxed', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Boxed</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Boxed', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,12 +48,13 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#2825-2835' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#2881-2891' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Boxed {
     type <a href='#associatedtype.Data' class="type">Data</a>;
     type <a href='#associatedtype.Place' class="type">Place</a>: <a class="trait" href="../../core/ops/trait.BoxPlace.html" title="trait core::ops::BoxPlace">BoxPlace</a>&lt;Self::<a class="trait" href="../../core/ops/trait.Boxed.html" title="trait core::ops::Boxed">Data</a>&gt;;
     unsafe fn <a href='#tymethod.finalize' class='fnname'>finalize</a>(filled: Self::<a class="trait" href="../../core/ops/trait.Boxed.html" title="trait core::ops::Boxed">Place</a>) -&gt; Self;
 }</pre><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>placement_new_protocol </code><a href="https://github.com/rust-lang/rust/issues/27779">#27779</a>)</div></div><div class='docblock'><p>Core trait for the <code>box EXPR</code> form.</p>
+
 <p><code>box EXPR</code> effectively desugars into:</p>
 
 <pre class="rust rust-example-rendered">
@@ -64,6 +65,7 @@
     ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">write</span>(<span class="ident">raw_place</span>, <span class="ident">value</span>);
     <span class="ident">Boxed</span>::<span class="ident">finalize</span>(<span class="ident">place</span>)
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20place%20%3D%20BoxPlace%3A%3Amake_place()%3B%0Alet%20raw_place%20%3D%20Place%3A%3Apointer(%26mut%20place)%3B%0Alet%20value%20%3D%20EXPR%3B%0Aunsafe%20%7B%0A%20%20%20%20%3A%3Astd%3A%3Aptr%3A%3Awrite(raw_place%2C%20value)%3B%0A%20%20%20%20Boxed%3A%3Afinalize(place)%0A%7D%0A%7D">Run</a></pre>
+
 <p>The type of <code>box EXPR</code> is supplied from its surrounding
 context; in the above expansion, the result type <code>T</code> is used
 to determine which implementation of <code>Boxed</code> to use, and that
@@ -143,7 +145,6 @@ returned instance of <code>Self</code> and forgetting <code>filled</code>.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="vec-dealloc.html#deallocating" name="deallocating"><h1>Deallocating</h1></a>
+                    <a class="header" href="vec-dealloc.html#deallocating" id="deallocating"><h1>Deallocating</h1></a>
 <p>Next we should implement Drop so that we don't massively leak tons of resources.
 The easiest way is to just call <code>pop</code> until it yields None, and then deallocate
 our buffer. Note that calling <code>pop</code> is unneeded if <code>T: !Drop</code>. In theory we can
@@ -85,7 +86,7 @@ haven't actually allocated any memory.</p>
             let elem_size = mem::size_of::&lt;T&gt;();
             let num_bytes = elem_size * self.cap;
             unsafe {
-                heap::deallocate(*self.ptr as *mut _, num_bytes, align);
+                heap::deallocate(self.ptr.as_ptr() as *mut _, num_bytes, align);
             }
         }
     }

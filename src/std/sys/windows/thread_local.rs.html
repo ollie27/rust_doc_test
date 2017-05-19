@@ -293,39 +293,6 @@
 <span id="248">248</span>
 <span id="249">249</span>
 <span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -337,10 +304,11 @@
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
+<span class="kw">use</span> <span class="ident">mem</span>;
 <span class="kw">use</span> <span class="ident">ptr</span>;
+<span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicPtr</span>;
+<span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::<span class="ident">SeqCst</span>;
 <span class="kw">use</span> <span class="ident">sys</span>::<span class="ident">c</span>;
-<span class="kw">use</span> <span class="ident">sys_common</span>::<span class="ident">mutex</span>::<span class="ident">Mutex</span>;
-<span class="kw">use</span> <span class="ident">sys_common</span>;
 
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Key</span> <span class="op">=</span> <span class="ident">c</span>::<span class="ident">DWORD</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Dtor</span> <span class="op">=</span> <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>);
@@ -363,8 +331,6 @@
 <span class="comment">// * All TLS destructors are tracked by *us*, not the windows runtime. This</span>
 <span class="comment">//   means that we have a global list of destructors for each TLS key that</span>
 <span class="comment">//   we know about.</span>
-<span class="comment">// * When a TLS key is destroyed, we&#39;re sure to remove it from the dtor list</span>
-<span class="comment">//   if it&#39;s in there.</span>
 <span class="comment">// * When a thread exits, we run over the entire list and run dtors for all</span>
 <span class="comment">//   non-null keys. This attempts to match Unix semantics in this regard.</span>
 <span class="comment">//</span>
@@ -378,13 +344,6 @@
 <span class="comment">// [1]: http://www.codeproject.com/Articles/8113/Thread-Local-Storage-The-C-Way</span>
 <span class="comment">// [2]: https://github.com/ChromiumWebApps/chromium/blob/master/base</span>
 <span class="comment">//                        /threading/thread_local_storage_win.cc#L42</span>
-
-<span class="comment">// NB these are specifically not types from `std::sync` as they currently rely</span>
-<span class="comment">// on poisoning and this module needs to operate at a lower level than requiring</span>
-<span class="comment">// the thread infrastructure to be in place (useful on the borders of</span>
-<span class="comment">// initialization/destruction).</span>
-<span class="kw">static</span> <span class="ident">DTOR_LOCK</span>: <span class="ident">Mutex</span> <span class="op">=</span> <span class="ident">Mutex</span>::<span class="ident">new</span>();
-<span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">DTORS</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Key</span>, <span class="ident">Dtor</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>();
 
 <span class="comment">// -------------------------------------------------------------------------</span>
 <span class="comment">// Native bindings</span>
@@ -414,81 +373,64 @@
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="ident">key</span>: <span class="ident">Key</span>) {
-    <span class="kw">if</span> <span class="ident">unregister_dtor</span>(<span class="ident">key</span>) {
-        <span class="comment">// FIXME: Currently if a key has a destructor associated with it we</span>
-        <span class="comment">// can&#39;t actually ever unregister it. If we were to</span>
-        <span class="comment">// unregister it, then any key destruction would have to be</span>
-        <span class="comment">// serialized with respect to actually running destructors.</span>
-        <span class="comment">//</span>
-        <span class="comment">// We want to avoid a race where right before run_dtors runs</span>
-        <span class="comment">// some destructors TlsFree is called. Allowing the call to</span>
-        <span class="comment">// TlsFree would imply that the caller understands that *all</span>
-        <span class="comment">// known threads* are not exiting, which is quite a difficult</span>
-        <span class="comment">// thing to know!</span>
-        <span class="comment">//</span>
-        <span class="comment">// For now we just leak all keys with dtors to &quot;fix&quot; this.</span>
-        <span class="comment">// Note that source [2] above shows precedent for this sort</span>
-        <span class="comment">// of strategy.</span>
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">c</span>::<span class="ident">TlsFree</span>(<span class="ident">key</span>);
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">r</span> <span class="op">!=</span> <span class="number">0</span>);
-    }
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="ident">_key</span>: <span class="ident">Key</span>) {
+    <span class="macro">rtabort</span><span class="macro">!</span>(<span class="string">&quot;can&#39;t destroy tls keys on windows&quot;</span>)
+}
+
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">requires_synchronized_create</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="bool-val">true</span>
 }
 
 <span class="comment">// -------------------------------------------------------------------------</span>
 <span class="comment">// Dtor registration</span>
 <span class="comment">//</span>
-<span class="comment">// These functions are associated with registering and unregistering</span>
-<span class="comment">// destructors. They&#39;re pretty simple, they just push onto a vector and scan</span>
-<span class="comment">// a vector currently.</span>
+<span class="comment">// Windows has no native support for running destructors so we manage our own</span>
+<span class="comment">// list of destructors to keep track of how to destroy keys. We then install a</span>
+<span class="comment">// callback later to get invoked whenever a thread exits, running all</span>
+<span class="comment">// appropriate destructors.</span>
 <span class="comment">//</span>
-<span class="comment">// FIXME: This could probably be at least a little faster with a BTree.</span>
+<span class="comment">// Currently unregistration from this list is not supported. A destructor can be</span>
+<span class="comment">// registered but cannot be unregistered. There&#39;s various simplifying reasons</span>
+<span class="comment">// for doing this, the big ones being:</span>
+<span class="comment">//</span>
+<span class="comment">// 1. Currently we don&#39;t even support deallocating TLS keys, so normal operation</span>
+<span class="comment">//    doesn&#39;t need to deallocate a destructor.</span>
+<span class="comment">// 2. There is no point in time where we know we can unregister a destructor</span>
+<span class="comment">//    because it could always be getting run by some remote thread.</span>
+<span class="comment">//</span>
+<span class="comment">// Typically processes have a statically known set of TLS keys which is pretty</span>
+<span class="comment">// small, and we&#39;d want to keep this memory alive for the whole process anyway</span>
+<span class="comment">// really.</span>
+<span class="comment">//</span>
+<span class="comment">// Perhaps one day we can fold the `Box` here into a static allocation,</span>
+<span class="comment">// expanding the `StaticKey` structure to contain not only a slot for the TLS</span>
+<span class="comment">// key but also a slot for the destructor queue on windows. An optimization for</span>
+<span class="comment">// another day!</span>
 
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">init_dtors</span>() {
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">DTORS</span>.<span class="ident">is_null</span>() { <span class="kw">return</span> }
+<span class="kw">static</span> <span class="ident">DTORS</span>: <span class="ident">AtomicPtr</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">AtomicPtr</span>::<span class="ident">new</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>());
 
-    <span class="kw">let</span> <span class="ident">dtors</span> <span class="op">=</span> <span class="kw">box</span> <span class="ident">Vec</span>::<span class="op">&lt;</span>(<span class="ident">Key</span>, <span class="ident">Dtor</span>)<span class="op">&gt;</span>::<span class="ident">new</span>();
-
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">sys_common</span>::<span class="ident">at_exit</span>(<span class="kw">move</span><span class="op">||</span> {
-        <span class="ident">DTOR_LOCK</span>.<span class="ident">lock</span>();
-        <span class="kw">let</span> <span class="ident">dtors</span> <span class="op">=</span> <span class="ident">DTORS</span>;
-        <span class="ident">DTORS</span> <span class="op">=</span> <span class="number">1</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _;
-        <span class="ident">Box</span>::<span class="ident">from_raw</span>(<span class="ident">dtors</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">DTORS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">==</span> <span class="number">1</span>); <span class="comment">// can&#39;t re-init after destructing</span>
-        <span class="ident">DTOR_LOCK</span>.<span class="ident">unlock</span>();
-    });
-    <span class="kw">if</span> <span class="ident">res</span>.<span class="ident">is_ok</span>() {
-        <span class="ident">DTORS</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">into_raw</span>(<span class="ident">dtors</span>);
-    } <span class="kw">else</span> {
-        <span class="ident">DTORS</span> <span class="op">=</span> <span class="number">1</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _;
-    }
+<span class="kw">struct</span> <span class="ident">Node</span> {
+    <span class="ident">dtor</span>: <span class="ident">Dtor</span>,
+    <span class="ident">key</span>: <span class="ident">Key</span>,
+    <span class="ident">next</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Node</span>,
 }
 
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">register_dtor</span>(<span class="ident">key</span>: <span class="ident">Key</span>, <span class="ident">dtor</span>: <span class="ident">Dtor</span>) {
-    <span class="ident">DTOR_LOCK</span>.<span class="ident">lock</span>();
-    <span class="ident">init_dtors</span>();
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">DTORS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!=</span> <span class="number">0</span>);
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">DTORS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!=</span> <span class="number">1</span>,
-            <span class="string">&quot;cannot create new TLS keys after the main thread has exited&quot;</span>);
-    (<span class="kw-2">*</span><span class="ident">DTORS</span>).<span class="ident">push</span>((<span class="ident">key</span>, <span class="ident">dtor</span>));
-    <span class="ident">DTOR_LOCK</span>.<span class="ident">unlock</span>();
-}
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">node</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">Node</span> {
+        <span class="ident">key</span>: <span class="ident">key</span>,
+        <span class="ident">dtor</span>: <span class="ident">dtor</span>,
+        <span class="ident">next</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
+    });
 
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unregister_dtor</span>(<span class="ident">key</span>: <span class="ident">Key</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">DTOR_LOCK</span>.<span class="ident">lock</span>();
-    <span class="ident">init_dtors</span>();
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">DTORS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!=</span> <span class="number">0</span>);
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">DTORS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">!=</span> <span class="number">1</span>,
-            <span class="string">&quot;cannot unregister destructors after the main thread has exited&quot;</span>);
-    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">dtors</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">DTORS</span>;
-        <span class="kw">let</span> <span class="ident">before</span> <span class="op">=</span> <span class="ident">dtors</span>.<span class="ident">len</span>();
-        <span class="ident">dtors</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">k</span>, _)<span class="op">|</span> <span class="ident">k</span> <span class="op">!=</span> <span class="ident">key</span>);
-        <span class="ident">dtors</span>.<span class="ident">len</span>() <span class="op">!=</span> <span class="ident">before</span>
-    };
-    <span class="ident">DTOR_LOCK</span>.<span class="ident">unlock</span>();
-    <span class="ident">ret</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">head</span> <span class="op">=</span> <span class="ident">DTORS</span>.<span class="ident">load</span>(<span class="ident">SeqCst</span>);
+    <span class="kw">loop</span> {
+        <span class="ident">node</span>.<span class="ident">next</span> <span class="op">=</span> <span class="ident">head</span>;
+        <span class="kw">match</span> <span class="ident">DTORS</span>.<span class="ident">compare_exchange</span>(<span class="ident">head</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">node</span>, <span class="ident">SeqCst</span>, <span class="ident">SeqCst</span>) {
+            <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="ident">mem</span>::<span class="ident">forget</span>(<span class="ident">node</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">cur</span>) <span class="op">=&gt;</span> <span class="ident">head</span> <span class="op">=</span> <span class="ident">cur</span>,
+        }
+    }
 }
 
 <span class="comment">// -------------------------------------------------------------------------</span>
@@ -525,16 +467,12 @@
 <span class="comment">// # Ok, what&#39;s up with running all these destructors?</span>
 <span class="comment">//</span>
 <span class="comment">// This will likely need to be improved over time, but this function</span>
-<span class="comment">// attempts a &quot;poor man&#39;s&quot; destructor callback system. To do this we clone a</span>
-<span class="comment">// local copy of the dtor list to start out with. This is our fudgy attempt</span>
-<span class="comment">// to not hold the lock while destructors run and not worry about the list</span>
-<span class="comment">// changing while we&#39;re looking at it.</span>
-<span class="comment">//</span>
-<span class="comment">// Once we&#39;ve got a list of what to run, we iterate over all keys, check</span>
-<span class="comment">// their values, and then run destructors if the values turn out to be non</span>
-<span class="comment">// null (setting them to null just beforehand). We do this a few times in a</span>
-<span class="comment">// loop to basically match Unix semantics. If we don&#39;t reach a fixed point</span>
-<span class="comment">// after a short while then we just inevitably leak something most likely.</span>
+<span class="comment">// attempts a &quot;poor man&#39;s&quot; destructor callback system. Once we&#39;ve got a list</span>
+<span class="comment">// of what to run, we iterate over all keys, check their values, and then run</span>
+<span class="comment">// destructors if the values turn out to be non null (setting them to null just</span>
+<span class="comment">// beforehand). We do this a few times in a loop to basically match Unix</span>
+<span class="comment">// semantics. If we don&#39;t reach a fixed point after a short while then we just</span>
+<span class="comment">// inevitably leak something most likely.</span>
 <span class="comment">//</span>
 <span class="comment">// # The article mentions weird stuff about &quot;/INCLUDE&quot;?</span>
 <span class="comment">//</span>
@@ -588,25 +526,21 @@
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">run_dtors</span>() {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">any_run</span> <span class="op">=</span> <span class="bool-val">true</span>;
     <span class="kw">for</span> _ <span class="kw">in</span> <span class="number">0</span>..<span class="number">5</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">any_run</span> { <span class="kw">break</span> }
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">any_run</span> {
+            <span class="kw">break</span>
+        }
         <span class="ident">any_run</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">let</span> <span class="ident">dtors</span> <span class="op">=</span> {
-            <span class="ident">DTOR_LOCK</span>.<span class="ident">lock</span>();
-            <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">DTORS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&lt;=</span> <span class="number">1</span> {
-                <span class="ident">Vec</span>::<span class="ident">new</span>()
-            } <span class="kw">else</span> {
-                (<span class="kw-2">*</span><span class="ident">DTORS</span>).<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">collect</span>()
-            };
-            <span class="ident">DTOR_LOCK</span>.<span class="ident">unlock</span>();
-            <span class="ident">ret</span>
-        };
-        <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">key</span>, <span class="ident">dtor</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">dtors</span> {
-            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">c</span>::<span class="ident">TlsGetValue</span>(<span class="ident">key</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cur</span> <span class="op">=</span> <span class="ident">DTORS</span>.<span class="ident">load</span>(<span class="ident">SeqCst</span>);
+        <span class="kw">while</span> <span class="op">!</span><span class="ident">cur</span>.<span class="ident">is_null</span>() {
+            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">c</span>::<span class="ident">TlsGetValue</span>((<span class="kw-2">*</span><span class="ident">cur</span>).<span class="ident">key</span>);
+
             <span class="kw">if</span> <span class="op">!</span><span class="ident">ptr</span>.<span class="ident">is_null</span>() {
-                <span class="ident">c</span>::<span class="ident">TlsSetValue</span>(<span class="ident">key</span>, <span class="ident">ptr</span>::<span class="ident">null_mut</span>());
-                <span class="ident">dtor</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _);
+                <span class="ident">c</span>::<span class="ident">TlsSetValue</span>((<span class="kw-2">*</span><span class="ident">cur</span>).<span class="ident">key</span>, <span class="ident">ptr</span>::<span class="ident">null_mut</span>());
+                ((<span class="kw-2">*</span><span class="ident">cur</span>).<span class="ident">dtor</span>)(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _);
                 <span class="ident">any_run</span> <span class="op">=</span> <span class="bool-val">true</span>;
             }
+
+            <span class="ident">cur</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">cur</span>).<span class="ident">next</span>;
         }
     }
 }
@@ -668,7 +602,6 @@
         window.rootPath = "../../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>

@@ -2956,6 +2956,62 @@
 <span id="2911">2911</span>
 <span id="2912">2912</span>
 <span id="2913">2913</span>
+<span id="2914">2914</span>
+<span id="2915">2915</span>
+<span id="2916">2916</span>
+<span id="2917">2917</span>
+<span id="2918">2918</span>
+<span id="2919">2919</span>
+<span id="2920">2920</span>
+<span id="2921">2921</span>
+<span id="2922">2922</span>
+<span id="2923">2923</span>
+<span id="2924">2924</span>
+<span id="2925">2925</span>
+<span id="2926">2926</span>
+<span id="2927">2927</span>
+<span id="2928">2928</span>
+<span id="2929">2929</span>
+<span id="2930">2930</span>
+<span id="2931">2931</span>
+<span id="2932">2932</span>
+<span id="2933">2933</span>
+<span id="2934">2934</span>
+<span id="2935">2935</span>
+<span id="2936">2936</span>
+<span id="2937">2937</span>
+<span id="2938">2938</span>
+<span id="2939">2939</span>
+<span id="2940">2940</span>
+<span id="2941">2941</span>
+<span id="2942">2942</span>
+<span id="2943">2943</span>
+<span id="2944">2944</span>
+<span id="2945">2945</span>
+<span id="2946">2946</span>
+<span id="2947">2947</span>
+<span id="2948">2948</span>
+<span id="2949">2949</span>
+<span id="2950">2950</span>
+<span id="2951">2951</span>
+<span id="2952">2952</span>
+<span id="2953">2953</span>
+<span id="2954">2954</span>
+<span id="2955">2955</span>
+<span id="2956">2956</span>
+<span id="2957">2957</span>
+<span id="2958">2958</span>
+<span id="2959">2959</span>
+<span id="2960">2960</span>
+<span id="2961">2961</span>
+<span id="2962">2962</span>
+<span id="2963">2963</span>
+<span id="2964">2964</span>
+<span id="2965">2965</span>
+<span id="2966">2966</span>
+<span id="2967">2967</span>
+<span id="2968">2968</span>
+<span id="2969">2969</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -3194,6 +3250,42 @@
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Here is an example of the same `Point` struct implementing the `Add` trait</span>
+<span class="doccomment">/// using generics.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// use std::ops::Add;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// #[derive(Debug)]</span>
+<span class="doccomment">/// struct Point&lt;T&gt; {</span>
+<span class="doccomment">///     x: T,</span>
+<span class="doccomment">///     y: T,</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// // Notice that the implementation uses the `Output` associated type</span>
+<span class="doccomment">/// impl&lt;T: Add&lt;Output=T&gt;&gt; Add for Point&lt;T&gt; {</span>
+<span class="doccomment">///     type Output = Point&lt;T&gt;;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">///     fn add(self, other: Point&lt;T&gt;) -&gt; Point&lt;T&gt; {</span>
+<span class="doccomment">///         Point {</span>
+<span class="doccomment">///             x: self.x + other.x,</span>
+<span class="doccomment">///             y: self.y + other.y,</span>
+<span class="doccomment">///         }</span>
+<span class="doccomment">///     }</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// impl&lt;T: PartialEq&gt; PartialEq for Point&lt;T&gt; {</span>
+<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
+<span class="doccomment">///         self.x == other.x &amp;&amp; self.y == other.y</span>
+<span class="doccomment">///     }</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// fn main() {</span>
+<span class="doccomment">///     assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 },</span>
+<span class="doccomment">///                Point { x: 3, y: 3 });</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// Note that `RHS = Self` by default, but this is not mandatory. For example,</span>
 <span class="doccomment">/// [std::time::SystemTime] implements `Add&lt;Duration&gt;`, which permits</span>
 <span class="doccomment">/// operations of the form `SystemTime = SystemTime + Duration`.</span>
@@ -3201,6 +3293,7 @@
 <span class="doccomment">/// [std::time::SystemTime]: ../../std/time/struct.SystemTime.html</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;add&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} + {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `+` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3274,6 +3367,7 @@
 <span class="doccomment">/// [std::time::SystemTime]: ../../std/time/struct.SystemTime.html</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;sub&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} - {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `-` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3396,6 +3490,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;mul&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} * {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `*` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3524,6 +3619,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;div&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} / {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `/` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3603,6 +3699,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;rem&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} % {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Rem</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `%` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3842,6 +3939,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitand&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &amp; {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitAnd</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `&amp;` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3925,6 +4023,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitor&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} | {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitOr</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `|` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -4011,6 +4110,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitxor&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} ^ {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitXor</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `^` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -4093,6 +4193,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shl&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &lt;&lt; {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Shl</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `&lt;&lt;` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -4196,6 +4297,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shr&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &gt;&gt; {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Shr</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The resulting type after applying the `&gt;&gt;` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -4280,6 +4382,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;add_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} += {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AddAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `+=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4336,6 +4439,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;sub_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} -= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SubAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `-=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4381,6 +4485,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;mul_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} *= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `*=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4426,6 +4531,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;div_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} /= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `/=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4470,6 +4576,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;rem_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} %= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RemAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `%=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4556,6 +4663,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitand_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &amp;= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitAndAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `&amp;=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4600,6 +4708,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitor_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} |= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitOrAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `|=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4644,6 +4753,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitxor_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} ^= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitXorAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `^=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4688,6 +4798,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shl_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &lt;&lt;= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ShlAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `&lt;&lt;=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -4753,6 +4864,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shr_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &gt;&gt;= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ShrAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The method for the `&gt;&gt;=` operator</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
@@ -5817,10 +5929,10 @@
     <span class="kw">type</span> <span class="ident">Error</span>;
 
     <span class="doccomment">/// Create a `Carrier` from a success value.</span>
-    <span class="kw">fn</span> <span class="ident">from_success</span>(<span class="self">Self</span>::<span class="ident">Success</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">from_success</span>(_: <span class="self">Self</span>::<span class="ident">Success</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
 
     <span class="doccomment">/// Create a `Carrier` from an error value.</span>
-    <span class="kw">fn</span> <span class="ident">from_error</span>(<span class="self">Self</span>::<span class="ident">Error</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">from_error</span>(_: <span class="self">Self</span>::<span class="ident">Error</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
 
     <span class="doccomment">/// Translate this `Carrier` to another implementation of `Carrier` with the</span>
     <span class="doccomment">/// same associated types.</span>
@@ -5928,7 +6040,6 @@
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

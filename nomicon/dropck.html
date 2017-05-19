@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,7 +68,7 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="dropck.html#drop-check" name="drop-check"><h1>Drop Check</h1></a>
+                    <a class="header" href="dropck.html#drop-check" id="drop-check"><h1>Drop Check</h1></a>
 <p>We have seen how lifetimes provide us some fairly simple rules for ensuring
 that we never read dangling references. However up to this point we have only ever
 interacted with the <em>outlives</em> relationship in an inclusive manner. That is,
@@ -216,7 +217,7 @@ far as the borrow checker knows while it is analyzing <code>main</code>, the bod
 of an inspector's destructor might access that borrowed data.</p>
 <p>Therefore, the drop checker forces all borrowed data in a value to
 strictly outlive that value.</p>
-<a class="header" href="dropck.html#an-escape-hatch" name="an-escape-hatch"><h1>An Escape Hatch</h1></a>
+<a class="header" href="dropck.html#an-escape-hatch" id="an-escape-hatch"><h1>An Escape Hatch</h1></a>
 <p>The precise rules that govern drop checking may be less restrictive in
 the future.</p>
 <p>The current analysis is deliberately conservative and trivial; it forces all
@@ -300,7 +301,7 @@ destructor, adding the <code>#[may_dangle]</code>
 attribute makes the type vulnerable to misuse that the borrower
 checker will not catch, inviting havoc. It is better to avoid adding
 the attribute.</p>
-<a class="header" href="dropck.html#is-that-all-about-drop-checker" name="is-that-all-about-drop-checker"><h1>Is that all about drop checker?</h1></a>
+<a class="header" href="dropck.html#is-that-all-about-drop-checker" id="is-that-all-about-drop-checker"><h1>Is that all about drop checker?</h1></a>
 <p>It turns out that when writing unsafe code, we generally don't need to
 worry at all about doing the right thing for the drop checker. However there
 is one special case that you need to worry about, which we will look at in

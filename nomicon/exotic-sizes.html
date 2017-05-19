@@ -10,7 +10,8 @@
         <base href="">
 
         <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <link rel="shortcut icon" href="favicon.png">
 
@@ -67,10 +68,10 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="exotic-sizes.html#exotically-sized-types" name="exotically-sized-types"><h1>Exotically Sized Types</h1></a>
+                    <a class="header" href="exotic-sizes.html#exotically-sized-types" id="exotically-sized-types"><h1>Exotically Sized Types</h1></a>
 <p>Most of the time, we think in terms of types with a fixed, positive size. This
 is not always the case, however.</p>
-<a class="header" href="exotic-sizes.html#dynamically-sized-types-dsts" name="dynamically-sized-types-dsts"><h1>Dynamically Sized Types (DSTs)</h1></a>
+<a class="header" href="exotic-sizes.html#dynamically-sized-types-dsts" id="dynamically-sized-types-dsts"><h1>Dynamically Sized Types (DSTs)</h1></a>
 <p>Rust in fact supports Dynamically Sized Types (DSTs): types without a statically
 known size or alignment. On the surface, this is a bit nonsensical: Rust <em>must</em>
 know the size and alignment of something in order to correctly work with it! In
@@ -89,7 +90,6 @@ it points to.</p>
 <p>Structs can actually store a single DST directly as their last field, but this
 makes them a DST as well:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 // Can't be stored on the stack directly
 struct Foo {
@@ -100,10 +100,9 @@ struct Foo {
 #}</code></pre></pre>
 <p><strong>NOTE: <a href="https://github.com/rust-lang/rust/issues/26403">As of Rust 1.0 struct DSTs are broken if the last field has
 a variable position based on its alignment</a>.</strong></p>
-<a class="header" href="exotic-sizes.html#zero-sized-types-zsts" name="zero-sized-types-zsts"><h1>Zero Sized Types (ZSTs)</h1></a>
+<a class="header" href="exotic-sizes.html#zero-sized-types-zsts" id="zero-sized-types-zsts"><h1>Zero Sized Types (ZSTs)</h1></a>
 <p>Rust actually allows types to be specified that occupy no space:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 struct Foo; // No fields = no size
 
@@ -138,12 +137,11 @@ consequence of types with no size. In particular, pointer offsets are no-ops,
 and standard allocators (including jemalloc, the one used by default in Rust)
 may return <code>nullptr</code> when a zero-sized allocation is requested, which is
 indistinguishable from out of memory.</p>
-<a class="header" href="exotic-sizes.html#empty-types" name="empty-types"><h1>Empty Types</h1></a>
+<a class="header" href="exotic-sizes.html#empty-types" id="empty-types"><h1>Empty Types</h1></a>
 <p>Rust also enables types to be declared that <em>cannot even be instantiated</em>. These
 types can only be talked about at the type level, and never at the value level.
 Empty types can be declared by specifying an enum with no variants:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-# 
 #fn main() {
 enum Void {} // No variants = EMPTY
 

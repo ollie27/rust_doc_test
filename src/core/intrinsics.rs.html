@@ -1319,33 +1319,6 @@
 <span id="1274">1274</span>
 <span id="1275">1275</span>
 <span id="1276">1276</span>
-<span id="1277">1277</span>
-<span id="1278">1278</span>
-<span id="1279">1279</span>
-<span id="1280">1280</span>
-<span id="1281">1281</span>
-<span id="1282">1282</span>
-<span id="1283">1283</span>
-<span id="1284">1284</span>
-<span id="1285">1285</span>
-<span id="1286">1286</span>
-<span id="1287">1287</span>
-<span id="1288">1288</span>
-<span id="1289">1289</span>
-<span id="1290">1290</span>
-<span id="1291">1291</span>
-<span id="1292">1292</span>
-<span id="1293">1293</span>
-<span id="1294">1294</span>
-<span id="1295">1295</span>
-<span id="1296">1296</span>
-<span id="1297">1297</span>
-<span id="1298">1298</span>
-<span id="1299">1299</span>
-<span id="1300">1300</span>
-<span id="1301">1301</span>
-<span id="1302">1302</span>
-<span id="1303">1303</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1395,7 +1368,6 @@
             <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
 <span class="attribute">#<span class="op">!</span>[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;drop_in_place&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_deprecated</span>(<span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;no longer an intrinsic - use `ptr::drop_in_place` directly&quot;</span>,
                    <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.18.0&quot;</span>)]</span>
@@ -1994,27 +1966,6 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size_of_val</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(_: <span class="kw-2">&amp;</span><span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">usize</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min_align_of_val</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(_: <span class="kw-2">&amp;</span><span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">usize</span>;
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
-    <span class="doccomment">/// Executes the destructor (if any) of the pointed-to value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This has two use cases:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// * It is *required* to use `drop_in_place` to drop unsized types like</span>
-    <span class="doccomment">///   trait objects, because they can&#39;t be read out onto the stack and</span>
-    <span class="doccomment">///   dropped normally.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// * It is friendlier to the optimizer to do this over `ptr::read` when</span>
-    <span class="doccomment">///   dropping manually allocated memory (e.g. when writing Box/Rc/Vec),</span>
-    <span class="doccomment">///   as the compiler doesn&#39;t need to prove that it&#39;s sound to elide the</span>
-    <span class="doccomment">///   copy.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Undefined Behavior</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This has all the same safety problems as `ptr::read` with respect to</span>
-    <span class="doccomment">/// invalid pointers, types, and double drops.</span>
-    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;drop_in_place&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">drop_in_place</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">to_drop</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>);
-
     <span class="doccomment">/// Gets a static string slice containing the name of a type.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">type_name</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>;
 
@@ -2039,9 +1990,6 @@
     <span class="doccomment">/// undropped. In the general case one must use `ptr::write` to</span>
     <span class="doccomment">/// initialize memory previous set to the result of `uninit`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">uninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> <span class="ident">T</span>;
-
-    <span class="doccomment">/// Moves a value out of scope without running drop glue.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">forget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(_: <span class="ident">T</span>) <span class="op">-&gt;</span> ();
 
     <span class="doccomment">/// Reinterprets the bits of a value of one type as another type.</span>
     <span class="doccomment">///</span>
@@ -2613,11 +2561,9 @@
 
     <span class="doccomment">/// Performs an unchecked left shift, resulting in undefined behavior when</span>
     <span class="doccomment">/// y &lt; 0 or y &gt;= N, where N is the width of T in bits.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unchecked_shl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>;
     <span class="doccomment">/// Performs an unchecked right shift, resulting in undefined behavior when</span>
     <span class="doccomment">/// y &lt; 0 or y &gt;= N, where N is the width of T in bits.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unchecked_shr</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>, <span class="ident">y</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>;
 
     <span class="doccomment">/// Returns (a + b) mod 2&lt;sup&gt;N&lt;/sup&gt;, where N is the width of T in bits.</span>
@@ -2708,7 +2654,6 @@
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

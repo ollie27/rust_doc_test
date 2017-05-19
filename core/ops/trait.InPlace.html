@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'InPlace', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait InPlace</p><div class="block items"><ul><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'InPlace', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops.rs.html#2788-2802' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops.rs.html#2844-2858' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait InPlace&lt;Data:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt;: <a class="trait" href="../../core/ops/trait.Place.html" title="trait core::ops::Place">Place</a>&lt;Data&gt; {
     type <a href='#associatedtype.Owner' class="type">Owner</a>;
     unsafe fn <a href='#tymethod.finalize' class='fnname'>finalize</a>(self) -&gt; Self::<a class="trait" href="../../core/ops/trait.InPlace.html" title="trait core::ops::InPlace">Owner</a>;
@@ -57,6 +57,7 @@
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
         <h3 id='associatedtype.Owner' class='method'><span id='Owner.t' class='invisible'><code>type <a href='#associatedtype.Owner' class="type">Owner</a></code></span></h3><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>placement_new_protocol </code><a href="https://github.com/rust-lang/rust/issues/27779">#27779</a>)</div></div><div class='docblock'><p><code>Owner</code> is the type of the end value of <code>PLACE &lt;- EXPR</code></p>
+
 <p>Note that when <code>PLACE &lt;- EXPR</code> is solely used for
 side-effecting an existing data-structure,
 e.g. <code>Vec::emplace_back</code>, then <code>Owner</code> need not carry any
@@ -130,7 +131,6 @@ the returned instance of <code>Owner</code> and forgetting self.</p>
         window.rootPath = "../../";
         window.currentCrate = "core";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

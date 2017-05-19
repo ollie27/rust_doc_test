@@ -313,6 +313,13 @@
 <span id="268">268</span>
 <span id="269">269</span>
 <span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -377,6 +384,7 @@
 <span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="self">self</span>, <span class="ident">AtomicUsize</span>, <span class="ident">Ordering</span>};
 
 <span class="kw">use</span> <span class="ident">sys</span>::<span class="ident">thread_local</span> <span class="kw">as</span> <span class="ident">imp</span>;
+<span class="kw">use</span> <span class="ident">sys_common</span>::<span class="ident">mutex</span>::<span class="ident">Mutex</span>;
 
 <span class="doccomment">/// A type for TLS keys that are statically allocated.</span>
 <span class="doccomment">///</span>
@@ -461,20 +469,6 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">val</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>) { <span class="ident">imp</span>::<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">key</span>(), <span class="ident">val</span>) }
 
-    <span class="doccomment">/// Deallocates this OS TLS key.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This function is unsafe as there is no guarantee that the key is not</span>
-    <span class="doccomment">/// currently in use by other threads or will not ever be used again.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Note that this does *not* run the user-provided destructor if one was</span>
-    <span class="doccomment">/// specified at definition time. Doing so must be done manually.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">key</span>.<span class="ident">swap</span>(<span class="number">0</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>) {
-            <span class="number">0</span> <span class="op">=&gt;</span> {}
-            <span class="ident">n</span> <span class="op">=&gt;</span> { <span class="ident">imp</span>::<span class="ident">destroy</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">imp</span>::<span class="ident">Key</span>) }
-        }
-    }
-
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">key</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">imp</span>::<span class="ident">Key</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">key</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">Relaxed</span>) {
@@ -484,6 +478,24 @@
     }
 
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">lazy_init</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="comment">// Currently the Windows implementation of TLS is pretty hairy, and</span>
+        <span class="comment">// it greatly simplifies creation if we just synchronize everything.</span>
+        <span class="comment">//</span>
+        <span class="comment">// Additionally a 0-index of a tls key hasn&#39;t been seen on windows, so</span>
+        <span class="comment">// we just simplify the whole branch.</span>
+        <span class="kw">if</span> <span class="ident">imp</span>::<span class="ident">requires_synchronized_create</span>() {
+            <span class="kw">static</span> <span class="ident">INIT_LOCK</span>: <span class="ident">Mutex</span> <span class="op">=</span> <span class="ident">Mutex</span>::<span class="ident">new</span>();
+            <span class="ident">INIT_LOCK</span>.<span class="ident">lock</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">key</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">SeqCst</span>);
+            <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="number">0</span> {
+                <span class="ident">key</span> <span class="op">=</span> <span class="ident">imp</span>::<span class="ident">create</span>(<span class="self">self</span>.<span class="ident">dtor</span>) <span class="kw">as</span> <span class="ident">usize</span>;
+                <span class="self">self</span>.<span class="ident">key</span>.<span class="ident">store</span>(<span class="ident">key</span>, <span class="ident">Ordering</span>::<span class="ident">SeqCst</span>);
+            }
+            <span class="ident">INIT_LOCK</span>.<span class="ident">unlock</span>();
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">key</span> <span class="op">!=</span> <span class="number">0</span>);
+            <span class="kw">return</span> <span class="ident">key</span>
+        }
+
         <span class="comment">// POSIX allows the key created here to be 0, but the compare_and_swap</span>
         <span class="comment">// below relies on using 0 as a sentinel value to check who won the</span>
         <span class="comment">// race to set the shared TLS key. As far as I know, there is no</span>
@@ -543,7 +555,9 @@
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Key</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">unsafe</span> { <span class="ident">imp</span>::<span class="ident">destroy</span>(<span class="self">self</span>.<span class="ident">key</span>) }
+        <span class="comment">// Right now Windows doesn&#39;t support TLS key destruction, but this also</span>
+        <span class="comment">// isn&#39;t used anywhere other than tests, so just leak the TLS key.</span>
+        <span class="comment">// unsafe { imp::destroy(self.key) }</span>
     }
 }
 
@@ -642,7 +656,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

@@ -678,6 +678,19 @@
 <span id="633">633</span>
 <span id="634">634</span>
 <span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -858,9 +871,22 @@
     };
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">ptr</span>::<span class="ident">null_mut</span>();
     <span class="kw">unsafe</span> {
-        <span class="ident">cvt_gai</span>(<span class="ident">c</span>::<span class="ident">getaddrinfo</span>(<span class="ident">c_host</span>.<span class="ident">as_ptr</span>(), <span class="ident">ptr</span>::<span class="ident">null</span>(), <span class="kw-2">&amp;</span><span class="ident">hints</span>,
-                               <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res</span>))<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">LookupHost</span> { <span class="ident">original</span>: <span class="ident">res</span>, <span class="ident">cur</span>: <span class="ident">res</span> })
+        <span class="kw">match</span> <span class="ident">cvt_gai</span>(<span class="ident">c</span>::<span class="ident">getaddrinfo</span>(<span class="ident">c_host</span>.<span class="ident">as_ptr</span>(), <span class="ident">ptr</span>::<span class="ident">null</span>(), <span class="kw-2">&amp;</span><span class="ident">hints</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res</span>)) {
+            <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">LookupHost</span> { <span class="ident">original</span>: <span class="ident">res</span>, <span class="ident">cur</span>: <span class="ident">res</span> })
+            },
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> {
+                <span class="comment">// The lookup failure could be caused by using a stale /etc/resolv.conf.</span>
+                <span class="comment">// See https://github.com/rust-lang/rust/issues/41570.</span>
+                <span class="comment">// We therefore force a reload of the nameserver information.</span>
+                <span class="ident">c</span>::<span class="ident">res_init</span>();
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>)
+            },
+            <span class="comment">// the cfg is needed here to avoid an &quot;unreachable pattern&quot; warning</span>
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">unix</span>))]</span>
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>),
+        }
     }
 }
 
@@ -1372,7 +1398,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "std";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>
