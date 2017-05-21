@@ -741,7 +741,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;string_box_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.7.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;string_box_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">str_err</span>: <span class="ident">String</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">err1</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">From</span>::<span class="ident">from</span>(<span class="ident">str_err</span>);
@@ -757,7 +757,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;string_box_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.7.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;string_box_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident">From</span>::<span class="ident">from</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">err</span>))
@@ -830,7 +830,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.7.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Error</span><span class="op">&gt;</span> <span class="ident">Error</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="ident">Error</span>::<span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>)

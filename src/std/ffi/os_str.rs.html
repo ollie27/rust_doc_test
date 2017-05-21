@@ -1457,14 +1457,14 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;os_string_from_box&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.17.0&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">OsString</span> {
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;os_string_from_box&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.18.0&quot;</span>)]</span>
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">OsString</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">boxed</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">OsString</span> {
         <span class="ident">boxed</span>.<span class="ident">into_os_string</span>()
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_from_c_string&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.17.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_from_os_string&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.18.0&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">OsString</span> {
     <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">into_boxed_os_str</span>()

@@ -1428,6 +1428,56 @@
 <span id="1383">1383</span>
 <span id="1384">1384</span>
 <span id="1385">1385</span>
+<span id="1386">1386</span>
+<span id="1387">1387</span>
+<span id="1388">1388</span>
+<span id="1389">1389</span>
+<span id="1390">1390</span>
+<span id="1391">1391</span>
+<span id="1392">1392</span>
+<span id="1393">1393</span>
+<span id="1394">1394</span>
+<span id="1395">1395</span>
+<span id="1396">1396</span>
+<span id="1397">1397</span>
+<span id="1398">1398</span>
+<span id="1399">1399</span>
+<span id="1400">1400</span>
+<span id="1401">1401</span>
+<span id="1402">1402</span>
+<span id="1403">1403</span>
+<span id="1404">1404</span>
+<span id="1405">1405</span>
+<span id="1406">1406</span>
+<span id="1407">1407</span>
+<span id="1408">1408</span>
+<span id="1409">1409</span>
+<span id="1410">1410</span>
+<span id="1411">1411</span>
+<span id="1412">1412</span>
+<span id="1413">1413</span>
+<span id="1414">1414</span>
+<span id="1415">1415</span>
+<span id="1416">1416</span>
+<span id="1417">1417</span>
+<span id="1418">1418</span>
+<span id="1419">1419</span>
+<span id="1420">1420</span>
+<span id="1421">1421</span>
+<span id="1422">1422</span>
+<span id="1423">1423</span>
+<span id="1424">1424</span>
+<span id="1425">1425</span>
+<span id="1426">1426</span>
+<span id="1427">1427</span>
+<span id="1428">1428</span>
+<span id="1429">1429</span>
+<span id="1430">1430</span>
+<span id="1431">1431</span>
+<span id="1432">1432</span>
+<span id="1433">1433</span>
+<span id="1434">1434</span>
+<span id="1435">1435</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1611,8 +1661,33 @@
 <span class="comment">// Builder</span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<span class="doccomment">/// Thread configuration. Provides detailed control over the properties</span>
-<span class="doccomment">/// and behavior of new threads.</span>
+<span class="doccomment">/// Thread factory, which can be used in order to configure the properties of</span>
+<span class="doccomment">/// a new thread.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Methods can be chained on it in order to configure it.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The two configurations available are:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// - [`name`]: allows to give a name to the thread which is currently</span>
+<span class="doccomment">///   only used in `panic` messages.</span>
+<span class="doccomment">/// - [`stack_size`]: specifies the desired stack size. Note that this can</span>
+<span class="doccomment">///   be overriden by the OS.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If the [`stack_size`] field is not specified, the stack size</span>
+<span class="doccomment">/// will be the `RUST_MIN_STACK` environment variable. If it is</span>
+<span class="doccomment">/// not specified either, a sensible default will be set.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If the [`name`] field is not specified, the thread will not be named.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The [`spawn`] method will take ownership of the builder and create an</span>
+<span class="doccomment">/// [`io::Result`] to the thread handle with the given configuration.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The [`thread::spawn`] free function uses a `Builder` with default</span>
+<span class="doccomment">/// configuration and [`unwrap`]s its return value.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// You may want to use [`spawn`] instead of [`thread::spawn`], when you want</span>
+<span class="doccomment">/// to recover from a failure to launch a thread, indeed the free function will</span>
+<span class="doccomment">/// panick where the `Builder` method will return a [`io::Result`].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -1627,6 +1702,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// handler.join().unwrap();</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`thread::spawn`]: ../../std/thread/fn.spawn.html</span>
+<span class="doccomment">/// [`stack_size`]: ../../std/thread/struct.Builder.html#method.stack_size</span>
+<span class="doccomment">/// [`name`]: ../../std/thread/struct.Builder.html#method.name</span>
+<span class="doccomment">/// [`spawn`]: ../../std/thread/struct.Builder.html#method.spawn</span>
+<span class="doccomment">/// [`io::Result`]: ../../std/io/type.Result.html</span>
+<span class="doccomment">/// [`unwrap`]: ../../std/result/enum.Result.html#method.unwrap</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Builder</span> {
@@ -1639,11 +1721,6 @@
 <span class="kw">impl</span> <span class="ident">Builder</span> {
     <span class="doccomment">/// Generates the base configuration for spawning a thread, from which</span>
     <span class="doccomment">/// configuration methods can be chained.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the [`stack_size`] field is not specified, the stack size</span>
-    <span class="doccomment">/// will be the `RUST_MIN_STACK` environment variable.  If it is</span>
-    <span class="doccomment">/// not specified either, a sensible default will be set (2MB as</span>
-    <span class="doccomment">/// of the writting of this doc).</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1660,8 +1737,6 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// handler.join().unwrap();</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`stack_size`]: ../../std/thread/struct.Builder.html#method.stack_size</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Builder</span> {
         <span class="ident">Builder</span> {
@@ -1711,9 +1786,10 @@
         <span class="self">self</span>
     }
 
-    <span class="doccomment">/// Spawns a new thread, and returns a join handle for it.</span>
+    <span class="doccomment">/// Spawns a new thread by taking ownership of the `Builder`, and returns an</span>
+    <span class="doccomment">/// [`io::Result`] to its [`JoinHandle`].</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The child thread may outlive the parent (unless the parent thread</span>
+    <span class="doccomment">/// The spawned thread may outlive the caller (unless the caller thread</span>
     <span class="doccomment">/// is the main thread; the whole process is terminated when the main</span>
     <span class="doccomment">/// thread finishes). The join handle can be used to block on</span>
     <span class="doccomment">/// termination of the child thread, including recovering its panics.</span>
@@ -1728,6 +1804,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`spawn`]: ../../std/thread/fn.spawn.html</span>
     <span class="doccomment">/// [`io::Result`]: ../../std/io/type.Result.html</span>
+    <span class="doccomment">/// [`JoinHandle`]: ../../std/thread/struct.JoinHandle.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1899,6 +1976,23 @@
 
 <span class="doccomment">/// Cooperatively gives up a timeslice to the OS scheduler.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// This is used when the programmer knows that the thread will have nothing</span>
+<span class="doccomment">/// to do for some time, and thus avoid wasting computing time.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// For example when polling on a resource, it is common to check that it is</span>
+<span class="doccomment">/// available, and if not to yield in order to avoid busy waiting.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Thus the pattern of `yield`ing after a failed poll is rather common when</span>
+<span class="doccomment">/// implementing low-level shared resources or synchronization primitives.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// However programmers will usualy prefer to use, [`channel`]s, [`Condvar`]s,</span>
+<span class="doccomment">/// [`Mutex`]es or [`join`] for their synchronisation routines, as they avoid</span>
+<span class="doccomment">/// thinking about thread schedulling.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Note that [`channel`]s for example are implemented using this primitive.</span>
+<span class="doccomment">/// Indeed when you call `send` or `recv`, which are blocking, they will yield</span>
+<span class="doccomment">/// if the channel is not available.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
@@ -1906,6 +2000,12 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// thread::yield_now();</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`channel`]: ../../std/sync/mpsc/index.html</span>
+<span class="doccomment">/// [`spawn`]: ../../std/thread/fn.spawn.html</span>
+<span class="doccomment">/// [`join`]: ../../std/thread/struct.JoinHandle.html#method.join</span>
+<span class="doccomment">/// [`Mutex`]: ../../std/sync/struct.Mutex.html</span>
+<span class="doccomment">/// [`Condvar`]: ../../std/sync/struct.Condvar.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">yield_now</span>() {
     <span class="ident">imp</span>::<span class="ident">Thread</span>::<span class="ident">yield_now</span>()

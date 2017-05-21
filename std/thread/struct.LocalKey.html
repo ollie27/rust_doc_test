@@ -48,19 +48,19 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/std/thread/local.rs.html#81-100' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/std/thread/local.rs.html#85-104' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct LocalKey&lt;T:&nbsp;'static&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A thread local storage key which owns its contents.</p>
 
 <p>This key uses the fastest possible implementation available to it for the
-target platform. It is instantiated with the <code>thread_local!</code> macro and the
-primary method is the <code>with</code> method.</p>
+target platform. It is instantiated with the <a href="../../std/macro.thread_local.html"><code>thread_local!</code></a> macro and the
+primary method is the <a href="../../std/thread/struct.LocalKey.html#method.with"><code>with</code></a> method.</p>
 
-<p>The <code>with</code> method yields a reference to the contained value which cannot be
+<p>The <a href="../../std/thread/struct.LocalKey.html#method.with"><code>with</code></a> method yields a reference to the contained value which cannot be
 sent across threads or escape the given closure.</p>
 
 <h1 id='initialization-and-destruction' class='section-header'><a href='#initialization-and-destruction'>Initialization and Destruction</a></h1>
-<p>Initialization is dynamically performed on the first call to <code>with()</code>
-within a thread, and values that implement <code>Drop</code> get destructed when a
+<p>Initialization is dynamically performed on the first call to <a href="../../std/thread/struct.LocalKey.html#method.with"><code>with</code></a>
+within a thread, and values that implement <a href="../../std/ops/trait.Drop.html"><code>Drop</code></a> get destructed when a
 thread exits. Some caveats apply, which are explained below.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
@@ -108,7 +108,7 @@ destructors are run.</li>
 sometimes cancel <em>all</em> destructors for the current thread, whether or not
 the slots have already had their destructors run or not.</li>
 </ol>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;'static&gt; <a class="struct" href="../../std/thread/struct.LocalKey.html" title="struct std::thread::LocalKey">LocalKey</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/thread/local.rs.html#223-319' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;'static&gt; <a class="struct" href="../../std/thread/struct.LocalKey.html" title="struct std::thread::LocalKey">LocalKey</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/thread/local.rs.html#235-334' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.with' class="method"><span id='with.v' class='invisible'><code>fn <a href='#method.with' class='fnname'>with</a>&lt;F, R&gt;(&amp;'static self, f: F) -&gt; R <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="../../std/ops/trait.FnOnce.html" title="trait std::ops::FnOnce">FnOnce</a>(&amp;T) -&gt; R,&nbsp;</span></code></span></h4>
 <div class='docblock'><p>Acquires a reference to the value in this TLS key.</p>
 
@@ -124,24 +124,24 @@ previously been run for this thread.</p>
 </details></div></div><div class='docblock'><p>Query the current state of this key.</p>
 
 <p>A key is initially in the <code>Uninitialized</code> state whenever a thread
-starts. It will remain in this state up until the first call to <code>with</code>
+starts. It will remain in this state up until the first call to <a href="../../std/thread/struct.LocalKey.html#method.with"><code>with</code></a>
 within a thread has run the initialization expression successfully.</p>
 
 <p>Once the initialization expression succeeds, the key transitions to the
-<code>Valid</code> state which will guarantee that future calls to <code>with</code> will
+<code>Valid</code> state which will guarantee that future calls to <a href="../../std/thread/struct.LocalKey.html#method.with"><code>with</code></a> will
 succeed within the thread.</p>
 
 <p>When a thread exits, each key will be destroyed in turn, and as keys are
 destroyed they will enter the <code>Destroyed</code> state just before the
 destructor starts to run. Keys may remain in the <code>Destroyed</code> state after
 destruction has completed. Keys without destructors (e.g. with types
-that are <code>Copy</code>), may never enter the <code>Destroyed</code> state.</p>
+that are <a href="../../std/marker/trait.Copy.html"><code>Copy</code></a>), may never enter the <code>Destroyed</code> state.</p>
 
 <p>Keys in the <code>Uninitialized</code> state can be accessed so long as the
 initialization does not panic. Keys in the <code>Valid</code> state are guaranteed
 to be able to be accessed. Keys in the <code>Destroyed</code> state will panic on
-any call to <code>with</code>.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;'static&gt; <a class="trait" href="../../std/fmt/trait.Debug.html" title="trait std::fmt::Debug">Debug</a> for <a class="struct" href="../../std/thread/struct.LocalKey.html" title="struct std::thread::LocalKey">LocalKey</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div><a class='srclink' href='../../src/std/thread/local.rs.html#103-107' title='goto source code'>[src]</a></span></h3>
+any call to <a href="../../std/thread/struct.LocalKey.html#method.with"><code>with</code></a>.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;'static&gt; <a class="trait" href="../../std/fmt/trait.Debug.html" title="trait std::fmt::Debug">Debug</a> for <a class="struct" href="../../std/thread/struct.LocalKey.html" title="struct std::thread::LocalKey">LocalKey</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div><a class='srclink' href='../../src/std/thread/local.rs.html#107-111' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='../../std/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="../../std/fmt/type.Result.html" title="type std::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>

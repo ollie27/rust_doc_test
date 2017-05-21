@@ -3012,6 +3012,7 @@
 <span id="2967">2967</span>
 <span id="2968">2968</span>
 <span id="2969">2969</span>
+<span id="2970">2970</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -3814,6 +3815,7 @@
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ty</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> { <span class="macro">neg_impl_core</span><span class="macro">!</span>{ <span class="ident">x</span> <span class="op">=&gt;</span> <span class="op">-</span><span class="ident">x</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>)<span class="kw-2">*</span>} }
 }
 
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_macros</span>)]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">neg_impl_unsigned</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ty</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> {
         <span class="macro">neg_impl_core</span><span class="macro">!</span>{ <span class="ident">x</span> <span class="op">=&gt;</span> {

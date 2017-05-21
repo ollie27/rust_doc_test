@@ -639,6 +639,21 @@
 <span id="594">594</span>
 <span id="595">595</span>
 <span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -661,16 +676,16 @@
 <span class="doccomment">/// A thread local storage key which owns its contents.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This key uses the fastest possible implementation available to it for the</span>
-<span class="doccomment">/// target platform. It is instantiated with the `thread_local!` macro and the</span>
-<span class="doccomment">/// primary method is the `with` method.</span>
+<span class="doccomment">/// target platform. It is instantiated with the [`thread_local!`] macro and the</span>
+<span class="doccomment">/// primary method is the [`with`] method.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The `with` method yields a reference to the contained value which cannot be</span>
+<span class="doccomment">/// The [`with`] method yields a reference to the contained value which cannot be</span>
 <span class="doccomment">/// sent across threads or escape the given closure.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Initialization and Destruction</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Initialization is dynamically performed on the first call to `with()`</span>
-<span class="doccomment">/// within a thread, and values that implement `Drop` get destructed when a</span>
+<span class="doccomment">/// Initialization is dynamically performed on the first call to [`with`]</span>
+<span class="doccomment">/// within a thread, and values that implement [`Drop`] get destructed when a</span>
 <span class="doccomment">/// thread exits. Some caveats apply, which are explained below.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
@@ -719,6 +734,10 @@
 <span class="doccomment">/// 3. On macOS, initializing TLS during destruction of other TLS slots can</span>
 <span class="doccomment">///    sometimes cancel *all* destructors for the current thread, whether or not</span>
 <span class="doccomment">///    the slots have already had their destructors run or not.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`with`]: ../../std/thread/struct.LocalKey.html#method.with</span>
+<span class="doccomment">/// [`thread_local!`]: ../../std/macro.thread_local.html</span>
+<span class="doccomment">/// [`Drop`]: ../../std/ops/trait.Drop.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LocalKey</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
     <span class="comment">// This outer `LocalKey&lt;T&gt;` type is what&#39;s going to be stored in statics,</span>
@@ -748,7 +767,7 @@
     }
 }
 
-<span class="doccomment">/// Declare a new thread local storage key of type `std::thread::LocalKey`.</span>
+<span class="doccomment">/// Declare a new thread local storage key of type [`std::thread::LocalKey`].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Syntax</span>
 <span class="doccomment">///</span>
@@ -766,8 +785,10 @@
 <span class="doccomment">/// # fn main() {}</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// See [LocalKey documentation](thread/struct.LocalKey.html) for more</span>
+<span class="doccomment">/// See [LocalKey documentation][`std::thread::LocalKey`] for more</span>
 <span class="doccomment">/// information.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`std::thread::LocalKey`]: ../std/thread/struct.LocalKey.html</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">allow_internal_unstable</span>]</span>
@@ -837,11 +858,13 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">LocalKeyState</span> {
     <span class="doccomment">/// All keys are in this state whenever a thread starts. Keys will</span>
-    <span class="doccomment">/// transition to the `Valid` state once the first call to `with` happens</span>
+    <span class="doccomment">/// transition to the `Valid` state once the first call to [`with`] happens</span>
     <span class="doccomment">/// and the initialization expression succeeds.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Keys in the `Uninitialized` state will yield a reference to the closure</span>
-    <span class="doccomment">/// passed to `with` so long as the initialization routine does not panic.</span>
+    <span class="doccomment">/// passed to [`with`] so long as the initialization routine does not panic.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`with`]: ../../std/thread/struct.LocalKey.html#method.with</span>
     <span class="ident">Uninitialized</span>,
 
     <span class="doccomment">/// Once a key has been accessed successfully, it will enter the `Valid`</span>
@@ -850,7 +873,9 @@
     <span class="doccomment">/// `Destroyed` state.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Keys in the `Valid` state will be guaranteed to yield a reference to the</span>
-    <span class="doccomment">/// closure passed to `with`.</span>
+    <span class="doccomment">/// closure passed to [`with`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`with`]: ../../std/thread/struct.LocalKey.html#method.with</span>
     <span class="ident">Valid</span>,
 
     <span class="doccomment">/// When a thread exits, the destructors for keys will be run (if</span>
@@ -858,7 +883,9 @@
     <span class="doccomment">/// destructor has run, a key is in the `Destroyed` state.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Keys in the `Destroyed` states will trigger a panic when accessed via</span>
-    <span class="doccomment">/// `with`.</span>
+    <span class="doccomment">/// [`with`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`with`]: ../../std/thread/struct.LocalKey.html#method.with</span>
     <span class="ident">Destroyed</span>,
 }
 
@@ -925,23 +952,26 @@
     <span class="doccomment">/// Query the current state of this key.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// A key is initially in the `Uninitialized` state whenever a thread</span>
-    <span class="doccomment">/// starts. It will remain in this state up until the first call to `with`</span>
+    <span class="doccomment">/// starts. It will remain in this state up until the first call to [`with`]</span>
     <span class="doccomment">/// within a thread has run the initialization expression successfully.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Once the initialization expression succeeds, the key transitions to the</span>
-    <span class="doccomment">/// `Valid` state which will guarantee that future calls to `with` will</span>
+    <span class="doccomment">/// `Valid` state which will guarantee that future calls to [`with`] will</span>
     <span class="doccomment">/// succeed within the thread.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// When a thread exits, each key will be destroyed in turn, and as keys are</span>
     <span class="doccomment">/// destroyed they will enter the `Destroyed` state just before the</span>
     <span class="doccomment">/// destructor starts to run. Keys may remain in the `Destroyed` state after</span>
     <span class="doccomment">/// destruction has completed. Keys without destructors (e.g. with types</span>
-    <span class="doccomment">/// that are `Copy`), may never enter the `Destroyed` state.</span>
+    <span class="doccomment">/// that are [`Copy`]), may never enter the `Destroyed` state.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Keys in the `Uninitialized` state can be accessed so long as the</span>
     <span class="doccomment">/// initialization does not panic. Keys in the `Valid` state are guaranteed</span>
     <span class="doccomment">/// to be able to be accessed. Keys in the `Destroyed` state will panic on</span>
-    <span class="doccomment">/// any call to `with`.</span>
+    <span class="doccomment">/// any call to [`with`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`with`]: ../../std/thread/struct.LocalKey.html#method.with</span>
+    <span class="doccomment">/// [`Copy`]: ../../std/marker/trait.Copy.html</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;thread_local_state&quot;</span>,
                <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;state querying was recently added&quot;</span>,
                <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27716&quot;</span>)]</span>

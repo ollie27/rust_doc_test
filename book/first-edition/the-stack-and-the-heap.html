@@ -251,7 +251,7 @@ like this:</p>
 <tr><td> 1                    </td><td> y    </td><td> 42                     </td></tr>
 <tr><td> 0                    </td><td> x    </td><td> → (2<sup>30</sup>) - 1 </td></tr>
 </table>
-<p>We have (2<sup>30</sup>) - 1 addresses in our hypothetical computer with 1GB of RAM. And since
+<p>We have (2<sup>30</sup>) addresses in our hypothetical computer with 1GB of RAM. And since
 our stack grows from zero, the easiest place to allocate memory is from the
 other end. So our first value is at the highest place in memory. And the value
 of the struct at <code>x</code> has a <a href="raw-pointers.html">raw pointer</a> to the place we’ve

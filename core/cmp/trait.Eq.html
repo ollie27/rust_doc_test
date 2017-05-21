@@ -98,81 +98,81 @@ always desired.</p>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Eq for *const T</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Eq for *mut T</code></li>
 <li><code>impl&lt;Ret&gt; Eq for fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret&gt; Eq for extern fn() -&gt; Ret</code></li>
+<li><code>impl&lt;Ret&gt; Eq for extern &quot;C&quot; fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; Eq for unsafe fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret&gt; Eq for unsafe extern fn() -&gt; Ret</code></li>
+<li><code>impl&lt;Ret&gt; Eq for unsafe extern &quot;C&quot; fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A&gt; Eq for fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Eq for extern fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Eq for extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Eq for extern &quot;C&quot; fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Eq for extern &quot;C&quot; fn(_: A, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A&gt; Eq for unsafe fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Eq for unsafe extern fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Eq for unsafe extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Eq for unsafe extern &quot;C&quot; fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B&gt; Eq for fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Eq for extern fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Eq for extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Eq for extern &quot;C&quot; fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B&gt; Eq for unsafe fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Eq for unsafe extern fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Eq for unsafe extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C&gt; Eq for fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Eq for extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Eq for extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C&gt; Eq for unsafe fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Eq for unsafe extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Eq for unsafe extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D&gt; Eq for fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Eq for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Eq for <a class="struct" href="../../core/marker/struct.PhantomData.html" title="struct core::marker::PhantomData">PhantomData</a>&lt;T&gt;</code></li>
 <li><code>impl Eq for <a class="struct" href="../../core/ops/struct.RangeFull.html" title="struct core::ops::RangeFull">RangeFull</a></code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a>&gt; Eq for <a class="struct" href="../../core/ops/struct.Range.html" title="struct core::ops::Range">Range</a>&lt;Idx&gt;</code></li>

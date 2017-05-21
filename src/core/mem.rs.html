@@ -899,6 +899,58 @@
 <span id="854">854</span>
 <span id="855">855</span>
 <span id="856">856</span>
+<span id="857">857</span>
+<span id="858">858</span>
+<span id="859">859</span>
+<span id="860">860</span>
+<span id="861">861</span>
+<span id="862">862</span>
+<span id="863">863</span>
+<span id="864">864</span>
+<span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
+<span id="870">870</span>
+<span id="871">871</span>
+<span id="872">872</span>
+<span id="873">873</span>
+<span id="874">874</span>
+<span id="875">875</span>
+<span id="876">876</span>
+<span id="877">877</span>
+<span id="878">878</span>
+<span id="879">879</span>
+<span id="880">880</span>
+<span id="881">881</span>
+<span id="882">882</span>
+<span id="883">883</span>
+<span id="884">884</span>
+<span id="885">885</span>
+<span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
+<span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
+<span id="898">898</span>
+<span id="899">899</span>
+<span id="900">900</span>
+<span id="901">901</span>
+<span id="902">902</span>
+<span id="903">903</span>
+<span id="904">904</span>
+<span id="905">905</span>
+<span id="906">906</span>
+<span id="907">907</span>
+<span id="908">908</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1202,6 +1254,58 @@
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">align_of_val</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
     <span class="kw">unsafe</span> { <span class="ident">intrinsics</span>::<span class="ident">min_align_of_val</span>(<span class="ident">val</span>) }
+}
+
+<span class="doccomment">/// Returns whether dropping values of type `T` matters.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This is purely an optimization hint, and may be implemented conservatively.</span>
+<span class="doccomment">/// For instance, always returning `true` would be a valid implementation of</span>
+<span class="doccomment">/// this function.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Low level implementations of things like collections, which need to manually</span>
+<span class="doccomment">/// drop their data, should use this function to avoid unnecessarily</span>
+<span class="doccomment">/// trying to drop all their contents when they are destroyed. This might not</span>
+<span class="doccomment">/// make a difference in release builds (where a loop that has no side-effects</span>
+<span class="doccomment">/// is easily detected and eliminated), but is often a big win for debug builds.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Note that `ptr::drop_in_place` already performs this check, so if your workload</span>
+<span class="doccomment">/// can be reduced to some small number of drop_in_place calls, using this is</span>
+<span class="doccomment">/// unnecessary. In particular note that you can drop_in_place a slice, and that</span>
+<span class="doccomment">/// will do a single needs_drop check for all the values.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Types like Vec therefore just `drop_in_place(&amp;mut self[..])` without using</span>
+<span class="doccomment">/// needs_drop explicitly. Types like HashMap, on the other hand, have to drop</span>
+<span class="doccomment">/// values one at a time and should use this API.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Examples</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Here&#39;s an example of how a collection might make use of needs_drop:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// #![feature(needs_drop)]</span>
+<span class="doccomment">/// use std::{mem, ptr};</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// pub struct MyCollection&lt;T&gt; { /* ... */ }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// impl&lt;T&gt; Drop for MyCollection&lt;T&gt; {</span>
+<span class="doccomment">///     fn drop(&amp;mut self) {</span>
+<span class="doccomment">///         unsafe {</span>
+<span class="doccomment">///             // drop the data</span>
+<span class="doccomment">///             if mem::needs_drop::&lt;T&gt;() {</span>
+<span class="doccomment">///                 for x in self.iter_mut() {</span>
+<span class="doccomment">///                     ptr::drop_in_place(x);</span>
+<span class="doccomment">///                 }</span>
+<span class="doccomment">///             }</span>
+<span class="doccomment">///             self.free_buffer();</span>
+<span class="doccomment">///         }</span>
+<span class="doccomment">///     }</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;needs_drop&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;41890&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">needs_drop</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">unsafe</span> { <span class="ident">intrinsics</span>::<span class="ident">needs_drop</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() }
 }
 
 <span class="doccomment">/// Creates a value whose bytes are all zero.</span>

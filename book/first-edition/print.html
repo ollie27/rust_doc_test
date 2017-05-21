@@ -710,7 +710,7 @@ the code using <code>rand</code>, we need to modify our <code>Cargo.toml</code>.
 add these few lines at the bottom:</p>
 <pre><code class="language-toml">[dependencies]
 
-rand=&quot;0.3.0&quot;
+rand = &quot;0.3.0&quot;
 </code></pre>
 <p>The <code>[dependencies]</code> section of <code>Cargo.toml</code> is like the <code>[package]</code> section:
 everything that follows it is part of it, until the next section starts.
@@ -720,7 +720,7 @@ which Cargo understands to be any release that’s compatible with this specific
 Cargo understands <a href="http://semver.org">Semantic Versioning</a>, which is a standard for writing version
 numbers. A bare number like above is actually shorthand for <code>^0.3.0</code>,
 meaning &quot;anything compatible with 0.3.0&quot;.
-If we wanted to use only <code>0.3.0</code> exactly, we could say <code>rand=&quot;=0.3.0&quot;</code>
+If we wanted to use only <code>0.3.0</code> exactly, we could say <code>rand = &quot;=0.3.0&quot;</code>
 (note the two equal signs).
 We could also use a range of versions.
 <a href="http://doc.crates.io/specifying-dependencies.html">Cargo’s documentation</a> contains more details.</p>
@@ -2709,7 +2709,7 @@ let answer = foo(&amp;v1, &amp;v2);
 <pre><pre class="playpen"><code class="language-rust">fn main() {
     // Don't worry if you don't understand how `fold` works, the point here is that an immutable reference is borrowed.
     fn sum_vec(v: &amp;Vec&lt;i32&gt;) -&gt; i32 {
-        return v.iter().fold(0, |a, &amp;b| a + b);
+        v.iter().fold(0, |a, &amp;b| a + b)
     }
     // Borrow two vectors and sum them.
     // This kind of borrowing does not allow mutation through the borrowed reference.
@@ -3439,7 +3439,7 @@ let mut a = Point { x: 5, y: 6 };
 
 a.x = 10;
 
-let b = Point { x: 5, y: 6};
+let b = Point { x: 5, y: 6 };
 
 b.x = 10; // Error: cannot assign to immutable field `b.x`.
 </code></pre>
@@ -3562,7 +3562,7 @@ fn main() {
 <p>Initialization of a data structure (struct, enum, union) can be simplified when
 fields of the data structure are initialized with variables of the same
 names as the fields.</p>
-<pre><code>#[derive(Debug)]
+<pre><pre class="playpen"><code class="language-rust">#[derive(Debug)]
 struct Person&lt;'a&gt; {
     name: &amp;'a str,
     age: u8
@@ -3577,7 +3577,7 @@ fn main() {
     // Debug-print struct
     println!(&quot;{:?}&quot;, peter);
 }
-</code></pre>
+</code></pre></pre>
 <a class="header" href="print.html#update-syntax" id="update-syntax"><h1>Update syntax</h1></a>
 <p>A <code>struct</code> can include <code>..</code> to indicate that you want to use a copy of some
 other <code>struct</code> for some of the values. For example:</p>
@@ -8589,7 +8589,7 @@ like this:</p>
 <tr><td> 1                    </td><td> y    </td><td> 42                     </td></tr>
 <tr><td> 0                    </td><td> x    </td><td> → (2<sup>30</sup>) - 1 </td></tr>
 </table>
-<p>We have (2<sup>30</sup>) - 1 addresses in our hypothetical computer with 1GB of RAM. And since
+<p>We have (2<sup>30</sup>) addresses in our hypothetical computer with 1GB of RAM. And since
 our stack grows from zero, the easiest place to allocate memory is from the
 other end. So our first value is at the highest place in memory. And the value
 of the struct at <code>x</code> has a <a href="raw-pointers.html">raw pointer</a> to the place we’ve
@@ -14052,7 +14052,7 @@ programming language that commands a computer to perform an action.</p>
 <li><code>…u8</code>, <code>…i32</code>, <code>…f64</code>, <code>…usize</code>, …: numeric literal of specific type.</li>
 <li><code>&quot;…&quot;</code>: string literal.  See <a href="strings.html">Strings</a>.</li>
 <li><code>r&quot;…&quot;</code>, <code>r#&quot;…&quot;#</code>, <code>r##&quot;…&quot;##</code>, …: raw string literal, escape characters are not processed. See <a href="../../reference/tokens.html#raw-string-literals">Reference (Raw String Literals)</a>.</li>
-<li><code>b&quot;…&quot;</code>: byte string literal, constructs a <code>[u8]</code> instead of a string. See <a href="../../reference/tokens.html/#byte-string-literals">Reference (Byte String Literals)</a>.</li>
+<li><code>b&quot;…&quot;</code>: byte string literal, constructs a <code>[u8]</code> instead of a string. See <a href="../../reference/tokens.html#byte-and-byte-string-literals">Reference (Byte String Literals)</a>.</li>
 <li><code>br&quot;…&quot;</code>, <code>br#&quot;…&quot;#</code>, <code>br##&quot;…&quot;##</code>, …: raw byte string literal, combination of raw and byte string literal. See <a href="../../reference/tokens.html#raw-byte-string-literals">Reference (Raw Byte String Literals)</a>.</li>
 <li><code>'…'</code>: character literal.  See <a href="primitive-types.html#char">Primitive Types (<code>char</code>)</a>.</li>
 <li><code>b'…'</code>: ASCII byte literal.</li>
@@ -14199,9 +14199,8 @@ paper by Michael Sproul.</li>
 <li><a href="http://scialex.github.io/reenix.pdf">Reenix: Implementing a Unix-Like Operating System in
 Rust</a>. Undergrad paper by Alex
 Light.</li>
-<li>[Evaluation of performance and productivity metrics of potential
-programming languages in the HPC environment]
-(http://octarineparrot.com/assets/mrfloya-thesis-ba.pdf).
+<li><a href="http://octarineparrot.com/assets/mrfloya-thesis-ba.pdf">Evaluation of performance and productivity metrics of potential
+programming languages in the HPC environment</a>.
 Bachelor's thesis by Florian Wilkens. Compares C, Go and Rust.</li>
 <li><a href="http://spw15.langsec.org/papers/couprie-nom.pdf">Nom, a byte oriented, streaming, zero copy, parser combinators library
 in Rust</a>. By

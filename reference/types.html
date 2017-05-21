@@ -367,6 +367,38 @@ fn main() {
 </code></pre></pre>
 <p>In this example, the trait <code>Printable</code> occurs as a trait object in both the
 type signature of <code>print</code>, and the cast expression in <code>main</code>.</p>
+<p>Since a trait object can contain references, the lifetimes of those references
+need to be expressed as part of the trait object. The assumed lifetime of
+references held by a trait object is called its <em>default object lifetime bound</em>.
+These were defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0599-default-object-bound.md">RFC 599</a> and amended in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1156-adjust-default-object-bounds.md">RFC 1156</a>.</p>
+<p>For traits that themselves have no lifetime parameters, the default bound is
+based on what kind of trait object is used:</p>
+<pre><code class="language-rust ignore">// For the following trait...
+trait Foo { }
+
+// ...these two are the same:
+Box&lt;Foo&gt;
+Box&lt;Foo + 'static&gt;
+
+// ...and so are these:
+&amp;'a Foo
+&amp;'a (Foo + 'a)
+</code></pre>
+<p>The <code>+ 'static</code> and <code>+ 'a</code> refer to the default bounds of those kinds of trait
+objects, and also to how you can directly override them. Note that the innermost
+object sets the bound, so <code>&amp;'a Box&lt;Foo&gt;</code> is still <code>&amp;'a Box&lt;Foo + 'static&gt;</code>.</p>
+<p>For traits that have lifetime parameters of their own, the default bound is
+based on that lifetime parameter:</p>
+<pre><code class="language-rust ignore">// For the following trait...
+trait Bar&lt;'a&gt;: 'a { }
+
+// ...these two are the same:
+Box&lt;Bar&lt;'a&gt;&gt;
+Box&lt;Bar&lt;'a&gt; + 'a&gt;
+</code></pre>
+<p>The default for user-defined trait objects is based on the object type itself.
+If a type parameter has a lifetime bound, then that lifetime bound becomes the
+default bound for trait objects of that type. For example, <code>std::cell::Ref&lt;'a, T&gt;</code> contains a <code>T: 'a</code> bound, therefore trait objects of type <code>Ref&lt;'a, SomeTrait&gt;</code> are the same as <code>Ref&lt;'a, (SomeTrait + 'a)&gt;</code>.</p>
 <a class="header" href="types.html#type-parameters" id="type-parameters"><h3>Type parameters</h3></a>
 <p>Within the body of an item that has type parameter declarations, the names of
 its type parameters are types:</p>

@@ -2250,6 +2250,39 @@
 <span id="2205">2205</span>
 <span id="2206">2206</span>
 <span id="2207">2207</span>
+<span id="2208">2208</span>
+<span id="2209">2209</span>
+<span id="2210">2210</span>
+<span id="2211">2211</span>
+<span id="2212">2212</span>
+<span id="2213">2213</span>
+<span id="2214">2214</span>
+<span id="2215">2215</span>
+<span id="2216">2216</span>
+<span id="2217">2217</span>
+<span id="2218">2218</span>
+<span id="2219">2219</span>
+<span id="2220">2220</span>
+<span id="2221">2221</span>
+<span id="2222">2222</span>
+<span id="2223">2223</span>
+<span id="2224">2224</span>
+<span id="2225">2225</span>
+<span id="2226">2226</span>
+<span id="2227">2227</span>
+<span id="2228">2228</span>
+<span id="2229">2229</span>
+<span id="2230">2230</span>
+<span id="2231">2231</span>
+<span id="2232">2232</span>
+<span id="2233">2233</span>
+<span id="2234">2234</span>
+<span id="2235">2235</span>
+<span id="2236">2236</span>
+<span id="2237">2237</span>
+<span id="2238">2238</span>
+<span id="2239">2239</span>
+<span id="2240">2240</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2016 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2264,7 +2297,7 @@
 <span class="kw">use</span> <span class="ident">cmp</span>::<span class="ident">Ordering</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Chain</span>, <span class="ident">Cycle</span>, <span class="ident">Cloned</span>, <span class="ident">Enumerate</span>, <span class="ident">Filter</span>, <span class="ident">FilterMap</span>, <span class="ident">FlatMap</span>, <span class="ident">Fuse</span>};
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Inspect</span>, <span class="ident">Map</span>, <span class="ident">Peekable</span>, <span class="ident">Scan</span>, <span class="ident">Skip</span>, <span class="ident">SkipWhile</span>, <span class="ident">Take</span>, <span class="ident">TakeWhile</span>, <span class="ident">Rev</span>};
+<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Inspect</span>, <span class="ident">Map</span>, <span class="ident">Peekable</span>, <span class="ident">Scan</span>, <span class="ident">Skip</span>, <span class="ident">SkipWhile</span>, <span class="ident">StepBy</span>, <span class="ident">Take</span>, <span class="ident">TakeWhile</span>, <span class="ident">Rev</span>};
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Zip</span>, <span class="ident">Sum</span>, <span class="ident">Product</span>};
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">ChainState</span>, <span class="ident">FromIterator</span>, <span class="ident">ZipImpl</span>};
 
@@ -2509,6 +2542,39 @@
             <span class="ident">n</span> <span class="op">-=</span> <span class="number">1</span>;
         }
         <span class="prelude-val">None</span>
+    }
+
+    <span class="doccomment">/// Creates an iterator starting at the same point, but stepping by</span>
+    <span class="doccomment">/// the given amount at each iteration.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that it will always return the first element of the range,</span>
+    <span class="doccomment">/// regardless of the step given.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Panics</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The method will panic if the given step is `0`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Basic usage:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #![feature(iterator_step_by)]</span>
+    <span class="doccomment">/// let a = [0, 1, 2, 3, 4, 5];</span>
+    <span class="doccomment">/// let mut iter = a.into_iter().step_by(2);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(&amp;0));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(&amp;2));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(&amp;4));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), None);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;iterator_step_by&quot;</span>,
+               <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;unstable replacement of Range::step_by&quot;</span>,
+               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27741&quot;</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">step_by</span>(<span class="self">self</span>, <span class="ident">step</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">StepBy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> {
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">step</span> <span class="op">!=</span> <span class="number">0</span>);
+        <span class="ident">StepBy</span>{<span class="ident">iter</span>: <span class="self">self</span>, <span class="ident">step</span>: <span class="ident">step</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">first_take</span>: <span class="bool-val">true</span>}
     }
 
     <span class="doccomment">/// Takes two iterators and creates a new iterator over both in sequence.</span>

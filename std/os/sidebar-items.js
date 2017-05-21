@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["raw","Raw OS-specific types for the current platform/architecture"],["windows","Experimental extensions to `std` for Windows."]]});
+initSidebarItems({"mod":[["raw","Raw OS-specific types for the current platform/architecture"],["windows","Platform-specific extensions to `std` for Windows."]]});

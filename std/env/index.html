@@ -48,12 +48,16 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/std/env.rs.html#11-1066' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/std/env.rs.html#11-1086' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Inspection and manipulation of the process&#39;s environment.</p>
 
 <p>This module contains functions to inspect various aspects such as
 environment variables, process arguments, the current directory, and various
 other important directories.</p>
+
+<p>There are several functions and structs in this module that have a
+counterpart ending in <code>os</code>. Those ending in <code>os</code> will return an <a href="../../std/ffi/struct.OsString.html"><code>OsString</code></a>
+and those without will be returning a <a href="../string/struct.String.html"><code>String</code></a>.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -84,16 +88,16 @@ for each argument.</p>
                            <td><a class="struct" href="struct.JoinPathsError.html"
                                   title='struct std::env::JoinPathsError'>JoinPathsError</a></td>
                            <td class='docblock-short'>
-                                <p>Error type returned from <code>std::env::join_paths</code> when paths fail to be
-joined.</p>
+                                <p>The error type for operations on the <code>PATH</code> variable. Possibly returned from
+the <a href="fn.join_paths.html"><code>env::join_paths</code></a> function.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.SplitPaths.html"
                                   title='struct std::env::SplitPaths'>SplitPaths</a></td>
                            <td class='docblock-short'>
-                                <p>An iterator over <code>PathBuf</code> instances for parsing an environment variable
-according to platform-specific conventions.</p>
+                                <p>An iterator that splits an environment variable into paths according to
+platform-specific conventions.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -115,7 +119,8 @@ according to platform-specific conventions.</p>
                            <td><a class="enum" href="enum.VarError.html"
                                   title='enum std::env::VarError'>VarError</a></td>
                            <td class='docblock-short'>
-                                <p>Possible errors from the <a href="fn.var.html"><code>env::var</code></a> function.</p>
+                                <p>The error type for operations interacting with environment variables.
+Possibly returned from the <a href="fn.var.html"><code>env::var</code></a> function.</p>
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
@@ -175,8 +180,7 @@ environment variable.</p>
                            <td><a class="fn" href="fn.set_current_dir.html"
                                   title='fn std::env::set_current_dir'>set_current_dir</a></td>
                            <td class='docblock-short'>
-                                <p>Changes the current working directory to the specified path, returning
-whether the change was completed successfully or not.</p>
+                                <p>Changes the current working directory to the specified path.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

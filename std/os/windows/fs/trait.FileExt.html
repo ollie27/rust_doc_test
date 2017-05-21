@@ -48,11 +48,11 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../../src/std/sys/windows/ext/fs.rs.html#23-57' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../../src/std/sys/windows/ext/fs.rs.html#25-93' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait FileExt {
     fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;mut [</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;;
     fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;;
-}</pre><div class='docblock'><p>Windows-specific extensions to <code>File</code></p>
+}</pre><div class='docblock'><p>Windows-specific extensions to <a href="../../../fs/struct.File.html"><code>File</code></a>.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
@@ -70,6 +70,19 @@ function, it is set to the end of the read.</p>
 <p>Note that similar to <code>File::read</code>, it is not an error to return with a
 short read. When returning from such a short read, the file pointer is
 still updated.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File</span>::<span class="ident">open</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">10</span>];
+
+<span class="comment">// Read 10 bytes, starting 72 bytes from the</span>
+<span class="comment">// start of the file.</span>
+<span class="ident">file</span>.<span class="ident">seek_read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>[..], <span class="number">72</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20file%20%3D%20File%3A%3Aopen(%22foo.txt%22)%3F%3B%0Alet%20mut%20buffer%20%3D%20%5B0%3B%2010%5D%3B%0A%0A%2F%2F%20Read%2010%20bytes%2C%20starting%2072%20bytes%20from%20the%0A%2F%2F%20start%20of%20the%20file.%0Afile.seek_read(%26mut%20buffer%5B..%5D%2C%2072)%3F%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.seek_write' class='method'><span id='seek_write.v' class='invisible'><code>fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='docblock'><p>Seeks to a given position and writes a number of bytes.</p>
 
 <p>Returns the number of bytes written.</p>
@@ -84,6 +97,17 @@ extended and the intermediate bytes are left uninitialized.</p>
 <p>Note that similar to <code>File::write</code>, it is not an error to return a
 short write. When returning from such a short write, the file pointer
 is still updated.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">File</span>::<span class="ident">create</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+
+<span class="comment">// Write a byte string starting 72 bytes from</span>
+<span class="comment">// the start of the file.</span>
+<span class="ident">buffer</span>.<span class="ident">seek_write</span>(<span class="string">b&quot;some bytes&quot;</span>, <span class="number">72</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20buffer%20%3D%20File%3A%3Acreate(%22foo.txt%22)%3F%3B%0A%0A%2F%2F%20Write%20a%20byte%20string%20starting%2072%20bytes%20from%0A%2F%2F%20the%20start%20of%20the%20file.%0Abuffer.seek_write(b%22some%20bytes%22%2C%2072)%3F%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

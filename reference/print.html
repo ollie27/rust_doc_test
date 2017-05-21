@@ -127,18 +127,18 @@ grammar in this document.</p>
 <p>An identifier is any nonempty Unicode<sup class="footnote-reference"><a href="print.html#non_ascii_idents">1</a></sup> string of the following form:</p>
 <p>Either</p>
 <ul>
-<li>The first character has property <code>XID_start</code></li>
-<li>The remaining characters have property <code>XID_continue</code></li>
+<li>The first character has property <a href="http://unicode.org/cldr/utility/list-unicodeset.jsp?a=%5B%3AXID_Start%3A%5D&amp;abb=on&amp;g=&amp;i="><code>XID_start</code></a></li>
+<li>The remaining characters have property <a href="http://unicode.org/cldr/utility/list-unicodeset.jsp?a=%5B%3AXID_Continue%3A%5D&amp;abb=on&amp;g=&amp;i="><code>XID_continue</code></a></li>
 </ul>
 <p>Or</p>
 <ul>
 <li>The first character is <code>_</code></li>
 <li>The identifier is more than one character, <code>_</code> alone is not an identifier</li>
-<li>The remaining characters have property <code>XID_continue</code></li>
+<li>The remaining characters have property <a href="http://unicode.org/cldr/utility/list-unicodeset.jsp?a=%5B%3AXID_Continue%3A%5D&amp;abb=on&amp;g=&amp;i="><code>XID_continue</code></a></li>
 </ul>
 <p>that does <em>not</em> occur in the set of <a href="../grammar.html#keywords">keywords</a>.</p>
 <blockquote>
-<p><strong>Note</strong>: <code>XID_start</code> and <code>XID_continue</code> as character properties cover the
+<p><strong>Note</strong>: <a href="http://unicode.org/cldr/utility/list-unicodeset.jsp?a=%5B%3AXID_Start%3A%5D&amp;abb=on&amp;g=&amp;i="><code>XID_start</code></a> and <a href="http://unicode.org/cldr/utility/list-unicodeset.jsp?a=%5B%3AXID_Continue%3A%5D&amp;abb=on&amp;g=&amp;i="><code>XID_continue</code></a> as character properties cover the
 character ranges used to form the more familiar C and Java language-family
 identifiers.</p>
 </blockquote>
@@ -2318,10 +2318,26 @@ an error if insufficient type information is available for definite inference.
 Any variables introduced by a variable declaration are visible from the point of
 declaration until the end of the enclosing block scope.</p>
 <a class="header" href="print.html#expression-statements" id="expression-statements"><h2>Expression statements</h2></a>
-<p>An <em>expression statement</em> is one that evaluates an <a href="expressions.html">expression</a>
-and ignores its result. The type of an expression statement <code>e;</code> is always
-<code>()</code>, regardless of the type of <code>e</code>. As a rule, an expression statement's
-purpose is to trigger the effects of evaluating its expression.</p>
+<p>An <em>expression statement</em> is one that evaluates an
+<a href="expressions.html">expression</a> and ignores its result. The type of an
+expression statement <code>e;</code> is always <code>()</code>, regardless of the type of <code>e</code>. As a
+rule, an expression statement's purpose is to trigger the effects of evaluating
+its expression. An expression that consists of only a <a href="expressions.html#block-expressions">block
+expression</a> or control flow expression,
+that doesn't end a block and evaluates to <code>()</code> can also be used as an
+expression statement by omitting the trailing semicolon.</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# let mut v = vec![1, 2, 3];
+v.pop();          // Ignore the element returned from pop
+if v.is_empty() {
+    v.push(5);
+} else {
+    v.remove(0);
+}                 // Semicolon can be omitted.
+[1];              // Separate expression statement, not an indexing expression.
+
+#}</code></pre></pre>
 <a class="header" href="print.html#expressions" id="expressions"><h1>Expressions</h1></a>
 <p>An expression may have two roles: it always produces a <em>value</em>, and it may have
 <em>effects</em> (otherwise known as &quot;side effects&quot;). An expression <em>evaluates to</em> a
@@ -3368,6 +3384,38 @@ fn main() {
 </code></pre></pre>
 <p>In this example, the trait <code>Printable</code> occurs as a trait object in both the
 type signature of <code>print</code>, and the cast expression in <code>main</code>.</p>
+<p>Since a trait object can contain references, the lifetimes of those references
+need to be expressed as part of the trait object. The assumed lifetime of
+references held by a trait object is called its <em>default object lifetime bound</em>.
+These were defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0599-default-object-bound.md">RFC 599</a> and amended in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1156-adjust-default-object-bounds.md">RFC 1156</a>.</p>
+<p>For traits that themselves have no lifetime parameters, the default bound is
+based on what kind of trait object is used:</p>
+<pre><code class="language-rust ignore">// For the following trait...
+trait Foo { }
+
+// ...these two are the same:
+Box&lt;Foo&gt;
+Box&lt;Foo + 'static&gt;
+
+// ...and so are these:
+&amp;'a Foo
+&amp;'a (Foo + 'a)
+</code></pre>
+<p>The <code>+ 'static</code> and <code>+ 'a</code> refer to the default bounds of those kinds of trait
+objects, and also to how you can directly override them. Note that the innermost
+object sets the bound, so <code>&amp;'a Box&lt;Foo&gt;</code> is still <code>&amp;'a Box&lt;Foo + 'static&gt;</code>.</p>
+<p>For traits that have lifetime parameters of their own, the default bound is
+based on that lifetime parameter:</p>
+<pre><code class="language-rust ignore">// For the following trait...
+trait Bar&lt;'a&gt;: 'a { }
+
+// ...these two are the same:
+Box&lt;Bar&lt;'a&gt;&gt;
+Box&lt;Bar&lt;'a&gt; + 'a&gt;
+</code></pre>
+<p>The default for user-defined trait objects is based on the object type itself.
+If a type parameter has a lifetime bound, then that lifetime bound becomes the
+default bound for trait objects of that type. For example, <code>std::cell::Ref&lt;'a, T&gt;</code> contains a <code>T: 'a</code> bound, therefore trait objects of type <code>Ref&lt;'a, SomeTrait&gt;</code> are the same as <code>Ref&lt;'a, (SomeTrait + 'a)&gt;</code>.</p>
 <a class="header" href="print.html#type-parameters-1" id="type-parameters-1"><h3>Type parameters</h3></a>
 <p>Within the body of an item that has type parameter declarations, the names of
 its type parameters are types:</p>

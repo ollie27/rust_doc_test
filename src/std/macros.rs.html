@@ -730,7 +730,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Panics if writing to `io::stderr` fails.</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eprint&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.18.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eprint&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.19.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">allow_internal_unstable</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">eprint</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> (<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">io</span>::<span class="ident">_eprint</span>(<span class="macro">format_args</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>)));
@@ -749,7 +749,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Panics if writing to `io::stderr` fails.</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eprint&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.18.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eprint&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.19.0&quot;</span>)]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">eprintln</span> {
     () <span class="op">=&gt;</span> (<span class="macro">eprint</span><span class="macro">!</span>(<span class="string">&quot;\n&quot;</span>));
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> (<span class="macro">eprint</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>, <span class="string">&quot;\n&quot;</span>)));

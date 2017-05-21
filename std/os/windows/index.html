@@ -48,12 +48,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/std/sys/windows/ext/mod.rs.html#11-41' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p>Experimental extensions to <code>std</code> for Windows.</p>
+               </span><a class='srclink' href='../../../src/std/sys/windows/ext/mod.rs.html#11-43' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Platform-specific extensions to <code>std</code> for Windows.</p>
 
-<p>For now, this module is limited to extracting handles, file
-descriptors, and sockets, but its functionality will grow over
-time.</p>
+<p>Provides access to platform-level information for Windows, and exposes
+Windows-specific idioms that would otherwise be inappropriate as part
+the core <code>std</code> library. These extensions allow developers to use
+<code>std</code> types and idioms with Windows in a way that the normal
+platform-agnostic idioms would not normally support.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -67,7 +69,7 @@ time.</p>
                            <td><a class="mod" href="fs/index.html"
                                   title='mod std::os::windows::fs'>fs</a></td>
                            <td class='docblock-short'>
-                                <p>Windows-specific extensions for the primitives in <code>std::fs</code></p>
+                                <p>Windows-specific extensions for the primitives in the <code>std::fs</code> module.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

@@ -136,81 +136,81 @@ deriving both <a href="../../std/cmp/trait.Eq.html"><code>Eq</code></a> and <cod
 <li><code>impl&lt;T&gt; Hash for <a class="struct" href="../../core/mem/struct.Discriminant.html" title="struct core::mem::Discriminant">Discriminant</a>&lt;T&gt;</code></li>
 <li><code>impl&lt;T:&nbsp;<a class="trait" href="../../core/hash/trait.Hash.html" title="trait core::hash::Hash">Hash</a> + <a class="trait" href="../../core/nonzero/trait.Zeroable.html" title="trait core::nonzero::Zeroable">Zeroable</a>&gt; Hash for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;T&gt;</code></li>
 <li><code>impl&lt;Ret&gt; Hash for fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret&gt; Hash for extern fn() -&gt; Ret</code></li>
+<li><code>impl&lt;Ret&gt; Hash for extern &quot;C&quot; fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; Hash for unsafe fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret&gt; Hash for unsafe extern fn() -&gt; Ret</code></li>
+<li><code>impl&lt;Ret&gt; Hash for unsafe extern &quot;C&quot; fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A&gt; Hash for fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Hash for extern fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Hash for extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Hash for extern &quot;C&quot; fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Hash for extern &quot;C&quot; fn(_: A, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A&gt; Hash for unsafe fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Hash for unsafe extern fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Hash for unsafe extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Hash for unsafe extern &quot;C&quot; fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B&gt; Hash for fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Hash for extern fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Hash for extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Hash for extern &quot;C&quot; fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B&gt; Hash for unsafe fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Hash for unsafe extern fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Hash for unsafe extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C&gt; Hash for fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Hash for extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Hash for extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C&gt; Hash for unsafe fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Hash for unsafe extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Hash for unsafe extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D&gt; Hash for fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Hash for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Hash for <a class="struct" href="../../core/marker/struct.PhantomData.html" title="struct core::marker::PhantomData">PhantomData</a>&lt;T&gt;</code></li>
 <li><code>impl Hash for <a class="struct" href="../../core/ops/struct.RangeFull.html" title="struct core::ops::RangeFull">RangeFull</a></code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/hash/trait.Hash.html" title="trait core::hash::Hash">Hash</a>&gt; Hash for <a class="struct" href="../../core/ops/struct.Range.html" title="struct core::ops::Range">Range</a>&lt;Idx&gt;</code></li>

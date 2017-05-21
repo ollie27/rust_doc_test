@@ -48,38 +48,115 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../../src/std/sys/windows/ext/fs.rs.html#203-238' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../../src/std/sys/windows/ext/fs.rs.html#290-433' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait MetadataExt {
     fn <a href='#tymethod.file_attributes' class='fnname'>file_attributes</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u32.html">u32</a>;
     fn <a href='#tymethod.creation_time' class='fnname'>creation_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a>;
     fn <a href='#tymethod.last_access_time' class='fnname'>last_access_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a>;
     fn <a href='#tymethod.last_write_time' class='fnname'>last_write_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a>;
     fn <a href='#tymethod.file_size' class='fnname'>file_size</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a>;
-}</pre><div class='docblock'><p>Extension methods for <code>fs::Metadata</code> to access the raw fields contained
+}</pre><div class='docblock'><p>Extension methods for <a href="../../../fs/struct.Metadata.html"><code>fs::Metadata</code></a> to access the raw fields contained
 within.</p>
+
+<p>The data members that this trait exposes correspond to the members
+of the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa363788.aspx"><code>BY_HANDLE_FILE_INFORMATION</code></a> structure.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
         <h3 id='tymethod.file_attributes' class='method'><span id='file_attributes.v' class='invisible'><code>fn <a href='#tymethod.file_attributes' class='fnname'>file_attributes</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u32.html">u32</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>dwFileAttributes</code> field of this metadata.</p>
 
 <p>This field contains the file system attribute information for a file
-or directory.</p>
+or directory. For possible values and their descriptions, see
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg258117.aspx">File Attribute Constants</a> in the Windows Dev Center.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">metadata</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">attributes</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">file_attributes</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0Alet%20attributes%20%3D%20metadata.file_attributes()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.creation_time' class='method'><span id='creation_time.v' class='invisible'><code>fn <a href='#tymethod.creation_time' class='fnname'>creation_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>ftCreationTime</code> field of this metadata.</p>
 
-<p>The returned 64-bit value represents the number of 100-nanosecond
-intervals since January 1, 1601 (UTC).</p>
+<p>The returned 64-bit value is equivalent to a <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724284.aspx"><code>FILETIME</code></a> struct,
+which represents the number of 100-nanosecond intervals since
+January 1, 1601 (UTC). The struct is automatically
+converted to a <code>u64</code> value, as that is the recommended way
+to use it.</p>
+
+<p>If the underlying filesystem does not support creation time, the
+returned value is 0.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">metadata</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">creation_time</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">creation_time</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0Alet%20creation_time%20%3D%20metadata.creation_time()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.last_access_time' class='method'><span id='last_access_time.v' class='invisible'><code>fn <a href='#tymethod.last_access_time' class='fnname'>last_access_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>ftLastAccessTime</code> field of this metadata.</p>
 
-<p>The returned 64-bit value represents the number of 100-nanosecond
-intervals since January 1, 1601 (UTC).</p>
+<p>The returned 64-bit value is equivalent to a <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724284.aspx"><code>FILETIME</code></a> struct,
+which represents the number of 100-nanosecond intervals since
+January 1, 1601 (UTC). The struct is automatically
+converted to a <code>u64</code> value, as that is the recommended way
+to use it.</p>
+
+<p>For a file, the value specifies the last time that a file was read
+from or written to. For a directory, the value specifies when
+the directory was created. For both files and directories, the
+specified date is correct, but the time of day is always set to
+midnight.</p>
+
+<p>If the underlying filesystem does not support last access time, the
+returned value is 0.</p>
+
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">metadata</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">last_access_time</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">last_access_time</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0Alet%20last_access_time%20%3D%20metadata.last_access_time()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.last_write_time' class='method'><span id='last_write_time.v' class='invisible'><code>fn <a href='#tymethod.last_write_time' class='fnname'>last_write_time</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>ftLastWriteTime</code> field of this metadata.</p>
 
-<p>The returned 64-bit value represents the number of 100-nanosecond
-intervals since January 1, 1601 (UTC).</p>
+<p>The returned 64-bit value is equivalent to a <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724284.aspx"><code>FILETIME</code></a> struct,
+which represents the number of 100-nanosecond intervals since
+January 1, 1601 (UTC). The struct is automatically
+converted to a <code>u64</code> value, as that is the recommended way
+to use it.</p>
+
+<p>For a file, the value specifies the last time that a file was written
+to. For a directory, the structure specifies when the directory was
+created.</p>
+
+<p>If the underlying filesystem does not support the last write time
+time, the returned value is 0.</p>
+
+<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">metadata</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">last_write_time</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">last_write_time</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0Alet%20last_write_time%20%3D%20metadata.last_write_time()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div><h3 id='tymethod.file_size' class='method'><span id='file_size.v' class='invisible'><code>fn <a href='#tymethod.file_size' class='fnname'>file_size</a>(&amp;self) -&gt; <a class="primitive" href="../../../primitive.u64.html">u64</a></code></span></h3><div class='docblock'><p>Returns the value of the <code>nFileSize{High,Low}</code> fields of this
 metadata.</p>
 
 <p>The returned value does not have meaning for directories.</p>
+
+<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">windows</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">metadata</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">file_size</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">file_size</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20metadata%20%3D%20fs%3A%3Ametadata(%22foo.txt%22)%3F%3B%0Alet%20file_size%20%3D%20metadata.file_size()%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

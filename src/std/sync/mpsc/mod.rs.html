@@ -3966,7 +3966,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_debug&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.7.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_debug&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Sender {{ .. }}&quot;</span>)
@@ -4096,7 +4096,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_debug&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.7.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_debug&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SyncSender</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;SyncSender {{ .. }}&quot;</span>)
@@ -4112,7 +4112,7 @@
         <span class="ident">Receiver</span> { <span class="ident">inner</span>: <span class="ident">UnsafeCell</span>::<span class="ident">new</span>(<span class="ident">inner</span>) }
     }
 
-    <span class="doccomment">/// Attempts to return a pending value on this receiver without blocking</span>
+    <span class="doccomment">/// Attempts to return a pending value on this receiver without blocking.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method will never block the caller in order to wait for data to</span>
     <span class="doccomment">/// become available. Instead, this will always return immediately with a</span>
@@ -4562,7 +4562,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_debug&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.7.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_debug&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Receiver {{ .. }}&quot;</span>)
@@ -4689,7 +4689,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_recv_timeout_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.14.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_recv_timeout_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.15.0&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">RecvTimeoutError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
@@ -4703,7 +4703,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_recv_timeout_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.14.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_recv_timeout_error&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.15.0&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">RecvTimeoutError</span> {
     <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {

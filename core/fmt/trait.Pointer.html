@@ -92,81 +92,81 @@ as hexadecimal.</p>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     <li><code>impl&lt;Ret&gt; Pointer for fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret&gt; Pointer for extern fn() -&gt; Ret</code></li>
+<li><code>impl&lt;Ret&gt; Pointer for extern &quot;C&quot; fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret&gt; Pointer for unsafe fn() -&gt; Ret</code></li>
-<li><code>impl&lt;Ret&gt; Pointer for unsafe extern fn() -&gt; Ret</code></li>
+<li><code>impl&lt;Ret&gt; Pointer for unsafe extern &quot;C&quot; fn() -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A&gt; Pointer for fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Pointer for extern fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Pointer for extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Pointer for extern &quot;C&quot; fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Pointer for extern &quot;C&quot; fn(_: A, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A&gt; Pointer for unsafe fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Pointer for unsafe extern fn(_: A) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A&gt; Pointer for unsafe extern fn(_: A, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B&gt; Pointer for fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Pointer for extern fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Pointer for extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B&gt; Pointer for unsafe fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Pointer for unsafe extern fn(_: A, _: B) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B&gt; Pointer for unsafe extern fn(_: A, _: B, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C&gt; Pointer for fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Pointer for extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Pointer for extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C&gt; Pointer for unsafe fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Pointer for unsafe extern fn(_: A, _: B, _: C) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for unsafe fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
-<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for unsafe extern fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L) -&gt; Ret</code></li>
+<li><code>impl&lt;Ret, A, B, C, D, E, F, G, H, I, J, K, L&gt; Pointer for unsafe extern &quot;C&quot; fn(_: A, _: B, _: C, _: D, _: E, _: F, _: G, _: H, _: I, _: J, _: K, _: L, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Pointer for <a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Pointer for <a class="struct" href="../../core/ptr/struct.Shared.html" title="struct core::ptr::Shared">Shared</a>&lt;T&gt;</code></li>
 <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Pointer for *const T</code></li>
