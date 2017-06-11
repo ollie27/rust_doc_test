@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/cmp.rs.html#555-663' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/cmp.rs.html#567-675' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "ord"]
 </div>pub trait PartialOrd&lt;Rhs&nbsp;=&nbsp;Self&gt;: <a class="trait" href="../../std/cmp/trait.PartialEq.html" title="trait std::cmp::PartialEq">PartialEq</a>&lt;Rhs&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Rhs: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span>{
     fn <a href='#tymethod.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;Rhs) -&gt; <a class="enum" href="../../std/option/enum.Option.html" title="enum std::option::Option">Option</a>&lt;<a class="enum" href="../../std/cmp/enum.Ordering.html" title="enum std::cmp::Ordering">Ordering</a>&gt;;
@@ -74,13 +74,17 @@ transitively: if <code>T: PartialOrd&lt;U&gt;</code> and <code>U: PartialOrd&lt;
 ordering based on the top-to-bottom declaration order of the struct&#39;s members.</p>
 
 <h2 id='how-can-i-implement-partialord' class='section-header'><a href='#how-can-i-implement-partialord'>How can I implement <code>PartialOrd</code>?</a></h2>
-<p>PartialOrd only requires implementation of the <code>partial_cmp</code> method, with the others generated
-from default implementations.</p>
+<p><code>PartialOrd</code> only requires implementation of the <code>partial_cmp</code> method, with the others
+generated from default implementations.</p>
 
 <p>However it remains possible to implement the others separately for types which do not have a
 total order. For example, for floating point numbers, <code>NaN &lt; 0 == false</code> and <code>NaN &gt;= 0 == false</code> (cf. IEEE 754-2008 section 5.11).</p>
 
 <p><code>PartialOrd</code> requires your type to be <code>PartialEq</code>.</p>
+
+<p>Implementations of <code>PartialEq</code>, <code>PartialOrd</code>, and <code>Ord</code> <em>must</em> agree with each other. It&#39;s
+easy to accidentally make them disagree by deriving some of the traits and manually
+implementing others.</p>
 
 <p>If your type is <code>Ord</code>, you can implement <code>partial_cmp()</code> by using <code>cmp()</code>:</p>
 
@@ -262,6 +266,7 @@ operator.</p>
 <li><code>impl&lt;T&gt; PartialOrd&lt;<a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 18]</a>&gt; for <a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 18]</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd&lt;unsafe extern &quot;C&quot; fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret&gt; for unsafe extern &quot;C&quot; fn(A, B, C, D, E, F, G, H, ...) -&gt; Ret</code></li>
 <li><code>impl PartialOrd&lt;!&gt; for !</code></li>
+<li><code>impl&lt;T, E&gt; PartialOrd&lt;<a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, E&gt;&gt; for <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, E&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;E: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;E&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
 <li><code>impl&lt;T&gt; PartialOrd&lt;<a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 10]</a>&gt; for <a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 10]</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
 <li><code>impl&lt;Ret, A, B&gt; PartialOrd&lt;unsafe extern &quot;C&quot; fn(A, B, ...) -&gt; Ret&gt; for unsafe extern &quot;C&quot; fn(A, B, ...) -&gt; Ret</code></li>
 <li><code>impl&lt;T&gt; PartialOrd&lt;<a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 5]</a>&gt; for <a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 5]</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
@@ -345,7 +350,6 @@ operator.</p>
 <li><code>impl&lt;T&gt; PartialOrd&lt;<a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 11]</a>&gt; for <a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 11]</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
 <li><code>impl&lt;T&gt; PartialOrd&lt;<a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 12]</a>&gt; for <a class="primitive" href="../primitive.array.html">[</a>T<a class="primitive" href="../primitive.array.html">; 12]</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F, G, H&gt; PartialOrd&lt;unsafe fn(A, B, C, D, E, F, G, H) -&gt; Ret&gt; for unsafe fn(A, B, C, D, E, F, G, H) -&gt; Ret</code></li>
-<li><code>impl&lt;T, E&gt; PartialOrd&lt;<a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, E&gt;&gt; for <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;T, E&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;E: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;E&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.PartialOrd.html" title="trait std::cmp::PartialOrd">PartialOrd</a>&lt;T&gt;,&nbsp;</span></code></li>
 <li><code>impl&lt;Ret, A&gt; PartialOrd&lt;unsafe extern &quot;C&quot; fn(A) -&gt; Ret&gt; for unsafe extern &quot;C&quot; fn(A) -&gt; Ret</code></li>
 <li><code>impl&lt;Ret, A, B, C, D, E, F&gt; PartialOrd&lt;extern &quot;C&quot; fn(A, B, C, D, E, F) -&gt; Ret&gt; for extern &quot;C&quot; fn(A, B, C, D, E, F) -&gt; Ret</code></li>
 <li><code>impl PartialOrd&lt;<a class="primitive" href="../primitive.f64.html">f64</a>&gt; for <a class="primitive" href="../primitive.f64.html">f64</a></code></li>

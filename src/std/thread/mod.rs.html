@@ -1478,6 +1478,56 @@
 <span id="1433">1433</span>
 <span id="1434">1434</span>
 <span id="1435">1435</span>
+<span id="1436">1436</span>
+<span id="1437">1437</span>
+<span id="1438">1438</span>
+<span id="1439">1439</span>
+<span id="1440">1440</span>
+<span id="1441">1441</span>
+<span id="1442">1442</span>
+<span id="1443">1443</span>
+<span id="1444">1444</span>
+<span id="1445">1445</span>
+<span id="1446">1446</span>
+<span id="1447">1447</span>
+<span id="1448">1448</span>
+<span id="1449">1449</span>
+<span id="1450">1450</span>
+<span id="1451">1451</span>
+<span id="1452">1452</span>
+<span id="1453">1453</span>
+<span id="1454">1454</span>
+<span id="1455">1455</span>
+<span id="1456">1456</span>
+<span id="1457">1457</span>
+<span id="1458">1458</span>
+<span id="1459">1459</span>
+<span id="1460">1460</span>
+<span id="1461">1461</span>
+<span id="1462">1462</span>
+<span id="1463">1463</span>
+<span id="1464">1464</span>
+<span id="1465">1465</span>
+<span id="1466">1466</span>
+<span id="1467">1467</span>
+<span id="1468">1468</span>
+<span id="1469">1469</span>
+<span id="1470">1470</span>
+<span id="1471">1471</span>
+<span id="1472">1472</span>
+<span id="1473">1473</span>
+<span id="1474">1474</span>
+<span id="1475">1475</span>
+<span id="1476">1476</span>
+<span id="1477">1477</span>
+<span id="1478">1478</span>
+<span id="1479">1479</span>
+<span id="1480">1480</span>
+<span id="1481">1481</span>
+<span id="1482">1482</span>
+<span id="1483">1483</span>
+<span id="1484">1484</span>
+<span id="1485">1485</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1840,9 +1890,12 @@
             }
             <span class="kw">unsafe</span> {
                 <span class="ident">thread_info</span>::<span class="ident">set</span>(<span class="ident">imp</span>::<span class="ident">guard</span>::<span class="ident">current</span>(), <span class="ident">their_thread</span>);
+                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
                 <span class="kw">let</span> <span class="ident">try_result</span> <span class="op">=</span> <span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="ident">panic</span>::<span class="ident">AssertUnwindSafe</span>(<span class="op">||</span> {
                     ::<span class="ident">sys_common</span>::<span class="ident">backtrace</span>::<span class="ident">__rust_begin_short_backtrace</span>(<span class="ident">f</span>)
                 }));
+                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>))]</span>
+                <span class="kw">let</span> <span class="ident">try_result</span> <span class="op">=</span> <span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="ident">panic</span>::<span class="ident">AssertUnwindSafe</span>(<span class="ident">f</span>));
                 <span class="kw-2">*</span><span class="ident">their_packet</span>.<span class="ident">get</span>() <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">try_result</span>);
             }
         };
@@ -1874,6 +1927,26 @@
 <span class="doccomment">/// This will create a thread using default parameters of [`Builder`], if you</span>
 <span class="doccomment">/// want to specify the stack size or the name of the thread, use this API</span>
 <span class="doccomment">/// instead.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// As you can see in the signature of `spawn` there are two constraints on</span>
+<span class="doccomment">/// both the closure given to `spawn` and its return value, let&#39;s explain them:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// - The `&#39;static` constraint means that the closure and its return value</span>
+<span class="doccomment">///   must have a lifetime of the whole program execution. The reason for this</span>
+<span class="doccomment">///   is that threads can `detach` and outlive the lifetime they have been</span>
+<span class="doccomment">///   created in.</span>
+<span class="doccomment">///   Indeed if the thread, and by extension its return value, can outlive their</span>
+<span class="doccomment">///   caller, we need to make sure that they will be valid afterwards, and since</span>
+<span class="doccomment">///   we *can&#39;t* know when it will return we need to have them valid as long as</span>
+<span class="doccomment">///   possible, that is until the end of the program, hence the `&#39;static`</span>
+<span class="doccomment">///   lifetime.</span>
+<span class="doccomment">/// - The [`Send`] constraint is because the closure will need to be passed</span>
+<span class="doccomment">///   *by value* from the thread where it is spawned to the new thread. Its</span>
+<span class="doccomment">///   return value will need to be passed from the new thread to the thread</span>
+<span class="doccomment">///   where it is `join`ed.</span>
+<span class="doccomment">///   As a reminder, the [`Send`] marker trait, expresses that it is safe to be</span>
+<span class="doccomment">///   passed from thread to thread. [`Sync`] expresses that it is safe to have a</span>
+<span class="doccomment">///   reference be passed from thread to thread.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Panics</span>
 <span class="doccomment">///</span>
@@ -1941,6 +2014,8 @@
 <span class="doccomment">/// [`panic`]: ../../std/macro.panic.html</span>
 <span class="doccomment">/// [`Builder::spawn`]: ../../std/thread/struct.Builder.html#method.spawn</span>
 <span class="doccomment">/// [`Builder`]: ../../std/thread/struct.Builder.html</span>
+<span class="doccomment">/// [`Send`]: ../../std/marker/trait.Send.html</span>
+<span class="doccomment">/// [`Sync`]: ../../std/marker/trait.Sync.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spawn</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">JoinHandle</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span>
     <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-&gt;</span> <span class="ident">T</span>, <span class="ident">F</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">T</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>
@@ -2550,11 +2625,12 @@
 
 <span class="doccomment">/// An owned permission to join on a thread (block on its termination).</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A `JoinHandle` *detaches* the child thread when it is dropped.</span>
+<span class="doccomment">/// A `JoinHandle` *detaches* the associated thread when it is dropped, which</span>
+<span class="doccomment">/// means that there is no longer any handle to thread and no way to `join`</span>
+<span class="doccomment">/// on it.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Due to platform restrictions, it is not possible to [`Clone`] this</span>
-<span class="doccomment">/// handle: the ability to join a child thread is a uniquely-owned</span>
-<span class="doccomment">/// permission.</span>
+<span class="doccomment">/// handle: the ability to join a thread is a uniquely-owned permission.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This `struct` is created by the [`thread::spawn`] function and the</span>
 <span class="doccomment">/// [`thread::Builder::spawn`] method.</span>
@@ -2581,6 +2657,30 @@
 <span class="doccomment">/// let join_handle: thread::JoinHandle&lt;_&gt; = builder.spawn(|| {</span>
 <span class="doccomment">///     // some work here</span>
 <span class="doccomment">/// }).unwrap();</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Child being detached and outliving its parent:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```no_run</span>
+<span class="doccomment">/// use std::thread;</span>
+<span class="doccomment">/// use std::time::Duration;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let original_thread = thread::spawn(|| {</span>
+<span class="doccomment">///     let _detached_thread = thread::spawn(|| {</span>
+<span class="doccomment">///         // Here we sleep to make sure that the first thread returns before.</span>
+<span class="doccomment">///         thread::sleep(Duration::from_millis(10));</span>
+<span class="doccomment">///         // This will be called, even though the JoinHandle is dropped.</span>
+<span class="doccomment">///         println!(&quot;♫ Still alive ♫&quot;);</span>
+<span class="doccomment">///     });</span>
+<span class="doccomment">/// });</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let _ = original_thread.join();</span>
+<span class="doccomment">/// println!(&quot;Original thread is joined.&quot;);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// // We make sure that the new thread has time to run, before the main</span>
+<span class="doccomment">/// // thread returns.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// thread::sleep(Duration::from_millis(1000));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`Clone`]: ../../std/clone/trait.Clone.html</span>

@@ -2796,6 +2796,22 @@
 <span id="2751">2751</span>
 <span id="2752">2752</span>
 <span id="2753">2753</span>
+<span id="2754">2754</span>
+<span id="2755">2755</span>
+<span id="2756">2756</span>
+<span id="2757">2757</span>
+<span id="2758">2758</span>
+<span id="2759">2759</span>
+<span id="2760">2760</span>
+<span id="2761">2761</span>
+<span id="2762">2762</span>
+<span id="2763">2763</span>
+<span id="2764">2764</span>
+<span id="2765">2765</span>
+<span id="2766">2766</span>
+<span id="2767">2767</span>
+<span id="2768">2768</span>
+<span id="2769">2769</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2814,7 +2830,6 @@
 <span class="kw">use</span> <span class="ident">convert</span>::<span class="ident">TryFrom</span>;
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">intrinsics</span>;
-<span class="kw">use</span> <span class="ident">mem</span>::<span class="ident">size_of</span>;
 <span class="kw">use</span> <span class="ident">str</span>::<span class="ident">FromStr</span>;
 
 <span class="doccomment">/// Provides intentionally-wrapped arithmetic on `T`.</span>
@@ -4975,8 +4990,32 @@
             (<span class="self">self</span>.<span class="ident">wrapping_sub</span>(<span class="number">1</span>)) <span class="op">&amp;</span> <span class="self">self</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>(<span class="self">self</span> <span class="op">==</span> <span class="number">0</span>)
         }
 
+        <span class="comment">// Returns one less than next power of two.</span>
+        <span class="comment">// (For 8u8 next power of two is 8u8 and for 6u8 it is 8u8)</span>
+        <span class="comment">//</span>
+        <span class="comment">// 8u8.one_less_than_next_power_of_two() == 7</span>
+        <span class="comment">// 6u8.one_less_than_next_power_of_two() == 7</span>
+        <span class="comment">//</span>
+        <span class="comment">// This method cannot overflow, as in the `next_power_of_two`</span>
+        <span class="comment">// overflow cases it instead ends up returning the maximum value</span>
+        <span class="comment">// of the type, and can return 0 for 0.</span>
+        <span class="kw">fn</span> <span class="ident">one_less_than_next_power_of_two</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+            <span class="kw">if</span> <span class="self">self</span> <span class="op">&lt;=</span> <span class="number">1</span> { <span class="kw">return</span> <span class="number">0</span>; }
+
+            <span class="comment">// Because `p &gt; 0`, it cannot consist entirely of leading zeros.</span>
+            <span class="comment">// That means the shift is always in-bounds, and some processors</span>
+            <span class="comment">// (such as intel pre-haswell) have more efficient ctlz</span>
+            <span class="comment">// intrinsics when the argument is non-zero.</span>
+            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="self">self</span> <span class="op">-</span> <span class="number">1</span>;
+            <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">leading_zeros</span>();
+            <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">SelfT</span><span class="op">&gt;</span>::<span class="ident">max_value</span>() <span class="op">&gt;&gt;</span> <span class="ident">z</span>
+        }
+
         <span class="doccomment">/// Returns the smallest power of two greater than or equal to `self`.</span>
-        <span class="doccomment">/// Unspecified behavior on overflow.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// When return value overflows (i.e. `self &gt; (1 &lt;&lt; (N-1))` for type</span>
+        <span class="doccomment">/// `uN`), it panics in debug mode and return value is wrapped to 0 in</span>
+        <span class="doccomment">/// release mode (the only situation in which method can return 0).</span>
         <span class="doccomment">///</span>
         <span class="doccomment">/// # Examples</span>
         <span class="doccomment">///</span>
@@ -4989,9 +5028,7 @@
         <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_power_of_two</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-            <span class="kw">let</span> <span class="ident">bits</span> <span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="number">8</span>;
-            <span class="kw">let</span> <span class="ident">one</span>: <span class="self">Self</span> <span class="op">=</span> <span class="number">1</span>;
-            <span class="ident">one</span> <span class="op">&lt;&lt;</span> ((<span class="ident">bits</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">wrapping_sub</span>(<span class="ident">one</span>).<span class="ident">leading_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">bits</span>)
+            <span class="self">self</span>.<span class="ident">one_less_than_next_power_of_two</span>() <span class="op">+</span> <span class="number">1</span>
         }
 
         <span class="doccomment">/// Returns the smallest power of two greater than or equal to `n`. If</span>
@@ -5009,12 +5046,7 @@
         <span class="doccomment">/// ```</span>
         <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">checked_next_power_of_two</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">npot</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_power_of_two</span>();
-            <span class="kw">if</span> <span class="ident">npot</span> <span class="op">&gt;=</span> <span class="self">self</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">npot</span>)
-            } <span class="kw">else</span> {
-                <span class="prelude-val">None</span>
-            }
+            <span class="self">self</span>.<span class="ident">one_less_than_next_power_of_two</span>().<span class="ident">checked_add</span>(<span class="number">1</span>)
         }
     }
 }

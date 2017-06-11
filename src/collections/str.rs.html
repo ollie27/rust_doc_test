@@ -2029,6 +2029,17 @@
 <span id="1984">1984</span>
 <span id="1985">1985</span>
 <span id="1986">1986</span>
+<span id="1987">1987</span>
+<span id="1988">1988</span>
+<span id="1989">1989</span>
+<span id="1990">1990</span>
+<span id="1991">1991</span>
+<span id="1992">1992</span>
+<span id="1993">1993</span>
+<span id="1994">1994</span>
+<span id="1995">1995</span>
+<span id="1996">1996</span>
+<span id="1997">1997</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2467,6 +2478,12 @@
     <span class="doccomment">/// Creates a string slice from another string slice, bypassing safety</span>
     <span class="doccomment">/// checks.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// This is generally not recommended, use with caution! For a safe</span>
+    <span class="doccomment">/// alternative see [`str`] and [`Index`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`str`]: primitive.str.html</span>
+    <span class="doccomment">/// [`Index`]: ops/trait.Index.html</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// This new slice goes from `begin` to `end`, including `begin` but</span>
     <span class="doccomment">/// excluding `end`.</span>
     <span class="doccomment">///</span>
@@ -2509,6 +2526,11 @@
 
     <span class="doccomment">/// Creates a string slice from another string slice, bypassing safety</span>
     <span class="doccomment">/// checks.</span>
+    <span class="doccomment">/// This is generally not recommended, use with caution! For a safe</span>
+    <span class="doccomment">/// alternative see [`str`] and [`IndexMut`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`str`]: primitive.str.html</span>
+    <span class="doccomment">/// [`IndexMut`]: ops/trait.IndexMut.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This new slice goes from `begin` to `end`, including `begin` but</span>
     <span class="doccomment">/// excluding `end`.</span>
@@ -3050,7 +3072,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// let x = &quot;(///)&quot;.to_string();</span>
-    <span class="doccomment">/// let d: Vec&lt;_&gt; = x.split(&#39;/&#39;).collect();;</span>
+    <span class="doccomment">/// let d: Vec&lt;_&gt; = x.split(&#39;/&#39;).collect();</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert_eq!(d, &amp;[&quot;(&quot;, &quot;&quot;, &quot;&quot;, &quot;)&quot;]);</span>
     <span class="doccomment">/// ```</span>

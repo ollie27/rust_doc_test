@@ -973,6 +973,18 @@
 <span id="928">928</span>
 <span id="929">929</span>
 <span id="930">930</span>
+<span id="931">931</span>
+<span id="932">932</span>
+<span id="933">933</span>
+<span id="934">934</span>
+<span id="935">935</span>
+<span id="936">936</span>
+<span id="937">937</span>
+<span id="938">938</span>
+<span id="939">939</span>
+<span id="940">940</span>
+<span id="941">941</span>
+<span id="942">942</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1042,6 +1054,10 @@
 <span class="doccomment">/// in terms of it by default. Any manual implementation of `ne` *must* respect</span>
 <span class="doccomment">/// the rule that `eq` is a strict inverse of `ne`; that is, `!(a == b)` if and</span>
 <span class="doccomment">/// only if `a != b`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Implementations of `PartialEq`, `PartialOrd`, and `Ord` *must* agree with</span>
+<span class="doccomment">/// each other. It&#39;s easy to accidentally make them disagree by deriving some</span>
+<span class="doccomment">/// of the traits and manually implementing others.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// An example implementation for a domain in which two books are considered</span>
 <span class="doccomment">/// the same book if their ISBN matches, even if the formats differ:</span>
@@ -1362,6 +1378,10 @@
 <span class="doccomment">/// Then you must define an implementation for `cmp()`. You may find it useful to use</span>
 <span class="doccomment">/// `cmp()` on your type&#39;s fields.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Implementations of `PartialEq`, `PartialOrd`, and `Ord` *must* agree with each other. It&#39;s</span>
+<span class="doccomment">/// easy to accidentally make them disagree by deriving some of the traits and manually</span>
+<span class="doccomment">/// implementing others.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// Here&#39;s an example where you want to sort people by height only, disregarding `id`</span>
 <span class="doccomment">/// and `name`:</span>
 <span class="doccomment">///</span>
@@ -1450,14 +1470,18 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ## How can I implement `PartialOrd`?</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// PartialOrd only requires implementation of the `partial_cmp` method, with the others generated</span>
-<span class="doccomment">/// from default implementations.</span>
+<span class="doccomment">/// `PartialOrd` only requires implementation of the `partial_cmp` method, with the others</span>
+<span class="doccomment">/// generated from default implementations.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// However it remains possible to implement the others separately for types which do not have a</span>
 <span class="doccomment">/// total order. For example, for floating point numbers, `NaN &lt; 0 == false` and `NaN &gt;= 0 ==</span>
 <span class="doccomment">/// false` (cf. IEEE 754-2008 section 5.11).</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `PartialOrd` requires your type to be `PartialEq`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Implementations of `PartialEq`, `PartialOrd`, and `Ord` *must* agree with each other. It&#39;s</span>
+<span class="doccomment">/// easy to accidentally make them disagree by deriving some of the traits and manually</span>
+<span class="doccomment">/// implementing others.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// If your type is `Ord`, you can implement `partial_cmp()` by using `cmp()`:</span>
 <span class="doccomment">///</span>

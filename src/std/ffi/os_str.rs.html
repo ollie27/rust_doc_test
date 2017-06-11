@@ -925,6 +925,12 @@
 <span id="880">880</span>
 <span id="881">881</span>
 <span id="882">882</span>
+<span id="883">883</span>
+<span id="884">884</span>
+<span id="885">885</span>
+<span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1175,7 +1181,9 @@
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">shrink_to_fit</span>()
     }
 
-    <span class="doccomment">/// Converts this `OsString` into a boxed `OsStr`.</span>
+    <span class="doccomment">/// Converts this `OsString` into a boxed [`OsStr`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`OsStr`]: struct.OsStr.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1410,12 +1418,13 @@
     <span class="doccomment">/// Returns the length of this `OsStr`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that this does **not** return the number of bytes in this string</span>
-    <span class="doccomment">/// as, for example, OS strings on Windows are encoded as a list of `u16`</span>
+    <span class="doccomment">/// as, for example, OS strings on Windows are encoded as a list of [`u16`]</span>
     <span class="doccomment">/// rather than a list of bytes. This number is simply useful for passing to</span>
     <span class="doccomment">/// other methods like [`OsString::with_capacity`] to avoid reallocations.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// See `OsStr` introduction for more information about encoding.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// [`u16`]: ../primitive.u16.html</span>
     <span class="doccomment">/// [`OsString::with_capacity`]: struct.OsString.html#method.with_capacity</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
@@ -1434,7 +1443,10 @@
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">inner</span>.<span class="ident">len</span>()
     }
 
-    <span class="doccomment">/// Converts a `Box&lt;OsStr&gt;` into an `OsString` without copying or allocating.</span>
+    <span class="doccomment">/// Converts a [`Box`]`&lt;OsStr&gt;` into an [`OsString`] without copying or allocating.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Box`]: ../boxed/struct.Box.html</span>
+    <span class="doccomment">/// [`OsString`]: struct.OsString.html</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;into_boxed_os_str&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;40380&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_os_string</span>(<span class="self">self</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">OsString</span> {
         <span class="kw">let</span> <span class="ident">inner</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>) };

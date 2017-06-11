@@ -164,10 +164,7 @@ fn handle_connection(mut stream: TcpStream) {
 <p><span class="caption">Listing 20-10: Simulating a slow request by recognizing
 <code>/sleep</code> and sleeping for 5 seconds</span></p>
 <p>This code is a bit messy, but it's good enough for our simulation purposes! We
-created a second request whose data we'll recognize, <code>sleep</code>, and a second
-slice of <code>buffer</code> that's the same size as <code>sleep</code> to try comparing with
-<code>sleep</code>. We called the new slice <code>sleep_start</code> and changed the <code>start</code> slice
-variable name to <code>get_start</code> to tell the two slices apart. We added an <code>else if</code> after the <code>if</code> block to check for the request to <code>/sleep</code>, and when we see
+created a second request <code>sleep</code>, whose data we'll recognize. We added an <code>else if</code> after the <code>if</code> block to check for the request to <code>/sleep</code>, and when we see
 that request, we'll sleep for five seconds before rendering the hello page.</p>
 <p>You can really see how primitive our server is here; real libraries would
 handle the recognition of multiple requests in a less verbose way!</p>

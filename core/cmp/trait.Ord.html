@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/cmp.rs.html#421-438' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/cmp.rs.html#429-446' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Ord: <a class="trait" href="../../core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> + <a class="trait" href="../../core/cmp/trait.PartialOrd.html" title="trait core::cmp::PartialOrd">PartialOrd</a>&lt;Self&gt; {
     fn <a href='#tymethod.cmp' class='fnname'>cmp</a>(&amp;self, other: &amp;Self) -&gt; <a class="enum" href="../../core/cmp/enum.Ordering.html" title="enum core::cmp::Ordering">Ordering</a>;
 }</pre><div class='docblock'><p>Trait for types that form a <a href="https://en.wikipedia.org/wiki/Total_order">total order</a>.</p>
@@ -69,6 +69,10 @@ ordering based on the top-to-bottom declaration order of the struct&#39;s member
 
 <p>Then you must define an implementation for <code>cmp()</code>. You may find it useful to use
 <code>cmp()</code> on your type&#39;s fields.</p>
+
+<p>Implementations of <code>PartialEq</code>, <code>PartialOrd</code>, and <code>Ord</code> <em>must</em> agree with each other. It&#39;s
+easy to accidentally make them disagree by deriving some of the traits and manually
+implementing others.</p>
 
 <p>Here&#39;s an example where you want to sort people by height only, disregarding <code>id</code>
 and <code>name</code>:</p>

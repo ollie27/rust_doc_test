@@ -51,7 +51,7 @@
                </span><a class='srclink' href='../../src/core/hash/mod.rs.html#385-408' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait BuildHasher {
     type <a href='#associatedtype.Hasher' class="type">Hasher</a>: <a class="trait" href="../../core/hash/trait.Hasher.html" title="trait core::hash::Hasher">Hasher</a>;
-    fn <a href='#tymethod.build_hasher' class='fnname'>build_hasher</a>(&amp;self) -&gt; Self::<a class="trait" href="../../core/hash/trait.BuildHasher.html" title="trait core::hash::BuildHasher">Hasher</a>;
+    fn <a href='#tymethod.build_hasher' class='fnname'>build_hasher</a>(&amp;self) -&gt; Self::<a class="type" href="../../core/hash/trait.BuildHasher.html#associatedtype.Hasher" title="type core::hash::BuildHasher::Hasher">Hasher</a>;
 }</pre><div class='docblock'><p>A trait for creating instances of <a href="trait.Hasher.html"><code>Hasher</code></a>.</p>
 
 <p>A <code>BuildHasher</code> is typically used (e.g. by <a href="../../std/collections/struct.HashMap.html"><code>HashMap</code></a>) to create
@@ -82,7 +82,7 @@ is fed into each hasher, the same output will also be generated.</p>
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.build_hasher' class='method'><span id='build_hasher.v' class='invisible'><code>fn <a href='#tymethod.build_hasher' class='fnname'>build_hasher</a>(&amp;self) -&gt; Self::<a class="trait" href="../../core/hash/trait.BuildHasher.html" title="trait core::hash::BuildHasher">Hasher</a></code></span></h3><div class='docblock'><p>Creates a new hasher.</p>
+        <h3 id='tymethod.build_hasher' class='method'><span id='build_hasher.v' class='invisible'><code>fn <a href='#tymethod.build_hasher' class='fnname'>build_hasher</a>(&amp;self) -&gt; Self::<a class="type" href="../../core/hash/trait.BuildHasher.html#associatedtype.Hasher" title="type core::hash::BuildHasher::Hasher">Hasher</a></code></span></h3><div class='docblock'><p>Creates a new hasher.</p>
 
 <p>Each call to <code>build_hasher</code> on the same instance should produce identical
 <a href="trait.Hasher.html"><code>Hasher</code></a>s.</p>

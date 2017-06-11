@@ -462,8 +462,6 @@ fn handle_connection(mut stream: TcpStream) {
 
     let get = b&quot;GET / HTTP/1.1\r\n&quot;;
 
-    let start = &amp;buffer[..get.len()];
-
     if buffer.starts_with(get) {
         let mut file = File::open(&quot;hello.html&quot;).unwrap();
 

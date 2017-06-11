@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/core/macros.rs.html#222-224' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/core/macros.rs.html#230-232' title='goto source code'>[src]</a></span></h1>
 <pre class="rust macro">
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">debug_assert</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> { ... };
@@ -61,6 +61,7 @@ evaluated to <code>true</code> at runtime.</p>
 <p>Like <a href="macro.assert.html"><code>assert!</code></a>, this macro also has a second version, where a custom panic
 message can be provided.</p>
 
+<h1 id='uses' class='section-header'><a href='#uses'>Uses</a></h1>
 <p>Unlike <a href="macro.assert.html"><code>assert!</code></a>, <code>debug_assert!</code> statements are only enabled in non
 optimized builds by default. An optimized build will omit all
 <code>debug_assert!</code> statements unless <code>-C debug-assertions</code> is passed to the

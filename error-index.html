@@ -4189,7 +4189,9 @@ that the value provided is a positive integer between quotes.</p>
 
 <span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Brecursion_limit%3D%221000%22%5D%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 </div>
-<div class="error-described error-used"><h2 id="E0297" class="section-header"><a href="#E0297">E0297</a></h2>
+<div class="error-described error-unused"><h2 id="E0297" class="section-header"><a href="#E0297">E0297</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-6' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-6'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>Patterns used to bind names must be irrefutable. That is, they must guarantee
 that a name will be extracted in all cases. Instead of pattern matching the
 loop variable, consider using a <code>match</code> or <code>if let</code> inside the loop body. For
@@ -5939,6 +5941,29 @@ declare it or imported it into the scope. Examples:</p>
 <span class="comment">// or:</span>
 
 <span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) {} <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Something%3B%0A%0Aimpl%20Something%20%7B%7D%20%2F%2F%20ok!%0A%0A%2F%2F%20or%3A%0A%0Atrait%20Foo%20%7B%0A%20%20%20%20type%20N%3B%0A%0A%20%20%20%20fn%20bar(Self%3A%3AN)%3B%20%2F%2F%20ok!%0A%7D%0A%0A%2F%2F%20or%3A%0A%0Afn%20foo%3CT%3E(x%3A%20T)%20%7B%7D%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+
+<p>Another case that causes this error is when a type is imported into a parent
+module. To fix this, you can follow the suggestion and use File directly or
+<code>use super::File;</code> which will import the types from the parent namespace. An
+example that causes this error is below:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
+
+<span class="kw">mod</span> <span class="ident">foo</span> {
+    <span class="kw">fn</span> <span class="ident">some_function</span>(<span class="ident">f</span>: <span class="ident">File</span>) {}
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0A%0Amod%20foo%20%7B%0A%20%20%20%20fn%20some_function(f%3A%20File)%20%7B%7D%0A%7D%0A%7D">Run</a></pre>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
+
+<span class="kw">mod</span> <span class="ident">foo</span> {
+    <span class="comment">// either</span>
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">File</span>;
+    <span class="comment">// or</span>
+    <span class="comment">// use std::fs::File;</span>
+    <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">f</span>: <span class="ident">File</span>) {}
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Afs%3A%3AFile%3B%0A%0Amod%20foo%20%7B%0A%20%20%20%20%2F%2F%20either%0A%20%20%20%20use%20super%3A%3AFile%3B%0A%20%20%20%20%2F%2F%20or%0A%20%20%20%20%2F%2F%20use%20std%3A%3Afs%3A%3AFile%3B%0A%20%20%20%20fn%20foo(f%3A%20File)%20%7B%7D%0A%7D%0Afn%20main()%20%7B%7D%20%2F%2F%20don't%20insert%20it%20for%20us%3B%20that'll%20break%20imports%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0415" class="section-header"><a href="#E0415">E0415</a></h2>
 <p>More than one function parameter have the same name.</p>
@@ -8560,7 +8585,9 @@ makes a difference in practice.)</p>
 </div>
 <div class="error-described error-used"><h2 id="E0593" class="section-header"><a href="#E0593">E0593</a></h2>
 <p>You tried to supply an <code>Fn</code>-based type with an incorrect number of arguments
-than what was expected. Erroneous code example:</p>
+than what was expected.</p>
+
+<p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>()<span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">F</span>) { }
@@ -8569,6 +8596,159 @@ than what was expected. Erroneous code example:</p>
     <span class="comment">// [E0593] closure takes 1 argument but 0 arguments are required</span>
     <span class="ident">foo</span>(<span class="op">|</span><span class="ident">y</span><span class="op">|</span> { });
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20foo%3CF%3A%20Fn()%3E(x%3A%20F)%20%7B%20%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%5BE0593%5D%20closure%20takes%201%20argument%20but%200%20arguments%20are%20required%0A%20%20%20%20foo(%7Cy%7C%20%7B%20%7D)%3B%0A%7D%0A">Run</a></pre>
+</div>
+<div class="error-undescribed error-used"><h2 id="E0594" class="section-header"><a href="#E0594">E0594</a></h2>
+<p>No description.</p>
+</div>
+<div class="error-undescribed error-used"><h2 id="E0595" class="section-header"><a href="#E0595">E0595</a></h2>
+<p>No description.</p>
+</div>
+<div class="error-described error-used"><h2 id="E0596" class="section-header"><a href="#E0596">E0596</a></h2>
+<p>This error occurs because you tried to mutably borrow a non-mutable variable.</p>
+
+<p>Example of erroneous code:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">x</span>; <span class="comment">// error: cannot borrow mutably</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%201%3B%0Alet%20y%20%3D%20%26mut%20x%3B%20%2F%2F%20error%3A%20cannot%20borrow%20mutably%0A%7D">Run</a></pre>
+
+<p>In here, <code>x</code> isn&#39;t mutable, so when we try to mutably borrow it in <code>y</code>, it
+fails. To fix this error, you need to make <code>x</code> mutable:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">x</span>; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20x%20%3D%201%3B%0Alet%20y%20%3D%20%26mut%20x%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0597" class="section-header"><a href="#E0597">E0597</a></h2>
+<p>This error occurs because a borrow was made inside a variable which has a
+greater lifetime than the borrowed one.</p>
+
+<p>Example of erroneous code:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="ident">x</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">u32</span><span class="op">&gt;</span>,
+}
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="prelude-val">None</span> };
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
+<span class="ident">x</span>.<span class="ident">x</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">y</span>); <span class="comment">// error: `y` does not live long enough</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20x%3A%20Option%3C%26'a%20u32%3E%2C%0A%7D%0A%0Alet%20mut%20x%20%3D%20Foo%20%7B%20x%3A%20None%20%7D%3B%0Alet%20y%20%3D%200%3B%0Ax.x%20%3D%20Some(%26y)%3B%20%2F%2F%20error%3A%20%60y%60%20does%20not%20live%20long%20enough%0A%7D">Run</a></pre>
+
+<p>In here, <code>x</code> is created before <code>y</code> and therefore has a greater lifetime. Always
+keep in mind that values in a scope are dropped in the opposite order they are
+created. So to fix the previous example, just make the <code>y</code> lifetime greater than
+the <code>x</code>&#39;s one:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="ident">x</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">u32</span><span class="op">&gt;</span>,
+}
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="prelude-val">None</span> };
+<span class="ident">x</span>.<span class="ident">x</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">y</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20x%3A%20Option%3C%26'a%20u32%3E%2C%0A%7D%0A%0Alet%20y%20%3D%200%3B%0Alet%20mut%20x%20%3D%20Foo%20%7B%20x%3A%20None%20%7D%3B%0Ax.x%20%3D%20Some(%26y)%3B%0A%7D">Run</a></pre>
+</div>
+<div class="error-undescribed error-used"><h2 id="E0598" class="section-header"><a href="#E0598">E0598</a></h2>
+<p>No description.</p>
+</div>
+<div class="error-described error-used"><h2 id="E0599" class="section-header"><a href="#E0599">E0599</a></h2>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Mouth</span>;
+
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">Mouth</span>;
+<span class="ident">x</span>.<span class="ident">chocolate</span>(); <span class="comment">// error: no method named `chocolate` found for type `Mouth`</span>
+               <span class="comment">//        in the current scope</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Mouth%3B%0A%0Alet%20x%20%3D%20Mouth%3B%0Ax.chocolate()%3B%20%2F%2F%20error%3A%20no%20method%20named%20%60chocolate%60%20found%20for%20type%20%60Mouth%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20in%20the%20current%20scope%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0600" class="section-header"><a href="#E0600">E0600</a></h2>
+<p>An unary operator was used on a type which doesn&#39;t implement it.</p>
+
+<p>Example of erroneous code:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">enum</span> <span class="ident">Question</span> {
+    <span class="ident">Yes</span>,
+    <span class="ident">No</span>,
+}
+
+<span class="op">!</span><span class="ident">Question</span>::<span class="ident">Yes</span>; <span class="comment">// error: cannot apply unary operator `!` to type `Question`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aenum%20Question%20%7B%0A%20%20%20%20Yes%2C%0A%20%20%20%20No%2C%0A%7D%0A%0A!Question%3A%3AYes%3B%20%2F%2F%20error%3A%20cannot%20apply%20unary%20operator%20%60!%60%20to%20type%20%60Question%60%0A%7D">Run</a></pre>
+
+<p>In this case, <code>Question</code> would need to implement the <code>std::ops::Not</code> trait in
+order to be able to use <code>!</code> on it. Let&#39;s implement it:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Not</span>;
+
+<span class="kw">enum</span> <span class="ident">Question</span> {
+    <span class="ident">Yes</span>,
+    <span class="ident">No</span>,
+}
+
+<span class="comment">// We implement the `Not` trait on the enum.</span>
+<span class="kw">impl</span> <span class="ident">Not</span> <span class="kw">for</span> <span class="ident">Question</span> {
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">bool</span>;
+
+    <span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">Question</span>::<span class="ident">Yes</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>, <span class="comment">// If the `Answer` is `Yes`, then it</span>
+                                    <span class="comment">// returns false.</span>
+            <span class="ident">Question</span>::<span class="ident">No</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>, <span class="comment">// And here we do the opposite.</span>
+        }
+    }
+}
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">Question</span>::<span class="ident">Yes</span>, <span class="bool-val">false</span>);
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">Question</span>::<span class="ident">No</span>, <span class="bool-val">true</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aops%3A%3ANot%3B%0A%0Aenum%20Question%20%7B%0A%20%20%20%20Yes%2C%0A%20%20%20%20No%2C%0A%7D%0A%0A%2F%2F%20We%20implement%20the%20%60Not%60%20trait%20on%20the%20enum.%0Aimpl%20Not%20for%20Question%20%7B%0A%20%20%20%20type%20Output%20%3D%20bool%3B%0A%0A%20%20%20%20fn%20not(self)%20-%3E%20bool%20%7B%0A%20%20%20%20%20%20%20%20match%20self%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20Question%3A%3AYes%20%3D%3E%20false%2C%20%2F%2F%20If%20the%20%60Answer%60%20is%20%60Yes%60%2C%20then%20it%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20returns%20false.%0A%20%20%20%20%20%20%20%20%20%20%20%20Question%3A%3ANo%20%3D%3E%20true%2C%20%2F%2F%20And%20here%20we%20do%20the%20opposite.%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aassert_eq!(!Question%3A%3AYes%2C%20false)%3B%0Aassert_eq!(!Question%3A%3ANo%2C%20true)%3B%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0601" class="section-header"><a href="#E0601">E0601</a></h2>
+<p>No <code>main</code> function was found in a binary crate. To fix this error, just add a
+<code>main</code> function. For example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="comment">// Your program will start here.</span>
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Hello world!&quot;</span>);
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Your%20program%20will%20start%20here.%0A%20%20%20%20println!(%22Hello%20world!%22)%3B%0A%7D%0A">Run</a></pre>
+
+<p>If you don&#39;t know the basics of Rust, you can go look to the Rust Book to get
+started: <a href="https://doc.rust-lang.org/book/">https://doc.rust-lang.org/book/</a></p>
+</div>
+<div class="error-described error-used"><h2 id="E0602" class="section-header"><a href="#E0602">E0602</a></h2>
+<p>An unknown lint was used on the command line.</p>
+
+<p>Erroneous example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="ident">rustc</span> <span class="op">-</span><span class="ident">D</span> <span class="ident">bogus</span> <span class="ident">omse_file</span>.<span class="ident">rs</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Arustc%20-D%20bogus%20omse_file.rs%0A%7D">Run</a></pre>
+
+<p>Maybe you just misspelled the lint name or the lint doesn&#39;t exist anymore.
+Either way, try to update/remove it in order to fix the error.</p>
+</div>
+<div class="error-described error-used"><h2 id="E0603" class="section-header"><a href="#E0603">E0603</a></h2>
+<p>A private item was used outside its scope.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">SomeModule</span> {
+    <span class="kw">const</span> <span class="ident">PRIVATE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x_a_bad_1dea_u32</span>; <span class="comment">// This const is private, so we</span>
+                                            <span class="comment">// can&#39;t use it outside of the</span>
+                                            <span class="comment">// `SomeModule` module.</span>
+}
+
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;const value: {}&quot;</span>, <span class="ident">SomeModule</span>::<span class="ident">PRIVATE</span>); <span class="comment">// error: constant `CONSTANT`</span>
+                                                  <span class="comment">//        is private</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20SomeModule%20%7B%0A%20%20%20%20const%20PRIVATE%3A%20u32%20%3D%200x_a_bad_1dea_u32%3B%20%2F%2F%20This%20const%20is%20private%2C%20so%20we%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20can't%20use%20it%20outside%20of%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%60SomeModule%60%20module.%0A%7D%0A%0Aprintln!(%22const%20value%3A%20%7B%7D%22%2C%20SomeModule%3A%3APRIVATE)%3B%20%2F%2F%20error%3A%20constant%20%60CONSTANT%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20is%20private%0A%7D">Run</a></pre>
+
+<p>In order to fix this error, you need to make the item public by using the <code>pub</code>
+keyword. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">SomeModule</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PRIVATE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x_a_bad_1dea_u32</span>; <span class="comment">// We set it public by using the</span>
+                                                <span class="comment">// `pub` keyword.</span>
+}
+
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;const value: {}&quot;</span>, <span class="ident">SomeModule</span>::<span class="ident">PRIVATE</span>); <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20SomeModule%20%7B%0A%20%20%20%20pub%20const%20PRIVATE%3A%20u32%20%3D%200x_a_bad_1dea_u32%3B%20%2F%2F%20We%20set%20it%20public%20by%20using%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%60pub%60%20keyword.%0A%7D%0A%0Aprintln!(%22const%20value%3A%20%7B%7D%22%2C%20SomeModule%3A%3APRIVATE)%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
 </div>
 </body>
 </html>

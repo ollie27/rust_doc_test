@@ -122,7 +122,7 @@ pointer, leading to a double free down the line. For this reason, <a href="../..
 but not <code>Copy</code>.</p>
 
 <p><a href="../clone/trait.Clone.html"><code>Clone</code></a> is a supertrait of <code>Copy</code>, so everything which is <code>Copy</code> must also implement
-<a href="../clone/trait.Clone.html"><code>Clone</code></a>. If a type is <code>Copy</code> then its <a href="../clone/trait.Clone.html"><code>Clone</code></a> implementation need only return <code>*self</code>
+<a href="../clone/trait.Clone.html"><code>Clone</code></a>. If a type is <code>Copy</code> then its <a href="../clone/trait.Clone.html"><code>Clone</code></a> implementation only needs to return <code>*self</code>
 (see the example above).</p>
 
 <h2 id='when-can-my-type-be-copy' class='section-header'><a href='#when-can-my-type-be-copy'>When can my type be <code>Copy</code>?</a></h2>

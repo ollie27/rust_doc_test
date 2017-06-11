@@ -1506,6 +1506,24 @@
 <span id="1461">1461</span>
 <span id="1462">1462</span>
 <span id="1463">1463</span>
+<span id="1464">1464</span>
+<span id="1465">1465</span>
+<span id="1466">1466</span>
+<span id="1467">1467</span>
+<span id="1468">1468</span>
+<span id="1469">1469</span>
+<span id="1470">1470</span>
+<span id="1471">1471</span>
+<span id="1472">1472</span>
+<span id="1473">1473</span>
+<span id="1474">1474</span>
+<span id="1475">1475</span>
+<span id="1476">1476</span>
+<span id="1477">1477</span>
+<span id="1478">1478</span>
+<span id="1479">1479</span>
+<span id="1480">1480</span>
+<span id="1481">1481</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1564,6 +1582,24 @@
 <span class="doccomment">//! [`Weak&lt;T&gt;`][`Weak`] does not auto-dereference to `T`, because the value may have</span>
 <span class="doccomment">//! already been destroyed.</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//! # Cloning references</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Creating a new reference from an existing reference counted pointer is done using the</span>
+<span class="doccomment">//! `Clone` trait implemented for [`Rc&lt;T&gt;`][`Rc`] and [`Weak&lt;T&gt;`][`Weak`].</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//! use std::rc::Rc;</span>
+<span class="doccomment">//! let foo = Rc::new(vec![1.0, 2.0, 3.0]);</span>
+<span class="doccomment">//! // The two syntaxes below are equivalent.</span>
+<span class="doccomment">//! let a = foo.clone();</span>
+<span class="doccomment">//! let b = Rc::clone(&amp;foo);</span>
+<span class="doccomment">//! // a and b both point to the same memory location as foo.</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The `Rc::clone(&amp;from)` syntax is the most idiomatic because it conveys more explicitly</span>
+<span class="doccomment">//! the meaning of the code. In the example above, this syntax makes it easier to see that</span>
+<span class="doccomment">//! this code is creating a new reference rather than copying the whole content of foo.</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! # Examples</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Consider a scenario where a set of `Gadget`s are owned by a given `Owner`.</span>
@@ -1599,11 +1635,11 @@
 <span class="doccomment">//!     // the reference count in the process.</span>
 <span class="doccomment">//!     let gadget1 = Gadget {</span>
 <span class="doccomment">//!         id: 1,</span>
-<span class="doccomment">//!         owner: gadget_owner.clone(),</span>
+<span class="doccomment">//!         owner: Rc::clone(&amp;gadget_owner),</span>
 <span class="doccomment">//!     };</span>
 <span class="doccomment">//!     let gadget2 = Gadget {</span>
 <span class="doccomment">//!         id: 2,</span>
-<span class="doccomment">//!         owner: gadget_owner.clone(),</span>
+<span class="doccomment">//!         owner: Rc::clone(&amp;gadget_owner),</span>
 <span class="doccomment">//!     };</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     // Dispose of our local variable `gadget_owner`.</span>
@@ -1672,13 +1708,13 @@
 <span class="doccomment">//!     let gadget1 = Rc::new(</span>
 <span class="doccomment">//!         Gadget {</span>
 <span class="doccomment">//!             id: 1,</span>
-<span class="doccomment">//!             owner: gadget_owner.clone(),</span>
+<span class="doccomment">//!             owner: Rc::clone(&amp;gadget_owner),</span>
 <span class="doccomment">//!         }</span>
 <span class="doccomment">//!     );</span>
 <span class="doccomment">//!     let gadget2 = Rc::new(</span>
 <span class="doccomment">//!         Gadget {</span>
 <span class="doccomment">//!             id: 2,</span>
-<span class="doccomment">//!             owner: gadget_owner.clone(),</span>
+<span class="doccomment">//!             owner: Rc::clone(&amp;gadget_owner),</span>
 <span class="doccomment">//!         }</span>
 <span class="doccomment">//!     );</span>
 <span class="doccomment">//!</span>
@@ -1825,7 +1861,7 @@
     <span class="doccomment">/// assert_eq!(Rc::try_unwrap(x), Ok(3));</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let x = Rc::new(4);</span>
-    <span class="doccomment">/// let _y = x.clone();</span>
+    <span class="doccomment">/// let _y = Rc::clone(&amp;x);</span>
     <span class="doccomment">/// assert_eq!(*Rc::try_unwrap(x).unwrap_err(), 4);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2017,7 +2053,7 @@
     <span class="doccomment">/// use std::rc::Rc;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let five = Rc::new(5);</span>
-    <span class="doccomment">/// let _also_five = five.clone();</span>
+    <span class="doccomment">/// let _also_five = Rc::clone(&amp;five);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert_eq!(2, Rc::strong_count(&amp;five));</span>
     <span class="doccomment">/// ```</span>
@@ -2059,7 +2095,7 @@
     <span class="doccomment">/// *Rc::get_mut(&amp;mut x).unwrap() = 4;</span>
     <span class="doccomment">/// assert_eq!(*x, 4);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let _y = x.clone();</span>
+    <span class="doccomment">/// let _y = Rc::clone(&amp;x);</span>
     <span class="doccomment">/// assert!(Rc::get_mut(&amp;mut x).is_none());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2085,7 +2121,7 @@
     <span class="doccomment">/// use std::rc::Rc;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let five = Rc::new(5);</span>
-    <span class="doccomment">/// let same_five = five.clone();</span>
+    <span class="doccomment">/// let same_five = Rc::clone(&amp;five);</span>
     <span class="doccomment">/// let other_five = Rc::new(5);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert!(Rc::ptr_eq(&amp;five, &amp;same_five));</span>
@@ -2117,7 +2153,7 @@
     <span class="doccomment">/// let mut data = Rc::new(5);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// *Rc::make_mut(&amp;mut data) += 1;        // Won&#39;t clone anything</span>
-    <span class="doccomment">/// let mut other_data = data.clone();    // Won&#39;t clone inner data</span>
+    <span class="doccomment">/// let mut other_data = Rc::clone(&amp;data);    // Won&#39;t clone inner data</span>
     <span class="doccomment">/// *Rc::make_mut(&amp;mut data) += 1;        // Clones inner data</span>
     <span class="doccomment">/// *Rc::make_mut(&amp;mut data) += 1;        // Won&#39;t clone anything</span>
     <span class="doccomment">/// *Rc::make_mut(&amp;mut other_data) *= 2;  // Won&#39;t clone anything</span>
@@ -2189,7 +2225,7 @@
     <span class="doccomment">/// }</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let foo  = Rc::new(Foo);</span>
-    <span class="doccomment">/// let foo2 = foo.clone();</span>
+    <span class="doccomment">/// let foo2 = Rc::clone(&amp;foo);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// drop(foo);    // Doesn&#39;t print anything</span>
     <span class="doccomment">/// drop(foo2);   // Prints &quot;dropped!&quot;</span>
@@ -2229,7 +2265,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// let five = Rc::new(5);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// five.clone();</span>
+    <span class="doccomment">/// Rc::clone(&amp;five);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -2559,7 +2595,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::rc::Rc;</span>
+    <span class="doccomment">/// use std::rc::{Rc, Weak};</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// struct Foo;</span>
     <span class="doccomment">///</span>
@@ -2571,7 +2607,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// let foo = Rc::new(Foo);</span>
     <span class="doccomment">/// let weak_foo = Rc::downgrade(&amp;foo);</span>
-    <span class="doccomment">/// let other_weak_foo = weak_foo.clone();</span>
+    <span class="doccomment">/// let other_weak_foo = Weak::clone(&amp;weak_foo);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// drop(weak_foo);   // Doesn&#39;t print anything</span>
     <span class="doccomment">/// drop(foo);        // Prints &quot;dropped!&quot;</span>
@@ -2599,11 +2635,11 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::rc::Rc;</span>
+    <span class="doccomment">/// use std::rc::{Rc, Weak};</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let weak_five = Rc::downgrade(&amp;Rc::new(5));</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// weak_five.clone();</span>
+    <span class="doccomment">/// Weak::clone(&amp;weak_five);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Weak</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {

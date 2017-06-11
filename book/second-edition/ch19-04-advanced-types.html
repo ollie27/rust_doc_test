@@ -260,9 +260,9 @@ another <code>Result&lt;T, E&gt;</code>, which means we can use any methods that
 <code>Result&lt;T, E&gt;</code> with it, and special syntax like <code>?</code>.</p>
 <a class="header" href="ch19-04-advanced-types.html#the-never-type--that-never-returns" id="the-never-type--that-never-returns"><h3>The Never Type, <code>!</code>, that Never Returns</h3></a>
 <p>Rust has a special type named <code>!</code>. In type theory lingo, it's called the
-<em>bottom type</em>, but we prefer the name <em>never</em>. The name describes what it does:
-it stands in the place of the return type when a function will never return.
-For example:</p>
+<em>bottom type</em>, but we prefer to call it the <em>never type</em>. The name describes
+what it does: it stands in the place of the return type when a function will
+never return. For example:</p>
 <pre><code class="language-rust ignore">fn bar() -&gt; ! {
 </code></pre>
 <p>This is read as &quot;the function <code>bar</code> returns never,&quot; and functions that return
@@ -292,7 +292,7 @@ learned that <code>match</code> arms must return the same type. This doesn't wor
 }
 </code></pre>
 <p>What would the type of <code>guess</code> be here? It'd have to be both an integer and a
-string, and Rust requires that <code>guess</code> can only have one type. So what
+string, and Rust requires that <code>guess</code> can only have one type. So what does
 <code>continue</code> return? Why are we allowed to return a <code>u32</code> from one arm in Listing
 19-33 and have another arm that ends with <code>continue</code>?</p>
 <p>As you may have guessed, <code>continue</code> has a value of <code>!</code>. That is, when Rust goes

@@ -69,7 +69,8 @@
 
                 <div id="content" class="content">
                     <a class="header" href="type-coercions.html#type-coercions" id="type-coercions"><h1>Type coercions</h1></a>
-<p>Coercions are defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0401-coercions.md">RFC 401</a>. A coercion is implicit and has no syntax.</p>
+<p>Coercions are defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0401-coercions.md">RFC 401</a>. <a href="https://github.com/rust-lang/rfcs/blob/master/text/1558-closure-to-fn-coercion.md">RFC 1558</a> then expanded on that.
+A coercion is implicit and has no syntax.</p>
 <a class="header" href="type-coercions.html#coercion-sites" id="coercion-sites"><h2>Coercion sites</h2></a>
 <p>A coercion can only occur at certain coercion sites in a program; these are
 typically places where the desired type is explicit or can be derived by
@@ -220,6 +221,9 @@ trait <code>U</code>.</li>
 <p>In the future, coerce_inner will be recursively extended to tuples and
 structs. In addition, coercions from sub-traits to super-traits will be
 added. See <a href="https://github.com/rust-lang/rfcs/blob/master/text/0401-coercions.md">RFC 401</a> for more details.</p>
+</li>
+<li>
+<p>Non capturing closures to <code>fn</code> pointers</p>
 </li>
 </ul>
 

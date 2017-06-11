@@ -1536,6 +1536,24 @@
 <span id="1491">1491</span>
 <span id="1492">1492</span>
 <span id="1493">1493</span>
+<span id="1494">1494</span>
+<span id="1495">1495</span>
+<span id="1496">1496</span>
+<span id="1497">1497</span>
+<span id="1498">1498</span>
+<span id="1499">1499</span>
+<span id="1500">1500</span>
+<span id="1501">1501</span>
+<span id="1502">1502</span>
+<span id="1503">1503</span>
+<span id="1504">1504</span>
+<span id="1505">1505</span>
+<span id="1506">1506</span>
+<span id="1507">1507</span>
+<span id="1508">1508</span>
+<span id="1509">1509</span>
+<span id="1510">1510</span>
+<span id="1511">1511</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1630,6 +1648,24 @@
 <span class="doccomment">/// strong `Arc` pointers from parent nodes to children, and [`Weak`][weak]</span>
 <span class="doccomment">/// pointers from children back to their parents.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// # Cloning references</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Creating a new reference from an existing reference counted pointer is done using the</span>
+<span class="doccomment">/// `Clone` trait implemented for [`Arc&lt;T&gt;`][`arc`] and [`Weak&lt;T&gt;`][`weak`].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// use std::sync::Arc;</span>
+<span class="doccomment">/// let foo = Arc::new(vec![1.0, 2.0, 3.0]);</span>
+<span class="doccomment">/// // The two syntaxes below are equivalent.</span>
+<span class="doccomment">/// let a = foo.clone();</span>
+<span class="doccomment">/// let b = Arc::clone(&amp;foo);</span>
+<span class="doccomment">/// // a and b both point to the same memory location as foo.</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The `Arc::clone(&amp;from)` syntax is the most idiomatic because it conveys more explicitly</span>
+<span class="doccomment">/// the meaning of the code. In the example above, this syntax makes it easier to see that</span>
+<span class="doccomment">/// this code is creating a new reference rather than copying the whole content of foo.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// ## `Deref` behavior</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `Arc&lt;T&gt;` automatically dereferences to `T` (via the [`Deref`][deref] trait),</span>
@@ -1677,7 +1713,7 @@
 <span class="doccomment">/// let five = Arc::new(5);</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// for _ in 0..10 {</span>
-<span class="doccomment">///     let five = five.clone();</span>
+<span class="doccomment">///     let five = Arc::clone(&amp;five);</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     thread::spawn(move || {</span>
 <span class="doccomment">///         println!(&quot;{:?}&quot;, five);</span>
@@ -1697,7 +1733,7 @@
 <span class="doccomment">/// let val = Arc::new(AtomicUsize::new(5));</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// for _ in 0..10 {</span>
-<span class="doccomment">///     let val = val.clone();</span>
+<span class="doccomment">///     let val = Arc::clone(&amp;val);</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     thread::spawn(move || {</span>
 <span class="doccomment">///         let v = val.fetch_add(1, Ordering::SeqCst);</span>
@@ -1821,7 +1857,7 @@
     <span class="doccomment">/// assert_eq!(Arc::try_unwrap(x), Ok(3));</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let x = Arc::new(4);</span>
-    <span class="doccomment">/// let _y = x.clone();</span>
+    <span class="doccomment">/// let _y = Arc::clone(&amp;x);</span>
     <span class="doccomment">/// assert_eq!(*Arc::try_unwrap(x).unwrap_err(), 4);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1990,7 +2026,7 @@
     <span class="doccomment">/// use std::sync::Arc;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let five = Arc::new(5);</span>
-    <span class="doccomment">/// let _also_five = five.clone();</span>
+    <span class="doccomment">/// let _also_five = Arc::clone(&amp;five);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // This assertion is deterministic because we haven&#39;t shared</span>
     <span class="doccomment">/// // the `Arc` between threads.</span>
@@ -2038,7 +2074,7 @@
     <span class="doccomment">/// use std::sync::Arc;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let five = Arc::new(5);</span>
-    <span class="doccomment">/// let same_five = five.clone();</span>
+    <span class="doccomment">/// let same_five = Arc::clone(&amp;five);</span>
     <span class="doccomment">/// let other_five = Arc::new(5);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert!(Arc::ptr_eq(&amp;five, &amp;same_five));</span>
@@ -2063,7 +2099,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// let five = Arc::new(5);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// five.clone();</span>
+    <span class="doccomment">/// Arc::clone(&amp;five);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -2130,7 +2166,7 @@
     <span class="doccomment">/// let mut data = Arc::new(5);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// *Arc::make_mut(&amp;mut data) += 1;         // Won&#39;t clone anything</span>
-    <span class="doccomment">/// let mut other_data = data.clone();      // Won&#39;t clone inner data</span>
+    <span class="doccomment">/// let mut other_data = Arc::clone(&amp;data); // Won&#39;t clone inner data</span>
     <span class="doccomment">/// *Arc::make_mut(&amp;mut data) += 1;         // Clones inner data</span>
     <span class="doccomment">/// *Arc::make_mut(&amp;mut data) += 1;         // Won&#39;t clone anything</span>
     <span class="doccomment">/// *Arc::make_mut(&amp;mut other_data) *= 2;   // Won&#39;t clone anything</span>
@@ -2218,7 +2254,7 @@
     <span class="doccomment">/// *Arc::get_mut(&amp;mut x).unwrap() = 4;</span>
     <span class="doccomment">/// assert_eq!(*x, 4);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let _y = x.clone();</span>
+    <span class="doccomment">/// let _y = Arc::clone(&amp;x);</span>
     <span class="doccomment">/// assert!(Arc::get_mut(&amp;mut x).is_none());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2290,7 +2326,7 @@
     <span class="doccomment">/// }</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let foo  = Arc::new(Foo);</span>
-    <span class="doccomment">/// let foo2 = foo.clone();</span>
+    <span class="doccomment">/// let foo2 = Arc::clone(&amp;foo);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// drop(foo);    // Doesn&#39;t print anything</span>
     <span class="doccomment">/// drop(foo2);   // Prints &quot;dropped!&quot;</span>
@@ -2442,11 +2478,11 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::sync::Arc;</span>
+    <span class="doccomment">/// use std::sync::{Arc, Weak};</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let weak_five = Arc::downgrade(&amp;Arc::new(5));</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// weak_five.clone();</span>
+    <span class="doccomment">/// Weak::clone(&amp;weak_five);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Weak</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -2495,7 +2531,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::sync::Arc;</span>
+    <span class="doccomment">/// use std::sync::{Arc, Weak};</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// struct Foo;</span>
     <span class="doccomment">///</span>
@@ -2507,7 +2543,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// let foo = Arc::new(Foo);</span>
     <span class="doccomment">/// let weak_foo = Arc::downgrade(&amp;foo);</span>
-    <span class="doccomment">/// let other_weak_foo = weak_foo.clone();</span>
+    <span class="doccomment">/// let other_weak_foo = Weak::clone(&amp;weak_foo);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// drop(weak_foo);   // Doesn&#39;t print anything</span>
     <span class="doccomment">/// drop(foo);        // Prints &quot;dropped!&quot;</span>

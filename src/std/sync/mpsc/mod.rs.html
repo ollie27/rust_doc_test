@@ -3042,6 +3042,42 @@
 <span id="2997">2997</span>
 <span id="2998">2998</span>
 <span id="2999">2999</span>
+<span id="3000">3000</span>
+<span id="3001">3001</span>
+<span id="3002">3002</span>
+<span id="3003">3003</span>
+<span id="3004">3004</span>
+<span id="3005">3005</span>
+<span id="3006">3006</span>
+<span id="3007">3007</span>
+<span id="3008">3008</span>
+<span id="3009">3009</span>
+<span id="3010">3010</span>
+<span id="3011">3011</span>
+<span id="3012">3012</span>
+<span id="3013">3013</span>
+<span id="3014">3014</span>
+<span id="3015">3015</span>
+<span id="3016">3016</span>
+<span id="3017">3017</span>
+<span id="3018">3018</span>
+<span id="3019">3019</span>
+<span id="3020">3020</span>
+<span id="3021">3021</span>
+<span id="3022">3022</span>
+<span id="3023">3023</span>
+<span id="3024">3024</span>
+<span id="3025">3025</span>
+<span id="3026">3026</span>
+<span id="3027">3027</span>
+<span id="3028">3028</span>
+<span id="3029">3029</span>
+<span id="3030">3030</span>
+<span id="3031">3031</span>
+<span id="3032">3032</span>
+<span id="3033">3033</span>
+<span id="3034">3034</span>
+<span id="3035">3035</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -4297,14 +4333,43 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// Successfully receiving value before encountering timeout:</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// ```no_run</span>
-    <span class="doccomment">/// use std::sync::mpsc::{self, RecvTimeoutError};</span>
+    <span class="doccomment">/// use std::thread;</span>
     <span class="doccomment">/// use std::time::Duration;</span>
+    <span class="doccomment">/// use std::sync::mpsc;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let (send, recv) = mpsc::channel::&lt;()&gt;();</span>
+    <span class="doccomment">/// let (send, recv) = mpsc::channel();</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let timeout = Duration::from_millis(100);</span>
-    <span class="doccomment">/// assert_eq!(Err(RecvTimeoutError::Timeout), recv.recv_timeout(timeout));</span>
+    <span class="doccomment">/// thread::spawn(move || {</span>
+    <span class="doccomment">///     send.send(&#39;a&#39;).unwrap();</span>
+    <span class="doccomment">/// });</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(</span>
+    <span class="doccomment">///     recv.recv_timeout(Duration::from_millis(400)),</span>
+    <span class="doccomment">///     Ok(&#39;a&#39;)</span>
+    <span class="doccomment">/// );</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Receiving an error upon reaching timeout:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```no_run</span>
+    <span class="doccomment">/// use std::thread;</span>
+    <span class="doccomment">/// use std::time::Duration;</span>
+    <span class="doccomment">/// use std::sync::mpsc;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let (send, recv) = mpsc::channel();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// thread::spawn(move || {</span>
+    <span class="doccomment">///     thread::sleep(Duration::from_millis(800));</span>
+    <span class="doccomment">///     send.send(&#39;a&#39;).unwrap();</span>
+    <span class="doccomment">/// });</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(</span>
+    <span class="doccomment">///     recv.recv_timeout(Duration::from_millis(400)),</span>
+    <span class="doccomment">///     Err(mpsc::RecvTimeoutError::Timeout)</span>
+    <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mpsc_recv_timeout&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.12.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">recv_timeout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">timeout</span>: <span class="ident">Duration</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">RecvTimeoutError</span><span class="op">&gt;</span> {
@@ -4386,14 +4451,16 @@
     <span class="doccomment">/// let (send, recv) = channel();</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// thread::spawn(move || {</span>
-    <span class="doccomment">///     send.send(1u8).unwrap();</span>
-    <span class="doccomment">///     send.send(2u8).unwrap();</span>
-    <span class="doccomment">///     send.send(3u8).unwrap();</span>
+    <span class="doccomment">///     send.send(1).unwrap();</span>
+    <span class="doccomment">///     send.send(2).unwrap();</span>
+    <span class="doccomment">///     send.send(3).unwrap();</span>
     <span class="doccomment">/// });</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// for x in recv.iter() {</span>
-    <span class="doccomment">///     println!(&quot;Got: {}&quot;, x);</span>
-    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// let mut iter = recv.iter();</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(1));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(2));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(3));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), None);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -4409,29 +4476,34 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// ```no_run</span>
     <span class="doccomment">/// use std::sync::mpsc::channel;</span>
     <span class="doccomment">/// use std::thread;</span>
     <span class="doccomment">/// use std::time::Duration;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let (sender, receiver) = channel();</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// // Nothing is in the buffer yet</span>
+    <span class="doccomment">/// // nothing is in the buffer yet</span>
     <span class="doccomment">/// assert!(receiver.try_iter().next().is_none());</span>
-    <span class="doccomment">/// println!(&quot;Nothing in the buffer...&quot;);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// thread::spawn(move || {</span>
+    <span class="doccomment">///     thread::sleep(Duration::from_secs(1));</span>
     <span class="doccomment">///     sender.send(1).unwrap();</span>
     <span class="doccomment">///     sender.send(2).unwrap();</span>
     <span class="doccomment">///     sender.send(3).unwrap();</span>
     <span class="doccomment">/// });</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// println!(&quot;Going to sleep...&quot;);</span>
-    <span class="doccomment">/// thread::sleep(Duration::from_secs(2)); // block for two seconds</span>
+    <span class="doccomment">/// // nothing is in the buffer yet</span>
+    <span class="doccomment">/// assert!(receiver.try_iter().next().is_none());</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// for x in receiver.try_iter() {</span>
-    <span class="doccomment">///     println!(&quot;Got: {}&quot;, x);</span>
-    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// // block for two seconds</span>
+    <span class="doccomment">/// thread::sleep(Duration::from_secs(2));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut iter = receiver.try_iter();</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(1));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(2));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), Some(3));</span>
+    <span class="doccomment">/// assert_eq!(iter.next(), None);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;receiver_try_iter&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.15.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TryIter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -4969,7 +5041,7 @@
     <span class="kw">fn</span> <span class="ident">oneshot_single_thread_send_then_recv</span>() {
         <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>();
         <span class="ident">tx</span>.<span class="ident">send</span>(<span class="kw">box</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -5026,7 +5098,7 @@
     <span class="kw">fn</span> <span class="ident">oneshot_multi_task_recv_then_send</span>() {
         <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">channel</span>::<span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>();
         <span class="kw">let</span> <span class="ident">_t</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
         });
 
         <span class="ident">tx</span>.<span class="ident">send</span>(<span class="kw">box</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
@@ -5039,7 +5111,7 @@
             <span class="ident">drop</span>(<span class="ident">tx</span>);
         });
         <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
         }).<span class="ident">join</span>();
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
     }
@@ -5093,7 +5165,7 @@
             <span class="kw">let</span> <span class="ident">_t</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
                 <span class="ident">tx</span>.<span class="ident">send</span>(<span class="kw">box</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
             });
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
         }
     }
 
@@ -5118,7 +5190,7 @@
                 <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">10</span> { <span class="kw">return</span> }
 
                 <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
-                    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="ident">i</span>);
+                    <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="ident">i</span>);
                     <span class="ident">recv</span>(<span class="ident">rx</span>, <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>);
                 });
             }
@@ -5655,7 +5727,7 @@
     <span class="kw">fn</span> <span class="ident">oneshot_single_thread_send_then_recv</span>() {
         <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">sync_channel</span>::<span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>(<span class="number">1</span>);
         <span class="ident">tx</span>.<span class="ident">send</span>(<span class="kw">box</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -5727,7 +5799,7 @@
     <span class="kw">fn</span> <span class="ident">oneshot_multi_task_recv_then_send</span>() {
         <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">sync_channel</span>::<span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>(<span class="number">0</span>);
         <span class="kw">let</span> <span class="ident">_t</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
         });
 
         <span class="ident">tx</span>.<span class="ident">send</span>(<span class="kw">box</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
@@ -5740,7 +5812,7 @@
             <span class="ident">drop</span>(<span class="ident">tx</span>);
         });
         <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
         }).<span class="ident">join</span>();
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
     }
@@ -5794,7 +5866,7 @@
             <span class="kw">let</span> <span class="ident">_t</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
                 <span class="ident">tx</span>.<span class="ident">send</span>(<span class="kw">box</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
             });
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="number">10</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="number">10</span>);
         }
     }
 
@@ -5819,7 +5891,7 @@
                 <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">10</span> { <span class="kw">return</span> }
 
                 <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span><span class="op">||</span> {
-                    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="kw">box</span> <span class="ident">i</span>);
+                    <span class="macro">assert</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>() <span class="op">==</span> <span class="ident">i</span>);
                     <span class="ident">recv</span>(<span class="ident">rx</span>, <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>);
                 });
             }

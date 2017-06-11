@@ -1118,6 +1118,40 @@
 <span id="1073">1073</span>
 <span id="1074">1074</span>
 <span id="1075">1075</span>
+<span id="1076">1076</span>
+<span id="1077">1077</span>
+<span id="1078">1078</span>
+<span id="1079">1079</span>
+<span id="1080">1080</span>
+<span id="1081">1081</span>
+<span id="1082">1082</span>
+<span id="1083">1083</span>
+<span id="1084">1084</span>
+<span id="1085">1085</span>
+<span id="1086">1086</span>
+<span id="1087">1087</span>
+<span id="1088">1088</span>
+<span id="1089">1089</span>
+<span id="1090">1090</span>
+<span id="1091">1091</span>
+<span id="1092">1092</span>
+<span id="1093">1093</span>
+<span id="1094">1094</span>
+<span id="1095">1095</span>
+<span id="1096">1096</span>
+<span id="1097">1097</span>
+<span id="1098">1098</span>
+<span id="1099">1099</span>
+<span id="1100">1100</span>
+<span id="1101">1101</span>
+<span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1295,7 +1329,7 @@
     <span class="comment">// Querying the contained values</span>
     <span class="comment">/////////////////////////////////////////////////////////////////////////</span>
 
-    <span class="doccomment">/// Returns `true` if the option is a `Some` value.</span>
+    <span class="doccomment">/// Returns `true` if the option is a [`Some`] value.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1306,6 +1340,8 @@
     <span class="doccomment">/// let x: Option&lt;u32&gt; = None;</span>
     <span class="doccomment">/// assert_eq!(x.is_some(), false);</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Some`]: #variant.Some</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
@@ -1315,7 +1351,7 @@
         }
     }
 
-    <span class="doccomment">/// Returns `true` if the option is a `None` value.</span>
+    <span class="doccomment">/// Returns `true` if the option is a [`None`] value.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1326,6 +1362,8 @@
     <span class="doccomment">/// let x: Option&lt;u32&gt; = None;</span>
     <span class="doccomment">/// assert_eq!(x.is_none(), true);</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_none</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
@@ -1390,13 +1428,14 @@
     <span class="comment">// Getting to contained values</span>
     <span class="comment">/////////////////////////////////////////////////////////////////////////</span>
 
-    <span class="doccomment">/// Unwraps an option, yielding the content of a `Some`.</span>
+    <span class="doccomment">/// Unwraps an option, yielding the content of a [`Some`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics if the value is a [`None`] with a custom panic message provided by</span>
     <span class="doccomment">/// `msg`.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Some`]: #variant.Some</span>
     <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
@@ -1419,16 +1458,17 @@
         }
     }
 
-    <span class="doccomment">/// Moves the value `v` out of the `Option&lt;T&gt;` if it is `Some(v)`.</span>
+    <span class="doccomment">/// Moves the value `v` out of the `Option&lt;T&gt;` if it is [`Some(v)`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// In general, because this function may panic, its use is discouraged.</span>
-    <span class="doccomment">/// Instead, prefer to use pattern matching and handle the `None`</span>
+    <span class="doccomment">/// Instead, prefer to use pattern matching and handle the [`None`]</span>
     <span class="doccomment">/// case explicitly.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics if the self value equals [`None`].</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Some(v)`]: #variant.Some</span>
     <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
@@ -1516,7 +1556,9 @@
     }
 
     <span class="doccomment">/// Applies a function to the contained value (if any),</span>
-    <span class="doccomment">/// or returns a `default` (if not).</span>
+    <span class="doccomment">/// or returns a [`default`][] (if not).</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`default`]: ../default/trait.Default.html#tymethod.default</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1537,7 +1579,9 @@
     }
 
     <span class="doccomment">/// Applies a function to the contained value (if any),</span>
-    <span class="doccomment">/// or computes a `default` (if not).</span>
+    <span class="doccomment">/// or computes a [`default`][] (if not).</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`default`]: ../default/trait.Default.html#tymethod.default</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1559,12 +1603,14 @@
         }
     }
 
-    <span class="doccomment">/// Transforms the `Option&lt;T&gt;` into a [`Result&lt;T, E&gt;`], mapping `Some(v)` to</span>
-    <span class="doccomment">/// [`Ok(v)`] and `None` to [`Err(err)`][Err].</span>
+    <span class="doccomment">/// Transforms the `Option&lt;T&gt;` into a [`Result&lt;T, E&gt;`], mapping [`Some(v)`] to</span>
+    <span class="doccomment">/// [`Ok(v)`] and [`None`] to [`Err(err)`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Result&lt;T, E&gt;`]: ../../std/result/enum.Result.html</span>
     <span class="doccomment">/// [`Ok(v)`]: ../../std/result/enum.Result.html#variant.Ok</span>
-    <span class="doccomment">/// [Err]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`Err(err)`]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
+    <span class="doccomment">/// [`Some(v)`]: #variant.Some</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1584,12 +1630,14 @@
         }
     }
 
-    <span class="doccomment">/// Transforms the `Option&lt;T&gt;` into a [`Result&lt;T, E&gt;`], mapping `Some(v)` to</span>
-    <span class="doccomment">/// [`Ok(v)`] and `None` to [`Err(err())`][Err].</span>
+    <span class="doccomment">/// Transforms the `Option&lt;T&gt;` into a [`Result&lt;T, E&gt;`], mapping [`Some(v)`] to</span>
+    <span class="doccomment">/// [`Ok(v)`] and [`None`] to [`Err(err())`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Result&lt;T, E&gt;`]: ../../std/result/enum.Result.html</span>
     <span class="doccomment">/// [`Ok(v)`]: ../../std/result/enum.Result.html#variant.Ok</span>
-    <span class="doccomment">/// [Err]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`Err(err())`]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
+    <span class="doccomment">/// [`Some(v)`]: #variant.Some</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1655,7 +1703,9 @@
     <span class="comment">// Boolean operations on the values, eager and lazy</span>
     <span class="comment">/////////////////////////////////////////////////////////////////////////</span>
 
-    <span class="doccomment">/// Returns `None` if the option is `None`, otherwise returns `optb`.</span>
+    <span class="doccomment">/// Returns [`None`] if the option is [`None`], otherwise returns `optb`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1685,10 +1735,12 @@
         }
     }
 
-    <span class="doccomment">/// Returns `None` if the option is `None`, otherwise calls `f` with the</span>
+    <span class="doccomment">/// Returns [`None`] if the option is [`None`], otherwise calls `f` with the</span>
     <span class="doccomment">/// wrapped value and returns the result.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Some languages call this operation flatmap.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1766,8 +1818,10 @@
     <span class="comment">// Entry-like operations to insert if None and return a reference</span>
     <span class="comment">/////////////////////////////////////////////////////////////////////////</span>
 
-    <span class="doccomment">/// Inserts `v` into the option if it is `None`, then</span>
+    <span class="doccomment">/// Inserts `v` into the option if it is [`None`], then</span>
     <span class="doccomment">/// returns a mutable reference to the contained value.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1799,8 +1853,10 @@
         }
     }
 
-    <span class="doccomment">/// Inserts a value computed from `f` into the option if it is `None`, then</span>
+    <span class="doccomment">/// Inserts a value computed from `f` into the option if it is [`None`], then</span>
     <span class="doccomment">/// returns a mutable reference to the contained value.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1836,7 +1892,9 @@
     <span class="comment">// Misc</span>
     <span class="comment">/////////////////////////////////////////////////////////////////////////</span>
 
-    <span class="doccomment">/// Takes the value out of the option, leaving a `None` in its place.</span>
+    <span class="doccomment">/// Takes the value out of the option, leaving a [`None`] in its place.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -1878,16 +1936,16 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Returns the contained value or a default</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Consumes the `self` argument then, if `Some`, returns the contained</span>
-    <span class="doccomment">/// value, otherwise if `None`, returns the default value for that</span>
+    <span class="doccomment">/// Consumes the `self` argument then, if [`Some`], returns the contained</span>
+    <span class="doccomment">/// value, otherwise if [`None`], returns the default value for that</span>
     <span class="doccomment">/// type.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Convert a string to an integer, turning poorly-formed strings</span>
-    <span class="doccomment">/// into 0 (the default value for integers). `parse` converts</span>
-    <span class="doccomment">/// a string to any other type that implements `FromStr`, returning</span>
-    <span class="doccomment">/// `None` on error.</span>
+    <span class="doccomment">/// into 0 (the default value for integers). [`parse`] converts</span>
+    <span class="doccomment">/// a string to any other type that implements [`FromStr`], returning</span>
+    <span class="doccomment">/// [`None`] on error.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// let good_year_from_input = &quot;1909&quot;;</span>
@@ -1898,6 +1956,11 @@
     <span class="doccomment">/// assert_eq!(1909, good_year);</span>
     <span class="doccomment">/// assert_eq!(0, bad_year);</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Some`]: #variant.Some</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
+    <span class="doccomment">/// [`parse`]: ../../std/primitive.str.html#method.parse</span>
+    <span class="doccomment">/// [`FromStr`]: ../../std/str/trait.FromStr.html</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unwrap_or_default</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
@@ -1922,7 +1985,9 @@
 
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns None.</span>
+    <span class="doccomment">/// Returns [`None`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`None`]: #variant.None</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { <span class="prelude-val">None</span> }
 }
@@ -2141,8 +2206,8 @@
 
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">V</span>: <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;&gt;</span> <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Takes each element in the `Iterator`: if it is `None`, no further</span>
-    <span class="doccomment">/// elements are taken, and the `None` is returned. Should no `None` occur, a</span>
+    <span class="doccomment">/// Takes each element in the [`Iterator`]: if it is [`None`], no further</span>
+    <span class="doccomment">/// elements are taken, and the [`None`] is returned. Should no [`None`] occur, a</span>
     <span class="doccomment">/// container with the values of each `Option` is returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Here is an example which increments every integer in a vector,</span>
@@ -2158,6 +2223,9 @@
     <span class="doccomment">/// ).collect();</span>
     <span class="doccomment">/// assert!(res == Some(vec![2, 3]));</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Iterator`]: ../iter/trait.Iterator.html</span>
+    <span class="doccomment">/// [`None`]: enum.Option.html#variant.None</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span> {
         <span class="comment">// FIXME(#11084): This could be replaced with Iterator::scan when this</span>

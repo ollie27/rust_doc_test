@@ -302,7 +302,7 @@ pointer type <code>fn()</code>. There is currently no syntax for unique fn types
 though the compiler will emit a type like <code>fn() {foo}</code> in error
 messages to indicate &quot;the unique fn type for the function <code>foo</code>&quot;.</p>
 <a class="header" href="types.html#closure-types" id="closure-types"><h2>Closure types</h2></a>
-<p>A <a href="expressions.html#lambda-expressions">lambda expression</a> produces a closure
+<p>A <a href="expressions.html#closure-expressions">closure expression</a> produces a closure
 value with a unique, anonymous type that cannot be written out.</p>
 <p>Depending on the requirements of the closure, its type implements one or
 more of the closure traits:</p>
@@ -322,11 +322,24 @@ can move out values from its environment.</p>
 <p><code>Fn</code>
 : The closure can be called multiple times through a shared reference.
 A closure called as <code>Fn</code> can neither move out from nor mutate values
-from its environment. <code>Fn</code> inherits from <code>FnMut</code>, which itself
-inherits from <code>FnOnce</code>.</p>
+from its environment, but read-only access to such values is allowed.
+<code>Fn</code> inherits from <code>FnMut</code>, which itself inherits from <code>FnOnce</code>.</p>
 </li>
 </ul>
-</div>
+<p>Closures that don't use anything from their environment (&quot;non capturing closures&quot;)
+can be coerced to function pointers (<code>fn</code>) with the matching signature.
+To adopt the example from the section above:</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+let add = |x, y| x + y;
+
+let mut x = add(5,7);
+
+type Binop = fn(i32, i32) -&gt; i32;
+let bo: Binop = add;
+x = bo(5,7);
+
+#}</code></pre></pre>
 <a class="header" href="types.html#trait-objects" id="trait-objects"><h2>Trait objects</h2></a>
 <p>In Rust, a type like <code>&amp;SomeTrait</code> or <code>Box&lt;SomeTrait&gt;</code> is called a <em>trait object</em>.
 Each instance of a trait object includes:</p>
@@ -452,6 +465,7 @@ impl Printable for String {
 <p>The notation <code>&amp;self</code> is a shorthand for <code>self: &amp;Self</code>. In this case,
 in the impl, <code>Self</code> refers to the value of type <code>String</code> that is the
 receiver for a call to the method <code>make_string</code>.</p>
+</div>
 
                 </div>
 

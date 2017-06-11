@@ -82,9 +82,10 @@ execution, and may reside in read-only memory.</p>
 <li><a href="items.html#modules">modules</a></li>
 <li><a href="items.html#functions">function definitions</a></li>
 <li><a href="items.html#external-blocks"><code>extern</code> blocks</a></li>
-<li><a href="../grammar.html#type-definitions">type definitions</a></li>
+<li><a href="items.html#type-aliases">type definitions</a></li>
 <li><a href="items.html#structs">struct definitions</a></li>
 <li><a href="items.html#enumerations">enumeration definitions</a></li>
+<li><a href="items.html#unions">union definitions</a></li>
 <li><a href="items.html#constant-items">constant items</a></li>
 <li><a href="items.html#static-items">static items</a></li>
 <li><a href="items.html#traits">trait definitions</a></li>
@@ -200,14 +201,14 @@ Rather, <a href="items.html#extern-crate-declarations"><code>extern crate</code>
 </blockquote>
 <p>Use declarations support a number of convenient shortcuts:</p>
 <ul>
-<li>Rebinding the target name as a new local name, using the syntax <code>use p::q::r as x;</code></li>
 <li>Simultaneously binding a list of paths differing only in their final element,
 using the glob-like brace syntax <code>use a::b::{c,d,e,f};</code></li>
-<li>Binding all paths matching a given prefix, using the asterisk wildcard syntax
-<code>use a::b::*;</code></li>
 <li>Simultaneously binding a list of paths differing only in their final element
 and their immediate parent module, using the <code>self</code> keyword, such as
 <code>use a::b::{self, c, d};</code></li>
+<li>Rebinding the target name as a new local name, using the syntax <code>use p::q::r as x;</code>. This can also be used with the last two features: <code>use a::b::{self as ab, c as abc}</code>.</li>
+<li>Binding all paths matching a given prefix, using the asterisk wildcard syntax
+<code>use a::b::*;</code></li>
 </ul>
 <p>An example of <code>use</code> declarations:</p>
 <pre><pre class="playpen"><code class="language-rust">use std::option::Option::{Some, None};
@@ -358,9 +359,10 @@ fn my_err(s: &amp;str) -&gt; ! {
 
 #}</code></pre></pre>
 <p>We call such functions &quot;diverging&quot; because they never return a value to the
-caller. Every control path in a diverging function must end with a <code>panic!()</code> or
-a call to another diverging function on every control path. The <code>!</code> annotation
-does <em>not</em> denote a type.</p>
+caller. Every control path in a diverging function must end with a <code>panic!()</code>,
+a loop expression without an associated break expression, or a call to another
+diverging function on every control path. The <code>!</code> annotation does <em>not</em> denote
+a type.</p>
 <p>It might be necessary to declare a diverging function because as mentioned
 previously, the typechecker checks that every control path in a function ends
 with a <a href="expressions.html#return-expressions"><code>return</code></a> or diverging expression. So, if <code>my_err</code>
@@ -426,8 +428,7 @@ type Point = (u8, u8);
 let p: Point = (41, 68);
 
 #}</code></pre></pre>
-<p>Currently a type alias to an enum type cannot be used to qualify the
-constructors:</p>
+<p>A type alias to an enum type cannot be used to qualify the constructors:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 enum E { A }
@@ -530,6 +531,139 @@ let x = Foo::Bar as u32; // x is now 123u32
 #}</code></pre></pre>
 <p>This only works as long as none of the variants have data attached. If
 it were <code>Bar(i32)</code>, this is disallowed.</p>
+<a class="header" href="items.html#unions" id="unions"><h2>Unions</h2></a>
+<p>A union declaration uses the same syntax as a struct declaration, except with
+<code>union</code> in place of <code>struct</code>.</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+#[repr(C)]
+union MyUnion {
+    f1: u32,
+    f2: f32,
+}
+
+#}</code></pre></pre>
+<p>The key property of unions is that all fields of a union share common storage.
+As a result writes to one field of a union can overwrite its other fields,
+and size of a union is determined by the size of its largest field.</p>
+<p>A value of a union type can be created using the same syntax that is used for
+struct types, except that it must specify exactly one field:</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# union MyUnion { f1: u32, f2: f32 }
+
+let u = MyUnion { f1: 1 };
+
+#}</code></pre></pre>
+<p>The expression above creates a value of type <code>MyUnion</code> with active field <code>f1</code>.
+Active field of a union can be accessed using the same syntax as struct fields:</p>
+<pre><code class="language-rust ignore">let f = u.f1;
+</code></pre>
+<p>Inactive fields can be accessed as well (using the same syntax) if they are
+sufficiently layout compatible with the
+current value kept by the union. Reading incompatible fields results in
+undefined behavior.
+However, the active field is not generally known statically, so all reads of
+union fields have to be placed in <code>unsafe</code> blocks.</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# union MyUnion { f1: u32, f2: f32 }
+# let u = MyUnion { f1: 1 };
+
+unsafe {
+    let f = u.f1;
+}
+
+#}</code></pre></pre>
+<p>Writes to <code>Copy</code> union fields do not require reads for running destructors,
+so these writes don't have to be placed in <code>unsafe</code> blocks</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# union MyUnion { f1: u32, f2: f32 }
+# let mut u = MyUnion { f1: 1 };
+
+u.f1 = 2;
+
+#}</code></pre></pre>
+<p>Commonly, code using unions will provide safe wrappers around unsafe
+union field accesses.</p>
+<p>Another way to access union fields is to use pattern matching.
+Pattern matching on union fields uses the same syntax as struct patterns,
+except that the pattern must specify exactly one field.
+Since pattern matching accesses potentially inactive fields it has
+to be placed in <code>unsafe</code> blocks as well.</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# union MyUnion { f1: u32, f2: f32 }
+
+fn f(u: MyUnion) {
+    unsafe {
+        match u {
+            MyUnion { f1: 10 } =&gt; { println!(&quot;ten&quot;); }
+            MyUnion { f2 } =&gt; { println!(&quot;{}&quot;, f2); }
+        }
+    }
+}
+
+#}</code></pre></pre>
+<p>Pattern matching may match a union as a field of a larger structure. In
+particular, when using a Rust union to implement a C tagged union via FFI, this
+allows matching on the tag and the corresponding field simultaneously:</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+#[repr(u32)]
+enum Tag { I, F }
+
+#[repr(C)]
+union U {
+    i: i32,
+    f: f32,
+}
+
+#[repr(C)]
+struct Value {
+    tag: Tag,
+    u: U,
+}
+
+fn is_zero(v: Value) -&gt; bool {
+    unsafe {
+        match v {
+            Value { tag: I, u: U { i: 0 } } =&gt; true,
+            Value { tag: F, u: U { f: 0.0 } } =&gt; true,
+            _ =&gt; false,
+        }
+    }
+}
+
+#}</code></pre></pre>
+<p>Since union fields share common storage, gaining write access to one
+field of a union can give write access to all its remaining fields.
+Borrow checking rules have to be adjusted to account for this fact.
+As a result, if one field of a union is borrowed, all its remaining fields
+are borrowed as well for the same lifetime.</p>
+<pre><code class="language-rust ignore">// ERROR: cannot borrow `u` (via `u.f2`) as mutable more than once at a time
+fn test() {
+    let mut u = MyUnion { f1: 1 };
+    unsafe {
+        let b1 = &amp;mut u.f1;
+                      ---- first mutable borrow occurs here (via `u.f1`)
+        let b2 = &amp;mut u.f2;
+                      ^^^^ second mutable borrow occurs here (via `u.f2`)
+        *b1 = 5;
+    }
+    - first borrow ends here
+    assert_eq!(unsafe { u.f1 }, 5);
+}
+</code></pre>
+<p>As you could see, in many aspects (except for layouts, safety and ownership)
+unions behave exactly like structs, largely as a consequence of inheriting their
+syntactic shape from structs.
+This is also true for many unmentioned aspects of Rust language (such as
+privacy, name resolution, type inference, generics, trait implementations,
+inherent implementations, coherence, pattern checking, etc etc etc).</p>
+<p>More detailed specification for unions, including unstable bits, can be found in
+<a href="https://github.com/rust-lang/rfcs/pull/1897">RFC 1897 &quot;Unions v1.2&quot;</a>.</p>
 <a class="header" href="items.html#constant-items" id="constant-items"><h2>Constant items</h2></a>
 <p>A <em>constant item</em> is a named <em>constant value</em> which is not associated with a
 specific memory location in the program. Constants are essentially inlined

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1276' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1323' title='goto source code'>[src]</a></span></h1>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>core_intrinsics</code>)</summary><p>intrinsics are unlikely to ever be stabilized, instead they should be used through stabilized interfaces in the rest of the standard library</p>
 </details></div></div><div class='docblock'><p>rustc compiler intrinsics.</p>
 
@@ -1466,6 +1466,46 @@ primitives via the <code>wrapping_sub</code> method. For example,
                                   title='fn std::intrinsics::pref_align_of'>pref_align_of</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] 
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.prefetch_read_data.html"
+                                  title='fn std::intrinsics::prefetch_read_data'>prefetch_read_data</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>The <code>prefetch</code> intrinsic is a hint to the code generator to insert a prefetch instruction
+if supported; otherwise, it is a noop.
+Prefetches have no effect on the behavior of the program but can change its performance
+characteristics.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.prefetch_read_instruction.html"
+                                  title='fn std::intrinsics::prefetch_read_instruction'>prefetch_read_instruction</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>The <code>prefetch</code> intrinsic is a hint to the code generator to insert a prefetch instruction
+if supported; otherwise, it is a noop.
+Prefetches have no effect on the behavior of the program but can change its performance
+characteristics.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.prefetch_write_data.html"
+                                  title='fn std::intrinsics::prefetch_write_data'>prefetch_write_data</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>The <code>prefetch</code> intrinsic is a hint to the code generator to insert a prefetch instruction
+if supported; otherwise, it is a noop.
+Prefetches have no effect on the behavior of the program but can change its performance
+characteristics.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.prefetch_write_instruction.html"
+                                  title='fn std::intrinsics::prefetch_write_instruction'>prefetch_write_instruction</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>The <code>prefetch</code> intrinsic is a hint to the code generator to insert a prefetch instruction
+if supported; otherwise, it is a noop.
+Prefetches have no effect on the behavior of the program but can change its performance
+characteristics.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>

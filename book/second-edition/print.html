@@ -1459,7 +1459,7 @@ const MAX_POINTS: u32 = 100_000;
 #}</code></pre></pre>
 <p>Constants are valid for the entire time a program runs, within the scope they
 were declared in, making them a useful choice for values in your application
-domain that multiple part of the program might need to know about, such as the
+domain that multiple parts of the program might need to know about, such as the
 maximum number of points any player of a game is allowed to earn or the speed
 of light.</p>
 <p>Naming hardcoded values used throughout your program as constants is useful in
@@ -4633,7 +4633,7 @@ fn value_in_cents(coin: Coin) -&gt; i32 {
 values that match the pattern. This is how we can extract values out of enum
 variants.</p>
 <p>As an example, let’s change one of our enum variants to hold data inside it.
-From 1999 through 2008, the United States printed quarters with different
+From 1999 through 2008, the United States minted quarters with different
 designs for each of the 50 states on one side. No other coins got state
 designs, so only quarters have this extra value. We can add this information to
 our <code>enum</code> by changing the <code>Quarter</code> variant to include a <code>State</code> value stored
@@ -9235,7 +9235,7 @@ mod tests {
     }
 
     #[test]
-    fn smaller_can_hold_larger() {
+    fn smaller_can_not_hold_larger() {
         let larger = Rectangle { length: 8, width: 7 };
         let smaller = Rectangle { length: 5, width: 1 };
 
@@ -9248,7 +9248,7 @@ mod tests {
 we need to negate that result before we pass it to the <code>assert!</code> macro. This
 way, our test will pass if <code>can_hold</code> returns <code>false</code>:</p>
 <pre><code class="language-text">running 2 tests
-test tests::smaller_can_hold_larger ... ok
+test tests::smaller_can_not_hold_larger ... ok
 test tests::larger_can_hold_smaller ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured
@@ -9274,7 +9274,7 @@ impl Rectangle {
 #}</code></pre></pre>
 <p>Running the tests now produces:</p>
 <pre><code class="language-text">running 2 tests
-test tests::smaller_can_hold_larger ... ok
+test tests::smaller_can_not_hold_larger ... ok
 test tests::larger_can_hold_smaller ... FAILED
 
 failures:
@@ -11874,124 +11874,711 @@ store data effectively in the appropriate data structures, handle errors
 nicely, and be well tested.</p>
 <p>Next, let's explore some functional-language influenced Rust features: closures
 and iterators.</p>
-<a class="header" href="print.html#functional-language-features-in-rust---iterators-and-closures" id="functional-language-features-in-rust---iterators-and-closures"><h1>Functional Language features in Rust - Iterators and Closures</h1></a>
-<p>Rust's design has taken inspiration from a lot of previous work. One of Rust's
-influences is functional programming, where functions are values that can be
-used as arguments or return values to other functions, assigned to variables,
-and so forth. We're going to sidestep the issue of what, exactly, functional
-programming is or is not, and instead show off some features of Rust that
-are similar to features in many languages referred to as functional.</p>
+<a class="header" href="print.html#functional-language-features-in-rust-iterators-and-closures" id="functional-language-features-in-rust-iterators-and-closures"><h1>Functional Language features in Rust: Iterators and Closures</h1></a>
+<!-- Are closures unique to Rust? -->
+<!-- No, they're from functional languages, which is why they're discussed in
+this chapter. Do you have a suggestion on how to make that clearer than the
+text in the intro paragraph here? /Carol -->
+<p>Rust's design has taken inspiration from a lot of existing languages and
+techniques, and one significant influence is <em>functional programming</em>.
+Programming in a functional style often includes using functions as values in
+arguments or return values of other functions, assigning functions to variables
+for later execution, and so forth. We won't debate here the issue of what,
+exactly, functional programming is or is not, but will instead show off some
+features of Rust that are similar to features in many languages often referred
+to as functional.</p>
 <p>More specifically, we're going to cover:</p>
 <ul>
-<li><em>Closures</em>, a function-like construct you can store in a variable.</li>
-<li><em>Iterators</em>, a way of processing series of elements.</li>
-<li>How to use these features to improve upon the project from the last chapter.</li>
+<li><em>Closures</em>: a function-like construct you can store in a variable.</li>
+<li><em>Iterators</em>: a way of processing a series of elements.</li>
+<li>How to use these features to improve on the I/O project from Chapter 12.</li>
 <li>The performance of these features. Spoiler alert: they're faster than you
 might think!</li>
 </ul>
-<p>This is not a complete list of Rust's influence from the functional style:
-pattern matching, enums, and many other features are too. But mastering
-closures and iterators are an important part of writing idiomatic, fast Rust
-code.</p>
-<a class="header" href="print.html#closures" id="closures"><h2>Closures</h2></a>
-<p>Rust gives you the ability to define <em>closures</em>, which are similar to
-functions. Instead of starting with a technical definition, let's see what
-closures look like, syntactically, and then we'll return to defining what they
-are. Listing 13-1 shows a small closure whose definition is assigned to the
-variable <code>add_one</code>, which we can then use to call the closure:</p>
+<p>There are other Rust features influenced by the functional style, like pattern
+matching and enums, that we've covered in other chapters as well. Mastering
+closures and iterators is an important part of writing idiomatic, fast Rust
+code, so we're devoting an entire chapter to them here.</p>
+<a class="header" href="print.html#closures-anonymous-functions-that-can-capture-their-environment" id="closures-anonymous-functions-that-can-capture-their-environment"><h2>Closures: Anonymous Functions that can Capture their Environment</h2></a>
+<!-- Bill's suggested we flesh out some of these subtitles, which I think we
+did more with earlier chapters but we (I, included!) have got a bit lax with. I
+don't think this is quite right, is there a shorter heading we could use to
+capture what a closure is/is for? -->
+<!-- I've attempted a more descriptive subtitle, what do you think? /Carol -->
+<p>Rust's <em>closures</em> are anonymous functions that you can save in a variable or
+pass as arguments to other functions. You can create the closure in one place,
+and then call the closure to evaluate it in a different context. Unlike
+functions, closures are allowed to capture values from the scope in which they
+are called. We're going to demonstrate how these features of closures allow for
+code reuse and customization of behavior.</p>
+<!-- Can you say what sets closures apart from functions, explicitly, above? I
+can't see it clearly enough to be confident, after one read through this
+chapter. I think it would help to have the closure definition up front, to help
+to let the reader know what they are looking out for in the examples. When
+would you use a closure, for example, rather than using a function? And is it
+the closure that's stored in the variable, or is it the result of applying the
+closure to a value passed as an argument? -->
+<!-- I've tried reworking the above paragraph and restructuring the examples to
+be more motivating. I've also tried to make it clear throughout that storing a
+closure is storing the *unevaluated* code, and then you call the closure in
+order to get the result. /Carol -->
+<a class="header" href="print.html#creating-an-abstraction-of-behavior-using-a-closure" id="creating-an-abstraction-of-behavior-using-a-closure"><h3>Creating an Abstraction of Behavior Using a Closure</h3></a>
+<p>Let's work on an example that will show a situation where storing a closure to
+be executed at a later time is useful. We'll talk about the syntax of closures,
+type inference, and traits along the way.</p>
+<p>The hypothetical situation is this: we're working at a startup that's making an
+app to generate custom exercise workout plans. The backend is written in Rust,
+and the algorithm that generates the workout plan takes into account many
+different factors like the app user's age, their Body Mass Index, their
+preferences, their recent workouts, and an intensity number they specify. The
+actual algorithm used isn't important in this example; what's important is that
+this calculation takes a few seconds. We only want to call this algorithm if we
+need to, and we only want to call it once, so that we aren't making the user
+wait more than they need to. We're going to simulate calling this hypothetical
+algorithm by calling the <code>simulated_expensive_calculation</code> function shown in
+Listing 13-1 instead, which will print <code>calculating slowly...</code>, wait for two
+seconds, and then return whatever number we passed in:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playpen"><code class="language-rust">fn main() {
-    let add_one = |x| x + 1;
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+use std::thread;
+use std::time::Duration;
 
-    let five = add_one(4);
-
-    assert_eq!(5, five);
+fn simulated_expensive_calculation(intensity: i32) -&gt; i32 {
+    println!(&quot;calculating slowly...&quot;);
+    thread::sleep(Duration::from_secs(2));
+    intensity
 }
-</code></pre></pre>
-<p><span class="caption">Listing 13-1: A closure that takes one parameter and adds
-one to it, assigned to the variable <code>add_one</code></span></p>
-<p>The closure definition, on the first line, shows that the closure takes one
-parameter named <code>x</code>. Parameters to closures go in between vertical pipes (<code>|</code>).</p>
-<p>This is a minimal closure with only one expression as its body. Listing 13-2 has
-a closure with a bit more complexity:</p>
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-1: A function we'll use to stand in for a
+hypothetical calculation that takes about two seconds to run</span></p>
+<p>Next, we have a <code>main</code> function that contains the parts of the workout app that
+are important for this example. This represents the code that the app would
+call when a user asks for a workout plan. Because the interaction with the
+app's frontend isn't relevant to the use of closures, we're going to hardcode
+values representing inputs to our program and print the outputs.</p>
+<p>The inputs to the program are:</p>
+<ul>
+<li>An <code>intensity</code> number from the user, specified when they request a workout,
+so they can indicate whether they'd like a low intensity workout or a high
+intensity workout</li>
+<li>A random number that will generate some variety in the workout plans</li>
+</ul>
+<p>The output the program prints will be the recommended workout plan.</p>
+<p>Listing 13-2 shows the <code>main</code> function we're going to use. We've hardcoded the
+variable <code>simulated_user_specified_value</code> to 10 and the variable
+<code>simulated_random_number</code> to 7 for simplicity's sake; in an actual program we'd
+get the intensity number from the app frontend and we'd use the <code>rand</code> crate to
+generate a random number like we did in the Guessing Game example in Chapter 2.
+The <code>main</code> function calls a <code>generate_workout</code> function with the simulated
+input values:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust">fn main() {
-    let calculate = |a, b| {
-        let mut result = a * 2;
+    let simulated_user_specified_value = 10;
+    let simulated_random_number = 7;
 
-        result += b;
+    generate_workout(simulated_user_specified_value, simulated_random_number);
+}
+# fn generate_workout(intensity: i32, random_number: i32) {}
+</code></pre></pre>
+<p><span class="caption">Listing 13-2: A <code>main</code> function containing hardcoded
+values to simulate user input and random number generation inputs to the
+<code>generate_workout</code> function</span></p>
+<p>That's the context of what we're working on. The <code>generate_workout</code> function in
+Listing 13-3 contains the business logic of the app that we're most concerned
+with in this example. The rest of the code changes in this example will be made
+to this function:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# use std::thread;
+# use std::time::Duration;
+#
+# fn simulated_expensive_calculation(num: i32) -&gt; i32 {
+#     println!(&quot;calculating slowly...&quot;);
+#     thread::sleep(Duration::from_secs(2));
+#     num
+# }
+#
+fn generate_workout(intensity: i32, random_number: i32) {
+    if intensity &lt; 25 {
+        println!(
+            &quot;Today, do {} pushups!&quot;,
+            simulated_expensive_calculation(intensity)
+        );
+        println!(
+            &quot;Next, do {} situps!&quot;,
+            simulated_expensive_calculation(intensity)
+        );
+    } else {
+        if random_number == 3 {
+            println!(&quot;Take a break today! Remember to stay hydrated!&quot;);
+        } else {
+            println!(
+                &quot;Today, run for {} minutes!&quot;,
+                simulated_expensive_calculation(intensity)
+            )
+        }
+    }
+}
 
-        result
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-3: The business logic of the program that
+prints the workout plans based on the inputs and calls to the
+<code>simulated_expensive_calculation</code> function</span></p>
+<p>The code in Listing 13-3 has multiple calls to the slow calculation function.
+The first <code>if</code> block calls <code>simulated_expensive_calculation</code> twice, the <code>if</code>
+inside the outer <code>else</code> doesn't call it at all, and the code inside the <code>else</code>
+case inside the outer <code>else</code> calls it once.</p>
+<!-- Will add wingdings in libreoffice /Carol -->
+<p>The desired behavior of the <code>generate_workout</code> function is to first check if
+the user wants a low intensity workout (indicated by a number less than 25) or
+a high intensity workout (25 or more). Low intensity workout plans will
+recommend a number of pushups and situps based on the complex algorithm we're
+simulating with the <code>simulated_expensive_calculation</code> function, which needs the
+intensity number as an input.</p>
+<p>If the user wants a high intensity workout, there's some additional logic: if
+the value of the random number generated by the app happens to be 3, the app
+will recommend a break and hydration instead. If not, the user will get a high
+intensity workout of a number of minutes of running that comes from the complex
+algorithm.</p>
+<p>The data science team has let us know that there are going to be some changes
+to the way we have to call the algorithm, so we want to refactor this code to
+have only one place that calls the <code>simulated_expensive_calculation</code> function
+to update when those changes happen. We also want to get rid of the spot where
+we're currently calling the function twice unnecessarily, and we don't want to
+add any other calls to that function in the process. That is, we don't want to
+call it if we're in the case where the result isn't needed at all, and we still
+want to call it only once in the last case.</p>
+<p>There are many ways we could restructure this program. The way we're going to
+try first is extracting the duplicated call to the expensive calculation
+function into a variable, as shown in Listing 13-4:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# use std::thread;
+# use std::time::Duration;
+#
+# fn simulated_expensive_calculation(num: i32) -&gt; i32 {
+#     println!(&quot;calculating slowly...&quot;);
+#     thread::sleep(Duration::from_secs(2));
+#     num
+# }
+#
+fn generate_workout(intensity: i32, random_number: i32) {
+    let expensive_result =
+        simulated_expensive_calculation(intensity);
+
+    if intensity &lt; 25 {
+        println!(
+            &quot;Today, do {} pushups!&quot;,
+            expensive_result
+        );
+        println!(
+            &quot;Next, do {} situps!&quot;,
+            expensive_result
+        );
+    } else {
+        if random_number == 3 {
+            println!(&quot;Take a break today! Remember to stay hydrated!&quot;);
+        } else {
+            println!(
+                &quot;Today, run for {} minutes!&quot;,
+                expensive_result
+            )
+        }
+    }
+}
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-4: Extracting the calls to
+<code>simulated_expensive_calculation</code> to one place before the <code>if</code> blocks and
+storing the result in the <code>expensive_result</code> variable</span></p>
+<!-- Will add ghosting and wingdings in libreoffice /Carol -->
+<p>This change unifies all the calls to <code>simulated_expensive_calculation</code> and
+solves the problem of the first <code>if</code> block calling the function twice
+unnecessarily. Unfortunately, we're now calling this function and waiting for
+the result in all cases, which includes the inner <code>if</code> block that doesn't use
+the result value at all.</p>
+<p>We want to be able to specify some code in one place in our program, but then
+only execute that code if we actually need the result in some other place in
+our program. This is a use case for closures!</p>
+<a class="header" href="print.html#closures-store-code-to-be-executed-later" id="closures-store-code-to-be-executed-later"><h3>Closures Store Code to be Executed Later</h3></a>
+<p>Instead of always calling the <code>simulated_expensive_calculation</code> function before
+the <code>if</code> blocks, we can define a closure and store the closure in a variable
+instead of the result as shown in Listing 13-5. We can actually choose to move
+the whole body of <code>simulated_expensive_calculation</code> within the closure we're
+introducing here:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# use std::thread;
+# use std::time::Duration;
+#
+let expensive_closure = |num| {
+    println!(&quot;calculating slowly...&quot;);
+    thread::sleep(Duration::from_secs(2));
+    num
+};
+# expensive_closure(5);
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-5: Defining a closure with the body that was
+in the expensive function and store the closure in the <code>expensive_closure</code>
+variable</span></p>
+<!-- Can you elaborate on *how* to define the closure first? I've had a go here
+based on what I can see but not sure it's correct. Are we saying that a closure
+is function that assigned its result to a variable you can then use? -->
+<!-- I've attempted to elaborate on defining a closure in the next few
+paragraphs starting here, is this better? /Carol -->
+<p>The closure definition is the part after the <code>=</code> that we're assigning to the
+variable <code>expensive_closure</code>. To define a closure, we start with a pair of
+vertical pipes (<code>|</code>). Inside the pipes is where we specify the parameters to
+the closure; this syntax was chosen because of its similarity to closure
+definitions in Smalltalk and Ruby. This closure has one parameter named <code>num</code>;
+if we had more than one parameter, we would separate them with commas, like
+<code>|param1, param2|</code>.</p>
+<p>After the parameters, we put curly braces that hold the body of the closure.
+The curly braces are optional if the closure body only has one line. After the
+curly braces, we need a semicolon to go with the <code>let</code> statement. The value
+returned from the last line in the closure body (<code>num</code>), since that line
+doesn't end in a semicolon, will be the value returned from the closure when
+it's called, just like in function bodies.</p>
+<p>Note that this <code>let</code> statement means <code>expensive_closure</code> contains the
+<em>definition</em> of an anonymous function, not the <em>resulting value</em> of calling the
+anonymous function. Recall the reason we're using a closure is because we want
+to define the code to call at one point, store that code, and actually call it
+at a later point; the code we want to call is now stored in <code>expensive_closure</code>.</p>
+<p>Now that we have the closure defined, we can change the code in the <code>if</code> blocks
+to call the closure in order to execute the code and get the resulting value.
+Calling a closure looks very similar to calling a function; we specify the
+variable name that holds the closure definition and follow it with parentheses
+containing the argument values we want to use for that call as shown in Listing
+13-6:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# use std::thread;
+# use std::time::Duration;
+#
+fn generate_workout(intensity: i32, random_number: i32) {
+    let expensive_closure = |num| {
+        println!(&quot;calculating slowly...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        num
     };
 
-    assert_eq!(7, calculate(2, 3)); // 2 * 2 + 3 == 7
-    assert_eq!(13, calculate(4, 5)); // 4 * 2 + 5 == 13
+    if intensity &lt; 25 {
+        println!(
+            &quot;Today, do {} pushups!&quot;,
+            expensive_closure(intensity)
+        );
+        println!(
+            &quot;Next, do {} situps!&quot;,
+            expensive_closure(intensity)
+        );
+    } else {
+        if random_number == 3 {
+            println!(&quot;Take a break today! Remember to stay hydrated!&quot;);
+        } else {
+            println!(
+                &quot;Today, run for {} minutes!&quot;,
+                expensive_closure(intensity)
+            )
+        }
+    }
 }
-</code></pre></pre>
-<p><span class="caption">Listing 13-2: A closure with two parameters and multiple
-expressions in its body</span></p>
-<p>We can use curly brackets to define a closure body with more than one
-expression.</p>
-<p>You'll notice a few things about closures that are different from functions
-defined with the <code>fn</code> keyword. The first difference is that we did not need to
-annotate the types of the parameters the closure takes or the value it returns.
-We can choose to add type annotations if we want; Listing 13-3 shows the
-closure from Listing 13-1 with annotations for the parameter's and return
-value's types:</p>
-<p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playpen"><code class="language-rust">fn main() {
-    let add_one = |x: i32| -&gt; i32 { x + 1 };
 
-    assert_eq!(2, add_one(1));
-}
-</code></pre></pre>
-<p><span class="caption">Listing 13-3: A closure definition with optional
-parameter and return value type annotations</span></p>
-<p>The syntax of closures and functions looks more similar with type annotations.
-Let's compare the different ways we can specify closures with the syntax for
-defining a function more directly. We've added some spaces here to line up the
-relevant parts:</p>
-<pre><code class="language-rust ignore">fn  add_one_v1   (x: i32) -&gt; i32 { x + 1 }  // a function
-let add_one_v2 = |x: i32| -&gt; i32 { x + 1 }; // the full syntax for a closure
-let add_one_v3 = |x|             { x + 1 }; // a closure eliding types
-let add_one_v4 = |x|               x + 1  ; // without braces
-</code></pre>
-<p>The reason type annotations are not required for defining a closure but are
-required for defining a function is that functions are part of an explicit
-interface exposed to your users, so defining this interface rigidly is
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-6: Calling the <code>expensive_closure</code> we've
+defined</span></p>
+<p>Now we've achieved the goal of unifying where the expensive calculation is
+called to one place, and we're only executing that code where we need the
+results. However, we've reintroduced one of the problems from Listing 13-3:
+we're still calling the closure twice in the first <code>if</code> block, which will call
+the expensive code twice and make the user wait twice as long as they need to.
+We could fix this problem by creating a variable local to that <code>if</code> block to
+hold the result of calling the closure, but there's another solution we can use
+since we have a closure. We'll get back to that solution in a bit; let's first
+talk about why there aren't type annotations in the closure definition and the
+traits involved with closures.</p>
+<a class="header" href="print.html#closure-type-inference-and-annotation" id="closure-type-inference-and-annotation"><h3>Closure Type Inference and Annotation</h3></a>
+<p>Closure are different than functions defined with the <code>fn</code> keyword in a few
+ways. The first is that closures don't require you to annotate the types of the
+parameters or the return value like <code>fn</code> functions do.</p>
+<!-- I've suggested moving this next paragraph up from below, I found this
+section difficult to follow with this next paragraph -->
+<p>Type annotations are required on functions because they're are part of an
+explicit interface exposed to your users. Defining this interface rigidly is
 important for ensuring that everyone agrees on what types of values a function
 uses and returns. Closures aren't used in an exposed interface like this,
-though: they're stored in bindings and called directly. Being forced to
-annotate the types would be a significant ergonomic loss for little advantage.</p>
-<p>Closure definitions do have one type inferred for each of their parameters and
-for their return value. For instance, if we call the closure without type
-annotations from Listing 13-1 using an <code>i8</code>, we'll get an error if we then try
-to call the same closure with an <code>i32</code>:</p>
+though: they're stored in variables and used without naming them and exposing
+them to be invoked by users of our library.</p>
+<p>Additionally, closures are usually short and only relevant within a narrow
+context rather than in any arbitrary scenario. Within these limited contexts,
+the compiler is reliably able to infer the types of the parameters and return
+type similarly to how it's able to infer the types of most variables. Being
+forced to annotate the types in these small, anonymous functions would be
+annoying and largely redundant with the information the compiler already has
+available.</p>
+<!--Can you expand above on what you mean by "stored in bindings and called
+directly"? Do you mean stored in a variable? I'm struggling to visualize how
+closures are used, and what the important difference is between them and
+functions. I think a clearer definition of what they are, what they do, and
+what they're used for at the start of the closures section would help clear
+this up -->
+<!-- Yes, sorry, in Rust terminology "binding" is mostly synonymous to
+"variable", but when we started working on the book we decided to be consistent
+and more like what people are used to by referring to the concept as "variable"
+throughout, but we missed this spot. /Carol -->
+<p>Like variables, we can choose to add type annotations if we want to increase
+explicitness and clarity in exchange for being more verbose than is strictly
+necessary; annotating the types for the closure we defined in Listing 13-4
+would look like the definition shown here in Listing 13-7:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><code class="language-rust ignore">let add_one = |x| x + 1;
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# use std::thread;
+# use std::time::Duration;
+#
+let expensive_closure = |num: i32| -&gt; i32 {
+    println!(&quot;calculating slowly...&quot;);
+    thread::sleep(Duration::from_secs(2));
+    num
+};
 
-let five = add_one(4i8);
-assert_eq!(5i8, five);
-
-let three = add_one(2i32);
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-7: Adding optional type annotations of the
+parameter and return value types in the closure</span></p>
+<!-- Why might you want to, if you don't need to? In a particular situation? -->
+<!-- I've added an explanation /Carol -->
+<!-- Below -- Am I right in assuming the closures below are doing the same
+thing as the functions? -->
+<!-- Yes /Carol -->
+<p>The syntax of closures and functions looks more similar with type annotations.
+Here's a vertical comparison of the syntax for the definition of a function
+that adds one to its parameter, and a closure that has the same behavior. We've
+added some spaces here to line up the relevant parts). This illustrates how
+closure syntax is similar to function syntax except for the use of pipes rather
+than parentheses and the amount of syntax that is optional:</p>
+<!-- Prod: can you align this as shown in the text? -->
+<!-- I'm confused, does this note mean that production *won't* be aligning all
+of our other code examples as shown in the text? That's concerning to me, we're
+trying to illustrate idiomatic Rust style in all the code examples, so our
+alignment is always intentional... /Carol -->
+<pre><code class="language-rust ignore">fn  add_one_v1   (x: i32) -&gt; i32 { x + 1 }
+let add_one_v2 = |x: i32| -&gt; i32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
 </code></pre>
+<!-- Can you point out where we're looking at here, where the important
+differences lie? -->
+<!-- The importance isn't the difference but the similarity... I've tried to
+clarify /Carol -->
+<!-- Will add wingdings and ghosting in libreoffice /Carol -->
+<p>The first line shows a function definition, and the second line shows a fully
+annotated closure definition. The third line removes the type annotations from
+the closure definition, and the fourth line removes the braces that are
+optional since the closure body only has one line. These are all valid
+definitions that will produce the same behavior when they're called.</p>
+<!--Below--I'm not sure I'm following, is the i8 type being inferred? It seems
+like we're annotating it. -->
+<!-- The types in the function definitions are being inferred, but since Rust's
+variable types for numbers defaults to `i32`, in order to illustrate our point
+here we're forcing the type of the *variable* to be `i8` by annotating it in
+the *variable* declaration. I've changed the example to hopefully be less
+confusing and convey our point better. /Carol -->
+<p>Closure definitions will have one concrete type inferred for each of their
+parameters and for their return value. For instance, Listing 13-8 shows the
+definition of a short closure that just returns the value it gets as a
+parameter. This closure isn't very useful except for the purposes of this
+example. Note that we haven't added any type annotations to the definition: if
+we then try to call the closure twice, using a <code>String</code> as an argument the
+first time and an <code>i32</code> the second time, we'll get an error:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><code class="language-rust ignore">let example_closure = |x| x;
+
+let s = example_closure(String::from(&quot;hello&quot;));
+let n = example_closure(5);
+</code></pre>
+<p><span class="caption">Listing 13-8: Attempting to call a closure whose types
+are inferred with two different types</span></p>
 <p>The compiler gives us this error:</p>
 <pre><code class="language-text">error[E0308]: mismatched types
- --&gt;
+ --&gt; src/main.rs
   |
-7 | let three = add_one(2i32);
-  |                     ^^^^ expected i8, found i32
+  | let n = example_closure(5);
+  |                         ^ expected struct `std::string::String`, found
+  integral variable
+  |
+  = note: expected type `std::string::String`
+             found type `{integer}`
 </code></pre>
-<p>Since closures' types can be inferred reliably since they're called directly,
-it would be tedious if we were required to annotate their types.</p>
-<p>Another reason to have a different syntax from functions for closures is that
-they have different behavior than functions: closures possess an <em>environment</em>.</p>
-<a class="header" href="print.html#closures-can-reference-their-environment" id="closures-can-reference-their-environment"><h3>Closures Can Reference Their Environment</h3></a>
-<p>We've learned that functions can only use variables that are in scope, either
-by being <code>const</code> or being declared as parameters. Closures can do more: they're
-allowed to access variables from their enclosing scope. Listing 13-4 has an
-example of a closure in the variable <code>equal_to_x</code> that uses the variable <code>x</code>
-from the closure's surrounding environment:</p>
+<!-- Will add wingdings in libreoffice /Carol -->
+<p>The first time we call <code>example_closure</code> with the <code>String</code> value, the compiler
+infers the type of <code>x</code> and the return type of the closure to be <code>String</code>. Those
+types are then locked in to the closure in <code>example_closure</code>, and we get a type
+error if we try to use a different type with the same closure.</p>
+<a class="header" href="print.html#using-closures-with-generic-parameters-and-the-fn-traits" id="using-closures-with-generic-parameters-and-the-fn-traits"><h3>Using Closures with Generic Parameters and the <code>Fn</code> Traits</h3></a>
+<p>Returning to our workout generation app, in Listing 13-6 we left our code still
+calling the expensive calculation closure more times than it needs to. In each
+place throughout our code, if we need the results of the expensive closure more
+than once, we could save the result in a variable for reuse and use the
+variable instead of calling the closure again. This could be a lot of repeated
+code saving the results in a variety of places.</p>
+<p>However, because we have a closure for the expensive calculation, we have
+another solution available to us. We can create a struct that will hold the
+closure and the resulting value of calling the closure. The struct will only
+execute the closure if we need the resulting value, and it will cache the
+resulting value so that the rest of our code doesn't have to be responsible for
+saving and reusing the result. You may know this pattern as <em>memoization</em> or
+<em>lazy evaluation</em>.</p>
+<p>In order to make a struct that holds a closure, we need to be able to specify
+the type of the closure. Each closure instance has its own unique anonymous
+type: that is, even if two closures have the same signature, their types are
+still considered to be different. In order to define structs, enums, or
+function parameters that use closures, we use generics and trait bounds like we
+discussed in Chapter 10.</p>
+<!-- So Fn is a trait built into the language, is that right? I wasn't sure if
+it was just a placeholder here -->
+<!-- Fn is provided by the standard library; I've clarified here. /Carol -->
+<p>The <code>Fn</code> traits are provided by the standard library. All closures implement
+one of the traits <code>Fn</code>, <code>FnMut</code>, or <code>FnOnce</code>. We'll discuss the difference
+between these traits in the next section on capturing the environment; in this
+example, we can use the <code>Fn</code> trait.</p>
+<p>We add types to the <code>Fn</code> trait bound to represent the types of the parameters
+and return values that the closures must have in order to match this trait
+bound. In this case, our closure has a parameter of type <code>i32</code> and returns an
+<code>i32</code>, so the trait bound we specify is <code>Fn(i32) -&gt; i32</code>.</p>
+<p>Listing 13-9 shows the definition of the <code>Cacher</code> struct that holds a closure
+and an optional result value:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+struct Cacher&lt;T&gt;
+    where T: Fn(i32) -&gt; i32
+{
+    calculation: T,
+    value: Option&lt;i32&gt;,
+}
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-9: Defining a <code>Cacher</code> struct that holds a
+closure in <code>calculation</code> and an optional result in <code>value</code></span></p>
+<p>The <code>Cacher</code> struct has a <code>calculation</code> field of the generic type <code>T</code>. The
+trait bounds on <code>T</code> specify that <code>T</code> is a closure by using the <code>Fn</code> trait. Any
+closure we want to store in the <code>calculation</code> field of a <code>Cacher</code> instance must
+have one <code>i32</code> parameter (specified within the parentheses after <code>Fn</code>) and must
+return an <code>i32</code> (specified after the <code>-&gt;</code>).</p>
+<p>The <code>value</code> field is of type <code>Option&lt;i32&gt;</code>. Before we execute the closure,
+<code>value</code> will be <code>None</code>. If the code using a <code>Cacher</code> asks for the result of the
+closure, we'll execute the closure at that time and store the result within a
+<code>Some</code> variant in the <code>value</code> field. Then if the code asks for the result of
+the closure again, instead of executing the closure again, we'll return the
+result that we're holding in the <code>Some</code> variant.</p>
+<p>The logic around the <code>value</code> field that we've just described is defined in
+Listing 13-10:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# struct Cacher&lt;T&gt;
+#     where T: Fn(i32) -&gt; i32
+# {
+#     calculation: T,
+#     value: Option&lt;i32&gt;,
+# }
+#
+impl&lt;T&gt; Cacher&lt;T&gt;
+    where T: Fn(i32) -&gt; i32
+{
+    fn new(calculation: T) -&gt; Cacher&lt;T&gt; {
+        Cacher {
+            calculation,
+            value: None,
+        }
+    }
+
+    fn value(&amp;mut self, arg: i32) -&gt; i32 {
+        match self.value {
+            Some(v) =&gt; v,
+            None =&gt; {
+                let v = (self.calculation)(arg);
+                self.value = Some(v);
+                v
+            },
+        }
+    }
+}
+
+#}</code></pre></pre>
+<!-- Liz: the `new` function is using the "struct init shorthand" by just
+saying `calculation` instead of `calculation: calculation`, since the parameter
+matches the struct field name. This was recently added to stable Rust and we've
+added an introduction of it in Chapter 5. Just adding an explanation here for
+you in case you read this chapter before the changes we've made to Chapter 5!
+/Carol -->
+<p><span class="caption">Listing 13-10: Implementations on <code>Cacher</code> of an
+associated function named <code>new</code> and a method named <code>value</code> that manage the
+caching logic</span></p>
+<p>The fields on the <code>Cacher</code> struct are private since we want <code>Cacher</code> to manage
+their values rather than letting the calling code potentially change the values
+in these fields directly. The <code>Cacher::new</code> function takes a generic parameter
+<code>T</code>, which we've defined in the context of the <code>impl</code> block to have the same
+trait bound as the <code>Cacher</code> struct. <code>Cacher::new</code> returns a <code>Cacher</code> instance
+that holds the closure specified in the <code>calculation</code> field and a <code>None</code> value
+in the <code>value</code> field, since we haven't executed the closure yet.</p>
+<p>When the calling code wants the result of evaluating the closure, instead of
+calling the closure directly, it will call the <code>value</code> method. This method
+checks to see if we already have a resulting value in <code>self.value</code> in a <code>Some</code>;
+if we do, it returns the value within the <code>Some</code> without executing the closure
+again.</p>
+<p>If <code>self.value</code> is <code>None</code>, we call the closure stored in <code>self.calculation</code>,
+save the result in <code>self.value</code> for future use, and return the value as well.</p>
+<p>Listing 13-11 shows how we can use this <code>Cacher</code> struct in the
+<code>generate_workout</code> function from Listing 13-6:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# use std::thread;
+# use std::time::Duration;
+#
+# struct Cacher&lt;T&gt;
+#     where T: Fn(i32) -&gt; i32
+# {
+#     calculation: T,
+#     value: Option&lt;i32&gt;,
+# }
+#
+# impl&lt;T&gt; Cacher&lt;T&gt;
+#     where T: Fn(i32) -&gt; i32
+# {
+#     fn new(calculation: T) -&gt; Cacher&lt;T&gt; {
+#         Cacher {
+#             calculation,
+#             value: None,
+#         }
+#     }
+#
+#     fn value(&amp;mut self, arg: i32) -&gt; i32 {
+#         match self.value {
+#             Some(v) =&gt; v,
+#             None =&gt; {
+#                 let v = (self.calculation)(arg);
+#                 self.value = Some(v);
+#                 v
+#             },
+#         }
+#     }
+# }
+#
+fn generate_workout(intensity: i32, random_number: i32) {
+    let mut expensive_result = Cacher::new(|num| {
+        println!(&quot;calculating slowly...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        num
+    });
+
+    if intensity &lt; 25 {
+        println!(
+            &quot;Today, do {} pushups!&quot;,
+            expensive_result.value(intensity)
+        );
+        println!(
+            &quot;Next, do {} situps!&quot;,
+            expensive_result.value(intensity)
+        );
+    } else {
+        if random_number == 3 {
+            println!(&quot;Take a break today! Remember to stay hydrated!&quot;);
+        } else {
+            println!(
+                &quot;Today, run for {} minutes!&quot;,
+                expensive_result.value(intensity)
+            )
+        }
+    }
+}
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-11: Using <code>Cacher</code> in the <code>generate_workout</code>
+function to abstract away the caching logic</span></p>
+<!-- Will add ghosting and wingdings in libreoffice /Carol -->
+<p>Instead of saving the closure in a variable directly, we save a new instance of
+<code>Cacher</code> that holds the closure. Then, in each place we want the result, we
+call the <code>value</code> method on the <code>Cacher</code> instance. We can call the <code>value</code>
+method as many times as we want, or not call it at all, and the expensive
+calculation will be run a maximum of once. Try running this program with the
+<code>main</code> function from Listing 13-2, and change the values in the
+<code>simulated_user_specified_value</code> and <code>simulated_random_number</code> variables to
+verify that in all of the cases in the various <code>if</code> and <code>else</code> blocks,
+<code>calculating slowly...</code> printed by the closure only shows up once and only when
+needed.</p>
+<p>The <code>Cacher</code> takes care of the logic necessary to ensure we aren't calling the
+expensive calculation more than we need to be so that <code>generate_workout</code> can
+focus on the business logic. Caching values is a more generally useful behavior
+that we might want to use in other parts of our code with other closures as
+well. However, there are a few problems with the current implementation of
+<code>Cacher</code> that would make reusing it in different contexts difficult.</p>
+<p>The first problem is a <code>Cacher</code> instance assumes it will always get the same
+value for the parameter <code>arg</code> to the <code>value</code> method. That is, this test of
+<code>Cacher</code> will fail:</p>
+<pre><code class="language-rust ignore">#[test]
+fn call_with_different_values() {
+    let mut c = Cacher::new(|a| a);
+
+    let v1 = c.value(1);
+    let v2 = c.value(2);
+
+    assert_eq!(v2, 2);
+}
+</code></pre>
+<p>This test creates a new <code>Cacher</code> instance with a closure that returns the value
+passed into it. We call the <code>value</code> method on this <code>Cacher</code> instance with
+an <code>arg</code> value of 1 and then an <code>arg</code> value of 2, and we expect that the call
+to <code>value</code> with the <code>arg</code> value of 2 returns 2.</p>
+<p>Run this with the <code>Cacher</code> implementation from Listing 13-9 and Listing 13-10
+and the test will fail on the <code>assert_eq!</code> with this message:</p>
+<pre><code class="language-text">thread 'call_with_different_arg_values' panicked at 'assertion failed:
+`(left == right)` (left: `1`, right: `2`)', src/main.rs
+</code></pre>
+<p>The problem is that the first time we called <code>c.value</code> with 1, the <code>Cacher</code>
+instance saved <code>Some(1)</code> in <code>self.value</code>. After that, no matter what we pass
+in to the <code>value</code> method, it will always return 1.</p>
+<p>Try modifying <code>Cacher</code> to hold a hash map rather than a single value. The keys
+of the hash map will be the <code>arg</code> values that are passed in, and the values of
+the hash map will be the result of calling the closure on that key. Instead of
+looking at whether <code>self.value</code> directly has a <code>Some</code> or a <code>None</code> value, the
+<code>value</code> function will look up the <code>arg</code> in the hash map and return the value if
+it's present. If it's not present, the <code>Cacher</code> will call the closure and save
+the resulting value in the hash map associated with its <code>arg</code> value.</p>
+<p>Another problem with the current <code>Cacher</code> implementation that restricts its use
+is that it only accepts closures that take one parameter of type <code>i32</code> and
+return an <code>i32</code>. We might want to be able to cache the results of closures that
+take a string slice as an argument and return <code>usize</code> values, for example. Try
+introducing more generic parameters to increase the flexibility of the <code>Cacher</code>
+functionality.</p>
+<a class="header" href="print.html#closures-can-capture-their-environment" id="closures-can-capture-their-environment"><h3>Closures Can Capture Their Environment</h3></a>
+<p>In the workout generator example, we only used closures as inline anonymous
+functions. Closures have an additional ability we can use that functions don't
+have, however: they can capture their environment and access variables from the
+scope in which they're defined.</p>
+<!-- To clarify, by enclosing scope, do you mean the scope that the closure is
+inside? Can you expand on that?-->
+<!-- Yes, I've tried here to clarify that it's the scope in which the closure
+is defined /Carol -->
+<p>Listing 13-12 has an example of a closure stored in the variable <code>equal_to_x</code>
+that uses the variable <code>x</code> from the closure's surrounding environment:</p>
+<!-- To clarify how we talk about a closure, does the closure include the
+variable name, or are we referring to the closure as the functionality that is
+on the right side of the = and so not including to variable name? I thought it
+was the former, but it seems like the latter above. If it's the former, would
+"an example of a closure with the variable `equal_to_x`" make more sense? -->
+<!-- No, the closure does not include the variable name in which it's stored;
+storing a closure in a variable is optional. It should always be the latter,
+and I hope the reworking of the example used throughout the closure section
+and making the wording consistent has cleared this confusion up by this point.
+/Carol -->
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust">fn main() {
     let x = 4;
@@ -12003,12 +12590,20 @@ from the closure's surrounding environment:</p>
     assert!(equal_to_x(y));
 }
 </code></pre></pre>
-<p><span class="caption">Listing 13-4: Example of a closure that refers to a
+<p><span class="caption">Listing 13-12: Example of a closure that refers to a
 variable in its enclosing scope</span></p>
 <p>Here, even though <code>x</code> is not one of the parameters of <code>equal_to_x</code>, the
-<code>equal_to_x</code> closure is allowed to use <code>x</code>, since <code>x</code> is a variable defined in
-the scope that <code>equal_to_x</code> is defined. We aren't allowed to do the same thing
-that Listing 13-4 does with functions; let's see what happens if we try:</p>
+<code>equal_to_x</code> closure is allowed to use the <code>x</code> variable that's defined in the
+same scope that <code>equal_to_x</code> is defined in.</p>
+<!-- So *why* is this allowed with closures and not functions, what about
+closures makes this safe? -->
+<!-- It's not really about safety; capturing the environment is the defining
+functionality a closure has. The reason functions *don't* capture their
+environment is mostly around storage overhead; I've added an explanation of
+that aspect. Can you elaborate on what led to the conclusion that allowing
+captures with functions wouldn't be safe and what you mean by "safe" here?
+/Carol -->
+<p>We can't do the same with functions; let's see what happens if we try:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><code class="language-rust ignore">fn main() {
     let x = 4;
@@ -12029,140 +12624,388 @@ closure form instead
   |                                          ^
 </code></pre>
 <p>The compiler even reminds us that this only works with closures!</p>
-<p>Creating closures that capture values from their environment is mostly used in
-the context of starting new threads. We'll show some more examples and explain
-more detail about this feature of closures in Chapter 16 when we talk about
-concurrency.</p>
-<a class="header" href="print.html#closures-as-function-parameters-using-the-fn-traits" id="closures-as-function-parameters-using-the-fn-traits"><h3>Closures as Function Parameters Using the <code>Fn</code> Traits</h3></a>
-<p>While we can bind closures to variables, that's not the most useful thing we
-can do with them. We can also define functions that have closures as parameters
-by using the <code>Fn</code> traits. Here's an example of a function named <code>call_with_one</code>
-whose signature has a closure as a parameter:</p>
-<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-#fn main() {
-fn call_with_one&lt;F&gt;(some_closure: F) -&gt; i32
-    where F: Fn(i32) -&gt; i32 {
+<p>When a closure captures a value from its environment, the closure uses memory
+to store the values for use in the closure body. This use of memory is overhead
+that we don't want pay for in the more common case where we want to execute
+code that doesn't capture its environment. Because functions are never allowed
+to capture their environment, defining and using functions will never incur
+this overhead.</p>
+<!-- Why didn't this work, is there a reason ingrained in the language? Or is
+that not really relevant? -->
+<!-- I've added an explanation /Carol -->
+<p>Closures can capture values from their environment in three ways, which
+directly map to the three ways a function can take a parameter: taking
+ownership, borrowing immutably, and borrowing mutably. These ways of capturing
+values are encoded in the three <code>Fn</code> traits as follows:</p>
+<ul>
+<li><code>FnOnce</code> takes ownership of the variables it captures from the environment
+and moves those variables into the closure when the closure is defined.
+Therefore, a <code>FnOnce</code> closure cannot be called more than once in the same
+context.</li>
+<li><code>Fn</code> borrows values from the environment immutably.</li>
+<li><code>FnMut</code> can change the environment since it mutably borrows values.</li>
+</ul>
+<p>When we create a closure, Rust infers how we want to reference the environment
+based on how the closure uses the values from the environment. In Listing
+13-12, the <code>equal_to_x</code> closure borrows <code>x</code> immutably (so <code>equal_to_x</code> has the
+<code>Fn</code> trait) since the body of the closure only needs to read the value in <code>x</code>.</p>
+<p>If we want to force the closure to take ownership of the values it uses in the
+environment, we can use the <code>move</code> keyword before the parameter list. This is
+mostly useful when passing a closure to a new thread in order to move the data
+to be owned by the new thread. We'll have more examples of <code>move</code> closures in
+Chapter 16 when we talk about concurrency, but for now here's the code from
+Listing 13-12 with the <code>move</code> keyword added to the closure definition and using
+vectors instead of integers, since integers can be copied rather than moved:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><code class="language-rust ignore">fn main() {
+    let x = vec![1, 2, 3];
 
-    some_closure(1)
+    let equal_to_x = move |z| z == x;
+
+    println!(&quot;can't use x here: {:?}&quot;, x);
+
+    let y = vec![1, 2, 3];
+
+    assert!(equal_to_x(y));
 }
-
-let answer = call_with_one(|x| x + 2);
-
-assert_eq!(3, answer);
-
-#}</code></pre></pre>
-<p>We pass the closure <code>|x| x + 2</code>, to <code>call_with_one</code>, and <code>call_with_one</code> calls
-that closure with <code>1</code> as an argument. The return value of the call to
-<code>some_closure</code> is then returned from <code>call_with_one</code>.</p>
-<p>The signature of <code>call_with_one</code> is using the <code>where</code> syntax discussed in the
-Traits section of Chapter 10. The <code>some_closure</code> parameter has the generic type
-<code>F</code>, which in the <code>where</code> clause is defined as having the trait bounds
-<code>Fn(i32) -&gt; i32</code>. The <code>Fn</code> trait represents a closure, and we can add types to
-the <code>Fn</code> trait to represent a specific type of closure. In this case, our
-closure has a parameter of type <code>i32</code> and returns an <code>i32</code>, so the generic bound
-we specify is <code>Fn(i32) -&gt; i32</code>.</p>
-<p>Specifying a function signature that contains a closure requires the use of
-generics and trait bounds. Each closure has a unique type, so we can't write
-the type of a closure directly, we have to use generics.</p>
-<p><code>Fn</code> isn't the only trait bound available for specifying closures, however.
-There are three: <code>Fn</code>, <code>FnMut</code>, and <code>FnOnce</code>. This continues the patterns of
-threes we've seen elsewhere in Rust: borrowing, borrowing mutably, and
-ownership. Using <code>Fn</code> specifies that the closure used may only borrow values in
-its environment. To specify a closure that mutates the environment, use
-<code>FnMut</code>, and if the closure takes ownership of the environment, <code>FnOnce</code>. Most
-of the time, you can start with <code>Fn</code>, and the compiler will tell you if you
-need <code>FnMut</code> or <code>FnOnce</code> based on what happens when the function calls the
-closure.</p>
-<p>To illustrate a situation where it's useful for a function to have a parameter
-that's a closure, let's move on to our next topic: iterators.</p>
-<a class="header" href="print.html#iterators" id="iterators"><h2>Iterators</h2></a>
-<p>Iterators are a pattern in Rust that allows you to do some processing on a
-sequence of items. For example, the code in Listing 13-5 adds one to each
-number in a vector:</p>
+</code></pre>
+<p>This example doesn't compile:</p>
+<pre><code class="language-text">error[E0382]: use of moved value: `x`
+ --&gt; src/main.rs:6:40
+  |
+4 |     let equal_to_x = move |z| z == x;
+  |                      -------- value moved (into closure) here
+5 |
+6 |     println!(&quot;can't use x here: {:?}&quot;, x);
+  |                                        ^ value used here after move
+  |
+  = note: move occurs because `x` has type `std::vec::Vec&lt;i32&gt;`, which does not
+    implement the `Copy` trait
+</code></pre>
+<p>The <code>x</code> value is moved into the closure when the closure is defined because of
+the <code>move</code> keyword. The closure then has ownership of <code>x</code>, and <code>main</code> isn't
+allowed to use <code>x</code> anymore. Removing the <code>println!</code> will fix this example.</p>
+<p>Most of the time when specifying one of the <code>Fn</code> trait bounds, you can start
+with <code>Fn</code> and the compiler will tell you if you need <code>FnMut</code> or <code>FnOnce</code> based
+on what happens in the closure body.</p>
+<p>To illustrate situations where closures that can capture their environment are
+useful as function parameters, let's move on to our next topic: iterators.</p>
+<a class="header" href="print.html#processing-a-series-of-items-with-iterators" id="processing-a-series-of-items-with-iterators"><h2>Processing a Series of Items with Iterators</h2></a>
+<!-- From reading on, it seems like an iterator is useless without the methods
+we use it with --- I think this is an important point to make early, I did find
+it difficult to know what an iterator actually was throughout, and how it
+depends on these other methods. Can you add something to this effect? -->
+<!-- Reiterating the need for a clear definition of an iterator here--it seems
+like an item that's used in iteration rather than something that performs the
+process of iteration itself, is that right? Like a counter passed from element
+to element? Can we define this at the begin of the iterator section? -->
+<!-- I've added an explanation along these lines, does this help? /Carol -->
+<p>The iterator pattern allows you to perform some task on a sequence of items in
+turn. An <em>iterator</em> is responsible for the logic around iterating over each item
+in the sequence and determining when the sequence has finished. When we use
+iterators, we don't have to reimplement that logic ourselves.</p>
+<p>In Rust, iterators are <em>lazy</em>, which means they have no effect until we call
+methods on them that consume the iterator to use it up. For example, the code
+in Listing 13-13 creates an iterator over the items in the vector <code>v1</code> by
+calling the <code>iter</code> method defined on <code>Vec</code>. This code by itself doesn't do
+anything useful:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 let v1 = vec![1, 2, 3];
 
-let v2: Vec&lt;i32&gt; = v1.iter().map(|x| x + 1).collect();
-
-assert_eq!(v2, [2, 3, 4]);
+let v1_iter = v1.iter();
 
 #}</code></pre></pre>
-<p><span class="caption">Listing 13-5: Using an iterator, <code>map</code>, and <code>collect</code> to
-add one to each number in a vector</span></p>
-<!-- Will add wingdings in libreoffice /Carol -->
-<p>The <code>iter</code> method on vectors allows us to produce an <em>iterator</em> from the
-vector. Next, the <code>map</code> method called on the iterator allows us to process each
-element: in this case, we've passed a closure to <code>map</code> that specifies for every
-element <code>x</code>, add one to it. <code>map</code> is one of the most basic ways of interacting
-with an iterator, as processing each element in turn is very useful! Finally,
-the <code>collect</code> method consumes the iterator and puts the iterator's elements
-into a new data structure. In this case, since we've said that <code>v2</code> has the
-type <code>Vec&lt;i32&gt;</code>, <code>collect</code> will create a new vector out of the <code>i32</code> values.</p>
-<p>Methods on iterators like <code>map</code> are sometimes called <em>iterator adaptors</em>
-because they take one iterator and produce a new iterator. That is, <code>map</code>
-builds on top of our previous iterator and produces another iterator by calling
-the closure it's passed to create the new sequence of values.</p>
-<p>So, to recap, this line of code does the following:</p>
-<ol>
-<li>Creates an iterator from the vector.</li>
-<li>Uses the <code>map</code> adaptor with a closure argument to add one to each element.</li>
-<li>Uses the <code>collect</code> adaptor to consume the iterator and make a new vector.</li>
-</ol>
-<p>That's how we end up with <code>[2, 3, 4]</code>. As you can see, closures are a very
-important part of using iterators: they provide a way of customizing the
-behavior of an iterator adaptor like <code>map</code>.</p>
-<a class="header" href="print.html#iterators-are-lazy" id="iterators-are-lazy"><h3>Iterators are Lazy</h3></a>
-<p>In the previous section, you may have noticed a subtle difference in wording:
-we said that <code>map</code> <em>adapts</em> an iterator, but <code>collect</code> <em>consumes</em> one. That was
-intentional. By themselves, iterators won't do anything; they're lazy. That is,
-if we write code like Listing 13-5 except we don't call <code>collect</code>:</p>
+<p><span class="caption">Listing 13-13: Creating an iterator; this by itself isn't
+useful</span></p>
+<p>After creating an iterator, we can choose to use it in a variety of ways. In
+Listing 3-6, we actually used iterators with <code>for</code> loops to execute some code
+on each item, though we glossed over what the call to <code>iter</code> did until now. The
+example in Listing 13-14 separates the creation of the iterator from the use of
+the iterator in the <code>for</code> loop. The iterator is stored in the <code>v1_iter</code>
+variable, and no iteration takes place at that time. Once the <code>for</code> loop is
+called using the iterator in <code>v1_iter</code>, then each element in the iterator is
+used in one iteration of the loop, which prints out each value:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
-let v1: Vec&lt;i32&gt; = vec![1, 2, 3];
+let v1 = vec![1, 2, 3];
 
-v1.iter().map(|x| x + 1); // without collect
+let v1_iter = v1.iter();
+
+for val in v1_iter {
+    println!(&quot;Got: {}&quot;, val);
+}
 
 #}</code></pre></pre>
-<p>It will compile, but it will give us a warning:</p>
-<pre><code class="language-text">warning: unused result which must be used: iterator adaptors are lazy and do
-nothing unless consumed, #[warn(unused_must_use)] on by default
- --&gt; src/main.rs:4:1
-  |
-4 | v1.iter().map(|x| x + 1); // without collect
-  | ^^^^^^^^^^^^^^^^^^^^^^^^^
-</code></pre>
-<p>We get this warning because iterator adaptors won't start actually doing the
-processing on their own. They need some other method that causes the iterator
-chain to evaluate. We call those <em>consuming adaptors</em>, and <code>collect</code> is one of
-them.</p>
-<p>So how do we tell which iterator methods consume the iterator or not? And what
-adaptors are available? For that, let's look at the <code>Iterator</code> trait.</p>
-<a class="header" href="print.html#the-iterator-trait" id="the-iterator-trait"><h3>The <code>Iterator</code> trait</h3></a>
-<p>Iterators all implement a trait named <code>Iterator</code> that is defined in the standard
-library. The definition of the trait looks like this:</p>
+<p><span class="caption">Listing 13-13: Making use of an iterator in a <code>for</code>
+loop</span></p>
+<p>In languages that don't have iterators provided by their standard libraries, we
+would likely write this same functionality by starting a variable at index 0,
+using that variable to index into the vector to get a value, and incrementing
+the variable value in a loop until its value gets up to the total number of
+items in the vector. Iterators take care of all of that logic for us, which
+cuts down on the repetitive code we would have to write and potentially mess up.
+In addition, the way iterators are implemented gives us more flexibility to
+use the same logic with many different kinds of sequences, not just data
+structures that we can index into like vectors. Let's see how iterators do that.</p>
+<a class="header" href="print.html#the-iterator-trait-and-the-next-method" id="the-iterator-trait-and-the-next-method"><h3>The <code>Iterator</code> trait and the <code>next</code> method</h3></a>
+<p>Iterators all implement a trait named <code>Iterator</code> that is defined in the
+standard library. The definition of the trait looks like this:</p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 trait Iterator {
     type Item;
 
     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+
+    // methods with default implementations elided
 }
 
 #}</code></pre></pre>
-<p>There's some new syntax that we haven't covered here yet: <code>type Item</code> and
-<code>Self::Item</code> are defining an <em>associated type</em> with this trait, and we'll talk
-about associated types in depth in Chapter 19. For now, all you need to know is
-that this code says the <code>Iterator</code> trait requires that you also define an
-<code>Item</code> type, and this <code>Item</code> type is used in the return type of the <code>next</code>
-method. In other words, the <code>Item</code> type will be the type of element that's
-returned from the iterator.</p>
-<p>Let's make an iterator named <code>Counter</code> that will count from <code>1</code> to <code>5</code>, using
-the <code>Iterator</code> trait. First, we need to create a struct that holds the current
-state of the iterator, which is one field named <code>count</code> that will hold a <code>u32</code>.
-We'll also define a <code>new</code> method, which isn't strictly necessary. We want our
-<code>Counter</code> to go from one to five, though, so we're always going to have it
-holding a zero to start:</p>
+<p>You'll notice some new syntax that we haven't covered yet: <code>type Item</code> and
+<code>Self::Item</code>, which are defining an <em>associated type</em> with this trait. We'll
+talk about associated types in depth in Chapter 19, but for now, all you need
+to know is that this code says implementing <code>Iterator</code> trait requires that you
+also define an <code>Item</code> type, and this <code>Item</code> type is used in the return type of
+the <code>next</code> method. In other words, the <code>Item</code> type will be the type of element
+that's returned from the iterator.</p>
+<p>The <code>next</code> method is the only method that the <code>Iterator</code> trait requires
+implementers of the trait to define. <code>next</code> returns one item of the iterator
+at a time wrapped in <code>Some</code>, and when iteration is over, it returns <code>None</code>.
+We can call the <code>next</code> method on iterators directly if we'd like; Listing 13-14
+has a test that demonstrates the values we'd get on repeated calls to <code>next</code>
+on the iterator created from the vector:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust test_harness"># #![allow(unused_variables)]
+#fn main() {
+#[test]
+fn iterator_demonstration() {
+    let v1 = vec![1, 2, 3];
+
+    let mut v1_iter = v1.iter();
+
+    assert_eq!(v1_iter.next(), Some(&amp;1));
+    assert_eq!(v1_iter.next(), Some(&amp;2));
+    assert_eq!(v1_iter.next(), Some(&amp;3));
+    assert_eq!(v1_iter.next(), None);
+}
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-14: Calling the <code>next</code> method on an
+iterator</span></p>
+<p>Note that we needed to make <code>v1_iter</code> mutable: calling the <code>next</code> method on an
+iterator changes the iterator's state that keeps track of where it is in the
+sequence. Put another way, this code <em>consumes</em>, or uses up, the iterator. Each
+call to <code>next</code> eats up an item from the iterator.</p>
+<p>Also note that the values we get from the calls to <code>next</code> are immutable
+references to the values in the vector. The <code>iter</code> method produces an iterator
+over immutable references. If we wanted to create an iterator that takes
+ownership of <code>v1</code> and returns owned values, we can call <code>into_iter</code> instead of
+<code>iter</code>. Similarly, if we want to iterate over mutable references, we can call
+<code>iter_mut</code> instead of <code>iter</code>.</p>
+<a class="header" href="print.html#methods-in-the-iterator-trait-that-consume-the-iterator" id="methods-in-the-iterator-trait-that-consume-the-iterator"><h3>Methods in the <code>Iterator</code> Trait that Consume the Iterator</h3></a>
+<!-- Can you explain what it is you mean by "consumes" an iterator here? It
+doesn't look like we do in this section, I think that's important to lay that
+out clearly -->
+<!-- This next paragraph doesn't give much away to me I'm afraid, not being
+clear what we mean by *consume* at this point. Is a consuming adaptor like a
+catalyst? -->
+<!-- I hope this section addresses these comments you had /Carol -->
+<p>The <code>Iterator</code> trait has a number of different methods with default
+implementations provided for us by the standard library; you can find out all
+about these methods by looking in the standard library API documentation for
+the <code>Iterator</code> trait. Some of these methods call the <code>next</code> method in their
+definition, which is why we're required to implement the <code>next</code> method when
+implementing the <code>Iterator</code> trait.</p>
+<!-- Is there somewhere they can learn about all the methods and what they do,
+how to use them? This seems like a good sample example, and if we can broaden
+it out that would be really helpful -->
+<!-- I've moved this comment here since you made this comment on the last
+version of this chapter right after a spot where we mentioned looking at the
+standard library API documentation for the iterator trait, like we're now doing
+in the above paragraph. That's where the reader should go to learn about
+all the methods and what they do and how to use them. Can you elaborate on why
+that wasn't clear in the previous version of the chapter? Is there a reason why
+the standard library API documentation didn't sound like that place to go?
+/Carol -->
+<p>The methods that call the <code>next</code> method are called <em>consuming adaptors</em>, since
+calling them uses up the iterator. An example of a consuming adaptor is the
+<code>sum</code> method. This method takes ownership of the iterator and iterates through
+the items by repeatedly calling <code>next</code>, thus consuming the iterator. As it
+iterates through each item, it adds each item to a running total and returns
+the total when iteration has completed. Listing 13-15 has a test illustrating a
+use of the <code>sum</code> method:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+#[test]
+fn iterator_sum() {
+    let v1 = vec![1, 2, 3];
+
+    let v1_iter = v1.iter();
+
+    let total: i32 = v1_iter.sum();
+
+    assert_eq!(total, 6);
+}
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-15: Calling the <code>sum</code> method to get the total
+of all items in the iterator</span></p>
+<p>We aren't allowed to use <code>v1_iter</code> after the call to <code>sum</code> since <code>sum</code> takes
+ownership of the iterator we call it on.</p>
+<a class="header" href="print.html#methods-in-the-iterator-trait-that-produce-other-iterators" id="methods-in-the-iterator-trait-that-produce-other-iterators"><h3>Methods in the <code>Iterator</code> Trait that Produce Other Iterators</h3></a>
+<p>Another kind of method defined on the <code>Iterator</code> trait are methods that produce
+other iterators. These methods are called <em>iterator adaptors</em> and allow us to
+change iterators into different kind of iterators. We can chain multiple calls
+to iterator adaptors. Because all iterators are lazy, however, we have to
+call one of the consuming adaptor methods in order to get results from calls
+to iterator adaptors. Listing 13-16 shows an example of calling the iterator
+adaptor method <code>map</code>, which takes a closure that <code>map</code> will call on each
+item in order to produce a new iterator in which each item from the vector has
+been incremented by 1. This code produces a warning, though:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+let v1: Vec&lt;i32&gt; = vec![1, 2, 3];
+
+v1.iter().map(|x| x + 1);
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-16: Calling the iterator adapter <code>map</code> to
+create a new iterator</span></p>
+<p>The warning we get is:</p>
+<pre><code class="language-text">warning: unused result which must be used: iterator adaptors are lazy and do
+nothing unless consumed
+ --&gt; src/main.rs:4:1
+  |
+4 | v1.iter().map(|x| x + 1);
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: #[warn(unused_must_use)] on by default
+</code></pre>
+<p>The code in Listing 13-16 isn't actually doing anything; the closure we've
+specified never gets called. The warning reminds us why: iterator adaptors are
+lazy, and we probably meant to consume the iterator here.</p>
+<p>In order to fix this warning and consume the iterator to get a useful result,
+we're going to use the <code>collect</code> method, which we saw briefly in Chapter 12.
+This method consumes the iterator and collects the resulting values into a
+data structure. In Listing 13-17, we're going to collect the results of
+iterating over the iterator returned from the call to <code>map</code> into a vector that
+will contain each item from the original vector incremented by 1:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+let v1: Vec&lt;i32&gt; = vec![1, 2, 3];
+
+let v2: Vec&lt;_&gt; = v1.iter().map(|x| x + 1).collect();
+
+assert_eq!(v2, vec![2, 3, 4]);
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-17: Calling the <code>map</code> method to create a new
+iterator, then calling the <code>collect</code> method to consume the new iterator and
+create a vector</span></p>
+<p>Because <code>map</code> takes a closure, we can specify any operation that we want to
+perform on each item that we iterate over. This is a great example of how using
+closures lets us customize some behavior while reusing the iteration behavior
+that the <code>Iterator</code> trait provides.</p>
+<!-- I'm not clear from this last sentence which part is iterating through each
+element, iter or map? What is map actually doing?-->
+<!--Ah, I'm afraid I completely failed to follow this. What is the second
+iterator for? I'm still not clear on what map does, can you expand on this? It
+seems crucial to using iterators. Map applies the iterator to each element,
+which applies the closure?
+<p>Also, to generalize this discussion a bit, would you ever use iter without map?
+--&gt;</p>
+<!-- I hope this new breakdown/rearranging has cleared up these comments you
+had on the last version of this chapter about the difference between
+iter and map. I hope the added examples where we've used iter without map have
+cleared up the last question. /Carol -->
+<a class="header" href="print.html#using-closures-that-capture-their-environment-with-iterators" id="using-closures-that-capture-their-environment-with-iterators"><h3>Using Closures that Capture their Environment with Iterators</h3></a>
+<p>Now that we've introduced iterators, we can demonstrate a common use of
+closures that capture their environment by using the <code>filter</code> iterator adapter.
+The <code>filter</code> method on an iterator takes a closure that takes each item from
+the iterator and returns a boolean. If the closure returns <code>true</code>, the value
+will be included in the iterator produced by <code>filter</code>. If the closure returns
+<code>false</code>, the value won't be included in the resulting iterator. Listing 13-18
+demonstrates using <code>filter</code> with a closure that captures the <code>shoe_size</code>
+variable from its environment in order to iterate over a collection of <code>Shoe</code>
+struct instances in order to return only shoes that are the specified size:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust test_harness"># #![allow(unused_variables)]
+#fn main() {
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: i32,
+    style: String,
+}
+
+fn shoes_in_my_size(shoes: Vec&lt;Shoe&gt;, shoe_size: i32) -&gt; Vec&lt;Shoe&gt; {
+    shoes.into_iter()
+        .filter(|s| s.size == shoe_size)
+        .collect()
+}
+
+#[test]
+fn filters_by_size() {
+    let shoes = vec![
+        Shoe { size: 10, style: String::from(&quot;sneaker&quot;) },
+        Shoe { size: 13, style: String::from(&quot;sandal&quot;) },
+        Shoe { size: 10, style: String::from(&quot;boot&quot;) },
+    ];
+
+    let in_my_size = shoes_in_my_size(shoes, 10);
+
+    assert_eq!(
+        in_my_size,
+        vec![
+            Shoe { size: 10, style: String::from(&quot;sneaker&quot;) },
+            Shoe { size: 10, style: String::from(&quot;boot&quot;) },
+        ]
+    );
+}
+
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-18: Using the <code>filter</code> method with a closure
+that captures <code>shoe_size</code></span></p>
+<!-- Will add wingdings in libreoffice /Carol -->
+<p>The <code>shoes_in_my_size</code> function takes ownership of a vector of shoes and a shoe
+size as parameters. It returns a vector containing only shoes of the specified
+size. In the body of <code>shoes_in_my_size</code>, we call <code>into_iter</code> to create an
+iterator that takes ownership of the vector. Then we call <code>filter</code> to adapt
+that iterator into a new iterator that only contains elements for which the
+closure returns <code>true</code>. The closure we've specified captures the <code>shoe_size</code>
+parameter from the environment and uses the value to compare with each shoe's
+size to only keep shoes that are of the size specified. Finally, calling
+<code>collect</code> gathers the values returned by the adapted iterator into a vector
+that the function returns.</p>
+<p>The test shows that when we call <code>shoes_in_my_size</code>, we only get back shoes
+that have the same size as the value we specified.</p>
+<a class="header" href="print.html#implementing-the-iterator-trait-to-create-our-own-iterators" id="implementing-the-iterator-trait-to-create-our-own-iterators"><h3>Implementing the <code>Iterator</code> Trait to Create Our Own Iterators</h3></a>
+<!-- So it seems like we are creating a program with an iterator inside, is
+that right? I assumed the whole thing we were making was an iterator at first,
+which lead to a few confusions, can you lay it out up front? -->
+<!-- I'm not sure what you mean here, can you elaborate on what the distinction
+is to you between "a program with an iterator inside" and "whole thing we were
+making was an iterator"? I don't understand what you mean by these terms so I'm
+not sure how to clear this up. /Carol -->
+<p>We've shown that we can create an iterator by calling <code>iter</code>, <code>into_iter</code>, or
+<code>iter_mut</code> on a vector. We can also create iterators from the other collection
+types in the standard library, such as hash map. Additionally, we can implement
+the <code>Iterator</code> trait in order to create iterators that do anything we want.
+As previously mentioned, the only method we're required to provide a definition
+for is the <code>next</code> method. Once we've done that, we can use all the other
+methods that have default implementations provided by the <code>Iterator</code> trait on
+our iterator!</p>
+<!-- NEXT PARAGRAPH WRAPPED WEIRD INTENTIONALLY SEE #199 -->
+<p>The iterator we're going to create is one that will only ever count from 1
+to 5. First, we'll create a struct to hold on to some values, and then we'll
+make this struct into an iterator by implementing the <code>Iterator</code> trait and use
+the values in that implementation.</p>
+<p>Listing 13-19 has the definition of the <code>Counter</code> struct and an associated
+<code>new</code> function to create instances of <code>Counter</code>:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 struct Counter {
@@ -12176,12 +13019,28 @@ impl Counter {
 }
 
 #}</code></pre></pre>
+<p><span class="caption">Listing 13-19: Defining the <code>Counter</code> struct and a <code>new</code>
+function that creates instances of <code>Counter</code> with an initial value of 0 for
+<code>count</code></span></p>
+<!-- Could you add a filename here? I think that will help the reader keep
+track of what they're working on. Can you also just sum up in a line what this
+code has accomplished so far? I moved this down from above the code, if this
+will do? -->
+<!-- Done /Carol -->
+<p>The <code>Counter</code> struct has one field named <code>count</code>. This field holds a <code>u32</code>
+value that will keep track of where we are in the process of iterating from 1
+to 5. The <code>count</code> field is private since we want the implementation of
+<code>Counter</code> to manage its value. The <code>new</code> function enforces the behavior we want
+of always starting new instances with a value of 0 in the <code>count</code> field.</p>
+<!-- Why define the new method, if it isn't necessary? Or is that what this
+next line is telling us? -->
+<!-- So does this code just initialize it with 0? Is that jat { count: 0 }
+does?-->
+<!-- I've rearranged to make this clearer /Carol -->
 <p>Next, we're going to implement the <code>Iterator</code> trait for our <code>Counter</code> type by
-defining the body of the <code>next</code> method. The way we want our iterator to work
-is to add one to the state (which is why we initialized <code>count</code> to 0, since we
-want our iterator to return one first). If <code>count</code> is still less than six, we'll
-return the current value, but if <code>count</code> is six or higher, our iterator will
-return <code>None</code>, as shown in Listing 13-6:</p>
+defining the body of the <code>next</code> method to specify what we want to happen when
+this iterator is used, as shown in Listing 13-20:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 # struct Counter {
@@ -12189,14 +13048,11 @@ return <code>None</code>, as shown in Listing 13-6:</p>
 # }
 #
 impl Iterator for Counter {
-    // Our iterator will produce u32s
     type Item = u32;
 
     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
-        // increment our count. This is why we started at zero.
         self.count += 1;
 
-        // check to see if we've finished counting or not.
         if self.count &lt; 6 {
             Some(self.count)
         } else {
@@ -12206,73 +13062,89 @@ impl Iterator for Counter {
 }
 
 #}</code></pre></pre>
-<p><span class="caption">Listing 13-6: Implementing the <code>Iterator</code> trait on our
+<p><span class="caption">Listing 13-20: Implementing the <code>Iterator</code> trait on our
 <code>Counter</code> struct</span></p>
 <!-- I will add wingdings in libreoffice /Carol -->
-<p>The <code>type Item = u32</code> line is saying that the associated <code>Item</code> type will be
-a <code>u32</code> for our iterator. Again, don't worry about associated types yet, because
-we'll be covering them in Chapter 19.</p>
-<p>The <code>next</code> method is the main interface into an iterator, and it returns an
-<code>Option</code>. If the option is <code>Some(value)</code>, we have gotten another value from the
-iterator. If it's <code>None</code>, iteration is finished. Inside of the <code>next</code> method,
-we do whatever kind of calculation our iterator needs to do. In this case, we
-add one, then check to see if we're still below six. If we are, we can return
-<code>Some(self.count)</code> to produce the next value. If we're at six or more,
-iteration is over, so we return <code>None</code>.</p>
-<p>The iterator trait specifies that when an iterator returns <code>None</code>, that
-indicates iteration is finished. The trait does not mandate anything about the
-behavior an iterator must have if the <code>next</code> method is called again after
-having returned one <code>None</code> value. In this case, every time we call <code>next</code> after
-getting the first <code>None</code> value will still return <code>None</code>, but the internal
-<code>count</code> field will continue to be incremented by one each time. If we call
-<code>next</code> as many times as the maximum value a <code>u32</code> value can hold, <code>count</code> will
-overflow (which will <code>panic!</code> in debug mode and wrap in release mode). Other
-iterator implementations choose to start iterating again. If you need to be
-sure to have an iterator that will always return <code>None</code> on subsequent calls to
-the <code>next</code> method after the first <code>None</code> value is returned, you can use the
-<code>fuse</code> method to create an iterator with that characteristic out of any other
-iterator.</p>
-<p>Once we've implemented the <code>Iterator</code> trait, we have an iterator! We can use
-the iterator functionality that our <code>Counter</code> struct now has by calling the
-<code>next</code> method on it repeatedly:</p>
-<pre><code class="language-rust ignore">let mut counter = Counter::new();
+<p>We set the associated <code>Item</code> type for our iterator to <code>u32</code>, meaning the
+iterator will return <code>u32</code> values. Again, don't worry about associated types
+yet, we'll be covering them in Chapter 19. We want our iterator to add one to
+the current state, which is why we initialized <code>count</code> to 0: we want our
+iterator to return one first. If the value of <code>count</code> is less than six, <code>next</code>
+will return the current value wrapped in <code>Some</code>, but if <code>count</code> is six or
+higher, our iterator will return <code>None</code>.</p>
+<a class="header" href="print.html#using-our-counter-iterators-next-method" id="using-our-counter-iterators-next-method"><h4>Using Our <code>Counter</code> Iterator's <code>next</code> Method</h4></a>
+<p>Once we've implemented the <code>Iterator</code> trait, we have an iterator! Listing 13-21
+shows a test demonstrating that we can use the iterator functionality our
+<code>Counter</code> struct now has by calling the <code>next</code> method on it directly, just like
+we did with the iterator created from a vector in Listing 13-14:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+# struct Counter {
+#     count: u32,
+# }
+#
+# impl Iterator for Counter {
+#     type Item = u32;
+#
+#     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+#         self.count += 1;
+#
+#         if self.count &lt; 6 {
+#             Some(self.count)
+#         } else {
+#             None
+#         }
+#     }
+# }
+#
+#[test]
+fn calling_next_directly() {
+    let mut counter = Counter::new();
 
-let x = counter.next();
-println!(&quot;{:?}&quot;, x);
+    assert_eq!(counter.next(), Some(1));
+    assert_eq!(counter.next(), Some(2));
+    assert_eq!(counter.next(), Some(3));
+    assert_eq!(counter.next(), Some(4));
+    assert_eq!(counter.next(), Some(5));
+    assert_eq!(counter.next(), None);
+}
 
-let x = counter.next();
-println!(&quot;{:?}&quot;, x);
-
-let x = counter.next();
-println!(&quot;{:?}&quot;, x);
-
-let x = counter.next();
-println!(&quot;{:?}&quot;, x);
-
-let x = counter.next();
-println!(&quot;{:?}&quot;, x);
-
-let x = counter.next();
-println!(&quot;{:?}&quot;, x);
-</code></pre>
-<p>This will print <code>Some(1)</code> through <code>Some(5)</code> and then <code>None</code>, each on their own
-line.</p>
-<a class="header" href="print.html#all-sorts-of-iterator-adaptors" id="all-sorts-of-iterator-adaptors"><h3>All Sorts of <code>Iterator</code> Adaptors</h3></a>
-<p>In Listing 13-5, we had iterators and we called methods like <code>map</code> and
-<code>collect</code> on them. In Listing 13-6, however, we only implemented the <code>next</code>
-method on our <code>Counter</code>. How do we get methods like <code>map</code> and <code>collect</code> on our
-<code>Counter</code>?</p>
-<p>Well, when we told you about the definition of <code>Iterator</code>, we committed a small
-lie of omission. The <code>Iterator</code> trait has a number of other useful methods
-defined on it that come with default implementations that call the <code>next</code>
-method. Since <code>next</code> is the only method of the <code>Iterator</code> trait that does not
-have a default implementation, once you've done that, you get all of the other
-<code>Iterator</code> adaptors for free. There are a lot of them!</p>
-<p>For example, if for some reason we wanted to take the values that an instance of
-<code>Counter</code> produces, pair those values with values produced by another <code>Counter</code>
-instance after skipping the first value that instance produces, multiply each
-pair together, keep only those results that are divisible by three, and add all
-the resulting values together, we could do so:</p>
+#}</code></pre></pre>
+<p><span class="caption">Listing 13-21: Testing the functionality of the <code>next</code>
+method implementation</span></p>
+<p>This test creates a new <code>Counter</code> instance in the <code>counter</code> variable and then
+calls <code>next</code> repeatedly, verifying that we have implemented the behavior we
+want this iterator to have of returning the values from 1 to 5.</p>
+<!-- So if I have this right, the first line creates a new Counter called
+counter, and the rest of them merely call counter with next, store it in x, and
+then print x? And we have to do that 5 times to get the 1-5 count? Phew, could
+you wrap that up if indeed it is correct!) and sum up here? -->
+<!-- I decided to change this into a test rather than printing out values, and
+I added some summary text about what the test is doing. Is this clearer? /Carol
+-->
+<a class="header" href="print.html#using-other-iterator-trait-methods-on-our-iterator" id="using-other-iterator-trait-methods-on-our-iterator"><h4>Using Other <code>Iterator</code> Trait Methods on Our Iterator</h4></a>
+<p>Because we implemented the <code>Iterator</code> trait by defining the <code>next</code> method, we
+can now use any <code>Iterator</code> trait method's default implementations that the
+standard library has defined, since they all use the <code>next</code> method's
+functionality.</p>
+<!-- So we can't just use these methods anyway? It seems like we did earlier,
+but here we have to use next first, before we cam access these methods? -->
+<!-- No, we don't have to *use* `next` before we can use the other methods, we
+have to *define* `next` before we can use the other methods. I hope the various
+rewordings and reworkings have made this clearer by this point. /Carol -->
+<!-- below: once you've done what, defined a default implementation? Only then
+can you use other adapters, is that what we're saying? And I'm still not clear
+on what an adapter does/means, as opposed to a method, or consumer, at this
+point. -->
+<!-- I hope this comment has been cleared up too /Carol -->
+<p>For example, if for some reason we wanted to take the values that an instance
+of <code>Counter</code> produces, pair those values with values produced by another
+<code>Counter</code> instance after skipping the first value that instance produces,
+multiply each pair together, keep only those results that are divisible by
+three, and add all the resulting values together, we could do so as shown in
+the test in Listing 13-22:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 # struct Counter {
@@ -12301,29 +13173,35 @@ the resulting values together, we could do so:</p>
 #         }
 #     }
 # }
-let sum: u32 = Counter::new().zip(Counter::new().skip(1))
-                             .map(|(a, b)| a * b)
-                             .filter(|x| x % 3 == 0)
-                             .sum();
-assert_eq!(18, sum);
+#
+#[test]
+fn using_other_iterator_trait_methods() {
+    let sum: u32 = Counter::new().zip(Counter::new().skip(1))
+                                 .map(|(a, b)| a * b)
+                                 .filter(|x| x % 3 == 0)
+                                 .sum();
+    assert_eq!(18, sum);
+}
 
 #}</code></pre></pre>
+<p><span class="caption">Listing 13-22: Using a variety of <code>Iterator</code> trait
+methods on our <code>Counter</code> iterator</span></p>
 <p>Note that <code>zip</code> produces only four pairs; the theoretical fifth pair <code>(5, None)</code> is never produced because <code>zip</code> returns <code>None</code> when either of its input
 iterators return <code>None</code>.</p>
 <p>All of these method calls are possible because we implemented the <code>Iterator</code>
-trait by specifying how the <code>next</code> method works. Use the standard library
-documentation to find more useful methods that will come in handy when you're
-working with iterators.</p>
+trait by specifying how the <code>next</code> method works and the standard library
+provides default implementations for other methods that call <code>next</code>.</p>
 <a class="header" href="print.html#improving-our-io-project" id="improving-our-io-project"><h2>Improving our I/O Project</h2></a>
-<p>In our I/O project implementing <code>grep</code> in the last chapter, there are some
-places where the code could be made clearer and more concise using iterators.
-Let's take a look at how iterators can improve our implementation of the
-<code>Config::new</code> function and the <code>search</code> function.</p>
-<a class="header" href="print.html#removing-a-clone-by-using-an-iterator" id="removing-a-clone-by-using-an-iterator"><h3>Removing a <code>clone</code> by Using an Iterator</h3></a>
-<p>Back in listing 12-8, we had this code that took a slice of <code>String</code> values and
-created an instance of the <code>Config</code> struct by checking for the right number of
+<p>We can improve our implementation of the I/O project in Chapter 12 by using
+iterators to make places in the code clearer and more concise. Let's take a
+look at how iterators can improve our implementation of both the <code>Config::new</code>
+function and the <code>search</code> function.</p>
+<a class="header" href="print.html#removing-a-clone-using-an-iterator" id="removing-a-clone-using-an-iterator"><h3>Removing a <code>clone</code> Using an Iterator</h3></a>
+<p>In Listing 12-13, we had code that took a slice of <code>String</code> values and created
+an instance of the <code>Config</code> struct by checking for the right number of
 arguments, indexing into the slice, and cloning the values so that the <code>Config</code>
-struct could own those values:</p>
+struct could own those values. We've reproduced the code here in Listing 13-23:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
 <pre><code class="language-rust ignore">impl Config {
     fn new(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
         if args.len() &lt; 3 {
@@ -12339,40 +13217,101 @@ struct could own those values:</p>
     }
 }
 </code></pre>
-<p>At the time, we said not to worry about the <code>clone</code> calls here, and that we
-could remove them in the future. Well, that time is now! So, why do we need
-<code>clone</code> here? The issue is that we have a slice with <code>String</code> elements in the
-parameter <code>args</code>, and the <code>new</code> function does not own <code>args</code>. In order to be
-able to return ownership of a <code>Config</code> instance, we need to clone the values
-that we put in the <code>query</code> and <code>filename</code> fields of <code>Config</code>, so that the
-<code>Config</code> instance can own its values.</p>
-<p>Now that we know more about iterators, we can change the <code>new</code> function to
-instead take ownership of an iterator as its argument. We'll use the iterator
-functionality instead of having to check the length of the slice and index into
-specific locations. Since we've taken ownership of the iterator, and we won't be
-using indexing operations that borrow anymore, we can move the <code>String</code> values
-from the iterator into <code>Config</code> instead of calling <code>clone</code> and making a new
-allocation.</p>
-<p>First, let's take <code>main</code> as it was in Listing 12-6, and change it to pass the
-return value of <code>env::args</code> to <code>Config::new</code>, instead of calling <code>collect</code> and
-passing a slice:</p>
+<p><span class="caption">Listing 13-23: Reproduction of the <code>Config::new</code> function
+from Listing 12-13</span></p>
+<!--Is this why we didn't want to use clone calls, they were inefficient, or
+was it that stacking clone calls can become confusing/is bad practice? -->
+<!-- Yep, it's for performance reasons /Carol -->
+<p>At the time, we said not to worry about the inefficient <code>clone</code> calls here
+because we would remove them in the future. Well, that time is now!</p>
+<p>The reason we needed <code>clone</code> here in the first place is that we have a slice
+with <code>String</code> elements in the parameter <code>args</code>, but the <code>new</code> function does not
+own <code>args</code>. In order to be able to return ownership of a <code>Config</code> instance, we
+need to clone the values that we put in the <code>query</code> and <code>filename</code> fields of
+<code>Config</code>, so that the <code>Config</code> instance can own its values.</p>
+<p>With our new knowledge about iterators, we can change the <code>new</code> function to
+take ownership of an iterator as its argument instead of borrowing a slice.
+We'll use the iterator functionality instead of the code we had that checks the
+length of the slice and indexes into specific locations. This will clear up
+what the <code>Config::new</code> function is doing since the iterator will take care of
+accessing the values.</p>
+<!-- use the iterator functionality to what? How will iterating allow us to do
+the same thing, can you briefly lay that out? -->
+<!-- It's mostly for clarity and using a good abstraction, I've tried fixing
+/Carol -->
+<p>Once <code>Config::new</code> taking ownership of the iterator and not using indexing
+operations that borrow, we can move the <code>String</code> values from the iterator into
+<code>Config</code> rather than calling <code>clone</code> and making a new allocation.</p>
+<!-- below: which file are we in, can you specify here? -->
+<!-- done /Carol -->
+<a class="header" href="print.html#using-the-iterator-returned-by-envargs-directly" id="using-the-iterator-returned-by-envargs-directly"><h4>Using the Iterator Returned by <code>env::args</code> Directly</h4></a>
+<p>In your I/O project's <em>src/main.rs</em>, let's change the start of the <code>main</code>
+function from this code that we had in Listing 12-23:</p>
 <pre><code class="language-rust ignore">fn main() {
-    let config = Config::new(env::args());
+    let args: Vec&lt;String&gt; = env::args().collect();
+    let mut stderr = std::io::stderr();
+
+    let config = Config::new(&amp;args).unwrap_or_else(|err| {
+        writeln!(
+            &amp;mut stderr,
+            &quot;Problem parsing arguments: {}&quot;,
+            err
+        ).expect(&quot;Could not write to stderr&quot;);
+        process::exit(1);
+    });
     // ...snip...
+}
 </code></pre>
-<!-- Will add ghosting in libreoffice /Carol -->
-<p>If we look in the standard library documentation for the <code>env::args</code> function,
-we'll see that its return type is <code>std::env::Args</code>. So next we'll update the
-signature of the <code>Config::new</code> function so that the parameter <code>args</code> has the
-type <code>std::env::Args</code> instead of <code>&amp;[String]</code>:</p>
+<p>To the code in Listing 13-24:</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre><code class="language-rust ignore">fn main() {
+    let mut stderr = std::io::stderr();
+
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
+        writeln!(
+            &amp;mut stderr,
+            &quot;Problem parsing arguments: {}&quot;,
+            err
+        ).expect(&quot;Could not write to stderr&quot;);
+        process::exit(1);
+    });
+    // ...snip...
+}
+</code></pre>
+<p><span class="caption">Listing 13-24: Passing the return value of <code>env::args</code> to
+<code>Config::new</code></span></p>
+<!-- I think, if we're going to be building this up bit by bit, it might be
+worth adding listing numbers and file names to each, can you add those? Don't
+worry about being accurate with the numbers, we can update them more easily
+later -->
+<!-- That's nice of you to offer, but since we're maintaining an online version
+that we're keeping in sync with each round of edits, we need to keep the
+listing numbers making sense as well. We'll just take care of them. /Carol -->
+<p>The <code>env::args</code> function returns an iterator! Rather than collecting the
+iterator values into a vector and then passing a slice to <code>Config::new</code>, now
+we're passing ownership of the iterator returned from <code>env::args</code> to
+<code>Config::new</code> directly.</p>
+<p>Next, we need to update the definition of <code>Config::new</code>. In your I/O project's
+<em>src/lib.rs</em>, let's change the signature of <code>Config::new</code> to look like Listing
+13-25:</p>
+<!-- can you give the filename here too? -->
+<!-- done /Carol -->
+<p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><code class="language-rust ignore">impl Config {
     fn new(args: std::env::Args) -&gt; Result&lt;Config, &amp;'static str&gt; {
         // ...snip...
 </code></pre>
-<!-- Will add ghosting in libreoffice /Carol -->
-<p>Next, we'll fix the body of <code>Config::new</code>. As we can also see in the standard
-library documentation, <code>std::env::Args</code> implements the <code>Iterator</code> trait, so we
-know we can call the <code>next</code> method on it! Here's the new code:</p>
+<p><span class="caption">Listing 13-25: Updating the signature of <code>Config::new</code> to
+expect an iterator</span></p>
+<p>The standard library documentation for the <code>env::args</code> function shows that the
+type of the iterator it returns is <code>std::env::Args</code>. We've updated the
+signature of the <code>Config::new</code> function so that the parameter <code>args</code> has the
+type <code>std::env::Args</code> instead of <code>&amp;[String]</code>.</p>
+<a class="header" href="print.html#using-iterator-trait-methods-instead-of-indexing" id="using-iterator-trait-methods-instead-of-indexing"><h4>Using <code>Iterator</code> Trait Methods Instead of Indexing</h4></a>
+<p>Next, we'll fix the body of <code>Config::new</code>. The standard library documentation
+also mentions that <code>std::env::Args</code> implements the <code>Iterator</code> trait, so we know
+we can call the <code>next</code> method on it! Listing 13-26 has the new code:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
 # struct Config {
@@ -12401,29 +13340,31 @@ impl Config {
 }
 
 #}</code></pre></pre>
-<!-- Will add ghosting and wingdings in libreoffice /Carol -->
+<p><span class="caption">Listing 13-26: Changing the body of <code>Config::new</code> to use
+iterator methods</span></p>
+<!-- is this the *full* new lib.rs code? Worth noting for ghosting purposes -->
+<!-- No, this is just the `Config::new` function, which I thought would be
+clear by saying "Next, we'll fix the body of `Config::new`.", can you elaborate
+on why that's not clear enough? I would expect programmers to be able to
+understand where a function starts and ends. /Carol -->
 <p>Remember that the first value in the return value of <code>env::args</code> is the name of
-the program. We want to ignore that, so first we'll call <code>next</code> and not do
-anything with the return value. The second time we call <code>next</code> should be the
-value we want to put in the <code>query</code> field of <code>Config</code>. We use a <code>match</code> to
-extract the value if <code>next</code> returns a <code>Some</code>, and we return early with an <code>Err</code>
-value if there weren't enough arguments (which would cause this call to <code>next</code>
-to return <code>None</code>).</p>
-<p>We do the same thing for the <code>filename</code> value. It's slightly unfortunate that
-the <code>match</code> expressions for <code>query</code> and <code>filename</code> are so similar. It would be
-nice if we could use <code>?</code> on the <code>Option</code> returned from <code>next</code>, but <code>?</code> only
-works with <code>Result</code> values currently. Even if we could use <code>?</code> on <code>Option</code> like
-we can on <code>Result</code>, the value we would get would be borrowed, and we want to
-move the <code>String</code> from the iterator into <code>Config</code>.</p>
+the program. We want to ignore that and get to the next value, so first we call
+<code>next</code> and do nothing with the return value. Second, we call <code>next</code> on the
+value we want to put in the <code>query</code> field of <code>Config</code>. If <code>next</code> returns a
+<code>Some</code>, we use a <code>match</code> to extract the value. If it returns <code>None</code>, it means
+not enough arguments were given and we return early with an <code>Err</code> value. We do
+the same thing for the <code>filename</code> value.</p>
+<!-- Hm, if ? would not work anyway, I'm not clear on why we mention, why it's
+a shame we cant use it on Option? -->
+<!-- We've taken this out, it's something that a portion of the readers might
+be wondering and something that Rust might let you do someday, but yeah, it's
+probably just distracting to most people /Carol -->
 <a class="header" href="print.html#making-code-clearer-with-iterator-adaptors" id="making-code-clearer-with-iterator-adaptors"><h3>Making Code Clearer with Iterator Adaptors</h3></a>
-<p>The other bit of code where we could take advantage of iterators was in the
-<code>search</code> function as implemented in Listing 12-15:</p>
-<!-- We hadn't had a listing number for this code sample when we submitted
-chapter 12; we'll fix the listing numbers in that chapter after you've
-reviewed it. /Carol -->
-<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-#fn main() {
-fn search&lt;'a&gt;(query: &amp;str, contents: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+<p>The other place in our I/O project we could take advantage of iterators is in
+the <code>search</code> function, as implemented in Listing 12-19 and reproduced here in
+Listing 13-27:</p>
+<p><span class="filename">Filename: src/lib.rs</span></p>
+<pre><code class="language-rust ignore">fn search&lt;'a&gt;(query: &amp;str, contents: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
     let mut results = Vec::new();
 
     for line in contents.lines() {
@@ -12434,70 +13375,71 @@ fn search&lt;'a&gt;(query: &amp;str, contents: &amp;'a str) -&gt; Vec&lt;&amp;'a
 
     results
 }
-
-#}</code></pre></pre>
-<p>We can write this code in a much shorter way, and avoiding having to have a
-mutable intermediate <code>results</code> vector, by using iterator adaptor methods like
-this instead:</p>
-<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-#fn main() {
-fn search&lt;'a&gt;(query: &amp;str, contents: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+</code></pre>
+<p><span class="caption">Listing 13-27: The implementation of the <code>search</code>
+function from Listing 12-19</span></p>
+<p>We can write this code in a much shorter way by using iterator adaptor methods
+instead. This also lets us avoid having a mutable intermediate <code>results</code>
+vector. The functional programming style prefers to minimize the amount of
+mutable state to make code clearer. Removing the mutable state might make it
+easier for us to make a future enhancement to make searching happen in
+parallel, since we wouldn't have to manage concurrent access to the <code>results</code>
+vector. Listing 13-28 shows this change:</p>
+<!-- Remind us why we want to avoid the mutable results vector? -->
+<!-- done /Carol -->
+<p><span class="filename">Filename: src/lib.rs</span></p>
+<pre><code class="language-rust ignore">fn search&lt;'a&gt;(query: &amp;str, contents: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
     contents.lines()
         .filter(|line| line.contains(query))
         .collect()
 }
-
-#}</code></pre></pre>
-<p>Here, we use the <code>filter</code> adaptor to only keep the lines that
-<code>line.contains(query)</code> returns true for. We then collect them up into another
-vector with <code>collect</code>. Much simpler!</p>
-<p>We can use the same technique in the <code>search_case_insensitive</code> function that we
-defined in Listing 12-16 as follows:</p>
-<!-- Similarly, the code snippet that will be 12-16 didn't have a listing
-number when we sent you chapter 12, we will fix it. /Carol -->
-<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
-#fn main() {
-fn search_case_insensitive&lt;'a&gt;(query: &amp;str, contents: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
-    let query = query.to_lowercase();
-
-    contents.lines()
-        .filter(|line| {
-            line.to_lowercase().contains(&amp;query)
-        }).collect()
-}
-
-#}</code></pre></pre>
-<p>Not too bad! So which style should you choose? Most Rust programmers prefer to
-use the iterator style. It's a bit tougher to understand at first, but once you
-gain an intuition for what the various iterator adaptors do, this is much
-easier to understand. Instead of fiddling with the various bits of looping
-and building a new vector, the code focuses on the high-level objective of the
-loop, abstracting some of the commonplace code so that it's easier to see the
-concepts that are unique to this usage of the code, like the condition on which
-the code is filtering each element in the iterator.</p>
-<p>But are they truly equivalent? Surely the more low-level loop will be faster.
-Let's talk about performance.</p>
-<a class="header" href="print.html#performance" id="performance"><h2>Performance</h2></a>
-<p>Which version of our <code>grep</code> functions is faster: the version with an explicit
-<code>for</code> loop or the version with iterators? We ran a benchmark by loading the
-entire contents of &quot;The Adventures of Sherlock Holmes&quot; by Sir Arthur Conan
-Doyle into a <code>String</code> and looking for the word &quot;the&quot; in the contents. Here were
-the results of the benchmark on the version of grep using the <code>for</code> loop and the
-version using iterators:</p>
-<pre><code class="language-text">test bench_grep_for  ... bench:  19,620,300 ns/iter (+/- 915,700)
-test bench_grep_iter ... bench:  19,234,900 ns/iter (+/- 657,200)
+</code></pre>
+<p><span class="caption">Listing 13-28: Using iterator adaptor methods in the
+implementation of the <code>search</code> function</span></p>
+<p>Recall that the purpose of the <code>search</code> function is to return all lines in
+<code>contents</code> that contain the <code>query</code>. Similarly to the <code>filter</code> example in
+Listing 13-18, we can use the <code>filter</code> adaptor to keep only the lines that
+<code>line.contains(query)</code> returns true for. We then collect the matching lines up
+into another vector with <code>collect</code>. Much simpler!</p>
+<!-- what is that, here, only lines that contain a matching string? A bit more
+context would help out, we probably can't rely on readers remembering all the
+details I'm afraid -->
+<!-- done /Carol -->
+<p>The next logical question is which style you should choose in your own code:
+the original implementation in Listing 13-27, or the version using iterators in
+Listing 13-28. Most Rust programmers prefer to use the iterator style. It's a
+bit tougher to get the hang of at first, but once you get a feel for the
+various iterator adaptors and what they do, iterators can be easier to
+understand. Instead of fiddling with the various bits of looping and building
+new vectors, the code focuses on the high-level objective of the loop. This
+abstracts away some of the commonplace code so that it's easier to see the
+concepts that are unique to this code, like the filtering condition each
+element in the iterator must pass.</p>
+<p>But are the two implementations truly equivalent? The intuitive assumption
+might be that the more low-level loop will be faster. Let's talk about
+performance.</p>
+<a class="header" href="print.html#comparing-performance-loops-versus-iterators" id="comparing-performance-loops-versus-iterators"><h2>Comparing Performance: Loops versus Iterators</h2></a>
+<p>To determine which to use, we need to know which version of our <code>search</code>
+functions is faster: the version with an explicit <code>for</code> loop or the version
+with iterators.</p>
+<p>We ran a benchmark by loading the entire contents of &quot;The Adventures of
+Sherlock Holmes&quot; by Sir Arthur Conan Doyle into a <code>String</code> and looking for the
+word &quot;the&quot; in the contents. Here were the results of the benchmark on the
+version of <code>search</code> using the <code>for</code> loop and the version using iterators:</p>
+<pre><code class="language-text">test bench_search_for  ... bench:  19,620,300 ns/iter (+/- 915,700)
+test bench_search_iter ... bench:  19,234,900 ns/iter (+/- 657,200)
 </code></pre>
 <p>The iterator version ended up slightly faster! We're not going to go through
 the benchmark code here, as the point is not to prove that they're exactly
-equivalent, but to get a general sense of how these two implementations
-compare. For a <em>real</em> benchmark, you'd want to check various texts of various
-sizes, different words, words of different lengths, and all kinds of other
-variations. The point is this: iterators, while a high-level abstraction, get
-compiled down to roughly the same code as if you'd written the lower-level code
-yourself. Iterators are one of Rust's <em>zero-cost abstractions</em>, by which we mean
-using the abstraction imposes no additional runtime overhead in the same way
-that Bjarne Stroustrup, the original designer and implementer of C++, defines
-<em>zero-overhead</em>:</p>
+equivalent, but to get a general sense of how these two implementations compare
+performance-wise. For a more comprehensive benchmark, you'd want to check
+various texts of various sizes, different words, words of different lengths,
+and all kinds of other variations. The point is this: iterators, while a
+high-level abstraction, get compiled down to roughly the same code as if you'd
+written the lower-level code yourself. Iterators are one of Rust's <em>zero-cost
+abstractions</em>, by which we mean using the abstraction imposes no additional
+runtime overhead in the same way that Bjarne Stroustrup, the original designer
+and implementer of C++, defines <em>zero-overhead</em>:</p>
 <blockquote>
 <p>In general, C++ implementations obey the zero-overhead principle: What you
 don’t use, you don’t pay for. And further: What you do use, you couldn’t hand
@@ -12506,13 +13448,24 @@ code any better.</p>
 <li>Bjarne Stroustrup &quot;Foundations of C++&quot;</li>
 </ul>
 </blockquote>
-<p>As another example, here is some code taken from an audio decoder. This code
-uses an iterator chain to do some math on three variables in scope: a <code>buffer</code>
-slice of data, an array of 12 <code>coefficients</code>, and an amount by which to shift
-data in <code>qlp_shift</code>. We've declared the variables within this example but not
-given them any values; while this code doesn't have much meaning outside of its
-context, it's still a concise, real-world example of how Rust translates
-high-level ideas to low-level code:</p>
+<!-- should this be "handle code any better", above? -->
+<!-- No, this is an exact quote. He means hand code, as in "code by hand",
+rather than let the language/standard library code it for you. The quote is
+at the top of page 4 in http://www.stroustrup.com/ETAPS-corrected-draft.pdf
+/Carol -->
+<p>As another example, here is some code taken from an audio decoder. The decoding
+algorithm uses the linear prediction mathematical operation to estimate future
+values based on a linear function of the previous samples.</p>
+<!-- Can you briefly explain what the intention of the code it --- that will
+help us understand, for example, why we have a `prediction` value -->
+<!-- I've tried, but the algorithm is really complicated and not really all
+that important... /Carol -->
+<p>This code uses an iterator chain to do some math on three variables in scope: a
+<code>buffer</code> slice of data, an array of 12 <code>coefficients</code>, and an amount by which
+to shift data in <code>qlp_shift</code>. We've declared the variables within this example
+but not given them any values; while this code doesn't have much meaning
+outside of its context, it's still a concise, real-world example of how Rust
+translates high-level ideas to low-level code:</p>
 <pre><code class="language-rust ignore">let buffer: &amp;mut [i32];
 let coefficients: [i64; 12];
 let qlp_shift: i16;
@@ -12527,27 +13480,42 @@ for i in 12..buffer.len() {
 }
 </code></pre>
 <p>In order to calculate the value of <code>prediction</code>, this code iterates through
-each of the 12 values in <code>coefficients</code>, uses the <code>zip</code> method to pair the
-coefficient values with the previous 12 values in <code>buffer</code>. Then for each pair,
-multiply the values together, sum all the results, and shift the bits in the
-sum <code>qlp_shift</code> bits to the right</p>
+each of the 12 values in <code>coefficients</code> and uses the <code>zip</code> method to pair the
+coefficient values with the previous 12 values in <code>buffer</code>. Then, for each
+pair, we multiply the values together, sum all the results, and shift the bits
+in the sum <code>qlp_shift</code> bits to the right.</p>
 <p>Calculations in applications like audio decoders often prioritize performance
 most highly. Here, we're creating an iterator, using two adaptors, then
 consuming the value. What assembly code would this Rust code compile to? Well,
 as of this writing, it compiles down to the same assembly you'd write by hand.
 There's no loop at all corresponding to the iteration over the values in
 <code>coefficients</code>: Rust knows that there are twelve iterations, so it &quot;unrolls&quot;
-the loop. All of the coefficients get stored in registers (which means
-accessing the values is very fast). There are no bounds checks on the array
-access. It's extremely efficient.</p>
+the loop. Unrolling is an optimization that removes the overhead of the loop
+controlling code and instead generates repetitive code for each iteration of
+the loop.</p>
+<!-- Maybe some expansion on what you mean by unrolls? -->
+<!-- done /Carol -->
+<p>All of the coefficients get stored in registers, which means it's very fast to
+access the values. There are no bounds checks on the array access at runtime.
+All these optimizations Rust is able to apply make the resulting code extremely
+efficient.</p>
 <p>Now that you know this, go use iterators and closures without fear! They make
 code feel higher-level, but don't impose a runtime performance penalty for
 doing so.</p>
 <a class="header" href="print.html#summary-11" id="summary-11"><h2>Summary</h2></a>
 <p>Closures and iterators are Rust features inspired by functional programming
 language ideas. They contribute to Rust's ability to clearly express high-level
-ideas. The implementations of closures and iterators, as well as other zero-cost
-abstractions in Rust, are such that runtime performance is not affected.</p>
+ideas, at low level performance. The implementations of closures and iterators
+are such that runtime performance is not affected. This is part of Rust's goal
+to strive to provide zero-cost abstractions.</p>
+<!-- Are we going to cover which other elements of rust are zero-cost
+abstractions, somewhere? Might be good to cross ref or, if we've already
+covered, give a brief list or a way to identify them -->
+<!-- Zero-cost abstraction in Rust is more about a design philosophy and a goal
+we keep in mind; all abstractions in Rust strive to be zero-cost abstractions,
+and if they aren't, it's considered a bug. There will always be some bugs. I've
+reworded a bit to not make it sound as much like something we could list.
+/Carol -->
 <p>Now that we've improved the expressiveness of our I/O project, let's look at
 some more features of <code>cargo</code> that would help us get ready to share the project
 with the world.</p>
@@ -14792,7 +15760,7 @@ fn main() {
 
         for val in vals {
             tx.send(val).unwrap();
-            thread::sleep(Duration::new(1, 0));
+            thread::sleep(Duration::from_secs(1));
         }
     });
 
@@ -14845,7 +15813,7 @@ thread::spawn(move || {
 
     for val in vals {
         tx1.send(val).unwrap();
-        thread::sleep(Duration::new(1, 0));
+        thread::sleep(Duration::from_secs(1));
     }
 });
 
@@ -14859,7 +15827,7 @@ thread::spawn(move || {
 
     for val in vals {
         tx.send(val).unwrap();
-        thread::sleep(Duration::new(1, 0));
+        thread::sleep(Duration::from_secs(1));
     }
 });
 // ...snip...
@@ -15315,7 +16283,7 @@ new concurrent types that aren't made up of <code>Send</code> and <code>Sync</co
 careful thought to make sure the safety guarantees are upheld. <a href="https://doc.rust-lang.org/stable/nomicon/">The Nomicon</a>
 has more information about these guarantees and how to uphold them.</p>
 <a class="header" href="print.html#summary-14" id="summary-14"><h2>Summary</h2></a>
-<p>This isn't the last we'll see of concurrency in this book; the project in
+<p>This isn't the last time we'll see concurrency in this book; the project in
 Chapter 20 will use these concepts in a more realistic situation than the
 smaller examples we discussed in this chapter.</p>
 <p>As we mentioned, since very little of how Rust deals with concurrency has to be
@@ -18865,9 +19833,9 @@ another <code>Result&lt;T, E&gt;</code>, which means we can use any methods that
 <code>Result&lt;T, E&gt;</code> with it, and special syntax like <code>?</code>.</p>
 <a class="header" href="print.html#the-never-type--that-never-returns" id="the-never-type--that-never-returns"><h3>The Never Type, <code>!</code>, that Never Returns</h3></a>
 <p>Rust has a special type named <code>!</code>. In type theory lingo, it's called the
-<em>bottom type</em>, but we prefer the name <em>never</em>. The name describes what it does:
-it stands in the place of the return type when a function will never return.
-For example:</p>
+<em>bottom type</em>, but we prefer to call it the <em>never type</em>. The name describes
+what it does: it stands in the place of the return type when a function will
+never return. For example:</p>
 <pre><code class="language-rust ignore">fn bar() -&gt; ! {
 </code></pre>
 <p>This is read as &quot;the function <code>bar</code> returns never,&quot; and functions that return
@@ -18897,7 +19865,7 @@ learned that <code>match</code> arms must return the same type. This doesn't wor
 }
 </code></pre>
 <p>What would the type of <code>guess</code> be here? It'd have to be both an integer and a
-string, and Rust requires that <code>guess</code> can only have one type. So what
+string, and Rust requires that <code>guess</code> can only have one type. So what does
 <code>continue</code> return? Why are we allowed to return a <code>u32</code> from one arm in Listing
 19-33 and have another arm that ends with <code>continue</code>?</p>
 <p>As you may have guessed, <code>continue</code> has a value of <code>!</code>. That is, when Rust goes
@@ -19487,8 +20455,6 @@ fn handle_connection(mut stream: TcpStream) {
 
     let get = b&quot;GET / HTTP/1.1\r\n&quot;;
 
-    let start = &amp;buffer[..get.len()];
-
     if buffer.starts_with(get) {
         let mut file = File::open(&quot;hello.html&quot;).unwrap();
 
@@ -19684,10 +20650,7 @@ fn handle_connection(mut stream: TcpStream) {
 <p><span class="caption">Listing 20-10: Simulating a slow request by recognizing
 <code>/sleep</code> and sleeping for 5 seconds</span></p>
 <p>This code is a bit messy, but it's good enough for our simulation purposes! We
-created a second request whose data we'll recognize, <code>sleep</code>, and a second
-slice of <code>buffer</code> that's the same size as <code>sleep</code> to try comparing with
-<code>sleep</code>. We called the new slice <code>sleep_start</code> and changed the <code>start</code> slice
-variable name to <code>get_start</code> to tell the two slices apart. We added an <code>else if</code> after the <code>if</code> block to check for the request to <code>/sleep</code>, and when we see
+created a second request <code>sleep</code>, whose data we'll recognize. We added an <code>else if</code> after the <code>if</code> block to check for the request to <code>/sleep</code>, and when we see
 that request, we'll sleep for five seconds before rendering the hello page.</p>
 <p>You can really see how primitive our server is here; real libraries would
 handle the recognition of multiple requests in a less verbose way!</p>
@@ -20116,7 +21079,7 @@ we can tell the different workers in the pool apart when logging or debugging.</
 <p>Let's make these changes:</p>
 <ol>
 <li>Define a <code>Worker</code> struct that holds an <code>id</code> and a <code>JoinHandle&lt;()&gt;</code></li>
-<li>Change <code>ThreadPool</code> to hold has a vector of <code>Worker</code> instances</li>
+<li>Change <code>ThreadPool</code> to hold a vector of <code>Worker</code> instances</li>
 <li>Define a <code>Worker::new</code> function that takes an <code>id</code> number and returns a
 <code>Worker</code> instance with that <code>id</code> and a thread spawned with an empty closure,
 which we'll fix soon</li>

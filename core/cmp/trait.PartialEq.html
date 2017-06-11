@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/cmp.rs.html#106-116' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/cmp.rs.html#110-120' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "eq"]
 </div>pub trait PartialEq&lt;Rhs:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&nbsp;=&nbsp;Self&gt; {
     fn <a href='#tymethod.eq' class='fnname'>eq</a>(&amp;self, other: &amp;Rhs) -&gt; bool;
@@ -83,6 +83,10 @@ and not equal to the other variants.</p>
 in terms of it by default. Any manual implementation of <code>ne</code> <em>must</em> respect
 the rule that <code>eq</code> is a strict inverse of <code>ne</code>; that is, <code>!(a == b)</code> if and
 only if <code>a != b</code>.</p>
+
+<p>Implementations of <code>PartialEq</code>, <code>PartialOrd</code>, and <code>Ord</code> <em>must</em> agree with
+each other. It&#39;s easy to accidentally make them disagree by deriving some
+of the traits and manually implementing others.</p>
 
 <p>An example implementation for a domain in which two books are considered
 the same book if their ISBN matches, even if the formats differ:</p>
@@ -215,7 +219,7 @@ by <code>==</code>.</p>
 <li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&gt; PartialEq for <a class="struct" href="../../core/ops/struct.Range.html" title="struct core::ops::Range">Range</a>&lt;Idx&gt;</code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&gt; PartialEq for <a class="struct" href="../../core/ops/struct.RangeFrom.html" title="struct core::ops::RangeFrom">RangeFrom</a>&lt;Idx&gt;</code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&gt; PartialEq for <a class="struct" href="../../core/ops/struct.RangeTo.html" title="struct core::ops::RangeTo">RangeTo</a>&lt;Idx&gt;</code></li>
-<li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&gt; PartialEq for <a class="enum" href="../../core/ops/enum.RangeInclusive.html" title="enum core::ops::RangeInclusive">RangeInclusive</a>&lt;Idx&gt;</code></li>
+<li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&gt; PartialEq for <a class="struct" href="../../core/ops/struct.RangeInclusive.html" title="struct core::ops::RangeInclusive">RangeInclusive</a>&lt;Idx&gt;</code></li>
 <li><code>impl&lt;Idx:&nbsp;<a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&gt; PartialEq for <a class="struct" href="../../core/ops/struct.RangeToInclusive.html" title="struct core::ops::RangeToInclusive">RangeToInclusive</a>&lt;Idx&gt;</code></li>
 <li><code>impl PartialEq for ()</code></li>
 <li><code>impl PartialEq for bool</code></li>

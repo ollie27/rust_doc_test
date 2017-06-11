@@ -2180,6 +2180,25 @@
 <span id="2135">2135</span>
 <span id="2136">2136</span>
 <span id="2137">2137</span>
+<span id="2138">2138</span>
+<span id="2139">2139</span>
+<span id="2140">2140</span>
+<span id="2141">2141</span>
+<span id="2142">2142</span>
+<span id="2143">2143</span>
+<span id="2144">2144</span>
+<span id="2145">2145</span>
+<span id="2146">2146</span>
+<span id="2147">2147</span>
+<span id="2148">2148</span>
+<span id="2149">2149</span>
+<span id="2150">2150</span>
+<span id="2151">2151</span>
+<span id="2152">2152</span>
+<span id="2153">2153</span>
+<span id="2154">2154</span>
+<span id="2155">2155</span>
+<span id="2156">2156</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2016 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2374,10 +2393,11 @@
 <span class="doccomment">//! {</span>
 <span class="doccomment">//!     let result = match IntoIterator::into_iter(values) {</span>
 <span class="doccomment">//!         mut iter =&gt; loop {</span>
-<span class="doccomment">//!             match iter.next() {</span>
-<span class="doccomment">//!                 Some(x) =&gt; { println!(&quot;{}&quot;, x); },</span>
+<span class="doccomment">//!             let x = match iter.next() {</span>
+<span class="doccomment">//!                 Some(val) =&gt; val,</span>
 <span class="doccomment">//!                 None =&gt; break,</span>
-<span class="doccomment">//!             }</span>
+<span class="doccomment">//!             };</span>
+<span class="doccomment">//!             let () = { println!(&quot;{}&quot;, x); };</span>
 <span class="doccomment">//!         },</span>
 <span class="doccomment">//!     };</span>
 <span class="doccomment">//!     result</span>
@@ -2492,10 +2512,13 @@
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;step_trait&quot;</span>,
            <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;likely to be replaced by finer-grained traits&quot;</span>,
-           <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27741&quot;</span>)]</span>
+           <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42168&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">range</span>::<span class="ident">Step</span>;
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;step_by&quot;</span>, <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;recent addition&quot;</span>,
            <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27741&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">rustc_deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.19.0&quot;</span>,
+                   <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;replaced by `iter::StepBy`&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">range</span>::<span class="ident">StepBy</span> <span class="kw">as</span> <span class="ident">DeprecatedStepBy</span>;
 
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -2703,7 +2726,7 @@
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fused&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35602&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">FusedIterator</span> <span class="kw">for</span> <span class="ident">Cycle</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Iterator</span> {}
 
-<span class="doccomment">/// An iterator that steps by n elements every iteration.</span>
+<span class="doccomment">/// An adapter for stepping iterators by a custom amount.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This `struct` is created by the [`step_by`] method on [`Iterator`]. See</span>
 <span class="doccomment">/// its documentation for more.</span>
@@ -2736,7 +2759,26 @@
             <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">nth</span>(<span class="self">self</span>.<span class="ident">step</span>)
         }
     }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">size_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
+        <span class="kw">let</span> <span class="ident">inner_hint</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">size_hint</span>();
+
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">first_take</span> {
+            <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">==</span> <span class="number">0</span> { <span class="number">0</span> } <span class="kw">else</span> { <span class="number">1</span> <span class="op">+</span> (<span class="ident">n</span><span class="op">-</span><span class="number">1</span>)<span class="op">/</span>(<span class="self">self</span>.<span class="ident">step</span><span class="op">+</span><span class="number">1</span>) };
+            (<span class="ident">f</span>(<span class="ident">inner_hint</span>.<span class="number">0</span>), <span class="ident">inner_hint</span>.<span class="number">1</span>.<span class="ident">map</span>(<span class="ident">f</span>))
+        } <span class="kw">else</span> {
+            <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span> <span class="op">/</span> (<span class="self">self</span>.<span class="ident">step</span><span class="op">+</span><span class="number">1</span>);
+            (<span class="ident">f</span>(<span class="ident">inner_hint</span>.<span class="number">0</span>), <span class="ident">inner_hint</span>.<span class="number">1</span>.<span class="ident">map</span>(<span class="ident">f</span>))
+        }
+    }
 }
+
+<span class="comment">// StepBy can only make the iterator shorter, so the len will still fit.</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;iterator_step_by&quot;</span>,
+           <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;unstable replacement of Range::step_by&quot;</span>,
+           <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27741&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">ExactSizeIterator</span> <span class="kw">for</span> <span class="ident">StepBy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">ExactSizeIterator</span> {}
 
 <span class="doccomment">/// An iterator that strings two iterators together.</span>
 <span class="doccomment">///</span>
@@ -3995,10 +4037,6 @@
         (<span class="number">0</span>, <span class="ident">upper</span>) <span class="comment">// can&#39;t know a lower bound, due to the scan function</span>
     }
 }
-
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fused&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35602&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">I</span>, <span class="ident">St</span>, <span class="ident">F</span><span class="op">&gt;</span> <span class="ident">FusedIterator</span> <span class="kw">for</span> <span class="ident">Scan</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">St</span>, <span class="ident">F</span><span class="op">&gt;</span>
-    <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">FusedIterator</span>, <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">St</span>, <span class="ident">I</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {}
 
 <span class="doccomment">/// An iterator that maps each element to an iterator, and yields the elements</span>
 <span class="doccomment">/// of the produced iterators.</span>

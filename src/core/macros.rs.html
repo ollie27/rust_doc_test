@@ -742,6 +742,14 @@
 <span id="697">697</span>
 <span id="698">698</span>
 <span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -780,6 +788,8 @@
 <span class="doccomment">/// This will invoke the [`panic!`] macro if the provided expression cannot be</span>
 <span class="doccomment">/// evaluated to `true` at runtime.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// # Uses</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// Assertions are always checked in both debug and release builds, and cannot</span>
 <span class="doccomment">/// be disabled. See [`debug_assert!`] for assertions that are not enabled in</span>
 <span class="doccomment">/// release builds by default.</span>
@@ -790,7 +800,9 @@
 <span class="doccomment">/// Other use-cases of `assert!` include [testing] and enforcing run-time</span>
 <span class="doccomment">/// invariants in safe code (whose violation cannot result in unsafety).</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This macro has a second version, where a custom panic message can</span>
+<span class="doccomment">/// # Custom Messages</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This macro has a second form, where a custom panic message can</span>
 <span class="doccomment">/// be provided with or without arguments for formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`panic!`]: macro.panic.html</span>
@@ -830,14 +842,15 @@
     );
 }
 
-<span class="doccomment">/// Asserts that two expressions are equal to each other.</span>
+<span class="doccomment">/// Asserts that two expressions are equal to each other (using [`PartialEq`]).</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// On panic, this macro will print the values of the expressions with their</span>
 <span class="doccomment">/// debug representations.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Like [`assert!`], this macro has a second version, where a custom</span>
+<span class="doccomment">/// Like [`assert!`], this macro has a second form, where a custom</span>
 <span class="doccomment">/// panic message can be provided.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// [`PartialEq`]: cmp/trait.PartialEq.html</span>
 <span class="doccomment">/// [`assert!`]: macro.assert.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
@@ -875,14 +888,15 @@
     });
 }
 
-<span class="doccomment">/// Asserts that two expressions are not equal to each other.</span>
+<span class="doccomment">/// Asserts that two expressions are not equal to each other (using [`PartialEq`]).</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// On panic, this macro will print the values of the expressions with their</span>
 <span class="doccomment">/// debug representations.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Like `assert!()`, this macro has a second version, where a custom</span>
+<span class="doccomment">/// Like [`assert!`], this macro has a second form, where a custom</span>
 <span class="doccomment">/// panic message can be provided.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// [`PartialEq`]: cmp/trait.PartialEq.html</span>
 <span class="doccomment">/// [`assert!`]: macro.assert.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
@@ -927,6 +941,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Like [`assert!`], this macro also has a second version, where a custom panic</span>
 <span class="doccomment">/// message can be provided.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Uses</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Unlike [`assert!`], `debug_assert!` statements are only enabled in non</span>
 <span class="doccomment">/// optimized builds by default. An optimized build will omit all</span>

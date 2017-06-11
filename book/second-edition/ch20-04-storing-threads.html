@@ -258,7 +258,7 @@ we can tell the different workers in the pool apart when logging or debugging.</
 <p>Let's make these changes:</p>
 <ol>
 <li>Define a <code>Worker</code> struct that holds an <code>id</code> and a <code>JoinHandle&lt;()&gt;</code></li>
-<li>Change <code>ThreadPool</code> to hold has a vector of <code>Worker</code> instances</li>
+<li>Change <code>ThreadPool</code> to hold a vector of <code>Worker</code> instances</li>
 <li>Define a <code>Worker::new</code> function that takes an <code>id</code> number and returns a
 <code>Worker</code> instance with that <code>id</code> and a thread spawned with an empty closure,
 which we'll fix soon</li>

@@ -1319,6 +1319,53 @@
 <span id="1274">1274</span>
 <span id="1275">1275</span>
 <span id="1276">1276</span>
+<span id="1277">1277</span>
+<span id="1278">1278</span>
+<span id="1279">1279</span>
+<span id="1280">1280</span>
+<span id="1281">1281</span>
+<span id="1282">1282</span>
+<span id="1283">1283</span>
+<span id="1284">1284</span>
+<span id="1285">1285</span>
+<span id="1286">1286</span>
+<span id="1287">1287</span>
+<span id="1288">1288</span>
+<span id="1289">1289</span>
+<span id="1290">1290</span>
+<span id="1291">1291</span>
+<span id="1292">1292</span>
+<span id="1293">1293</span>
+<span id="1294">1294</span>
+<span id="1295">1295</span>
+<span id="1296">1296</span>
+<span id="1297">1297</span>
+<span id="1298">1298</span>
+<span id="1299">1299</span>
+<span id="1300">1300</span>
+<span id="1301">1301</span>
+<span id="1302">1302</span>
+<span id="1303">1303</span>
+<span id="1304">1304</span>
+<span id="1305">1305</span>
+<span id="1306">1306</span>
+<span id="1307">1307</span>
+<span id="1308">1308</span>
+<span id="1309">1309</span>
+<span id="1310">1310</span>
+<span id="1311">1311</span>
+<span id="1312">1312</span>
+<span id="1313">1313</span>
+<span id="1314">1314</span>
+<span id="1315">1315</span>
+<span id="1316">1316</span>
+<span id="1317">1317</span>
+<span id="1318">1318</span>
+<span id="1319">1319</span>
+<span id="1320">1320</span>
+<span id="1321">1321</span>
+<span id="1322">1322</span>
+<span id="1323">1323</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1886,7 +1933,54 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">atomic_umax_rel</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">dst</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">src</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">atomic_umax_acqrel</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">dst</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">src</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">atomic_umax_relaxed</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">dst</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">src</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>;
+
+    <span class="doccomment">/// The `prefetch` intrinsic is a hint to the code generator to insert a prefetch instruction</span>
+    <span class="doccomment">/// if supported; otherwise, it is a noop.</span>
+    <span class="doccomment">/// Prefetches have no effect on the behavior of the program but can change its performance</span>
+    <span class="doccomment">/// characteristics.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `locality` argument must be a constant integer and is a temporal locality specifier</span>
+    <span class="doccomment">/// ranging from (0) - no locality, to (3) - extremely local keep in cache</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_read_data</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">locality</span>: <span class="ident">i32</span>);
+    <span class="doccomment">/// The `prefetch` intrinsic is a hint to the code generator to insert a prefetch instruction</span>
+    <span class="doccomment">/// if supported; otherwise, it is a noop.</span>
+    <span class="doccomment">/// Prefetches have no effect on the behavior of the program but can change its performance</span>
+    <span class="doccomment">/// characteristics.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `locality` argument must be a constant integer and is a temporal locality specifier</span>
+    <span class="doccomment">/// ranging from (0) - no locality, to (3) - extremely local keep in cache</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_write_data</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">locality</span>: <span class="ident">i32</span>);
+    <span class="doccomment">/// The `prefetch` intrinsic is a hint to the code generator to insert a prefetch instruction</span>
+    <span class="doccomment">/// if supported; otherwise, it is a noop.</span>
+    <span class="doccomment">/// Prefetches have no effect on the behavior of the program but can change its performance</span>
+    <span class="doccomment">/// characteristics.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `locality` argument must be a constant integer and is a temporal locality specifier</span>
+    <span class="doccomment">/// ranging from (0) - no locality, to (3) - extremely local keep in cache</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_read_instruction</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">locality</span>: <span class="ident">i32</span>);
+    <span class="doccomment">/// The `prefetch` intrinsic is a hint to the code generator to insert a prefetch instruction</span>
+    <span class="doccomment">/// if supported; otherwise, it is a noop.</span>
+    <span class="doccomment">/// Prefetches have no effect on the behavior of the program but can change its performance</span>
+    <span class="doccomment">/// characteristics.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `locality` argument must be a constant integer and is a temporal locality specifier</span>
+    <span class="doccomment">/// ranging from (0) - no locality, to (3) - extremely local keep in cache</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_write_instruction</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">locality</span>: <span class="ident">i32</span>);
 }
+
+<span class="comment">// Empty bootstrap implementations for stage0 compilation</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_read_data</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">_data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">_locality</span>: <span class="ident">i32</span>) { <span class="comment">/* EMPTY */</span> }
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_write_data</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">_data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">_locality</span>: <span class="ident">i32</span>) { <span class="comment">/* EMPTY */</span> }
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_read_instruction</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">_data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">_locality</span>: <span class="ident">i32</span>) { <span class="comment">/* EMPTY */</span> }
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prefetch_write_instruction</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">_data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">_locality</span>: <span class="ident">i32</span>) { <span class="comment">/* EMPTY */</span> }
 
 <span class="kw">extern</span> <span class="string">&quot;rust-intrinsic&quot;</span> {
 

@@ -1153,6 +1153,25 @@
 <span id="1108">1108</span>
 <span id="1109">1109</span>
 <span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
+<span id="1113">1113</span>
+<span id="1114">1114</span>
+<span id="1115">1115</span>
+<span id="1116">1116</span>
+<span id="1117">1117</span>
+<span id="1118">1118</span>
+<span id="1119">1119</span>
+<span id="1120">1120</span>
+<span id="1121">1121</span>
+<span id="1122">1122</span>
+<span id="1123">1123</span>
+<span id="1124">1124</span>
+<span id="1125">1125</span>
+<span id="1126">1126</span>
+<span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1398,6 +1417,7 @@
 
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">iter</span>::{<span class="ident">FromIterator</span>, <span class="ident">FusedIterator</span>, <span class="ident">TrustedLen</span>};
+<span class="kw">use</span> <span class="ident">ops</span>;
 
 <span class="doccomment">/// `Result` is a type that represents either success (`Ok`) or failure (`Err`).</span>
 <span class="doccomment">///</span>
@@ -2264,7 +2284,24 @@
         }
     }
 }
-</pre>
+
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;try_trait&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42327&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>,<span class="ident">E</span><span class="op">&gt;</span> <span class="ident">ops</span>::<span class="ident">Try</span> <span class="kw">for</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="prelude-val">Ok</span> <span class="op">=</span> <span class="ident">T</span>;
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>;
+
+    <span class="kw">fn</span> <span class="ident">into_result</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_ok</span>(<span class="ident">v</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">v</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_error</span>(<span class="ident">v</span>: <span class="ident">E</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="prelude-val">Err</span>(<span class="ident">v</span>)
+    }
+}</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

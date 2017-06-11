@@ -93,6 +93,13 @@ is the first. After this:</p>
 <a class="header" href="print.html#contributing" id="contributing"><h3>Contributing</h3></a>
 <p>The source files from which this book is generated can be found on
 <a href="https://github.com/rust-lang/book/tree/master/first-edition/src">GitHub</a>.</p>
+<a class="header" href="print.html#second-edition-of-this-book" id="second-edition-of-this-book"><h3>Second edition of this book</h3></a>
+<p>There are two editions of &quot;The Rust Programming Language&quot;, this being the
+first edition.</p>
+<p>The <a href="../second-edition/index.html">second edition</a> is a complete re-write. It is still under
+construction, though it is far enough along to learn most of Rust. We suggest
+reading the second edition and then checking out the first edition later to pick
+up some of the more esoteric parts of the language.</p>
 <a class="header" href="print.html#getting-started" id="getting-started"><h1>Getting Started</h1></a>
 <p>This first chapter of the book will get us going with Rust and its tooling.
 First, we’ll install Rust. Then, the classic ‘Hello World’ program. Finally,
@@ -7954,7 +7961,28 @@ constructs in the language.</p>
 <p>Definition and expansion of macros both happen in a single depth-first,
 lexical-order traversal of a crate’s source. So a macro defined at module scope
 is visible to any subsequent code in the same module, which includes the body
-of any subsequent child <code>mod</code> items.</p>
+of any subsequent child <code>mod</code> items. If you want to use your macro, which is
+defined in a different module, you need to use <code>macro_use</code> attribute <em>before</em>
+using the macro. Let's say our macros are defined in module <code>macros</code> and we
+would like to use them inside module <code>client</code>. This is the required module
+definition order:</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+#[macro_use]
+mod macros;
+mod client;
+
+#}</code></pre></pre>
+<p>The opposite order would result in a compilation failure:</p>
+<pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
+#fn main() {
+mod client;
+#[macro_use]
+mod macros;
+
+#}</code></pre></pre>
+<pre><code class="language-bash">error: cannot find macro `my_macro!` in this scope
+</code></pre>
 <p>A macro defined within the body of a single <code>fn</code>, or anywhere else not at
 module scope, is visible only within that item.</p>
 <p>If a module has the <code>macro_use</code> attribute, its macros are also visible in its
