@@ -191,7 +191,7 @@ then pass it back to Rust compiler.</p>
 error for a procedural macro, then you should <code>panic!</code> with the error message.
 In this case, we're keeping it as simple as possible.</p>
 <p>Great, so let's write <code>impl_hello_world(&amp;ast)</code>.</p>
-<pre><code class="language-rust ignore">fn impl_hello_world(ast: &amp;syn::MacroInput) -&gt; quote::Tokens {
+<pre><code class="language-rust ignore">fn impl_hello_world(ast: &amp;syn::DeriveInput) -&gt; quote::Tokens {
     let name = &amp;ast.ident;
     quote! {
         impl HelloWorld for #name {
@@ -204,7 +204,7 @@ In this case, we're keeping it as simple as possible.</p>
 </code></pre>
 <p>So this is where quotes comes in. The <code>ast</code> argument is a struct that gives us
 a representation of our type (which can be either a <code>struct</code> or an <code>enum</code>).
-Check out the <a href="https://docs.rs/syn/0.10.5/syn/struct.MacroInput.html">docs</a>,
+Check out the <a href="https://docs.rs/syn/0.11.11/syn/struct.DeriveInput.html">docs</a>,
 there is some useful information there. We are able to get the name of the
 type using <code>ast.ident</code>. The <code>quote!</code> macro lets us write up the Rust code
 that we wish to return and convert it into <code>Tokens</code>. <code>quote!</code> lets us use some
@@ -215,8 +215,8 @@ similar to regular macros work. You should check out the
 <p>So I think that's it. Oh, well, we do need to add dependencies for <code>syn</code> and
 <code>quote</code> in the <code>cargo.toml</code> for <code>hello-world-derive</code>.</p>
 <pre><code class="language-toml">[dependencies]
-syn = &quot;0.10.5&quot;
-quote = &quot;0.3.10&quot;
+syn = &quot;0.11.11&quot;
+quote = &quot;0.3.15&quot;
 </code></pre>
 <p>That should be it. Let's try to compile <code>hello-world</code>.</p>
 <pre><code class="language-bash">error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type
@@ -261,7 +261,7 @@ pub fn hello_world(input: TokenStream) -&gt; TokenStream
 <p>This condition can be easily checked with the help of <code>syn</code>.
 But how do we tell the user, that we do not accept enums?
 The idiomatic way to report errors in procedural macros is to panic:</p>
-<pre><code class="language-rust ignore">fn impl_hello_world(ast: &amp;syn::MacroInput) -&gt; quote::Tokens {
+<pre><code class="language-rust ignore">fn impl_hello_world(ast: &amp;syn::DeriveInput) -&gt; quote::Tokens {
     let name = &amp;ast.ident;
     // Check if derive(HelloWorld) was specified for a struct
     if let syn::Body::Struct(_) = ast.body {

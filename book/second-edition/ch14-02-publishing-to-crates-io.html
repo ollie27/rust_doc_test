@@ -198,8 +198,8 @@ convenient to use from another library, you don't have to rearrange your
 internal organization: you can choose to re-export items to make a different
 public structure with <code>pub use</code>.</p>
 <p>For example, say that we made a library named <code>art</code> consisting of a <code>kinds</code>
-module containing an enum named <code>Color</code> and a <code>utils</code> module containing a
-function named <code>mix</code> as shown in Listing 14-2:</p>
+module containing two enums named <code>PrimaryColor</code> and <code>SecondaryColor</code>, and a
+<code>utils</code> module containing a function named <code>mix</code> as shown in Listing 14-2:</p>
 <p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><code class="language-rust ignore">//! # Art
 //!

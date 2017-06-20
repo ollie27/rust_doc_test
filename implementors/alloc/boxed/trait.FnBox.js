@@ -1,5 +1,6 @@
 (function() {var implementors = {};
 implementors["alloc"] = [];
+implementors["collections"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

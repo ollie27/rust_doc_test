@@ -589,8 +589,9 @@ to our crate. One way to get around this restriction is to use the <em>newtype
 pattern</em>, which involves creating a new type using a tuple struct with one
 field as a thin wrapper around the type we want to implement a trait for. Then
 the wrapper type is local to our crate, and we can implement the trait on the
-wrapper. &quot;Newtype&quot; is a term from Haskell, and in Rust, there's no runtime
-performance penalty for using this pattern.</p>
+wrapper. &quot;Newtype&quot; is a term originating from the Haskell programming language.
+There's no runtime performance penalty for using this pattern. The wrapper type
+is elided at compile time.</p>
 <p>For example, if we wanted to implement <code>Display</code> on <code>Vec</code>, we can make a
 <code>Wrapper</code> struct that holds an instance of <code>Vec</code>. Then we can implement
 <code>Display</code> on <code>Wrapper</code> and use the <code>Vec</code> value as shown in Listing 19-30:</p>

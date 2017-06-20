@@ -119,7 +119,7 @@
 <p>We resolved the error messages shown in Listing 7-4 by moving the <code>network</code> and
 <code>network::server</code> code into the <em>src/network/mod.rs</em> and
 <em>src/network/server.rs</em> files, respectively. At that point, <code>cargo build</code> was
-able to build our project, but we still get some warning messages about the
+able to build our project, but we still get warning messages about the
 <code>client::connect</code>, <code>network::connect</code>, and <code>network::server::connect</code> functions
 not being used:</p>
 <pre><code class="language-text">warning: function is never used: `connect`, #[warn(dead_code)] on by default
@@ -141,14 +141,14 @@ warning: function is never used: `connect`, #[warn(dead_code)] on by default
   | ^
 </code></pre>
 <p>So why are we receiving these warnings? After all, we’re building a library
-with functions that are intended to be used by our <em>users</em>, and not necessarily
-by us within our own project, so it shouldn’t matter that these <code>connect</code>
+with functions that are intended to be used by our <em>users</em>, not necessarily by
+us within our own project, so it shouldn’t matter that these <code>connect</code>
 functions go unused. The point of creating them is that they will be used by
-another project and not our own.</p>
+another project, not our own.</p>
 <p>To understand why this program invokes these warnings, let’s try using the
-<code>connect</code> library as if we were another project, calling it externally. To do
-that, we’ll create a binary crate in the same directory as our library crate,
-by making a <em>src/main.rs</em> file containing this code:</p>
+<code>connect</code> library from another project, calling it externally. To do that,
+we’ll create a binary crate in the same directory as our library crate by
+making a <em>src/main.rs</em> file containing this code:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><code class="language-rust ignore">extern crate communicator;
 
@@ -157,22 +157,22 @@ fn main() {
 }
 </code></pre>
 <p>We use the <code>extern crate</code> command to bring the <code>communicator</code> library crate
-into scope, because our package actually now contains <em>two</em> crates. Cargo
-treats <em>src/main.rs</em> as the root file of a binary crate, which is separate from
-the existing library crate whose root file is <em>src/lib.rs</em>. This pattern is
-quite common for executable projects: most functionality is in a library crate,
-and the binary crate uses that library crate. This way, other programs can also
-use the library crate, and it’s a nice separation of concerns.</p>
-<p>From the point of view of a crate outside of the <code>communicator</code> library looking
-in, all of the modules we've been creating are within a module that has the
-same name as the crate, <code>communicator</code>. We call the top-level module of a crate
-the <em>root module</em>.</p>
-<p>Also note that even if we're using an external crate within a submodule of our
+into scope. Our package now contains <em>two</em> crates. Cargo treats <em>src/main.rs</em>
+as the root file of a binary crate, which is separate from the existing library
+crate whose root file is <em>src/lib.rs</em>. This pattern is quite common for
+executable projects: most functionality is in a library crate, and the binary
+crate uses that library crate. As a result, other programs can also use the
+library crate, and it’s a nice separation of concerns.</p>
+<p>From the point of view of a crate outside the <code>communicator</code> library looking
+in, all the modules we’ve been creating are within a module that has the same
+name as the crate, <code>communicator</code>. We call the top-level module of a crate the
+<em>root module</em>.</p>
+<p>Also note that even if we’re using an external crate within a submodule of our
 project, the <code>extern crate</code> should go in our root module (so in <em>src/main.rs</em>
 or <em>src/lib.rs</em>). Then, in our submodules, we can refer to items from external
 crates as if the items are top-level modules.</p>
-<p>Our binary crate right now just calls our library’s <code>connect</code> function from the
-<code>client</code> module. However, invoking <code>cargo build</code> will now give us an error
+<p>Right now, our binary crate just calls our library’s <code>connect</code> function from
+the <code>client</code> module. However, invoking <code>cargo build</code> will now give us an error
 after the warnings:</p>
 <pre><code class="language-text">error: module `client` is private
  --&gt; src/main.rs:4:5
@@ -180,32 +180,33 @@ after the warnings:</p>
 4 |     communicator::client::connect();
   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </code></pre>
-<p>Ah ha! This tells us that the <code>client</code> module is private, and this is the crux
-of the warnings. It’s also the first time we’ve run into the concepts of
+<p>Ah ha! This error tells us that the <code>client</code> module is private, which is the
+crux of the warnings. It’s also the first time we’ve run into the concepts of
 <em>public</em> and <em>private</em> in the context of Rust. The default state of all code in
 Rust is private: no one else is allowed to use the code. If you don’t use a
-private function within your own program, since your own program is the only
-code allowed to use that function, Rust will warn you that the function has
-gone unused.</p>
-<p>Once we specify that a function like <code>client::connect</code> is public, not only will
-our call to that function from our binary crate be allowed, the warning that
-the function is unused will go away. Marking something public lets Rust know
-that we intend for the function to be used by code outside of our program. Rust
-considers the theoretical external usage that’s now possible as the function
-“being used.” Thus, when something is marked as public, Rust will not require
-that it’s used in our own program and will stop warning that the item is unused.</p>
+private function within your program, because your program is the only code
+allowed to use that function, Rust will warn you that the function has gone
+unused.</p>
+<p>After we specify that a function like <code>client::connect</code> is public, not only
+will our call to that function from our binary crate be allowed, but the
+warning that the function is unused will go away. Marking a function as public
+lets Rust know that the function will be used by code outside of our program.
+Rust considers the theoretical external usage that’s now possible as the
+function “being used.” Thus, when something is marked public, Rust will not
+require that it be used in our program and will stop warning that the item is
+unused.</p>
 <a class="header" href="ch07-02-controlling-visibility-with-pub.html#making-a-function-public" id="making-a-function-public"><h3>Making a Function Public</h3></a>
 <p>To tell Rust to make something public, we add the <code>pub</code> keyword to the start of
 the declaration of the item we want to make public. We’ll focus on fixing the
-warning that tells us that <code>client::connect</code> has gone unused for now, as well
-as the “module <code>client</code> is private” error from our binary crate. Modify
+warning that indicates <code>client::connect</code> has gone unused for now, as well as
+the <code>module `client` is private</code> error from our binary crate. Modify
 <em>src/lib.rs</em> to make the <code>client</code> module public, like so:</p>
 <p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><code class="language-rust ignore">pub mod client;
 
 mod network;
 </code></pre>
-<p>The <code>pub</code> goes right before <code>mod</code>. Let’s try building again:</p>
+<p>The <code>pub</code> keyword is placed right before <code>mod</code>. Let’s try building again:</p>
 <pre><code class="language-text">error: function `connect` is private
  --&gt; src/main.rs:4:5
   |
@@ -213,8 +214,8 @@ mod network;
   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </code></pre>
 <p>Hooray! We have a different error! Yes, different error messages are a cause
-for celebration. The new error says “function <code>connect</code> is private”, so let’s
-edit <em>src/client.rs</em> to make <code>client::connect</code> public too:</p>
+for celebration. The new error shows <code>function `connect` is private</code>, so
+let’s edit <em>src/client.rs</em> to make <code>client::connect</code> public too:</p>
 <p><span class="filename">Filename: src/client.rs</span></p>
 <pre><pre class="playpen"><code class="language-rust"># #![allow(unused_variables)]
 #fn main() {
@@ -222,7 +223,7 @@ pub fn connect() {
 }
 
 #}</code></pre></pre>
-<p>And run <code>cargo build</code> again:</p>
+<p>Now run <code>cargo build</code> again:</p>
 <pre><code class="language-text">warning: function is never used: `connect`, #[warn(dead_code)] on by default
  --&gt; src/network/mod.rs:1:1
   |
@@ -235,23 +236,24 @@ warning: function is never used: `connect`, #[warn(dead_code)] on by default
 1 | fn connect() {
   | ^
 </code></pre>
-<p>It compiled, and the warning about <code>client::connect</code> not being used is gone!</p>
-<p>Unused code warnings don’t always indicate that something needs to be made
-public: if you <em>didn’t</em> want these functions to be part of your public API,
-unused code warnings could be alerting you to code you no longer needed and can
-safely delete. They could also be alerting you to a bug, if you had just
+<p>The code compiled, and the warning about <code>client::connect</code> not being used is
+gone!</p>
+<p>Unused code warnings don’t always indicate that an item in your code needs to
+be made public: if you <em>didn’t</em> want these functions to be part of your public
+API, unused code warnings could be alerting you to code you no longer need that
+you can safely delete. They could also be alerting you to a bug if you had just
 accidentally removed all places within your library where this function is
 called.</p>
-<p>In our case though, we <em>do</em> want the other two functions to be part of our
-crate’s public API, so let’s mark them as <code>pub</code> as well to try to get rid of
-the remaining warnings. Modify <em>src/network/mod.rs</em> to be:</p>
+<p>But in this case, we <em>do</em> want the other two functions to be part of our
+crate’s public API, so let’s mark them as <code>pub</code> as well to get rid of the
+remaining warnings. Modify <em>src/network/mod.rs</em> to look like the following:</p>
 <p><span class="filename">Filename: src/network/mod.rs</span></p>
 <pre><code class="language-rust ignore">pub fn connect() {
 }
 
 mod server;
 </code></pre>
-<p>And compile:</p>
+<p>Then compile the code:</p>
 <pre><code class="language-text">warning: function is never used: `connect`, #[warn(dead_code)] on by default
  --&gt; src/network/mod.rs:1:1
   |
@@ -264,35 +266,36 @@ warning: function is never used: `connect`, #[warn(dead_code)] on by default
 1 | fn connect() {
   | ^
 </code></pre>
-<p>Hmmm, we’re still getting an unused function warning even though
-<code>network::connect</code> is set to <code>pub</code>. This is because the function is public
+<p>Hmmm, we’re still getting an unused function warning, even though
+<code>network::connect</code> is set to <code>pub</code>. The reason is that the function is public
 within the module, but the <code>network</code> module that the function resides in is not
-public. We’re working from the interior of the library out this time, where
+public. We’re working from the interior of the library out this time, whereas
 with <code>client::connect</code> we worked from the outside in. We need to change
-<em>src/lib.rs</em> to make <code>network</code> public too:</p>
+<em>src/lib.rs</em> to make <code>network</code> public too, like so:</p>
 <p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><code class="language-rust ignore">pub mod client;
 
 pub mod network;
 </code></pre>
-<p>Now if we compile, that warning is gone:</p>
+<p>Now when we compile, that warning is gone:</p>
 <pre><code class="language-text">warning: function is never used: `connect`, #[warn(dead_code)] on by default
  --&gt; src/network/server.rs:1:1
   |
 1 | fn connect() {
   | ^
 </code></pre>
-<p>Only one warning left! Try to fix this one on your own!</p>
+<p>Only one warning is left! Try to fix this one on your own!</p>
 <a class="header" href="ch07-02-controlling-visibility-with-pub.html#privacy-rules" id="privacy-rules"><h3>Privacy Rules</h3></a>
 <p>Overall, these are the rules for item visibility:</p>
 <ol>
 <li>If an item is public, it can be accessed through any of its parent modules.</li>
-<li>If an item is private, it may be accessed only by the current module and its
+<li>If an item is private, it can be accessed only by the current module and its
 child modules.</li>
 </ol>
 <a class="header" href="ch07-02-controlling-visibility-with-pub.html#privacy-examples" id="privacy-examples"><h3>Privacy Examples</h3></a>
-<p>Let’s look at a few more examples to get some practice. Create a new library
-project and enter the code in Listing 7-5 into your new project’s <em>src/lib.rs</em>:</p>
+<p>Let’s look at a few more privacy examples to get some practice. Create a new
+library project and enter the code in Listing 7-5 into your new project’s
+<em>src/lib.rs</em>:</p>
 <p><span class="filename">Filename: src/lib.rs</span></p>
 <pre><code class="language-rust ignore">mod outermost {
     pub fn middle_function() {}
@@ -315,31 +318,31 @@ fn try_me() {
 </code></pre>
 <p><span class="caption">Listing 7-5: Examples of private and public functions,
 some of which are incorrect</span></p>
-<p>Before you try to compile this code, make a guess about which lines in <code>try_me</code>
-function will have errors. Then try compiling to see if you were right, and
-read on for discussion of the errors!</p>
+<p>Before you try to compile this code, make a guess about which lines in the
+<code>try_me</code> function will have errors. Then, try compiling the code to see whether
+you were right, and read on for the discussion of the errors!</p>
 <a class="header" href="ch07-02-controlling-visibility-with-pub.html#looking-at-the-errors" id="looking-at-the-errors"><h4>Looking at the Errors</h4></a>
 <p>The <code>try_me</code> function is in the root module of our project. The module named
-<code>outermost</code> is private, but the second privacy rule says the <code>try_me</code> function
-is allowed to access the <code>outermost</code> module since <code>outermost</code> is in the current
-(root) module, as is <code>try_me</code>.</p>
-<p>The call to <code>outermost::middle_function</code> will work. This is because
-<code>middle_function</code> is public, and <code>try_me</code> is accessing <code>middle_function</code>
-through its parent module, <code>outermost</code>. We determined in the previous paragraph
-that this module is accessible.</p>
+<code>outermost</code> is private, but the second privacy rule states that the <code>try_me</code>
+function is allowed to access the <code>outermost</code> module because <code>outermost</code> is in
+the current (root) module, as is <code>try_me</code>.</p>
+<p>The call to <code>outermost::middle_function</code> will work because <code>middle_function</code> is
+public, and <code>try_me</code> is accessing <code>middle_function</code> through its parent module
+<code>outermost</code>. We determined in the previous paragraph that this module is
+accessible.</p>
 <p>The call to <code>outermost::middle_secret_function</code> will cause a compilation error.
 <code>middle_secret_function</code> is private, so the second rule applies. The root
 module is neither the current module of <code>middle_secret_function</code> (<code>outermost</code>
 is), nor is it a child module of the current module of <code>middle_secret_function</code>.</p>
 <p>The module named <code>inside</code> is private and has no child modules, so it can only
-be accessed by its current module, <code>outermost</code>. That means the <code>try_me</code>
-function is not allowed to call <code>outermost::inside::inner_function</code> or
-<code>outermost::inside::secret_function</code> either.</p>
+be accessed by its current module <code>outermost</code>. That means the <code>try_me</code> function
+is not allowed to call <code>outermost::inside::inner_function</code> or
+<code>outermost::inside::secret_function</code>.</p>
 <a class="header" href="ch07-02-controlling-visibility-with-pub.html#fixing-the-errors" id="fixing-the-errors"><h4>Fixing the Errors</h4></a>
 <p>Here are some suggestions for changing the code in an attempt to fix the
 errors. Before you try each one, make a guess as to whether it will fix the
-errors, then compile to see if you’re right and use the privacy rules to
-understand why.</p>
+errors, and then compile the code to see whether or not you’re right, using the
+privacy rules to understand why.</p>
 <ul>
 <li>What if the <code>inside</code> module was public?</li>
 <li>What if <code>outermost</code> was public and <code>inside</code> was private?</li>
@@ -348,7 +351,7 @@ understand why.</p>
 that we want to refer to the modules starting from the root module.)</li>
 </ul>
 <p>Feel free to design more experiments and try them out!</p>
-<p>Next, let’s talk about bringing items into a scope with the <code>use</code> keyword.</p>
+<p>Next, let’s talk about bringing items into scope with the <code>use</code> keyword.</p>
 
                 </div>
 

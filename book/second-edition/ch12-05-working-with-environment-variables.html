@@ -179,14 +179,12 @@ Trust me.&quot;;
 <!-- Will add ghosting and wingdings in libreoffice /Carol -->
 <p><span class="caption">Listing 12-20: Adding a new failing test for the case
 insensitive function we're about to add</span></p>
-<p>Note that we've edited the old test's <code>query</code> and <code>contents</code> too: we changed
-the query to &quot;duct&quot;, which will match the line with the word &quot;productive&quot;.
-We've added a new line with the text &quot;Duct tape&quot;, with a capital D, that
-shouldn't match the query &quot;duct&quot; when we're searching for the query in a case
-sensitive manner. We've changed this test to ensure that we don't accidentally
-break the case sensitive search functionality that we've already implemented;
-this test should pass now and should continue to pass as we work on the case
-insensitive search.</p>
+<p>Note that we've edited the old test's <code>contents</code> too. We've added a new line
+with the text &quot;Duct tape&quot;, with a capital D, that shouldn't match the query
+&quot;duct&quot; when we're searching for the query in a case sensitive manner. We've
+changed this test to ensure that we don't accidentally break the case sensitive
+search functionality that we've already implemented; this test should pass now
+and should continue to pass as we work on the case insensitive search.</p>
 <p>The new test for the case insensitive search uses &quot;rUsT&quot; with some capital
 letters as its query. The expected return value from the
 <code>search_case_insensitive</code> function we're going to add is that the query &quot;rust&quot;
@@ -416,7 +414,7 @@ variables!</p>
 configuration. In those cases, the programs decide that one or the other takes
 precedence. For another exercise on your own, try controlling case
 insensitivity through a command line argument as well as through the
-environment variable, and decide which should take precedence the program is
+environment variable, and decide which should take precedence if the program is
 run with contradictory values.</p>
 <p>The <code>std::env</code> module contains many more useful features for dealing with
 environment variables; check out its documentation to see what's available.</p>

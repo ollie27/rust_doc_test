@@ -152,7 +152,9 @@ up to the final number. So here’s a diagram of our first stack frame:</p>
 <tr><td> 0       </td><td> x    </td><td> 42    </td></tr>
 </table>
 <p>Because <code>0</code> was taken by the first frame, <code>1</code> and <code>2</code> are used for <code>foo()</code>’s
-stack frame. It grows upward, the more functions we call.</p>
+stack frame. It grows upward, the more functions we call. Notice that we are <strong>not</strong>
+taking into account the size of each variable (for example, a 32 bit variable would
+use the memory addresses from 0 to 3, or 4 bytes).</p>
 </div>
 <p>There are some important things we have to take note of here. The numbers 0, 1,
 and 2 are all solely for illustrative purposes, and bear no relationship to the

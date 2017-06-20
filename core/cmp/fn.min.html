@@ -48,10 +48,12 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/cmp.rs.html#691-693' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/cmp.rs.html#729-731' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn min&lt;T:&nbsp;<a class="trait" href="../../core/cmp/trait.Ord.html" title="trait core::cmp::Ord">Ord</a>&gt;(v1: T, v2: T) -&gt; T</pre><div class='docblock'><p>Compares and returns the minimum of two values.</p>
 
 <p>Returns the first argument if the comparison determines them to be equal.</p>
+
+<p>Internally uses an alias to <code>Ord::min</code>.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <pre class="rust rust-example-rendered">

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1323' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1343' title='goto source code'>[src]</a></span></h1>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>core_intrinsics</code>)</summary><p>intrinsics are unlikely to ever be stabilized, instead they should be used through stabilized interfaces in the rest of the standard library</p>
 </details></div></div><div class='docblock'><p>rustc compiler intrinsics.</p>
 
@@ -1148,6 +1148,14 @@ as the <code>order</code>. For example,
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.ctlz_nonzero.html"
+                                  title='fn core::intrinsics::ctlz_nonzero'>ctlz_nonzero</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Like <code>ctlz</code>, but extra-unsafe as it returns <code>undef</code> when
+given an <code>x</code> with value <code>0</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
                            <td><a class="fn" href="fn.ctpop.html"
                                   title='fn core::intrinsics::ctpop'>ctpop</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
@@ -1159,6 +1167,14 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::cttz'>cttz</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the number of trailing unset bits (zeroes) in an integer type <code>T</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.cttz_nonzero.html"
+                                  title='fn core::intrinsics::cttz_nonzero'>cttz_nonzero</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Like <code>cttz</code>, but extra-unsafe as it returns <code>undef</code> when
+given an <code>x</code> with value <code>0</code>.</p>
                            </td>
                        </tr>
                        <tr class='unstable module-item'>

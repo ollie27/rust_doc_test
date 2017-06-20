@@ -1,4 +1,5 @@
 (function() {var implementors = {};
+implementors["alloc"] = [];
 implementors["collections"] = [];
 implementors["core"] = [];
 implementors["std"] = [];

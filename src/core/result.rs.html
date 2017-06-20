@@ -1169,9 +1169,6 @@
 <span id="1124">1124</span>
 <span id="1125">1125</span>
 <span id="1126">1126</span>
-<span id="1127">1127</span>
-<span id="1128">1128</span>
-<span id="1129">1129</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2235,12 +2232,9 @@
     <span class="doccomment">/// checking for overflow:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::u32;</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// let v = vec![1, 2];</span>
-    <span class="doccomment">/// let res: Result&lt;Vec&lt;u32&gt;, &amp;&#39;static str&gt; = v.iter().map(|&amp;x: &amp;u32|</span>
-    <span class="doccomment">///     if x == u32::MAX { Err(&quot;Overflow!&quot;) }</span>
-    <span class="doccomment">///     else { Ok(x + 1) }</span>
+    <span class="doccomment">/// let res: Result&lt;Vec&lt;u32&gt;, &amp;&#39;static str&gt; = v.iter().map(|x: &amp;u32|</span>
+    <span class="doccomment">///     x.checked_add(1).ok_or(&quot;Overflow!&quot;)</span>
     <span class="doccomment">/// ).collect();</span>
     <span class="doccomment">/// assert!(res == Ok(vec![2, 3]));</span>
     <span class="doccomment">/// ```</span>
@@ -2301,7 +2295,8 @@
     <span class="kw">fn</span> <span class="ident">from_error</span>(<span class="ident">v</span>: <span class="ident">E</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="prelude-val">Err</span>(<span class="ident">v</span>)
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

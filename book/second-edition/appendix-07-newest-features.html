@@ -140,8 +140,27 @@ fn main() {
 
     // Using field init shorthand:
     let portia = Person { name, age };
-    
+
     println!(&quot;{:?}&quot;, portia);
+}
+</code></pre></pre>
+<a class="header" href="appendix-07-newest-features.html#returning-from-loops" id="returning-from-loops"><h2>Returning from loops</h2></a>
+<p>One of the uses of a <code>loop</code> is to retry an operation you know can fail, such as
+checking if a thread completed its job. However, you might need to pass the
+result of that operation to the rest of your code. If you add it to the <code>break</code>
+expression you use to stop the loop, it will be returned by the broken loop:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+
+    assert_eq!(result, 20);
 }
 </code></pre></pre>
 

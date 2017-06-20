@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/collections/borrow.rs.html#44-86' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/alloc/borrow.rs.html#44-86' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ToOwned {
     type <a href='#associatedtype.Owned' class="type">Owned</a>: <a class="trait" href="../../collections/borrow/trait.Borrow.html" title="trait collections::borrow::Borrow">Borrow</a>&lt;Self&gt;;
     fn <a href='#tymethod.to_owned' class='fnname'>to_owned</a>(&amp;self) -&gt; Self::<a class="type" href="../../collections/borrow/trait.ToOwned.html#associatedtype.Owned" title="type collections::borrow::ToOwned::Owned">Owned</a>;
@@ -76,7 +76,7 @@ from any borrow of a given type.</p>
 <span class="kw">let</span> <span class="ident">ss</span>: <span class="ident">String</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">to_owned</span>();
 
 <span class="kw">let</span> <span class="ident">v</span>: <span class="kw-2">&amp;</span>[<span class="ident">i32</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>];
-<span class="kw">let</span> <span class="ident">vv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">to_owned</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20s%3A%20%26str%20%3D%20%22a%22%3B%0Alet%20ss%3A%20String%20%3D%20s.to_owned()%3B%0A%0Alet%20v%3A%20%26%5Bi32%5D%20%3D%20%26%5B1%2C%202%5D%3B%0Alet%20vv%3A%20Vec%3Ci32%3E%20%3D%20v.to_owned()%3B%0A%7D">Run</a></pre>
+<span class="kw">let</span> <span class="ident">vv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">to_owned</span>();</pre>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
@@ -93,15 +93,15 @@ from any borrow of a given type.</p>
 <span class="string">&quot;hello&quot;</span>.<span class="ident">clone_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">s</span>);
 
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
-[<span class="number">1</span>, <span class="number">2</span>][..].<span class="ident">clone_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">v</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(toowned_clone_into)%5D%0Afn%20main()%20%7B%0Alet%20mut%20s%3A%20String%20%3D%20String%3A%3Anew()%3B%0A%22hello%22.clone_into(%26mut%20s)%3B%0A%0Alet%20mut%20v%3A%20Vec%3Ci32%3E%20%3D%20Vec%3A%3Anew()%3B%0A%5B1%2C%202%5D%5B..%5D.clone_into(%26mut%20v)%3B%0A%7D&amp;version=nightly">Run</a></pre>
+[<span class="number">1</span>, <span class="number">2</span>][..].<span class="ident">clone_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">v</span>);</pre>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;T&gt; ToOwned for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,&nbsp;</span></code></li>
-<li><code>impl&lt;T:&nbsp;<a class="trait" href="../../core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>&gt; ToOwned for [T]</code></li>
-<li><code>impl ToOwned for str</code></li>
+    <li><code>impl ToOwned for str</code></li>
+<li><code>impl&lt;T&gt; ToOwned for [T] <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,&nbsp;</span></code></li>
+<li><code>impl&lt;T&gt; ToOwned for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,&nbsp;</span></code></li>
 </ul><script type="text/javascript" async
-                         src="../../implementors/collections/borrow/trait.ToOwned.js">
+                         src="../../implementors/alloc/borrow/trait.ToOwned.js">
                  </script></section>
     <section id='search' class="content hidden"></section>
 

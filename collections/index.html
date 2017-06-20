@@ -48,14 +48,15 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/collections/lib.rs.html#11-192' title='goto source code'>[src]</a></span></h1>
-<div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>collections </code><a href="https://github.com/rust-lang/rust/issues/27783">#27783</a>)</summary><p>library is unlikely to be stabilized with the current layout and name, use std::collections instead</p>
-</details></div></div><div class='docblock'><p>Collection types.</p>
+               </span><a class='srclink' href='../src/collections/lib.rs.html#11-72' title='goto source code'>[src]</a></span></h1>
+<div class='stability'><div class='stab deprecated'>Deprecated since 1.20.0<p>: collections moved to <code>alloc</code></p>
+</div><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>collections </code><a href="https://github.com/rust-lang/rust/issues/27783">#27783</a>)</summary><p>this library is unlikely to be stabilized in its current form or name</p>
+</details></div></div><div class='docblock'><p>Collection types</p>
 
 <p>See <a href="../std/collections/index.html"><code>std::collections</code></a> for a detailed
 discussion of collections in Rust.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use binary_heap::<a class="struct" href="../collections/binary_heap/struct.BinaryHeap.html" title="struct collections::binary_heap::BinaryHeap">BinaryHeap</a>;</code></td></tr><tr><td><code>pub use btree_map::<a class="struct" href="../collections/btree_map/struct.BTreeMap.html" title="struct collections::btree_map::BTreeMap">BTreeMap</a>;</code></td></tr><tr><td><code>pub use btree_set::<a class="struct" href="../collections/btree_set/struct.BTreeSet.html" title="struct collections::btree_set::BTreeSet">BTreeSet</a>;</code></td></tr><tr><td><code>pub use linked_list::<a class="struct" href="../collections/linked_list/struct.LinkedList.html" title="struct collections::linked_list::LinkedList">LinkedList</a>;</code></td></tr><tr><td><code>pub use vec_deque::<a class="struct" href="../collections/vec_deque/struct.VecDeque.html" title="struct collections::vec_deque::VecDeque">VecDeque</a>;</code></td></tr><tr><td><code>pub use string::<a class="struct" href="../collections/string/struct.String.html" title="struct collections::string::String">String</a>;</code></td></tr><tr><td><code>pub use vec::<a class="struct" href="../collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr><td><code>pub use alloc::binary_heap::<a class="struct" href="../collections/binary_heap/struct.BinaryHeap.html" title="struct collections::binary_heap::BinaryHeap">BinaryHeap</a>;</code></td></tr><tr><td><code>pub use alloc::btree_map::<a class="struct" href="../collections/btree_map/struct.BTreeMap.html" title="struct collections::btree_map::BTreeMap">BTreeMap</a>;</code></td></tr><tr><td><code>pub use alloc::btree_set::<a class="struct" href="../collections/btree_set/struct.BTreeSet.html" title="struct collections::btree_set::BTreeSet">BTreeSet</a>;</code></td></tr><tr><td><code>pub use alloc::linked_list::<a class="struct" href="../collections/linked_list/struct.LinkedList.html" title="struct collections::linked_list::LinkedList">LinkedList</a>;</code></td></tr><tr><td><code>pub use alloc::vec_deque::<a class="struct" href="../collections/vec_deque/struct.VecDeque.html" title="struct collections::vec_deque::VecDeque">VecDeque</a>;</code></td></tr><tr><td><code>pub use alloc::string::<a class="struct" href="../collections/string/struct.String.html" title="struct collections::string::String">String</a>;</code></td></tr><tr><td><code>pub use alloc::vec::<a class="struct" href="../collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class="mod" href="binary_heap/index.html"
@@ -69,13 +70,6 @@ discussion of collections in Rust.</p>
                                   title='mod collections::borrow'>borrow</a></td>
                            <td class='docblock-short'>
                                 <p>A module for working with borrowed data.</p>
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="mod" href="boxed/index.html"
-                                  title='mod collections::boxed'>boxed</a></td>
-                           <td class='docblock-short'>
-                                <p>A pointer type for heap allocation.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -132,7 +126,7 @@ discussion of collections in Rust.</p>
                                   title='mod collections::vec'>vec</a></td>
                            <td class='docblock-short'>
                                 <p>A contiguous growable array type with heap-allocated contents, written
-<code>Vec&lt;T&gt;</code> but pronounced &#39;vector.&#39;</p>
+<code>Vec&lt;T&gt;</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

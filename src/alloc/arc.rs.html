@@ -1554,6 +1554,8 @@
 <span id="1509">1509</span>
 <span id="1510">1510</span>
 <span id="1511">1511</span>
+<span id="1512">1512</span>
+<span id="1513">1513</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1599,7 +1601,8 @@
 <span class="doccomment">/// necessarily) at _exactly_ `MAX_REFCOUNT + 1` references.</span>
 <span class="kw">const</span> <span class="ident">MAX_REFCOUNT</span>: <span class="ident">usize</span> <span class="op">=</span> (<span class="ident">isize</span>::<span class="ident">MAX</span>) <span class="kw">as</span> <span class="ident">usize</span>;
 
-<span class="doccomment">/// A thread-safe reference-counting pointer.</span>
+<span class="doccomment">/// A thread-safe reference-counting pointer. &#39;Arc&#39; stands for &#39;Atomically</span>
+<span class="doccomment">/// Reference Counted&#39;.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The type `Arc&lt;T&gt;` provides shared ownership of a value of type `T`,</span>
 <span class="doccomment">/// allocated in the heap. Invoking [`clone`][clone] on `Arc` produces</span>
@@ -2778,10 +2781,11 @@
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>;
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>::{<span class="ident">Acquire</span>, <span class="ident">SeqCst</span>};
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">vec</span>::<span class="ident">Vec</span>;
-    <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Arc</span>, <span class="ident">Weak</span>};
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Mutex</span>;
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">From</span>;
+
+    <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Arc</span>, <span class="ident">Weak</span>};
+    <span class="kw">use</span> <span class="ident">vec</span>::<span class="ident">Vec</span>;
 
     <span class="kw">struct</span> <span class="ident">Canary</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">atomic</span>::<span class="ident">AtomicUsize</span>);
 

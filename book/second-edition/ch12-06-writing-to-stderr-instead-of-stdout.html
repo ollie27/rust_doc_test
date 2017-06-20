@@ -146,7 +146,7 @@ to standard error. /Carol-->
 <em>output.txt</em> instead of the screen. We didn't see the error message we were
 expecting printed on the screen, so that means it must have ended up in the
 file. Let's see what <em>output.txt</em> contains:</p>
-<pre><code class="language-text">Application error: No search string or filename found
+<pre><code class="language-text">Problem parsing arguments: not enough arguments
 </code></pre>
 <!-- I don't understand why we send this output to a file to then just say we
 want it to the screen, won't it do that by default? And what has this got to do
@@ -210,7 +210,7 @@ variables we're interpolating.</p>
 <p>Let's try running the program again in the same way, without any arguments and
 redirecting <code>stdout</code> with <code>&gt;</code>:</p>
 <pre><code class="language-text">$ cargo run &gt; output.txt
-Application error: No search string or filename found
+Problem parsing arguments: not enough arguments
 </code></pre>
 <p>Now we see our error on the screen, and <code>output.txt</code> contains nothing, which is
 the behavior that's expected of command line programs.</p>

@@ -399,7 +399,7 @@ that the slice this code creates contains valid <code>i32</code> values. Attempt
 language. To do this, Rust has a keyword, <code>extern</code>, that facilitates creating
 and using a <em>Foreign Function Interface</em> (FFI). Listing 19-8 demonstrates how
 to set up an integration with a function named <code>some_function</code> defined in an
-external library written in a language other tha Rust. Functions declared
+external library written in a language other than Rust. Functions declared
 within <code>extern</code> blocks are always unsafe to call from Rust code:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><code class="language-rust ignore">extern &quot;C&quot; {
@@ -449,7 +449,7 @@ mutable global variable, a data race can happen.</p>
 <p>Global variables are called <em>static</em> in Rust. Listing 19-9 shows an example
 declaration and use of a static variable with a string slice as a value:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playpen"><code class="language-rust">static HELLO_WORLD: &amp;'static str = &quot;Hello, world!&quot;;
+<pre><pre class="playpen"><code class="language-rust">static HELLO_WORLD: &amp;str = &quot;Hello, world!&quot;;
 
 fn main() {
     println!(&quot;name is: {}&quot;, HELLO_WORLD);
@@ -460,10 +460,12 @@ variable</span></p>
 <p><code>static</code> variables are similar to constants: their names are also in
 <code>SCREAMING_SNAKE_CASE</code> by convention, and we <em>must</em> annotate the variable's
 type, which is <code>&amp;'static str</code> in this case. Only references with the <code>'static</code>
-lifetime may be stored in a static variable. Accessing immutable static
-variables is safe. Values in a static variable have a fixed address in memory,
-and using the value will always access the same data. Constants, on the other
-hand, are allowed to duplicate their data whenever they are used.</p>
+lifetime may be stored in a static variable. Because of this, the Rust compiler
+can figure out the lifetime by itself and we don't need to annotate it explicitly.
+Accessing immutable static variables is safe. Values in a static variable have a
+fixed address in memory, and using the value will always access the same data.
+Constants, on the other hand, are allowed to duplicate their data whenever they
+are used.</p>
 <p>Another way in which static variables are different from constants is that
 static variables can be mutable. Both accessing and modifying mutable static
 variables is unsafe. Listing 19-10 shows how to declare, access, and modify a

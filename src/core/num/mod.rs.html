@@ -2812,6 +2812,28 @@
 <span id="2767">2767</span>
 <span id="2768">2768</span>
 <span id="2769">2769</span>
+<span id="2770">2770</span>
+<span id="2771">2771</span>
+<span id="2772">2772</span>
+<span id="2773">2773</span>
+<span id="2774">2774</span>
+<span id="2775">2775</span>
+<span id="2776">2776</span>
+<span id="2777">2777</span>
+<span id="2778">2778</span>
+<span id="2779">2779</span>
+<span id="2780">2780</span>
+<span id="2781">2781</span>
+<span id="2782">2782</span>
+<span id="2783">2783</span>
+<span id="2784">2784</span>
+<span id="2785">2785</span>
+<span id="2786">2786</span>
+<span id="2787">2787</span>
+<span id="2788">2788</span>
+<span id="2789">2789</span>
+<span id="2790">2790</span>
+<span id="2791">2791</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -4077,6 +4099,7 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">SelfT</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ActualT</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BITS</span>:<span class="ident">expr</span>,
      <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ctpop</span>:<span class="ident">path</span>,
      <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ctlz</span>:<span class="ident">path</span>,
+     <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ctlz_nonzero</span>:<span class="ident">path</span>,
      <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cttz</span>:<span class="ident">path</span>,
      <span class="macro-nonterminal">$</span><span class="macro-nonterminal">bswap</span>:<span class="ident">path</span>,
      <span class="macro-nonterminal">$</span><span class="macro-nonterminal">add_with_overflow</span>:<span class="ident">path</span>,
@@ -4999,6 +5022,7 @@
         <span class="comment">// This method cannot overflow, as in the `next_power_of_two`</span>
         <span class="comment">// overflow cases it instead ends up returning the maximum value</span>
         <span class="comment">// of the type, and can return 0 for 0.</span>
+        <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">one_less_than_next_power_of_two</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
             <span class="kw">if</span> <span class="self">self</span> <span class="op">&lt;=</span> <span class="number">1</span> { <span class="kw">return</span> <span class="number">0</span>; }
 
@@ -5007,7 +5031,7 @@
             <span class="comment">// (such as intel pre-haswell) have more efficient ctlz</span>
             <span class="comment">// intrinsics when the argument is non-zero.</span>
             <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="self">self</span> <span class="op">-</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">leading_zeros</span>();
+            <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ctlz_nonzero</span>(<span class="ident">p</span>) };
             <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">SelfT</span><span class="op">&gt;</span>::<span class="ident">max_value</span>() <span class="op">&gt;&gt;</span> <span class="ident">z</span>
         }
 
@@ -5051,11 +5075,17 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">stage0</span>)]</span>
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">ctlz_nonzero</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> { <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>(<span class="ident">x</span>) }
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">stage0</span>))]</span>
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">ctlz_nonzero</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> { <span class="ident">intrinsics</span>::<span class="ident">ctlz_nonzero</span>(<span class="ident">x</span>) }
+
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;u8&quot;</span>]</span>
 <span class="kw">impl</span> <span class="ident">u8</span> {
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">u8</span>, <span class="ident">u8</span>, <span class="number">8</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5068,6 +5098,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">u16</span>, <span class="ident">u16</span>, <span class="number">16</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5080,6 +5111,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="number">32</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5092,6 +5124,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">u64</span>, <span class="ident">u64</span>, <span class="number">64</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5104,6 +5137,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">u128</span>, <span class="ident">u128</span>, <span class="number">128</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5117,6 +5151,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">usize</span>, <span class="ident">u16</span>, <span class="number">16</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5129,6 +5164,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">usize</span>, <span class="ident">u32</span>, <span class="number">32</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5142,6 +5178,7 @@
     <span class="macro">uint_impl</span><span class="macro">!</span> { <span class="ident">usize</span>, <span class="ident">u64</span>, <span class="number">64</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctpop</span>,
         <span class="ident">intrinsics</span>::<span class="ident">ctlz</span>,
+        <span class="ident">ctlz_nonzero</span>,
         <span class="ident">intrinsics</span>::<span class="ident">cttz</span>,
         <span class="ident">intrinsics</span>::<span class="ident">bswap</span>,
         <span class="ident">intrinsics</span>::<span class="ident">add_with_overflow</span>,
@@ -5259,6 +5296,13 @@
     <span class="doccomment">/// Convert degrees to radians.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deg_rad_conversions&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.7.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">to_radians</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
+
+    <span class="doccomment">/// Returns the maximum of the two numbers.</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;core_float_min_max&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.20.0&quot;</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
+    <span class="doccomment">/// Returns the minimum of the two numbers.</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;core_float_min_max&quot;</span>, <span class="ident">since</span><span class="op">=</span><span class="string">&quot;1.20.0&quot;</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>;
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">from_str_radix_int_impl</span> {

@@ -69,47 +69,47 @@
 
 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 
-<span class="ident">check</span>(<span class="ident">v</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aborrow%3A%3ABorrowMut%3B%0A%0Afn%20check%3CT%3A%20BorrowMut%3C%5Bi32%5D%3E%3E(mut%20v%3A%20T)%20%7B%0A%20%20%20%20assert_eq!(%26mut%20%5B1%2C%202%2C%203%5D%2C%20v.borrow_mut())%3B%0A%7D%0A%0Alet%20v%20%3D%20vec!%5B1%2C%202%2C%203%5D%3B%0A%0Acheck(v)%3B%0A%7D">Run</a></pre>
+<span class="ident">check</span>(<span class="ident">v</span>);</pre>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 16]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 6]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 19]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 11]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 15]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 7]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 20]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 28]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 22]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 21]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 17]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 12]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 25]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 2]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;T&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 9]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 24]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 30]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 14]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 8]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 10]</code></li>
+    <li><code>impl&lt;T&gt; BorrowMut&lt;T&gt; for <a class="struct" href="../../alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for <a class="struct" href="../../collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;T&gt;</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 23]</code></li>
 <li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 27]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 32]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 9]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 25]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 30]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 13]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 11]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 19]</code></li>
 <li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 31]</code></li>
 <li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 0]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 4]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 3]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 18]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 1]</code></li>
-<li><code>impl&lt;'a, T&gt; BorrowMut&lt;T&gt; for &amp;'a mut T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 5]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 26]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 23]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 8]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;T&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 10]</code></li>
 <li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 29]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 13]</code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;T&gt; for <a class="struct" href="../../collections/boxed/struct.Box.html" title="struct collections::boxed::Box">Box</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></li>
-<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for <a class="struct" href="../../collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;T&gt;</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 17]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 3]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 15]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 7]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 32]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 21]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 12]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 18]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 4]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 2]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 14]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 24]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 28]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 16]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 22]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 26]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 1]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 5]</code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 6]</code></li>
+<li><code>impl&lt;'a, T&gt; BorrowMut&lt;T&gt; for &amp;'a mut T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><code>impl&lt;T&gt; BorrowMut&lt;[T]&gt; for [T; 20]</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/borrow/trait.BorrowMut.js">
                  </script></section>

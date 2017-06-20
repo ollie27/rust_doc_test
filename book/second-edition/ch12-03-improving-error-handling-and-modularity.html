@@ -270,9 +270,7 @@ fn parse_config(args: &amp;[String]) -&gt; Config {
     let query = args[1].clone();
     let filename = args[2].clone();
 
-    Config {
-        query, filename
-    }
+    Config { query, filename }
 }
 </code></pre></pre>
 <p>Listing 12-6: Refactoring <code>parse_config</code> to return an instance of a <code>Config</code>
@@ -298,7 +296,7 @@ trade-off.</p>
 <!-- PROD: START BOX -->
 <blockquote>
 <a class="header" href="ch12-03-improving-error-handling-and-modularity.html#the-tradeoffs-of-using-clone" id="the-tradeoffs-of-using-clone"><h4>The Tradeoffs of Using <code>clone</code></h4></a>
-<p>There's a tendency amongst many Rustaceans to avoid using <code>clone</code> to fix
+<p>There's a tendency among many Rustaceans to avoid using <code>clone</code> to fix
 ownership problems because of its runtime cost. In Chapter 13 on iterators,
 you'll learn how to use more efficient methods in this kind of situation, but
 for now, it's okay to copy a few strings to keep making progress since we'll
@@ -367,9 +365,7 @@ impl Config {
         let query = args[1].clone();
         let filename = args[2].clone();
 
-        Config {
-            query, filename
-        }
+        Config { query, filename }
     }
 }
 </code></pre></pre>
@@ -456,9 +452,7 @@ body of the function needed to return a <code>Result</code>:</p>
         let query = args[1].clone();
         let filename = args[2].clone();
 
-        Ok(Config {
-            query, filename
-        })
+        Ok(Config { query, filename })
     }
 }
 </code></pre>
@@ -703,9 +697,7 @@ impl Config {
         let query = args[1].clone();
         let filename = args[2].clone();
 
-        Ok(Config {
-            query, filename
-        })
+        Ok(Config { query, filename })
     }
 }
 

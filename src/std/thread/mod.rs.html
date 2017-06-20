@@ -1528,6 +1528,10 @@
 <span id="1483">1483</span>
 <span id="1484">1484</span>
 <span id="1485">1485</span>
+<span id="1486">1486</span>
+<span id="1487">1487</span>
+<span id="1488">1488</span>
+<span id="1489">1489</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2318,12 +2322,16 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// let timeout = Duration::from_secs(2);</span>
 <span class="doccomment">/// let beginning_park = Instant::now();</span>
-<span class="doccomment">/// park_timeout(timeout);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// while beginning_park.elapsed() &lt; timeout {</span>
-<span class="doccomment">///     println!(&quot;restarting park_timeout after {:?}&quot;, beginning_park.elapsed());</span>
-<span class="doccomment">///     let timeout = timeout - beginning_park.elapsed();</span>
-<span class="doccomment">///     park_timeout(timeout);</span>
+<span class="doccomment">/// let mut timeout_remaining = timeout;</span>
+<span class="doccomment">/// loop {</span>
+<span class="doccomment">///     park_timeout(timeout_remaining);</span>
+<span class="doccomment">///     let elapsed = beginning_park.elapsed();</span>
+<span class="doccomment">///     if elapsed &gt;= timeout {</span>
+<span class="doccomment">///         break;</span>
+<span class="doccomment">///     }</span>
+<span class="doccomment">///     println!(&quot;restarting park_timeout after {:?}&quot;, elapsed);</span>
+<span class="doccomment">///     timeout_remaining = timeout - elapsed;</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>

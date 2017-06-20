@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait Ord</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>cmp</a></p><script>window.sidebarCurrent = {name: 'Ord', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Ord</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#provided-methods">Provided Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>cmp</a></p><script>window.sidebarCurrent = {name: 'Ord', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -48,9 +48,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/cmp.rs.html#429-446' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/cmp.rs.html#429-482' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Ord: <a class="trait" href="../../core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> + <a class="trait" href="../../core/cmp/trait.PartialOrd.html" title="trait core::cmp::PartialOrd">PartialOrd</a>&lt;Self&gt; {
     fn <a href='#tymethod.cmp' class='fnname'>cmp</a>(&amp;self, other: &amp;Self) -&gt; <a class="enum" href="../../core/cmp/enum.Ordering.html" title="enum core::cmp::Ordering">Ordering</a>;
+
+    fn <a href='#method.max' class='fnname'>max</a>(self, other: Self) -&gt; Self<br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span>,
+    { ... }
+    fn <a href='#method.min' class='fnname'>min</a>(self, other: Self) -&gt; Self<br>&nbsp;&nbsp;&nbsp; <span class="where">where<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a></span>,
+    { ... }
 }</pre><div class='docblock'><p>Trait for types that form a <a href="https://en.wikipedia.org/wiki/Total_order">total order</a>.</p>
 
 <p>An order is a total order if it is (for all <code>a</code>, <code>b</code> and <code>c</code>):</p>
@@ -119,6 +124,29 @@ and <code>name</code>:</p>
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">5</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">10</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">10</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">5</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">5</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">5</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Acmp%3A%3AOrdering%3B%0A%0Aassert_eq!(5.cmp(%2610)%2C%20Ordering%3A%3ALess)%3B%0Aassert_eq!(10.cmp(%265)%2C%20Ordering%3A%3AGreater)%3B%0Aassert_eq!(5.cmp(%265)%2C%20Ordering%3A%3AEqual)%3B%0A%7D">Run</a></pre>
+</div></div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.max' class='method'><span id='max.v' class='invisible'><code>fn <a href='#method.max' class='fnname'>max</a>(self, other: Self) -&gt; Self <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></span></h3><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ord_max_min </code><a href="https://github.com/rust-lang/rust/issues/25663">#25663</a>)</div></div><div class='docblock'><p>Compares and returns the maximum of two values.</p>
+
+<p>Returns the second argument if the comparison determines them to be equal.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">ord_max_min</span>)]</span>
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">2</span>, <span class="number">1</span>.<span class="ident">max</span>(<span class="number">2</span>));
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">2</span>, <span class="number">2</span>.<span class="ident">max</span>(<span class="number">2</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(ord_max_min)%5D%0A%0Afn%20main()%20%7B%0Aassert_eq!(2%2C%201.max(2))%3B%0Aassert_eq!(2%2C%202.max(2))%3B%0A%7D&amp;version=nightly">Run</a></pre>
+</div><h3 id='method.min' class='method'><span id='min.v' class='invisible'><code>fn <a href='#method.min' class='fnname'>min</a>(self, other: Self) -&gt; Self <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></code></span></h3><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>ord_max_min </code><a href="https://github.com/rust-lang/rust/issues/25663">#25663</a>)</div></div><div class='docblock'><p>Compares and returns the minimum of two values.</p>
+
+<p>Returns the first argument if the comparison determines them to be equal.</p>
+
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">ord_max_min</span>)]</span>
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="number">1</span>.<span class="ident">min</span>(<span class="number">2</span>));
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">2</span>, <span class="number">2</span>.<span class="ident">min</span>(<span class="number">2</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(ord_max_min)%5D%0A%0Afn%20main()%20%7B%0Aassert_eq!(1%2C%201.min(2))%3B%0Aassert_eq!(2%2C%202.min(2))%3B%0A%7D&amp;version=nightly">Run</a></pre>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

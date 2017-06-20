@@ -1714,9 +1714,9 @@
     <span class="doccomment">/// &#39;XID_Start&#39; is a Unicode Derived Property specified in</span>
     <span class="doccomment">/// [UAX #31](http://unicode.org/reports/tr31/#NFKC_Modifications),</span>
     <span class="doccomment">/// mostly similar to `ID_Start` but modified for closure under `NFKx`.</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unicode&quot;</span>,
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rustc_private&quot;</span>,
                <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;mainly needed for compiler internals&quot;</span>,
-               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
+               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27812&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_xid_start</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="ident">derived_property</span>::<span class="ident">XID_Start</span>(<span class="self">self</span>)
@@ -1728,9 +1728,9 @@
     <span class="doccomment">/// &#39;XID_Continue&#39; is a Unicode Derived Property specified in</span>
     <span class="doccomment">/// [UAX #31](http://unicode.org/reports/tr31/#NFKC_Modifications),</span>
     <span class="doccomment">/// mostly similar to &#39;ID_Continue&#39; but modified for closure under NFKx.</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unicode&quot;</span>,
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rustc_private&quot;</span>,
                <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;mainly needed for compiler internals&quot;</span>,
-               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
+               <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27812&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_xid_continue</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="ident">derived_property</span>::<span class="ident">XID_Continue</span>(<span class="self">self</span>)
