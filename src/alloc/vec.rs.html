@@ -2636,6 +2636,11 @@
 <span id="2591">2591</span>
 <span id="2592">2592</span>
 <span id="2593">2593</span>
+<span id="2594">2594</span>
+<span id="2595">2595</span>
+<span id="2596">2596</span>
+<span id="2597">2597</span>
+<span id="2598">2598</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2795,7 +2800,7 @@
 <span class="doccomment">/// However be careful: if you try to access an index which isn&#39;t in the `Vec`,</span>
 <span class="doccomment">/// your software will panic! You cannot do this:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// ```should_panic</span>
 <span class="doccomment">/// let v = vec![0, 2, 4, 6];</span>
 <span class="doccomment">/// println!(&quot;{}&quot;, v[6]); // it will panic!</span>
 <span class="doccomment">/// ```</span>
@@ -2861,7 +2866,7 @@
 <span class="doccomment">/// on an empty Vec, it will not allocate memory. Similarly, if you store zero-sized</span>
 <span class="doccomment">/// types inside a `Vec`, it will not allocate space for them. *Note that in this case</span>
 <span class="doccomment">/// the `Vec` may not report a [`capacity`] of 0*. `Vec` will allocate if and only</span>
-<span class="doccomment">/// if [`mem::size_of::&lt;T&gt;`]` * capacity() &gt; 0`. In general, `Vec`&#39;s allocation</span>
+<span class="doccomment">/// if [`mem::size_of::&lt;T&gt;`]`() * capacity() &gt; 0`. In general, `Vec`&#39;s allocation</span>
 <span class="doccomment">/// details are subtle enough that it is strongly recommended that you only</span>
 <span class="doccomment">/// free memory allocated by a `Vec` by creating a new `Vec` and dropping it.</span>
 <span class="doccomment">///</span>
@@ -3462,7 +3467,8 @@
         }
     }
 
-    <span class="doccomment">/// Removes consecutive elements in the vector that resolve to the same key.</span>
+    <span class="doccomment">/// Removes all but the first of consecutive elements in the vector that resolve to the same</span>
+    <span class="doccomment">/// key.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the vector is sorted, this removes all duplicates.</span>
     <span class="doccomment">///</span>
@@ -3481,11 +3487,13 @@
         <span class="self">self</span>.<span class="ident">dedup_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> <span class="ident">key</span>(<span class="ident">a</span>) <span class="op">==</span> <span class="ident">key</span>(<span class="ident">b</span>))
     }
 
-    <span class="doccomment">/// Removes consecutive elements in the vector according to a predicate.</span>
+    <span class="doccomment">/// Removes all but the first of consecutive elements in the vector satisfying a given equality</span>
+    <span class="doccomment">/// relation.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `same_bucket` function is passed references to two elements from the vector, and</span>
-    <span class="doccomment">/// returns `true` if the elements compare equal, or `false` if they do not. Only the first</span>
-    <span class="doccomment">/// of adjacent equal items is kept.</span>
+    <span class="doccomment">/// returns `true` if the elements compare equal, or `false` if they do not. The elements are</span>
+    <span class="doccomment">/// passed in opposite order from their order in the vector, so if `same_bucket(a, b)` returns</span>
+    <span class="doccomment">/// `true`, `a` is removed.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the vector is sorted, this removes all duplicates.</span>
     <span class="doccomment">///</span>
@@ -4763,10 +4771,12 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_from_vec&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.18.0&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">into_boxed_slice</span>()
+<span class="comment">// note: test pulls in libstd, which causes errors here</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">test</span>))]</span>
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_from_vec&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
+        <span class="ident">v</span>.<span class="ident">into_boxed_slice</span>()
     }
 }
 

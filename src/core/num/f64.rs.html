@@ -316,6 +316,11 @@
 <span id="271">271</span>
 <span id="272">272</span>
 <span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -524,18 +529,23 @@
         }
     }
 
-    <span class="doccomment">/// Returns `true` if `self` is positive, including `+0.0` and</span>
-    <span class="doccomment">/// `Float::infinity()`.</span>
+    <span class="doccomment">/// Returns `true` if and only if `self` has a positive sign, including `+0.0`, `NaN`s with</span>
+    <span class="doccomment">/// positive sign bit and positive infinity.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">is_sign_positive</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span> <span class="op">&gt;</span> <span class="number">0.0</span> <span class="op">||</span> (<span class="number">1.0</span> <span class="op">/</span> <span class="self">self</span>) <span class="op">==</span> <span class="ident">INFINITY</span>
+        <span class="op">!</span><span class="self">self</span>.<span class="ident">is_sign_negative</span>()
     }
 
-    <span class="doccomment">/// Returns `true` if `self` is negative, including `-0.0` and</span>
-    <span class="doccomment">/// `Float::neg_infinity()`.</span>
+    <span class="doccomment">/// Returns `true` if and only if `self` has a negative sign, including `-0.0`, `NaN`s with</span>
+    <span class="doccomment">/// negative sign bit and negative infinity.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">is_sign_negative</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span> <span class="op">&lt;</span> <span class="number">0.0</span> <span class="op">||</span> (<span class="number">1.0</span> <span class="op">/</span> <span class="self">self</span>) <span class="op">==</span> <span class="ident">NEG_INFINITY</span>
+        <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+        <span class="ident">union</span> <span class="ident">F64Bytes</span> {
+            <span class="ident">f</span>: <span class="ident">f64</span>,
+            <span class="ident">b</span>: <span class="ident">u64</span>
+        }
+        <span class="kw">unsafe</span> { <span class="ident">F64Bytes</span> { <span class="ident">f</span>: <span class="self">self</span> }.<span class="ident">b</span> <span class="op">&amp;</span> <span class="number">0x8000_0000_0000_0000</span> <span class="op">!=</span> <span class="number">0</span> }
     }
 
     <span class="doccomment">/// Returns the reciprocal (multiplicative inverse) of the number.</span>

@@ -66,8 +66,9 @@
 </ul>
 
 <h2 id='derivable' class='section-header'><a href='#derivable'>Derivable</a></h2>
-<p>This trait can be used with <code>#[derive]</code>. When <code>derive</code>d, it will produce a lexicographic
-ordering based on the top-to-bottom declaration order of the struct&#39;s members.</p>
+<p>This trait can be used with <code>#[derive]</code>. When <code>derive</code>d on structs, it will produce a
+lexicographic ordering based on the top-to-bottom declaration order of the struct&#39;s members.
+When <code>derive</code>d on enums, variants are ordered by their top-to-bottom declaration order.</p>
 
 <h2 id='how-can-i-implement-ord' class='section-header'><a href='#how-can-i-implement-ord'>How can I implement <code>Ord</code>?</a></h2>
 <p><code>Ord</code> requires that the type also be <code>PartialOrd</code> and <code>Eq</code> (which requires <code>PartialEq</code>).</p>

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/alloc/string.rs.html#1919-1934' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/alloc/string.rs.html#1921-1936' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ToString {
     fn <a href='#tymethod.to_string' class='fnname'>to_string</a>(&amp;self) -&gt; <a class="struct" href="../../alloc/string/struct.String.html" title="struct alloc::string::String">String</a>;
 }</pre><div class='docblock'><p>A trait for converting a value to a <code>String</code>.</p>
@@ -77,6 +77,13 @@ implementation for free.</p>
 <li><code>impl ToString for str</code></li>
 <li><code>impl&lt;'a&gt; ToString for <a class="enum" href="../../alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'a, str&gt;</code></li>
 <li><code>impl ToString for <a class="struct" href="../../alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code></li>
+<li><code>impl&lt;'a, B:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; ToString for <a class="enum" href="../../alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'a, B&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;B: <a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a> + <a class="trait" href="../../alloc/borrow/trait.ToOwned.html" title="trait alloc::borrow::ToOwned">ToOwned</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;B as <a class="trait" href="../../alloc/borrow/trait.ToOwned.html" title="trait alloc::borrow::ToOwned">ToOwned</a>&gt;::<a class="type" href="../../alloc/borrow/trait.ToOwned.html#associatedtype.Owned" title="type alloc::borrow::ToOwned::Owned">Owned</a>: <a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a>,&nbsp;</span></code></li>
+<li><code>impl&lt;'a, T:&nbsp;<a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a> + ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; ToString for &amp;'a T</code></li>
+<li><code>impl&lt;'a, T:&nbsp;<a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a> + ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; ToString for &amp;'a mut T</code></li>
+<li><code>impl&lt;T:&nbsp;<a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a> + ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; ToString for <a class="struct" href="../../alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;T&gt;</code></li>
+<li><code>impl&lt;T:&nbsp;<a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a> + ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; ToString for <a class="struct" href="../../alloc/arc/struct.Arc.html" title="struct alloc::arc::Arc">Arc</a>&lt;T&gt;</code></li>
+<li><code>impl&lt;T:&nbsp;<a class="trait" href="../../alloc/fmt/trait.Display.html" title="trait alloc::fmt::Display">Display</a> + ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; ToString for <a class="struct" href="../../alloc/rc/struct.Rc.html" title="struct alloc::rc::Rc">Rc</a>&lt;T&gt;</code></li>
+<li><code>impl&lt;'a&gt; ToString for <a class="struct" href="../../alloc/fmt/struct.Arguments.html" title="struct alloc::fmt::Arguments">Arguments</a>&lt;'a&gt;</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/alloc/string/trait.ToString.js">
                  </script></section>

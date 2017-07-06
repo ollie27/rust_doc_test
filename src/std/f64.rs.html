@@ -1690,13 +1690,6 @@
 <span id="1645">1645</span>
 <span id="1646">1646</span>
 <span id="1647">1647</span>
-<span id="1648">1648</span>
-<span id="1649">1649</span>
-<span id="1650">1650</span>
-<span id="1651">1651</span>
-<span id="1652">1652</span>
-<span id="1653">1653</span>
-<span id="1654">1654</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2001,21 +1994,15 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">signum</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> { <span class="ident">num</span>::<span class="ident">Float</span>::<span class="ident">signum</span>(<span class="self">self</span>) }
 
-    <span class="doccomment">/// Returns `true` if `self`&#39;s sign bit is positive, including</span>
-    <span class="doccomment">/// `+0.0` and `INFINITY`.</span>
+    <span class="doccomment">/// Returns `true` if and only if `self` has a positive sign, including `+0.0`, `NaN`s with</span>
+    <span class="doccomment">/// positive sign bit and positive infinity.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::f64;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let nan: f64 = f64::NAN;</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// let f = 7.0_f64;</span>
     <span class="doccomment">/// let g = -7.0_f64;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert!(f.is_sign_positive());</span>
     <span class="doccomment">/// assert!(!g.is_sign_positive());</span>
-    <span class="doccomment">/// // Requires both tests to determine if is `NaN`</span>
-    <span class="doccomment">/// assert!(!nan.is_sign_positive() &amp;&amp; !nan.is_sign_negative());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2026,21 +2013,15 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_positive</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { <span class="ident">num</span>::<span class="ident">Float</span>::<span class="ident">is_sign_positive</span>(<span class="self">self</span>) }
 
-    <span class="doccomment">/// Returns `true` if `self`&#39;s sign is negative, including `-0.0`</span>
-    <span class="doccomment">/// and `NEG_INFINITY`.</span>
+    <span class="doccomment">/// Returns `true` if and only if `self` has a negative sign, including `-0.0`, `NaN`s with</span>
+    <span class="doccomment">/// negative sign bit and negative infinity.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::f64;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let nan = f64::NAN;</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// let f = 7.0_f64;</span>
     <span class="doccomment">/// let g = -7.0_f64;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert!(!f.is_sign_negative());</span>
     <span class="doccomment">/// assert!(g.is_sign_negative());</span>
-    <span class="doccomment">/// // Requires both tests to determine if is `NaN`.</span>
-    <span class="doccomment">/// assert!(!nan.is_sign_positive() &amp;&amp; !nan.is_sign_negative());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2758,13 +2739,16 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_bits</span>(<span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">u64</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">const</span> <span class="ident">EXP_MASK</span>: <span class="ident">u64</span>   <span class="op">=</span> <span class="number">0x7FF0000000000000</span>;
-        <span class="kw">const</span> <span class="ident">QNAN_MASK</span>: <span class="ident">u64</span>  <span class="op">=</span> <span class="number">0x0001000000000000</span>;
         <span class="kw">const</span> <span class="ident">FRACT_MASK</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">0x000FFFFFFFFFFFFF</span>;
         <span class="kw">if</span> <span class="ident">v</span> <span class="op">&amp;</span> <span class="ident">EXP_MASK</span> <span class="op">==</span> <span class="ident">EXP_MASK</span> <span class="op">&amp;&amp;</span> <span class="ident">v</span> <span class="op">&amp;</span> <span class="ident">FRACT_MASK</span> <span class="op">!=</span> <span class="number">0</span> {
-            <span class="comment">// If we have a NaN value, we</span>
-            <span class="comment">// convert signaling NaN values to quiet NaN</span>
-            <span class="comment">// by setting the the highest bit of the fraction</span>
-            <span class="ident">v</span> <span class="op">|=</span> <span class="ident">QNAN_MASK</span>;
+            <span class="comment">// While IEEE 754-2008 specifies encodings for quiet NaNs</span>
+            <span class="comment">// and signaling ones, certain MIPS and PA-RISC</span>
+            <span class="comment">// CPUs treat signaling NaNs differently.</span>
+            <span class="comment">// Therefore to be safe, we pass a known quiet NaN</span>
+            <span class="comment">// if v is any kind of NaN.</span>
+            <span class="comment">// The check above only assumes IEEE 754-1985 to be</span>
+            <span class="comment">// valid.</span>
+            <span class="ident">v</span> <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">NAN</span>) };
         }
         <span class="kw">unsafe</span> { ::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">v</span>) }
     }
@@ -2801,7 +2785,7 @@
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_infinite</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_finite</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_normal</span>());
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_sign_positive</span>());
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">nan</span>.<span class="ident">is_sign_positive</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">nan</span>.<span class="ident">is_sign_negative</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Fp</span>::<span class="ident">Nan</span>, <span class="ident">nan</span>.<span class="ident">classify</span>());
     }
@@ -3047,7 +3031,8 @@
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span>(<span class="op">-</span><span class="number">1f64</span>).<span class="ident">is_sign_positive</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">NEG_INFINITY</span>.<span class="ident">is_sign_positive</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span>(<span class="number">1f64</span><span class="op">/</span><span class="ident">NEG_INFINITY</span>).<span class="ident">is_sign_positive</span>());
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">NAN</span>.<span class="ident">is_sign_positive</span>());
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">NAN</span>.<span class="ident">is_sign_positive</span>());
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span>(<span class="op">-</span><span class="ident">NAN</span>).<span class="ident">is_sign_positive</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3060,6 +3045,7 @@
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">NEG_INFINITY</span>.<span class="ident">is_sign_negative</span>());
         <span class="macro">assert</span><span class="macro">!</span>((<span class="number">1f64</span><span class="op">/</span><span class="ident">NEG_INFINITY</span>).<span class="ident">is_sign_negative</span>());
         <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">NAN</span>.<span class="ident">is_sign_negative</span>());
+        <span class="macro">assert</span><span class="macro">!</span>((<span class="op">-</span><span class="ident">NAN</span>).<span class="ident">is_sign_negative</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

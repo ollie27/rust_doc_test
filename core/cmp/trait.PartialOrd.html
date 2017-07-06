@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/cmp.rs.html#603-711' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/cmp.rs.html#604-712' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'><div class="docblock attributes">#[lang = "ord"]
 </div>pub trait PartialOrd&lt;Rhs:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&nbsp;=&nbsp;Self&gt;: <a class="trait" href="../../core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&lt;Rhs&gt; {
     fn <a href='#tymethod.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;Rhs) -&gt; <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="enum" href="../../core/cmp/enum.Ordering.html" title="enum core::cmp::Ordering">Ordering</a>&gt;;
@@ -70,8 +70,9 @@
 transitively: if <code>T: PartialOrd&lt;U&gt;</code> and <code>U: PartialOrd&lt;V&gt;</code> then <code>U: PartialOrd&lt;T&gt;</code> and <code>T: PartialOrd&lt;V&gt;</code>.</p>
 
 <h2 id='derivable' class='section-header'><a href='#derivable'>Derivable</a></h2>
-<p>This trait can be used with <code>#[derive]</code>. When <code>derive</code>d, it will produce a lexicographic
-ordering based on the top-to-bottom declaration order of the struct&#39;s members.</p>
+<p>This trait can be used with <code>#[derive]</code>. When <code>derive</code>d on structs, it will produce a
+lexicographic ordering based on the top-to-bottom declaration order of the struct&#39;s members.
+When <code>derive</code>d on enums, variants are ordered by their top-to-bottom declaration order.</p>
 
 <h2 id='how-can-i-implement-partialord' class='section-header'><a href='#how-can-i-implement-partialord'>How can I implement <code>PartialOrd</code>?</a></h2>
 <p><code>PartialOrd</code> only requires implementation of the <code>partial_cmp</code> method, with the others

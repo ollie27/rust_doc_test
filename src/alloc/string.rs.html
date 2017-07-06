@@ -2253,6 +2253,63 @@
 <span id="2208">2208</span>
 <span id="2209">2209</span>
 <span id="2210">2210</span>
+<span id="2211">2211</span>
+<span id="2212">2212</span>
+<span id="2213">2213</span>
+<span id="2214">2214</span>
+<span id="2215">2215</span>
+<span id="2216">2216</span>
+<span id="2217">2217</span>
+<span id="2218">2218</span>
+<span id="2219">2219</span>
+<span id="2220">2220</span>
+<span id="2221">2221</span>
+<span id="2222">2222</span>
+<span id="2223">2223</span>
+<span id="2224">2224</span>
+<span id="2225">2225</span>
+<span id="2226">2226</span>
+<span id="2227">2227</span>
+<span id="2228">2228</span>
+<span id="2229">2229</span>
+<span id="2230">2230</span>
+<span id="2231">2231</span>
+<span id="2232">2232</span>
+<span id="2233">2233</span>
+<span id="2234">2234</span>
+<span id="2235">2235</span>
+<span id="2236">2236</span>
+<span id="2237">2237</span>
+<span id="2238">2238</span>
+<span id="2239">2239</span>
+<span id="2240">2240</span>
+<span id="2241">2241</span>
+<span id="2242">2242</span>
+<span id="2243">2243</span>
+<span id="2244">2244</span>
+<span id="2245">2245</span>
+<span id="2246">2246</span>
+<span id="2247">2247</span>
+<span id="2248">2248</span>
+<span id="2249">2249</span>
+<span id="2250">2250</span>
+<span id="2251">2251</span>
+<span id="2252">2252</span>
+<span id="2253">2253</span>
+<span id="2254">2254</span>
+<span id="2255">2255</span>
+<span id="2256">2256</span>
+<span id="2257">2257</span>
+<span id="2258">2258</span>
+<span id="2259">2259</span>
+<span id="2260">2260</span>
+<span id="2261">2261</span>
+<span id="2262">2262</span>
+<span id="2263">2263</span>
+<span id="2264">2264</span>
+<span id="2265">2265</span>
+<span id="2266">2266</span>
+<span id="2267">2267</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2321,9 +2378,11 @@
 <span class="kw">use</span> <span class="ident">std_unicode</span>::<span class="ident">lossy</span>;
 <span class="kw">use</span> <span class="ident">std_unicode</span>::<span class="ident">char</span>::{<span class="ident">decode_utf16</span>, <span class="ident">REPLACEMENT_CHARACTER</span>};
 
+<span class="kw">use</span> <span class="ident">arc</span>::<span class="ident">Arc</span>;
 <span class="kw">use</span> <span class="ident">borrow</span>::{<span class="ident">Cow</span>, <span class="ident">ToOwned</span>};
 <span class="kw">use</span> <span class="ident">range</span>::<span class="ident">RangeArgument</span>;
 <span class="kw">use</span> <span class="ident">Bound</span>::{<span class="ident">Excluded</span>, <span class="ident">Included</span>, <span class="ident">Unbounded</span>};
+<span class="kw">use</span> <span class="ident">rc</span>::<span class="ident">Rc</span>;
 <span class="kw">use</span> <span class="ident">str</span>::{<span class="self">self</span>, <span class="ident">from_boxed_utf8_unchecked</span>, <span class="ident">FromStr</span>, <span class="ident">Utf8Error</span>, <span class="ident">Chars</span>};
 <span class="kw">use</span> <span class="ident">vec</span>::<span class="ident">Vec</span>;
 <span class="kw">use</span> <span class="ident">boxed</span>::<span class="ident">Box</span>;
@@ -2380,7 +2439,7 @@
 <span class="doccomment">/// similar, but without the UTF-8 constraint. The second implication is that</span>
 <span class="doccomment">/// you cannot index into a `String`:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// ```compile_fail,E0277</span>
 <span class="doccomment">/// let s = &quot;hello&quot;;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// println!(&quot;The first letter of s is {}&quot;, s[0]); // ERROR!!!</span>
@@ -4199,12 +4258,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">T</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="ident">default</span> <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
-        <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::<span class="ident">Write</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
-        <span class="ident">buf</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>))
-           .<span class="ident">expect</span>(<span class="string">&quot;a Display implementation return an error unexpectedly&quot;</span>);
-        <span class="ident">buf</span>.<span class="ident">shrink_to_fit</span>();
-        <span class="ident">buf</span>
+        <span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>).<span class="ident">to_string</span>()
     }
 }
 
@@ -4229,6 +4283,66 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
         <span class="self">self</span>.<span class="ident">to_owned</span>()
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">B</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">B</span><span class="op">&gt;</span>
+    <span class="kw">where</span> <span class="ident">B</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="ident">ToOwned</span>,
+          <span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">ToOwned</span><span class="op">&gt;</span>::<span class="ident">Owned</span>: <span class="ident">fmt</span>::<span class="ident">Display</span>
+{
+    <span class="ident">default</span> <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
+            <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="kw-2">ref</span> <span class="ident">b</span>) <span class="op">=&gt;</span> <span class="ident">b</span>.<span class="ident">to_string</span>(),
+            <span class="ident">Cow</span>::<span class="ident">Owned</span>(<span class="kw-2">ref</span> <span class="ident">o</span>) <span class="op">=&gt;</span> <span class="ident">o</span>.<span class="ident">to_string</span>(),
+        }
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span> {
+    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">to_string</span>()
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">to_string</span>()
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">to_string</span>()
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">to_string</span>()
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">to_string</span>()
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_to_string_specialization&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToString</span> <span class="kw">for</span> <span class="ident">fmt</span>::<span class="ident">Arguments</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+        <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::<span class="ident">Write</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
+        <span class="ident">buf</span>.<span class="ident">write_fmt</span>(<span class="kw-2">*</span><span class="self">self</span>)
+           .<span class="ident">expect</span>(<span class="string">&quot;a Display implementation return an error unexpectedly&quot;</span>);
+        <span class="ident">buf</span>.<span class="ident">shrink_to_fit</span>();
+        <span class="ident">buf</span>
     }
 }
 
@@ -4264,10 +4378,10 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_from_str&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.18.0&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">into_boxed_str</span>()
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;box_from_str&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="ident">s</span>.<span class="ident">into_boxed_str</span>()
     }
 }
 

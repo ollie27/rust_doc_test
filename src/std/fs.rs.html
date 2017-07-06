@@ -3072,6 +3072,31 @@
 <span id="3027">3027</span>
 <span id="3028">3028</span>
 <span id="3029">3029</span>
+<span id="3030">3030</span>
+<span id="3031">3031</span>
+<span id="3032">3032</span>
+<span id="3033">3033</span>
+<span id="3034">3034</span>
+<span id="3035">3035</span>
+<span id="3036">3036</span>
+<span id="3037">3037</span>
+<span id="3038">3038</span>
+<span id="3039">3039</span>
+<span id="3040">3040</span>
+<span id="3041">3041</span>
+<span id="3042">3042</span>
+<span id="3043">3043</span>
+<span id="3044">3044</span>
+<span id="3045">3045</span>
+<span id="3046">3046</span>
+<span id="3047">3047</span>
+<span id="3048">3048</span>
+<span id="3049">3049</span>
+<span id="3050">3050</span>
+<span id="3051">3051</span>
+<span id="3052">3052</span>
+<span id="3053">3053</span>
+<span id="3054">3054</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -3094,7 +3119,7 @@
 
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">ffi</span>::<span class="ident">OsString</span>;
-<span class="kw">use</span> <span class="ident">io</span>::{<span class="self">self</span>, <span class="ident">SeekFrom</span>, <span class="ident">Seek</span>, <span class="ident">Read</span>, <span class="ident">Write</span>};
+<span class="kw">use</span> <span class="ident">io</span>::{<span class="self">self</span>, <span class="ident">SeekFrom</span>, <span class="ident">Seek</span>, <span class="ident">Read</span>, <span class="ident">Initializer</span>, <span class="ident">Write</span>};
 <span class="kw">use</span> <span class="ident">path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 <span class="kw">use</span> <span class="ident">sys</span>::<span class="ident">fs</span> <span class="kw">as</span> <span class="ident">fs_imp</span>;
 <span class="kw">use</span> <span class="ident">sys_common</span>::{<span class="ident">AsInnerMut</span>, <span class="ident">FromInner</span>, <span class="ident">AsInner</span>, <span class="ident">IntoInner</span>};
@@ -3521,8 +3546,10 @@
     <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">read</span>(<span class="ident">buf</span>)
     }
-    <span class="kw">fn</span> <span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">read_to_end</span>(<span class="ident">buf</span>)
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">initializer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="ident">Initializer</span>::<span class="ident">nop</span>()
     }
 }
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3543,8 +3570,10 @@
     <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">read</span>(<span class="ident">buf</span>)
     }
-    <span class="kw">fn</span> <span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">read_to_end</span>(<span class="ident">buf</span>)
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">initializer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="ident">Initializer</span>::<span class="ident">nop</span>()
     }
 }
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -3724,15 +3753,29 @@
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function will return an error under a number of different</span>
-    <span class="doccomment">/// circumstances, to include but not limited to:</span>
+    <span class="doccomment">/// circumstances. Some of these error conditions are listed here, together</span>
+    <span class="doccomment">/// with their [`ErrorKind`]. The mapping to [`ErrorKind`]s is not part of</span>
+    <span class="doccomment">/// the compatiblity contract of the function, especially the `Other` kind</span>
+    <span class="doccomment">/// might change to more specific kinds in the future.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// * Opening a file that does not exist without setting `create` or</span>
-    <span class="doccomment">///   `create_new`.</span>
-    <span class="doccomment">/// * Attempting to open a file with access that the user lacks</span>
-    <span class="doccomment">///   permissions for</span>
-    <span class="doccomment">/// * Filesystem-level errors (full disk, etc)</span>
-    <span class="doccomment">/// * Invalid combinations of open options (truncate without write access,</span>
-    <span class="doccomment">///   no access mode set, etc)</span>
+    <span class="doccomment">/// * [`NotFound`]: The specified file does not exist and neither `create`</span>
+    <span class="doccomment">///   or `create_new` is set.</span>
+    <span class="doccomment">/// * [`NotFound`]: One of the directory components of the file path does</span>
+    <span class="doccomment">///   not exist.</span>
+    <span class="doccomment">/// * [`PermissionDenied`]: The user lacks permission to get the specified</span>
+    <span class="doccomment">///   access rights for the file.</span>
+    <span class="doccomment">/// * [`PermissionDenied`]: The user lacks permission to open one of the</span>
+    <span class="doccomment">///   directory components of the specified path.</span>
+    <span class="doccomment">/// * [`AlreadyExists`]: `create_new` was specified and the file already</span>
+    <span class="doccomment">///   exists.</span>
+    <span class="doccomment">/// * [`InvalidInput`]: Invalid combinations of open options (truncate</span>
+    <span class="doccomment">///   without write access, no access mode set, etc.).</span>
+    <span class="doccomment">/// * [`Other`]: One of the directory components of the specified file path</span>
+    <span class="doccomment">///   was not, in fact, a directory.</span>
+    <span class="doccomment">/// * [`Other`]: Filesystem-level errors: full disk, write permission</span>
+    <span class="doccomment">///   requested on a read-only file system, exceeded disk quota, too many</span>
+    <span class="doccomment">///   open files, too long filename, too many symbolic links in the</span>
+    <span class="doccomment">///   specified path (Unix-like systems only), etc.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -3741,6 +3784,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// let file = OpenOptions::new().open(&quot;foo.txt&quot;);</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`ErrorKind`]: ../io/enum.ErrorKind.html</span>
+    <span class="doccomment">/// [`AlreadyExists`]: ../io/enum.ErrorKind.html#variant.AlreadyExists</span>
+    <span class="doccomment">/// [`InvalidInput`]: ../io/enum.ErrorKind.html#variant.InvalidInput</span>
+    <span class="doccomment">/// [`NotFound`]: ../io/enum.ErrorKind.html#variant.NotFound</span>
+    <span class="doccomment">/// [`Other`]: ../io/enum.ErrorKind.html#variant.Other</span>
+    <span class="doccomment">/// [`PermissionDenied`]: ../io/enum.ErrorKind.html#variant.PermissionDenied</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">open</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">File</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">_open</span>(<span class="ident">path</span>.<span class="ident">as_ref</span>())

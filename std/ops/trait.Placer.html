@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops/place.rs.html#61-68' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops/place.rs.html#68-75' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Placer&lt;Data&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Data: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span>{
     type <a href='#associatedtype.Place' class="type">Place</a>: <a class="trait" href="../../std/ops/trait.InPlace.html" title="trait std::ops::InPlace">InPlace</a>&lt;Data&gt;;
     fn <a href='#tymethod.make_place' class='fnname'>make_place</a>(self) -&gt; Self::<a class="type" href="../../std/ops/trait.Placer.html#associatedtype.Place" title="type std::ops::Placer::Place">Place</a>;
@@ -64,7 +64,7 @@
 <span class="kw">unsafe</span> {
     <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">write</span>(<span class="ident">raw_place</span>, <span class="ident">value</span>);
     <span class="ident">InPlace</span>::<span class="ident">finalize</span>(<span class="ident">place</span>)
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20p%20%3D%20PLACE%3B%0Alet%20mut%20place%20%3D%20Placer%3A%3Amake_place(p)%3B%0Alet%20raw_place%20%3D%20Place%3A%3Apointer(%26mut%20place)%3B%0Alet%20value%20%3D%20EXPR%3B%0Aunsafe%20%7B%0A%20%20%20%20std%3A%3Aptr%3A%3Awrite(raw_place%2C%20value)%3B%0A%20%20%20%20InPlace%3A%3Afinalize(place)%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(placement_new_protocol%2C%20box_heap)%5D%0Ause%20std%3A%3Aops%3A%3A%7BPlacer%2C%20Place%2C%20InPlace%7D%3B%0A%23%5Ballow(non_snake_case)%5D%0Afn%20main()%20%7B%0Alet%20PLACE%20%3D%20std%3A%3Aboxed%3A%3AHEAP%3B%0Alet%20EXPR%20%3D%201%3B%0Alet%20p%20%3D%20PLACE%3B%0Alet%20mut%20place%20%3D%20Placer%3A%3Amake_place(p)%3B%0Alet%20raw_place%20%3D%20Place%3A%3Apointer(%26mut%20place)%3B%0Alet%20value%20%3D%20EXPR%3B%0Aunsafe%20%7B%0A%20%20%20%20std%3A%3Aptr%3A%3Awrite(raw_place%2C%20value)%3B%0A%20%20%20%20InPlace%3A%3Afinalize(place)%0A%7D%0A%3B%20%7D%0A&amp;version=nightly">Run</a></pre>
 
 <p>The type of <code>PLACE &lt;- EXPR</code> is derived from the type of <code>PLACE</code>;
 if the type of <code>PLACE</code> is <code>P</code>, then the final type of the whole
@@ -86,13 +86,13 @@ uninitialized state for <code>Data</code>.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/collections/linked_list/struct.BackPlace.html" title="struct std::collections::linked_list::BackPlace">BackPlace</a>&lt;'a, T&gt;</code></li>
-<li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/collections/linked_list/struct.FrontPlace.html" title="struct std::collections::linked_list::FrontPlace">FrontPlace</a>&lt;'a, T&gt;</code></li>
+    <li><code>impl&lt;T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/boxed/struct.ExchangeHeapSingleton.html" title="struct std::boxed::ExchangeHeapSingleton">ExchangeHeapSingleton</a></code></li>
 <li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/collections/vec_deque/struct.PlaceFront.html" title="struct std::collections::vec_deque::PlaceFront">PlaceFront</a>&lt;'a, T&gt;</code></li>
+<li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/collections/linked_list/struct.FrontPlace.html" title="struct std::collections::linked_list::FrontPlace">FrontPlace</a>&lt;'a, T&gt;</code></li>
 <li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for std::vec::<a class="struct" href="../../std/vec/struct.PlaceBack.html" title="struct std::vec::PlaceBack">PlaceBack</a>&lt;'a, T&gt;</code></li>
-<li><code>impl&lt;T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/boxed/struct.ExchangeHeapSingleton.html" title="struct std::boxed::ExchangeHeapSingleton">ExchangeHeapSingleton</a></code></li>
 <li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for std::collections::vec_deque::<a class="struct" href="../../std/collections/vec_deque/struct.PlaceBack.html" title="struct std::collections::vec_deque::PlaceBack">PlaceBack</a>&lt;'a, T&gt;</code></li>
 <li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for &amp;'a mut <a class="struct" href="../../std/collections/binary_heap/struct.BinaryHeap.html" title="struct std::collections::binary_heap::BinaryHeap">BinaryHeap</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: 'a + <a class="trait" href="../../std/clone/trait.Clone.html" title="trait std::clone::Clone">Clone</a> + <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a>,&nbsp;</span></code></li>
+<li><code>impl&lt;'a, T&gt; Placer&lt;T&gt; for <a class="struct" href="../../std/collections/linked_list/struct.BackPlace.html" title="struct std::collections::linked_list::BackPlace">BackPlace</a>&lt;'a, T&gt;</code></li>
 <li><code>impl&lt;'a, K, V&gt; Placer&lt;V&gt; for <a class="enum" href="../../std/collections/hash_map/enum.Entry.html" title="enum std::collections::hash_map::Entry">Entry</a>&lt;'a, K, V&gt;</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/ops/place/trait.Placer.js">

@@ -409,6 +409,7 @@
 <span id="364">364</span>
 <span id="365">365</span>
 <span id="366">366</span>
+<span id="367">367</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -438,7 +439,7 @@
 <span class="doccomment">/// It does not have an `IntoIterator` implementation, so you can&#39;t use it in a</span>
 <span class="doccomment">/// `for` loop directly. This won&#39;t compile:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// ```compile_fail,E0277</span>
 <span class="doccomment">/// for i in .. {</span>
 <span class="doccomment">///    // ...</span>
 <span class="doccomment">/// }</span>
@@ -596,7 +597,7 @@
 <span class="doccomment">/// It does not have an `IntoIterator` implementation, so you can&#39;t use it in a</span>
 <span class="doccomment">/// `for` loop directly. This won&#39;t compile:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// ```compile_fail,E0277</span>
 <span class="doccomment">/// for i in ..5 {</span>
 <span class="doccomment">///     // ...</span>
 <span class="doccomment">/// }</span>
@@ -725,7 +726,8 @@
 <span class="doccomment">/// It does not have an `IntoIterator` implementation, so you can&#39;t use it in a</span>
 <span class="doccomment">/// `for` loop directly. This won&#39;t compile:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// ```compile_fail,E0277</span>
+<span class="doccomment">/// #![feature(inclusive_range_syntax)]</span>
 <span class="doccomment">/// for i in ...5 {</span>
 <span class="doccomment">///     // ...</span>
 <span class="doccomment">/// }</span>

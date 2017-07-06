@@ -189,6 +189,7 @@
 <span id="144">144</span>
 <span id="145">145</span>
 <span id="146">146</span>
+<span id="147">147</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -214,13 +215,14 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! On a technical level, Rust inserts</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//! extern crate std;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! into the crate root of every crate, and</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//! # #[allow(unused_imports)]</span>
 <span class="doccomment">//! use std::prelude::v1::*;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>

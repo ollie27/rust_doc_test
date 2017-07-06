@@ -576,8 +576,6 @@
 <span id="531">531</span>
 <span id="532">532</span>
 <span id="533">533</span>
-<span id="534">534</span>
-<span id="535">535</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -811,7 +809,7 @@
 <span class="doccomment">//! There are a number of related macros in the `format!` family. The ones that</span>
 <span class="doccomment">//! are currently implemented are:</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
+<span class="doccomment">//! ```ignore (only-for-syntax-highlight)</span>
 <span class="doccomment">//! format!      // described above</span>
 <span class="doccomment">//! write!       // first argument is a &amp;mut io::Write, the destination</span>
 <span class="doccomment">//! writeln!     // same as write but appends a newline</span>
@@ -1079,12 +1077,10 @@
 
 <span class="kw">use</span> <span class="ident">string</span>;
 
-<span class="doccomment">/// The format function takes a precompiled format string and a list of</span>
-<span class="doccomment">/// arguments, to return the resulting formatted string.</span>
+<span class="doccomment">/// The `format` function takes an `Arguments` struct and returns the resulting</span>
+<span class="doccomment">/// formatted string.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # Arguments</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///   * args - a structure of arguments generated via the `format_args!` macro.</span>
+<span class="doccomment">/// The `Arguments` instance can be created with the `format_args!` macro.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>

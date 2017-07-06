@@ -1052,7 +1052,7 @@
 <span class="doccomment">/// example, here is a struct `Slice` that has two pointers of type `*const T`,</span>
 <span class="doccomment">/// presumably pointing into an array somewhere:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// ```compile_fail,E0392</span>
 <span class="doccomment">/// struct Slice&lt;&#39;a, T&gt; {</span>
 <span class="doccomment">///     start: *const T,</span>
 <span class="doccomment">///     end: *const T,</span>

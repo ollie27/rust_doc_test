@@ -511,14 +511,14 @@ Therefore, all accesses to trait types must be through pointers. If you
 encounter this error you should try to avoid dereferencing the pointer.</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">let</span> <span class="ident">trait_obj</span>: <span class="kw-2">&amp;</span><span class="ident">SomeTrait</span> <span class="op">=</span> ...;
+<span class="kw">let</span> <span class="ident">trait_obj</span>: <span class="kw-2">&amp;</span><span class="ident">SomeTrait</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="string">&quot;some_value&quot;</span>;
 
 <span class="comment">// This tries to implicitly dereference to create an unsized local variable.</span>
 <span class="kw">let</span> <span class="kw-2">&amp;</span><span class="ident">invalid</span> <span class="op">=</span> <span class="ident">trait_obj</span>;
 
 <span class="comment">// You can call methods without binding to the value being pointed at.</span>
 <span class="ident">trait_obj</span>.<span class="ident">method_one</span>();
-<span class="ident">trait_obj</span>.<span class="ident">method_two</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20trait_obj%3A%20%26SomeTrait%20%3D%20...%3B%0A%0A%2F%2F%20This%20tries%20to%20implicitly%20dereference%20to%20create%20an%20unsized%20local%20variable.%0Alet%20%26invalid%20%3D%20trait_obj%3B%0A%0A%2F%2F%20You%20can%20call%20methods%20without%20binding%20to%20the%20value%20being%20pointed%20at.%0Atrait_obj.method_one()%3B%0Atrait_obj.method_two()%3B%0A%7D">Run</a></pre>
+<span class="ident">trait_obj</span>.<span class="ident">method_two</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20SomeTrait%20%7B%20fn%20method_one(%26self)%7B%7D%20fn%20method_two(%26self)%7B%7D%20%7D%0Aimpl%3CT%3E%20SomeTrait%20for%20T%20%7B%7D%0Alet%20trait_obj%3A%20%26SomeTrait%20%3D%20%26%22some_value%22%3B%0A%0A%2F%2F%20This%20tries%20to%20implicitly%20dereference%20to%20create%20an%20unsized%20local%20variable.%0Alet%20%26invalid%20%3D%20trait_obj%3B%0A%0A%2F%2F%20You%20can%20call%20methods%20without%20binding%20to%20the%20value%20being%20pointed%20at.%0Atrait_obj.method_one()%3B%0Atrait_obj.method_two()%3B%0A%7D">Run</a></pre>
 
 <p>You can read more about trait objects in the Trait Object section of the
 Reference:</p>
@@ -680,7 +680,7 @@ a method. Erroneous code example:</p>
 <p>Please note on the last example that we could have called <code>method</code> like this:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="ident">x</span>.<span class="ident">method</span>(<span class="ident">v</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ax.method(v)%3B%0A%7D">Run</a></pre>
+<span class="ident">x</span>.<span class="ident">method</span>(<span class="ident">v</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Test%3B%0Aimpl%20Test%20%7B%20fn%20method%3CT%3E(%26self%2C%20v%3A%20%26%5BT%5D)%20-%3E%20usize%20%7B%20v.len()%20%7D%20%7D%0Alet%20x%20%3D%20Test%3B%0Alet%20v%20%3D%20%26%5B0%5D%3B%0Ax.method(v)%3B%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0038" class="section-header"><a href="#E0038">E0038</a></h2>
 <p>Trait objects like <code>Box&lt;Trait&gt;</code> can only be constructed when certain
@@ -848,7 +848,7 @@ theoretically be an infinite number of types.</p>
     <span class="ident">thing</span>.<span class="ident">foo</span>(<span class="bool-val">true</span>); <span class="comment">// this could be any one of the 8 types above</span>
     <span class="ident">thing</span>.<span class="ident">foo</span>(<span class="number">1</span>);
     <span class="ident">thing</span>.<span class="ident">foo</span>(<span class="string">&quot;hello&quot;</span>);
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20call_foo(thing%3A%20Box%3CTrait%3E)%20%7B%0A%20%20%20%20thing.foo(true)%3B%20%2F%2F%20this%20could%20be%20any%20one%20of%20the%208%20types%20above%0A%20%20%20%20thing.foo(1)%3B%0A%20%20%20%20thing.foo(%22hello%22)%3B%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Trait%20%7B%20fn%20foo%3CT%3E(%26self%2C%20on%3A%20T)%3B%20%7D%0Aimpl%20Trait%20for%20String%20%7B%20fn%20foo%3CT%3E(%26self%2C%20on%3A%20T)%20%7B%7D%20%7D%0Aimpl%20Trait%20for%20u8%20%7B%20fn%20foo%3CT%3E(%26self%2C%20on%3A%20T)%20%7B%7D%20%7D%0Aimpl%20Trait%20for%20bool%20%7B%20fn%20foo%3CT%3E(%26self%2C%20on%3A%20T)%20%7B%7D%20%7D%0A%2F%2F%20etc.%0Afn%20call_foo(thing%3A%20Box%3CTrait%3E)%20%7B%0A%20%20%20%20thing.foo(true)%3B%20%2F%2F%20this%20could%20be%20any%20one%20of%20the%208%20types%20above%0A%20%20%20%20thing.foo(1)%3B%0A%20%20%20%20thing.foo(%22hello%22)%3B%0A%7D%0A%7D">Run</a></pre>
 
 <p>We don&#39;t just need to create a table of all implementations of all methods of
 <code>Trait</code>, we need to create such a table, for each different type fed to
@@ -1171,12 +1171,11 @@ takes a minimum number of arguments. For example, consider C&#39;s variadic <cod
 function:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span>;
-<span class="kw">use</span> <span class="ident">libc</span>::{ <span class="ident">c_char</span>, <span class="ident">c_int</span> };
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_int</span>};
 
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">fn</span> <span class="ident">printf</span>(_: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, ...) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20libc%3B%0Ause%20libc%3A%3A%7B%20c_char%2C%20c_int%20%7D%3B%0A%0Aextern%20%22C%22%20%7B%0A%20%20%20%20fn%20printf(_%3A%20*const%20c_char%2C%20...)%20-%3E%20c_int%3B%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aos%3A%3Araw%3A%3A%7Bc_char%2C%20c_int%7D%3B%0A%0Aextern%20%22C%22%20%7B%0A%20%20%20%20fn%20printf(_%3A%20*const%20c_char%2C%20...)%20-%3E%20c_int%3B%0A%7D%0A%7D">Run</a></pre>
 
 <p>Using this declaration, it must be called with at least one argument, so
 simply calling <code>printf()</code> is invalid. But the following uses are allowed:</p>
@@ -1185,10 +1184,15 @@ simply calling <code>printf()</code> is invalid. But the following uses are allo
 <span class="kw">unsafe</span> {
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>;
 
-    <span class="ident">printf</span>(<span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;test\n&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">as_ptr</span>());
-    <span class="ident">printf</span>(<span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;number = %d\n&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">as_ptr</span>(), <span class="number">3</span>);
-    <span class="ident">printf</span>(<span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;%d, %d\n&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">as_ptr</span>(), <span class="number">10</span>, <span class="number">5</span>);
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aunsafe%20%7B%0A%20%20%20%20use%20std%3A%3Affi%3A%3ACString%3B%0A%0A%20%20%20%20printf(CString%3A%3Anew(%22test%5Cn%22).unwrap().as_ptr())%3B%0A%20%20%20%20printf(CString%3A%3Anew(%22number%20%3D%20%25d%5Cn%22).unwrap().as_ptr()%2C%203)%3B%0A%20%20%20%20printf(CString%3A%3Anew(%22%25d%2C%20%25d%5Cn%22).unwrap().as_ptr()%2C%2010%2C%205)%3B%0A%7D%0A%7D">Run</a></pre>
+    <span class="kw">let</span> <span class="ident">fmt</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;test\n&quot;</span>).<span class="ident">unwrap</span>();
+    <span class="ident">printf</span>(<span class="ident">fmt</span>.<span class="ident">as_ptr</span>());
+
+    <span class="kw">let</span> <span class="ident">fmt</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;number = %d\n&quot;</span>).<span class="ident">unwrap</span>();
+    <span class="ident">printf</span>(<span class="ident">fmt</span>.<span class="ident">as_ptr</span>(), <span class="number">3</span>);
+
+    <span class="kw">let</span> <span class="ident">fmt</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="string">&quot;%d, %d\n&quot;</span>).<span class="ident">unwrap</span>();
+    <span class="ident">printf</span>(<span class="ident">fmt</span>.<span class="ident">as_ptr</span>(), <span class="number">10</span>, <span class="number">5</span>);
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(static_nobundle)%5D%0Ause%20std%3A%3Aos%3A%3Araw%3A%3A%7Bc_char%2C%20c_int%7D%3B%0A%23%5Bcfg_attr(all(windows%2C%20target_env%20%3D%20%22msvc%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20link(name%20%3D%20%22legacy_stdio_definitions%22%2C%20kind%20%3D%20%22static-nobundle%22))%5D%0Aextern%20%22C%22%20%7B%20fn%20printf(_%3A%20*const%20c_char%2C%20...)%20-%3E%20c_int%3B%20%7D%0Afn%20main()%20%7B%0Aunsafe%20%7B%0A%20%20%20%20use%20std%3A%3Affi%3A%3ACString%3B%0A%0A%20%20%20%20let%20fmt%20%3D%20CString%3A%3Anew(%22test%5Cn%22).unwrap()%3B%0A%20%20%20%20printf(fmt.as_ptr())%3B%0A%0A%20%20%20%20let%20fmt%20%3D%20CString%3A%3Anew(%22number%20%3D%20%25d%5Cn%22).unwrap()%3B%0A%20%20%20%20printf(fmt.as_ptr()%2C%203)%3B%0A%0A%20%20%20%20let%20fmt%20%3D%20CString%3A%3Anew(%22%25d%2C%20%25d%5Cn%22).unwrap()%3B%0A%20%20%20%20printf(fmt.as_ptr()%2C%2010%2C%205)%3B%0A%7D%0A%7D%0A&amp;version=nightly">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0061" class="section-header"><a href="#E0061">E0061</a></h2>
 <p>The number of arguments passed to a function must match the number of arguments
@@ -1417,6 +1421,8 @@ large (since we would be able to nest <code>ListNode</code>s to any depth). Spec
 <p>This works because <code>Box</code> is a pointer, so its size is well-known.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0073" class="section-header"><a href="#E0073">E0073</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-3' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-3'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>You cannot define a struct (or enum) <code>Foo</code> that requires an instance of <code>Foo</code>
 in order to make a new <code>Foo</code> value. This is because there would be no way a
 first instance of <code>Foo</code> could be made to initialize another instance!</p>
@@ -1434,6 +1440,8 @@ first instance of <code>Foo</code> could be made to initialize another instance!
 <p>Now it&#39;s possible to create at least one instance of <code>Foo</code>: <code>Foo { x: None }</code>.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0074" class="section-header"><a href="#E0074">E0074</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-4' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-4'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>When using the <code>#[simd]</code> attribute on a tuple struct, the components of the
 tuple struct must all be of a concrete, nongeneric type so the compiler can
 reason about how to use SIMD with them. This error will occur if the types
@@ -1569,6 +1577,8 @@ variants.</p>
 encountered, so a conflict occurs.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0082" class="section-header"><a href="#E0082">E0082</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-5' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-5'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>When you specify enum discriminants with <code>=</code>, the compiler expects <code>isize</code>
 values by default. Or you can add the <code>repr</code> attibute to the enum declaration
 for an explicit choice of the discriminant type. In either cases, the
@@ -1580,7 +1590,7 @@ otherwise this error is raised. For example:</p>
 <span class="kw">enum</span> <span class="ident">Thing</span> {
     <span class="ident">A</span> <span class="op">=</span> <span class="number">1024</span>,
     <span class="ident">B</span> <span class="op">=</span> <span class="number">5</span>,
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Brepr(u8)%5D%0Aenum%20Thing%20%7B%0A%20%20%20%20A%20%3D%201024%2C%0A%20%20%20%20B%20%3D%205%2C%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bdeny(overflowing_literals)%5D%0Afn%20main()%20%7B%0A%23%5Brepr(u8)%5D%0Aenum%20Thing%20%7B%0A%20%20%20%20A%20%3D%201024%2C%0A%20%20%20%20B%20%3D%205%2C%0A%7D%0A%7D">Run</a></pre>
 
 <p>Here, 1024 lies outside the valid range for <code>u8</code>, so the discriminant for <code>A</code> is
 invalid. Here is another, more subtle example which depends on target word size:</p>
@@ -1588,7 +1598,7 @@ invalid. Here is another, more subtle example which depends on target word size:
 <pre class="rust rust-example-rendered">
 <span class="kw">enum</span> <span class="ident">DependsOnPointerSize</span> {
     <span class="ident">A</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">32</span>,
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aenum%20DependsOnPointerSize%20%7B%0A%20%20%20%20A%20%3D%201%20%3C%3C%2032%2C%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Brepr(i32)%5D%0Aenum%20DependsOnPointerSize%20%7B%0A%20%20%20%20A%20%3D%201%20%3C%3C%2032%2C%0A%7D%0A%7D">Run</a></pre>
 
 <p>Here, <code>1 &lt;&lt; 32</code> is interpreted as an <code>isize</code> value. So it is invalid for 32 bit
 target (<code>target_pointer_width = &quot;32&quot;</code>) but valid for 64 bit target.</p>
@@ -1970,7 +1980,7 @@ by the <code>impl</code>:</p>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">i</span>: <span class="ident">Foo</span>) <span class="op">-&gt;</span> <span class="ident">i32</span> {
         <span class="number">0</span>
     }
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Apub%20struct%20Foo%3B%20%2F%2F%20you%20define%20your%20type%20in%20your%20crate%0A%0Aimpl%20Drop%20for%20Foo%20%7B%20%2F%2F%20and%20you%20can%20implement%20the%20trait%20on%20it!%0A%20%20%20%20%2F%2F%20code%20of%20trait%20implementation%20here%0A%7D%0A%0Aimpl%20From%3CFoo%3E%20for%20i32%20%7B%20%2F%2F%20or%20you%20use%20a%20type%20from%20your%20crate%20as%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20a%20type%20parameter%0A%20%20%20%20fn%20from(i%3A%20Foo)%20-%3E%20i32%20%7B%0A%20%20%20%20%20%20%20%200%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Apub%20struct%20Foo%3B%20%2F%2F%20you%20define%20your%20type%20in%20your%20crate%0A%0Aimpl%20Drop%20for%20Foo%20%7B%20%2F%2F%20and%20you%20can%20implement%20the%20trait%20on%20it!%0A%20%20%20%20%2F%2F%20code%20of%20trait%20implementation%20here%0A%20%20fn%20drop(%26mut%20self)%20%7B%20%7D%0A%7D%0A%0Aimpl%20From%3CFoo%3E%20for%20i32%20%7B%20%2F%2F%20or%20you%20use%20a%20type%20from%20your%20crate%20as%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20a%20type%20parameter%0A%20%20%20%20fn%20from(i%3A%20Foo)%20-%3E%20i32%20%7B%0A%20%20%20%20%20%20%20%200%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 
 <p>Alternatively, define a trait locally and implement that instead:</p>
 
@@ -2212,7 +2222,7 @@ attribute. Such a function must have the following type signature (for more
 information: <a href="http://doc.rust-lang.org/stable/book/first-edition/no-stdlib.html">http://doc.rust-lang.org/stable/book/first-edition/no-stdlib.html</a>):</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">fn</span>(<span class="ident">isize</span>, <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">isize</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn(isize%2C%20*const%20*const%20u8)%20-%3E%20isize%3B%0A%7D">Run</a></pre>
+<span class="kw">fn</span>(<span class="ident">isize</span>, <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">isize</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20_%3A%0Afn(isize%2C%20*const%20*const%20u8)%20-%3E%20isize%3B%0A%7D">Run</a></pre>
 
 <p>Example:</p>
 
@@ -2311,6 +2321,8 @@ point into a Rust program. Example:</p>
 <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">argc</span>: <span class="ident">isize</span>, <span class="ident">argv</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">isize</span> { <span class="number">0</span> } <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(start)%5D%0A%0Afn%20main()%20%7B%0A%23%5Bstart%5D%0Afn%20foo(argc%3A%20isize%2C%20argv%3A%20*const%20*const%20u8)%20-%3E%20isize%20%7B%200%20%7D%20%2F%2F%20ok!%0A%7D&amp;version=nightly">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0139" class="section-header"><a href="#E0139">E0139</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-6' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-6'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>There are various restrictions on transmuting between types in Rust; for example
 types being transmuted must have the same size. To apply all these restrictions,
 the compiler must know the exact types that may be transmuted. When type
@@ -2346,21 +2358,23 @@ possible type substitution. It&#39;s possible to use traits to do this cleanly,
 for example:</p>
 
 <pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>;
+
 <span class="kw">struct</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
 
-<span class="kw">trait</span> <span class="ident">MyTransmutableType</span> {
+<span class="kw">trait</span> <span class="ident">MyTransmutableType</span>: <span class="ident">Sized</span> {
     <span class="kw">fn</span> <span class="ident">transmute</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">MyTransmutableType</span> <span class="kw">for</span> <span class="ident">u8</span> {
-    <span class="kw">fn</span> <span class="ident">transmute</span>(<span class="ident">x</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="ident">transmute</span>(<span class="ident">x</span>)
+    <span class="kw">fn</span> <span class="ident">transmute</span>(<span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
+        <span class="kw">unsafe</span> { <span class="ident">transmute</span>(<span class="ident">x</span>) }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">MyTransmutableType</span> <span class="kw">for</span> <span class="ident">String</span> {
-    <span class="kw">fn</span> <span class="ident">transmute</span>(<span class="ident">x</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="ident">transmute</span>(<span class="ident">x</span>)
+    <span class="kw">fn</span> <span class="ident">transmute</span>(<span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
+        <span class="kw">unsafe</span> { <span class="ident">transmute</span>(<span class="ident">x</span>) }
     }
 }
 
@@ -2369,7 +2383,7 @@ for example:</p>
 <span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">MyTransmutableType</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
     <span class="kw">let</span> <span class="ident">y</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">MyTransmutableType</span><span class="op">&gt;</span>::<span class="ident">transmute</span>(<span class="ident">x</span>);
     <span class="comment">// do something with y</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3CT%3E(Vec%3CT%3E)%3B%0A%0Atrait%20MyTransmutableType%20%7B%0A%20%20%20%20fn%20transmute(Vec%3CSelf%3E)%20-%3E%20Foo%3CSelf%3E%3B%0A%7D%0A%0Aimpl%20MyTransmutableType%20for%20u8%20%7B%0A%20%20%20%20fn%20transmute(x%3A%20Foo%3Cu8%3E)%20-%3E%20Vec%3Cu8%3E%20%7B%0A%20%20%20%20%20%20%20%20transmute(x)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20MyTransmutableType%20for%20String%20%7B%0A%20%20%20%20fn%20transmute(x%3A%20Foo%3CString%3E)%20-%3E%20Vec%3CString%3E%20%7B%0A%20%20%20%20%20%20%20%20transmute(x)%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20...%20more%20impls%20for%20the%20types%20you%20intend%20to%20transmute%0A%0Afn%20foo%3CT%3A%20MyTransmutableType%3E(x%3A%20Vec%3CT%3E)%20%7B%0A%20%20%20%20let%20y%3A%20Foo%3CT%3E%20%3D%20%3CT%20as%20MyTransmutableType%3E%3A%3Atransmute(x)%3B%0A%20%20%20%20%2F%2F%20do%20something%20with%20y%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Amem%3A%3Atransmute%3B%0A%0Astruct%20Foo%3CT%3E(Vec%3CT%3E)%3B%0A%0Atrait%20MyTransmutableType%3A%20Sized%20%7B%0A%20%20%20%20fn%20transmute(Vec%3CSelf%3E)%20-%3E%20Foo%3CSelf%3E%3B%0A%7D%0A%0Aimpl%20MyTransmutableType%20for%20u8%20%7B%0A%20%20%20%20fn%20transmute(x%3A%20Vec%3Cu8%3E)%20-%3E%20Foo%3Cu8%3E%20%7B%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20transmute(x)%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20MyTransmutableType%20for%20String%20%7B%0A%20%20%20%20fn%20transmute(x%3A%20Vec%3CString%3E)%20-%3E%20Foo%3CString%3E%20%7B%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20transmute(x)%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20...%20more%20impls%20for%20the%20types%20you%20intend%20to%20transmute%0A%0Afn%20foo%3CT%3A%20MyTransmutableType%3E(x%3A%20Vec%3CT%3E)%20%7B%0A%20%20%20%20let%20y%3A%20Foo%3CT%3E%20%3D%20%3CT%20as%20MyTransmutableType%3E%3A%3Atransmute(x)%3B%0A%20%20%20%20%2F%2F%20do%20something%20with%20y%0A%7D%0A%7D">Run</a></pre>
 
 <p>Each impl will be checked for a size match in the transmute as usual, and since
 there are no unbound type parameters involved, this should compile unless there
@@ -2378,7 +2392,9 @@ is a size mismatch in one of the impls.</p>
 <p>It is also possible to manually transmute:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="ident">ptr</span>::<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="ident">v</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">SomeType</span>) <span class="comment">// `v` transmuted to `SomeType`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aptr%3A%3Aread(%26v%20as%20*const%20_%20as%20*const%20SomeType)%20%2F%2F%20%60v%60%20transmuted%20to%20%60SomeType%60%0A%7D">Run</a></pre>
+<span class="kw">unsafe</span> {
+    <span class="ident">ptr</span>::<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="ident">v</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">SomeType</span>) <span class="comment">// `v` transmuted to `SomeType`</span>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aptr%3B%0Alet%20v%20%3D%20Some(%22value%22)%3B%0Atype%20SomeType%20%3D%20%26'static%20%5Bu8%5D%3B%0Aunsafe%20%7B%0A%20%20%20%20ptr%3A%3Aread(%26v%20as%20*const%20_%20as%20*const%20SomeType)%20%2F%2F%20%60v%60%20transmuted%20to%20%60SomeType%60%0A%7D%0A%3B%0A%7D">Run</a></pre>
 
 <p>Note that this does not move <code>v</code> (unlike <code>transmute</code>), and may need a
 call to <code>mem::forget(v)</code> in case you want to avoid destructors being called.</p>
@@ -2408,7 +2424,7 @@ attributes:</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0154" class="section-header"><a href="#E0154">E0154</a></h2>
 
-<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-3' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-3'>Note: this error code is no longer emitted by the compiler.</a></h2>
+<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-7' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-7'>Note: this error code is no longer emitted by the compiler.</a></h2>
 <p>Imports (<code>use</code> statements) are not allowed after non-item statements, such as
 variable declarations and expression statements.</p>
 
@@ -2564,14 +2580,14 @@ you prefer them unqualified, you can import the variants into scope:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">Method</span>::<span class="kw-2">*</span>;
-<span class="kw">enum</span> <span class="ident">Method</span> { <span class="ident">GET</span>, <span class="ident">POST</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20Method%3A%3A*%3B%0Aenum%20Method%20%7B%20GET%2C%20POST%20%7D%0A%7D">Run</a></pre>
+<span class="kw">enum</span> <span class="ident">Method</span> { <span class="ident">GET</span>, <span class="ident">POST</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20Method%3A%3A*%3B%0Aenum%20Method%20%7B%20GET%2C%20POST%20%7D%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 
 <p>If you want others to be able to import variants from your module directly, use
 <code>pub use</code>:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">Method</span>::<span class="kw-2">*</span>;
-<span class="kw">enum</span> <span class="ident">Method</span> { <span class="ident">GET</span>, <span class="ident">POST</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Apub%20use%20Method%3A%3A*%3B%0Aenum%20Method%20%7B%20GET%2C%20POST%20%7D%0A%7D">Run</a></pre>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Method</span> { <span class="ident">GET</span>, <span class="ident">POST</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=pub%20use%20Method%3A%3A*%3B%0Apub%20enum%20Method%20%7B%20GET%2C%20POST%20%7D%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0182" class="section-header"><a href="#E0182">E0182</a></h2>
 <p>You bound an associated type in an expression path which is not
@@ -2685,6 +2701,8 @@ used the right trait. Example:</p>
 information see the <a href="https://github.com/rust-lang/rfcs/blob/master/text/0019-opt-in-builtin-traits.md">opt-in builtin traits RFC</a>.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0193" class="section-header"><a href="#E0193">E0193</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-8' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-8'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p><code>where</code> clauses must use generic type parameters: it does not make sense to use
 them otherwise. An example causing this error:</p>
 
@@ -3073,18 +3091,16 @@ what this means, it is perhaps easiest to consider a few examples.</p>
 following trait <code>impl</code> is an error:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">range</span>::<span class="ident">RangeArgument</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">foo</span>;
+<span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">ForeignTrait</span>;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RangeArgument</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span> { } <span class="comment">// error</span>
-
-<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20alloc%3B%0Ause%20alloc%3A%3Arange%3A%3ARangeArgument%3B%0A%0Aimpl%3CT%3E%20RangeArgument%3CT%3E%20for%20T%20%7B%20%7D%20%2F%2F%20error%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ForeignTrait</span> <span class="kw">for</span> <span class="ident">T</span> { } <span class="comment">// error</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23%5Bcfg(for_demonstration_only)%5D%0Aextern%20crate%20foo%3B%0A%23%5Bcfg(for_demonstration_only)%5D%0Ause%20foo%3A%3AForeignTrait%3B%0Ause%20std%3A%3Apanic%3A%3AUnwindSafe%20as%20ForeignTrait%3B%0A%0Aimpl%3CT%3E%20ForeignTrait%20for%20T%20%7B%20%7D%20%2F%2F%20error%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 
 <p>To work around this, it can be covered with a local type, <code>MyType</code>:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">T</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ForeignTrait</span> <span class="kw">for</span> <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { } <span class="comment">// Ok</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20MyType%3CT%3E(T)%3B%0Aimpl%3CT%3E%20ForeignTrait%20for%20MyType%3CT%3E%20%7B%20%7D%20%2F%2F%20Ok%0A%7D">Run</a></pre>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ForeignTrait</span> <span class="kw">for</span> <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { } <span class="comment">// Ok</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Apanic%3A%3AUnwindSafe%20as%20ForeignTrait%3B%0Astruct%20MyType%3CT%3E(T)%3B%0Aimpl%3CT%3E%20ForeignTrait%20for%20MyType%3CT%3E%20%7B%20%7D%20%2F%2F%20Ok%0A%7D">Run</a></pre>
 
 <p>Please note that a type alias is not sufficient.</p>
 
@@ -3306,12 +3322,12 @@ and <code>where</code> clause. Erroneous code example:</p>
 declaration:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">baz</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">=</span><span class="ident">Bar</span><span class="op">&gt;&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">I</span> <span class="kw">as</span> <span class="ident">Foo</span><span class="op">&gt;</span>::<span class="ident">A</span>) {} <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20baz%3CI%3A%20Foo%3CA%3DBar%3E%3E(x%3A%20%26%3CI%20as%20Foo%3E%3A%3AA)%20%7B%7D%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">baz</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">=</span><span class="ident">Bar</span><span class="op">&gt;&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">I</span> <span class="kw">as</span> <span class="ident">Foo</span><span class="op">&gt;</span>::<span class="ident">A</span>) {} <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Bar%3B%0Atrait%20Foo%20%7B%20type%20A%3B%20%7D%0Afn%20baz%3CI%3A%20Foo%3CA%3DBar%3E%3E(x%3A%20%26%3CI%20as%20Foo%3E%3A%3AA)%20%7B%7D%20%2F%2F%20ok!%0A%7D">Run</a></pre>
 
 <p>Or in the <code>where</code> clause:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">baz</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">I</span> <span class="kw">as</span> <span class="ident">Foo</span><span class="op">&gt;</span>::<span class="ident">A</span>) <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">=</span><span class="ident">Bar</span><span class="op">&gt;</span> {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20baz%3CI%3E(x%3A%20%26%3CI%20as%20Foo%3E%3A%3AA)%20where%20I%3A%20Foo%3CA%3DBar%3E%20%7B%7D%0A%7D">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">baz</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">I</span> <span class="kw">as</span> <span class="ident">Foo</span><span class="op">&gt;</span>::<span class="ident">A</span>) <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">Foo</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">=</span><span class="ident">Bar</span><span class="op">&gt;</span> {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Bar%3B%0Atrait%20Foo%20%7B%20type%20A%3B%20%7D%0Afn%20baz%3CI%3E(x%3A%20%26%3CI%20as%20Foo%3E%3A%3AA)%20where%20I%3A%20Foo%3CA%3DBar%3E%20%7B%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0230" class="section-header"><a href="#E0230">E0230</a></h2>
 <p>The trait has more type parameters specified than appear in its definition.</p>
@@ -3383,7 +3399,7 @@ with two in the definition of <code>Bar</code>:</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0251" class="section-header"><a href="#E0251">E0251</a></h2>
 
-<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-4' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-4'>Note: this error code is no longer emitted by the compiler.</a></h2>
+<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-9' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-9'>Note: this error code is no longer emitted by the compiler.</a></h2>
 <p>Two items of the same name cannot be imported without rebinding one of the
 items under a new local name.</p>
 
@@ -3483,34 +3499,34 @@ already been imported.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;
 
 <span class="kw">mod</span> <span class="ident">foo</span> {
-    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">alloc</span> {
+    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">core</span> {
         <span class="kw">fn</span> <span class="ident">do_something</span>();
     }
 }
 
-<span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">alloc</span>; <span class="comment">// error: an extern crate named `alloc` has already</span>
+<span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">core</span>;  <span class="comment">// error: an extern crate named `core` has already</span>
                 <span class="comment">//        been imported in this module</span>
 
-<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20alloc%3B%0A%0Amod%20foo%20%7B%0A%20%20%20%20pub%20trait%20alloc%20%7B%0A%20%20%20%20%20%20%20%20fn%20do_something()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Ause%20foo%3A%3Aalloc%3B%20%2F%2F%20error%3A%20an%20extern%20crate%20named%20%60alloc%60%20has%20already%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20been%20imported%20in%20this%20module%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20core%3B%0A%0Amod%20foo%20%7B%0A%20%20%20%20pub%20trait%20core%20%7B%0A%20%20%20%20%20%20%20%20fn%20do_something()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Ause%20foo%3A%3Acore%3B%20%20%2F%2F%20error%3A%20an%20extern%20crate%20named%20%60core%60%20has%20already%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20been%20imported%20in%20this%20module%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 
 <p>To fix issue issue, you have to rename at least one of the two imports.
 Example:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span> <span class="kw">as</span> <span class="ident">liballoc</span>; <span class="comment">// ok!</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span> <span class="kw">as</span> <span class="ident">libcore</span>; <span class="comment">// ok!</span>
 
 <span class="kw">mod</span> <span class="ident">foo</span> {
-    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">alloc</span> {
+    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">core</span> {
         <span class="kw">fn</span> <span class="ident">do_something</span>();
     }
 }
 
-<span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">alloc</span>;
+<span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">core</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20alloc%20as%20liballoc%3B%20%2F%2F%20ok!%0A%0Amod%20foo%20%7B%0A%20%20%20%20pub%20trait%20alloc%20%7B%0A%20%20%20%20%20%20%20%20fn%20do_something()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Ause%20foo%3A%3Aalloc%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20core%20as%20libcore%3B%20%2F%2F%20ok!%0A%0Amod%20foo%20%7B%0A%20%20%20%20pub%20trait%20core%20%7B%0A%20%20%20%20%20%20%20%20fn%20do_something()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Ause%20foo%3A%3Acore%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0255" class="section-header"><a href="#E0255">E0255</a></h2>
 <p>You can&#39;t import a value whose name is the same as another value defined in the
@@ -3557,7 +3573,7 @@ module.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0256" class="section-header"><a href="#E0256">E0256</a></h2>
 
-<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-5' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-5'>Note: this error code is no longer emitted by the compiler.</a></h2>
+<h2 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-10' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-10'>Note: this error code is no longer emitted by the compiler.</a></h2>
 <p>You can&#39;t import a type or module when the name of the item being imported is
 the same as another type or submodule defined in the module.</p>
 
@@ -3581,10 +3597,10 @@ that has been imported into the current module.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span> <span class="kw">as</span> <span class="ident">std</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span> <span class="kw">as</span> <span class="ident">core</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20std%3B%0Aextern%20crate%20libc%20as%20std%3B%0A%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(libc)%5D%0Aextern%20crate%20core%3B%0Aextern%20crate%20libc%20as%20core%3B%0A%0Afn%20main()%20%7B%7D%0A&amp;version=nightly">Run</a></pre>
 
 <p>The solution is to choose a different name that doesn&#39;t conflict with any
 external crate imported into the current module.</p>
@@ -3592,8 +3608,10 @@ external crate imported into the current module.</p>
 <p>Correct example:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span> <span class="kw">as</span> <span class="ident">other_name</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20std%3B%0Aextern%20crate%20libc%20as%20other_name%3B%0A%7D">Run</a></pre>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span> <span class="kw">as</span> <span class="ident">other_name</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(libc)%5D%0Aextern%20crate%20core%3B%0Aextern%20crate%20libc%20as%20other_name%3B%0A%0Afn%20main()%20%7B%7D%0A&amp;version=nightly">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0260" class="section-header"><a href="#E0260">E0260</a></h2>
 <p>The name for an item declaration conflicts with an external crate&#39;s name.</p>
@@ -3601,25 +3619,25 @@ external crate imported into the current module.</p>
 <p>Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">abc</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;
 
-<span class="kw">struct</span> <span class="ident">abc</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20abc%3B%0A%0Astruct%20abc%3B%0A%7D">Run</a></pre>
+<span class="kw">struct</span> <span class="ident">core</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20core%3B%0A%0Astruct%20core%3B%0A%7D">Run</a></pre>
 
 <p>There are two possible solutions:</p>
 
 <p>Solution #1: Rename the item.</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">abc</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;
 
-<span class="kw">struct</span> <span class="ident">xyz</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20abc%3B%0A%0Astruct%20xyz%3B%0A%7D">Run</a></pre>
+<span class="kw">struct</span> <span class="ident">xyz</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20core%3B%0A%0Astruct%20xyz%3B%0A%7D">Run</a></pre>
 
 <p>Solution #2: Import the crate with a different name.</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">abc</span> <span class="kw">as</span> <span class="ident">xyz</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span> <span class="kw">as</span> <span class="ident">xyz</span>;
 
-<span class="kw">struct</span> <span class="ident">abc</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20abc%20as%20xyz%3B%0A%0Astruct%20abc%3B%0A%7D">Run</a></pre>
+<span class="kw">struct</span> <span class="ident">abc</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20core%20as%20xyz%3B%0A%0Astruct%20abc%3B%0A%7D">Run</a></pre>
 
 <p>See the Declaration Statements section of the reference for more information
 about what constitutes an Item declaration and what does not:</p>
@@ -3730,7 +3748,7 @@ Examples follow.</p>
 }
 
 <span class="kw">impl</span> <span class="ident">Trait</span> <span class="kw">for</span> <span class="ident">i8</span> { <span class="kw">type</span> <span class="ident">AssociatedType</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>; }
-~~~~~~~~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<span class="comment">//~~~~~~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <span class="comment">//      |                             |</span>
 <span class="comment">// `i8` does have                     |</span>
 <span class="comment">// implementation                     |</span>
@@ -3742,7 +3760,7 @@ Examples follow.</p>
 <span class="ident">foo</span>(<span class="number">3_i8</span>);
 <span class="comment">// Here, we invoke `foo` with an `i8`, which does not satisfy</span>
 <span class="comment">// the constraint `&lt;i8 as Trait&gt;::AssociatedType=u32`, and</span>
-<span class="comment">// therefore the type-checker complains with this error code.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Trait%20%7B%20type%20AssociatedType%3B%20%7D%0A%0Afn%20foo%3CT%3E(t%3A%20T)%20where%20T%3A%20Trait%3CAssociatedType%3Du32%3E%20%7B%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20~~~~~~~~%20~~~~~~~~~~~~~~~~~~%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20This%20says%20%60foo%60%20can%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20only%20be%20used%20with%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20some%20type%20that%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20implements%20%60Trait%60.%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20This%20says%20not%20only%20must%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%60T%60%20be%20an%20impl%20of%20%60Trait%60%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20but%20also%20that%20the%20impl%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20must%20assign%20the%20type%20%60u32%60%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20to%20the%20associated%20type.%0A%20%20%20%20println!(%22in%20foo%22)%3B%0A%7D%0A%0Aimpl%20Trait%20for%20i8%20%7B%20type%20AssociatedType%20%3D%20%26'static%20str%3B%20%7D%0A~~~~~~~~~~~~~~~~~%20%20%20~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%0A%2F%2F%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%60i8%60%20does%20have%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20implementation%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20of%20%60Trait%60...%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20...%20but%20it%20is%20an%20implementation%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20that%20assigns%20%60%26'static%20str%60%20to%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20the%20associated%20type.%0A%0Afoo(3_i8)%3B%0A%2F%2F%20Here%2C%20we%20invoke%20%60foo%60%20with%20an%20%60i8%60%2C%20which%20does%20not%20satisfy%0A%2F%2F%20the%20constraint%20%60%3Ci8%20as%20Trait%3E%3A%3AAssociatedType%3Du32%60%2C%20and%0A%2F%2F%20therefore%20the%20type-checker%20complains%20with%20this%20error%20code.%0A%7D">Run</a></pre>
+<span class="comment">// therefore the type-checker complains with this error code.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Trait%20%7B%20type%20AssociatedType%3B%20%7D%0A%0Afn%20foo%3CT%3E(t%3A%20T)%20where%20T%3A%20Trait%3CAssociatedType%3Du32%3E%20%7B%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20~~~~~~~~%20~~~~~~~~~~~~~~~~~~%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20This%20says%20%60foo%60%20can%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20only%20be%20used%20with%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20some%20type%20that%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20implements%20%60Trait%60.%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20This%20says%20not%20only%20must%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%60T%60%20be%20an%20impl%20of%20%60Trait%60%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20but%20also%20that%20the%20impl%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20must%20assign%20the%20type%20%60u32%60%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20to%20the%20associated%20type.%0A%20%20%20%20println!(%22in%20foo%22)%3B%0A%7D%0A%0Aimpl%20Trait%20for%20i8%20%7B%20type%20AssociatedType%20%3D%20%26'static%20str%3B%20%7D%0A%2F%2F~~~~~~~~~~~~~~~%20%20%20~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%0A%2F%2F%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%60i8%60%20does%20have%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20implementation%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20of%20%60Trait%60...%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20...%20but%20it%20is%20an%20implementation%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20that%20assigns%20%60%26'static%20str%60%20to%0A%2F%2F%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20the%20associated%20type.%0A%0Afoo(3_i8)%3B%0A%2F%2F%20Here%2C%20we%20invoke%20%60foo%60%20with%20an%20%60i8%60%2C%20which%20does%20not%20satisfy%0A%2F%2F%20the%20constraint%20%60%3Ci8%20as%20Trait%3E%3A%3AAssociatedType%3Du32%60%2C%20and%0A%2F%2F%20therefore%20the%20type-checker%20complains%20with%20this%20error%20code.%0A%7D">Run</a></pre>
 
 <p>Here is a more subtle instance of the same problem, that can
 arise with for-loops in Rust:</p>
@@ -4191,7 +4209,7 @@ that the value provided is a positive integer between quotes.</p>
 </div>
 <div class="error-described error-unused"><h2 id="E0297" class="section-header"><a href="#E0297">E0297</a></h2>
 
-<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-6' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-6'>Note: this error code is no longer emitted by the compiler.</a></h4>
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-11' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-11'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>Patterns used to bind names must be irrefutable. That is, they must guarantee
 that a name will be extracted in all cases. Instead of pattern matching the
 loop variable, consider using a <code>match</code> or <code>if let</code> inside the loop body. For
@@ -4640,44 +4658,6 @@ conversion from a sized to an unsized type with the
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">CoerceUnsized</span><span class="op">&lt;</span><span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">MyType</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">CoerceUnsized</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> {}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(coerce_unsized)%5D%0A%0Afn%20main()%20%7B%0Ause%20std%3A%3Aops%3A%3ACoerceUnsized%3B%0A%0Apub%20struct%20MyType%3CT%3A%20%3FSized%3E%20%7B%0A%20%20%20%20field_with_unsized_type%3A%20T%2C%0A%7D%0A%0Aimpl%3CT%2C%20U%3E%20CoerceUnsized%3CMyType%3CU%3E%3E%20for%20MyType%3CT%3E%0A%20%20%20%20where%20T%3A%20CoerceUnsized%3CU%3E%20%7B%7D%0A%7D&amp;version=nightly">Run</a></pre>
-</div>
-<div class="error-described error-unused"><h2 id="E0329" class="section-header"><a href="#E0329">E0329</a></h2>
-<p>An attempt was made to access an associated constant through either a generic
-type parameter or <code>Self</code>. This is not supported yet. An example causing this
-error is shown below:</p>
-
-<pre class="rust rust-example-rendered">
-<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">associated_consts</span>)]</span>
-
-<span class="kw">trait</span> <span class="ident">Foo</span> {
-    <span class="kw">const</span> <span class="ident">BAR</span>: <span class="ident">f64</span>;
-}
-
-<span class="kw">struct</span> <span class="ident">MyStruct</span>;
-
-<span class="kw">impl</span> <span class="ident">Foo</span> <span class="kw">for</span> <span class="ident">MyStruct</span> {
-    <span class="kw">const</span> <span class="ident">BAR</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">0f64</span>;
-}
-
-<span class="kw">fn</span> <span class="ident">get_bar_bad</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Foo</span><span class="op">&gt;</span>(<span class="ident">t</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
-    <span class="ident">F</span>::<span class="ident">BAR</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(associated_consts)%5D%0A%0Afn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20const%20BAR%3A%20f64%3B%0A%7D%0A%0Astruct%20MyStruct%3B%0A%0Aimpl%20Foo%20for%20MyStruct%20%7B%0A%20%20%20%20const%20BAR%3A%20f64%20%3D%200f64%3B%0A%7D%0A%0Afn%20get_bar_bad%3CF%3A%20Foo%3E(t%3A%20F)%20-%3E%20f64%20%7B%0A%20%20%20%20F%3A%3ABAR%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
-
-<p>Currently, the value of <code>BAR</code> for a particular type can only be accessed
-through a concrete type, as shown below:</p>
-
-<pre class="rust rust-example-rendered">
-<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">associated_consts</span>)]</span>
-
-<span class="kw">trait</span> <span class="ident">Foo</span> {
-    <span class="kw">const</span> <span class="ident">BAR</span>: <span class="ident">f64</span>;
-}
-
-<span class="kw">struct</span> <span class="ident">MyStruct</span>;
-
-<span class="kw">fn</span> <span class="ident">get_bar_good</span>() <span class="op">-&gt;</span> <span class="ident">f64</span> {
-    <span class="op">&lt;</span><span class="ident">MyStruct</span> <span class="kw">as</span> <span class="ident">Foo</span><span class="op">&gt;</span>::<span class="ident">BAR</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(associated_consts)%5D%0A%0Afn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20const%20BAR%3A%20f64%3B%0A%7D%0A%0Astruct%20MyStruct%3B%0A%0Afn%20get_bar_good()%20-%3E%20f64%20%7B%0A%20%20%20%20%3CMyStruct%20as%20Foo%3E%3A%3ABAR%0A%7D%0A%7D&amp;version=nightly">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0364" class="section-header"><a href="#E0364">E0364</a></h2>
 <p>Private items cannot be publicly re-exported. This error indicates that you
@@ -5219,10 +5199,13 @@ structure that is currently uninitialized.</p>
 <span class="kw">struct</span> <span class="ident">Foo</span> {
     <span class="ident">a</span>: <span class="ident">u32</span>,
 }
+<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Foo</span> {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) { <span class="comment">/* ... */</span> }
+}
 
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">a</span>: <span class="number">1</span> };
 <span class="ident">drop</span>(<span class="ident">x</span>); <span class="comment">// `x` is now uninitialized</span>
-<span class="ident">x</span>.<span class="ident">a</span> <span class="op">=</span> <span class="number">2</span>; <span class="comment">// error, partial reinitialization of uninitialized structure `t`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20a%3A%20u32%2C%0A%7D%0A%0Alet%20mut%20x%20%3D%20Foo%20%7B%20a%3A%201%20%7D%3B%0Adrop(x)%3B%20%2F%2F%20%60x%60%20is%20now%20uninitialized%0Ax.a%20%3D%202%3B%20%2F%2F%20error%2C%20partial%20reinitialization%20of%20uninitialized%20structure%20%60t%60%0A%7D">Run</a></pre>
+<span class="ident">x</span>.<span class="ident">a</span> <span class="op">=</span> <span class="number">2</span>; <span class="comment">// error, partial reinitialization of uninitialized structure `t`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20a%3A%20u32%2C%0A%7D%0Aimpl%20Drop%20for%20Foo%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%20%2F*%20...%20*%2F%20%7D%0A%7D%0A%0Alet%20mut%20x%20%3D%20Foo%20%7B%20a%3A%201%20%7D%3B%0Adrop(x)%3B%20%2F%2F%20%60x%60%20is%20now%20uninitialized%0Ax.a%20%3D%202%3B%20%2F%2F%20error%2C%20partial%20reinitialization%20of%20uninitialized%20structure%20%60t%60%0A%7D">Run</a></pre>
 
 <p>This error can be fixed by fully reinitializing the structure in question:</p>
 
@@ -5230,10 +5213,13 @@ structure that is currently uninitialized.</p>
 <span class="kw">struct</span> <span class="ident">Foo</span> {
     <span class="ident">a</span>: <span class="ident">u32</span>,
 }
+<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Foo</span> {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) { <span class="comment">/* ... */</span> }
+}
 
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">a</span>: <span class="number">1</span> };
 <span class="ident">drop</span>(<span class="ident">x</span>);
-<span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">a</span>: <span class="number">2</span> };<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20a%3A%20u32%2C%0A%7D%0A%0Alet%20mut%20x%20%3D%20Foo%20%7B%20a%3A%201%20%7D%3B%0Adrop(x)%3B%0Ax%20%3D%20Foo%20%7B%20a%3A%202%20%7D%3B%0A%7D">Run</a></pre>
+<span class="ident">x</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">a</span>: <span class="number">2</span> };<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20a%3A%20u32%2C%0A%7D%0Aimpl%20Drop%20for%20Foo%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%20%2F*%20...%20*%2F%20%7D%0A%7D%0A%0Alet%20mut%20x%20%3D%20Foo%20%7B%20a%3A%201%20%7D%3B%0Adrop(x)%3B%0Ax%20%3D%20Foo%20%7B%20a%3A%202%20%7D%3B%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0384" class="section-header"><a href="#E0384">E0384</a></h2>
 <p>This error occurs when an attempt is made to reassign an immutable variable.
@@ -5495,6 +5481,8 @@ defaulted parameter will fix this issue. Fixed example:</p>
 <span class="kw">fn</span> <span class="ident">together_we_will_rule_the_galaxy</span>(<span class="ident">son</span>: <span class="kw-2">&amp;</span><span class="ident">A</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>) {} <span class="comment">// Ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20A%3CT%3DSelf%3E%20%7B%7D%0A%0Afn%20together_we_will_rule_the_galaxy(son%3A%20%26A%3Ci32%3E)%20%7B%7D%20%2F%2F%20Ok!%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0398" class="section-header"><a href="#E0398">E0398</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-12' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-12'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>In Rust 1.3, the default object lifetime bounds are expected to change, as
 described in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1156-adjust-default-object-bounds.md">RFC 1156</a>. You are getting a warning because the compiler
 thinks it is possible that this change will cause a compilation error in your
@@ -5513,12 +5501,12 @@ you are calling. For example, if the error is reported on a call like <code>foo(
 and <code>foo</code> is defined as follows:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">arg</span>: <span class="kw-2">&amp;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">SomeTrait</span><span class="op">&gt;</span>) { ... }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo(arg%3A%20%26Box%3CSomeTrait%3E)%20%7B%20...%20%7D%0A%7D">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">arg</span>: <span class="kw-2">&amp;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">SomeTrait</span><span class="op">&gt;</span>) { <span class="comment">/* ... */</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20SomeTrait%20%7B%7D%0Afn%20foo(arg%3A%20%26Box%3CSomeTrait%3E)%20%7B%20%2F*%20...%20*%2F%20%7D%0A%7D">Run</a></pre>
 
 <p>You might change it to:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">arg</span>: <span class="kw-2">&amp;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">SomeTrait</span><span class="op">+</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) { ... }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo%3C'a%3E(arg%3A%20%26Box%3CSomeTrait%2B'a%3E)%20%7B%20...%20%7D%0A%7D">Run</a></pre>
+<span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">arg</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">SomeTrait</span><span class="op">+</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) { <span class="comment">/* ... */</span> }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20SomeTrait%20%7B%7D%0Afn%20foo%3C'a%3E(arg%3A%20%26'a%20Box%3CSomeTrait%2B'a%3E)%20%7B%20%2F*%20...%20*%2F%20%7D%0A%7D">Run</a></pre>
 
 <p>This explicitly states that you expect the trait object <code>SomeTrait</code> to contain
 references (with a maximum lifetime of <code>&#39;a</code>).</p>
@@ -5651,7 +5639,7 @@ function might be easier:</p>
     <span class="kw">fn</span> <span class="ident">bar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">y</span>: <span class="ident">T</span>) {
         <span class="comment">// ..</span>
     }
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aimpl%3CT%3E%20Foo%3CT%3E%20%7B%0A%20%20%20%20pub%20fn%20foo(%26self%2C%20x%3A%20T)%20%7B%0A%20%20%20%20%20%20%20%20self.bar(x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20fn%20bar(%26self%2C%20y%3A%20T)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20..%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3CT%3E(T)%3B%0Aimpl%3CT%3E%20Foo%3CT%3E%20%7B%0A%20%20%20%20pub%20fn%20foo(%26self%2C%20x%3A%20T)%20%7B%0A%20%20%20%20%20%20%20%20self.bar(x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20fn%20bar(%26self%2C%20y%3A%20T)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20..%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 
 <p>For default impls in traits, the private helper solution won&#39;t work, however
 closures or copying the parameters should still work.</p>
@@ -5721,7 +5709,7 @@ was imported. Example:</p>
 
 <span class="kw">impl</span> <span class="ident">SomeTrait</span> <span class="kw">for</span> <span class="ident">Foo</span> { <span class="comment">// ok!</span>
     <span class="comment">// implements functions</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20solution%201%3A%0Ause%20some_file%3A%3ASomeTrait%3B%0A%0A%2F%2F%20solution%202%3A%0Atrait%20SomeTrait%20%7B%0A%20%20%20%20%2F%2F%20some%20functions%0A%7D%0A%0Astruct%20Foo%3B%0A%0Aimpl%20SomeTrait%20for%20Foo%20%7B%20%2F%2F%20ok!%0A%20%20%20%20%2F%2F%20implements%20functions%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Bcfg(for_demonstration_only)%5D%0A%2F%2F%20solution%201%3A%0Ause%20some_file%3A%3ASomeTrait%3B%0A%0A%2F%2F%20solution%202%3A%0Atrait%20SomeTrait%20%7B%0A%20%20%20%20%2F%2F%20some%20functions%0A%7D%0A%0Astruct%20Foo%3B%0A%0Aimpl%20SomeTrait%20for%20Foo%20%7B%20%2F%2F%20ok!%0A%20%20%20%20%2F%2F%20implements%20functions%0A%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0407" class="section-header"><a href="#E0407">E0407</a></h2>
 <p>A definition of a method not in the implemented trait was given in a trait
@@ -6003,7 +5991,7 @@ example that causes this error is below:</p>
 <span class="kw">match</span> (<span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">C</span>) {
     (<span class="ident">x</span>, <span class="ident">x2</span>, <span class="ident">see</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">==</span> <span class="ident">x2</span> <span class="op">=&gt;</span> { <span class="comment">/* A and B are equal, do one thing */</span> }
     (<span class="ident">y</span>, <span class="ident">z</span>, <span class="ident">see</span>) <span class="op">=&gt;</span> { <span class="comment">/* A and B unequal; do another thing */</span> }
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amatch%20(A%2C%20B%2C%20C)%20%7B%0A%20%20%20%20(x%2C%20x2%2C%20see)%20if%20x%20%3D%3D%20x2%20%3D%3E%20%7B%20%2F*%20A%20and%20B%20are%20equal%2C%20do%20one%20thing%20*%2F%20%7D%0A%20%20%20%20(y%2C%20z%2C%20see)%20%3D%3E%20%7B%20%2F*%20A%20and%20B%20unequal%3B%20do%20another%20thing%20*%2F%20%7D%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20(A%2C%20B%2C%20C)%20%3D%20(1%2C%202%2C%203)%3B%0Amatch%20(A%2C%20B%2C%20C)%20%7B%0A%20%20%20%20(x%2C%20x2%2C%20see)%20if%20x%20%3D%3D%20x2%20%3D%3E%20%7B%20%2F*%20A%20and%20B%20are%20equal%2C%20do%20one%20thing%20*%2F%20%7D%0A%20%20%20%20(y%2C%20z%2C%20see)%20%3D%3E%20%7B%20%2F*%20A%20and%20B%20unequal%3B%20do%20another%20thing%20*%2F%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0422" class="section-header"><a href="#E0422">E0422</a></h2>
 <p>You are trying to use an identifier that is either undefined or not a struct.
@@ -6126,7 +6114,7 @@ identifier being referred to is valid for the given situation. Example:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">foo</span>::<span class="ident">bar</span>;
-<span class="ident">bar</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20foo%3A%3Abar%3B%0Abar()%3B%0A%7D">Run</a></pre>
+<span class="ident">bar</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=mod%20foo%20%7B%20pub%20fn%20bar()%20%7B%7D%20%7D%0Afn%20main()%20%7B%0Ause%20foo%3A%3Abar%3B%0Abar()%3B%0A%7D%0A">Run</a></pre>
 
 <p>If the item you are importing is not defined in some super-module of the
 current module, then it must also be declared as public (e.g., <code>pub fn</code>).</p>
@@ -6197,7 +6185,7 @@ as part of a brace-enclosed list of imports:</p>
 <code>self</code> import. Example:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">something</span>::<span class="self">self</span>; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20something%3A%3Aself%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+<span class="kw">use</span> <span class="ident">something</span>::{<span class="self">self</span>}; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=mod%20something%20%7B%7D%0Afn%20main()%20%7B%0Ause%20something%3A%3A%7Bself%7D%3B%20%2F%2F%20ok!%0A%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0431" class="section-header"><a href="#E0431">E0431</a></h2>
 <p>An invalid <code>self</code> import was made.</p>
@@ -6230,15 +6218,15 @@ import it. Example:</p>
 
 <span class="kw">mod</span> <span class="ident">something</span> {
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span>;
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20self%3A%3Asomething%3A%3AFoo%3B%20%2F%2F%20ok!%0A%0Amod%20something%20%7B%0A%20%20%20%20pub%20struct%20Foo%3B%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20self%3A%3Asomething%3A%3AFoo%3B%20%2F%2F%20ok!%0A%0Amod%20something%20%7B%0A%20%20%20%20pub%20struct%20Foo%3B%0A%7D%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 
 <p>Or, if you tried to use a module from an external crate, you may have missed
 the <code>extern crate</code> declaration (which is usually placed in the crate root):</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">homura</span>; <span class="comment">// Required to use the `homura` crate</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>; <span class="comment">// Required to use the `core` crate</span>
 
-<span class="kw">use</span> <span class="ident">homura</span>::<span class="ident">Madoka</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20crate%20homura%3B%20%2F%2F%20Required%20to%20use%20the%20%60homura%60%20crate%0A%0Ause%20homura%3A%3AMadoka%3B%0A%7D">Run</a></pre>
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">any</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=extern%20crate%20core%3B%20%2F%2F%20Required%20to%20use%20the%20%60core%60%20crate%0A%0Ause%20core%3A%3Aany%3B%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0433" class="section-header"><a href="#E0433">E0433</a></h2>
 <p>An undeclared type or module was used.</p>
@@ -6604,6 +6592,8 @@ Example:</p>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20Foo%20%7B%0A%20%20%20%20pub%20struct%20Bar(u32)%3B%20%2F%2F%20we%20set%20the%20Bar%20type%20public%0A%0A%20%20%20%20pub%20fn%20bar()%20-%3E%20Bar%20%7B%20%2F%2F%20ok!%0A%20%20%20%20%20%20%20%20Bar(0)%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div>
 <div class="error-described error-unused"><h2 id="E0447" class="section-header"><a href="#E0447">E0447</a></h2>
+
+<h4 id='note-this-error-code-is-no-longer-emitted-by-the-compiler-13' class='section-header'><a href='#note-this-error-code-is-no-longer-emitted-by-the-compiler-13'>Note: this error code is no longer emitted by the compiler.</a></h4>
 <p>The <code>pub</code> keyword was used inside a function. Erroneous code example:</p>
 
 <pre class="rust rust-example-rendered">
@@ -6897,10 +6887,10 @@ given crate.</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">mod</span> <span class="ident">foo</span> {
-    <span class="attribute">#[<span class="ident">macro_use</span>(<span class="ident">helpful_macro</span>)]</span> <span class="comment">// error: must be at crate root to import</span>
+    <span class="attribute">#[<span class="ident">macro_use</span>(<span class="ident">debug_assert</span>)]</span>  <span class="comment">// error: must be at crate root to import</span>
     <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;          <span class="comment">//        macros from another crate</span>
-    <span class="macro">helpful_macro</span><span class="macro">!</span>(...);
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20foo%20%7B%0A%20%20%20%20%23%5Bmacro_use(helpful_macro)%5D%20%2F%2F%20error%3A%20must%20be%20at%20crate%20root%20to%20import%0A%20%20%20%20extern%20crate%20core%3B%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20macros%20from%20another%20crate%0A%20%20%20%20helpful_macro!(...)%3B%0A%7D%0A%7D">Run</a></pre>
+    <span class="kw">fn</span> <span class="ident">run_macro</span>() { <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="bool-val">true</span>); }
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20foo%20%7B%0A%20%20%20%20%23%5Bmacro_use(debug_assert)%5D%20%20%2F%2F%20error%3A%20must%20be%20at%20crate%20root%20to%20import%0A%20%20%20%20extern%20crate%20core%3B%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20macros%20from%20another%20crate%0A%20%20%20%20fn%20run_macro()%20%7B%20debug_assert!(true)%3B%20%7D%0A%7D%0A%7D">Run</a></pre>
 
 <p>Only <code>extern crate</code> imports at the crate root level are allowed to import
 macros.</p>
@@ -6909,12 +6899,12 @@ macros.</p>
 This will work:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="attribute">#[<span class="ident">macro_use</span>(<span class="ident">helpful_macro</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">some_crate</span>;
+<span class="attribute">#[<span class="ident">macro_use</span>(<span class="ident">debug_assert</span>)]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">core</span>;
 
 <span class="kw">mod</span> <span class="ident">foo</span> {
-    <span class="macro">helpful_macro</span><span class="macro">!</span>(...)
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%23%5Bmacro_use(helpful_macro)%5D%0Aextern%20crate%20some_crate%3B%0A%0Amod%20foo%20%7B%0A%20%20%20%20helpful_macro!(...)%0A%7D%0A%7D">Run</a></pre>
+    <span class="kw">fn</span> <span class="ident">run_macro</span>() { <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="bool-val">true</span>); }
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23%5Bmacro_use(debug_assert)%5D%0Aextern%20crate%20core%3B%0A%0Amod%20foo%20%7B%0A%20%20%20%20fn%20run_macro()%20%7B%20debug_assert!(true)%3B%20%7D%0A%7D%0Afn%20main()%20%7B%7D%0A">Run</a></pre>
 </div>
 <div class="error-described error-used"><h2 id="E0469" class="section-header"><a href="#E0469">E0469</a></h2>
 <p>A macro listed for import was not found.</p>
@@ -7703,8 +7693,7 @@ you have three choices:</p>
     <span class="ident">x</span>.<span class="ident">borrow</span>().<span class="ident">nothing_is_true</span>(); <span class="comment">// ok!</span>
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0A%23%5Bderive(Clone%2C%20Copy)%5D%20%2F%2F%20we%20implement%20the%20Copy%20trait%0Astruct%20TheDarkKnight%3B%0A%0Aimpl%20TheDarkKnight%20%7B%0A%20%20%20%20fn%20nothing_is_true(self)%20%7B%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%20RefCell%3A%3Anew(TheDarkKnight)%3B%0A%0A%20%20%20%20x.borrow().nothing_is_true()%3B%20%2F%2F%20ok!%0A%7D%0A">Run</a></pre>
 
-<p>Moving out of a member of a mutably borrowed struct is fine if you put something
-back. <code>mem::replace</code> can be used for that:</p>
+<p>Moving a member out of a mutably borrowed struct will also cause E0507 error:</p>
 
 <pre class="rust rust-example-rendered">
 <span class="kw">struct</span> <span class="ident">TheDarkKnight</span>;
@@ -7718,16 +7707,25 @@ back. <code>mem::replace</code> can be used for that:</p>
 }
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cave</span> <span class="op">=</span> <span class="ident">Batcave</span> {
         <span class="ident">knight</span>: <span class="ident">TheDarkKnight</span>
     };
     <span class="kw">let</span> <span class="ident">borrowed</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cave</span>;
 
     <span class="ident">borrowed</span>.<span class="ident">knight</span>.<span class="ident">nothing_is_true</span>(); <span class="comment">// E0507</span>
-    <span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">borrowed</span>.<span class="ident">knight</span>, <span class="ident">TheDarkKnight</span>).<span class="ident">nothing_is_true</span>(); <span class="comment">// ok!</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20TheDarkKnight%3B%0A%0Aimpl%20TheDarkKnight%20%7B%0A%20%20%20%20fn%20nothing_is_true(self)%20%7B%7D%0A%7D%0A%0Astruct%20Batcave%20%7B%0A%20%20%20%20knight%3A%20TheDarkKnight%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20use%20std%3A%3Amem%3B%0A%0A%20%20%20%20let%20mut%20cave%20%3D%20Batcave%20%7B%0A%20%20%20%20%20%20%20%20knight%3A%20TheDarkKnight%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20borrowed%20%3D%20%26mut%20cave%3B%0A%0A%20%20%20%20borrowed.knight.nothing_is_true()%3B%20%2F%2F%20E0507%0A%20%20%20%20mem%3A%3Areplace(%26mut%20borrowed.knight%2C%20TheDarkKnight).nothing_is_true()%3B%20%2F%2F%20ok!%0A%7D%0A">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=struct%20TheDarkKnight%3B%0A%0Aimpl%20TheDarkKnight%20%7B%0A%20%20%20%20fn%20nothing_is_true(self)%20%7B%7D%0A%7D%0A%0Astruct%20Batcave%20%7B%0A%20%20%20%20knight%3A%20TheDarkKnight%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20cave%20%3D%20Batcave%20%7B%0A%20%20%20%20%20%20%20%20knight%3A%20TheDarkKnight%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20borrowed%20%3D%20%26mut%20cave%3B%0A%0A%20%20%20%20borrowed.knight.nothing_is_true()%3B%20%2F%2F%20E0507%0A%7D%0A">Run</a></pre>
+
+<p>It is fine only if you put something back. <code>mem::replace</code> can be used for that:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cave</span> <span class="op">=</span> <span class="ident">Batcave</span> {
+    <span class="ident">knight</span>: <span class="ident">TheDarkKnight</span>
+};
+<span class="kw">let</span> <span class="ident">borrowed</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cave</span>;
+
+<span class="ident">mem</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">borrowed</span>.<span class="ident">knight</span>, <span class="ident">TheDarkKnight</span>).<span class="ident">nothing_is_true</span>(); <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20TheDarkKnight%3B%0Aimpl%20TheDarkKnight%20%7B%20fn%20nothing_is_true(self)%20%7B%7D%20%7D%0Astruct%20Batcave%20%7B%20knight%3A%20TheDarkKnight%20%7D%0Ause%20std%3A%3Amem%3B%0A%0Alet%20mut%20cave%20%3D%20Batcave%20%7B%0A%20%20%20%20knight%3A%20TheDarkKnight%0A%7D%3B%0Alet%20borrowed%20%3D%20%26mut%20cave%3B%0A%0Amem%3A%3Areplace(%26mut%20borrowed.knight%2C%20TheDarkKnight).nothing_is_true()%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
 
 <p>You can find more information about borrowing in the rust-book:
 <a href="http://doc.rust-lang.org/book/first-edition/references-and-borrowing.html">http://doc.rust-lang.org/book/first-edition/references-and-borrowing.html</a></p>
@@ -7904,8 +7902,8 @@ example:</p>
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">unsafe</span> { <span class="ident">takes_u8</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="number">0u16</span>)); }
-    <span class="comment">// error: transmute called with differently sized types</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20takes_u8(_%3A%20u8)%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20unsafe%20%7B%20takes_u8(%3A%3Astd%3A%3Amem%3A%3Atransmute(0u16))%3B%20%7D%0A%20%20%20%20%2F%2F%20error%3A%20transmute%20called%20with%20differently%20sized%20types%0A%7D%0A">Run</a></pre>
+    <span class="comment">// error: transmute called with types of different sizes</span>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20takes_u8(_%3A%20u8)%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20unsafe%20%7B%20takes_u8(%3A%3Astd%3A%3Amem%3A%3Atransmute(0u16))%3B%20%7D%0A%20%20%20%20%2F%2F%20error%3A%20transmute%20called%20with%20types%20of%20different%20sizes%0A%7D%0A">Run</a></pre>
 
 <p>Please use types with same size or use the expected type directly. Example:</p>
 
@@ -8347,8 +8345,40 @@ matched.</p>
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Simba</span> { <span class="ident">mother</span>: <span class="number">1</span>, <span class="ident">father</span>: <span class="number">0</span> }; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Simba%20%7B%0A%20%20%20%20mother%3A%20u32%2C%0A%20%20%20%20father%3A%20u32%2C%0A%7D%0A%0Alet%20s%20%3D%20Simba%20%7B%20mother%3A%201%2C%20father%3A%200%20%7D%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
 </div>
-<div class="error-undescribed error-used"><h2 id="E0562" class="section-header"><a href="#E0562">E0562</a></h2>
-<p>No description.</p>
+<div class="error-described error-used"><h2 id="E0562" class="section-header"><a href="#E0562">E0562</a></h2>
+<p>Abstract return types (written <code>impl Trait</code> for some trait <code>Trait</code>) are only
+allowed as function return types.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">conservative_impl_trait</span>)]</span>
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="ident">count_to_ten</span>: <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="number">0</span>..<span class="number">10</span>;
+    <span class="comment">// error: `impl Trait` not allowed outside of function and inherent method</span>
+    <span class="comment">//        return types</span>
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">count_to_ten</span> {
+        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">i</span>);
+    }
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(conservative_impl_trait)%5D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20count_to_ten%3A%20impl%20Iterator%3CItem%3Dusize%3E%20%3D%200..10%3B%0A%20%20%20%20%2F%2F%20error%3A%20%60impl%20Trait%60%20not%20allowed%20outside%20of%20function%20and%20inherent%20method%0A%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20return%20types%0A%20%20%20%20for%20i%20in%20count_to_ten%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20i)%3B%0A%20%20%20%20%7D%0A%7D%0A&amp;version=nightly">Run</a></pre>
+
+<p>Make sure <code>impl Trait</code> only appears in return-type position.</p>
+
+<pre class="rust rust-example-rendered">
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">conservative_impl_trait</span>)]</span>
+
+<span class="kw">fn</span> <span class="ident">count_to_n</span>(<span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="number">0</span>..<span class="ident">n</span>
+}
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">count_to_n</span>(<span class="number">10</span>) {  <span class="comment">// ok!</span>
+        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">i</span>);
+    }
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(conservative_impl_trait)%5D%0A%0Afn%20count_to_n(n%3A%20usize)%20-%3E%20impl%20Iterator%3CItem%3Dusize%3E%20%7B%0A%20%20%20%200..n%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20for%20i%20in%20count_to_n(10)%20%7B%20%20%2F%2F%20ok!%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20i)%3B%0A%20%20%20%20%7D%0A%7D%0A&amp;version=nightly">Run</a></pre>
+
+<p>See <a href="https://github.com/rust-lang/rfcs/blob/master/text/1522-conservative-impl-trait.md">RFC 1522</a> for more details.</p>
 </div>
 <div class="error-undescribed error-unused"><h2 id="E0563" class="section-header"><a href="#E0563">E0563</a></h2>
 <p>No description.</p>
@@ -8525,19 +8555,20 @@ details.</p>
 <pre class="rust rust-example-rendered">
 <span class="comment">// For the purposes of this explanation, all of these</span>
 <span class="comment">// different kinds of `fn` declarations are equivalent:</span>
-<span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="ident">i32</span>) { ... }
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="ident">i32</span>);
-<span class="kw">impl</span> <span class="ident">i32</span> { <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="self">self</span>) { ... } }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20For%20the%20purposes%20of%20this%20explanation%2C%20all%20of%20these%0A%2F%2F%20different%20kinds%20of%20%60fn%60%20declarations%20are%20equivalent%3A%0Afn%20foo(x%3A%20i32)%20%7B%20...%20%7D%0Aextern%20%22C%22%20fn%20foo(x%3A%20i32)%3B%0Aimpl%20i32%20%7B%20fn%20foo(x%3A%20self)%20%7B%20...%20%7D%20%7D%0A%7D">Run</a></pre>
+<span class="kw">struct</span> <span class="ident">S</span>;
+<span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="ident">S</span>) { <span class="comment">/* ... */</span> }
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> { <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">x</span>: <span class="ident">S</span>); }
+<span class="kw">impl</span> <span class="ident">S</span> { <span class="kw">fn</span> <span class="ident">foo</span>(<span class="self">self</span>) { <span class="comment">/* ... */</span> } }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20For%20the%20purposes%20of%20this%20explanation%2C%20all%20of%20these%0A%2F%2F%20different%20kinds%20of%20%60fn%60%20declarations%20are%20equivalent%3A%0Astruct%20S%3B%0Afn%20foo(x%3A%20S)%20%7B%20%2F*%20...%20*%2F%20%7D%0A%23%5Bcfg(for_demonstration_only)%5D%0Aextern%20%22C%22%20%7B%20fn%20foo(x%3A%20S)%3B%20%7D%0A%23%5Bcfg(for_demonstration_only)%5D%0Aimpl%20S%20%7B%20fn%20foo(self)%20%7B%20%2F*%20...%20*%2F%20%7D%20%7D%0A%7D">Run</a></pre>
 
-<p>the type of <code>foo</code> is <strong>not</strong> <code>fn(i32)</code>, as one might expect.
+<p>the type of <code>foo</code> is <strong>not</strong> <code>fn(S)</code>, as one might expect.
 Rather, it is a unique, zero-sized marker type written here as <code>typeof(foo)</code>.
-However, <code>typeof(foo)</code> can be <em>coerced</em> to a function pointer <code>fn(i32)</code>,
+However, <code>typeof(foo)</code> can be <em>coerced</em> to a function pointer <code>fn(S)</code>,
 so you rarely notice this:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="kw">let</span> <span class="ident">x</span>: <span class="kw">fn</span>(<span class="ident">i32</span>) <span class="op">=</span> <span class="ident">foo</span>; <span class="comment">// OK, coerces</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%3A%20fn(i32)%20%3D%20foo%3B%20%2F%2F%20OK%2C%20coerces%0A%7D">Run</a></pre>
+<span class="kw">let</span> <span class="ident">x</span>: <span class="kw">fn</span>(<span class="ident">S</span>) <span class="op">=</span> <span class="ident">foo</span>; <span class="comment">// OK, coerces</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20S%3B%0Afn%20foo(_%3A%20S)%20%7B%7D%0Alet%20x%3A%20fn(S)%20%3D%20foo%3B%20%2F%2F%20OK%2C%20coerces%0A%7D">Run</a></pre>
 
-<p>The reason that this matter is that the type <code>fn(i32)</code> is not specific to
+<p>The reason that this matter is that the type <code>fn(S)</code> is not specific to
 any particular function: it&#39;s a function <em>pointer</em>. So calling <code>x()</code> results
 in a virtual call, whereas <code>foo()</code> is statically dispatched, because the type
 of <code>foo</code> tells us precisely what function is being called.</p>
@@ -8550,12 +8581,11 @@ when using <strong>transmute</strong> to convert a fn item into a fn pointer.</p
 
 <pre class="rust rust-example-rendered">
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">userdata</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>) {
-   ...
+    <span class="comment">/* ... */</span>
 }
 
 <span class="kw">let</span> <span class="ident">f</span>: <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i32</span>) <span class="op">=</span> <span class="ident">transmute</span>(<span class="ident">foo</span>);
-<span class="ident">callback</span>(<span class="ident">f</span>);
-<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20%22C%22%20fn%20foo(userdata%3A%20Box%3Ci32%3E)%20%7B%0A%20%20%20...%0A%7D%0A%0Alet%20f%3A%20extern%20%22C%22%20fn(*mut%20i32)%20%3D%20transmute(foo)%3B%0Acallback(f)%3B%0A%7D">Run</a></pre>
+<span class="ident">callback</span>(<span class="ident">f</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20%22C%22%20fn%20foo(userdata%3A%20Box%3Ci32%3E)%20%7B%0A%20%20%20%20%2F*%20...%20*%2F%0A%7D%0A%0Afn%20callback(_%3A%20extern%20%22C%22%20fn(*mut%20i32))%20%7B%7D%0Ause%20std%3A%3Amem%3A%3Atransmute%3B%0Aunsafe%20%7B%0Alet%20f%3A%20extern%20%22C%22%20fn(*mut%20i32)%20%3D%20transmute(foo)%3B%0Acallback(f)%3B%0A%7D%0A%7D">Run</a></pre>
 
 <p>Here, transmute is being used to convert the types of the fn arguments.
 This pattern is incorrect because, because the type of <code>foo</code> is a function
@@ -8566,12 +8596,11 @@ This pattern should be rewritten. There are a few possible ways to do this:</p>
 <ul>
 <li>change the original fn declaration to match the expected signature,
 and do the cast in the fn body (the prefered option)</li>
-<li>cast the fn item fo a fn pointer before calling transmute, as shown here:
+<li><p>cast the fn item fo a fn pointer before calling transmute, as shown here:</p>
 
-<ul>
-<li><code>let f: extern &quot;C&quot; fn(*mut i32) = transmute(foo as extern &quot;C&quot; fn(_))</code></li>
-<li><code>let f: extern &quot;C&quot; fn(*mut i32) = transmute(foo as usize) /* works too */</code></li>
-</ul></li>
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">f</span>: <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i32</span>) <span class="op">=</span> <span class="ident">transmute</span>(<span class="ident">foo</span> <span class="kw">as</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(_));
+<span class="kw">let</span> <span class="ident">f</span>: <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i32</span>) <span class="op">=</span> <span class="ident">transmute</span>(<span class="ident">foo</span> <span class="kw">as</span> <span class="ident">usize</span>); <span class="comment">// works too</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aextern%20%22C%22%20fn%20foo(_%3A%20Box%3Ci32%3E)%20%7B%7D%0Ause%20std%3A%3Amem%3A%3Atransmute%3B%0Aunsafe%20%7B%0Alet%20f%3A%20extern%20%22C%22%20fn(*mut%20i32)%20%3D%20transmute(foo%20as%20extern%20%22C%22%20fn(_))%3B%0Alet%20f%3A%20extern%20%22C%22%20fn(*mut%20i32)%20%3D%20transmute(foo%20as%20usize)%3B%20%2F%2F%20works%20too%0A%7D%0A%7D">Run</a></pre></li>
 </ul>
 
 <p>The same applies to transmutes to <code>*mut fn()</code>, which were observedin practice.
@@ -8719,8 +8748,8 @@ started: <a href="https://doc.rust-lang.org/book/">https://doc.rust-lang.org/boo
 
 <p>Erroneous example:</p>
 
-<pre class="rust rust-example-rendered">
-<span class="ident">rustc</span> <span class="op">-</span><span class="ident">D</span> <span class="ident">bogus</span> <span class="ident">omse_file</span>.<span class="ident">rs</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Arustc%20-D%20bogus%20omse_file.rs%0A%7D">Run</a></pre>
+<pre><code class="language-sh">rustc -D bogus omse_file.rs
+</code></pre>
 
 <p>Maybe you just misspelled the lint name or the lint doesn&#39;t exist anymore.
 Either way, try to update/remove it in order to fix the error.</p>
@@ -8750,6 +8779,93 @@ keyword. Example:</p>
 }
 
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;const value: {}&quot;</span>, <span class="ident">SomeModule</span>::<span class="ident">PRIVATE</span>); <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20SomeModule%20%7B%0A%20%20%20%20pub%20const%20PRIVATE%3A%20u32%20%3D%200x_a_bad_1dea_u32%3B%20%2F%2F%20We%20set%20it%20public%20by%20using%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%60pub%60%20keyword.%0A%7D%0A%0Aprintln!(%22const%20value%3A%20%7B%7D%22%2C%20SomeModule%3A%3APRIVATE)%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0604" class="section-header"><a href="#E0604">E0604</a></h2>
+<p>A cast to <code>char</code> was attempted on a type other than <code>u8</code>.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="number">0u32</span> <span class="kw">as</span> <span class="ident">char</span>; <span class="comment">// error: only `u8` can be cast as `char`, not `u32`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A0u32%20as%20char%3B%20%2F%2F%20error%3A%20only%20%60u8%60%20can%20be%20cast%20as%20%60char%60%2C%20not%20%60u32%60%0A%7D">Run</a></pre>
+
+<p>As the error message indicates, only <code>u8</code> can be cast into <code>char</code>. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="number">86u8</span> <span class="kw">as</span> <span class="ident">char</span>; <span class="comment">// ok!</span>
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">c</span>, <span class="string">&#39;V&#39;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20c%20%3D%2086u8%20as%20char%3B%20%2F%2F%20ok!%0Aassert_eq!(c%2C%20'V')%3B%0A%7D">Run</a></pre>
+
+<p>For more information about casts, take a look at The Book:
+<a href="https://doc.rust-lang.org/book/first-edition/casting-between-types.html">https://doc.rust-lang.org/book/first-edition/casting-between-types.html</a></p>
+</div>
+<div class="error-described error-used"><h2 id="E0605" class="section-header"><a href="#E0605">E0605</a></h2>
+<p>An invalid cast was attempted.</p>
+
+<p>Erroneous code examples:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0u8</span>;
+<span class="ident">x</span> <span class="kw">as</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>; <span class="comment">// error: non-primitive cast: `u8` as `std::vec::Vec&lt;u8&gt;`</span>
+
+<span class="comment">// Another example</span>
+
+<span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>; <span class="comment">// So here, `v` is a `*const u8`.</span>
+<span class="ident">v</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="ident">u8</span>; <span class="comment">// error: non-primitive cast: `*const u8` as `&amp;u8`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%200u8%3B%0Ax%20as%20Vec%3Cu8%3E%3B%20%2F%2F%20error%3A%20non-primitive%20cast%3A%20%60u8%60%20as%20%60std%3A%3Avec%3A%3AVec%3Cu8%3E%60%0A%0A%2F%2F%20Another%20example%0A%0Alet%20v%20%3D%200%20as%20*const%20u8%3B%20%2F%2F%20So%20here%2C%20%60v%60%20is%20a%20%60*const%20u8%60.%0Av%20as%20%26u8%3B%20%2F%2F%20error%3A%20non-primitive%20cast%3A%20%60*const%20u8%60%20as%20%60%26u8%60%0A%7D">Run</a></pre>
+
+<p>Only primitive types can be cast into each other. Examples:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0u8</span>;
+<span class="ident">x</span> <span class="kw">as</span> <span class="ident">u32</span>; <span class="comment">// ok!</span>
+
+<span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>;
+<span class="ident">v</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">i8</span>; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%200u8%3B%0Ax%20as%20u32%3B%20%2F%2F%20ok!%0A%0Alet%20v%20%3D%200%20as%20*const%20u8%3B%0Av%20as%20*const%20i8%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+
+<p>For more information about casts, take a look at The Book:
+<a href="https://doc.rust-lang.org/book/first-edition/casting-between-types.html">https://doc.rust-lang.org/book/first-edition/casting-between-types.html</a></p>
+</div>
+<div class="error-described error-used"><h2 id="E0606" class="section-header"><a href="#E0606">E0606</a></h2>
+<p>An incompatible cast was attempted.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="number">0u8</span>; <span class="comment">// Here, `x` is a `&amp;u8`.</span>
+<span class="kw">let</span> <span class="ident">y</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">u32</span>; <span class="comment">// error: casting `&amp;u8` as `u32` is invalid</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%260u8%3B%20%2F%2F%20Here%2C%20%60x%60%20is%20a%20%60%26u8%60.%0Alet%20y%3A%20u32%20%3D%20x%20as%20u32%3B%20%2F%2F%20error%3A%20casting%20%60%26u8%60%20as%20%60u32%60%20is%20invalid%0A%7D">Run</a></pre>
+
+<p>When casting, keep in mind that only primitive types can be cast into each
+other. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="number">0u8</span>;
+<span class="kw">let</span> <span class="ident">y</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">x</span> <span class="kw">as</span> <span class="ident">u32</span>; <span class="comment">// We dereference it first and then cast it.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%260u8%3B%0Alet%20y%3A%20u32%20%3D%20*x%20as%20u32%3B%20%2F%2F%20We%20dereference%20it%20first%20and%20then%20cast%20it.%0A%7D">Run</a></pre>
+
+<p>For more information about casts, take a look at The Book:
+<a href="https://doc.rust-lang.org/book/first-edition/casting-between-types.html">https://doc.rust-lang.org/book/first-edition/casting-between-types.html</a></p>
+</div>
+<div class="error-described error-used"><h2 id="E0607" class="section-header"><a href="#E0607">E0607</a></h2>
+<p>A cast between a thin and a fat pointer was attempted.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>;
+<span class="ident">v</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> [<span class="ident">u8</span>];<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20v%20%3D%200%20as%20*const%20u8%3B%0Av%20as%20*const%20%5Bu8%5D%3B%0A%7D">Run</a></pre>
+
+<p>First: what are thin and fat pointers?</p>
+
+<p>Thin pointers are &quot;simple&quot; pointers: they are purely a reference to a memory
+address.</p>
+
+<p>Fat pointers are pointers referencing Dynamically Sized Types (also called DST).
+DST don&#39;t have a statically known size, therefore they can only exist behind
+some kind of pointers that contain additional information. Slices and trait
+objects are DSTs. In the case of slices, the additional information the fat
+pointer holds is their size.</p>
+
+<p>To fix this error, don&#39;t try to cast directly between thin and fat pointers.</p>
+
+<p>For more information about casts, take a look at The Book:
+<a href="https://doc.rust-lang.org/book/first-edition/casting-between-types.html">https://doc.rust-lang.org/book/first-edition/casting-between-types.html</a></p>
 </div>
 <div class="error-described error-used"><h2 id="E0608" class="section-header"><a href="#E0608">E0608</a></h2>
 <p>An attempt to index into a type which doesn&#39;t implement the <code>std::ops::Index</code>
@@ -8820,6 +8936,230 @@ fields. To access data via named fields, struct types are used. Example:</p>
 
 <p>For more information see The Rust Book: <a href="https://doc.rust-lang.org/book/">https://doc.rust-lang.org/book/</a></p>
 </div>
+<div class="error-described error-used"><h2 id="E0611" class="section-header"><a href="#E0611">E0611</a></h2>
+<p>Attempted to access a private field on a tuple-struct.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">some_module</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span>(<span class="ident">u32</span>);
+
+    <span class="kw">impl</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Foo</span> { <span class="ident">Foo</span>(<span class="number">0</span>) }
+    }
+}
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">some_module</span>::<span class="ident">Foo</span>::<span class="ident">new</span>();
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">y</span>.<span class="number">0</span>); <span class="comment">// error: field `0` of tuple-struct `some_module::Foo`</span>
+                     <span class="comment">//        is private</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20some_module%20%7B%0A%20%20%20%20pub%20struct%20Foo(u32)%3B%0A%0A%20%20%20%20impl%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20fn%20new()%20-%3E%20Foo%20%7B%20Foo(0)%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20y%20%3D%20some_module%3A%3AFoo%3A%3Anew()%3B%0Aprintln!(%22%7B%7D%22%2C%20y.0)%3B%20%2F%2F%20error%3A%20field%20%600%60%20of%20tuple-struct%20%60some_module%3A%3AFoo%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20is%20private%0A%7D">Run</a></pre>
+
+<p>Since the field is private, you have two solutions:</p>
+
+<p>1) Make the field public:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">some_module</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span>(<span class="kw">pub</span> <span class="ident">u32</span>); <span class="comment">// The field is now public.</span>
+
+    <span class="kw">impl</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Foo</span> { <span class="ident">Foo</span>(<span class="number">0</span>) }
+    }
+}
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">some_module</span>::<span class="ident">Foo</span>::<span class="ident">new</span>();
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">y</span>.<span class="number">0</span>); <span class="comment">// So we can access it directly.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20some_module%20%7B%0A%20%20%20%20pub%20struct%20Foo(pub%20u32)%3B%20%2F%2F%20The%20field%20is%20now%20public.%0A%0A%20%20%20%20impl%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20fn%20new()%20-%3E%20Foo%20%7B%20Foo(0)%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20y%20%3D%20some_module%3A%3AFoo%3A%3Anew()%3B%0Aprintln!(%22%7B%7D%22%2C%20y.0)%3B%20%2F%2F%20So%20we%20can%20access%20it%20directly.%0A%7D">Run</a></pre>
+
+<p>2) Add a getter function to keep the field private but allow for accessing its
+value:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">some_module</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span>(<span class="ident">u32</span>);
+
+    <span class="kw">impl</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Foo</span> { <span class="ident">Foo</span>(<span class="number">0</span>) }
+
+        <span class="comment">// We add the getter function.</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">u32</span> { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span> }
+    }
+}
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">some_module</span>::<span class="ident">Foo</span>::<span class="ident">new</span>();
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">y</span>.<span class="ident">get</span>()); <span class="comment">// So we can get the value through the function.</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20some_module%20%7B%0A%20%20%20%20pub%20struct%20Foo(u32)%3B%0A%0A%20%20%20%20impl%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20fn%20new()%20-%3E%20Foo%20%7B%20Foo(0)%20%7D%0A%0A%20%20%20%20%20%20%20%20%2F%2F%20We%20add%20the%20getter%20function.%0A%20%20%20%20%20%20%20%20pub%20fn%20get(%26self)%20-%3E%20%26u32%20%7B%20%26self.0%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20y%20%3D%20some_module%3A%3AFoo%3A%3Anew()%3B%0Aprintln!(%22%7B%7D%22%2C%20y.get())%3B%20%2F%2F%20So%20we%20can%20get%20the%20value%20through%20the%20function.%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0612" class="section-header"><a href="#E0612">E0612</a></h2>
+<p>Attempted out-of-bounds tuple index.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Foo</span>(<span class="ident">u32</span>);
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">Foo</span>(<span class="number">0</span>);
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">y</span>.<span class="number">1</span>); <span class="comment">// error: attempted out-of-bounds tuple index `1`</span>
+                     <span class="comment">//        on type `Foo`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo(u32)%3B%0A%0Alet%20y%20%3D%20Foo(0)%3B%0Aprintln!(%22%7B%7D%22%2C%20y.1)%3B%20%2F%2F%20error%3A%20attempted%20out-of-bounds%20tuple%20index%20%601%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20on%20type%20%60Foo%60%0A%7D">Run</a></pre>
+
+<p>If a tuple/tuple-struct type has n fields, you can only try to access these n
+fields from 0 to (n - 1). So in this case, you can only index <code>0</code>. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Foo</span>(<span class="ident">u32</span>);
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">Foo</span>(<span class="number">0</span>);
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">y</span>.<span class="number">0</span>); <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo(u32)%3B%0A%0Alet%20y%20%3D%20Foo(0)%3B%0Aprintln!(%22%7B%7D%22%2C%20y.0)%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0613" class="section-header"><a href="#E0613">E0613</a></h2>
+<p>Attempted tuple index on a type which isn&#39;t a tuple nor a tuple-struct.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Foo</span>;
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">Foo</span>;
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">y</span>.<span class="number">1</span>); <span class="comment">// error: attempted to access tuple index `1` on type</span>
+                     <span class="comment">//        `Foo`, but the type was not a tuple or tuple</span>
+                     <span class="comment">//        struct</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%3B%0A%0Alet%20y%20%3D%20Foo%3B%0Aprintln!(%22%7B%7D%22%2C%20y.1)%3B%20%2F%2F%20error%3A%20attempted%20to%20access%20tuple%20index%20%601%60%20on%20type%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20%60Foo%60%2C%20but%20the%20type%20was%20not%20a%20tuple%20or%20tuple%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20struct%0A%7D">Run</a></pre>
+
+<p>Only tuple and tuple-struct types can be indexed this way. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="comment">// Let&#39;s create a tuple first:</span>
+<span class="kw">let</span> <span class="ident">x</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) <span class="op">=</span> (<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>);
+<span class="comment">// You can index its fields this way:</span>
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;({}, {}, {}, {})&quot;</span>, <span class="ident">x</span>.<span class="number">0</span>, <span class="ident">x</span>.<span class="number">1</span>, <span class="ident">x</span>.<span class="number">2</span>, <span class="ident">x</span>.<span class="number">3</span>);
+
+<span class="comment">// Now let&#39;s declare a tuple-struct:</span>
+<span class="kw">struct</span> <span class="ident">TupleStruct</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>);
+<span class="comment">// Let&#39;s instantiate it:</span>
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">TupleStruct</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>);
+<span class="comment">// And just like the tuple:</span>
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;({}, {}, {}, {})&quot;</span>, <span class="ident">x</span>.<span class="number">0</span>, <span class="ident">x</span>.<span class="number">1</span>, <span class="ident">x</span>.<span class="number">2</span>, <span class="ident">x</span>.<span class="number">3</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20Let's%20create%20a%20tuple%20first%3A%0Alet%20x%3A%20(u32%2C%20u32%2C%20u32%2C%20u32)%20%3D%20(0%2C%201%2C%201%2C%202)%3B%0A%2F%2F%20You%20can%20index%20its%20fields%20this%20way%3A%0Aprintln!(%22(%7B%7D%2C%20%7B%7D%2C%20%7B%7D%2C%20%7B%7D)%22%2C%20x.0%2C%20x.1%2C%20x.2%2C%20x.3)%3B%0A%0A%2F%2F%20Now%20let's%20declare%20a%20tuple-struct%3A%0Astruct%20TupleStruct(u32%2C%20u32%2C%20u32%2C%20u32)%3B%0A%2F%2F%20Let's%20instantiate%20it%3A%0Alet%20x%20%3D%20TupleStruct(0%2C%201%2C%201%2C%202)%3B%0A%2F%2F%20And%20just%20like%20the%20tuple%3A%0Aprintln!(%22(%7B%7D%2C%20%7B%7D%2C%20%7B%7D%2C%20%7B%7D)%22%2C%20x.0%2C%20x.1%2C%20x.2%2C%20x.3)%3B%0A%7D">Run</a></pre>
+
+<p>If you want to index into an array, use <code>[]</code> instead:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>];
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;[{}, {}, {}, {}]&quot;</span>, <span class="ident">x</span>[<span class="number">0</span>], <span class="ident">x</span>[<span class="number">1</span>], <span class="ident">x</span>[<span class="number">2</span>], <span class="ident">x</span>[<span class="number">3</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%26%5B0%2C%201%2C%201%2C%202%5D%3B%0Aprintln!(%22%5B%7B%7D%2C%20%7B%7D%2C%20%7B%7D%2C%20%7B%7D%5D%22%2C%20x%5B0%5D%2C%20x%5B1%5D%2C%20x%5B2%5D%2C%20x%5B3%5D)%3B%0A%7D">Run</a></pre>
+
+<p>If you want to access a field of a struct, check the field&#39;s name wasn&#39;t
+misspelled:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">SomeStruct</span> {
+    <span class="ident">x</span>: <span class="ident">u32</span>,
+    <span class="ident">y</span>: <span class="ident">i32</span>,
+}
+
+<span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">SomeStruct</span> {
+    <span class="ident">x</span>: <span class="number">0</span>,
+    <span class="ident">y</span>: <span class="op">-</span><span class="number">1</span>,
+};
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;x: {} y: {}&quot;</span>, <span class="ident">s</span>.<span class="ident">x</span>, <span class="ident">s</span>.<span class="ident">y</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20SomeStruct%20%7B%0A%20%20%20%20x%3A%20u32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Alet%20s%20%3D%20SomeStruct%20%7B%0A%20%20%20%20x%3A%200%2C%0A%20%20%20%20y%3A%20-1%2C%0A%7D%3B%0Aprintln!(%22x%3A%20%7B%7D%20y%3A%20%7B%7D%22%2C%20s.x%2C%20s.y)%3B%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0614" class="section-header"><a href="#E0614">E0614</a></h2>
+<p>Attempted to dereference a variable which cannot be dereferenced.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0u32</span>;
+<span class="kw-2">*</span><span class="ident">y</span>; <span class="comment">// error: type `u32` cannot be dereferenced</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20y%20%3D%200u32%3B%0A*y%3B%20%2F%2F%20error%3A%20type%20%60u32%60%20cannot%20be%20dereferenced%0A%7D">Run</a></pre>
+
+<p>Only types implementing <code>std::ops::Deref</code> can be dereferenced (such as <code>&amp;T</code>).
+Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0u32</span>;
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">y</span>;
+<span class="comment">// So here, `x` is a `&amp;u32`, so we can dereference it:</span>
+<span class="kw-2">*</span><span class="ident">x</span>; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20y%20%3D%200u32%3B%0Alet%20x%20%3D%20%26y%3B%0A%2F%2F%20So%20here%2C%20%60x%60%20is%20a%20%60%26u32%60%2C%20so%20we%20can%20dereference%20it%3A%0A*x%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0615" class="section-header"><a href="#E0615">E0615</a></h2>
+<p>Attempted to access a method like a field.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">Foo</span> {
+    <span class="ident">x</span>: <span class="ident">u32</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">Foo</span> {
+    <span class="kw">fn</span> <span class="ident">method</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {}
+}
+
+<span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="number">0</span> };
+<span class="ident">f</span>.<span class="ident">method</span>; <span class="comment">// error: attempted to take value of method `method` on type `Foo`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%0A%20%20%20%20x%3A%20u32%2C%0A%7D%0A%0Aimpl%20Foo%20%7B%0A%20%20%20%20fn%20method(%26self)%20%7B%7D%0A%7D%0A%0Alet%20f%20%3D%20Foo%20%7B%20x%3A%200%20%7D%3B%0Af.method%3B%20%2F%2F%20error%3A%20attempted%20to%20take%20value%20of%20method%20%60method%60%20on%20type%20%60Foo%60%0A%7D">Run</a></pre>
+
+<p>If you want to use a method, add <code>()</code> after it:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="ident">f</span>.<span class="ident">method</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%20x%3A%20u32%20%7D%0Aimpl%20Foo%20%7B%20fn%20method(%26self)%20%7B%7D%20%7D%0Alet%20f%20%3D%20Foo%20%7B%20x%3A%200%20%7D%3B%0Af.method()%3B%0A%7D">Run</a></pre>
+
+<p>However, if you wanted to access a field of a struct check that the field name
+is spelled correctly. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">f</span>.<span class="ident">x</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Astruct%20Foo%20%7B%20x%3A%20u32%20%7D%0Aimpl%20Foo%20%7B%20fn%20method(%26self)%20%7B%7D%20%7D%0Alet%20f%20%3D%20Foo%20%7B%20x%3A%200%20%7D%3B%0Aprintln!(%22%7B%7D%22%2C%20f.x)%3B%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0616" class="section-header"><a href="#E0616">E0616</a></h2>
+<p>Attempted to access a private field on a struct.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">some_module</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span> {
+        <span class="ident">x</span>: <span class="ident">u32</span>, <span class="comment">// So `x` is private in here.</span>
+    }
+
+    <span class="kw">impl</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Foo</span> { <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="number">0</span> } }
+    }
+}
+
+<span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">some_module</span>::<span class="ident">Foo</span>::<span class="ident">new</span>();
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">f</span>.<span class="ident">x</span>); <span class="comment">// error: field `x` of struct `some_module::Foo` is private</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20some_module%20%7B%0A%20%20%20%20pub%20struct%20Foo%20%7B%0A%20%20%20%20%20%20%20%20x%3A%20u32%2C%20%2F%2F%20So%20%60x%60%20is%20private%20in%20here.%0A%20%20%20%20%7D%0A%0A%20%20%20%20impl%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20fn%20new()%20-%3E%20Foo%20%7B%20Foo%20%7B%20x%3A%200%20%7D%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20f%20%3D%20some_module%3A%3AFoo%3A%3Anew()%3B%0Aprintln!(%22%7B%7D%22%2C%20f.x)%3B%20%2F%2F%20error%3A%20field%20%60x%60%20of%20struct%20%60some_module%3A%3AFoo%60%20is%20private%0A%7D">Run</a></pre>
+
+<p>If you want to access this field, you have two options:</p>
+
+<p>1) Set the field public:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">some_module</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">u32</span>, <span class="comment">// `x` is now public.</span>
+    }
+
+    <span class="kw">impl</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Foo</span> { <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="number">0</span> } }
+    }
+}
+
+<span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">some_module</span>::<span class="ident">Foo</span>::<span class="ident">new</span>();
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">f</span>.<span class="ident">x</span>); <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20some_module%20%7B%0A%20%20%20%20pub%20struct%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20x%3A%20u32%2C%20%2F%2F%20%60x%60%20is%20now%20public.%0A%20%20%20%20%7D%0A%0A%20%20%20%20impl%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20fn%20new()%20-%3E%20Foo%20%7B%20Foo%20%7B%20x%3A%200%20%7D%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20f%20%3D%20some_module%3A%3AFoo%3A%3Anew()%3B%0Aprintln!(%22%7B%7D%22%2C%20f.x)%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+
+<p>2) Add a getter function:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">mod</span> <span class="ident">some_module</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Foo</span> {
+        <span class="ident">x</span>: <span class="ident">u32</span>, <span class="comment">// So `x` is still private in here.</span>
+    }
+
+    <span class="kw">impl</span> <span class="ident">Foo</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Foo</span> { <span class="ident">Foo</span> { <span class="ident">x</span>: <span class="number">0</span> } }
+
+        <span class="comment">// We create the getter function here:</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_x</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">u32</span> { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">x</span> }
+    }
+}
+
+<span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">some_module</span>::<span class="ident">Foo</span>::<span class="ident">new</span>();
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">f</span>.<span class="ident">get_x</span>()); <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Amod%20some_module%20%7B%0A%20%20%20%20pub%20struct%20Foo%20%7B%0A%20%20%20%20%20%20%20%20x%3A%20u32%2C%20%2F%2F%20So%20%60x%60%20is%20still%20private%20in%20here.%0A%20%20%20%20%7D%0A%0A%20%20%20%20impl%20Foo%20%7B%0A%20%20%20%20%20%20%20%20pub%20fn%20new()%20-%3E%20Foo%20%7B%20Foo%20%7B%20x%3A%200%20%7D%20%7D%0A%0A%20%20%20%20%20%20%20%20%2F%2F%20We%20create%20the%20getter%20function%20here%3A%0A%20%20%20%20%20%20%20%20pub%20fn%20get_x(%26self)%20-%3E%20%26u32%20%7B%20%26self.x%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Alet%20f%20%3D%20some_module%3A%3AFoo%3A%3Anew()%3B%0Aprintln!(%22%7B%7D%22%2C%20f.get_x())%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+</div>
 <div class="error-described error-used"><h2 id="E0617" class="section-header"><a href="#E0617">E0617</a></h2>
 <p>Attempted to pass an invalid type of variable into a variadic function.</p>
 
@@ -8863,6 +9203,113 @@ as possible. For better explanations, see The Rust Book:
 
 <span class="comment">// And we call it:</span>
 <span class="ident">i_am_a_function</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0A%2F%2F%20We%20declare%20a%20function%3A%0Afn%20i_am_a_function()%20%7B%7D%0A%0A%2F%2F%20And%20we%20call%20it%3A%0Ai_am_a_function()%3B%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0619" class="section-header"><a href="#E0619">E0619</a></h2>
+<p>The type-checker needed to know the type of an expression, but that type had not
+yet been inferred.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+<span class="kw">match</span> <span class="ident">x</span>.<span class="ident">pop</span>() {
+    <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> {
+        <span class="comment">// Here, the type of `v` is not (yet) known, so we</span>
+        <span class="comment">// cannot resolve this method call:</span>
+        <span class="ident">v</span>.<span class="ident">to_uppercase</span>(); <span class="comment">// error: the type of this value must be known in</span>
+                          <span class="comment">//        this context</span>
+    }
+    <span class="prelude-val">None</span> <span class="op">=&gt;</span> {}
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20x%20%3D%20vec!%5B%5D%3B%0Amatch%20x.pop()%20%7B%0A%20%20%20%20Some(v)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Here%2C%20the%20type%20of%20%60v%60%20is%20not%20(yet)%20known%2C%20so%20we%0A%20%20%20%20%20%20%20%20%2F%2F%20cannot%20resolve%20this%20method%20call%3A%0A%20%20%20%20%20%20%20%20v.to_uppercase()%3B%20%2F%2F%20error%3A%20the%20type%20of%20this%20value%20must%20be%20known%20in%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20this%20context%0A%20%20%20%20%7D%0A%20%20%20%20None%20%3D%3E%20%7B%7D%0A%7D%0A%7D">Run</a></pre>
+
+<p>Type inference typically proceeds from the top of the function to the bottom,
+figuring out types as it goes. In some cases -- notably method calls and
+overloadable operators like <code>*</code> -- the type checker may not have enough
+information <em>yet</em> to make progress. This can be true even if the rest of the
+function provides enough context (because the type-checker hasn&#39;t looked that
+far ahead yet). In this case, type annotations can be used to help it along.</p>
+
+<p>To fix this error, just specify the type of the variable. Example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[]; <span class="comment">// We precise the type of the vec elements.</span>
+<span class="kw">match</span> <span class="ident">x</span>.<span class="ident">pop</span>() {
+    <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=&gt;</span> {
+        <span class="ident">v</span>.<span class="ident">to_uppercase</span>(); <span class="comment">// Since rustc now knows the type of the vec elements,</span>
+                          <span class="comment">// we can use `v`&#39;s methods.</span>
+    }
+    <span class="prelude-val">None</span> <span class="op">=&gt;</span> {}
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20x%3A%20Vec%3CString%3E%20%3D%20vec!%5B%5D%3B%20%2F%2F%20We%20precise%20the%20type%20of%20the%20vec%20elements.%0Amatch%20x.pop()%20%7B%0A%20%20%20%20Some(v)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20v.to_uppercase()%3B%20%2F%2F%20Since%20rustc%20now%20knows%20the%20type%20of%20the%20vec%20elements%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20use%20%60v%60's%20methods.%0A%20%20%20%20%7D%0A%20%20%20%20None%20%3D%3E%20%7B%7D%0A%7D%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0620" class="section-header"><a href="#E0620">E0620</a></h2>
+<p>A cast to an unsized type was attempted.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">1_usize</span>, <span class="number">2</span>] <span class="kw">as</span> [<span class="ident">usize</span>]; <span class="comment">// error: cast to unsized type: `&amp;[usize; 2]`</span>
+                                  <span class="comment">//        as `[usize]`</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%26%5B1_usize%2C%202%5D%20as%20%5Busize%5D%3B%20%2F%2F%20error%3A%20cast%20to%20unsized%20type%3A%20%60%26%5Busize%3B%202%5D%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%20%20%20%20%20%20%20as%20%60%5Busize%5D%60%0A%7D">Run</a></pre>
+
+<p>In Rust, some types don&#39;t have a known size at compile-time. For example, in a
+slice type like <code>[u32]</code>, the number of elements is not known at compile-time and
+hence the overall size cannot be computed. As a result, such types can only be
+manipulated through a reference (e.g., <code>&amp;T</code> or <code>&amp;mut T</code>) or other pointer-type
+(e.g., <code>Box</code> or <code>Rc</code>). Try casting to a reference instead:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">1_usize</span>, <span class="number">2</span>] <span class="kw">as</span> <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]; <span class="comment">// ok!</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20x%20%3D%20%26%5B1_usize%2C%202%5D%20as%20%26%5Busize%5D%3B%20%2F%2F%20ok!%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0621" class="section-header"><a href="#E0621">E0621</a></h2>
+<p>This error code indicates a mismatch between the function signature (i.e.,
+the parameter types and the return type) and the function body. Most of
+the time, this indicates that the function signature needs to be changed to
+match the body, but it may be that the body needs to be changed to match
+the signature.</p>
+
+<p>Specifically, one or more of the parameters contain borrowed data that
+needs to have a named lifetime in order for the body to type-check. Most of
+the time, this is because the borrowed data is being returned from the
+function, as in this example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="ident">i32</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span> { <span class="comment">// explicit lifetime required</span>
+                                             <span class="comment">// in the type of `y`</span>
+    <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">y</span> { <span class="ident">x</span> } <span class="kw">else</span> { <span class="ident">y</span> }
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo%3C'a%3E(x%3A%20%26'a%20i32%2C%20y%3A%20%26i32)%20-%3E%20%26'a%20i32%20%7B%20%2F%2F%20explicit%20lifetime%20required%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20in%20the%20type%20of%20%60y%60%0A%20%20%20%20if%20x%20%3E%20y%20%7B%20x%20%7D%20else%20%7B%20y%20%7D%0A%7D%0A%7D">Run</a></pre>
+
+<p>Here, the function is returning data borrowed from either x or y, but the
+&#39;a annotation indicates that it is returning data only from x. We can make
+the signature match the body by changing the type of y to &amp;&#39;a i32, like so:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span> {
+    <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">y</span> { <span class="ident">x</span> } <span class="kw">else</span> { <span class="ident">y</span> }
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo%3C'a%3E(x%3A%20%26'a%20i32%2C%20y%3A%20%26'a%20i32)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20if%20x%20%3E%20y%20%7B%20x%20%7D%20else%20%7B%20y%20%7D%0A%7D%0A%7D">Run</a></pre>
+
+<p>Alternatively, you could change the body not to return data from y:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">fn</span> <span class="ident">foo</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="ident">i32</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">i32</span> {
+    <span class="ident">x</span>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20foo%3C'a%3E(x%3A%20%26'a%20i32%2C%20y%3A%20%26i32)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20x%0A%7D%0A%7D">Run</a></pre>
+</div>
+<div class="error-described error-used"><h2 id="E0622" class="section-header"><a href="#E0622">E0622</a></h2>
+<p>An intrinsic was declared without being a function.</p>
+
+<p>Erroneous code example:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">intrinsics</span>)]</span>
+<span class="kw">extern</span> <span class="string">&quot;rust-intrinsic&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="ident">breakpoint</span> : <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;rust-intrinsic&quot;</span> <span class="kw">fn</span>();
+    <span class="comment">// error: intrinsic must be a function</span>
+}
+
+<span class="kw">fn</span> <span class="ident">main</span>() { <span class="kw">unsafe</span> { <span class="ident">breakpoint</span>(); } }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(intrinsics)%5D%0Aextern%20%22rust-intrinsic%22%20%7B%0A%20%20%20%20pub%20static%20breakpoint%20%3A%20unsafe%20extern%20%22rust-intrinsic%22%20fn()%3B%0A%20%20%20%20%2F%2F%20error%3A%20intrinsic%20must%20be%20a%20function%0A%7D%0A%0Afn%20main()%20%7B%20unsafe%20%7B%20breakpoint()%3B%20%7D%20%7D%0A&amp;version=nightly">Run</a></pre>
+
+<p>An intrinsic is a function available for use in a given programming language
+whose implementation is handled specially by the compiler. In order to fix this
+error, just declare a function.</p>
 </div>
 </body>
 </html>

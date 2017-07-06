@@ -1236,6 +1236,90 @@
 <span id="1191">1191</span>
 <span id="1192">1192</span>
 <span id="1193">1193</span>
+<span id="1194">1194</span>
+<span id="1195">1195</span>
+<span id="1196">1196</span>
+<span id="1197">1197</span>
+<span id="1198">1198</span>
+<span id="1199">1199</span>
+<span id="1200">1200</span>
+<span id="1201">1201</span>
+<span id="1202">1202</span>
+<span id="1203">1203</span>
+<span id="1204">1204</span>
+<span id="1205">1205</span>
+<span id="1206">1206</span>
+<span id="1207">1207</span>
+<span id="1208">1208</span>
+<span id="1209">1209</span>
+<span id="1210">1210</span>
+<span id="1211">1211</span>
+<span id="1212">1212</span>
+<span id="1213">1213</span>
+<span id="1214">1214</span>
+<span id="1215">1215</span>
+<span id="1216">1216</span>
+<span id="1217">1217</span>
+<span id="1218">1218</span>
+<span id="1219">1219</span>
+<span id="1220">1220</span>
+<span id="1221">1221</span>
+<span id="1222">1222</span>
+<span id="1223">1223</span>
+<span id="1224">1224</span>
+<span id="1225">1225</span>
+<span id="1226">1226</span>
+<span id="1227">1227</span>
+<span id="1228">1228</span>
+<span id="1229">1229</span>
+<span id="1230">1230</span>
+<span id="1231">1231</span>
+<span id="1232">1232</span>
+<span id="1233">1233</span>
+<span id="1234">1234</span>
+<span id="1235">1235</span>
+<span id="1236">1236</span>
+<span id="1237">1237</span>
+<span id="1238">1238</span>
+<span id="1239">1239</span>
+<span id="1240">1240</span>
+<span id="1241">1241</span>
+<span id="1242">1242</span>
+<span id="1243">1243</span>
+<span id="1244">1244</span>
+<span id="1245">1245</span>
+<span id="1246">1246</span>
+<span id="1247">1247</span>
+<span id="1248">1248</span>
+<span id="1249">1249</span>
+<span id="1250">1250</span>
+<span id="1251">1251</span>
+<span id="1252">1252</span>
+<span id="1253">1253</span>
+<span id="1254">1254</span>
+<span id="1255">1255</span>
+<span id="1256">1256</span>
+<span id="1257">1257</span>
+<span id="1258">1258</span>
+<span id="1259">1259</span>
+<span id="1260">1260</span>
+<span id="1261">1261</span>
+<span id="1262">1262</span>
+<span id="1263">1263</span>
+<span id="1264">1264</span>
+<span id="1265">1265</span>
+<span id="1266">1266</span>
+<span id="1267">1267</span>
+<span id="1268">1268</span>
+<span id="1269">1269</span>
+<span id="1270">1270</span>
+<span id="1271">1271</span>
+<span id="1272">1272</span>
+<span id="1273">1273</span>
+<span id="1274">1274</span>
+<span id="1275">1275</span>
+<span id="1276">1276</span>
+<span id="1277">1277</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1354,6 +1438,90 @@
     <span class="comment">// y and t now point to the same thing, but we need to completely forget `tmp`</span>
     <span class="comment">// because it&#39;s no longer relevant.</span>
     <span class="ident">mem</span>::<span class="ident">forget</span>(<span class="ident">tmp</span>);
+}
+
+<span class="doccomment">/// Swaps a sequence of values at two mutable locations of the same type.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Safety</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The two arguments must each point to the beginning of `count` locations</span>
+<span class="doccomment">/// of valid memory, and the two memory ranges must not overlap.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Examples</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Basic usage:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// #![feature(swap_nonoverlapping)]</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// use std::ptr;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let mut x = [1, 2, 3, 4];</span>
+<span class="doccomment">/// let mut y = [7, 8, 9];</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// unsafe {</span>
+<span class="doccomment">///     ptr::swap_nonoverlapping(x.as_mut_ptr(), y.as_mut_ptr(), 2);</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(x, [7, 8, 3, 4]);</span>
+<span class="doccomment">/// assert_eq!(y, [1, 2, 9]);</span>
+<span class="doccomment">/// ```</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swap_nonoverlapping&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42818&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">swap_nonoverlapping</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">y</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">count</span>: <span class="ident">usize</span>) {
+    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">count</span>;
+    <span class="ident">swap_nonoverlapping_bytes</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">len</span>)
+}
+
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">swap_nonoverlapping_bytes</span>(<span class="ident">x</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">y</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">len</span>: <span class="ident">usize</span>) {
+    <span class="comment">// The approach here is to utilize simd to swap x &amp; y efficiently. Testing reveals</span>
+    <span class="comment">// that swapping either 32 bytes or 64 bytes at a time is most efficient for intel</span>
+    <span class="comment">// Haswell E processors. LLVM is more able to optimize if we give a struct a</span>
+    <span class="comment">// #[repr(simd)], even if we don&#39;t actually use this struct directly.</span>
+    <span class="comment">//</span>
+    <span class="comment">// FIXME repr(simd) broken on emscripten and redox</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;emscripten&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>)), <span class="ident">repr</span>(<span class="ident">simd</span>))]</span>
+    <span class="kw">struct</span> <span class="ident">Block</span>(<span class="ident">u64</span>, <span class="ident">u64</span>, <span class="ident">u64</span>, <span class="ident">u64</span>);
+    <span class="kw">struct</span> <span class="ident">UnalignedBlock</span>(<span class="ident">u64</span>, <span class="ident">u64</span>, <span class="ident">u64</span>, <span class="ident">u64</span>);
+
+    <span class="kw">let</span> <span class="ident">block_size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>();
+
+    <span class="comment">// Loop through x &amp; y, copying them `Block` at a time</span>
+    <span class="comment">// The optimizer should unroll the loop fully for most types</span>
+    <span class="comment">// N.B. We can&#39;t use a for loop as the `range` impl calls `mem::swap` recursively</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">while</span> <span class="ident">i</span> <span class="op">+</span> <span class="ident">block_size</span> <span class="op">&lt;=</span> <span class="ident">len</span> {
+        <span class="comment">// Create some uninitialized memory as scratch space</span>
+        <span class="comment">// Declaring `t` here avoids aligning the stack when this loop is unused</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span>: <span class="ident">Block</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">uninitialized</span>();
+        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">t</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">offset</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">isize</span>);
+        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>.<span class="ident">offset</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">isize</span>);
+
+        <span class="comment">// Swap a block of bytes of x &amp; y, using t as a temporary buffer</span>
+        <span class="comment">// This should be optimized into efficient SIMD operations where available</span>
+        <span class="ident">copy_nonoverlapping</span>(<span class="ident">x</span>, <span class="ident">t</span>, <span class="ident">block_size</span>);
+        <span class="ident">copy_nonoverlapping</span>(<span class="ident">y</span>, <span class="ident">x</span>, <span class="ident">block_size</span>);
+        <span class="ident">copy_nonoverlapping</span>(<span class="ident">t</span>, <span class="ident">y</span>, <span class="ident">block_size</span>);
+        <span class="ident">i</span> <span class="op">+=</span> <span class="ident">block_size</span>;
+    }
+
+    <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">len</span> {
+        <span class="comment">// Swap any remaining bytes</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span>: <span class="ident">UnalignedBlock</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">uninitialized</span>();
+        <span class="kw">let</span> <span class="ident">rem</span> <span class="op">=</span> <span class="ident">len</span> <span class="op">-</span> <span class="ident">i</span>;
+
+        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">t</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _ <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">offset</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">isize</span>);
+        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>.<span class="ident">offset</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">isize</span>);
+
+        <span class="ident">copy_nonoverlapping</span>(<span class="ident">x</span>, <span class="ident">t</span>, <span class="ident">rem</span>);
+        <span class="ident">copy_nonoverlapping</span>(<span class="ident">y</span>, <span class="ident">x</span>, <span class="ident">rem</span>);
+        <span class="ident">copy_nonoverlapping</span>(<span class="ident">t</span>, <span class="ident">y</span>, <span class="ident">rem</span>);
+    }
 }
 
 <span class="doccomment">/// Replaces the value at `dest` with `src`, returning the old</span>
@@ -1647,11 +1815,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Basic usage:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// ```ignore</span>
-    <span class="doccomment">/// let val: *const u8 = &amp;10u8 as *const u8;</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// let ptr: *const u8 = &amp;10u8 as *const u8;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// unsafe {</span>
-    <span class="doccomment">///     if let Some(val_back) = val.as_ref() {</span>
+    <span class="doccomment">///     if let Some(val_back) = ptr.as_ref() {</span>
     <span class="doccomment">///         println!(&quot;We got back the value: {}!&quot;, val_back);</span>
     <span class="doccomment">///     }</span>
     <span class="doccomment">/// }</span>
@@ -1809,11 +1977,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Basic usage:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// ```ignore</span>
-    <span class="doccomment">/// let val: *mut u8 = &amp;mut 10u8 as *mut u8;</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// let ptr: *mut u8 = &amp;mut 10u8 as *mut u8;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// unsafe {</span>
-    <span class="doccomment">///     if let Some(val_back) = val.as_ref() {</span>
+    <span class="doccomment">///     if let Some(val_back) = ptr.as_ref() {</span>
     <span class="doccomment">///         println!(&quot;We got back the value: {}!&quot;, val_back);</span>
     <span class="doccomment">///     }</span>
     <span class="doccomment">/// }</span>

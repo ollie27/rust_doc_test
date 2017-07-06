@@ -2284,6 +2284,53 @@
 <span id="2239">2239</span>
 <span id="2240">2240</span>
 <span id="2241">2241</span>
+<span id="2242">2242</span>
+<span id="2243">2243</span>
+<span id="2244">2244</span>
+<span id="2245">2245</span>
+<span id="2246">2246</span>
+<span id="2247">2247</span>
+<span id="2248">2248</span>
+<span id="2249">2249</span>
+<span id="2250">2250</span>
+<span id="2251">2251</span>
+<span id="2252">2252</span>
+<span id="2253">2253</span>
+<span id="2254">2254</span>
+<span id="2255">2255</span>
+<span id="2256">2256</span>
+<span id="2257">2257</span>
+<span id="2258">2258</span>
+<span id="2259">2259</span>
+<span id="2260">2260</span>
+<span id="2261">2261</span>
+<span id="2262">2262</span>
+<span id="2263">2263</span>
+<span id="2264">2264</span>
+<span id="2265">2265</span>
+<span id="2266">2266</span>
+<span id="2267">2267</span>
+<span id="2268">2268</span>
+<span id="2269">2269</span>
+<span id="2270">2270</span>
+<span id="2271">2271</span>
+<span id="2272">2272</span>
+<span id="2273">2273</span>
+<span id="2274">2274</span>
+<span id="2275">2275</span>
+<span id="2276">2276</span>
+<span id="2277">2277</span>
+<span id="2278">2278</span>
+<span id="2279">2279</span>
+<span id="2280">2280</span>
+<span id="2281">2281</span>
+<span id="2282">2282</span>
+<span id="2283">2283</span>
+<span id="2284">2284</span>
+<span id="2285">2285</span>
+<span id="2286">2286</span>
+<span id="2287">2287</span>
+<span id="2288">2288</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2016 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2767,6 +2814,53 @@
         <span class="self">Self</span>: <span class="ident">Sized</span>, <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Item</span>) <span class="op">-&gt;</span> <span class="ident">B</span>,
     {
         <span class="ident">Map</span>{<span class="ident">iter</span>: <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f</span>}
+    }
+
+    <span class="doccomment">/// Calls a closure on each element of an iterator.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is equivalent to using a [`for`] loop on the iterator, although</span>
+    <span class="doccomment">/// `break` and `continue` are not possible from a closure.  It&#39;s generally</span>
+    <span class="doccomment">/// more idiomatic to use a `for` loop, but `for_each` may be more legible</span>
+    <span class="doccomment">/// when processing items at the end of longer iterator chains.  In some</span>
+    <span class="doccomment">/// cases `for_each` may also be faster than a loop, because it will use</span>
+    <span class="doccomment">/// internal iteration on adaptors like `Chain`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`for`]: ../../book/first-edition/loops.html#for</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Basic usage:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #![feature(iterator_for_each)]</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// use std::sync::mpsc::channel;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let (tx, rx) = channel();</span>
+    <span class="doccomment">/// (0..5).map(|x| x * 2 + 1)</span>
+    <span class="doccomment">///       .for_each(move |x| tx.send(x).unwrap());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let v: Vec&lt;_&gt; =  rx.iter().collect();</span>
+    <span class="doccomment">/// assert_eq!(v, vec![1, 3, 5, 7, 9]);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For such a small example, a `for` loop may be cleaner, but `for_each`</span>
+    <span class="doccomment">/// might be preferable to keep a functional style with longer iterators:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #![feature(iterator_for_each)]</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// (0..5).flat_map(|x| x * 100 .. x * 110)</span>
+    <span class="doccomment">///       .enumerate()</span>
+    <span class="doccomment">///       .filter(|&amp;(i, x)| (i + x) % 3 == 0)</span>
+    <span class="doccomment">///       .for_each(|(i, x)| println!(&quot;{}:{}&quot;, i, x));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;iterator_for_each&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42986&quot;</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">for_each</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="kw">where</span>
+        <span class="self">Self</span>: <span class="ident">Sized</span>, <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="self">Self</span>::<span class="ident">Item</span>),
+    {
+        <span class="self">self</span>.<span class="ident">fold</span>((), <span class="kw">move</span> <span class="op">|</span>(), <span class="ident">item</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">item</span>));
     }
 
     <span class="doccomment">/// Creates an iterator which uses a closure to determine if an element</span>

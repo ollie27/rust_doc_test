@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ops/place.rs.html#109-119' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ops/place.rs.html#123-133' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Boxed {
     type <a href='#associatedtype.Data' class="type">Data</a>;
     type <a href='#associatedtype.Place' class="type">Place</a>: <a class="trait" href="../../std/ops/trait.BoxPlace.html" title="trait std::ops::BoxPlace">BoxPlace</a>&lt;Self::<a class="type" href="../../std/ops/trait.Boxed.html#associatedtype.Data" title="type std::ops::Boxed::Data">Data</a>&gt;;
@@ -64,7 +64,7 @@
 <span class="kw">unsafe</span> {
     ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">write</span>(<span class="ident">raw_place</span>, <span class="ident">value</span>);
     <span class="ident">Boxed</span>::<span class="ident">finalize</span>(<span class="ident">place</span>)
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20mut%20place%20%3D%20BoxPlace%3A%3Amake_place()%3B%0Alet%20raw_place%20%3D%20Place%3A%3Apointer(%26mut%20place)%3B%0Alet%20value%20%3D%20EXPR%3B%0Aunsafe%20%7B%0A%20%20%20%20%3A%3Astd%3A%3Aptr%3A%3Awrite(raw_place%2C%20value)%3B%0A%20%20%20%20Boxed%3A%3Afinalize(place)%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(placement_new_protocol)%5D%0Ause%20std%3A%3Aops%3A%3A%7BBoxPlace%2C%20Place%2C%20Boxed%7D%3B%0A%23%5Ballow(non_snake_case)%5D%0Afn%20main()%20%7B%0Alet%20EXPR%20%3D%201%3B%0Alet%20mut%20place%20%3D%20BoxPlace%3A%3Amake_place()%3B%0Alet%20raw_place%20%3D%20Place%3A%3Apointer(%26mut%20place)%3B%0Alet%20value%20%3D%20EXPR%3B%0Alet%20_%3A%20Box%3C_%3E%20%3D%0Aunsafe%20%7B%0A%20%20%20%20%3A%3Astd%3A%3Aptr%3A%3Awrite(raw_place%2C%20value)%3B%0A%20%20%20%20Boxed%3A%3Afinalize(place)%0A%7D%0A%3B%20%7D%0A&amp;version=nightly">Run</a></pre>
 
 <p>The type of <code>box EXPR</code> is supplied from its surrounding
 context; in the above expansion, the result type <code>T</code> is used

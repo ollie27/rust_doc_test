@@ -3073,11 +3073,6 @@
 <span id="3028">3028</span>
 <span id="3029">3029</span>
 <span id="3030">3030</span>
-<span id="3031">3031</span>
-<span id="3032">3032</span>
-<span id="3033">3033</span>
-<span id="3034">3034</span>
-<span id="3035">3035</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -3580,8 +3575,6 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">!</span><span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> { }
 
 <span class="doccomment">/// The sending-half of Rust&#39;s synchronous [`sync_channel`] type.</span>
-<span class="doccomment">/// This half can only be owned by one thread, but it can be cloned</span>
-<span class="doccomment">/// to send to other threads.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Messages can be sent through this channel with [`send`] or [`try_send`].</span>
 <span class="doccomment">///</span>
@@ -3635,9 +3628,6 @@
 
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span><span class="op">&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">SyncSender</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
-
-<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">!</span><span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">SyncSender</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 
 <span class="doccomment">/// An error returned from the [`Sender::send`] or [`SyncSender::send`]</span>
 <span class="doccomment">/// function on **channel**s.</span>

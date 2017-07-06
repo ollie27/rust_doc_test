@@ -259,12 +259,12 @@
 <span class="doccomment">//!   These functions are often provided by the system libc, but can also be</span>
 <span class="doccomment">//!   provided by the [rlibc crate](https://crates.io/crates/rlibc).</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! * `rust_begin_panic` - This function takes three arguments, a</span>
-<span class="doccomment">//!   `fmt::Arguments`, a `&amp;&#39;static str`, and a `u32`. These three arguments</span>
+<span class="doccomment">//! * `rust_begin_panic` - This function takes four arguments, a</span>
+<span class="doccomment">//!   `fmt::Arguments`, a `&amp;&#39;static str`, and two `u32`&#39;s. These four arguments</span>
 <span class="doccomment">//!   dictate the panic message, the file at which panic was invoked, and the</span>
-<span class="doccomment">//!   line. It is up to consumers of this core library to define this panic</span>
-<span class="doccomment">//!   function; it is only required to never return. This requires a `lang`</span>
-<span class="doccomment">//!   attribute named `panic_fmt`.</span>
+<span class="doccomment">//!   line and column inside the file. It is up to consumers of this core</span>
+<span class="doccomment">//!   library to define this panic function; it is only required to never</span>
+<span class="doccomment">//!   return. This requires a `lang` attribute named `panic_fmt`.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * `rust_eh_personality` - is used by the failure mechanisms of the</span>
 <span class="doccomment">//!    compiler. This is often mapped to GCC&#39;s personality function, but crates</span>

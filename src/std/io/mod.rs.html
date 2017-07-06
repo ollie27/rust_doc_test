@@ -2259,6 +2259,86 @@
 <span id="2214">2214</span>
 <span id="2215">2215</span>
 <span id="2216">2216</span>
+<span id="2217">2217</span>
+<span id="2218">2218</span>
+<span id="2219">2219</span>
+<span id="2220">2220</span>
+<span id="2221">2221</span>
+<span id="2222">2222</span>
+<span id="2223">2223</span>
+<span id="2224">2224</span>
+<span id="2225">2225</span>
+<span id="2226">2226</span>
+<span id="2227">2227</span>
+<span id="2228">2228</span>
+<span id="2229">2229</span>
+<span id="2230">2230</span>
+<span id="2231">2231</span>
+<span id="2232">2232</span>
+<span id="2233">2233</span>
+<span id="2234">2234</span>
+<span id="2235">2235</span>
+<span id="2236">2236</span>
+<span id="2237">2237</span>
+<span id="2238">2238</span>
+<span id="2239">2239</span>
+<span id="2240">2240</span>
+<span id="2241">2241</span>
+<span id="2242">2242</span>
+<span id="2243">2243</span>
+<span id="2244">2244</span>
+<span id="2245">2245</span>
+<span id="2246">2246</span>
+<span id="2247">2247</span>
+<span id="2248">2248</span>
+<span id="2249">2249</span>
+<span id="2250">2250</span>
+<span id="2251">2251</span>
+<span id="2252">2252</span>
+<span id="2253">2253</span>
+<span id="2254">2254</span>
+<span id="2255">2255</span>
+<span id="2256">2256</span>
+<span id="2257">2257</span>
+<span id="2258">2258</span>
+<span id="2259">2259</span>
+<span id="2260">2260</span>
+<span id="2261">2261</span>
+<span id="2262">2262</span>
+<span id="2263">2263</span>
+<span id="2264">2264</span>
+<span id="2265">2265</span>
+<span id="2266">2266</span>
+<span id="2267">2267</span>
+<span id="2268">2268</span>
+<span id="2269">2269</span>
+<span id="2270">2270</span>
+<span id="2271">2271</span>
+<span id="2272">2272</span>
+<span id="2273">2273</span>
+<span id="2274">2274</span>
+<span id="2275">2275</span>
+<span id="2276">2276</span>
+<span id="2277">2277</span>
+<span id="2278">2278</span>
+<span id="2279">2279</span>
+<span id="2280">2280</span>
+<span id="2281">2281</span>
+<span id="2282">2282</span>
+<span id="2283">2283</span>
+<span id="2284">2284</span>
+<span id="2285">2285</span>
+<span id="2286">2286</span>
+<span id="2287">2287</span>
+<span id="2288">2288</span>
+<span id="2289">2289</span>
+<span id="2290">2290</span>
+<span id="2291">2291</span>
+<span id="2292">2292</span>
+<span id="2293">2293</span>
+<span id="2294">2294</span>
+<span id="2295">2295</span>
+<span id="2296">2296</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2537,6 +2617,7 @@
 <span class="kw">use</span> <span class="ident">result</span>;
 <span class="kw">use</span> <span class="ident">str</span>;
 <span class="kw">use</span> <span class="ident">memchr</span>;
+<span class="kw">use</span> <span class="ident">ptr</span>;
 
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">buffered</span>::{<span class="ident">BufReader</span>, <span class="ident">BufWriter</span>, <span class="ident">LineWriter</span>};
@@ -2554,7 +2635,7 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">stdio</span>::{<span class="ident">StdoutLock</span>, <span class="ident">StderrLock</span>, <span class="ident">StdinLock</span>};
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;print_internals&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">stdio</span>::{<span class="ident">_print</span>, <span class="ident">_eprint</span>};
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;libstd_io_internals&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;libstd_io_internals&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>, <span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">stdio</span>::{<span class="ident">set_panic</span>, <span class="ident">set_print</span>};
 
@@ -2568,6 +2649,14 @@
 <span class="kw">mod</span> <span class="ident">stdio</span>;
 
 <span class="kw">const</span> <span class="ident">DEFAULT_BUF_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> ::<span class="ident">sys_common</span>::<span class="ident">io</span>::<span class="ident">DEFAULT_BUF_SIZE</span>;
+
+<span class="kw">struct</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> { <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">len</span>: <span class="ident">usize</span> }
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">set_len</span>(<span class="self">self</span>.<span class="ident">len</span>); }
+    }
+}
 
 <span class="comment">// A few methods below (read_to_string, read_line) will append data into a</span>
 <span class="comment">// `String` buffer, but we need to be pretty careful when doing this. The</span>
@@ -2590,23 +2679,16 @@
 <span class="kw">fn</span> <span class="ident">append_to_string</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">String</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
 {
-    <span class="kw">struct</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> { <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">len</span>: <span class="ident">usize</span> }
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-            <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">set_len</span>(<span class="self">self</span>.<span class="ident">len</span>); }
-        }
-    }
-
     <span class="kw">unsafe</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">Guard</span> { <span class="ident">len</span>: <span class="ident">buf</span>.<span class="ident">len</span>(), <span class="ident">s</span>: <span class="ident">buf</span>.<span class="ident">as_mut_vec</span>() };
-        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">g</span>.<span class="ident">s</span>);
-        <span class="kw">if</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>.<span class="ident">s</span>[<span class="ident">g</span>.<span class="ident">len</span>..]).<span class="ident">is_err</span>() {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">Guard</span> { <span class="ident">len</span>: <span class="ident">buf</span>.<span class="ident">len</span>(), <span class="ident">buf</span>: <span class="ident">buf</span>.<span class="ident">as_mut_vec</span>() };
+        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">g</span>.<span class="ident">buf</span>);
+        <span class="kw">if</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>.<span class="ident">buf</span>[<span class="ident">g</span>.<span class="ident">len</span>..]).<span class="ident">is_err</span>() {
             <span class="ident">ret</span>.<span class="ident">and_then</span>(<span class="op">|</span>_<span class="op">|</span> {
                 <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">InvalidData</span>,
                                <span class="string">&quot;stream did not contain valid UTF-8&quot;</span>))
             })
         } <span class="kw">else</span> {
-            <span class="ident">g</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">s</span>.<span class="ident">len</span>();
+            <span class="ident">g</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">len</span>();
             <span class="ident">ret</span>
         }
     }
@@ -2618,25 +2700,32 @@
 <span class="comment">// of data to return. Simply tacking on an extra DEFAULT_BUF_SIZE space every</span>
 <span class="comment">// time is 4,500 times (!) slower than this if the reader has a very small</span>
 <span class="comment">// amount of data to return.</span>
+<span class="comment">//</span>
+<span class="comment">// Because we&#39;re extending the buffer with uninitialized data for trusted</span>
+<span class="comment">// readers, we need to make sure to truncate that if any of this panics.</span>
 <span class="kw">fn</span> <span class="ident">read_to_end</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">r</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">start_len</span> <span class="op">=</span> <span class="ident">buf</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">start_len</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">Guard</span> { <span class="ident">len</span>: <span class="ident">buf</span>.<span class="ident">len</span>(), <span class="ident">buf</span>: <span class="ident">buf</span> };
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_write_size</span> <span class="op">=</span> <span class="number">16</span>;
     <span class="kw">let</span> <span class="ident">ret</span>;
     <span class="kw">loop</span> {
-        <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="ident">buf</span>.<span class="ident">len</span>() {
+        <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">len</span> <span class="op">==</span> <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">len</span>() {
             <span class="kw">if</span> <span class="ident">new_write_size</span> <span class="op">&lt;</span> <span class="ident">DEFAULT_BUF_SIZE</span> {
                 <span class="ident">new_write_size</span> <span class="op">*=</span> <span class="number">2</span>;
             }
-            <span class="ident">buf</span>.<span class="ident">resize</span>(<span class="ident">len</span> <span class="op">+</span> <span class="ident">new_write_size</span>, <span class="number">0</span>);
+            <span class="kw">unsafe</span> {
+                <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">reserve</span>(<span class="ident">new_write_size</span>);
+                <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">set_len</span>(<span class="ident">g</span>.<span class="ident">len</span> <span class="op">+</span> <span class="ident">new_write_size</span>);
+                <span class="ident">r</span>.<span class="ident">initializer</span>().<span class="ident">initialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">g</span>.<span class="ident">buf</span>[<span class="ident">g</span>.<span class="ident">len</span>..]);
+            }
         }
 
-        <span class="kw">match</span> <span class="ident">r</span>.<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>[<span class="ident">len</span>..]) {
+        <span class="kw">match</span> <span class="ident">r</span>.<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">g</span>.<span class="ident">buf</span>[<span class="ident">g</span>.<span class="ident">len</span>..]) {
             <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">=&gt;</span> {
-                <span class="ident">ret</span> <span class="op">=</span> <span class="prelude-val">Ok</span>(<span class="ident">len</span> <span class="op">-</span> <span class="ident">start_len</span>);
+                <span class="ident">ret</span> <span class="op">=</span> <span class="prelude-val">Ok</span>(<span class="ident">g</span>.<span class="ident">len</span> <span class="op">-</span> <span class="ident">start_len</span>);
                 <span class="kw">break</span>;
             }
-            <span class="prelude-val">Ok</span>(<span class="ident">n</span>) <span class="op">=&gt;</span> <span class="ident">len</span> <span class="op">+=</span> <span class="ident">n</span>,
+            <span class="prelude-val">Ok</span>(<span class="ident">n</span>) <span class="op">=&gt;</span> <span class="ident">g</span>.<span class="ident">len</span> <span class="op">+=</span> <span class="ident">n</span>,
             <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="ident">e</span>) <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">ErrorKind</span>::<span class="ident">Interrupted</span> <span class="op">=&gt;</span> {}
             <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> {
                 <span class="ident">ret</span> <span class="op">=</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>);
@@ -2645,7 +2734,6 @@
         }
     }
 
-    <span class="ident">buf</span>.<span class="ident">truncate</span>(<span class="ident">len</span>);
     <span class="ident">ret</span>
 }
 
@@ -2755,6 +2843,31 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>;
+
+    <span class="doccomment">/// Determines if this `Read`er can work with buffers of uninitialized</span>
+    <span class="doccomment">/// memory.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The default implementation returns an initializer which will zero</span>
+    <span class="doccomment">/// buffers.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If a `Read`er guarantees that it can work properly with uninitialized</span>
+    <span class="doccomment">/// memory, it should call `Initializer::nop()`. See the documentation for</span>
+    <span class="doccomment">/// `Initializer` for details.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The behavior of this method must be independent of the state of the</span>
+    <span class="doccomment">/// `Read`er - the method only takes `&amp;self` so that it can be used through</span>
+    <span class="doccomment">/// trait objects.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Unsafety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This method is unsafe because a `Read`er could otherwise return a</span>
+    <span class="doccomment">/// non-zeroing `Initializer` from another `Read` type without an `unsafe`</span>
+    <span class="doccomment">/// block.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">initializer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="ident">Initializer</span>::<span class="ident">zeroing</span>()
+    }
 
     <span class="doccomment">/// Read all bytes until EOF in this source, placing them into `buf`.</span>
     <span class="doccomment">///</span>
@@ -3088,6 +3201,50 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">take</span>(<span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u64</span>) <span class="op">-&gt;</span> <span class="ident">Take</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> {
         <span class="ident">Take</span> { <span class="ident">inner</span>: <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">limit</span> }
+    }
+}
+
+<span class="doccomment">/// A type used to conditionally initialize buffers passed to `Read` methods.</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Initializer</span>(<span class="ident">bool</span>);
+
+<span class="kw">impl</span> <span class="ident">Initializer</span> {
+    <span class="doccomment">/// Returns a new `Initializer` which will zero out buffers.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeroing</span>() <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="ident">Initializer</span>(<span class="bool-val">true</span>)
+    }
+
+    <span class="doccomment">/// Returns a new `Initializer` which will not zero out buffers.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Unsafety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This may only be called by `Read`ers which guarantee that they will not</span>
+    <span class="doccomment">/// read from buffers passed to `Read` methods, and that the return value of</span>
+    <span class="doccomment">/// the method accurately reflects the number of bytes that have been</span>
+    <span class="doccomment">/// written to the head of the buffer.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">nop</span>() <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="ident">Initializer</span>(<span class="bool-val">false</span>)
+    }
+
+    <span class="doccomment">/// Indicates if a buffer should be initialized.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">should_initialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="number">0</span>
+    }
+
+    <span class="doccomment">/// Initializes a buffer if necessary.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">initialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">should_initialize</span>() {
+            <span class="kw">unsafe</span> { <span class="ident">ptr</span>::<span class="ident">write_bytes</span>(<span class="ident">buf</span>.<span class="ident">as_mut_ptr</span>(), <span class="number">0</span>, <span class="ident">buf</span>.<span class="ident">len</span>()) }
+        }
     }
 }
 
@@ -3774,8 +3931,6 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(more_io_inner_methods)]</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// # use std::io;</span>
     <span class="doccomment">/// use std::io::prelude::*;</span>
     <span class="doccomment">/// use std::fs::File;</span>
@@ -3789,7 +3944,7 @@
     <span class="doccomment">/// # Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">issue</span><span class="op">=</span><span class="string">&quot;41519&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">T</span>, <span class="ident">U</span>) {
         (<span class="self">self</span>.<span class="ident">first</span>, <span class="self">self</span>.<span class="ident">second</span>)
     }
@@ -3799,8 +3954,6 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(more_io_inner_methods)]</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// # use std::io;</span>
     <span class="doccomment">/// use std::io::prelude::*;</span>
     <span class="doccomment">/// use std::fs::File;</span>
@@ -3814,7 +3967,7 @@
     <span class="doccomment">/// # Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">issue</span><span class="op">=</span><span class="string">&quot;41519&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> (<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">U</span>) {
         (<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">first</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">second</span>)
     }
@@ -3828,8 +3981,6 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(more_io_inner_methods)]</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// # use std::io;</span>
     <span class="doccomment">/// use std::io::prelude::*;</span>
     <span class="doccomment">/// use std::fs::File;</span>
@@ -3843,7 +3994,7 @@
     <span class="doccomment">/// # Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">issue</span><span class="op">=</span><span class="string">&quot;41519&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">U</span>) {
         (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">first</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">second</span>)
     }
@@ -3869,6 +4020,15 @@
             }
         }
         <span class="self">self</span>.<span class="ident">second</span>.<span class="ident">read</span>(<span class="ident">buf</span>)
+    }
+
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">initializer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="kw">let</span> <span class="ident">initializer</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">first</span>.<span class="ident">initializer</span>();
+        <span class="kw">if</span> <span class="ident">initializer</span>.<span class="ident">should_initialize</span>() {
+            <span class="ident">initializer</span>
+        } <span class="kw">else</span> {
+            <span class="self">self</span>.<span class="ident">second</span>.<span class="ident">initializer</span>()
+        }
     }
 }
 
@@ -3967,8 +4127,6 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(more_io_inner_methods)]</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// use std::io;</span>
     <span class="doccomment">/// use std::io::prelude::*;</span>
     <span class="doccomment">/// use std::fs::File;</span>
@@ -3984,7 +4142,7 @@
     <span class="doccomment">/// # Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">issue</span><span class="op">=</span><span class="string">&quot;41519&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>
     }
@@ -3998,8 +4156,6 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #![feature(more_io_inner_methods)]</span>
-    <span class="doccomment">///</span>
     <span class="doccomment">/// use std::io;</span>
     <span class="doccomment">/// use std::io::prelude::*;</span>
     <span class="doccomment">/// use std::fs::File;</span>
@@ -4015,7 +4171,7 @@
     <span class="doccomment">/// # Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">issue</span><span class="op">=</span><span class="string">&quot;41519&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;more_io_inner_methods&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>
     }
@@ -4033,6 +4189,10 @@
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>[..<span class="ident">max</span>])<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">limit</span> <span class="op">-=</span> <span class="ident">n</span> <span class="kw">as</span> <span class="ident">u64</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">n</span>)
+    }
+
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">initializer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">initializer</span>()
     }
 }
 

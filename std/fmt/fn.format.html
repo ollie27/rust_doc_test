@@ -48,14 +48,11 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/alloc/fmt.rs.html#529-535' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn format(args: <a class="struct" href="../../std/fmt/struct.Arguments.html" title="struct std::fmt::Arguments">Arguments</a>) -&gt; <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a></pre><div class='docblock'><p>The format function takes a precompiled format string and a list of
-arguments, to return the resulting formatted string.</p>
+               </span><a class='srclink' href='../../src/alloc/fmt.rs.html#527-533' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn format(args: <a class="struct" href="../../std/fmt/struct.Arguments.html" title="struct std::fmt::Arguments">Arguments</a>) -&gt; <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a></pre><div class='docblock'><p>The <code>format</code> function takes an <code>Arguments</code> struct and returns the resulting
+formatted string.</p>
 
-<h1 id='arguments' class='section-header'><a href='#arguments'>Arguments</a></h1>
-<ul>
-<li>args - a structure of arguments generated via the <code>format_args!</code> macro.</li>
-</ul>
+<p>The <code>Arguments</code> instance can be created with the <code>format_args!</code> macro.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Basic usage:</p>

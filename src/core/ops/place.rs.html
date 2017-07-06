@@ -169,6 +169,20 @@
 <span id="124">124</span>
 <span id="125">125</span>
 <span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -210,7 +224,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// `PLACE &lt;- EXPR` effectively desugars into:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```rust,ignore</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// # #![feature(placement_new_protocol, box_heap)]</span>
+<span class="doccomment">/// # use std::ops::{Placer, Place, InPlace};</span>
+<span class="doccomment">/// # #[allow(non_snake_case)]</span>
+<span class="doccomment">/// # fn main() {</span>
+<span class="doccomment">/// # let PLACE = std::boxed::HEAP;</span>
+<span class="doccomment">/// # let EXPR = 1;</span>
 <span class="doccomment">/// let p = PLACE;</span>
 <span class="doccomment">/// let mut place = Placer::make_place(p);</span>
 <span class="doccomment">/// let raw_place = Place::pointer(&amp;mut place);</span>
@@ -219,6 +239,7 @@
 <span class="doccomment">///     std::ptr::write(raw_place, value);</span>
 <span class="doccomment">///     InPlace::finalize(place)</span>
 <span class="doccomment">/// }</span>
+<span class="doccomment">/// # ; }</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The type of `PLACE &lt;- EXPR` is derived from the type of `PLACE`;</span>
@@ -261,14 +282,21 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// `box EXPR` effectively desugars into:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```rust,ignore</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// # #![feature(placement_new_protocol)]</span>
+<span class="doccomment">/// # use std::ops::{BoxPlace, Place, Boxed};</span>
+<span class="doccomment">/// # #[allow(non_snake_case)]</span>
+<span class="doccomment">/// # fn main() {</span>
+<span class="doccomment">/// # let EXPR = 1;</span>
 <span class="doccomment">/// let mut place = BoxPlace::make_place();</span>
 <span class="doccomment">/// let raw_place = Place::pointer(&amp;mut place);</span>
 <span class="doccomment">/// let value = EXPR;</span>
+<span class="doccomment">/// # let _: Box&lt;_&gt; =</span>
 <span class="doccomment">/// unsafe {</span>
 <span class="doccomment">///     ::std::ptr::write(raw_place, value);</span>
 <span class="doccomment">///     Boxed::finalize(place)</span>
 <span class="doccomment">/// }</span>
+<span class="doccomment">/// # ; }</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The type of `box EXPR` is supplied from its surrounding</span>

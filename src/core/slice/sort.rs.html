@@ -1100,7 +1100,7 @@
 
     <span class="kw">if</span> <span class="ident">start_l</span> <span class="op">&lt;</span> <span class="ident">end_l</span> {
         <span class="comment">// The left block remains.</span>
-        <span class="comment">// Move it&#39;s remaining out-of-order elements to the far right.</span>
+        <span class="comment">// Move its remaining out-of-order elements to the far right.</span>
         <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">width</span>(<span class="ident">l</span>, <span class="ident">r</span>), <span class="ident">block_l</span>);
         <span class="kw">while</span> <span class="ident">start_l</span> <span class="op">&lt;</span> <span class="ident">end_l</span> {
             <span class="kw">unsafe</span> {
@@ -1112,7 +1112,7 @@
         <span class="ident">width</span>(<span class="ident">v</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">r</span>)
     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">start_r</span> <span class="op">&lt;</span> <span class="ident">end_r</span> {
         <span class="comment">// The right block remains.</span>
-        <span class="comment">// Move it&#39;s remaining out-of-order elements to the far left.</span>
+        <span class="comment">// Move its remaining out-of-order elements to the far left.</span>
         <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">width</span>(<span class="ident">l</span>, <span class="ident">r</span>), <span class="ident">block_r</span>);
         <span class="kw">while</span> <span class="ident">start_r</span> <span class="op">&lt;</span> <span class="ident">end_r</span> {
             <span class="kw">unsafe</span> {
