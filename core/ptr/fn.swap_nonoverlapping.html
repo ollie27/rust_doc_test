@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/ptr.rs.html#148-153' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/ptr.rs.html#149-154' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub unsafe fn swap_nonoverlapping&lt;T&gt;(x: *mut T, y: *mut T, count: usize)</pre><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>swap_nonoverlapping </code><a href="https://github.com/rust-lang/rust/issues/42818">#42818</a>)</div></div><div class='docblock'><p>Swaps a sequence of values at two mutable locations of the same type.</p>
 
 <h1 id='safety' class='section-header'><a href='#safety'>Safety</a></h1>
@@ -59,7 +59,7 @@ of valid memory, and the two memory ranges must not overlap.</p>
 <p>Basic usage:</p>
 
 <pre class="rust rust-example-rendered">
-<span class="attribute">#<span class="op">!</span>[<span class="ident">feature</span>(<span class="ident">swap_nonoverlapping</span>)]</span>
+<span class="attribute">#![<span class="ident">feature</span>(<span class="ident">swap_nonoverlapping</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>;
 
@@ -71,7 +71,7 @@ of valid memory, and the two memory ranges must not overlap.</p>
 }
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">x</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">4</span>]);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">y</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">9</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Bfeature(swap_nonoverlapping)%5D%0A%0Afn%20main()%20%7B%0Ause%20std%3A%3Aptr%3B%0A%0Alet%20mut%20x%20%3D%20%5B1%2C%202%2C%203%2C%204%5D%3B%0Alet%20mut%20y%20%3D%20%5B7%2C%208%2C%209%5D%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20ptr%3A%3Aswap_nonoverlapping(x.as_mut_ptr()%2C%20y.as_mut_ptr()%2C%202)%3B%0A%7D%0A%0Aassert_eq!(x%2C%20%5B7%2C%208%2C%203%2C%204%5D)%3B%0Aassert_eq!(y%2C%20%5B1%2C%202%2C%209%5D)%3B%0A%7D&amp;version=nightly">Run</a></pre>
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">y</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">9</span>]);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0A%23!%5Bfeature(swap_nonoverlapping)%5D%0A%0Afn%20main()%20%7B%0Ause%20std%3A%3Aptr%3B%0A%0Alet%20mut%20x%20%3D%20%5B1%2C%202%2C%203%2C%204%5D%3B%0Alet%20mut%20y%20%3D%20%5B7%2C%208%2C%209%5D%3B%0A%0Aunsafe%20%7B%0A%20%20%20%20ptr%3A%3Aswap_nonoverlapping(x.as_mut_ptr()%2C%20y.as_mut_ptr()%2C%202)%3B%0A%7D%0A%0Aassert_eq!(x%2C%20%5B7%2C%208%2C%203%2C%204%5D)%3B%0Aassert_eq!(y%2C%20%5B1%2C%202%2C%209%5D)%3B%0A%7D&amp;version=nightly">Run</a></pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -89,10 +89,12 @@ of valid memory, and the two memory ranges must not overlap.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait FileExt</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>fs</a></p><script>window.sidebarCurrent = {name: 'FileExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait FileExt</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>windows</a>::<wbr><a href='index.html'>fs</a></p><script>window.sidebarCurrent = {name: 'FileExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -51,12 +51,14 @@
                </span><a class='srclink' href='../../../../src/std/sys/windows/ext/fs.rs.html#25-93' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait FileExt {
     fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;mut [</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;;
-    fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;;
-}</pre><div class='docblock'><p>Windows-specific extensions to <a href="../../../fs/struct.File.html"><code>File</code></a>.</p>
+<div class='item-spacer'></div>    fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;;
+}</pre><div class='stability'><div class='stab portability'>This is supported on <strong>Windows</strong> only.</div></div><div class='docblock'><p>Windows-specific extensions to <a href="../../../fs/struct.File.html"><code>File</code></a>.</p>
 </div>
-            <h2 id='required-methods'>Required Methods</h2>
+            <h2 id='required-methods' class='small-section-header'>
+              Required Methods<a href='#required-methods' class='anchor'></a>
+            </h2>
             <div class='methods'>
-        <h3 id='tymethod.seek_read' class='method'><span id='seek_read.v' class='invisible'><code>fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;mut [</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='docblock'><p>Seeks to a given position and reads a number of bytes.</p>
+        <h3 id='tymethod.seek_read' class='method'><span id='seek_read.v' class='invisible'><code>fn <a href='#tymethod.seek_read' class='fnname'>seek_read</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;mut [</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='stability'><div class='stab portability'>This is supported on <strong>Windows</strong> only.</div></div><div class='docblock'><p>Seeks to a given position and reads a number of bytes.</p>
 
 <p>Returns the number of bytes read.</p>
 
@@ -82,8 +84,8 @@ still updated.</p>
 
 <span class="comment">// Read 10 bytes, starting 72 bytes from the</span>
 <span class="comment">// start of the file.</span>
-<span class="ident">file</span>.<span class="ident">seek_read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>[..], <span class="number">72</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20file%20%3D%20File%3A%3Aopen(%22foo.txt%22)%3F%3B%0Alet%20mut%20buffer%20%3D%20%5B0%3B%2010%5D%3B%0A%0A%2F%2F%20Read%2010%20bytes%2C%20starting%2072%20bytes%20from%20the%0A%2F%2F%20start%20of%20the%20file.%0Afile.seek_read(%26mut%20buffer%5B..%5D%2C%2072)%3F%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
-</div><h3 id='tymethod.seek_write' class='method'><span id='seek_write.v' class='invisible'><code>fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='docblock'><p>Seeks to a given position and writes a number of bytes.</p>
+<span class="ident">file</span>.<span class="ident">seek_read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>[..], <span class="number">72</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aio%3B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20io%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20file%20%3D%20File%3A%3Aopen(%22foo.txt%22)%3F%3B%0Alet%20mut%20buffer%20%3D%20%5B0%3B%2010%5D%3B%0A%0A%2F%2F%20Read%2010%20bytes%2C%20starting%2072%20bytes%20from%20the%0A%2F%2F%20start%20of%20the%20file.%0Afile.seek_read(%26mut%20buffer%5B..%5D%2C%2072)%3F%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
+</div><h3 id='tymethod.seek_write' class='method'><span id='seek_write.v' class='invisible'><code>fn <a href='#tymethod.seek_write' class='fnname'>seek_write</a>(&amp;self, buf: <a class="primitive" href="../../../primitive.slice.html">&amp;[</a><a class="primitive" href="../../../primitive.u8.html">u8</a><a class="primitive" href="../../../primitive.slice.html">]</a>, offset: <a class="primitive" href="../../../primitive.u64.html">u64</a>) -&gt; <a class="type" href="../../../../std/io/type.Result.html" title="type std::io::Result">Result</a>&lt;<a class="primitive" href="../../../primitive.usize.html">usize</a>&gt;</code></span></h3><div class='stability'><div class='stab portability'>This is supported on <strong>Windows</strong> only.</div></div><div class='docblock'><p>Seeks to a given position and writes a number of bytes.</p>
 
 <p>Returns the number of bytes written.</p>
 
@@ -91,7 +93,7 @@ still updated.</p>
 from the current cursor. The current cursor <strong>is</strong> affected by this
 function, it is set to the end of the write.</p>
 
-<p>When writing beyond the end of the file, the file is appropiately
+<p>When writing beyond the end of the file, the file is appropriately
 extended and the intermediate bytes are left uninitialized.</p>
 
 <p>Note that similar to <code>File::write</code>, it is not an error to return a
@@ -107,11 +109,13 @@ is still updated.</p>
 
 <span class="comment">// Write a byte string starting 72 bytes from</span>
 <span class="comment">// the start of the file.</span>
-<span class="ident">buffer</span>.<span class="ident">seek_write</span>(<span class="string">b&quot;some bytes&quot;</span>, <span class="number">72</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20buffer%20%3D%20File%3A%3Acreate(%22foo.txt%22)%3F%3B%0A%0A%2F%2F%20Write%20a%20byte%20string%20starting%2072%20bytes%20from%0A%2F%2F%20the%20start%20of%20the%20file.%0Abuffer.seek_write(b%22some%20bytes%22%2C%2072)%3F%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
+<span class="ident">buffer</span>.<span class="ident">seek_write</span>(<span class="string">b&quot;some bytes&quot;</span>, <span class="number">72</span>)<span class="question-mark">?</span>;<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aos%3A%3Awindows%3A%3Aprelude%3A%3A*%3B%0A%0Afn%20foo()%20-%3E%20std%3A%3Aio%3A%3AResult%3C()%3E%20%7B%0Alet%20mut%20buffer%20%3D%20File%3A%3Acreate(%22foo.txt%22)%3F%3B%0A%0A%2F%2F%20Write%20a%20byte%20string%20starting%2072%20bytes%20from%0A%2F%2F%20the%20start%20of%20the%20file.%0Abuffer.seek_write(b%22some%20bytes%22%2C%2072)%3F%3B%0AOk(())%0A%7D%0A%7D">Run</a></pre>
 </div></div>
-        <h2 id='implementors'>Implementors</h2>
+        <h2 id='implementors' class='small-section-header'>
+          Implementors<a href='#implementors' class='anchor'></a>
+        </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl FileExt for <a class="struct" href="../../../../std/fs/struct.File.html" title="struct std::fs::File">File</a></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../../../src/std/sys/windows/ext/fs.rs.html#96-104' title='goto source code'>[src]</a></div><code>impl FileExt for <a class="struct" href="../../../../std/fs/struct.File.html" title="struct std::fs::File">File</a></code></li>
 </ul><script type="text/javascript" async
                          src="../../../../implementors/std/os/windows/fs/trait.FileExt.js">
                  </script></section>
@@ -131,10 +135,12 @@ is still updated.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

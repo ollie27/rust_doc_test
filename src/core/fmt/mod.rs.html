@@ -1760,6 +1760,35 @@
 <span id="1715">1715</span>
 <span id="1716">1716</span>
 <span id="1717">1717</span>
+<span id="1718">1718</span>
+<span id="1719">1719</span>
+<span id="1720">1720</span>
+<span id="1721">1721</span>
+<span id="1722">1722</span>
+<span id="1723">1723</span>
+<span id="1724">1724</span>
+<span id="1725">1725</span>
+<span id="1726">1726</span>
+<span id="1727">1727</span>
+<span id="1728">1728</span>
+<span id="1729">1729</span>
+<span id="1730">1730</span>
+<span id="1731">1731</span>
+<span id="1732">1732</span>
+<span id="1733">1733</span>
+<span id="1734">1734</span>
+<span id="1735">1735</span>
+<span id="1736">1736</span>
+<span id="1737">1737</span>
+<span id="1738">1738</span>
+<span id="1739">1739</span>
+<span id="1740">1740</span>
+<span id="1741">1741</span>
+<span id="1742">1742</span>
+<span id="1743">1743</span>
+<span id="1744">1744</span>
+<span id="1745">1745</span>
+<span id="1746">1746</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1773,7 +1802,7 @@
 
 <span class="doccomment">//! Utilities for formatting and printing strings.</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">cell</span>::{<span class="ident">UnsafeCell</span>, <span class="ident">Cell</span>, <span class="ident">RefCell</span>, <span class="ident">Ref</span>, <span class="ident">RefMut</span>};
 <span class="kw">use</span> <span class="ident">marker</span>::<span class="ident">PhantomData</span>;
@@ -1844,6 +1873,22 @@
 <span class="doccomment">/// This type does not support transmission of an error other than that an error</span>
 <span class="doccomment">/// occurred. Any extra information must be arranged to be transmitted through</span>
 <span class="doccomment">/// some other means.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// An important thing to remember is that the type `fmt::Error` should not be</span>
+<span class="doccomment">/// confused with `std::io::Error` or `std::error::Error`, which you may also</span>
+<span class="doccomment">/// have in scope.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Examples</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// use std::fmt::{self, write};</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let mut output = String::new();</span>
+<span class="doccomment">/// match write(&amp;mut output, format_args!(&quot;Hello {}!&quot;, &quot;world&quot;)) {</span>
+<span class="doccomment">///     Err(fmt::Error) =&gt; panic!(&quot;An error occurred&quot;),</span>
+<span class="doccomment">///     _ =&gt; (),</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Ord</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Error</span>;
@@ -2069,7 +2114,6 @@
 
 <span class="comment">// flags available in the v1 format of format_args</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span> <span class="comment">// SignMinus isn&#39;t currently used</span>
 <span class="kw">enum</span> <span class="ident">FlagV1</span> { <span class="ident">SignPlus</span>, <span class="ident">SignMinus</span>, <span class="ident">Alternate</span>, <span class="ident">SignAwareZeroPad</span>, }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Arguments</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -2081,9 +2125,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_v1</span>(<span class="ident">pieces</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>],
                   <span class="ident">args</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">ArgumentV1</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>]) <span class="op">-&gt;</span> <span class="ident">Arguments</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">Arguments</span> {
-            <span class="ident">pieces</span>: <span class="ident">pieces</span>,
+            <span class="ident">pieces</span>,
             <span class="ident">fmt</span>: <span class="prelude-val">None</span>,
-            <span class="ident">args</span>: <span class="ident">args</span>
+            <span class="ident">args</span>,
         }
     }
 
@@ -2100,9 +2144,9 @@
                             <span class="ident">args</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">ArgumentV1</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>],
                             <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">rt</span>::<span class="ident">v1</span>::<span class="ident">Argument</span>]) <span class="op">-&gt;</span> <span class="ident">Arguments</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">Arguments</span> {
-            <span class="ident">pieces</span>: <span class="ident">pieces</span>,
+            <span class="ident">pieces</span>,
             <span class="ident">fmt</span>: <span class="prelude-val">Some</span>(<span class="ident">fmt</span>),
-            <span class="ident">args</span>: <span class="ident">args</span>
+            <span class="ident">args</span>,
         }
     }
 
@@ -2174,7 +2218,7 @@
     }
 }
 
-<span class="doccomment">/// Format trait for the `?` character.</span>
+<span class="doccomment">/// `?` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `Debug` should format the output in a programmer-facing, debugging context.</span>
 <span class="doccomment">///</span>
@@ -2235,13 +2279,14 @@
 <span class="doccomment">/// The origin is: Point { x: 0, y: 0 }</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// There are a number of `debug_*` methods on `Formatter` to help you with manual</span>
+<span class="doccomment">/// There are a number of `debug_*` methods on [`Formatter`] to help you with manual</span>
 <span class="doccomment">/// implementations, such as [`debug_struct`][debug_struct].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `Debug` implementations using either `derive` or the debug builder API</span>
-<span class="doccomment">/// on `Formatter` support pretty printing using the alternate flag: `{:#?}`.</span>
+<span class="doccomment">/// on [`Formatter`] support pretty printing using the alternate flag: `{:#?}`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [debug_struct]: ../../std/fmt/struct.Formatter.html#method.debug_struct</span>
+<span class="doccomment">/// [`Formatter`]: ../../std/fmt/struct.Formatter.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Pretty printing with `#?`:</span>
 <span class="doccomment">///</span>
@@ -2339,7 +2384,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `o` character.</span>
+<span class="doccomment">/// `o` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `Octal` trait should format its output as a number in base-8.</span>
 <span class="doccomment">///</span>
@@ -2386,7 +2431,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `b` character.</span>
+<span class="doccomment">/// `b` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `Binary` trait should format its output as a number in binary.</span>
 <span class="doccomment">///</span>
@@ -2433,7 +2478,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `x` character.</span>
+<span class="doccomment">/// `x` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `LowerHex` trait should format its output as a number in hexadecimal, with `a` through `f`</span>
 <span class="doccomment">/// in lower case.</span>
@@ -2481,7 +2526,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `X` character.</span>
+<span class="doccomment">/// `X` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `UpperHex` trait should format its output as a number in hexadecimal, with `A` through `F`</span>
 <span class="doccomment">/// in upper case.</span>
@@ -2529,7 +2574,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `p` character.</span>
+<span class="doccomment">/// `p` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `Pointer` trait should format its output as a memory location. This is commonly presented</span>
 <span class="doccomment">/// as hexadecimal.</span>
@@ -2574,7 +2619,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `e` character.</span>
+<span class="doccomment">/// `e` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `LowerExp` trait should format its output in scientific notation with a lower-case `e`.</span>
 <span class="doccomment">///</span>
@@ -2617,7 +2662,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
 
-<span class="doccomment">/// Format trait for the `E` character.</span>
+<span class="doccomment">/// `E` formatting.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `UpperExp` trait should format its output in scientific notation with an upper-case `E`.</span>
 <span class="doccomment">///</span>
@@ -3022,7 +3067,7 @@
         <span class="ident">write</span>(<span class="self">self</span>.<span class="ident">buf</span>, <span class="ident">fmt</span>)
     }
 
-    <span class="doccomment">/// Flags for formatting (packed version of rt::Flag)</span>
+    <span class="doccomment">/// Flags for formatting</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> { <span class="self">self</span>.<span class="ident">flags</span> }
 
@@ -3068,8 +3113,11 @@
         <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> (<span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="ident">FlagV1</span>::<span class="ident">SignAwareZeroPad</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">!=</span> <span class="number">0</span>
     }
 
-    <span class="doccomment">/// Creates a `DebugStruct` builder designed to assist with creation of</span>
-    <span class="doccomment">/// `fmt::Debug` implementations for structs.</span>
+    <span class="doccomment">/// Creates a [`DebugStruct`] builder designed to assist with creation of</span>
+    <span class="doccomment">/// [`fmt::Debug`] implementations for structs.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`DebugStruct`]: ../../std/fmt/struct.DebugStruct.html</span>
+    <span class="doccomment">/// [`fmt::Debug`]: ../../std/fmt/trait.Debug.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -3094,7 +3142,6 @@
     <span class="doccomment">/// println!(&quot;{:?}&quot;, Foo { bar: 10, baz: &quot;Hello World&quot;.to_string() });</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug_builders&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.2.0&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">debug_struct</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">DebugStruct</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">builders</span>::<span class="ident">debug_struct_new</span>(<span class="self">self</span>, <span class="ident">name</span>)
     }
@@ -3122,7 +3169,6 @@
     <span class="doccomment">/// println!(&quot;{:?}&quot;, Foo(10, &quot;Hello World&quot;.to_string()));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug_builders&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.2.0&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">debug_tuple</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">DebugTuple</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">builders</span>::<span class="ident">debug_tuple_new</span>(<span class="self">self</span>, <span class="ident">name</span>)
     }
@@ -3147,7 +3193,6 @@
     <span class="doccomment">/// println!(&quot;{:?}&quot;, Foo(vec![10, 11]));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug_builders&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.2.0&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">debug_list</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">DebugList</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">builders</span>::<span class="ident">debug_list_new</span>(<span class="self">self</span>)
     }
@@ -3172,7 +3217,6 @@
     <span class="doccomment">/// println!(&quot;{:?}&quot;, Foo(vec![10, 11]));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug_builders&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.2.0&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">debug_set</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">DebugSet</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">builders</span>::<span class="ident">debug_set_new</span>(<span class="self">self</span>)
     }
@@ -3197,7 +3241,6 @@
     <span class="doccomment">/// println!(&quot;{:?}&quot;, Foo(vec![(&quot;A&quot;.to_string(), 10), (&quot;B&quot;.to_string(), 11)]));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug_builders&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.2.0&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">debug_map</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">DebugMap</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">builders</span>::<span class="ident">debug_map_new</span>(<span class="self">self</span>)
     }
@@ -3390,13 +3433,13 @@
     () <span class="op">=&gt;</span> ();
     ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>,)<span class="op">+</span> ) <span class="op">=&gt;</span> (
         <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-        <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">Debug</span>),<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="kw-2">*</span>) {
+        <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">Debug</span>),<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="kw-2">*</span>) <span class="kw">where</span> <span class="macro">last_type</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="op">+</span>): <span class="question-mark">?</span><span class="ident">Sized</span> {
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_assignments</span>, <span class="ident">deprecated</span>)]</span>
             <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">debug_tuple</span>(<span class="string">&quot;&quot;</span>);
                 <span class="kw">let</span> ($(<span class="kw-2">ref</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="kw-2">*</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
                 $(
-                    <span class="ident">builder</span>.<span class="ident">field</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
+                    <span class="ident">builder</span>.<span class="ident">field</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
                 )<span class="op">*</span>
 
                 <span class="ident">builder</span>.<span class="ident">finish</span>()
@@ -3404,6 +3447,11 @@
         }
         <span class="macro">peel</span><span class="macro">!</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="op">*</span> }
     )
+}
+
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">last_type</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>:<span class="ident">ident</span>,) <span class="op">=&gt;</span> { <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span> };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>:<span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest_a</span>:<span class="ident">ident</span>,)<span class="op">+</span>) <span class="op">=&gt;</span> { <span class="macro">last_type</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest_a</span>,)<span class="op">+</span>) };
 }
 
 <span class="macro">tuple</span><span class="macro">!</span> { <span class="ident">T0</span>, <span class="ident">T1</span>, <span class="ident">T2</span>, <span class="ident">T3</span>, <span class="ident">T4</span>, <span class="ident">T5</span>, <span class="ident">T6</span>, <span class="ident">T7</span>, <span class="ident">T8</span>, <span class="ident">T9</span>, <span class="ident">T10</span>, <span class="ident">T11</span>, }
@@ -3447,8 +3495,18 @@
                     .<span class="ident">finish</span>()
             }
             <span class="prelude-val">Err</span>(_) <span class="op">=&gt;</span> {
+                <span class="comment">// The RefCell is mutably borrowed so we can&#39;t look at its value</span>
+                <span class="comment">// here. Show a placeholder instead.</span>
+                <span class="kw">struct</span> <span class="ident">BorrowedPlaceholder</span>;
+
+                <span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BorrowedPlaceholder</span> {
+                    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span> {
+                        <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;&lt;borrowed&gt;&quot;</span>)
+                    }
+                }
+
                 <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;RefCell&quot;</span>)
-                    .<span class="ident">field</span>(<span class="string">&quot;value&quot;</span>, <span class="kw-2">&amp;</span><span class="string">&quot;&lt;borrowed&gt;&quot;</span>)
+                    .<span class="ident">field</span>(<span class="string">&quot;value&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">BorrowedPlaceholder</span>)
                     .<span class="ident">finish</span>()
             }
         }
@@ -3496,10 +3554,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

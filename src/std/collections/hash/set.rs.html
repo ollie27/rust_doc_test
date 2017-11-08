@@ -1741,6 +1741,38 @@
 <span id="1696">1696</span>
 <span id="1697">1697</span>
 <span id="1698">1698</span>
+<span id="1699">1699</span>
+<span id="1700">1700</span>
+<span id="1701">1701</span>
+<span id="1702">1702</span>
+<span id="1703">1703</span>
+<span id="1704">1704</span>
+<span id="1705">1705</span>
+<span id="1706">1706</span>
+<span id="1707">1707</span>
+<span id="1708">1708</span>
+<span id="1709">1709</span>
+<span id="1710">1710</span>
+<span id="1711">1711</span>
+<span id="1712">1712</span>
+<span id="1713">1713</span>
+<span id="1714">1714</span>
+<span id="1715">1715</span>
+<span id="1716">1716</span>
+<span id="1717">1717</span>
+<span id="1718">1718</span>
+<span id="1719">1719</span>
+<span id="1720">1720</span>
+<span id="1721">1721</span>
+<span id="1722">1722</span>
+<span id="1723">1723</span>
+<span id="1724">1724</span>
+<span id="1725">1725</span>
+<span id="1726">1726</span>
+<span id="1727">1727</span>
+<span id="1728">1728</span>
+<span id="1729">1729</span>
+<span id="1730">1730</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1867,13 +1899,16 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">Eq</span><span class="op">&gt;</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">RandomState</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates an empty HashSet.</span>
+    <span class="doccomment">/// Creates an empty `HashSet`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The hash set is initially created with a capacity of 0, so it will not allocate until it</span>
+    <span class="doccomment">/// is first inserted into.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::collections::HashSet;</span>
-    <span class="doccomment">/// let mut set: HashSet&lt;i32&gt; = HashSet::new();</span>
+    <span class="doccomment">/// let set: HashSet&lt;i32&gt; = HashSet::new();</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -1890,7 +1925,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::collections::HashSet;</span>
-    <span class="doccomment">/// let mut set: HashSet&lt;i32&gt; = HashSet::with_capacity(10);</span>
+    <span class="doccomment">/// let set: HashSet&lt;i32&gt; = HashSet::with_capacity(10);</span>
+    <span class="doccomment">/// assert!(set.capacity() &gt;= 10);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
@@ -1959,6 +1995,17 @@
     <span class="doccomment">/// Returns a reference to the set&#39;s [`BuildHasher`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`BuildHasher`]: ../../std/hash/trait.BuildHasher.html</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::HashSet;</span>
+    <span class="doccomment">/// use std::collections::hash_map::RandomState;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let hasher = RandomState::new();</span>
+    <span class="doccomment">/// let set: HashSet&lt;i32&gt; = HashSet::with_hasher(hasher);</span>
+    <span class="doccomment">/// let hasher: &amp;RandomState = set.hasher();</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;hashmap_public_hasher&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.9.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hasher</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">S</span> {
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">hasher</span>()
@@ -1993,6 +2040,7 @@
     <span class="doccomment">/// use std::collections::HashSet;</span>
     <span class="doccomment">/// let mut set: HashSet&lt;i32&gt; = HashSet::new();</span>
     <span class="doccomment">/// set.reserve(10);</span>
+    <span class="doccomment">/// assert!(set.capacity() &gt;= 10);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">additional</span>: <span class="ident">usize</span>) {
@@ -2056,19 +2104,19 @@
     <span class="doccomment">///     println!(&quot;{}&quot;, x); // Print 1</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let diff: HashSet&lt;_&gt; = a.difference(&amp;b).cloned().collect();</span>
-    <span class="doccomment">/// assert_eq!(diff, [1].iter().cloned().collect());</span>
+    <span class="doccomment">/// let diff: HashSet&lt;_&gt; = a.difference(&amp;b).collect();</span>
+    <span class="doccomment">/// assert_eq!(diff, [1].iter().collect());</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // Note that difference is not symmetric,</span>
     <span class="doccomment">/// // and `b - a` means something else:</span>
-    <span class="doccomment">/// let diff: HashSet&lt;_&gt; = b.difference(&amp;a).cloned().collect();</span>
-    <span class="doccomment">/// assert_eq!(diff, [4].iter().cloned().collect());</span>
+    <span class="doccomment">/// let diff: HashSet&lt;_&gt; = b.difference(&amp;a).collect();</span>
+    <span class="doccomment">/// assert_eq!(diff, [4].iter().collect());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> {
         <span class="ident">Difference</span> {
             <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">iter</span>(),
-            <span class="ident">other</span>: <span class="ident">other</span>,
+            <span class="ident">other</span>,
         }
     }
 
@@ -2087,11 +2135,11 @@
     <span class="doccomment">///     println!(&quot;{}&quot;, x);</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let diff1: HashSet&lt;_&gt; = a.symmetric_difference(&amp;b).cloned().collect();</span>
-    <span class="doccomment">/// let diff2: HashSet&lt;_&gt; = b.symmetric_difference(&amp;a).cloned().collect();</span>
+    <span class="doccomment">/// let diff1: HashSet&lt;_&gt; = a.symmetric_difference(&amp;b).collect();</span>
+    <span class="doccomment">/// let diff2: HashSet&lt;_&gt; = b.symmetric_difference(&amp;a).collect();</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert_eq!(diff1, diff2);</span>
-    <span class="doccomment">/// assert_eq!(diff1, [1, 4].iter().cloned().collect());</span>
+    <span class="doccomment">/// assert_eq!(diff1, [1, 4].iter().collect());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">symmetric_difference</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
@@ -2115,14 +2163,14 @@
     <span class="doccomment">///     println!(&quot;{}&quot;, x);</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let intersection: HashSet&lt;_&gt; = a.intersection(&amp;b).cloned().collect();</span>
-    <span class="doccomment">/// assert_eq!(intersection, [2, 3].iter().cloned().collect());</span>
+    <span class="doccomment">/// let intersection: HashSet&lt;_&gt; = a.intersection(&amp;b).collect();</span>
+    <span class="doccomment">/// assert_eq!(intersection, [2, 3].iter().collect());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Intersection</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> {
         <span class="ident">Intersection</span> {
             <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">iter</span>(),
-            <span class="ident">other</span>: <span class="ident">other</span>,
+            <span class="ident">other</span>,
         }
     }
 
@@ -2141,8 +2189,8 @@
     <span class="doccomment">///     println!(&quot;{}&quot;, x);</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let union: HashSet&lt;_&gt; = a.union(&amp;b).cloned().collect();</span>
-    <span class="doccomment">/// assert_eq!(union, [1, 2, 3, 4].iter().cloned().collect());</span>
+    <span class="doccomment">/// let union: HashSet&lt;_&gt; = a.union(&amp;b).collect();</span>
+    <span class="doccomment">/// assert_eq!(union, [1, 2, 3, 4].iter().collect());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">union</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Union</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> {
@@ -2184,6 +2232,22 @@
     }
 
     <span class="doccomment">/// Clears the set, returning all elements in an iterator.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::HashSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut set: HashSet&lt;_&gt; = [1, 2, 3].iter().cloned().collect();</span>
+    <span class="doccomment">/// assert!(!set.is_empty());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // print 1, 2, 3 in an arbitrary order</span>
+    <span class="doccomment">/// for i in set.drain() {</span>
+    <span class="doccomment">///     println!(&quot;{}&quot;, i);</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert!(set.is_empty());</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;drain&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.6.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">drain</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Drain</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -3458,10 +3522,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/core/sync/atomic.rs.html#1653-1664' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/core/sync/atomic.rs.html#1709-1720' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn fence(order: <a class="enum" href="../../../std/sync/atomic/enum.Ordering.html" title="enum std::sync::atomic::Ordering">Ordering</a>)</pre><div class='docblock'><p>An atomic fence.</p>
 
 <p>Depending on the specified order, a fence prevents the compiler and CPU from
@@ -106,14 +106,14 @@ other <a href="enum.Ordering.html#variant.SeqCst"><code>SeqCst</code></a> operat
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lock</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="kw">while</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">flag</span>.<span class="ident">compare_and_swap</span>(<span class="bool-val">false</span>, <span class="bool-val">true</span>, <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>) {}
-        <span class="comment">// This fence syncronizes-with store in `unlock`.</span>
+        <span class="comment">// This fence synchronizes-with store in `unlock`.</span>
         <span class="ident">fence</span>(<span class="ident">Ordering</span>::<span class="ident">Acquire</span>);
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unlock</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">flag</span>.<span class="ident">store</span>(<span class="bool-val">false</span>, <span class="ident">Ordering</span>::<span class="ident">Release</span>);
     }
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3AAtomicBool%3B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3Afence%3B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3AOrdering%3B%0A%0A%2F%2F%20A%20mutual%20exclusion%20primitive%20based%20on%20spinlock.%0Apub%20struct%20Mutex%20%7B%0A%20%20%20%20flag%3A%20AtomicBool%2C%0A%7D%0A%0Aimpl%20Mutex%20%7B%0A%20%20%20%20pub%20fn%20new()%20-%3E%20Mutex%20%7B%0A%20%20%20%20%20%20%20%20Mutex%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20flag%3A%20AtomicBool%3A%3Anew(false)%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20lock(%26self)%20%7B%0A%20%20%20%20%20%20%20%20while%20!self.flag.compare_and_swap(false%2C%20true%2C%20Ordering%3A%3ARelaxed)%20%7B%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20fence%20syncronizes-with%20store%20in%20%60unlock%60.%0A%20%20%20%20%20%20%20%20fence(Ordering%3A%3AAcquire)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20unlock(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.flag.store(false%2C%20Ordering%3A%3ARelease)%3B%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3AAtomicBool%3B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3Afence%3B%0Ause%20std%3A%3Async%3A%3Aatomic%3A%3AOrdering%3B%0A%0A%2F%2F%20A%20mutual%20exclusion%20primitive%20based%20on%20spinlock.%0Apub%20struct%20Mutex%20%7B%0A%20%20%20%20flag%3A%20AtomicBool%2C%0A%7D%0A%0Aimpl%20Mutex%20%7B%0A%20%20%20%20pub%20fn%20new()%20-%3E%20Mutex%20%7B%0A%20%20%20%20%20%20%20%20Mutex%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20flag%3A%20AtomicBool%3A%3Anew(false)%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20lock(%26self)%20%7B%0A%20%20%20%20%20%20%20%20while%20!self.flag.compare_and_swap(false%2C%20true%2C%20Ordering%3A%3ARelaxed)%20%7B%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20fence%20synchronizes-with%20store%20in%20%60unlock%60.%0A%20%20%20%20%20%20%20%20fence(Ordering%3A%3AAcquire)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20unlock(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.flag.store(false%2C%20Ordering%3A%3ARelease)%3B%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -131,10 +131,12 @@ other <a href="enum.Ordering.html#variant.SeqCst"><code>SeqCst</code></a> operat
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

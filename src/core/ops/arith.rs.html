@@ -900,22 +900,6 @@
 <span id="855">855</span>
 <span id="856">856</span>
 <span id="857">857</span>
-<span id="858">858</span>
-<span id="859">859</span>
-<span id="860">860</span>
-<span id="861">861</span>
-<span id="862">862</span>
-<span id="863">863</span>
-<span id="864">864</span>
-<span id="865">865</span>
-<span id="866">866</span>
-<span id="867">867</span>
-<span id="868">868</span>
-<span id="869">869</span>
-<span id="870">870</span>
-<span id="871">871</span>
-<span id="872">872</span>
-<span id="873">873</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -929,15 +913,20 @@
 
 <span class="doccomment">/// The addition operator `+`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory. For</span>
+<span class="doccomment">/// example, [`std::time::SystemTime`] implements `Add&lt;Duration&gt;`, which permits</span>
+<span class="doccomment">/// operations of the form `SystemTime = SystemTime + Duration`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`std::time::SystemTime`]: ../../std/time/struct.SystemTime.html</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This example creates a `Point` struct that implements the `Add` trait, and</span>
-<span class="doccomment">/// then demonstrates adding two `Point`s.</span>
+<span class="doccomment">/// ## `Add`able points</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Add;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
 <span class="doccomment">/// struct Point {</span>
 <span class="doccomment">///     x: i32,</span>
 <span class="doccomment">///     y: i32,</span>
@@ -954,17 +943,11 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl PartialEq for Point {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.x == other.x &amp;&amp; self.y == other.y</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 },</span>
-<span class="doccomment">///                Point { x: 3, y: 3 });</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 },</span>
+<span class="doccomment">///            Point { x: 3, y: 3 });</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ## Implementing `Add` with generics</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Here is an example of the same `Point` struct implementing the `Add` trait</span>
 <span class="doccomment">/// using generics.</span>
@@ -972,13 +955,13 @@
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Add;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
 <span class="doccomment">/// struct Point&lt;T&gt; {</span>
 <span class="doccomment">///     x: T,</span>
 <span class="doccomment">///     y: T,</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// // Notice that the implementation uses the `Output` associated type</span>
+<span class="doccomment">/// // Notice that the implementation uses the associated type `Output`.</span>
 <span class="doccomment">/// impl&lt;T: Add&lt;Output=T&gt;&gt; Add for Point&lt;T&gt; {</span>
 <span class="doccomment">///     type Output = Point&lt;T&gt;;</span>
 <span class="doccomment">///</span>
@@ -990,32 +973,18 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl&lt;T: PartialEq&gt; PartialEq for Point&lt;T&gt; {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.x == other.x &amp;&amp; self.y == other.y</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 },</span>
-<span class="doccomment">///                Point { x: 3, y: 3 });</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 },</span>
+<span class="doccomment">///            Point { x: 3, y: 3 });</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Note that `RHS = Self` by default, but this is not mandatory. For example,</span>
-<span class="doccomment">/// [std::time::SystemTime] implements `Add&lt;Duration&gt;`, which permits</span>
-<span class="doccomment">/// operations of the form `SystemTime = SystemTime + Duration`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [std::time::SystemTime]: ../../std/time/struct.SystemTime.html</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;add&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} + {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `+` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `+` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `+` operator</span>
+    <span class="doccomment">/// Performs the `+` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1039,15 +1008,20 @@
 
 <span class="doccomment">/// The subtraction operator `-`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory. For</span>
+<span class="doccomment">/// example, [`std::time::SystemTime`] implements `Sub&lt;Duration&gt;`, which permits</span>
+<span class="doccomment">/// operations of the form `SystemTime = SystemTime - Duration`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`std::time::SystemTime`]: ../../std/time/struct.SystemTime.html</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This example creates a `Point` struct that implements the `Sub` trait, and</span>
-<span class="doccomment">/// then demonstrates subtracting two `Point`s.</span>
+<span class="doccomment">/// ## `Sub`tractable points</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Sub;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
 <span class="doccomment">/// struct Point {</span>
 <span class="doccomment">///     x: i32,</span>
 <span class="doccomment">///     y: i32,</span>
@@ -1064,32 +1038,48 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl PartialEq for Point {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.x == other.x &amp;&amp; self.y == other.y</span>
+<span class="doccomment">/// assert_eq!(Point { x: 3, y: 3 } - Point { x: 2, y: 3 },</span>
+<span class="doccomment">///            Point { x: 1, y: 0 });</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ## Implementing `Sub` with generics</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Here is an example of the same `Point` struct implementing the `Sub` trait</span>
+<span class="doccomment">/// using generics.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// use std::ops::Sub;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Point&lt;T&gt; {</span>
+<span class="doccomment">///     x: T,</span>
+<span class="doccomment">///     y: T,</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// // Notice that the implementation uses the associated type `Output`.</span>
+<span class="doccomment">/// impl&lt;T: Sub&lt;Output=T&gt;&gt; Sub for Point&lt;T&gt; {</span>
+<span class="doccomment">///     type Output = Point&lt;T&gt;;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">///     fn sub(self, other: Point&lt;T&gt;) -&gt; Point&lt;T&gt; {</span>
+<span class="doccomment">///         Point {</span>
+<span class="doccomment">///             x: self.x - other.x,</span>
+<span class="doccomment">///             y: self.y - other.y,</span>
+<span class="doccomment">///         }</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Point { x: 3, y: 3 } - Point { x: 2, y: 3 },</span>
-<span class="doccomment">///                Point { x: 1, y: 0 });</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Point { x: 2, y: 3 } - Point { x: 1, y: 0 },</span>
+<span class="doccomment">///            Point { x: 1, y: 3 });</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Note that `RHS = Self` by default, but this is not mandatory. For example,</span>
-<span class="doccomment">/// [std::time::SystemTime] implements `Sub&lt;Duration&gt;`, which permits</span>
-<span class="doccomment">/// operations of the form `SystemTime = SystemTime - Duration`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [std::time::SystemTime]: ../../std/time/struct.SystemTime.html</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;sub&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} - {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `-` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `-` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `-` operator</span>
+    <span class="doccomment">/// Performs the `-` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1113,17 +1103,19 @@
 
 <span class="doccomment">/// The multiplication operator `*`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Implementing a `Mul`tipliable rational number struct:</span>
+<span class="doccomment">/// ## `Mul`tipliable rational numbers</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Mul;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// // The uniqueness of rational numbers in lowest terms is a consequence of</span>
-<span class="doccomment">/// // the fundamental theorem of arithmetic.</span>
-<span class="doccomment">/// #[derive(Eq)]</span>
-<span class="doccomment">/// #[derive(PartialEq, Debug)]</span>
+<span class="doccomment">/// // By the fundamental theorem of arithmetic, rational numbers in lowest</span>
+<span class="doccomment">/// // terms are unique. So, by keeping `Rational`s in reduced form, we can</span>
+<span class="doccomment">/// // derive `Eq` and `PartialEq`.</span>
+<span class="doccomment">/// #[derive(Debug, Eq, PartialEq)]</span>
 <span class="doccomment">/// struct Rational {</span>
 <span class="doccomment">///     nominator: usize,</span>
 <span class="doccomment">///     denominator: usize,</span>
@@ -1174,45 +1166,37 @@
 <span class="doccomment">///            Rational::new(1, 2));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Note that `RHS = Self` by default, but this is not mandatory. Here is an</span>
-<span class="doccomment">/// implementation which enables multiplication of vectors by scalars, as is</span>
-<span class="doccomment">/// done in linear algebra.</span>
+<span class="doccomment">/// ## Multiplying vectors by scalars as in linear algebra</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Mul;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Scalar {value: usize};</span>
+<span class="doccomment">/// struct Scalar { value: usize }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
-<span class="doccomment">/// struct Vector {value: Vec&lt;usize&gt;};</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Vector { value: Vec&lt;usize&gt; }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl Mul&lt;Vector&gt; for Scalar {</span>
+<span class="doccomment">/// impl Mul&lt;Scalar&gt; for Vector {</span>
 <span class="doccomment">///     type Output = Vector;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     fn mul(self, rhs: Vector) -&gt; Vector {</span>
-<span class="doccomment">///         Vector {value: rhs.value.iter().map(|v| self.value * v).collect()}</span>
+<span class="doccomment">///     fn mul(self, rhs: Scalar) -&gt; Vector {</span>
+<span class="doccomment">///         Vector { value: self.value.iter().map(|v| v * rhs.value).collect() }</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl PartialEq&lt;Vector&gt; for Vector {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.value == other.value</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let scalar = Scalar{value: 3};</span>
-<span class="doccomment">/// let vector = Vector{value: vec![2, 4, 6]};</span>
-<span class="doccomment">/// assert_eq!(scalar * vector, Vector{value: vec![6, 12, 18]});</span>
+<span class="doccomment">/// let vector = Vector { value: vec![2, 4, 6] };</span>
+<span class="doccomment">/// let scalar = Scalar { value: 3 };</span>
+<span class="doccomment">/// assert_eq!(vector * scalar, Vector { value: vec![6, 12, 18] });</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;mul&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} * {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `*` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `*` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `*` operator</span>
+    <span class="doccomment">/// Performs the `*` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1236,17 +1220,19 @@
 
 <span class="doccomment">/// The division operator `/`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Implementing a `Div`idable rational number struct:</span>
+<span class="doccomment">/// ## `Div`idable rational numbers</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Div;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// // The uniqueness of rational numbers in lowest terms is a consequence of</span>
-<span class="doccomment">/// // the fundamental theorem of arithmetic.</span>
-<span class="doccomment">/// #[derive(Eq)]</span>
-<span class="doccomment">/// #[derive(PartialEq, Debug)]</span>
+<span class="doccomment">/// // By the fundamental theorem of arithmetic, rational numbers in lowest</span>
+<span class="doccomment">/// // terms are unique. So, by keeping `Rational`s in reduced form, we can</span>
+<span class="doccomment">/// // derive `Eq` and `PartialEq`.</span>
+<span class="doccomment">/// #[derive(Debug, Eq, PartialEq)]</span>
 <span class="doccomment">/// struct Rational {</span>
 <span class="doccomment">///     nominator: usize,</span>
 <span class="doccomment">///     denominator: usize,</span>
@@ -1296,52 +1282,42 @@
 <span class="doccomment">///     x</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Rational::new(1, 2), Rational::new(2, 4));</span>
-<span class="doccomment">///     assert_eq!(Rational::new(1, 2) / Rational::new(3, 4),</span>
-<span class="doccomment">///                Rational::new(2, 3));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Rational::new(1, 2), Rational::new(2, 4));</span>
+<span class="doccomment">/// assert_eq!(Rational::new(1, 2) / Rational::new(3, 4),</span>
+<span class="doccomment">///            Rational::new(2, 3));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Note that `RHS = Self` by default, but this is not mandatory. Here is an</span>
-<span class="doccomment">/// implementation which enables division of vectors by scalars, as is done in</span>
-<span class="doccomment">/// linear algebra.</span>
+<span class="doccomment">/// ## Dividing vectors by scalars as in linear algebra</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Div;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Scalar {value: f32};</span>
+<span class="doccomment">/// struct Scalar { value: f32 }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
-<span class="doccomment">/// struct Vector {value: Vec&lt;f32&gt;};</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Vector { value: Vec&lt;f32&gt; }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// impl Div&lt;Scalar&gt; for Vector {</span>
 <span class="doccomment">///     type Output = Vector;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     fn div(self, rhs: Scalar) -&gt; Vector {</span>
-<span class="doccomment">///         Vector {value: self.value.iter().map(|v| v / rhs.value).collect()}</span>
+<span class="doccomment">///         Vector { value: self.value.iter().map(|v| v / rhs.value).collect() }</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl PartialEq&lt;Vector&gt; for Vector {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.value == other.value</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let scalar = Scalar{value: 2f32};</span>
-<span class="doccomment">/// let vector = Vector{value: vec![2f32, 4f32, 6f32]};</span>
-<span class="doccomment">/// assert_eq!(vector / scalar, Vector{value: vec![1f32, 2f32, 3f32]});</span>
+<span class="doccomment">/// let scalar = Scalar { value: 2f32 };</span>
+<span class="doccomment">/// let vector = Vector { value: vec![2f32, 4f32, 6f32] };</span>
+<span class="doccomment">/// assert_eq!(vector / scalar, Vector { value: vec![1f32, 2f32, 3f32] });</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;div&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} / {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `/` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `/` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `/` operator</span>
+    <span class="doccomment">/// Performs the `/` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1382,6 +1358,8 @@
 
 <span class="doccomment">/// The remainder operator `%`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This example implements `Rem` on a `SplitSlice` object. After `Rem` is</span>
@@ -1409,7 +1387,7 @@
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// // If we were to divide &amp;[0, 1, 2, 3, 4, 5, 6, 7] into slices of size 3,</span>
-<span class="doccomment">/// // the remainder would be &amp;[6, 7]</span>
+<span class="doccomment">/// // the remainder would be &amp;[6, 7].</span>
 <span class="doccomment">/// assert_eq!(SplitSlice { slice: &amp;[0, 1, 2, 3, 4, 5, 6, 7] } % 3,</span>
 <span class="doccomment">///            SplitSlice { slice: &amp;[6, 7] });</span>
 <span class="doccomment">/// ```</span>
@@ -1417,11 +1395,11 @@
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} % {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Rem</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `%` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `%` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="doccomment">/// The method for the `%` operator</span>
+    <span class="doccomment">/// Performs the `%` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">rem</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1490,21 +1468,21 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// // a negative positive is a negative</span>
+<span class="doccomment">/// // A negative positive is a negative.</span>
 <span class="doccomment">/// assert_eq!(-Sign::Positive, Sign::Negative);</span>
-<span class="doccomment">/// // a double negative is a positive</span>
+<span class="doccomment">/// // A double negative is a positive.</span>
 <span class="doccomment">/// assert_eq!(-Sign::Negative, Sign::Positive);</span>
-<span class="doccomment">/// // zero is its own negation</span>
+<span class="doccomment">/// // Zero is its own negation.</span>
 <span class="doccomment">/// assert_eq!(-Sign::Zero, Sign::Zero);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;neg&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Neg</span> {
-    <span class="doccomment">/// The resulting type after applying the `-` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `-` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the unary `-` operator</span>
+    <span class="doccomment">/// Performs the unary `-` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">neg</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1551,7 +1529,7 @@
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::AddAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
 <span class="doccomment">/// struct Point {</span>
 <span class="doccomment">///     x: i32,</span>
 <span class="doccomment">///     y: i32,</span>
@@ -1566,12 +1544,6 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl PartialEq for Point {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.x == other.x &amp;&amp; self.y == other.y</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// let mut point = Point { x: 1, y: 0 };</span>
 <span class="doccomment">/// point += Point { x: 2, y: 3 };</span>
 <span class="doccomment">/// assert_eq!(point, Point { x: 3, y: 3 });</span>
@@ -1580,7 +1552,7 @@
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} += {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AddAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `+=` operator</span>
+    <span class="doccomment">/// Performs the `+=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">add_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1593,6 +1565,8 @@
             <span class="attribute">#[<span class="ident">rustc_inherit_overflow_checks</span>]</span>
             <span class="kw">fn</span> <span class="ident">add_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">+=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">AddAssign</span>, <span class="ident">add_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1608,7 +1582,7 @@
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::SubAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// #[derive(Debug)]</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
 <span class="doccomment">/// struct Point {</span>
 <span class="doccomment">///     x: i32,</span>
 <span class="doccomment">///     y: i32,</span>
@@ -1623,12 +1597,6 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl PartialEq for Point {</span>
-<span class="doccomment">///     fn eq(&amp;self, other: &amp;Self) -&gt; bool {</span>
-<span class="doccomment">///         self.x == other.x &amp;&amp; self.y == other.y</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// let mut point = Point { x: 3, y: 3 };</span>
 <span class="doccomment">/// point -= Point { x: 2, y: 3 };</span>
 <span class="doccomment">/// assert_eq!(point, Point {x: 1, y: 0});</span>
@@ -1637,7 +1605,7 @@
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} -= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SubAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `-=` operator</span>
+    <span class="doccomment">/// Performs the `-=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">sub_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1650,6 +1618,8 @@
             <span class="attribute">#[<span class="ident">rustc_inherit_overflow_checks</span>]</span>
             <span class="kw">fn</span> <span class="ident">sub_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">-=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">SubAssign</span>, <span class="ident">sub_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1659,31 +1629,27 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `MulAssign`. When `Foo *= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `mul_assign`, and therefore, `main` prints `Multiplying!`.</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::MulAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Frequency { hertz: f64 }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl MulAssign for Foo {</span>
-<span class="doccomment">///     fn mul_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Multiplying!&quot;);</span>
+<span class="doccomment">/// impl MulAssign&lt;f64&gt; for Frequency {</span>
+<span class="doccomment">///     fn mul_assign(&amp;mut self, rhs: f64) {</span>
+<span class="doccomment">///         self.hertz *= rhs;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo *= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut frequency = Frequency { hertz: 50.0 };</span>
+<span class="doccomment">/// frequency *= 4.0;</span>
+<span class="doccomment">/// assert_eq!(Frequency { hertz: 200.0 }, frequency);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;mul_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} *= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">MulAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `*=` operator</span>
+    <span class="doccomment">/// Performs the `*=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1696,6 +1662,8 @@
             <span class="attribute">#[<span class="ident">rustc_inherit_overflow_checks</span>]</span>
             <span class="kw">fn</span> <span class="ident">mul_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">*=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">MulAssign</span>, <span class="ident">mul_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1705,31 +1673,27 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `DivAssign`. When `Foo /= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `div_assign`, and therefore, `main` prints `Dividing!`.</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::DivAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Frequency { hertz: f64 }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl DivAssign for Foo {</span>
-<span class="doccomment">///     fn div_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Dividing!&quot;);</span>
+<span class="doccomment">/// impl DivAssign&lt;f64&gt; for Frequency {</span>
+<span class="doccomment">///     fn div_assign(&amp;mut self, rhs: f64) {</span>
+<span class="doccomment">///         self.hertz /= rhs;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo /= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut frequency = Frequency { hertz: 200.0 };</span>
+<span class="doccomment">/// frequency /= 4.0;</span>
+<span class="doccomment">/// assert_eq!(Frequency { hertz: 50.0 }, frequency);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;div_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} /= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">DivAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `/=` operator</span>
+    <span class="doccomment">/// Performs the `/=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1741,6 +1705,8 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">div_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">/=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">DivAssign</span>, <span class="ident">div_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1750,31 +1716,31 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `RemAssign`. When `Foo %= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `rem_assign`, and therefore, `main` prints `Remainder-ing!`.</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::RemAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// struct CookieJar { cookies: u32 }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl RemAssign for Foo {</span>
-<span class="doccomment">///     fn rem_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Remainder-ing!&quot;);</span>
+<span class="doccomment">/// impl RemAssign&lt;u32&gt; for CookieJar {</span>
+<span class="doccomment">///     fn rem_assign(&amp;mut self, piles: u32) {</span>
+<span class="doccomment">///         self.cookies %= piles;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo %= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut jar = CookieJar { cookies: 31 };</span>
+<span class="doccomment">/// let piles = 4;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// println!(&quot;Splitting up {} cookies into {} even piles!&quot;, jar.cookies, piles);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// jar %= piles;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// println!(&quot;{} cookies remain in the cookie jar!&quot;, jar.cookies);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;rem_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} %= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RemAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `%=` operator</span>
+    <span class="doccomment">/// Performs the `%=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">rem_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1786,6 +1752,8 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">rem_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">%=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">RemAssign</span>, <span class="ident">rem_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1808,10 +1776,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

@@ -870,18 +870,6 @@
 <span id="825">825</span>
 <span id="826">826</span>
 <span id="827">827</span>
-<span id="828">828</span>
-<span id="829">829</span>
-<span id="830">830</span>
-<span id="831">831</span>
-<span id="832">832</span>
-<span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
-<span id="839">839</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -926,11 +914,11 @@
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;not&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Not</span> {
-    <span class="doccomment">/// The resulting type after applying the `!` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `!` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the unary `!` operator</span>
+    <span class="doccomment">/// Performs the unary `!` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -953,9 +941,11 @@
 
 <span class="doccomment">/// The bitwise AND operator `&amp;`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `&amp;` operator is lifted to a trivial `Scalar` type.</span>
+<span class="doccomment">/// An implementation of `BitAnd` for a wrapper around `bool`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitAnd;</span>
@@ -972,16 +962,13 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Scalar(true) &amp; Scalar(true), Scalar(true));</span>
-<span class="doccomment">///     assert_eq!(Scalar(true) &amp; Scalar(false), Scalar(false));</span>
-<span class="doccomment">///     assert_eq!(Scalar(false) &amp; Scalar(true), Scalar(false));</span>
-<span class="doccomment">///     assert_eq!(Scalar(false) &amp; Scalar(false), Scalar(false));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Scalar(true) &amp; Scalar(true), Scalar(true));</span>
+<span class="doccomment">/// assert_eq!(Scalar(true) &amp; Scalar(false), Scalar(false));</span>
+<span class="doccomment">/// assert_eq!(Scalar(false) &amp; Scalar(true), Scalar(false));</span>
+<span class="doccomment">/// assert_eq!(Scalar(false) &amp; Scalar(false), Scalar(false));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `BitAnd` trait is implemented for a `BooleanVector`</span>
-<span class="doccomment">/// struct.</span>
+<span class="doccomment">/// An implementation of `BitAnd` for a wrapper around `Vec&lt;bool&gt;`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitAnd;</span>
@@ -999,22 +986,20 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let bv1 = BooleanVector(vec![true, true, false, false]);</span>
-<span class="doccomment">///     let bv2 = BooleanVector(vec![true, false, true, false]);</span>
-<span class="doccomment">///     let expected = BooleanVector(vec![true, false, false, false]);</span>
-<span class="doccomment">///     assert_eq!(bv1 &amp; bv2, expected);</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let bv1 = BooleanVector(vec![true, true, false, false]);</span>
+<span class="doccomment">/// let bv2 = BooleanVector(vec![true, false, true, false]);</span>
+<span class="doccomment">/// let expected = BooleanVector(vec![true, false, false, false]);</span>
+<span class="doccomment">/// assert_eq!(bv1 &amp; bv2, expected);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitand&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &amp; {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitAnd</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `&amp;` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `&amp;` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `&amp;` operator</span>
+    <span class="doccomment">/// Performs the `&amp;` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1037,9 +1022,11 @@
 
 <span class="doccomment">/// The bitwise OR operator `|`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `|` operator is lifted to a trivial `Scalar` type.</span>
+<span class="doccomment">/// An implementation of `BitOr` for a wrapper around `bool`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitOr;</span>
@@ -1056,16 +1043,13 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Scalar(true) | Scalar(true), Scalar(true));</span>
-<span class="doccomment">///     assert_eq!(Scalar(true) | Scalar(false), Scalar(true));</span>
-<span class="doccomment">///     assert_eq!(Scalar(false) | Scalar(true), Scalar(true));</span>
-<span class="doccomment">///     assert_eq!(Scalar(false) | Scalar(false), Scalar(false));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Scalar(true) | Scalar(true), Scalar(true));</span>
+<span class="doccomment">/// assert_eq!(Scalar(true) | Scalar(false), Scalar(true));</span>
+<span class="doccomment">/// assert_eq!(Scalar(false) | Scalar(true), Scalar(true));</span>
+<span class="doccomment">/// assert_eq!(Scalar(false) | Scalar(false), Scalar(false));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `BitOr` trait is implemented for a `BooleanVector`</span>
-<span class="doccomment">/// struct.</span>
+<span class="doccomment">/// An implementation of `BitOr` for a wrapper around `Vec&lt;bool&gt;`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitOr;</span>
@@ -1083,22 +1067,20 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let bv1 = BooleanVector(vec![true, true, false, false]);</span>
-<span class="doccomment">///     let bv2 = BooleanVector(vec![true, false, true, false]);</span>
-<span class="doccomment">///     let expected = BooleanVector(vec![true, true, true, false]);</span>
-<span class="doccomment">///     assert_eq!(bv1 | bv2, expected);</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let bv1 = BooleanVector(vec![true, true, false, false]);</span>
+<span class="doccomment">/// let bv2 = BooleanVector(vec![true, false, true, false]);</span>
+<span class="doccomment">/// let expected = BooleanVector(vec![true, true, true, false]);</span>
+<span class="doccomment">/// assert_eq!(bv1 | bv2, expected);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitor&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} | {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitOr</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `|` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `|` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `|` operator</span>
+    <span class="doccomment">/// Performs the `|` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1121,9 +1103,11 @@
 
 <span class="doccomment">/// The bitwise XOR operator `^`.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Note that `RHS` is `Self` by default, but this is not mandatory.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `^` operator is lifted to a trivial `Scalar` type.</span>
+<span class="doccomment">/// An implementation of `BitXor` that lifts `^` to a wrapper around `bool`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitXor;</span>
@@ -1140,16 +1124,13 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Scalar(true) ^ Scalar(true), Scalar(false));</span>
-<span class="doccomment">///     assert_eq!(Scalar(true) ^ Scalar(false), Scalar(true));</span>
-<span class="doccomment">///     assert_eq!(Scalar(false) ^ Scalar(true), Scalar(true));</span>
-<span class="doccomment">///     assert_eq!(Scalar(false) ^ Scalar(false), Scalar(false));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(Scalar(true) ^ Scalar(true), Scalar(false));</span>
+<span class="doccomment">/// assert_eq!(Scalar(true) ^ Scalar(false), Scalar(true));</span>
+<span class="doccomment">/// assert_eq!(Scalar(false) ^ Scalar(true), Scalar(true));</span>
+<span class="doccomment">/// assert_eq!(Scalar(false) ^ Scalar(false), Scalar(false));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `BitXor` trait is implemented for a `BooleanVector`</span>
-<span class="doccomment">/// struct.</span>
+<span class="doccomment">/// An implementation of `BitXor` trait for a wrapper around `Vec&lt;bool&gt;`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitXor;</span>
@@ -1170,22 +1151,20 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let bv1 = BooleanVector(vec![true, true, false, false]);</span>
-<span class="doccomment">///     let bv2 = BooleanVector(vec![true, false, true, false]);</span>
-<span class="doccomment">///     let expected = BooleanVector(vec![false, true, true, false]);</span>
-<span class="doccomment">///     assert_eq!(bv1 ^ bv2, expected);</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let bv1 = BooleanVector(vec![true, true, false, false]);</span>
+<span class="doccomment">/// let bv2 = BooleanVector(vec![true, false, true, false]);</span>
+<span class="doccomment">/// let expected = BooleanVector(vec![false, true, true, false]);</span>
+<span class="doccomment">/// assert_eq!(bv1 ^ bv2, expected);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitxor&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} ^ {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitXor</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `^` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `^` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `^` operator</span>
+    <span class="doccomment">/// Performs the `^` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1211,7 +1190,7 @@
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// An implementation of `Shl` that lifts the `&lt;&lt;` operation on integers to a</span>
-<span class="doccomment">/// `Scalar` struct.</span>
+<span class="doccomment">/// wrapper around `usize`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Shl;</span>
@@ -1227,9 +1206,8 @@
 <span class="doccomment">///         Scalar(lhs &lt;&lt; rhs)</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Scalar(4) &lt;&lt; Scalar(2), Scalar(16));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(Scalar(4) &lt;&lt; Scalar(2), Scalar(16));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// An implementation of `Shl` that spins a vector leftward by a given amount.</span>
@@ -1246,7 +1224,7 @@
 <span class="doccomment">///     type Output = Self;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     fn shl(self, rhs: usize) -&gt; SpinVector&lt;T&gt; {</span>
-<span class="doccomment">///         // rotate the vector by `rhs` places</span>
+<span class="doccomment">///         // Rotate the vector by `rhs` places.</span>
 <span class="doccomment">///         let (a, b) = self.vec.split_at(rhs);</span>
 <span class="doccomment">///         let mut spun_vector: Vec&lt;T&gt; = vec![];</span>
 <span class="doccomment">///         spun_vector.extend_from_slice(b);</span>
@@ -1255,20 +1233,18 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(SpinVector { vec: vec![0, 1, 2, 3, 4] } &lt;&lt; 2,</span>
-<span class="doccomment">///                SpinVector { vec: vec![2, 3, 4, 0, 1] });</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(SpinVector { vec: vec![0, 1, 2, 3, 4] } &lt;&lt; 2,</span>
+<span class="doccomment">///            SpinVector { vec: vec![2, 3, 4, 0, 1] });</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shl&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &lt;&lt; {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Shl</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `&lt;&lt;` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `&lt;&lt;` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `&lt;&lt;` operator</span>
+    <span class="doccomment">/// Performs the `&lt;&lt;` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">shl</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1315,7 +1291,7 @@
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// An implementation of `Shr` that lifts the `&gt;&gt;` operation on integers to a</span>
-<span class="doccomment">/// `Scalar` struct.</span>
+<span class="doccomment">/// wrapper around `usize`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::Shr;</span>
@@ -1331,9 +1307,8 @@
 <span class="doccomment">///         Scalar(lhs &gt;&gt; rhs)</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(Scalar(16) &gt;&gt; Scalar(2), Scalar(4));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(Scalar(16) &gt;&gt; Scalar(2), Scalar(4));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// An implementation of `Shr` that spins a vector rightward by a given amount.</span>
@@ -1350,7 +1325,7 @@
 <span class="doccomment">///     type Output = Self;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     fn shr(self, rhs: usize) -&gt; SpinVector&lt;T&gt; {</span>
-<span class="doccomment">///         // rotate the vector by `rhs` places</span>
+<span class="doccomment">///         // Rotate the vector by `rhs` places.</span>
 <span class="doccomment">///         let (a, b) = self.vec.split_at(self.vec.len() - rhs);</span>
 <span class="doccomment">///         let mut spun_vector: Vec&lt;T&gt; = vec![];</span>
 <span class="doccomment">///         spun_vector.extend_from_slice(b);</span>
@@ -1359,20 +1334,18 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(SpinVector { vec: vec![0, 1, 2, 3, 4] } &gt;&gt; 2,</span>
-<span class="doccomment">///                SpinVector { vec: vec![3, 4, 0, 1, 2] });</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// assert_eq!(SpinVector { vec: vec![0, 1, 2, 3, 4] } &gt;&gt; 2,</span>
+<span class="doccomment">///            SpinVector { vec: vec![3, 4, 0, 1, 2] });</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shr&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &gt;&gt; {RHS}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Shr</span><span class="op">&lt;</span><span class="ident">RHS</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The resulting type after applying the `&gt;&gt;` operator</span>
+    <span class="doccomment">/// The resulting type after applying the `&gt;&gt;` operator.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// The method for the `&gt;&gt;` operator</span>
+    <span class="doccomment">/// Performs the `&gt;&gt;` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">shr</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">RHS</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -1418,7 +1391,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `&amp;=` operator is lifted to a trivial `Scalar` type.</span>
+<span class="doccomment">/// An implementation of `BitAndAssign` that lifts the `&amp;=` operator to a</span>
+<span class="doccomment">/// wrapper around `bool`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitAndAssign;</span>
@@ -1433,27 +1407,25 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut scalar = Scalar(true);</span>
-<span class="doccomment">///     scalar &amp;= Scalar(true);</span>
-<span class="doccomment">///     assert_eq!(scalar, Scalar(true));</span>
+<span class="doccomment">/// let mut scalar = Scalar(true);</span>
+<span class="doccomment">/// scalar &amp;= Scalar(true);</span>
+<span class="doccomment">/// assert_eq!(scalar, Scalar(true));</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     let mut scalar = Scalar(true);</span>
-<span class="doccomment">///     scalar &amp;= Scalar(false);</span>
-<span class="doccomment">///     assert_eq!(scalar, Scalar(false));</span>
+<span class="doccomment">/// let mut scalar = Scalar(true);</span>
+<span class="doccomment">/// scalar &amp;= Scalar(false);</span>
+<span class="doccomment">/// assert_eq!(scalar, Scalar(false));</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     let mut scalar = Scalar(false);</span>
-<span class="doccomment">///     scalar &amp;= Scalar(true);</span>
-<span class="doccomment">///     assert_eq!(scalar, Scalar(false));</span>
+<span class="doccomment">/// let mut scalar = Scalar(false);</span>
+<span class="doccomment">/// scalar &amp;= Scalar(true);</span>
+<span class="doccomment">/// assert_eq!(scalar, Scalar(false));</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     let mut scalar = Scalar(false);</span>
-<span class="doccomment">///     scalar &amp;= Scalar(false);</span>
-<span class="doccomment">///     assert_eq!(scalar, Scalar(false));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut scalar = Scalar(false);</span>
+<span class="doccomment">/// scalar &amp;= Scalar(false);</span>
+<span class="doccomment">/// assert_eq!(scalar, Scalar(false));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In this example, the `BitAndAssign` trait is implemented for a</span>
-<span class="doccomment">/// `BooleanVector` struct.</span>
+<span class="doccomment">/// Here, the `BitAndAssign` trait is implemented for a wrapper around</span>
+<span class="doccomment">/// `Vec&lt;bool&gt;`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitAndAssign;</span>
@@ -1462,7 +1434,7 @@
 <span class="doccomment">/// struct BooleanVector(Vec&lt;bool&gt;);</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// impl BitAndAssign for BooleanVector {</span>
-<span class="doccomment">///     // rhs is the &quot;right-hand side&quot; of the expression `a &amp;= b`</span>
+<span class="doccomment">///     // `rhs` is the &quot;right-hand side&quot; of the expression `a &amp;= b`.</span>
 <span class="doccomment">///     fn bitand_assign(&amp;mut self, rhs: Self) {</span>
 <span class="doccomment">///         assert_eq!(self.0.len(), rhs.0.len());</span>
 <span class="doccomment">///         *self = BooleanVector(self.0</span>
@@ -1473,18 +1445,16 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut bv = BooleanVector(vec![true, true, false, false]);</span>
-<span class="doccomment">///     bv &amp;= BooleanVector(vec![true, false, true, false]);</span>
-<span class="doccomment">///     let expected = BooleanVector(vec![true, false, false, false]);</span>
-<span class="doccomment">///     assert_eq!(bv, expected);</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut bv = BooleanVector(vec![true, true, false, false]);</span>
+<span class="doccomment">/// bv &amp;= BooleanVector(vec![true, false, true, false]);</span>
+<span class="doccomment">/// let expected = BooleanVector(vec![true, false, false, false]);</span>
+<span class="doccomment">/// assert_eq!(bv, expected);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitand_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &amp;= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitAndAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `&amp;=` operator</span>
+    <span class="doccomment">/// Performs the `&amp;=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">bitand_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1496,6 +1466,8 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">bitand_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">&amp;=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">BitAndAssign</span>, <span class="ident">bitand_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1505,31 +1477,31 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `BitOrAssign`. When `Foo |= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `bitor_assign`, and therefore, `main` prints `Bitwise Or-ing!`.</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitOrAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct PersonalPreferences {</span>
+<span class="doccomment">///     likes_cats: bool,</span>
+<span class="doccomment">///     likes_dogs: bool,</span>
+<span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl BitOrAssign for Foo {</span>
-<span class="doccomment">///     fn bitor_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Bitwise Or-ing!&quot;);</span>
+<span class="doccomment">/// impl BitOrAssign for PersonalPreferences {</span>
+<span class="doccomment">///     fn bitor_assign(&amp;mut self, rhs: Self) {</span>
+<span class="doccomment">///         self.likes_cats |= rhs.likes_cats;</span>
+<span class="doccomment">///         self.likes_dogs |= rhs.likes_dogs;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo |= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut prefs = PersonalPreferences { likes_cats: true, likes_dogs: false };</span>
+<span class="doccomment">/// prefs |= PersonalPreferences { likes_cats: false, likes_dogs: true };</span>
+<span class="doccomment">/// assert_eq!(prefs, PersonalPreferences { likes_cats: true, likes_dogs: true });</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitor_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} |= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitOrAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `|=` operator</span>
+    <span class="doccomment">/// Performs the `|=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">bitor_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1541,6 +1513,8 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">bitor_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">|=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">BitOrAssign</span>, <span class="ident">bitor_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1550,31 +1524,31 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `BitXorAssign`. When `Foo ^= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `bitxor_assign`, and therefore, `main` prints `Bitwise Xor-ing!`.</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::BitXorAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Personality {</span>
+<span class="doccomment">///     has_soul: bool,</span>
+<span class="doccomment">///     likes_knitting: bool,</span>
+<span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl BitXorAssign for Foo {</span>
-<span class="doccomment">///     fn bitxor_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Bitwise Xor-ing!&quot;);</span>
+<span class="doccomment">/// impl BitXorAssign for Personality {</span>
+<span class="doccomment">///     fn bitxor_assign(&amp;mut self, rhs: Self) {</span>
+<span class="doccomment">///         self.has_soul ^= rhs.has_soul;</span>
+<span class="doccomment">///         self.likes_knitting ^= rhs.likes_knitting;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo ^= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut personality = Personality { has_soul: false, likes_knitting: true };</span>
+<span class="doccomment">/// personality ^= Personality { has_soul: true, likes_knitting: true };</span>
+<span class="doccomment">/// assert_eq!(personality, Personality { has_soul: true, likes_knitting: false});</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;bitxor_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} ^= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BitXorAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `^=` operator</span>
+    <span class="doccomment">/// Performs the `^=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">bitxor_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1586,6 +1560,8 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">bitxor_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) { <span class="kw-2">*</span><span class="self">self</span> <span class="op">^=</span> <span class="ident">other</span> }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">BitXorAssign</span>, <span class="ident">bitxor_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> }
     )<span class="op">+</span>)
 }
 
@@ -1595,31 +1571,29 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `ShlAssign`. When `Foo &lt;&lt;= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `shl_assign`, and therefore, `main` prints `Shifting left!`.</span>
+<span class="doccomment">/// An implementation of `ShlAssign` for a wrapper around `usize`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::ShlAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Scalar(usize);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl ShlAssign&lt;Foo&gt; for Foo {</span>
-<span class="doccomment">///     fn shl_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Shifting left!&quot;);</span>
+<span class="doccomment">/// impl ShlAssign&lt;usize&gt; for Scalar {</span>
+<span class="doccomment">///     fn shl_assign(&amp;mut self, rhs: usize) {</span>
+<span class="doccomment">///         self.0 &lt;&lt;= rhs;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo &lt;&lt;= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut scalar = Scalar(4);</span>
+<span class="doccomment">/// scalar &lt;&lt;= 2;</span>
+<span class="doccomment">/// assert_eq!(scalar, Scalar(16));</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shl_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &lt;&lt;= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ShlAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `&lt;&lt;=` operator</span>
+    <span class="doccomment">/// Performs the `&lt;&lt;=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">shl_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1634,6 +1608,8 @@
                 <span class="kw-2">*</span><span class="self">self</span> <span class="op">&lt;&lt;=</span> <span class="ident">other</span>
             }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">ShlAssign</span>, <span class="ident">shl_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">f</span> }
     )
 }
 
@@ -1661,31 +1637,29 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// A trivial implementation of `ShrAssign`. When `Foo &gt;&gt;= Foo` happens, it ends up</span>
-<span class="doccomment">/// calling `shr_assign`, and therefore, `main` prints `Shifting right!`.</span>
+<span class="doccomment">/// An implementation of `ShrAssign` for a wrapper around `usize`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::ops::ShrAssign;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// struct Foo;</span>
+<span class="doccomment">/// #[derive(Debug, PartialEq)]</span>
+<span class="doccomment">/// struct Scalar(usize);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl ShrAssign&lt;Foo&gt; for Foo {</span>
-<span class="doccomment">///     fn shr_assign(&amp;mut self, _rhs: Foo) {</span>
-<span class="doccomment">///         println!(&quot;Shifting right!&quot;);</span>
+<span class="doccomment">/// impl ShrAssign&lt;usize&gt; for Scalar {</span>
+<span class="doccomment">///     fn shr_assign(&amp;mut self, rhs: usize) {</span>
+<span class="doccomment">///         self.0 &gt;&gt;= rhs;</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # #[allow(unused_assignments)]</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut foo = Foo;</span>
-<span class="doccomment">///     foo &gt;&gt;= Foo;</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let mut scalar = Scalar(16);</span>
+<span class="doccomment">/// scalar &gt;&gt;= 2;</span>
+<span class="doccomment">/// assert_eq!(scalar, Scalar(4));</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;shr_assign&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;no implementation for `{Self} &gt;&gt;= {Rhs}`&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ShrAssign</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">=</span><span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the `&gt;&gt;=` operator</span>
+    <span class="doccomment">/// Performs the `&gt;&gt;=` operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;op_assign_traits&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.8.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">shr_assign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>);
 }
@@ -1700,6 +1674,8 @@
                 <span class="kw-2">*</span><span class="self">self</span> <span class="op">&gt;&gt;=</span> <span class="ident">other</span>
             }
         }
+
+        <span class="macro">forward_ref_op_assign</span><span class="macro">!</span> { <span class="kw">impl</span> <span class="ident">ShrAssign</span>, <span class="ident">shr_assign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">f</span> }
     )
 }
 
@@ -1740,10 +1716,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

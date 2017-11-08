@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../proc_macro/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Crate proc_macro</p><div class="block items"><ul><li><a href="#structs">Structs</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'proc_macro', ty: 'mod', relpath: '../'};</script>
+        <p class='location'>Crate proc_macro</p><div class='block version'><p>Version 1.23.0-dev</p></div><div class="block items"><ul><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'proc_macro', ty: 'mod', relpath: '../'};</script>
     </nav>
 
     <nav class="sub">
@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/proc_macro/lib.rs.html#11-198' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/proc_macro/lib.rs.html#11-828' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A support library for macro authors when defining new macros.</p>
 
 <p>This library, provided by the standard distribution, provides the types
@@ -63,7 +63,17 @@ This functionality is intended to be expanded over time as more surface
 area for macro authors is stabilized.</p>
 
 <p>See <a href="../book/first-edition/procedural-macros.html">the book</a> for more.</p>
-</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+</div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<table>
+                       <tr class='unstable module-item'>
+                           <td><a class="macro" href="macro.quote.html"
+                                  title='macro proc_macro::quote'>quote</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p><code>quote!(..)</code> accepts arbitrary tokens and expands into a <code>TokenStream</code> describing the input.
+For example, <code>quote!(a + b)</code> will produce a expression, that, when evaluated, constructs
+the <code>TokenStream</code> <code>[Word(&quot;a&quot;), Op(&#39;+&#39;, Alone), Word(&quot;b&quot;)]</code>.</p>
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.LexError.html"
@@ -78,6 +88,101 @@ area for macro authors is stabilized.</p>
                            <td class='docblock-short'>
                                 <p>The main type provided by this crate, representing an abstract stream of
 tokens.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.Diagnostic.html"
+                                  title='struct proc_macro::Diagnostic'>Diagnostic</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>A structure representing a diagnostic message and associated children
+messages.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.LineColumn.html"
+                                  title='struct proc_macro::LineColumn'>LineColumn</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>A line-column pair representing the start or end of a <code>Span</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.Literal.html"
+                                  title='struct proc_macro::Literal'>Literal</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>A literal character (<code>&#39;a&#39;</code>), string (<code>&quot;hello&quot;</code>), or number (<code>2.3</code>).</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.SourceFile.html"
+                                  title='struct proc_macro::SourceFile'>SourceFile</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>The source file of a given <code>Span</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.Span.html"
+                                  title='struct proc_macro::Span'>Span</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>A region of source code, along with macro expansion information.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.Term.html"
+                                  title='struct proc_macro::Term'>Term</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>An interned string.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.TokenTree.html"
+                                  title='struct proc_macro::TokenTree'>TokenTree</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>A single token or a delimited sequence of token trees (e.g. <code>[1, (), ..]</code>).</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.TokenTreeIter.html"
+                                  title='struct proc_macro::TokenTreeIter'>TokenTreeIter</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>An iterator over <code>TokenTree</code>s.</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class='unstable module-item'>
+                           <td><a class="enum" href="enum.Delimiter.html"
+                                  title='enum proc_macro::Delimiter'>Delimiter</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Describes how a sequence of token trees is delimited.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="enum" href="enum.Level.html"
+                                  title='enum proc_macro::Level'>Level</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>An enum representing a diagnostic level.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="enum" href="enum.Spacing.html"
+                                  title='enum proc_macro::Spacing'>Spacing</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Whether an <code>Op</code> is either followed immediately by another <code>Op</code> or followed by whitespace.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="enum" href="enum.TokenNode.html"
+                                  title='enum proc_macro::TokenNode'>TokenNode</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Description of a <code>TokenTree</code></p>
+                           </td>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.quote_span.html"
+                                  title='fn proc_macro::quote_span'>quote_span</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Quote a <code>Span</code> into a <code>TokenStream</code>.
+This is needed to implement a custom quoter.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -96,10 +201,12 @@ tokens.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

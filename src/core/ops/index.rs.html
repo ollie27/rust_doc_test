@@ -196,11 +196,6 @@
 <span id="151">151</span>
 <span id="152">152</span>
 <span id="153">153</span>
-<span id="154">154</span>
-<span id="155">155</span>
-<span id="156">156</span>
-<span id="157">157</span>
-<span id="158">158</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -212,13 +207,12 @@
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
-<span class="doccomment">/// The `Index` trait is used to specify the functionality of indexing operations</span>
-<span class="doccomment">/// like `container[index]` when used in an immutable context.</span>
+<span class="doccomment">/// Used for indexing operations (`container[index]`) in immutable contexts.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `container[index]` is actually syntactic sugar for `*container.index(index)`,</span>
 <span class="doccomment">/// but only when used as an immutable value. If a mutable value is requested,</span>
 <span class="doccomment">/// [`IndexMut`] is used instead. This allows nice things such as</span>
-<span class="doccomment">/// `let value = v[index]` if `value` implements [`Copy`].</span>
+<span class="doccomment">/// `let value = v[index]` if the type of `value` implements [`Copy`].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`IndexMut`]: ../../std/ops/trait.IndexMut.html</span>
 <span class="doccomment">/// [`Copy`]: ../../std/marker/trait.Copy.html</span>
@@ -268,25 +262,23 @@
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;the type `{Self}` cannot be indexed by `{Idx}`&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">Idx</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The returned type after indexing</span>
+    <span class="doccomment">/// The returned type after indexing.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>: <span class="question-mark">?</span><span class="ident">Sized</span>;
 
-    <span class="doccomment">/// The method for the indexing (`container[index]`) operation</span>
+    <span class="doccomment">/// Performs the indexing (`container[index]`) operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">Idx</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
-<span class="doccomment">/// The `IndexMut` trait is used to specify the functionality of indexing</span>
-<span class="doccomment">/// operations like `container[index]` when used in a mutable context.</span>
+<span class="doccomment">/// Used for indexing operations (`container[index]`) in mutable contexts.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `container[index]` is actually syntactic sugar for</span>
 <span class="doccomment">/// `*container.index_mut(index)`, but only when used as a mutable value. If</span>
 <span class="doccomment">/// an immutable value is requested, the [`Index`] trait is used instead. This</span>
-<span class="doccomment">/// allows nice things such as `v[index] = value` if `value` implements [`Copy`].</span>
+<span class="doccomment">/// allows nice things such as `v[index] = value`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`Index`]: ../../std/ops/trait.Index.html</span>
-<span class="doccomment">/// [`Copy`]: ../../std/marker/trait.Copy.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -310,7 +302,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// struct Balance {</span>
 <span class="doccomment">///     pub left: Weight,</span>
-<span class="doccomment">///     pub right:Weight,</span>
+<span class="doccomment">///     pub right: Weight,</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// impl Index&lt;Side&gt; for Balance {</span>
@@ -335,28 +327,26 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let mut balance = Balance {</span>
-<span class="doccomment">///         right: Weight::Kilogram(2.5),</span>
-<span class="doccomment">///         left: Weight::Pound(1.5),</span>
-<span class="doccomment">///     };</span>
+<span class="doccomment">/// let mut balance = Balance {</span>
+<span class="doccomment">///     right: Weight::Kilogram(2.5),</span>
+<span class="doccomment">///     left: Weight::Pound(1.5),</span>
+<span class="doccomment">/// };</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     // In this case balance[Side::Right] is sugar for</span>
-<span class="doccomment">///     // *balance.index(Side::Right), since we are only reading</span>
-<span class="doccomment">///     // balance[Side::Right], not writing it.</span>
-<span class="doccomment">///     assert_eq!(balance[Side::Right],Weight::Kilogram(2.5));</span>
+<span class="doccomment">/// // In this case, `balance[Side::Right]` is sugar for</span>
+<span class="doccomment">/// // `*balance.index(Side::Right)`, since we are only *reading*</span>
+<span class="doccomment">/// // `balance[Side::Right]`, not writing it.</span>
+<span class="doccomment">/// assert_eq!(balance[Side::Right], Weight::Kilogram(2.5));</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     // However in this case balance[Side::Left] is sugar for</span>
-<span class="doccomment">///     // *balance.index_mut(Side::Left), since we are writing</span>
-<span class="doccomment">///     // balance[Side::Left].</span>
-<span class="doccomment">///     balance[Side::Left] = Weight::Kilogram(3.0);</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// // However, in this case `balance[Side::Left]` is sugar for</span>
+<span class="doccomment">/// // `*balance.index_mut(Side::Left)`, since we are writing</span>
+<span class="doccomment">/// // `balance[Side::Left]`.</span>
+<span class="doccomment">/// balance[Side::Left] = Weight::Kilogram(3.0);</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;index_mut&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">rustc_on_unimplemented</span> <span class="op">=</span> <span class="string">&quot;the type `{Self}` cannot be mutably indexed by `{Idx}`&quot;</span>]</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IndexMut</span><span class="op">&lt;</span><span class="ident">Idx</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>: <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">Idx</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The method for the mutable indexing (`container[index]`) operation</span>
+    <span class="doccomment">/// Performs the mutable indexing (`container[index]`) operation.</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">Idx</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -378,10 +368,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

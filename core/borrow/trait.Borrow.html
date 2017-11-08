@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait Borrow</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>borrow</a></p><script>window.sidebarCurrent = {name: 'Borrow', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Borrow</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>borrow</a></p><script>window.sidebarCurrent = {name: 'Borrow', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -69,7 +69,9 @@ type can be borrowed as multiple different types. In particular, <code>Vec&lt;T&
 <p><code>Borrow</code> is very similar to, but different than, <code>AsRef</code>. See
 <a href="../../book/first-edition/borrow-and-asref.html">the book</a> for more.</p>
 </div>
-            <h2 id='required-methods'>Required Methods</h2>
+            <h2 id='required-methods' class='small-section-header'>
+              Required Methods<a href='#required-methods' class='anchor'></a>
+            </h2>
             <div class='methods'>
         <h3 id='tymethod.borrow' class='method'><span id='borrow.v' class='invisible'><code>fn <a href='#tymethod.borrow' class='fnname'>borrow</a>(&amp;self) -&gt; &amp;Borrowed</code></span></h3><div class='docblock'><p>Immutably borrows from an owned value.</p>
 
@@ -87,9 +89,11 @@ type can be borrowed as multiple different types. In particular, <code>Vec&lt;T&
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="string">&quot;Hello&quot;</span>;
 
-<span class="ident">check</span>(<span class="ident">s</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aborrow%3A%3ABorrow%3B%0A%0Afn%20check%3CT%3A%20Borrow%3Cstr%3E%3E(s%3A%20T)%20%7B%0A%20%20%20%20assert_eq!(%22Hello%22%2C%20s.borrow())%3B%0A%7D%0A%0Alet%20s%20%3D%20%22Hello%22.to_string()%3B%0A%0Acheck(s)%3B%0A%0Alet%20s%20%3D%20%22Hello%22%3B%0A%0Acheck(s)%3B%0A%7D">Run</a></pre>
+<span class="ident">check</span>(<span class="ident">s</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aborrow%3A%3ABorrow%3B%0A%0Afn%20check%3CT%3A%20Borrow%3Cstr%3E%3E(s%3A%20T)%20%7B%0A%20%20%20%20assert_eq!(%22Hello%22%2C%20s.borrow())%3B%0A%7D%0A%0Alet%20s%20%3D%20%22Hello%22.to_string()%3B%0A%0Acheck(s)%3B%0A%0Alet%20s%20%3D%20%22Hello%22%3B%0A%0Acheck(s)%3B%0A%7D">Run</a></pre>
 </div></div>
-        <h2 id='implementors'>Implementors</h2>
+        <h2 id='implementors' class='small-section-header'>
+          Implementors<a href='#implementors' class='anchor'></a>
+        </h2>
         <ul class='item-list' id='implementors-list'>
     <li><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Borrow&lt;T&gt; for T</code></li>
 <li><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Borrow&lt;T&gt; for &amp;'a T</code></li>
@@ -146,10 +150,12 @@ type can be borrowed as multiple different types. In particular, <code>Vec&lt;T&
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

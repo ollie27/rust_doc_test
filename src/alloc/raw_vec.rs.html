@@ -789,6 +789,57 @@
 <span id="744">744</span>
 <span id="745">745</span>
 <span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -800,14 +851,13 @@
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
-<span class="kw">use</span> <span class="ident">allocator</span>::{<span class="ident">Alloc</span>, <span class="ident">Layout</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ptr</span>::{<span class="self">self</span>, <span class="ident">Unique</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">slice</span>;
-<span class="kw">use</span> <span class="ident">heap</span>::{<span class="ident">HeapAlloc</span>};
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::<span class="ident">Drop</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">cmp</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">mem</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ops</span>::<span class="ident">Drop</span>;
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ptr</span>::{<span class="self">self</span>, <span class="ident">Unique</span>};
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">slice</span>;
+<span class="kw">use</span> <span class="ident">heap</span>::{<span class="ident">Alloc</span>, <span class="ident">Layout</span>, <span class="ident">Heap</span>};
+<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
 
 <span class="doccomment">/// A low-level utility for more ergonomically allocating, reallocating, and deallocating</span>
 <span class="doccomment">/// a buffer of memory on the heap without having to worry about all the corner cases</span>
@@ -837,7 +887,7 @@
 <span class="doccomment">/// field. This allows zero-sized types to not be special-cased by consumers of</span>
 <span class="doccomment">/// this type.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_debug_implementations</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">A</span>: <span class="ident">Alloc</span> <span class="op">=</span> <span class="ident">HeapAlloc</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">A</span>: <span class="ident">Alloc</span> <span class="op">=</span> <span class="ident">Heap</span><span class="op">&gt;</span> {
     <span class="ident">ptr</span>: <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
     <span class="ident">cap</span>: <span class="ident">usize</span>,
     <span class="ident">a</span>: <span class="ident">A</span>,
@@ -853,8 +903,8 @@
         <span class="comment">// Unique::empty() doubles as &quot;unallocated&quot; and &quot;zero-sized allocation&quot;</span>
         <span class="ident">RawVec</span> {
             <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">empty</span>(),
-            <span class="ident">cap</span>: <span class="ident">cap</span>,
-            <span class="ident">a</span>: <span class="ident">a</span>,
+            <span class="ident">cap</span>,
+            <span class="ident">a</span>,
         }
     }
 
@@ -896,22 +946,22 @@
             };
 
             <span class="ident">RawVec</span> {
-                <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _),
-                <span class="ident">cap</span>: <span class="ident">cap</span>,
-                <span class="ident">a</span>: <span class="ident">a</span>,
+                <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _),
+                <span class="ident">cap</span>,
+                <span class="ident">a</span>,
             }
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">HeapAlloc</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Heap</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Creates the biggest possible RawVec (on the system heap)</span>
     <span class="doccomment">/// without allocating. If T has positive size, then this makes a</span>
-    <span class="doccomment">/// RawVec with capacity 0. If T has 0 size, then it it makes a</span>
+    <span class="doccomment">/// RawVec with capacity 0. If T has 0 size, then it makes a</span>
     <span class="doccomment">/// RawVec with capacity `usize::MAX`. Useful for implementing</span>
     <span class="doccomment">/// delayed allocation.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">new_in</span>(<span class="ident">HeapAlloc</span>)
+        <span class="self">Self</span>::<span class="ident">new_in</span>(<span class="ident">Heap</span>)
     }
 
     <span class="doccomment">/// Creates a RawVec (on the system heap) with exactly the</span>
@@ -931,13 +981,13 @@
     <span class="doccomment">/// Aborts on OOM</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity</span>(<span class="ident">cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="ident">RawVec</span>::<span class="ident">allocate_in</span>(<span class="ident">cap</span>, <span class="bool-val">false</span>, <span class="ident">HeapAlloc</span>)
+        <span class="ident">RawVec</span>::<span class="ident">allocate_in</span>(<span class="ident">cap</span>, <span class="bool-val">false</span>, <span class="ident">Heap</span>)
     }
 
     <span class="doccomment">/// Like `with_capacity` but guarantees the buffer is zeroed.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity_zeroed</span>(<span class="ident">cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="ident">RawVec</span>::<span class="ident">allocate_in</span>(<span class="ident">cap</span>, <span class="bool-val">true</span>, <span class="ident">HeapAlloc</span>)
+        <span class="ident">RawVec</span>::<span class="ident">allocate_in</span>(<span class="ident">cap</span>, <span class="bool-val">true</span>, <span class="ident">Heap</span>)
     }
 }
 
@@ -951,14 +1001,14 @@
     <span class="doccomment">/// If the ptr and capacity come from a RawVec created via `a`, then this is guaranteed.</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_parts_in</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">cap</span>: <span class="ident">usize</span>, <span class="ident">a</span>: <span class="ident">A</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">RawVec</span> {
-            <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">ptr</span>),
-            <span class="ident">cap</span>: <span class="ident">cap</span>,
-            <span class="ident">a</span>: <span class="ident">a</span>,
+            <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span>),
+            <span class="ident">cap</span>,
+            <span class="ident">a</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">HeapAlloc</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Heap</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Reconstitutes a RawVec from a pointer, capacity.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Undefined Behavior</span>
@@ -968,9 +1018,9 @@
     <span class="doccomment">/// If the ptr and capacity come from a RawVec, then this is guaranteed.</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_parts</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">RawVec</span> {
-            <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new</span>(<span class="ident">ptr</span>),
-            <span class="ident">cap</span>: <span class="ident">cap</span>,
-            <span class="ident">a</span>: <span class="ident">HeapAlloc</span>,
+            <span class="ident">ptr</span>: <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span>),
+            <span class="ident">cap</span>,
+            <span class="ident">a</span>: <span class="ident">Heap</span>,
         }
     }
 
@@ -1012,6 +1062,20 @@
     <span class="doccomment">/// Returns a mutable reference to the allocator backing this RawVec.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">alloc_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">A</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">a</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">current_layout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Layout</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="number">0</span> {
+            <span class="prelude-val">None</span>
+        } <span class="kw">else</span> {
+            <span class="comment">// We have an allocated chunk of memory, so we can bypass runtime</span>
+            <span class="comment">// checks to get our current layout.</span>
+            <span class="kw">unsafe</span> {
+                <span class="kw">let</span> <span class="ident">align</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
+                <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="self">self</span>.<span class="ident">cap</span>;
+                <span class="prelude-val">Some</span>(<span class="ident">Layout</span>::<span class="ident">from_size_align_unchecked</span>(<span class="ident">size</span>, <span class="ident">align</span>))
+            }
+        }
     }
 
     <span class="doccomment">/// Doubles the size of the type&#39;s backing allocation. This is common enough</span>
@@ -1072,27 +1136,40 @@
             <span class="comment">// 0, getting to here necessarily means the RawVec is overfull.</span>
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">elem_size</span> <span class="op">!=</span> <span class="number">0</span>, <span class="string">&quot;capacity overflow&quot;</span>);
 
-            <span class="kw">let</span> (<span class="ident">new_cap</span>, <span class="ident">ptr_res</span>) <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="comment">// skip to 4 because tiny Vec&#39;s are dumb; but not if that would cause overflow</span>
-                <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">elem_size</span> <span class="op">&gt;</span> (<span class="op">!</span><span class="number">0</span>) <span class="op">/</span> <span class="number">8</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">4</span> };
-                <span class="kw">let</span> <span class="ident">ptr_res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">alloc_array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">new_cap</span>);
-                (<span class="ident">new_cap</span>, <span class="ident">ptr_res</span>)
-            } <span class="kw">else</span> {
-                <span class="comment">// Since we guarantee that we never allocate more than isize::MAX bytes,</span>
-                <span class="comment">// `elem_size * self.cap &lt;= isize::MAX` as a precondition, so this can&#39;t overflow</span>
-                <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">cap</span>;
-                <span class="kw">let</span> <span class="ident">new_alloc_size</span> <span class="op">=</span> <span class="ident">new_cap</span> <span class="op">*</span> <span class="ident">elem_size</span>;
-                <span class="ident">alloc_guard</span>(<span class="ident">new_alloc_size</span>);
-                <span class="kw">let</span> <span class="ident">ptr_res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc_array</span>(<span class="self">self</span>.<span class="ident">ptr</span>, <span class="self">self</span>.<span class="ident">cap</span>, <span class="ident">new_cap</span>);
-                (<span class="ident">new_cap</span>, <span class="ident">ptr_res</span>)
+            <span class="kw">let</span> (<span class="ident">new_cap</span>, <span class="ident">uniq</span>) <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_layout</span>() {
+                <span class="prelude-val">Some</span>(<span class="ident">cur</span>) <span class="op">=&gt;</span> {
+                    <span class="comment">// Since we guarantee that we never allocate more than</span>
+                    <span class="comment">// isize::MAX bytes, `elem_size * self.cap &lt;= isize::MAX` as</span>
+                    <span class="comment">// a precondition, so this can&#39;t overflow. Additionally the</span>
+                    <span class="comment">// alignment will never be too large as to &quot;not be</span>
+                    <span class="comment">// satisfiable&quot;, so `Layout::from_size_align` will always</span>
+                    <span class="comment">// return `Some`.</span>
+                    <span class="comment">//</span>
+                    <span class="comment">// tl;dr; we bypass runtime checks due to dynamic assertions</span>
+                    <span class="comment">// in this module, allowing us to use</span>
+                    <span class="comment">// `from_size_align_unchecked`.</span>
+                    <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">cap</span>;
+                    <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="ident">new_cap</span> <span class="op">*</span> <span class="ident">elem_size</span>;
+                    <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align_unchecked</span>(<span class="ident">new_size</span>, <span class="ident">cur</span>.<span class="ident">align</span>());
+                    <span class="ident">alloc_guard</span>(<span class="ident">new_size</span>);
+                    <span class="kw">let</span> <span class="ident">ptr_res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
+                                                 <span class="ident">cur</span>,
+                                                 <span class="ident">new_layout</span>);
+                    <span class="kw">match</span> <span class="ident">ptr_res</span> {
+                        <span class="prelude-val">Ok</span>(<span class="ident">ptr</span>) <span class="op">=&gt;</span> (<span class="ident">new_cap</span>, <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>)),
+                        <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">e</span>),
+                    }
+                }
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
+                    <span class="comment">// skip to 4 because tiny Vec&#39;s are dumb; but not if that</span>
+                    <span class="comment">// would cause overflow</span>
+                    <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">elem_size</span> <span class="op">&gt;</span> (<span class="op">!</span><span class="number">0</span>) <span class="op">/</span> <span class="number">8</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">4</span> };
+                    <span class="kw">match</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">alloc_array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">new_cap</span>) {
+                        <span class="prelude-val">Ok</span>(<span class="ident">ptr</span>) <span class="op">=&gt;</span> (<span class="ident">new_cap</span>, <span class="ident">ptr</span>),
+                        <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">e</span>),
+                    }
+                }
             };
-
-            <span class="comment">// If allocate or reallocate fail, we&#39;ll get `null` back</span>
-            <span class="kw">let</span> <span class="ident">uniq</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ptr_res</span> {
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">err</span>),
-                <span class="prelude-val">Ok</span>(<span class="ident">uniq</span>) <span class="op">=&gt;</span> <span class="ident">uniq</span>,
-            };
-
             <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">=</span> <span class="ident">uniq</span>;
             <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">new_cap</span>;
         }
@@ -1115,21 +1192,27 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">double_in_place</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">elem_size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
+            <span class="kw">let</span> <span class="ident">old_layout</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_layout</span>() {
+                <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=&gt;</span> <span class="ident">layout</span>,
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="bool-val">false</span>, <span class="comment">// nothing to double</span>
+            };
 
             <span class="comment">// since we set the capacity to usize::MAX when elem_size is</span>
             <span class="comment">// 0, getting to here necessarily means the RawVec is overfull.</span>
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">elem_size</span> <span class="op">!=</span> <span class="number">0</span>, <span class="string">&quot;capacity overflow&quot;</span>);
 
-            <span class="comment">// Since we guarantee that we never allocate more than isize::MAX bytes,</span>
-            <span class="comment">// `elem_size * self.cap &lt;= isize::MAX` as a precondition, so this can&#39;t overflow</span>
+            <span class="comment">// Since we guarantee that we never allocate more than isize::MAX</span>
+            <span class="comment">// bytes, `elem_size * self.cap &lt;= isize::MAX` as a precondition, so</span>
+            <span class="comment">// this can&#39;t overflow.</span>
+            <span class="comment">//</span>
+            <span class="comment">// Similarly like with `double` above we can go straight to</span>
+            <span class="comment">// `Layout::from_size_align_unchecked` as we know this won&#39;t</span>
+            <span class="comment">// overflow and the alignment is sufficiently small.</span>
             <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">cap</span>;
-            <span class="kw">let</span> <span class="ident">new_alloc_size</span> <span class="op">=</span> <span class="ident">new_cap</span> <span class="op">*</span> <span class="ident">elem_size</span>;
-
-            <span class="ident">alloc_guard</span>(<span class="ident">new_alloc_size</span>);
-
+            <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="ident">new_cap</span> <span class="op">*</span> <span class="ident">elem_size</span>;
+            <span class="ident">alloc_guard</span>(<span class="ident">new_size</span>);
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _;
-            <span class="kw">let</span> <span class="ident">old_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>().<span class="ident">repeat</span>(<span class="self">self</span>.<span class="ident">cap</span>).<span class="ident">unwrap</span>().<span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>().<span class="ident">repeat</span>(<span class="ident">new_cap</span>).<span class="ident">unwrap</span>().<span class="number">0</span>;
+            <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align_unchecked</span>(<span class="ident">new_size</span>, <span class="ident">old_layout</span>.<span class="ident">align</span>());
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">grow_in_place</span>(<span class="ident">ptr</span>, <span class="ident">old_layout</span>, <span class="ident">new_layout</span>) {
                 <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {
                     <span class="comment">// We can&#39;t directly divide `size`.</span>
@@ -1165,8 +1248,6 @@
     <span class="doccomment">/// Aborts on OOM</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve_exact</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">used_cap</span>: <span class="ident">usize</span>, <span class="ident">needed_extra_cap</span>: <span class="ident">usize</span>) {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">elem_size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
-
             <span class="comment">// NOTE: we don&#39;t early branch on ZSTs here because we want this</span>
             <span class="comment">// to actually catch &quot;asking for more than usize::MAX&quot; in that case.</span>
             <span class="comment">// If we make it past the first branch then we are guaranteed to</span>
@@ -1180,21 +1261,22 @@
 
             <span class="comment">// Nothing we can really do about these checks :(</span>
             <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="ident">used_cap</span>.<span class="ident">checked_add</span>(<span class="ident">needed_extra_cap</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
-            <span class="kw">let</span> <span class="ident">new_alloc_size</span> <span class="op">=</span> <span class="ident">new_cap</span>.<span class="ident">checked_mul</span>(<span class="ident">elem_size</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
-            <span class="ident">alloc_guard</span>(<span class="ident">new_alloc_size</span>);
-
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">alloc_array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">new_cap</span>)
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc_array</span>(<span class="self">self</span>.<span class="ident">ptr</span>, <span class="self">self</span>.<span class="ident">cap</span>, <span class="ident">new_cap</span>)
+            <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Layout</span>::<span class="ident">array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">new_cap</span>) {
+                <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=&gt;</span> <span class="ident">layout</span>,
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;capacity overflow&quot;</span>),
             };
-
-            <span class="comment">// If allocate or reallocate fail, we&#39;ll get `null` back</span>
-            <span class="kw">let</span> <span class="ident">uniq</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">result</span> {
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">err</span>),
-                <span class="prelude-val">Ok</span>(<span class="ident">uniq</span>) <span class="op">=&gt;</span> <span class="ident">uniq</span>,
+            <span class="ident">alloc_guard</span>(<span class="ident">new_layout</span>.<span class="ident">size</span>());
+            <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_layout</span>() {
+                <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">old_ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+                    <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc</span>(<span class="ident">old_ptr</span>, <span class="ident">layout</span>, <span class="ident">new_layout</span>)
+                }
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">alloc</span>(<span class="ident">new_layout</span>),
             };
-
+            <span class="kw">let</span> <span class="ident">uniq</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">res</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">ptr</span>) <span class="op">=&gt;</span> <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>),
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">e</span>),
+            };
             <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">=</span> <span class="ident">uniq</span>;
             <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">new_cap</span>;
         }
@@ -1203,17 +1285,14 @@
     <span class="doccomment">/// Calculates the buffer&#39;s new size given that it&#39;ll hold `used_cap +</span>
     <span class="doccomment">/// needed_extra_cap` elements. This logic is used in amortized reserve methods.</span>
     <span class="doccomment">/// Returns `(new_capacity, new_alloc_size)`.</span>
-    <span class="kw">fn</span> <span class="ident">amortized_new_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">used_cap</span>: <span class="ident">usize</span>, <span class="ident">needed_extra_cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="ident">elem_size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
+    <span class="kw">fn</span> <span class="ident">amortized_new_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">used_cap</span>: <span class="ident">usize</span>, <span class="ident">needed_extra_cap</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         <span class="comment">// Nothing we can really do about these checks :(</span>
         <span class="kw">let</span> <span class="ident">required_cap</span> <span class="op">=</span> <span class="ident">used_cap</span>.<span class="ident">checked_add</span>(<span class="ident">needed_extra_cap</span>)
             .<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
         <span class="comment">// Cannot overflow, because `cap &lt;= isize::MAX`, and type of `cap` is `usize`.</span>
         <span class="kw">let</span> <span class="ident">double_cap</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">*</span> <span class="number">2</span>;
         <span class="comment">// `double_cap` guarantees exponential growth.</span>
-        <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">double_cap</span>, <span class="ident">required_cap</span>);
-        <span class="kw">let</span> <span class="ident">new_alloc_size</span> <span class="op">=</span> <span class="ident">new_cap</span>.<span class="ident">checked_mul</span>(<span class="ident">elem_size</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
-        (<span class="ident">new_cap</span>, <span class="ident">new_alloc_size</span>)
+        <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">double_cap</span>, <span class="ident">required_cap</span>)
     }
 
     <span class="doccomment">/// Ensures that the buffer contains at least enough space to hold</span>
@@ -1281,21 +1360,25 @@
                 <span class="kw">return</span>;
             }
 
-            <span class="kw">let</span> (<span class="ident">new_cap</span>, <span class="ident">new_alloc_size</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">amortized_new_size</span>(<span class="ident">used_cap</span>, <span class="ident">needed_extra_cap</span>);
+            <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">amortized_new_size</span>(<span class="ident">used_cap</span>, <span class="ident">needed_extra_cap</span>);
+
+            <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Layout</span>::<span class="ident">array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">new_cap</span>) {
+                <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=&gt;</span> <span class="ident">layout</span>,
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;capacity overflow&quot;</span>),
+            };
             <span class="comment">// FIXME: may crash and burn on over-reserve</span>
-            <span class="ident">alloc_guard</span>(<span class="ident">new_alloc_size</span>);
-
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">alloc_array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">new_cap</span>)
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc_array</span>(<span class="self">self</span>.<span class="ident">ptr</span>, <span class="self">self</span>.<span class="ident">cap</span>, <span class="ident">new_cap</span>)
+            <span class="ident">alloc_guard</span>(<span class="ident">new_layout</span>.<span class="ident">size</span>());
+            <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_layout</span>() {
+                <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">old_ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+                    <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc</span>(<span class="ident">old_ptr</span>, <span class="ident">layout</span>, <span class="ident">new_layout</span>)
+                }
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">alloc</span>(<span class="ident">new_layout</span>),
             };
-
-            <span class="kw">let</span> <span class="ident">uniq</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">result</span> {
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">err</span>),
-                <span class="prelude-val">Ok</span>(<span class="ident">uniq</span>) <span class="op">=&gt;</span> <span class="ident">uniq</span>,
+            <span class="kw">let</span> <span class="ident">uniq</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">res</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">ptr</span>) <span class="op">=&gt;</span> <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>),
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">e</span>),
             };
-
             <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">=</span> <span class="ident">uniq</span>;
             <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">new_cap</span>;
         }
@@ -1304,12 +1387,12 @@
     <span class="doccomment">/// Attempts to ensure that the buffer contains at least enough space to hold</span>
     <span class="doccomment">/// `used_cap + needed_extra_cap` elements. If it doesn&#39;t already have</span>
     <span class="doccomment">/// enough capacity, will reallocate in place enough space plus comfortable slack</span>
-    <span class="doccomment">/// space to get amortized `O(1)` behaviour. Will limit this behaviour</span>
+    <span class="doccomment">/// space to get amortized `O(1)` behavior. Will limit this behaviour</span>
     <span class="doccomment">/// if it would needlessly cause itself to panic.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `used_cap` exceeds `self.cap()`, this may fail to actually allocate</span>
     <span class="doccomment">/// the requested space. This is not really unsafe, but the unsafe</span>
-    <span class="doccomment">/// code *you* write that relies on the behaviour of this function may break.</span>
+    <span class="doccomment">/// code *you* write that relies on the behavior of this function may break.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns true if the reallocation attempt has succeeded, or false otherwise.</span>
     <span class="doccomment">///</span>
@@ -1328,21 +1411,24 @@
             <span class="comment">// Don&#39;t actually need any more capacity. If the current `cap` is 0, we can&#39;t</span>
             <span class="comment">// reallocate in place.</span>
             <span class="comment">// Wrapping in case they give a bad `used_cap`</span>
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span>().<span class="ident">wrapping_sub</span>(<span class="ident">used_cap</span>) <span class="op">&gt;=</span> <span class="ident">needed_extra_cap</span> <span class="op">||</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">let</span> <span class="ident">old_layout</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_layout</span>() {
+                <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=&gt;</span> <span class="ident">layout</span>,
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="bool-val">false</span>,
+            };
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span>().<span class="ident">wrapping_sub</span>(<span class="ident">used_cap</span>) <span class="op">&gt;=</span> <span class="ident">needed_extra_cap</span> {
                 <span class="kw">return</span> <span class="bool-val">false</span>;
             }
 
-            <span class="kw">let</span> (<span class="ident">new_cap</span>, <span class="ident">new_alloc_size</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">amortized_new_size</span>(<span class="ident">used_cap</span>, <span class="ident">needed_extra_cap</span>);
-            <span class="comment">// FIXME: may crash and burn on over-reserve</span>
-            <span class="ident">alloc_guard</span>(<span class="ident">new_alloc_size</span>);
+            <span class="kw">let</span> <span class="ident">new_cap</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">amortized_new_size</span>(<span class="ident">used_cap</span>, <span class="ident">needed_extra_cap</span>);
 
             <span class="comment">// Here, `cap &lt; used_cap + needed_extra_cap &lt;= new_cap`</span>
             <span class="comment">// (regardless of whether `self.cap - used_cap` wrapped).</span>
             <span class="comment">// Therefore we can safely call grow_in_place.</span>
 
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> _;
-            <span class="kw">let</span> <span class="ident">old_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>().<span class="ident">repeat</span>(<span class="self">self</span>.<span class="ident">cap</span>).<span class="ident">unwrap</span>().<span class="number">0</span>;
             <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>().<span class="ident">repeat</span>(<span class="ident">new_cap</span>).<span class="ident">unwrap</span>().<span class="number">0</span>;
+            <span class="comment">// FIXME: may crash and burn on over-reserve</span>
+            <span class="ident">alloc_guard</span>(<span class="ident">new_layout</span>.<span class="ident">size</span>());
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">grow_in_place</span>(<span class="ident">ptr</span>, <span class="ident">old_layout</span>, <span class="ident">new_layout</span>) {
                 <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {
                     <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">new_cap</span>;
@@ -1391,9 +1477,24 @@
             }
         } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">!=</span> <span class="ident">amount</span> {
             <span class="kw">unsafe</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc_array</span>(<span class="self">self</span>.<span class="ident">ptr</span>, <span class="self">self</span>.<span class="ident">cap</span>, <span class="ident">amount</span>) {
+                <span class="comment">// We know here that our `amount` is greater than zero. This</span>
+                <span class="comment">// implies, via the assert above, that capacity is also greater</span>
+                <span class="comment">// than zero, which means that we&#39;ve got a current layout that</span>
+                <span class="comment">// &quot;fits&quot;</span>
+                <span class="comment">//</span>
+                <span class="comment">// We also know that `self.cap` is greater than `amount`, and</span>
+                <span class="comment">// consequently we don&#39;t need runtime checks for creating either</span>
+                <span class="comment">// layout</span>
+                <span class="kw">let</span> <span class="ident">old_size</span> <span class="op">=</span> <span class="ident">elem_size</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">cap</span>;
+                <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="ident">elem_size</span> <span class="op">*</span> <span class="ident">amount</span>;
+                <span class="kw">let</span> <span class="ident">align</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
+                <span class="kw">let</span> <span class="ident">old_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align_unchecked</span>(<span class="ident">old_size</span>, <span class="ident">align</span>);
+                <span class="kw">let</span> <span class="ident">new_layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align_unchecked</span>(<span class="ident">new_size</span>, <span class="ident">align</span>);
+                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">realloc</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
+                                     <span class="ident">old_layout</span>,
+                                     <span class="ident">new_layout</span>) {
+                    <span class="prelude-val">Ok</span>(<span class="ident">p</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">=</span> <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>),
                     <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">oom</span>(<span class="ident">err</span>),
-                    <span class="prelude-val">Ok</span>(<span class="ident">uniq</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">=</span> <span class="ident">uniq</span>,
                 }
             }
             <span class="self">self</span>.<span class="ident">cap</span> <span class="op">=</span> <span class="ident">amount</span>;
@@ -1401,7 +1502,7 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">HeapAlloc</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawVec</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Heap</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Converts the entire buffer into `Box&lt;[T]&gt;`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// While it is not *strictly* Undefined Behavior to call</span>
@@ -1423,10 +1524,11 @@
     <span class="doccomment">/// Frees the memory owned by the RawVec *without* trying to Drop its contents.</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">dealloc_buffer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">let</span> <span class="ident">elem_size</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
-        <span class="kw">if</span> <span class="ident">elem_size</span> <span class="op">!=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">cap</span> <span class="op">!=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
-            <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>().<span class="ident">repeat</span>(<span class="self">self</span>.<span class="ident">cap</span>).<span class="ident">unwrap</span>().<span class="number">0</span>;
-            <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">dealloc</span>(<span class="ident">ptr</span>, <span class="ident">layout</span>);
+        <span class="kw">if</span> <span class="ident">elem_size</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">current_layout</span>() {
+                <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+                <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">dealloc</span>(<span class="ident">ptr</span>, <span class="ident">layout</span>);
+            }
         }
     }
 }
@@ -1485,13 +1587,13 @@
                 <span class="kw">if</span> <span class="ident">size</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fuel</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">AllocErr</span>::<span class="ident">Unsupported</span> { <span class="ident">details</span>: <span class="string">&quot;fuel exhausted&quot;</span> });
                 }
-                <span class="kw">match</span> <span class="ident">HeapAlloc</span>.<span class="ident">alloc</span>(<span class="ident">layout</span>) {
+                <span class="kw">match</span> <span class="ident">Heap</span>.<span class="ident">alloc</span>(<span class="ident">layout</span>) {
                     <span class="ident">ok</span> @ <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> { <span class="self">self</span>.<span class="ident">fuel</span> <span class="op">-=</span> <span class="ident">size</span>; <span class="ident">ok</span> }
                     <span class="ident">err</span> @ <span class="prelude-val">Err</span>(_) <span class="op">=&gt;</span> <span class="ident">err</span>,
                 }
             }
             <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">dealloc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">layout</span>: <span class="ident">Layout</span>) {
-                <span class="ident">HeapAlloc</span>.<span class="ident">dealloc</span>(<span class="ident">ptr</span>, <span class="ident">layout</span>)
+                <span class="ident">Heap</span>.<span class="ident">dealloc</span>(<span class="ident">ptr</span>, <span class="ident">layout</span>)
             }
         }
 
@@ -1554,10 +1656,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

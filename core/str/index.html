@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/str/mod.rs.html#11-2444' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/str/mod.rs.html#11-2524' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>String manipulation</p>
 
 <p>For more details, see std::str</p>
@@ -200,6 +200,13 @@ string.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="fn" href="fn.from_utf8_mut.html"
+                                  title='fn core::str::from_utf8_mut'>from_utf8_mut</a></td>
+                           <td class='docblock-short'>
+                                <p>Converts a mutable slice of bytes to a mutable string slice.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="fn" href="fn.from_utf8_unchecked.html"
                                   title='fn core::str::from_utf8_unchecked'>from_utf8_unchecked</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
@@ -207,18 +214,11 @@ string.</p>
 that the string contains valid UTF-8.</p>
                            </td>
                        </tr>
-                       <tr class='unstable module-item'>
-                           <td><a class="fn" href="fn.from_utf8_mut.html"
-                                  title='fn core::str::from_utf8_mut'>from_utf8_mut</a></td>
-                           <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Converts a mutable slice of bytes to a mutable string slice.</p>
-                           </td>
-                       </tr>
-                       <tr class='unstable module-item'>
+                       <tr class=' module-item'>
                            <td><a class="fn" href="fn.from_utf8_unchecked_mut.html"
                                   title='fn core::str::from_utf8_unchecked_mut'>from_utf8_unchecked_mut</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Converts a slice of bytes to a string slice without checking
+                                <p>Converts a slice of bytes to a string slice without checking
 that the string contains valid UTF-8; mutable version.</p>
                            </td>
                        </tr>
@@ -253,10 +253,12 @@ UTF-8-like encoding).</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

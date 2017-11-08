@@ -665,6 +665,84 @@
 <span id="620">620</span>
 <span id="621">621</span>
 <span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -757,7 +835,7 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">marker</span>;
@@ -908,7 +986,12 @@
 <span class="doccomment">/// [`write_u8`]: #method.write_u8</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Hasher</span> {
-    <span class="doccomment">/// Completes a round of hashing, producing the output hash generated.</span>
+    <span class="doccomment">/// Returns the hash value for the values written so far.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Despite its name, the method does not reset the hasher’s internal</span>
+    <span class="doccomment">/// state. Additional [`write`]s will continue from the current value.</span>
+    <span class="doccomment">/// If you need to start a fresh hash value, you will have to create</span>
+    <span class="doccomment">/// a new hasher.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -921,6 +1004,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// println!(&quot;Hash is {:x}!&quot;, hasher.finish());</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [&#39;write&#39;]: #tymethod.write</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u64</span>;
 
@@ -1017,6 +1102,52 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;hasher_write&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.3.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">write_isize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">isize</span>) {
         <span class="self">self</span>.<span class="ident">write_usize</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>)
+    }
+}
+
+<span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;indirect_hasher_impl&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.22.0&quot;</span>)]</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">H</span>: <span class="ident">Hasher</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Hasher</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">H</span> {
+    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">finish</span>()
+    }
+    <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write</span>(<span class="ident">bytes</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_u8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">u8</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_u8</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_u16</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">u16</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_u16</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_u32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">u32</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_u32</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_u64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">u64</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_u64</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_u128</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">u128</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_u128</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_usize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_usize</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_i8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">i8</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_i8</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_i16</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">i16</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_i16</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_i32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">i32</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_i32</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_i64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">i64</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_i64</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_i128</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">i128</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_i128</span>(<span class="ident">i</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">write_isize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">isize</span>) {
+        (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">write_isize</span>(<span class="ident">i</span>)
     }
 }
 
@@ -1227,7 +1358,7 @@
 
         ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>)<span class="op">+</span>) <span class="op">=&gt;</span> (
             <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-            <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">Hash</span>),<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="kw-2">*</span>) {
+            <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">Hash</span>),<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="kw-2">*</span>) <span class="kw">where</span> <span class="macro">last_type</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="op">+</span>): <span class="question-mark">?</span><span class="ident">Sized</span> {
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
                 <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">S</span>) {
                     <span class="kw">let</span> ($(<span class="kw-2">ref</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,)<span class="kw-2">*</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
@@ -1235,6 +1366,11 @@
                 }
             }
         );
+    }
+
+    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">last_type</span> {
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>:<span class="ident">ident</span>,) <span class="op">=&gt;</span> { <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span> };
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>:<span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest_a</span>:<span class="ident">ident</span>,)<span class="op">+</span>) <span class="op">=&gt;</span> { <span class="macro">last_type</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest_a</span>,)<span class="op">+</span>) };
     }
 
     <span class="macro">impl_hash_tuple</span><span class="macro">!</span> {}
@@ -1275,16 +1411,36 @@
     }
 
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
         <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">H</span>) {
-            <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">usize</span>)
+            <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>() {
+                <span class="comment">// Thin pointer</span>
+                <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> () <span class="kw">as</span> <span class="ident">usize</span>);
+            } <span class="kw">else</span> {
+                <span class="comment">// Fat pointer</span>
+                <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="kw">unsafe</span> {
+                    <span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> (<span class="ident">usize</span>, <span class="ident">usize</span>))
+                };
+                <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="ident">a</span>);
+                <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="ident">b</span>);
+            }
         }
     }
 
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">H</span>) {
-            <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">usize</span>)
+            <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>() {
+                <span class="comment">// Thin pointer</span>
+                <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> () <span class="kw">as</span> <span class="ident">usize</span>);
+            } <span class="kw">else</span> {
+                <span class="comment">// Fat pointer</span>
+                <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="kw">unsafe</span> {
+                    <span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> (<span class="ident">usize</span>, <span class="ident">usize</span>))
+                };
+                <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="ident">a</span>);
+                <span class="ident">state</span>.<span class="ident">write_usize</span>(<span class="ident">b</span>);
+            }
         }
     }
 }
@@ -1306,10 +1462,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

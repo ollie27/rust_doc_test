@@ -1261,6 +1261,48 @@
 <span id="1216">1216</span>
 <span id="1217">1217</span>
 <span id="1218">1218</span>
+<span id="1219">1219</span>
+<span id="1220">1220</span>
+<span id="1221">1221</span>
+<span id="1222">1222</span>
+<span id="1223">1223</span>
+<span id="1224">1224</span>
+<span id="1225">1225</span>
+<span id="1226">1226</span>
+<span id="1227">1227</span>
+<span id="1228">1228</span>
+<span id="1229">1229</span>
+<span id="1230">1230</span>
+<span id="1231">1231</span>
+<span id="1232">1232</span>
+<span id="1233">1233</span>
+<span id="1234">1234</span>
+<span id="1235">1235</span>
+<span id="1236">1236</span>
+<span id="1237">1237</span>
+<span id="1238">1238</span>
+<span id="1239">1239</span>
+<span id="1240">1240</span>
+<span id="1241">1241</span>
+<span id="1242">1242</span>
+<span id="1243">1243</span>
+<span id="1244">1244</span>
+<span id="1245">1245</span>
+<span id="1246">1246</span>
+<span id="1247">1247</span>
+<span id="1248">1248</span>
+<span id="1249">1249</span>
+<span id="1250">1250</span>
+<span id="1251">1251</span>
+<span id="1252">1252</span>
+<span id="1253">1253</span>
+<span id="1254">1254</span>
+<span id="1255">1255</span>
+<span id="1256">1256</span>
+<span id="1257">1257</span>
+<span id="1258">1258</span>
+<span id="1259">1259</span>
+<span id="1260">1260</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1274,9 +1316,9 @@
 
 <span class="doccomment">//! C definitions used by libnative that don&#39;t belong in liblibc</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">allow</span>(<span class="ident">bad_style</span>)]</span>
-<span class="attribute">#<span class="op">!</span>[<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">allow</span>(<span class="ident">dead_code</span>))]</span>
-<span class="attribute">#<span class="op">!</span>[<span class="ident">unstable</span>(<span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;windows_c&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">bad_style</span>)]</span>
+<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">allow</span>(<span class="ident">dead_code</span>))]</span>
+<span class="attribute">#![<span class="ident">unstable</span>(<span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;windows_c&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_int</span>, <span class="ident">c_uint</span>, <span class="ident">c_ulong</span>, <span class="ident">c_long</span>, <span class="ident">c_longlong</span>, <span class="ident">c_ushort</span>, <span class="ident">c_char</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
@@ -1296,11 +1338,11 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">HANDLE</span> <span class="op">=</span> <span class="ident">LPVOID</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">HINSTANCE</span> <span class="op">=</span> <span class="ident">HANDLE</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">HMODULE</span> <span class="op">=</span> <span class="ident">HINSTANCE</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">HRESULT</span> <span class="op">=</span> <span class="ident">LONG</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BOOL</span> <span class="op">=</span> <span class="ident">c_int</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BYTE</span> <span class="op">=</span> <span class="ident">u8</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BOOLEAN</span> <span class="op">=</span> <span class="ident">BYTE</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">GROUP</span> <span class="op">=</span> <span class="ident">c_uint</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LONG_PTR</span> <span class="op">=</span> <span class="ident">isize</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LARGE_INTEGER</span> <span class="op">=</span> <span class="ident">c_longlong</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LONG</span> <span class="op">=</span> <span class="ident">c_long</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">UINT</span> <span class="op">=</span> <span class="ident">c_uint</span>;
@@ -1309,7 +1351,6 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SIZE_T</span> <span class="op">=</span> <span class="ident">usize</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">WORD</span> <span class="op">=</span> <span class="ident">u16</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CHAR</span> <span class="op">=</span> <span class="ident">c_char</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">HCRYPTPROV</span> <span class="op">=</span> <span class="ident">LONG_PTR</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ULONG_PTR</span> <span class="op">=</span> <span class="ident">usize</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ULONG</span> <span class="op">=</span> <span class="ident">c_ulong</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
@@ -1461,6 +1502,8 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ERROR_IO_PENDING</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">997</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ERROR_TIMEOUT</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x5B4</span>;
 
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">E_NOTIMPL</span>: <span class="ident">HRESULT</span> <span class="op">=</span> <span class="number">0x80004001u32</span> <span class="kw">as</span> <span class="ident">HRESULT</span>;
+
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALID_HANDLE_VALUE</span>: <span class="ident">HANDLE</span> <span class="op">=</span> <span class="op">!</span><span class="number">0</span> <span class="kw">as</span> <span class="ident">HANDLE</span>;
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FACILITY_NT_BIT</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x1000_0000</span>;
@@ -1537,17 +1580,17 @@
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WAIT_OBJECT_0</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x00000000</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WAIT_TIMEOUT</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">258</span>;
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WAIT_FAILED</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0xFFFFFFFF</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;msvc&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_SYM_NAME</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">2000</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IMAGE_FILE_MACHINE_I386</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x014c</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IMAGE_FILE_MACHINE_AMD64</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x8664</span>;
-
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PROV_RSA_FULL</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CRYPT_SILENT</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">64</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CRYPT_VERIFYCONTEXT</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0xF0000000</span>;
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EXCEPTION_CONTINUE_SEARCH</span>: <span class="ident">LONG</span> <span class="op">=</span> <span class="number">0</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EXCEPTION_STACK_OVERFLOW</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0xc00000fd</span>;
@@ -1562,8 +1605,10 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PIPE_REJECT_REMOTE_CLIENTS</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x00000008</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PIPE_READMODE_BYTE</span>: <span class="ident">DWORD</span> <span class="op">=</span> <span class="number">0x00000000</span>;
 
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FD_SETSIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">64</span>;
+
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_pointer_width</span> <span class="op">=</span> <span class="string">&quot;64&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WSADATA</span> {
     <span class="kw">pub</span> <span class="ident">wVersion</span>: <span class="ident">WORD</span>,
     <span class="kw">pub</span> <span class="ident">wHighVersion</span>: <span class="ident">WORD</span>,
@@ -1574,7 +1619,7 @@
     <span class="kw">pub</span> <span class="ident">lpVendorInfo</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_pointer_width</span> <span class="op">=</span> <span class="string">&quot;64&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WSADATA</span> {
     <span class="kw">pub</span> <span class="ident">wVersion</span>: <span class="ident">WORD</span>,
     <span class="kw">pub</span> <span class="ident">wHighVersion</span>: <span class="ident">WORD</span>,
@@ -1833,6 +1878,7 @@
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;msvc&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SYMBOL_INFO</span> {
     <span class="kw">pub</span> <span class="ident">SizeOfStruct</span>: <span class="ident">c_ulong</span>,
     <span class="kw">pub</span> <span class="ident">TypeIndex</span>: <span class="ident">c_ulong</span>,
@@ -1856,6 +1902,7 @@
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;msvc&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IMAGEHLP_LINE64</span> {
     <span class="kw">pub</span> <span class="ident">SizeOfStruct</span>: <span class="ident">u32</span>,
     <span class="kw">pub</span> <span class="ident">Key</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>,
@@ -1874,6 +1921,7 @@
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ADDRESS64</span> {
     <span class="kw">pub</span> <span class="ident">Offset</span>: <span class="ident">u64</span>,
     <span class="kw">pub</span> <span class="ident">Segment</span>: <span class="ident">u16</span>,
@@ -1881,6 +1929,7 @@
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">STACKFRAME64</span> {
     <span class="kw">pub</span> <span class="ident">AddrPC</span>: <span class="ident">ADDRESS64</span>,
     <span class="kw">pub</span> <span class="ident">AddrReturn</span>: <span class="ident">ADDRESS64</span>,
@@ -1896,6 +1945,7 @@
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">KDHELP64</span> {
     <span class="kw">pub</span> <span class="ident">Thread</span>: <span class="ident">u64</span>,
     <span class="kw">pub</span> <span class="ident">ThCallbackStack</span>: <span class="ident">DWORD</span>,
@@ -2030,6 +2080,14 @@
     <span class="ident">_Dummy</span>: [<span class="ident">u8</span>; <span class="number">512</span>] <span class="comment">// FIXME: Fill this out</span>
 }
 
+<span class="comment">// FIXME(#43348): This structure is used for backtrace only, and a fake</span>
+<span class="comment">// definition is provided here only to allow rustdoc to pass type-check. This</span>
+<span class="comment">// will not appear in the final documentation. This should be also defined for</span>
+<span class="comment">// other architectures supported by Windows such as ARM, and for historical</span>
+<span class="comment">// interest, maybe MIPS and PowerPC as well.</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">dox</span>, <span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>))))]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CONTEXT</span> {}
+
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SOCKADDR_STORAGE_LH</span> {
     <span class="kw">pub</span> <span class="ident">ss_family</span>: <span class="ident">ADDRESS_FAMILY</span>,
@@ -2100,6 +2158,26 @@
     <span class="kw">pub</span> <span class="ident">dwControlKeyState</span>: <span class="ident">ULONG</span>,
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PCONSOLE_READCONSOLE_CONTROL</span> <span class="op">=</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">CONSOLE_READCONSOLE_CONTROL</span>;
+
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">fd_set</span> {
+    <span class="kw">pub</span> <span class="ident">fd_count</span>: <span class="ident">c_uint</span>,
+    <span class="kw">pub</span> <span class="ident">fd_array</span>: [<span class="ident">SOCKET</span>; <span class="ident">FD_SETSIZE</span>],
+}
+
+<span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">fd_set</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">fd_set</span> {
+        <span class="kw-2">*</span><span class="self">self</span>
+    }
+}
+
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">timeval</span> {
+    <span class="kw">pub</span> <span class="ident">tv_sec</span>: <span class="ident">c_long</span>,
+    <span class="kw">pub</span> <span class="ident">tv_usec</span>: <span class="ident">c_long</span>,
+}
 
 <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">WSAStartup</span>(<span class="ident">wVersionRequested</span>: <span class="ident">WORD</span>,
@@ -2319,6 +2397,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">FindNextFileW</span>(<span class="ident">findFile</span>: <span class="ident">HANDLE</span>, <span class="ident">findFileData</span>: <span class="ident">LPWIN32_FIND_DATAW</span>)
                          <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">FindClose</span>(<span class="ident">findFile</span>: <span class="ident">HANDLE</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">RtlCaptureContext</span>(<span class="ident">ctx</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">CONTEXT</span>);
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>: <span class="ident">SOCKET</span>,
                       <span class="ident">level</span>: <span class="ident">c_int</span>,
@@ -2350,20 +2429,13 @@
                        <span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ADDRINFOA</span>) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">freeaddrinfo</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ADDRINFOA</span>);
 
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">LoadLibraryW</span>(<span class="ident">name</span>: <span class="ident">LPCWSTR</span>) <span class="op">-&gt;</span> <span class="ident">HMODULE</span>;
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">FreeLibrary</span>(<span class="ident">handle</span>: <span class="ident">HMODULE</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetProcAddress</span>(<span class="ident">handle</span>: <span class="ident">HMODULE</span>,
                           <span class="ident">name</span>: <span class="ident">LPCSTR</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetModuleHandleW</span>(<span class="ident">lpModuleName</span>: <span class="ident">LPCWSTR</span>) <span class="op">-&gt;</span> <span class="ident">HMODULE</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">CryptAcquireContextA</span>(<span class="ident">phProv</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">HCRYPTPROV</span>,
-                                <span class="ident">pszContainer</span>: <span class="ident">LPCSTR</span>,
-                                <span class="ident">pszProvider</span>: <span class="ident">LPCSTR</span>,
-                                <span class="ident">dwProvType</span>: <span class="ident">DWORD</span>,
-                                <span class="ident">dwFlags</span>: <span class="ident">DWORD</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">CryptGenRandom</span>(<span class="ident">hProv</span>: <span class="ident">HCRYPTPROV</span>,
-                          <span class="ident">dwLen</span>: <span class="ident">DWORD</span>,
-                          <span class="ident">pbBuffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">BYTE</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">CryptReleaseContext</span>(<span class="ident">hProv</span>: <span class="ident">HCRYPTPROV</span>, <span class="ident">dwFlags</span>: <span class="ident">DWORD</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetSystemTimeAsFileTime</span>(<span class="ident">lpSystemTimeAsFileTime</span>: <span class="ident">LPFILETIME</span>);
 
@@ -2389,10 +2461,18 @@
                                <span class="ident">lpOverlapped</span>: <span class="ident">LPOVERLAPPED</span>,
                                <span class="ident">lpNumberOfBytesTransferred</span>: <span class="ident">LPDWORD</span>,
                                <span class="ident">bWait</span>: <span class="ident">BOOL</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">select</span>(<span class="ident">nfds</span>: <span class="ident">c_int</span>,
+                  <span class="ident">readfds</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">fd_set</span>,
+                  <span class="ident">writefds</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">fd_set</span>,
+                  <span class="ident">exceptfds</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">fd_set</span>,
+                  <span class="ident">timeout</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">timeval</span>) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
+
+    <span class="attribute">#[<span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;SystemFunction036&quot;</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">RtlGenRandom</span>(<span class="ident">RandomBuffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">RandomBufferLength</span>: <span class="ident">ULONG</span>) <span class="op">-&gt;</span> <span class="ident">BOOLEAN</span>;
 }
 
-<span class="comment">// Functions that aren&#39;t available on Windows XP, but we still use them and just</span>
-<span class="comment">// provide some form of a fallback implementation.</span>
+<span class="comment">// Functions that aren&#39;t available on every version of Windows that we support,</span>
+<span class="comment">// but we still use them and just provide some form of a fallback implementation.</span>
 <span class="macro">compat_fn</span><span class="macro">!</span> {
     <span class="ident">kernel32</span>:
 
@@ -2409,6 +2489,10 @@
     }
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">SetThreadStackGuarantee</span>(<span class="ident">_size</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_ulong</span>) <span class="op">-&gt;</span> <span class="ident">BOOL</span> {
         <span class="ident">SetLastError</span>(<span class="ident">ERROR_CALL_NOT_IMPLEMENTED</span> <span class="kw">as</span> <span class="ident">DWORD</span>); <span class="number">0</span>
+    }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">SetThreadDescription</span>(<span class="ident">hThread</span>: <span class="ident">HANDLE</span>,
+                                <span class="ident">lpThreadDescription</span>: <span class="ident">LPCWSTR</span>) <span class="op">-&gt;</span> <span class="ident">HRESULT</span> {
+        <span class="ident">SetLastError</span>(<span class="ident">ERROR_CALL_NOT_IMPLEMENTED</span> <span class="kw">as</span> <span class="ident">DWORD</span>); <span class="ident">E_NOTIMPL</span>
     }
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">SetFileInformationByHandle</span>(<span class="ident">_hFile</span>: <span class="ident">HANDLE</span>,
                     <span class="ident">_FileInformationClass</span>: <span class="ident">FILE_INFO_BY_HANDLE_CLASS</span>,
@@ -2450,7 +2534,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;gnu&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;gnu&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">gnu</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
@@ -2478,7 +2562,7 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;gnu&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;gnu&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backtrace&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">gnu</span>::<span class="kw-2">*</span>;
 </pre>
 </section>
@@ -2498,10 +2582,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

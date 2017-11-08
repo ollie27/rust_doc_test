@@ -54,12 +54,14 @@
     (  ) <span class="op">=&gt;</span> { ... };
     ( $ ( $ <span class="ident">arg</span> : <span class="ident">tt</span> ) <span class="op">+</span> ) <span class="op">=&gt;</span> { ... };
 }</pre>
-<div class='docblock'><p>A standardized placeholder for marking unfinished code. It panics with the
-message <code>&quot;not yet implemented&quot;</code> when executed.</p>
+<div class='docblock'><p>A standardized placeholder for marking unfinished code.</p>
 
 <p>This can be useful if you are prototyping and are just looking to have your
 code typecheck, or if you&#39;re implementing a trait that requires multiple
 methods, and you&#39;re only planning on using one of them.</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<p>This will always <a href="macro.panic.html">panic!</a></p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Here&#39;s an example of some in-progress code. We have a trait <code>Foo</code>:</p>
@@ -68,7 +70,7 @@ methods, and you&#39;re only planning on using one of them.</p>
 <span class="kw">trait</span> <span class="ident">Foo</span> {
     <span class="kw">fn</span> <span class="ident">bar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
     <span class="kw">fn</span> <span class="ident">baz</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%3B%0A%20%20%20%20fn%20baz(%26self)%3B%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%3B%0A%20%20%20%20fn%20baz(%26self)%3B%0A%7D%0A%7D">Run</a></pre>
 
 <p>We want to implement <code>Foo</code> on one of our types, but we also want to work on
 just <code>bar()</code> first. In order for our code to compile, we need to implement
@@ -93,7 +95,7 @@ just <code>bar()</code> first. In order for our code to compile, we need to impl
     <span class="ident">s</span>.<span class="ident">bar</span>();
 
     <span class="comment">// we aren&#39;t even using baz() yet, so this is fine.</span>
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=trait%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%3B%0A%20%20%20%20fn%20baz(%26self)%3B%0A%7D%0Astruct%20MyStruct%3B%0A%0Aimpl%20Foo%20for%20MyStruct%20%7B%0A%20%20%20%20fn%20bar(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20implementation%20goes%20here%0A%20%20%20%20%7D%0A%0A%20%20%20%20fn%20baz(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20not%20worry%20about%20implementing%20baz()%20for%20now%0A%20%20%20%20%20%20%20%20unimplemented!()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20s%20%3D%20MyStruct%3B%0A%20%20%20%20s.bar()%3B%0A%0A%20%20%20%20%2F%2F%20we%20aren't%20even%20using%20baz()%20yet%2C%20so%20this%20is%20fine.%0A%7D%0A">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Atrait%20Foo%20%7B%0A%20%20%20%20fn%20bar(%26self)%3B%0A%20%20%20%20fn%20baz(%26self)%3B%0A%7D%0Astruct%20MyStruct%3B%0A%0Aimpl%20Foo%20for%20MyStruct%20%7B%0A%20%20%20%20fn%20bar(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20implementation%20goes%20here%0A%20%20%20%20%7D%0A%0A%20%20%20%20fn%20baz(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20not%20worry%20about%20implementing%20baz()%20for%20now%0A%20%20%20%20%20%20%20%20unimplemented!()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20s%20%3D%20MyStruct%3B%0A%20%20%20%20s.bar()%3B%0A%0A%20%20%20%20%2F%2F%20we%20aren't%20even%20using%20baz()%20yet%2C%20so%20this%20is%20fine.%0A%7D%0A">Run</a></pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -111,10 +113,12 @@ just <code>bar()</code> first. In order for our code to compile, we need to impl
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

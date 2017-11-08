@@ -576,6 +576,30 @@
 <span id="531">531</span>
 <span id="532">532</span>
 <span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -589,16 +613,16 @@
 
 <span class="doccomment">//! Utilities for formatting and printing `String`s</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! This module contains the runtime support for the `format!` syntax extension.</span>
+<span class="doccomment">//! This module contains the runtime support for the [`format!`] syntax extension.</span>
 <span class="doccomment">//! This macro is implemented in the compiler to emit calls to this module in</span>
 <span class="doccomment">//! order to format arguments at runtime into strings.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Usage</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! The `format!` macro is intended to be familiar to those coming from C&#39;s</span>
-<span class="doccomment">//! printf/fprintf functions or Python&#39;s `str.format` function.</span>
+<span class="doccomment">//! The [`format!`] macro is intended to be familiar to those coming from C&#39;s</span>
+<span class="doccomment">//! `printf`/`fprintf` functions or Python&#39;s `str.format` function.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Some examples of the `format!` extension are:</span>
+<span class="doccomment">//! Some examples of the [`format!`] extension are:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! format!(&quot;Hello&quot;);                 // =&gt; &quot;Hello&quot;</span>
@@ -646,7 +670,7 @@
 <span class="doccomment">//! ## Named parameters</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Rust itself does not have a Python-like equivalent of named parameters to a</span>
-<span class="doccomment">//! function, but the `format!` macro is a syntax extension which allows it to</span>
+<span class="doccomment">//! function, but the [`format!`] macro is a syntax extension which allows it to</span>
 <span class="doccomment">//! leverage named parameters. Named parameters are listed at the end of the</span>
 <span class="doccomment">//! argument list and have the syntax:</span>
 <span class="doccomment">//!</span>
@@ -654,7 +678,7 @@
 <span class="doccomment">//! identifier &#39;=&#39; expression</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! For example, the following `format!` expressions all use named argument:</span>
+<span class="doccomment">//! For example, the following [`format!`] expressions all use named argument:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! format!(&quot;{argument}&quot;, argument = &quot;test&quot;);   // =&gt; &quot;test&quot;</span>
@@ -681,30 +705,30 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! If this syntax is used, then the number of characters to print precedes the</span>
 <span class="doccomment">//! actual object being formatted, and the number of characters must have the</span>
-<span class="doccomment">//! type `usize`.</span>
+<span class="doccomment">//! type [`usize`].</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Formatting traits</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! When requesting that an argument be formatted with a particular type, you</span>
 <span class="doccomment">//! are actually requesting that an argument ascribes to a particular trait.</span>
-<span class="doccomment">//! This allows multiple actual types to be formatted via `{:x}` (like `i8` as</span>
-<span class="doccomment">//! well as `isize`).  The current mapping of types to traits is:</span>
+<span class="doccomment">//! This allows multiple actual types to be formatted via `{:x}` (like [`i8`] as</span>
+<span class="doccomment">//! well as [`isize`]).  The current mapping of types to traits is:</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! * *nothing* ⇒ [`Display`](trait.Display.html)</span>
-<span class="doccomment">//! * `?` ⇒ [`Debug`](trait.Debug.html)</span>
+<span class="doccomment">//! * *nothing* ⇒ [`Display`]</span>
+<span class="doccomment">//! * `?` ⇒ [`Debug`]</span>
 <span class="doccomment">//! * `o` ⇒ [`Octal`](trait.Octal.html)</span>
 <span class="doccomment">//! * `x` ⇒ [`LowerHex`](trait.LowerHex.html)</span>
 <span class="doccomment">//! * `X` ⇒ [`UpperHex`](trait.UpperHex.html)</span>
 <span class="doccomment">//! * `p` ⇒ [`Pointer`](trait.Pointer.html)</span>
-<span class="doccomment">//! * `b` ⇒ [`Binary`](trait.Binary.html)</span>
+<span class="doccomment">//! * `b` ⇒ [`Binary`]</span>
 <span class="doccomment">//! * `e` ⇒ [`LowerExp`](trait.LowerExp.html)</span>
 <span class="doccomment">//! * `E` ⇒ [`UpperExp`](trait.UpperExp.html)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! What this means is that any type of argument which implements the</span>
-<span class="doccomment">//! `fmt::Binary` trait can then be formatted with `{:b}`. Implementations</span>
+<span class="doccomment">//! [`fmt::Binary`][`Binary`] trait can then be formatted with `{:b}`. Implementations</span>
 <span class="doccomment">//! are provided for these traits for a number of primitive types by the</span>
 <span class="doccomment">//! standard library as well. If no format is specified (as in `{}` or `{:6}`),</span>
-<span class="doccomment">//! then the format trait used is the `Display` trait.</span>
+<span class="doccomment">//! then the format trait used is the [`Display`] trait.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! When implementing a format trait for your own type, you will have to</span>
 <span class="doccomment">//! implement a method of the signature:</span>
@@ -723,15 +747,15 @@
 <span class="doccomment">//! should emit output into the `f.buf` stream. It is up to each format trait</span>
 <span class="doccomment">//! implementation to correctly adhere to the requested formatting parameters.</span>
 <span class="doccomment">//! The values of these parameters will be listed in the fields of the</span>
-<span class="doccomment">//! `Formatter` struct. In order to help with this, the `Formatter` struct also</span>
+<span class="doccomment">//! [`Formatter`] struct. In order to help with this, the [`Formatter`] struct also</span>
 <span class="doccomment">//! provides some helper methods.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Additionally, the return value of this function is `fmt::Result` which is a</span>
-<span class="doccomment">//! type alias of `Result&lt;(), std::fmt::Error&gt;`. Formatting implementations</span>
-<span class="doccomment">//! should ensure that they propagate errors from the `Formatter` (e.g., when</span>
-<span class="doccomment">//! calling `write!`) however, they should never return errors spuriously. That</span>
+<span class="doccomment">//! Additionally, the return value of this function is [`fmt::Result`] which is a</span>
+<span class="doccomment">//! type alias of [`Result`]`&lt;(), `[`std::fmt::Error`]`&gt;`. Formatting implementations</span>
+<span class="doccomment">//! should ensure that they propagate errors from the [`Formatter`][`Formatter`] (e.g., when</span>
+<span class="doccomment">//! calling [`write!`]) however, they should never return errors spuriously. That</span>
 <span class="doccomment">//! is, a formatting implementation must and may only return an error if the</span>
-<span class="doccomment">//! passed-in `Formatter` returns an error. This is because, contrary to what</span>
+<span class="doccomment">//! passed-in [`Formatter`] returns an error. This is because, contrary to what</span>
 <span class="doccomment">//! the function signature might suggest, string formatting is an infallible</span>
 <span class="doccomment">//! operation. This function only returns a result because writing to the</span>
 <span class="doccomment">//! underlying stream might fail and it must provide a way to propagate the fact</span>
@@ -788,12 +812,12 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! These two formatting traits have distinct purposes:</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! - `fmt::Display` implementations assert that the type can be faithfully</span>
+<span class="doccomment">//! - [`fmt::Display`][`Display`] implementations assert that the type can be faithfully</span>
 <span class="doccomment">//!   represented as a UTF-8 string at all times. It is **not** expected that</span>
-<span class="doccomment">//!   all types implement the `Display` trait.</span>
-<span class="doccomment">//! - `fmt::Debug` implementations should be implemented for **all** public types.</span>
+<span class="doccomment">//!   all types implement the [`Display`] trait.</span>
+<span class="doccomment">//! - [`fmt::Debug`][`Debug`] implementations should be implemented for **all** public types.</span>
 <span class="doccomment">//!   Output will typically represent the internal state as faithfully as possible.</span>
-<span class="doccomment">//!   The purpose of the `Debug` trait is to facilitate debugging Rust code. In</span>
+<span class="doccomment">//!   The purpose of the [`Debug`] trait is to facilitate debugging Rust code. In</span>
 <span class="doccomment">//!   most cases, using `#[derive(Debug)]` is sufficient and recommended.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Some examples of the output from both traits:</span>
@@ -806,7 +830,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Related macros</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! There are a number of related macros in the `format!` family. The ones that</span>
+<span class="doccomment">//! There are a number of related macros in the [`format!`] family. The ones that</span>
 <span class="doccomment">//! are currently implemented are:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```ignore (only-for-syntax-highlight)</span>
@@ -820,11 +844,11 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### `write!`</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! This and `writeln` are two macros which are used to emit the format string</span>
+<span class="doccomment">//! This and [`writeln!`] are two macros which are used to emit the format string</span>
 <span class="doccomment">//! to a specified stream. This is used to prevent intermediate allocations of</span>
 <span class="doccomment">//! format strings and instead directly write the output. Under the hood, this</span>
-<span class="doccomment">//! function is actually invoking the `write_fmt` function defined on the</span>
-<span class="doccomment">//! `std::io::Write` trait. Example usage is:</span>
+<span class="doccomment">//! function is actually invoking the [`write_fmt`] function defined on the</span>
+<span class="doccomment">//! [`std::io::Write`] trait. Example usage is:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! # #![allow(unused_must_use)]</span>
@@ -835,7 +859,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### `print!`</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! This and `println` emit their output to stdout. Similarly to the `write!`</span>
+<span class="doccomment">//! This and [`println!`] emit their output to stdout. Similarly to the [`write!`]</span>
 <span class="doccomment">//! macro, the goal of these macros is to avoid intermediate allocations when</span>
 <span class="doccomment">//! printing output. Example usage is:</span>
 <span class="doccomment">//!</span>
@@ -867,8 +891,8 @@
 <span class="doccomment">//! my_fmt_fn(format_args!(&quot;, or a {} too&quot;, &quot;function&quot;));</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! The result of the `format_args!` macro is a value of type `fmt::Arguments`.</span>
-<span class="doccomment">//! This structure can then be passed to the `write` and `format` functions</span>
+<span class="doccomment">//! The result of the [`format_args!`] macro is a value of type [`fmt::Arguments`].</span>
+<span class="doccomment">//! This structure can then be passed to the [`write`] and [`format`] functions</span>
 <span class="doccomment">//! inside this module in order to process the format string.</span>
 <span class="doccomment">//! The goal of this macro is to even further prevent intermediate allocations</span>
 <span class="doccomment">//! when dealing formatting strings.</span>
@@ -936,7 +960,7 @@
 <span class="doccomment">//! * `-` - Currently not used</span>
 <span class="doccomment">//! * `#` - This flag is indicates that the &quot;alternate&quot; form of printing should</span>
 <span class="doccomment">//!         be used. The alternate forms are:</span>
-<span class="doccomment">//!     * `#?` - pretty-print the `Debug` formatting</span>
+<span class="doccomment">//!     * `#?` - pretty-print the [`Debug`] formatting</span>
 <span class="doccomment">//!     * `#x` - precedes the argument with a `0x`</span>
 <span class="doccomment">//!     * `#X` - precedes the argument with a `0x`</span>
 <span class="doccomment">//!     * `#b` - precedes the argument with a `0b`</span>
@@ -963,9 +987,9 @@
 <span class="doccomment">//! the `0` flag is specified for numerics, then the implicit fill character is</span>
 <span class="doccomment">//! `0`.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! The value for the width can also be provided as a `usize` in the list of</span>
+<span class="doccomment">//! The value for the width can also be provided as a [`usize`] in the list of</span>
 <span class="doccomment">//! parameters by using the dollar syntax indicating that the second argument is</span>
-<span class="doccomment">//! a `usize` specifying the width, for example:</span>
+<span class="doccomment">//! a [`usize`] specifying the width, for example:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! // All of these print &quot;Hello x    !&quot;</span>
@@ -1053,8 +1077,30 @@
 <span class="doccomment">//! The literal characters `{` and `}` may be included in a string by preceding</span>
 <span class="doccomment">//! them with the same character. For example, the `{` character is escaped with</span>
 <span class="doccomment">//! `{{` and the `}` character is escaped with `}}`.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! [`usize`]: ../../std/primitive.usize.html</span>
+<span class="doccomment">//! [`isize`]: ../../std/primitive.isize.html</span>
+<span class="doccomment">//! [`i8`]: ../../std/primitive.i8.html</span>
+<span class="doccomment">//! [`Display`]: trait.Display.html</span>
+<span class="doccomment">//! [`Binary`]: trait.Binary.html</span>
+<span class="doccomment">//! [`fmt::Result`]: type.Result.html</span>
+<span class="doccomment">//! [`Result`]: ../../std/result/enum.Result.html</span>
+<span class="doccomment">//! [`std::fmt::Error`]: struct.Error.html</span>
+<span class="doccomment">//! [`Formatter`]: struct.Formatter.html</span>
+<span class="doccomment">//! [`write!`]: ../../std/macro.write.html</span>
+<span class="doccomment">//! [`Debug`]: trait.Debug.html</span>
+<span class="doccomment">//! [`format!`]: ../../std/macro.format.html</span>
+<span class="doccomment">//! [`writeln!`]: ../../std/macro.writeln.html</span>
+<span class="doccomment">//! [`write_fmt`]: ../../std/io/trait.Write.html#method.write_fmt</span>
+<span class="doccomment">//! [`std::io::Write`]: ../../std/io/trait.Write.html</span>
+<span class="doccomment">//! [`println!`]: ../../std/macro.println.html</span>
+<span class="doccomment">//! [`write!`]: ../../std/macro.write.html</span>
+<span class="doccomment">//! [`format_args!`]: ../../std/macro.format_args.html</span>
+<span class="doccomment">//! [`fmt::Arguments`]: struct.Arguments.html</span>
+<span class="doccomment">//! [`write`]: fn.write.html</span>
+<span class="doccomment">//! [`format`]: fn.format.html</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fmt_internals&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::<span class="ident">rt</span>;
@@ -1077,10 +1123,10 @@
 
 <span class="kw">use</span> <span class="ident">string</span>;
 
-<span class="doccomment">/// The `format` function takes an `Arguments` struct and returns the resulting</span>
+<span class="doccomment">/// The `format` function takes an [`Arguments`] struct and returns the resulting</span>
 <span class="doccomment">/// formatted string.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The `Arguments` instance can be created with the `format_args!` macro.</span>
+<span class="doccomment">/// The [`Arguments`] instance can be created with the [`format_args!`] macro.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -1093,7 +1139,7 @@
 <span class="doccomment">/// assert_eq!(s, &quot;Hello, world!&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Please note that using [`format!`][format!] might be preferrable.</span>
+<span class="doccomment">/// Please note that using [`format!`] might be preferrable.</span>
 <span class="doccomment">/// Example:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
@@ -1101,7 +1147,9 @@
 <span class="doccomment">/// assert_eq!(s, &quot;Hello, world!&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// [format!]: ../macro.format.html</span>
+<span class="doccomment">/// [`Arguments`]: struct.Arguments.html</span>
+<span class="doccomment">/// [`format_args!`]: ../../std/macro.format_args.html</span>
+<span class="doccomment">/// [`format!`]: ../../std/macro.format.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">format</span>(<span class="ident">args</span>: <span class="ident">Arguments</span>) <span class="op">-&gt;</span> <span class="ident">string</span>::<span class="ident">String</span> {
     <span class="kw">let</span> <span class="ident">capacity</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">estimated_capacity</span>();
@@ -1128,10 +1176,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

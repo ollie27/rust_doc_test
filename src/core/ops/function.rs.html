@@ -237,6 +237,86 @@
 <span id="192">192</span>
 <span id="193">193</span>
 <span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2012 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -248,26 +328,51 @@
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
-<span class="doccomment">/// A version of the call operator that takes an immutable receiver.</span>
+<span class="doccomment">/// The version of the call operator that takes an immutable receiver.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Instances of `Fn` can be called repeatedly without mutating state.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// *This trait (`Fn`) is not to be confused with [function pointers][]</span>
+<span class="doccomment">/// (`fn`).*</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// `Fn` is implemented automatically by closures which only take immutable</span>
+<span class="doccomment">/// references to captured variables or don&#39;t capture anything at all, as well</span>
+<span class="doccomment">/// as (safe) [function pointers][] (with some caveats, see their documentation</span>
+<span class="doccomment">/// for more details). Additionally, for any type `F` that implements `Fn`, `&amp;F`</span>
+<span class="doccomment">/// implements `Fn`, too.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Since both [`FnMut`] and [`FnOnce`] are supertraits of `Fn`, any</span>
+<span class="doccomment">/// instance of `Fn` can be used as a parameter where a [`FnMut`] or [`FnOnce`]</span>
+<span class="doccomment">/// is expected.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Use `Fn` as a bound when you want to accept a parameter of function-like</span>
+<span class="doccomment">/// type and need to call it repeatedly and without mutating state (e.g. when</span>
+<span class="doccomment">/// calling it concurrently). If you do not need such strict requirements, use</span>
+<span class="doccomment">/// [`FnMut`] or [`FnOnce`] as bounds.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// See the [chapter on closures in *The Rust Programming Language*][book] for</span>
+<span class="doccomment">/// some more information on this topic.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Also of note is the special syntax for `Fn` traits (e.g.</span>
+<span class="doccomment">/// `Fn(usize, bool) -&gt; usize`). Those interested in the technical details of</span>
+<span class="doccomment">/// this can refer to [the relevant section in the *Rustonomicon*][nomicon].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [book]: ../../book/second-edition/ch13-01-closures.html</span>
+<span class="doccomment">/// [`FnMut`]: trait.FnMut.html</span>
+<span class="doccomment">/// [`FnOnce`]: trait.FnOnce.html</span>
+<span class="doccomment">/// [function pointers]: ../../std/primitive.fn.html</span>
+<span class="doccomment">/// [nomicon]: ../../nomicon/hrtb.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Closures automatically implement this trait, which allows them to be</span>
-<span class="doccomment">/// invoked. Note, however, that `Fn` takes an immutable reference to any</span>
-<span class="doccomment">/// captured variables. To take a mutable capture, implement [`FnMut`], and to</span>
-<span class="doccomment">/// consume the capture, implement [`FnOnce`].</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`FnMut`]: trait.FnMut.html</span>
-<span class="doccomment">/// [`FnOnce`]: trait.FnOnce.html</span>
+<span class="doccomment">/// ## Calling a closure</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// let square = |x| x * x;</span>
 <span class="doccomment">/// assert_eq!(square(5), 25);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Closures can also be passed to higher-level functions through a `Fn`</span>
-<span class="doccomment">/// parameter (or a `FnMut` or `FnOnce` parameter, which are supertraits of</span>
-<span class="doccomment">/// `Fn`).</span>
+<span class="doccomment">/// ## Using a `Fn` parameter</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// fn call_with_one&lt;F&gt;(func: F) -&gt; usize</span>
@@ -283,17 +388,46 @@
 <span class="attribute">#[<span class="ident">rustc_paren_sugar</span>]</span>
 <span class="attribute">#[<span class="ident">fundamental</span>]</span> <span class="comment">// so that regex can rely that `&amp;str: !FnMut`</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Fn</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span> : <span class="ident">FnMut</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// This is called when the call operator is used.</span>
+    <span class="doccomment">/// Performs the call operation.</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fn_traits&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;29625&quot;</span>)]</span>
     <span class="kw">extern</span> <span class="string">&quot;rust-call&quot;</span> <span class="kw">fn</span> <span class="ident">call</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">args</span>: <span class="ident">Args</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
-<span class="doccomment">/// A version of the call operator that takes a mutable receiver.</span>
+<span class="doccomment">/// The version of the call operator that takes a mutable receiver.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Instances of `FnMut` can be called repeatedly and may mutate state.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// `FnMut` is implemented automatically by closures which take mutable</span>
+<span class="doccomment">/// references to captured variables, as well as all types that implement</span>
+<span class="doccomment">/// [`Fn`], e.g. (safe) [function pointers][] (since `FnMut` is a supertrait of</span>
+<span class="doccomment">/// [`Fn`]). Additionally, for any type `F` that implements `FnMut`, `&amp;mut F`</span>
+<span class="doccomment">/// implements `FnMut`, too.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Since [`FnOnce`] is a supertrait of `FnMut`, any instance of `FnMut` can be</span>
+<span class="doccomment">/// used where a [`FnOnce`] is expected, and since [`Fn`] is a subtrait of</span>
+<span class="doccomment">/// `FnMut`, any instance of [`Fn`] can be used where `FnMut` is expected.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Use `FnMut` as a bound when you want to accept a parameter of function-like</span>
+<span class="doccomment">/// type and need to call it repeatedly, while allowing it to mutate state.</span>
+<span class="doccomment">/// If you don&#39;t want the parameter to mutate state, use [`Fn`] as a</span>
+<span class="doccomment">/// bound; if you don&#39;t need to call it repeatedly, use [`FnOnce`].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// See the [chapter on closures in *The Rust Programming Language*][book] for</span>
+<span class="doccomment">/// some more information on this topic.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Also of note is the special syntax for `Fn` traits (e.g.</span>
+<span class="doccomment">/// `Fn(usize, bool) -&gt; usize`). Those interested in the technical details of</span>
+<span class="doccomment">/// this can refer to [the relevant section in the *Rustonomicon*][nomicon].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [book]: ../../book/second-edition/ch13-01-closures.html</span>
+<span class="doccomment">/// [`Fn`]: trait.Fn.html</span>
+<span class="doccomment">/// [`FnOnce`]: trait.FnOnce.html</span>
+<span class="doccomment">/// [function pointers]: ../../std/primitive.fn.html</span>
+<span class="doccomment">/// [nomicon]: ../../nomicon/hrtb.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Closures that mutably capture variables automatically implement this trait,</span>
-<span class="doccomment">/// which allows them to be invoked.</span>
+<span class="doccomment">/// ## Calling a mutably capturing closure</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// let mut x = 5;</span>
@@ -304,8 +438,7 @@
 <span class="doccomment">/// assert_eq!(x, 25);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Closures can also be passed to higher-level functions through a `FnMut`</span>
-<span class="doccomment">/// parameter (or a `FnOnce` parameter, which is a supertrait of `FnMut`).</span>
+<span class="doccomment">/// ## Using a `FnMut` parameter</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// fn do_twice&lt;F&gt;(mut func: F)</span>
@@ -328,17 +461,45 @@
 <span class="attribute">#[<span class="ident">rustc_paren_sugar</span>]</span>
 <span class="attribute">#[<span class="ident">fundamental</span>]</span> <span class="comment">// so that regex can rely that `&amp;str: !FnMut`</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FnMut</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span> : <span class="ident">FnOnce</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// This is called when the call operator is used.</span>
+    <span class="doccomment">/// Performs the call operation.</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fn_traits&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;29625&quot;</span>)]</span>
     <span class="kw">extern</span> <span class="string">&quot;rust-call&quot;</span> <span class="kw">fn</span> <span class="ident">call_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">args</span>: <span class="ident">Args</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
 
-<span class="doccomment">/// A version of the call operator that takes a by-value receiver.</span>
+<span class="doccomment">/// The version of the call operator that takes a by-value receiver.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Instances of `FnOnce` can be called, but might not be callable multiple</span>
+<span class="doccomment">/// times. Because of this, if the only thing known about a type is that it</span>
+<span class="doccomment">/// implements `FnOnce`, it can only be called once.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// `FnOnce` is implemented automatically by closure that might consume captured</span>
+<span class="doccomment">/// variables, as well as all types that implement [`FnMut`], e.g. (safe)</span>
+<span class="doccomment">/// [function pointers][] (since `FnOnce` is a supertrait of [`FnMut`]).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Since both [`Fn`] and [`FnMut`] are subtraits of `FnOnce`, any instance of</span>
+<span class="doccomment">/// [`Fn`] or [`FnMut`] can be used where a `FnOnce` is expected.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Use `FnOnce` as a bound when you want to accept a parameter of function-like</span>
+<span class="doccomment">/// type and only need to call it once. If you need to call the parameter</span>
+<span class="doccomment">/// repeatedly, use [`FnMut`] as a bound; if you also need it to not mutate</span>
+<span class="doccomment">/// state, use [`Fn`].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// See the [chapter on closures in *The Rust Programming Language*][book] for</span>
+<span class="doccomment">/// some more information on this topic.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Also of note is the special syntax for `Fn` traits (e.g.</span>
+<span class="doccomment">/// `Fn(usize, bool) -&gt; usize`). Those interested in the technical details of</span>
+<span class="doccomment">/// this can refer to [the relevant section in the *Rustonomicon*][nomicon].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [book]: ../../book/second-edition/ch13-01-closures.html</span>
+<span class="doccomment">/// [`Fn`]: trait.Fn.html</span>
+<span class="doccomment">/// [`FnMut`]: trait.FnMut.html</span>
+<span class="doccomment">/// [function pointers]: ../../std/primitive.fn.html</span>
+<span class="doccomment">/// [nomicon]: ../../nomicon/hrtb.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// By-value closures automatically implement this trait, which allows them to</span>
-<span class="doccomment">/// be invoked.</span>
+<span class="doccomment">/// ## Calling a by-value closure</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// let x = 5;</span>
@@ -346,21 +507,20 @@
 <span class="doccomment">/// assert_eq!(square_x(), 25);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// By-value Closures can also be passed to higher-level functions through a</span>
-<span class="doccomment">/// `FnOnce` parameter.</span>
+<span class="doccomment">/// ## Using a `FnOnce` parameter</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// fn consume_with_relish&lt;F&gt;(func: F)</span>
 <span class="doccomment">///     where F: FnOnce() -&gt; String</span>
 <span class="doccomment">/// {</span>
 <span class="doccomment">///     // `func` consumes its captured variables, so it cannot be run more</span>
-<span class="doccomment">///     // than once</span>
+<span class="doccomment">///     // than once.</span>
 <span class="doccomment">///     println!(&quot;Consumed: {}&quot;, func());</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     println!(&quot;Delicious!&quot;);</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     // Attempting to invoke `func()` again will throw a `use of moved</span>
-<span class="doccomment">///     // value` error for `func`</span>
+<span class="doccomment">///     // value` error for `func`.</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let x = String::from(&quot;x&quot;);</span>
@@ -378,7 +538,7 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fn_once_output&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.12.0&quot;</span>)]</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
-    <span class="doccomment">/// This is called when the call operator is used.</span>
+    <span class="doccomment">/// Performs the call operation.</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;fn_traits&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;29625&quot;</span>)]</span>
     <span class="kw">extern</span> <span class="string">&quot;rust-call&quot;</span> <span class="kw">fn</span> <span class="ident">call_once</span>(<span class="self">self</span>, <span class="ident">args</span>: <span class="ident">Args</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
 }
@@ -427,7 +587,7 @@
         <span class="kw">where</span> <span class="ident">F</span> : <span class="ident">FnMut</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>
     {
         <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">F</span>::<span class="ident">Output</span>;
-        <span class="kw">extern</span> <span class="string">&quot;rust-call&quot;</span> <span class="kw">fn</span> <span class="ident">call_once</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">args</span>: <span class="ident">A</span>) <span class="op">-&gt;</span> <span class="ident">F</span>::<span class="ident">Output</span> {
+        <span class="kw">extern</span> <span class="string">&quot;rust-call&quot;</span> <span class="kw">fn</span> <span class="ident">call_once</span>(<span class="self">self</span>, <span class="ident">args</span>: <span class="ident">A</span>) <span class="op">-&gt;</span> <span class="ident">F</span>::<span class="ident">Output</span> {
             (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">call_mut</span>(<span class="ident">args</span>)
         }
     }
@@ -450,10 +610,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

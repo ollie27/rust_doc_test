@@ -48,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/option.rs.html#11-1109' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/lib.rs.html#179' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Optional values.</p>
 
 <p>Type <a href="enum.Option.html"><code>Option</code></a> represents an optional value: every <a href="enum.Option.html"><code>Option</code></a>
@@ -90,7 +90,7 @@ of a value and take action, always accounting for the <a href="enum.Option.html#
     <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Result: {}&quot;</span>, <span class="ident">x</span>),
     <span class="comment">// The division was invalid</span>
     <span class="prelude-val">None</span>    <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Cannot divide by 0&quot;</span>),
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Afn%20divide(numerator%3A%20f64%2C%20denominator%3A%20f64)%20-%3E%20Option%3Cf64%3E%20%7B%0A%20%20%20%20if%20denominator%20%3D%3D%200.0%20%7B%0A%20%20%20%20%20%20%20%20None%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Some(numerator%20%2F%20denominator)%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20The%20return%20value%20of%20the%20function%20is%20an%20option%0Alet%20result%20%3D%20divide(2.0%2C%203.0)%3B%0A%0A%2F%2F%20Pattern%20match%20to%20retrieve%20the%20value%0Amatch%20result%20%7B%0A%20%20%20%20%2F%2F%20The%20division%20was%20valid%0A%20%20%20%20Some(x)%20%3D%3E%20println!(%22Result%3A%20%7B%7D%22%2C%20x)%2C%0A%20%20%20%20%2F%2F%20The%20division%20was%20invalid%0A%20%20%20%20None%20%20%20%20%3D%3E%20println!(%22Cannot%20divide%20by%200%22)%2C%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Afn%20divide(numerator%3A%20f64%2C%20denominator%3A%20f64)%20-%3E%20Option%3Cf64%3E%20%7B%0A%20%20%20%20if%20denominator%20%3D%3D%200.0%20%7B%0A%20%20%20%20%20%20%20%20None%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Some(numerator%20%2F%20denominator)%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20The%20return%20value%20of%20the%20function%20is%20an%20option%0Alet%20result%20%3D%20divide(2.0%2C%203.0)%3B%0A%0A%2F%2F%20Pattern%20match%20to%20retrieve%20the%20value%0Amatch%20result%20%7B%0A%20%20%20%20%2F%2F%20The%20division%20was%20valid%0A%20%20%20%20Some(x)%20%3D%3E%20println!(%22Result%3A%20%7B%7D%22%2C%20x)%2C%0A%20%20%20%20%2F%2F%20The%20division%20was%20invalid%0A%20%20%20%20None%20%20%20%20%3D%3E%20println!(%22Cannot%20divide%20by%200%22)%2C%0A%7D%0A%7D">Run</a></pre>
 
 <h1 id='options-and-pointers-nullable-pointers' class='section-header'><a href='#options-and-pointers-nullable-pointers'>Options and pointers (&quot;nullable&quot; pointers)</a></h1>
 <p>Rust&#39;s pointer types must always point to a valid location; there are
@@ -115,7 +115,7 @@ not (<a href="enum.Option.html#variant.None"><code>None</code></a>).</p>
         <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">p</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;has value {}&quot;</span>, <span class="ident">p</span>),
         <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;has no value&quot;</span>),
     }
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20optional%20%3D%20None%3B%0Acheck_optional(optional)%3B%0A%0Alet%20optional%20%3D%20Some(Box%3A%3Anew(9000))%3B%0Acheck_optional(optional)%3B%0A%0Afn%20check_optional(optional%3A%20Option%3CBox%3Ci32%3E%3E)%20%7B%0A%20%20%20%20match%20optional%20%7B%0A%20%20%20%20%20%20%20%20Some(ref%20p)%20%3D%3E%20println!(%22has%20value%20%7B%7D%22%2C%20p)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22has%20no%20value%22)%2C%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Alet%20optional%20%3D%20None%3B%0Acheck_optional(optional)%3B%0A%0Alet%20optional%20%3D%20Some(Box%3A%3Anew(9000))%3B%0Acheck_optional(optional)%3B%0A%0Afn%20check_optional(optional%3A%20Option%3CBox%3Ci32%3E%3E)%20%7B%0A%20%20%20%20match%20optional%20%7B%0A%20%20%20%20%20%20%20%20Some(ref%20p)%20%3D%3E%20println!(%22has%20value%20%7B%7D%22%2C%20p)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22has%20no%20value%22)%2C%0A%20%20%20%20%7D%0A%7D%0A%7D">Run</a></pre>
 
 <p>This usage of <a href="enum.Option.html"><code>Option</code></a> to create safe nullable pointers is so
 common that Rust does special optimizations to make the
@@ -134,7 +134,7 @@ in Rust are stored as efficiently as any other pointer type.</p>
 }
 
 <span class="comment">// Remove the contained string, destroying the Option</span>
-<span class="kw">let</span> <span class="ident">unwrapped_msg</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">unwrap_or</span>(<span class="string">&quot;default message&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Alet%20msg%20%3D%20Some(%22howdy%22)%3B%0A%0A%2F%2F%20Take%20a%20reference%20to%20the%20contained%20string%0Aif%20let%20Some(ref%20m)%20%3D%20msg%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20*m)%3B%0A%7D%0A%0A%2F%2F%20Remove%20the%20contained%20string%2C%20destroying%20the%20Option%0Alet%20unwrapped_msg%20%3D%20msg.unwrap_or(%22default%20message%22)%3B%0A%7D">Run</a></pre>
+<span class="kw">let</span> <span class="ident">unwrapped_msg</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">unwrap_or</span>(<span class="string">&quot;default message&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Alet%20msg%20%3D%20Some(%22howdy%22)%3B%0A%0A%2F%2F%20Take%20a%20reference%20to%20the%20contained%20string%0Aif%20let%20Some(ref%20m)%20%3D%20msg%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20*m)%3B%0A%7D%0A%0A%2F%2F%20Remove%20the%20contained%20string%2C%20destroying%20the%20Option%0Alet%20unwrapped_msg%20%3D%20msg.unwrap_or(%22default%20message%22)%3B%0A%7D">Run</a></pre>
 
 <p>Initialize a result to <a href="enum.Option.html#variant.None"><code>None</code></a> before a loop:</p>
 
@@ -169,7 +169,7 @@ in Rust are stored as efficiently as any other pointer type.</p>
 <span class="kw">match</span> <span class="ident">name_of_biggest_animal</span> {
     <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;the biggest animal is {}&quot;</span>, <span class="ident">name</span>),
     <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;there are no animals :(&quot;</span>),
-}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Aenum%20Kingdom%20%7B%20Plant(u32%2C%20%26'static%20str)%2C%20Animal(u32%2C%20%26'static%20str)%20%7D%0A%0A%2F%2F%20A%20list%20of%20data%20to%20search%20through.%0Alet%20all_the_big_things%20%3D%20%5B%0A%20%20%20%20Kingdom%3A%3APlant(250%2C%20%22redwood%22)%2C%0A%20%20%20%20Kingdom%3A%3APlant(230%2C%20%22noble%20fir%22)%2C%0A%20%20%20%20Kingdom%3A%3APlant(229%2C%20%22sugar%20pine%22)%2C%0A%20%20%20%20Kingdom%3A%3AAnimal(25%2C%20%22blue%20whale%22)%2C%0A%20%20%20%20Kingdom%3A%3AAnimal(19%2C%20%22fin%20whale%22)%2C%0A%20%20%20%20Kingdom%3A%3AAnimal(15%2C%20%22north%20pacific%20right%20whale%22)%2C%0A%5D%3B%0A%0A%2F%2F%20We're%20going%20to%20search%20for%20the%20name%20of%20the%20biggest%20animal%2C%0A%2F%2F%20but%20to%20start%20with%20we've%20just%20got%20%60None%60.%0Alet%20mut%20name_of_biggest_animal%20%3D%20None%3B%0Alet%20mut%20size_of_biggest_animal%20%3D%200%3B%0Afor%20big_thing%20in%20%26all_the_big_things%20%7B%0A%20%20%20%20match%20*big_thing%20%7B%0A%20%20%20%20%20%20%20%20Kingdom%3A%3AAnimal(size%2C%20name)%20if%20size%20%3E%20size_of_biggest_animal%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Now%20we've%20found%20the%20name%20of%20some%20big%20animal%0A%20%20%20%20%20%20%20%20%20%20%20%20size_of_biggest_animal%20%3D%20size%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20name_of_biggest_animal%20%3D%20Some(name)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20Kingdom%3A%3AAnimal(..)%20%7C%20Kingdom%3A%3APlant(..)%20%3D%3E%20()%0A%20%20%20%20%7D%0A%7D%0A%0Amatch%20name_of_biggest_animal%20%7B%0A%20%20%20%20Some(name)%20%3D%3E%20println!(%22the%20biggest%20animal%20is%20%7B%7D%22%2C%20name)%2C%0A%20%20%20%20None%20%3D%3E%20println!(%22there%20are%20no%20animals%20%3A(%22)%2C%0A%7D%0A%7D">Run</a></pre>
+}<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Aenum%20Kingdom%20%7B%20Plant(u32%2C%20%26'static%20str)%2C%20Animal(u32%2C%20%26'static%20str)%20%7D%0A%0A%2F%2F%20A%20list%20of%20data%20to%20search%20through.%0Alet%20all_the_big_things%20%3D%20%5B%0A%20%20%20%20Kingdom%3A%3APlant(250%2C%20%22redwood%22)%2C%0A%20%20%20%20Kingdom%3A%3APlant(230%2C%20%22noble%20fir%22)%2C%0A%20%20%20%20Kingdom%3A%3APlant(229%2C%20%22sugar%20pine%22)%2C%0A%20%20%20%20Kingdom%3A%3AAnimal(25%2C%20%22blue%20whale%22)%2C%0A%20%20%20%20Kingdom%3A%3AAnimal(19%2C%20%22fin%20whale%22)%2C%0A%20%20%20%20Kingdom%3A%3AAnimal(15%2C%20%22north%20pacific%20right%20whale%22)%2C%0A%5D%3B%0A%0A%2F%2F%20We're%20going%20to%20search%20for%20the%20name%20of%20the%20biggest%20animal%2C%0A%2F%2F%20but%20to%20start%20with%20we've%20just%20got%20%60None%60.%0Alet%20mut%20name_of_biggest_animal%20%3D%20None%3B%0Alet%20mut%20size_of_biggest_animal%20%3D%200%3B%0Afor%20big_thing%20in%20%26all_the_big_things%20%7B%0A%20%20%20%20match%20*big_thing%20%7B%0A%20%20%20%20%20%20%20%20Kingdom%3A%3AAnimal(size%2C%20name)%20if%20size%20%3E%20size_of_biggest_animal%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Now%20we've%20found%20the%20name%20of%20some%20big%20animal%0A%20%20%20%20%20%20%20%20%20%20%20%20size_of_biggest_animal%20%3D%20size%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20name_of_biggest_animal%20%3D%20Some(name)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20Kingdom%3A%3AAnimal(..)%20%7C%20Kingdom%3A%3APlant(..)%20%3D%3E%20()%0A%20%20%20%20%7D%0A%7D%0A%0Amatch%20name_of_biggest_animal%20%7B%0A%20%20%20%20Some(name)%20%3D%3E%20println!(%22the%20biggest%20animal%20is%20%7B%7D%22%2C%20name)%2C%0A%20%20%20%20None%20%3D%3E%20println!(%22there%20are%20no%20animals%20%3A(%22)%2C%0A%7D%0A%7D">Run</a></pre>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -191,6 +191,16 @@ in Rust are stored as efficiently as any other pointer type.</p>
                                   title='struct std::option::IterMut'>IterMut</a></td>
                            <td class='docblock-short'>
                                 <p>An iterator over a mutable reference to the <a href="enum.Option.html#variant.Some"><code>Some</code></a> variant of an <a href="enum.Option.html"><code>Option</code></a>.</p>
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="struct" href="struct.NoneError.html"
+                                  title='struct std::option::NoneError'>NoneError</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>The error type that results from applying the try operator (<code>?</code>) to a <code>None</code> value. If you wish
+to allow <code>x?</code> (where <code>x</code> is an <code>Option&lt;T&gt;</code>) to be converted into your error type, you can
+implement <code>impl From&lt;NoneError&gt;</code> for <code>YourErrorType</code>. In that case, <code>x?</code> within a function that
+returns <code>Result&lt;_, YourErrorType&gt;</code> will translate a <code>None</code> value into an <code>Err</code> result.</p>
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
@@ -217,10 +227,12 @@ in Rust are stored as efficiently as any other pointer type.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

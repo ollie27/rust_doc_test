@@ -48,22 +48,22 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/std/macros.rs.html#100-102' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/std/macros.rs.html#119-121' title='goto source code'>[src]</a></span></h1>
 <pre class="rust macro">
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">print</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>Macro for printing to the standard output.</p>
 
-<p>Equivalent to the <code>println!</code> macro except that a newline is not printed at
+<p>Equivalent to the <a href="../std/macro.println.html"><code>println!</code></a> macro except that a newline is not printed at
 the end of the message.</p>
 
 <p>Note that stdout is frequently line-buffered by default so it may be
-necessary to use <code>io::stdout().flush()</code> to ensure the output is emitted
+necessary to use <a href="../std/io/trait.Write.html#tymethod.flush"><code>io::stdout().flush()</code></a> to ensure the output is emitted
 immediately.</p>
 
 <p>Use <code>print!</code> only for the primary output of your program.  Use
-<code>eprint!</code> instead to print error and progress messages.</p>
+<a href="../std/macro.eprint.html"><code>eprint!</code></a> instead to print error and progress messages.</p>
 
 <h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
 <p>Panics if writing to <code>io::stdout()</code> fails.</p>
@@ -84,7 +84,7 @@ immediately.</p>
 
 <span class="macro">print</span><span class="macro">!</span>(<span class="string">&quot;this string has a newline, why not choose println! instead?\n&quot;</span>);
 
-<span class="ident">io</span>::<span class="ident">stdout</span>().<span class="ident">flush</span>().<span class="ident">unwrap</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=fn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Write%7D%3B%0A%0Aprint!(%22this%20%22)%3B%0Aprint!(%22will%20%22)%3B%0Aprint!(%22be%20%22)%3B%0Aprint!(%22on%20%22)%3B%0Aprint!(%22the%20%22)%3B%0Aprint!(%22same%20%22)%3B%0Aprint!(%22line%20%22)%3B%0A%0Aio%3A%3Astdout().flush().unwrap()%3B%0A%0Aprint!(%22this%20string%20has%20a%20newline%2C%20why%20not%20choose%20println!%20instead%3F%5Cn%22)%3B%0A%0Aio%3A%3Astdout().flush().unwrap()%3B%0A%7D">Run</a></pre>
+<span class="ident">io</span>::<span class="ident">stdout</span>().<span class="ident">flush</span>().<span class="ident">unwrap</span>();<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Write%7D%3B%0A%0Aprint!(%22this%20%22)%3B%0Aprint!(%22will%20%22)%3B%0Aprint!(%22be%20%22)%3B%0Aprint!(%22on%20%22)%3B%0Aprint!(%22the%20%22)%3B%0Aprint!(%22same%20%22)%3B%0Aprint!(%22line%20%22)%3B%0A%0Aio%3A%3Astdout().flush().unwrap()%3B%0A%0Aprint!(%22this%20string%20has%20a%20newline%2C%20why%20not%20choose%20println!%20instead%3F%5Cn%22)%3B%0A%0Aio%3A%3Astdout().flush().unwrap()%3B%0A%7D">Run</a></pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -102,10 +102,12 @@ immediately.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>

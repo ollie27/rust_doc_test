@@ -2339,6 +2339,66 @@
 <span id="2294">2294</span>
 <span id="2295">2295</span>
 <span id="2296">2296</span>
+<span id="2297">2297</span>
+<span id="2298">2298</span>
+<span id="2299">2299</span>
+<span id="2300">2300</span>
+<span id="2301">2301</span>
+<span id="2302">2302</span>
+<span id="2303">2303</span>
+<span id="2304">2304</span>
+<span id="2305">2305</span>
+<span id="2306">2306</span>
+<span id="2307">2307</span>
+<span id="2308">2308</span>
+<span id="2309">2309</span>
+<span id="2310">2310</span>
+<span id="2311">2311</span>
+<span id="2312">2312</span>
+<span id="2313">2313</span>
+<span id="2314">2314</span>
+<span id="2315">2315</span>
+<span id="2316">2316</span>
+<span id="2317">2317</span>
+<span id="2318">2318</span>
+<span id="2319">2319</span>
+<span id="2320">2320</span>
+<span id="2321">2321</span>
+<span id="2322">2322</span>
+<span id="2323">2323</span>
+<span id="2324">2324</span>
+<span id="2325">2325</span>
+<span id="2326">2326</span>
+<span id="2327">2327</span>
+<span id="2328">2328</span>
+<span id="2329">2329</span>
+<span id="2330">2330</span>
+<span id="2331">2331</span>
+<span id="2332">2332</span>
+<span id="2333">2333</span>
+<span id="2334">2334</span>
+<span id="2335">2335</span>
+<span id="2336">2336</span>
+<span id="2337">2337</span>
+<span id="2338">2338</span>
+<span id="2339">2339</span>
+<span id="2340">2340</span>
+<span id="2341">2341</span>
+<span id="2342">2342</span>
+<span id="2343">2343</span>
+<span id="2344">2344</span>
+<span id="2345">2345</span>
+<span id="2346">2346</span>
+<span id="2347">2347</span>
+<span id="2348">2348</span>
+<span id="2349">2349</span>
+<span id="2350">2350</span>
+<span id="2351">2351</span>
+<span id="2352">2352</span>
+<span id="2353">2353</span>
+<span id="2354">2354</span>
+<span id="2355">2355</span>
+<span id="2356">2356</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2364,7 +2424,7 @@
 <span class="doccomment">//! you&#39;ll see a few different types of I/O throughout the documentation in</span>
 <span class="doccomment">//! this module: [`File`]s, [`TcpStream`]s, and sometimes even [`Vec&lt;T&gt;`]s. For</span>
 <span class="doccomment">//! example, [`Read`] adds a [`read`][`Read::read`] method, which we can use on</span>
-<span class="doccomment">//! `File`s:</span>
+<span class="doccomment">//! [`File`]s:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! use std::io;</span>
@@ -2488,9 +2548,9 @@
 <span class="doccomment">//! # }</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Note that you cannot use the `?` operator in functions that do not return</span>
-<span class="doccomment">//! a `Result&lt;T, E&gt;` (e.g. `main`). Instead, you can call `.unwrap()` or `match`</span>
-<span class="doccomment">//! on the return value to catch any possible errors:</span>
+<span class="doccomment">//! Note that you cannot use the [`?` operator] in functions that do not return</span>
+<span class="doccomment">//! a [`Result&lt;T, E&gt;`][`Result`] (e.g. `main`). Instead, you can call [`.unwrap()`]</span>
+<span class="doccomment">//! or `match` on the return value to catch any possible errors:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! use std::io;</span>
@@ -2607,8 +2667,10 @@
 <span class="doccomment">//! [`io::Result`]: type.Result.html</span>
 <span class="doccomment">//! [`?` operator]: ../../book/first-edition/syntax-index.html</span>
 <span class="doccomment">//! [`Read::read`]: trait.Read.html#tymethod.read</span>
+<span class="doccomment">//! [`Result`]: ../result/enum.Result.html</span>
+<span class="doccomment">//! [`.unwrap()`]: ../result/enum.Result.html#method.unwrap</span>
 
-<span class="attribute">#<span class="op">!</span>[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">cmp</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span> <span class="kw">as</span> <span class="ident">core_str</span>;
@@ -2741,28 +2803,29 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Implementors of the `Read` trait are called &#39;readers&#39;.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Readers are defined by one required method, `read()`. Each call to `read`</span>
+<span class="doccomment">/// Readers are defined by one required method, [`read()`]. Each call to [`read()`]</span>
 <span class="doccomment">/// will attempt to pull bytes from this source into a provided buffer. A</span>
-<span class="doccomment">/// number of other methods are implemented in terms of `read()`, giving</span>
+<span class="doccomment">/// number of other methods are implemented in terms of [`read()`], giving</span>
 <span class="doccomment">/// implementors a number of ways to read bytes while only needing to implement</span>
 <span class="doccomment">/// a single method.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Readers are intended to be composable with one another. Many implementors</span>
-<span class="doccomment">/// throughout `std::io` take and provide types which implement the `Read`</span>
+<span class="doccomment">/// throughout [`std::io`] take and provide types which implement the `Read`</span>
 <span class="doccomment">/// trait.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Please note that each call to `read` may involve a system call, and</span>
-<span class="doccomment">/// therefore, using something that implements [`BufRead`][bufread], such as</span>
-<span class="doccomment">/// [`BufReader`][bufreader], will be more efficient.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [bufread]: trait.BufRead.html</span>
-<span class="doccomment">/// [bufreader]: struct.BufReader.html</span>
+<span class="doccomment">/// Please note that each call to [`read()`] may involve a system call, and</span>
+<span class="doccomment">/// therefore, using something that implements [`BufRead`], such as</span>
+<span class="doccomment">/// [`BufReader`], will be more efficient.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// [`File`][file]s implement `Read`:</span>
+<span class="doccomment">/// [`File`]s implement `Read`:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+<span class="doccomment">/// [`read()`]: trait.Read.html#tymethod.read</span>
+<span class="doccomment">/// [`std::io`]: ../../std/io/index.html</span>
+<span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
+<span class="doccomment">/// [`BufRead`]: trait.BufRead.html</span>
+<span class="doccomment">/// [`BufReader`]: struct.BufReader.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::io;</span>
@@ -2795,9 +2858,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function does not provide any guarantees about whether it blocks</span>
     <span class="doccomment">/// waiting for data, but if an object needs to block for a read but cannot</span>
-    <span class="doccomment">/// it will typically signal this via an `Err` return value.</span>
+    <span class="doccomment">/// it will typically signal this via an [`Err`] return value.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the return value of this method is `Ok(n)`, then it must be</span>
+    <span class="doccomment">/// If the return value of this method is [`Ok(n)`], then it must be</span>
     <span class="doccomment">/// guaranteed that `0 &lt;= n &lt;= buf.len()`. A nonzero `n` value indicates</span>
     <span class="doccomment">/// that the buffer `buf` has been filled in with `n` bytes of data from this</span>
     <span class="doccomment">/// source. If `n` is `0`, then it can indicate one of two scenarios:</span>
@@ -2818,14 +2881,17 @@
     <span class="doccomment">/// variant will be returned. If an error is returned then it must be</span>
     <span class="doccomment">/// guaranteed that no bytes were read.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// An error of the `ErrorKind::Interrupted` kind is non-fatal and the read</span>
+    <span class="doccomment">/// An error of the [`ErrorKind::Interrupted`] kind is non-fatal and the read</span>
     <span class="doccomment">/// operation should be retried if there is nothing else to do.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [`File`][file]s implement `Read`:</span>
+    <span class="doccomment">/// [`File`]s implement `Read`:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`Ok(n)`]: ../../std/result/enum.Result.html#variant.Ok</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`]: ../../std/io/enum.ErrorKind.html#variant.Interrupted</span>
+    <span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::io;</span>
@@ -2851,18 +2917,21 @@
     <span class="doccomment">/// buffers.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If a `Read`er guarantees that it can work properly with uninitialized</span>
-    <span class="doccomment">/// memory, it should call `Initializer::nop()`. See the documentation for</span>
-    <span class="doccomment">/// `Initializer` for details.</span>
+    <span class="doccomment">/// memory, it should call [`Initializer::nop()`]. See the documentation for</span>
+    <span class="doccomment">/// [`Initializer`] for details.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The behavior of this method must be independent of the state of the</span>
     <span class="doccomment">/// `Read`er - the method only takes `&amp;self` so that it can be used through</span>
     <span class="doccomment">/// trait objects.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// # Unsafety</span>
+    <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method is unsafe because a `Read`er could otherwise return a</span>
     <span class="doccomment">/// non-zeroing `Initializer` from another `Read` type without an `unsafe`</span>
     <span class="doccomment">/// block.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Initializer::nop()`]: ../../std/io/struct.Initializer.html#method.nop</span>
+    <span class="doccomment">/// [`Initializer`]: ../../std/io/struct.Initializer.html</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;read_initializer&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42788&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">initializer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Initializer</span> {
@@ -2872,16 +2941,16 @@
     <span class="doccomment">/// Read all bytes until EOF in this source, placing them into `buf`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// All bytes read from this source will be appended to the specified buffer</span>
-    <span class="doccomment">/// `buf`. This function will continuously call `read` to append more data to</span>
-    <span class="doccomment">/// `buf` until `read` returns either `Ok(0)` or an error of</span>
-    <span class="doccomment">/// non-`ErrorKind::Interrupted` kind.</span>
+    <span class="doccomment">/// `buf`. This function will continuously call [`read()`] to append more data to</span>
+    <span class="doccomment">/// `buf` until [`read()`] returns either [`Ok(0)`] or an error of</span>
+    <span class="doccomment">/// non-[`ErrorKind::Interrupted`] kind.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If successful, this function will return the total number of bytes read.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If this function encounters an error of the kind</span>
-    <span class="doccomment">/// `ErrorKind::Interrupted` then the error is ignored and the operation</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`] then the error is ignored and the operation</span>
     <span class="doccomment">/// will continue.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If any other read error is encountered then this function immediately</span>
@@ -2890,9 +2959,12 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [`File`][file]s implement `Read`:</span>
+    <span class="doccomment">/// [`File`]s implement `Read`:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`read()`]: trait.Read.html#tymethod.read</span>
+    <span class="doccomment">/// [`Ok(0)`]: ../../std/result/enum.Result.html#variant.Ok</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`]: ../../std/io/enum.ErrorKind.html#variant.Interrupted</span>
+    <span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::io;</span>
@@ -2973,11 +3045,11 @@
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If this function encounters an error of the kind</span>
-    <span class="doccomment">/// `ErrorKind::Interrupted` then the error is ignored and the operation</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`] then the error is ignored and the operation</span>
     <span class="doccomment">/// will continue.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If this function encounters an &quot;end of file&quot; before completely filling</span>
-    <span class="doccomment">/// the buffer, it returns an error of the kind `ErrorKind::UnexpectedEof`.</span>
+    <span class="doccomment">/// the buffer, it returns an error of the kind [`ErrorKind::UnexpectedEof`].</span>
     <span class="doccomment">/// The contents of `buf` are unspecified in this case.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If any other read error is encountered then this function immediately</span>
@@ -2989,9 +3061,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [`File`][file]s implement `Read`:</span>
+    <span class="doccomment">/// [`File`]s implement `Read`:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`]: ../../std/io/enum.ErrorKind.html#variant.Interrupted</span>
+    <span class="doccomment">/// [`ErrorKind::UnexpectedEof`]: ../../std/io/enum.ErrorKind.html#variant.UnexpectedEof</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::io;</span>
@@ -3062,18 +3136,25 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">by_ref</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> { <span class="self">self</span> }
 
-    <span class="doccomment">/// Transforms this `Read` instance to an `Iterator` over its bytes.</span>
+    <span class="doccomment">/// Transforms this `Read` instance to an [`Iterator`] over its bytes.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The returned type implements `Iterator` where the `Item` is `Result&lt;u8,</span>
-    <span class="doccomment">/// R::Err&gt;`.  The yielded item is `Ok` if a byte was successfully read and</span>
-    <span class="doccomment">/// `Err` otherwise for I/O errors. EOF is mapped to returning `None` from</span>
-    <span class="doccomment">/// this iterator.</span>
+    <span class="doccomment">/// The returned type implements [`Iterator`] where the `Item` is</span>
+    <span class="doccomment">/// [`Result`]`&lt;`[`u8`]`, `[`io::Error`]&gt;`.</span>
+    <span class="doccomment">/// The yielded item is [`Ok`] if a byte was successfully read and [`Err`]</span>
+    <span class="doccomment">/// otherwise. EOF is mapped to returning [`None`] from this iterator.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`File`][file]s implement `Read`:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`Iterator`]: ../../std/iter/trait.Iterator.html</span>
+    <span class="doccomment">/// [`Result`]: ../../std/result/enum.Result.html</span>
+    <span class="doccomment">/// [`io::Error``]: ../../std/io/struct.Error.html</span>
+    <span class="doccomment">/// [`u8`]: ../../std/primitive.u8.html</span>
+    <span class="doccomment">/// [`Ok`]: ../../std/result/enum.Result.html#variant.Ok</span>
+    <span class="doccomment">/// [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`None`]: ../../std/option/enum.Option.html#variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::io;</span>
@@ -3094,12 +3175,12 @@
         <span class="ident">Bytes</span> { <span class="ident">inner</span>: <span class="self">self</span> }
     }
 
-    <span class="doccomment">/// Transforms this `Read` instance to an `Iterator` over `char`s.</span>
+    <span class="doccomment">/// Transforms this `Read` instance to an [`Iterator`] over [`char`]s.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This adaptor will attempt to interpret this reader as a UTF-8 encoded</span>
-    <span class="doccomment">/// sequence of characters. The returned iterator will return `None` once</span>
+    <span class="doccomment">/// sequence of characters. The returned iterator will return [`None`] once</span>
     <span class="doccomment">/// EOF is reached for this reader. Otherwise each element yielded will be a</span>
-    <span class="doccomment">/// `Result&lt;char, E&gt;` where `E` may contain information about what I/O error</span>
+    <span class="doccomment">/// [`Result`]`&lt;`[`char`]`, E&gt;` where `E` may contain information about what I/O error</span>
     <span class="doccomment">/// occurred or where decoding failed.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Currently this adaptor will discard intermediate data read, and should</span>
@@ -3107,9 +3188,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [`File`][file]s implement `Read`:</span>
+    <span class="doccomment">/// [`File`]s implement `Read`:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`Iterator`]: ../../std/iter/trait.Iterator.html</span>
+    <span class="doccomment">/// [`Result`]: ../../std/result/enum.Result.html</span>
+    <span class="doccomment">/// [`char`]: ../../std/primitive.char.html</span>
+    <span class="doccomment">/// [`None`]: ../../std/option/enum.Option.html#variant.None</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// #![feature(io)]</span>
@@ -3172,15 +3257,17 @@
     <span class="doccomment">/// Creates an adaptor which will read at most `limit` bytes from it.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function returns a new instance of `Read` which will read at most</span>
-    <span class="doccomment">/// `limit` bytes, after which it will always return EOF (`Ok(0)`). Any</span>
+    <span class="doccomment">/// `limit` bytes, after which it will always return EOF ([`Ok(0)`]). Any</span>
     <span class="doccomment">/// read errors will not count towards the number of bytes read and future</span>
-    <span class="doccomment">/// calls to `read` may succeed.</span>
+    <span class="doccomment">/// calls to [`read()`] may succeed.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [`File`][file]s implement `Read`:</span>
+    <span class="doccomment">/// [`File`]s implement `Read`:</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
+    <span class="doccomment">/// [`Ok(0)`]: ../../std/result/enum.Result.html#variant.Ok</span>
+    <span class="doccomment">/// [`read()`]: trait.Read.html#tymethod.read</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use std::io;</span>
@@ -3219,7 +3306,7 @@
 
     <span class="doccomment">/// Returns a new `Initializer` which will not zero out buffers.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// # Unsafety</span>
+    <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This may only be called by `Read`ers which guarantee that they will not</span>
     <span class="doccomment">/// read from buffers passed to `Read` methods, and that the return value of</span>
@@ -3726,6 +3813,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If successful, this function will return the total number of bytes read.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// An empty buffer returned indicates that the stream has reached EOF.</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function will ignore all instances of [`ErrorKind::Interrupted`] and</span>
@@ -3785,6 +3874,8 @@
     <span class="doccomment">/// `buf`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If successful, this function will return the total number of bytes read.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// An empty buffer returned indicates that the stream has reached EOF.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
@@ -4096,6 +4187,35 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">limit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> { <span class="self">self</span>.<span class="ident">limit</span> }
+
+    <span class="doccomment">/// Sets the number of bytes that can be read before this instance will</span>
+    <span class="doccomment">/// return EOF. This is the same as constructing a new `Take` instance, so</span>
+    <span class="doccomment">/// the amount of bytes read and the previous limit value don&#39;t matter when</span>
+    <span class="doccomment">/// calling this method.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #![feature(take_set_limit)]</span>
+    <span class="doccomment">/// use std::io;</span>
+    <span class="doccomment">/// use std::io::prelude::*;</span>
+    <span class="doccomment">/// use std::fs::File;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # fn foo() -&gt; io::Result&lt;()&gt; {</span>
+    <span class="doccomment">/// let f = File::open(&quot;foo.txt&quot;)?;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // read at most five bytes</span>
+    <span class="doccomment">/// let mut handle = f.take(5);</span>
+    <span class="doccomment">/// handle.set_limit(10);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(handle.limit(), 10);</span>
+    <span class="doccomment">/// # Ok(())</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;take_set_limit&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;42781&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_limit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u64</span>) {
+        <span class="self">self</span>.<span class="ident">limit</span> <span class="op">=</span> <span class="ident">limit</span>;
+    }
 
     <span class="doccomment">/// Consumes the `Take`, returning the wrapped reader.</span>
     <span class="doccomment">///</span>
@@ -4654,10 +4774,12 @@
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
                     <dt>+</dt>
