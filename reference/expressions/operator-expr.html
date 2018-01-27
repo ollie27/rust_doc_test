@@ -21,56 +21,6 @@
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
-        <style>
-            .page-wrapper.has-warning > .nav-chapters {
-              /* add height for warning content & margin */
-              top: 120px;
-            }
-
-            p.warning {
-                background-color: rgb(242, 222, 222);
-                border-bottom-color: rgb(238, 211, 215);
-                border-bottom-left-radius: 4px;
-                border-bottom-right-radius: 4px;
-                border-bottom-style: solid;
-                border-bottom-width: 0.666667px;
-                border-image-outset: 0 0 0 0;
-                border-image-repeat: stretch stretch;
-                border-image-slice: 100% 100% 100% 100%;
-                border-image-source: none;
-                border-image-width: 1 1 1 1;
-                border-left-color: rgb(238, 211, 215);
-                border-left-style: solid;
-                border-left-width: 0.666667px;
-                border-right-color: rgb(238, 211, 215);
-                border-right-style: solid;
-                border-right-width: 0.666667px;
-                border-top-color: rgb(238, 211, 215);
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-                border-top-style: solid;
-                border-top-width: 0.666667px;
-                color: rgb(185, 74, 72);
-                margin-bottom: 0px;
-                margin-left: 0px;
-                margin-right: 0px;
-                margin-top: 30px;
-                padding-bottom: 8px;
-                padding-left: 14px;
-                padding-right: 35px;
-                padding-top: 8px;
-            }
-            p.warning strong {
-                color: rgb(185, 74, 72)
-            }
-            p.warning a {
-                color: rgb(0, 136, 204)
-            }
-
-            a .hljs {
-                color: #4183c4;
-            }
-        </style>
 
         <!-- Custom theme -->
         
@@ -96,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -116,29 +63,25 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="notation.html"><strong>1.</strong> Notation</a></li><li><ul class="section"><li><a href="unicode-productions.html"><strong>1.1.</strong> Unicode productions</a></li><li><a href="string-table-productions.html"><strong>1.2.</strong> String table productions</a></li></ul></li><li><a href="lexical-structure.html"><strong>2.</strong> Lexical structure</a></li><li><ul class="section"><li><a href="input-format.html"><strong>2.1.</strong> Input format</a></li><li><a href="keywords.html"><strong>2.2.</strong> Keywords</a></li><li><a href="identifiers.html"><strong>2.3.</strong> Identifiers</a></li><li><a href="comments.html"><strong>2.4.</strong> Comments</a></li><li><a href="whitespace.html"><strong>2.5.</strong> Whitespace</a></li><li><a href="tokens.html"><strong>2.6.</strong> Tokens</a></li><li><a href="paths.html"><strong>2.7.</strong> Paths</a></li></ul></li><li><a href="macros.html"><strong>3.</strong> Macros</a></li><li><ul class="section"><li><a href="macros-by-example.html"><strong>3.1.</strong> Macros By Example</a></li><li><a href="procedural-macros.html"><strong>3.2.</strong> Procedural Macros</a></li></ul></li><li><a href="crates-and-source-files.html"><strong>4.</strong> Crates and source files</a></li><li><a href="items-and-attributes.html"><strong>5.</strong> Items and attributes</a></li><li><ul class="section"><li><a href="items.html"><strong>5.1.</strong> Items</a></li><li><ul class="section"><li><a href="items/modules.html"><strong>5.1.1.</strong> Modules</a></li><li><a href="items/extern-crates.html"><strong>5.1.2.</strong> Extern crates</a></li><li><a href="items/use-declarations.html"><strong>5.1.3.</strong> Use declarations</a></li><li><a href="items/functions.html"><strong>5.1.4.</strong> Functions</a></li><li><a href="items/type-aliases.html"><strong>5.1.5.</strong> Type aliases</a></li><li><a href="items/structs.html"><strong>5.1.6.</strong> Structs</a></li><li><a href="items/enumerations.html"><strong>5.1.7.</strong> Enumerations</a></li><li><a href="items/unions.html"><strong>5.1.8.</strong> Unions</a></li><li><a href="items/constant-items.html"><strong>5.1.9.</strong> Constant items</a></li><li><a href="items/static-items.html"><strong>5.1.10.</strong> Static items</a></li><li><a href="items/traits.html"><strong>5.1.11.</strong> Traits</a></li><li><a href="items/implementations.html"><strong>5.1.12.</strong> Implementations</a></li><li><a href="items/external-blocks.html"><strong>5.1.13.</strong> External blocks</a></li></ul></li><li><a href="visibility-and-privacy.html"><strong>5.2.</strong> Visibility and Privacy</a></li><li><a href="attributes.html"><strong>5.3.</strong> Attributes</a></li></ul></li><li><a href="statements-and-expressions.html"><strong>6.</strong> Statements and expressions</a></li><li><ul class="section"><li><a href="statements.html"><strong>6.1.</strong> Statements</a></li><li><a href="expressions.html"><strong>6.2.</strong> Expressions</a></li><li><ul class="section"><li><a href="expressions/literal-expr.html"><strong>6.2.1.</strong> Literal expressions</a></li><li><a href="expressions/path-expr.html"><strong>6.2.2.</strong> Path expressions</a></li><li><a href="expressions/block-expr.html"><strong>6.2.3.</strong> Block expressions</a></li><li><a href="expressions/operator-expr.html" class="active"><strong>6.2.4.</strong> Operator expressions</a></li><li><a href="expressions/array-expr.html"><strong>6.2.5.</strong> Array and index expressions</a></li><li><a href="expressions/tuple-expr.html"><strong>6.2.6.</strong> Tuple and index expressions</a></li><li><a href="expressions/struct-expr.html"><strong>6.2.7.</strong> Struct expressions</a></li><li><a href="expressions/enum-variant-expr.html"><strong>6.2.8.</strong> Enum variant expressions</a></li><li><a href="expressions/call-expr.html"><strong>6.2.9.</strong> Call expressions</a></li><li><a href="expressions/method-call-expr.html"><strong>6.2.10.</strong> Method call expressions</a></li><li><a href="expressions/field-expr.html"><strong>6.2.11.</strong> Field access expressions</a></li><li><a href="expressions/closure-expr.html"><strong>6.2.12.</strong> Closure expressions</a></li><li><a href="expressions/loop-expr.html"><strong>6.2.13.</strong> Loop expressions</a></li><li><a href="expressions/range-expr.html"><strong>6.2.14.</strong> Range expressions</a></li><li><a href="expressions/if-expr.html"><strong>6.2.15.</strong> If and if let expressions</a></li><li><a href="expressions/match-expr.html"><strong>6.2.16.</strong> Match expressions</a></li><li><a href="expressions/return-expr.html"><strong>6.2.17.</strong> Return expressions</a></li></ul></li></ul></li><li><a href="type-system.html"><strong>7.</strong> Type system</a></li><li><ul class="section"><li><a href="types.html"><strong>7.1.</strong> Types</a></li><li><a href="dynamically-sized-types.html"><strong>7.2.</strong> Dynamically Sized Types</a></li><li><a href="interior-mutability.html"><strong>7.3.</strong> Interior mutability</a></li><li><a href="subtyping.html"><strong>7.4.</strong> Subtyping</a></li><li><a href="type-coercions.html"><strong>7.5.</strong> Type coercions</a></li></ul></li><li><a href="special-traits.html"><strong>8.</strong> Special traits</a></li><li><ul class="section"><li><a href="the-copy-trait.html"><strong>8.1.</strong> The Copy trait</a></li><li><a href="the-sized-trait.html"><strong>8.2.</strong> The Sized trait</a></li><li><a href="the-drop-trait.html"><strong>8.3.</strong> The Drop trait</a></li><li><a href="the-deref-trait.html"><strong>8.4.</strong> The Deref trait</a></li><li><a href="the-send-trait.html"><strong>8.5.</strong> The Send trait</a></li><li><a href="the-sync-trait.html"><strong>8.6.</strong> The Sync trait</a></li></ul></li><li><a href="memory-model.html"><strong>9.</strong> Memory model</a></li><li><ul class="section"><li><a href="memory-allocation-and-lifetime.html"><strong>9.1.</strong> Memory allocation and lifetime</a></li><li><a href="memory-ownership.html"><strong>9.2.</strong> Memory ownership</a></li><li><a href="variables.html"><strong>9.3.</strong> Variables</a></li></ul></li><li><a href="linkage.html"><strong>10.</strong> Linkage</a></li><li><a href="unsafety.html"><strong>11.</strong> Unsafety</a></li><li><ul class="section"><li><a href="unsafe-functions.html"><strong>11.1.</strong> Unsafe functions</a></li><li><a href="unsafe-blocks.html"><strong>11.2.</strong> Unsafe blocks</a></li><li><a href="behavior-considered-undefined.html"><strong>11.3.</strong> Behavior considered undefined</a></li><li><a href="behavior-not-considered-unsafe.html"><strong>11.4.</strong> Behavior not considered unsafe</a></li></ul></li><li><a href="influences.html">Appendix: Influences</a></li><li class="affix"><a href="undocumented.html">Appendix: As-yet-undocumented Features</a></li><li class="affix"><a href="glossory.html">Appendix: Glossory</a></li></ul>
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="notation.html"><strong>1.</strong> Notation</a></li><li><a href="lexical-structure.html"><strong>2.</strong> Lexical structure</a></li><li><ul class="section"><li><a href="input-format.html"><strong>2.1.</strong> Input format</a></li><li><a href="keywords.html"><strong>2.2.</strong> Keywords</a></li><li><a href="identifiers.html"><strong>2.3.</strong> Identifiers</a></li><li><a href="comments.html"><strong>2.4.</strong> Comments</a></li><li><a href="whitespace.html"><strong>2.5.</strong> Whitespace</a></li><li><a href="tokens.html"><strong>2.6.</strong> Tokens</a></li><li><a href="paths.html"><strong>2.7.</strong> Paths</a></li></ul></li><li><a href="macros.html"><strong>3.</strong> Macros</a></li><li><ul class="section"><li><a href="macros-by-example.html"><strong>3.1.</strong> Macros By Example</a></li><li><a href="procedural-macros.html"><strong>3.2.</strong> Procedural Macros</a></li></ul></li><li><a href="crates-and-source-files.html"><strong>4.</strong> Crates and source files</a></li><li><a href="items-and-attributes.html"><strong>5.</strong> Items and attributes</a></li><li><ul class="section"><li><a href="items.html"><strong>5.1.</strong> Items</a></li><li><ul class="section"><li><a href="items/modules.html"><strong>5.1.1.</strong> Modules</a></li><li><a href="items/extern-crates.html"><strong>5.1.2.</strong> Extern crates</a></li><li><a href="items/use-declarations.html"><strong>5.1.3.</strong> Use declarations</a></li><li><a href="items/functions.html"><strong>5.1.4.</strong> Functions</a></li><li><a href="items/type-aliases.html"><strong>5.1.5.</strong> Type aliases</a></li><li><a href="items/structs.html"><strong>5.1.6.</strong> Structs</a></li><li><a href="items/enumerations.html"><strong>5.1.7.</strong> Enumerations</a></li><li><a href="items/unions.html"><strong>5.1.8.</strong> Unions</a></li><li><a href="items/constant-items.html"><strong>5.1.9.</strong> Constant items</a></li><li><a href="items/static-items.html"><strong>5.1.10.</strong> Static items</a></li><li><a href="items/traits.html"><strong>5.1.11.</strong> Traits</a></li><li><a href="items/implementations.html"><strong>5.1.12.</strong> Implementations</a></li><li><a href="items/external-blocks.html"><strong>5.1.13.</strong> External blocks</a></li></ul></li><li><a href="visibility-and-privacy.html"><strong>5.2.</strong> Visibility and Privacy</a></li><li><a href="attributes.html"><strong>5.3.</strong> Attributes</a></li></ul></li><li><a href="statements-and-expressions.html"><strong>6.</strong> Statements and expressions</a></li><li><ul class="section"><li><a href="statements.html"><strong>6.1.</strong> Statements</a></li><li><a href="expressions.html"><strong>6.2.</strong> Expressions</a></li><li><ul class="section"><li><a href="expressions/literal-expr.html"><strong>6.2.1.</strong> Literal expressions</a></li><li><a href="expressions/path-expr.html"><strong>6.2.2.</strong> Path expressions</a></li><li><a href="expressions/block-expr.html"><strong>6.2.3.</strong> Block expressions</a></li><li><a href="expressions/operator-expr.html" class="active"><strong>6.2.4.</strong> Operator expressions</a></li><li><a href="expressions/array-expr.html"><strong>6.2.5.</strong> Array and index expressions</a></li><li><a href="expressions/tuple-expr.html"><strong>6.2.6.</strong> Tuple and index expressions</a></li><li><a href="expressions/struct-expr.html"><strong>6.2.7.</strong> Struct expressions</a></li><li><a href="expressions/enum-variant-expr.html"><strong>6.2.8.</strong> Enum variant expressions</a></li><li><a href="expressions/call-expr.html"><strong>6.2.9.</strong> Call expressions</a></li><li><a href="expressions/method-call-expr.html"><strong>6.2.10.</strong> Method call expressions</a></li><li><a href="expressions/field-expr.html"><strong>6.2.11.</strong> Field access expressions</a></li><li><a href="expressions/closure-expr.html"><strong>6.2.12.</strong> Closure expressions</a></li><li><a href="expressions/loop-expr.html"><strong>6.2.13.</strong> Loop expressions</a></li><li><a href="expressions/range-expr.html"><strong>6.2.14.</strong> Range expressions</a></li><li><a href="expressions/if-expr.html"><strong>6.2.15.</strong> If and if let expressions</a></li><li><a href="expressions/match-expr.html"><strong>6.2.16.</strong> Match expressions</a></li><li><a href="expressions/return-expr.html"><strong>6.2.17.</strong> Return expressions</a></li></ul></li></ul></li><li><a href="type-system.html"><strong>7.</strong> Type system</a></li><li><ul class="section"><li><a href="types.html"><strong>7.1.</strong> Types</a></li><li><a href="dynamically-sized-types.html"><strong>7.2.</strong> Dynamically Sized Types</a></li><li><a href="type-layout.html"><strong>7.3.</strong> Type layout</a></li><li><a href="interior-mutability.html"><strong>7.4.</strong> Interior mutability</a></li><li><a href="subtyping.html"><strong>7.5.</strong> Subtyping</a></li><li><a href="type-coercions.html"><strong>7.6.</strong> Type coercions</a></li><li><a href="destructors.html"><strong>7.7.</strong> Destructors</a></li></ul></li><li><a href="special-types-and-traits.html"><strong>8.</strong> Special types and traits</a></li><li><a href="memory-model.html"><strong>9.</strong> Memory model</a></li><li><ul class="section"><li><a href="memory-allocation-and-lifetime.html"><strong>9.1.</strong> Memory allocation and lifetime</a></li><li><a href="memory-ownership.html"><strong>9.2.</strong> Memory ownership</a></li><li><a href="variables.html"><strong>9.3.</strong> Variables</a></li></ul></li><li><a href="linkage.html"><strong>10.</strong> Linkage</a></li><li><a href="unsafety.html"><strong>11.</strong> Unsafety</a></li><li><ul class="section"><li><a href="unsafe-functions.html"><strong>11.1.</strong> Unsafe functions</a></li><li><a href="unsafe-blocks.html"><strong>11.2.</strong> Unsafe blocks</a></li><li><a href="behavior-considered-undefined.html"><strong>11.3.</strong> Behavior considered undefined</a></li><li><a href="behavior-not-considered-unsafe.html"><strong>11.4.</strong> Behavior not considered unsafe</a></li></ul></li><li><a href="influences.html">Appendix: Influences</a></li><li class="affix"><a href="undocumented.html">Appendix: As-yet-undocumented Features</a></li><li class="affix"><a href="glossary.html">Appendix: Glossary</a></li></ul>
         </div>
 
-        <div id="page-wrapper" class="page-wrapper has-warning">
+        <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
-                <header><p class="warning">
-                    For now, this reference is a best-effort document. We strive for validity and completeness, but are
-                    not yet there. In the future, the docs and lang teams will work together to figure out how
-                    best to do this. Until then, this is a best-effort attempt. If you find something wrong or
-                    missing, file an <a href="https://github.com/rust-lang-nursery/reference/issues">issue</a> or send in a
-                    pull request.
-                </p></header>
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title">The Rust Reference</h1>
 
                     <div class="right-buttons">
-                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -165,6 +108,7 @@ the number of bits in the type of the left-hand argument, or is negative.</li>
 <p>An expression enclosed in parentheses evaluates to the result of the enclosed
 expression. Parentheses can be used to explicitly specify evaluation order
 within an expression.</p>
+<p>This operator cannot be overloaded.</p>
 <p>An example of a parenthesized expression:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -176,15 +120,15 @@ assert_eq!(y, 20);
 #}</code></pre></pre>
 <a class="header" href="expressions/operator-expr.html#borrow-operators" id="borrow-operators"><h2>Borrow operators</h2></a>
 <p>The <code>&amp;</code> (shared borrow) and <code>&amp;mut</code> (mutable borrow) operators are unary prefix
-operators. When applied to an lvalue produce a reference (pointer) to the
-location that the value refers to. The lvalue is also placed into a borrowed
-state for the duration of the reference. For a shared borrow (<code>&amp;</code>), this
-implies that the lvalue may not be mutated, but it may be read or shared again.
-For a mutable borrow (<code>&amp;mut</code>), the lvalue may not be accessed in any way until
-the borrow expires. <code>&amp;mut</code> evaluates its operand in a mutable lvalue context.
-If the <code>&amp;</code> or <code>&amp;mut</code> operators are applied to an rvalue, a temporary value is
-created; the lifetime of this temporary value is defined by <a href="expressions.html#temporary-lifetimes">syntactic
-rules</a>. These operators cannot be overloaded.</p>
+operators. When applied to a <a href="expressions.html#place-expressions-and-value-expressions">place expression</a>, this expressions produces a
+reference (pointer) to the location that the value refers to. The memory
+location is also placed into a borrowed state for the duration of the reference.
+For a shared borrow (<code>&amp;</code>), this implies that the place may not be mutated, but
+it may be read or shared again. For a mutable borrow (<code>&amp;mut</code>), the place may not
+be accessed in any way until the borrow expires. <code>&amp;mut</code> evaluates its operand in
+a mutable place expression context. If the <code>&amp;</code> or <code>&amp;mut</code> operators are applied
+to a <a href="expressions.html#place-expressions-and-value-expressions">value expression</a>, then a <a href="expressions.html#temporary-lifetimes">temporary value</a> is created.</p>
+<p>These operators cannot be overloaded.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -203,12 +147,12 @@ let mut array = [-2, 3, 9];
 <p>The <code>*</code> (dereference) operator is also a unary prefix operator. When applied to
 a <a href="types.html#pointer-types">pointer</a> it denotes the pointed-to location. If
 the expression is of type <code>&amp;mut T</code> and <code>*mut T</code>, and is either a local
-variable, a (nested) field of a local variance or is a mutable lvalue, then the
-resulting <a href="expressions.html#lvalues-and-rvalues">lvalue</a> can be
-assigned to. Dereferencing a raw pointer requires <code>unsafe</code>.</p>
+variable, a (nested) field of a local variance or is a mutable <a href="expressions.html#place-expressions-and-value-expressions">place
+expression</a>, then the resulting memory location can be assigned to.
+Dereferencing a raw pointer requires <code>unsafe</code>.</p>
 <p>On non-pointer types <code>*x</code> is equivalent to <code>*std::ops::Deref::deref(&amp;x)</code> in an
-<a href="expressions.html#mutability">immutable lvalue context</a> and
-<code>*std::ops::Deref::deref_mut(&amp;mut x)</code> in a mutable lvalue context.</p>
+<a href="expressions.html#mutability">immutable place expression context</a> and
+<code>*std::ops::Deref::deref_mut(&amp;mut x)</code> in a mutable place expression context.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -218,11 +162,14 @@ let y = &amp;mut 9;
 *y = 11;
 assert_eq!(*y, 11);
 #}</code></pre></pre>
-<a class="header" href="expressions/operator-expr.html#the--operator" id="the--operator"><h2>The <code>?</code> operator.</h2></a>
-<p>The <code>?</code> (&quot;question mark&quot;) operator can be applied to values of the <code>Result&lt;T, E&gt;</code> type to propagate errors. If applied to <code>Err(e)</code> it will return
-<code>Err(From::from(e))</code> from the enclosing function or closure. If applied to
-<code>Ok(x)</code> it will unwrap the value to return <code>x</code>. Unlike other unary operators
-<code>?</code> is written in postfix notation. <code>?</code> cannot be overloaded.</p>
+<a class="header" href="expressions/operator-expr.html#the-question-mark-operator" id="the-question-mark-operator"><h2>The question mark operator</h2></a>
+<p>The question mark operator (<code>?</code>) unwraps valid values or returns errornous
+values, propagating them to the calling function. It is a unary postfix
+operator that can only be applied to the types <code>Result&lt;T, E&gt;</code> and <code>Option&lt;T&gt;</code>.</p>
+<p>When applied to values of the <code>Result&lt;T, E&gt;</code> type, it propagates errors. If
+the value is <code>Err(e)</code>, then it will return <code>Err(From::from(e))</code> from the
+enclosing function or closure. If applied to <code>Ok(x)</code>, then it will unwrap the
+value to evaulate to <code>x</code>.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -237,12 +184,31 @@ let res = try_to_parse();
 println!(&quot;{:?}&quot;, res);
 # assert!(res.is_err())
 #}</code></pre></pre>
+<p>When applied to values of the <code>Option&lt;T&gt;</code> type, it propagates <code>Nones</code>. If the
+value is <code>None</code>, then it will return <code>None</code>. If applied to <code>Some(x)</code>, then it
+will unwrap the value to evaluate to <code>x</code>.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn try_option_some() -&gt; Option&lt;u8&gt; {
+    let val = Some(1)?;
+    Some(val)
+}
+assert_eq!(try_option_some(), Some(1));
+
+fn try_option_none() -&gt; Option&lt;u8&gt; {
+    let val = None?;
+    Some(val)
+}
+assert_eq!(try_option_none(), None);
+#}</code></pre></pre>
+<p><code>?</code> cannot be overloaded.</p>
 <a class="header" href="expressions/operator-expr.html#negation-operators" id="negation-operators"><h2>Negation operators</h2></a>
 <p>These are the last two unary operators. This table summarizes the behavior of
 them on primitive types and which traits are used to overload these operators
 for other types. Remember that signed integers are always represented using
 two's complement. The operands of all of these operators are evaluated in
-rvalue context so are moved or copied.</p>
+<a href="expressions.html#place-expressions-and-value-expressions">value expression context</a> so are moved or copied.</p>
 <table><thead><tr><th> Symbol </th><th> Integer     </th><th> <code>bool</code>      </th><th> Floating Point </th><th> Overloading Trait  </th></tr></thead><tbody>
 <tr><td> <code>-</code>    </td><td> Negation*   </td><td>             </td><td> Negation       </td><td> <code>std::ops::Neg</code>    </td></tr>
 <tr><td> <code>!</code>    </td><td> Bitwise NOT </td><td> Logical NOT </td><td>                </td><td> <code>std::ops::Not</code>    </td></tr>
@@ -262,8 +228,8 @@ assert_eq!(true, !false);
 summarizes the behavior of arithmetic and logical binary operators on
 primitive types and which traits are used to overload these operators for other
 types. Remember that signed integers are always represented using two's
-complement. The operands of all of these operators are evaluated in rvalue
-context so are moved or copied.</p>
+complement. The operands of all of these operators are evaluated in <a href="expressions.html#place-expressions-and-value-expressions">value
+expression context</a> so are moved or copied.</p>
 <table><thead><tr><th> Symbol </th><th> Integer                 </th><th> <code>bool</code>      </th><th> Floating Point </th><th> Overloading Trait  </th></tr></thead><tbody>
 <tr><td> <code>+</code>    </td><td> Addition                </td><td>             </td><td> Addition       </td><td> <code>std::ops::Add</code>    </td></tr>
 <tr><td> <code>-</code>    </td><td> Subtraction             </td><td>             </td><td> Subtraction    </td><td> <code>std::ops::Sub</code>    </td></tr>
@@ -305,7 +271,7 @@ define actual comparisons by functions that use these traits as bounds. Many
 functions and macros in the standard library can then use that assumption
 (although not to ensure safety). Unlike the arithmetic and logical operators
 above, these operators implicitly take shared borrows of their operands,
-evaluating them in lvalue context:</p>
+evaluating them in <a href="expressions.html#place-expressions-and-value-expressions">place expression context</a>:</p>
 <pre><code class="language-rust ignore">a == b;
 // is equivalent to
 ::std::cmp::PartialEq::eq(&amp;a, &amp;b);
@@ -430,14 +396,14 @@ be fixed.</li>
 </li>
 </ul>
 <a class="header" href="expressions/operator-expr.html#assignment-expressions" id="assignment-expressions"><h2>Assignment expressions</h2></a>
-<p>An <em>assignment expression</em> consists of an
-<a href="expressions.html#lvalues-and-rvalues">lvalue</a> expression followed
-by an equals sign (<code>=</code>) and an
-<a href="expressions.html#lvalues-and-rvalues">rvalue</a> expression.</p>
-<p>Evaluating an assignment expression <a href="expressions.html#moved-and-copied-types">either copies or
-moves</a> its right-hand operand to its left-hand
-operand. The left-hand operand must be an lvalue: using an rvalue results in a
-compiler error, rather than promoting it to a temporary.</p>
+<p>An <em>assignment expression</em> consists of a <a href="expressions.html#place-expressions-and-value-expressions">place expression</a> followed by an
+equals sign (<code>=</code>) and a <a href="expressions.html#place-expressions-and-value-expressions">value expression</a>.</p>
+<p>Evaluating an assignment expression <a href="destructors.html">drops</a> the left-hand
+operand, unless it's an unitialized local variable or field of a local variable,
+and <a href="expressions.html#moved-and-copied-types">either copies or moves</a> its
+right-hand operand to its left-hand operand. The left-hand operand must be a
+place expression: using a value expression results in a compiler error, rather
+than promoting it to a temporary.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -447,12 +413,13 @@ x = y;
 #}</code></pre></pre>
 <a class="header" href="expressions/operator-expr.html#compound-assignment-expressions" id="compound-assignment-expressions"><h2>Compound assignment expressions</h2></a>
 <p>The <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, and <code>&gt;&gt;</code> operators may be
-composed with the <code>=</code> operator. The expression <code>lval OP= val</code> is equivalent to
-<code>lval = lval OP val</code>. For example, <code>x = x + 1</code> may be written as <code>x += 1</code>.
-Any such expression always has the <a href="types.html#tuple-types"><code>unit</code></a> type.
+composed with the <code>=</code> operator. The expression <code>place_exp OP= value</code> is
+equivalent to <code>place_expr = place_expr OP val</code>. For example, <code>x = x + 1</code> may be
+written as <code>x += 1</code>. Any such expression always has the <a href="types.html#tuple-types"><code>unit</code> type</a>.
 These operators can all be overloaded using the trait with the same name as for
 the normal operation followed by 'Assign', for example, <code>std::ops::AddAssign</code>
-is used to overload <code>+=</code>. As with <code>=</code>, <code>lval</code> must be an lvalue.</p>
+is used to overload <code>+=</code>. As with <code>=</code>, <code>place_expr</code> must be a <a href="expressions.html#place-expressions-and-value-expressions">place
+expression</a>.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -460,39 +427,18 @@ let mut x = 10;
 x += 4;
 assert_eq!(x, 14);
 #}</code></pre></pre>
-<a class="header" href="expressions/operator-expr.html#operator-precedence" id="operator-precedence"><h2>Operator precedence</h2></a>
-<p>The precedence of Rust operators is ordered as follows, going from strong to
-weak. Binary Operators at the same precedence level are evaluated in the order
-given by their associativity.</p>
-<table><thead><tr><th> Operator                    </th><th> Associativity       </th></tr></thead><tbody>
-<tr><td> <code>?</code>                         </td><td>                     </td></tr>
-<tr><td> Unary <code>-</code> <code>*</code> <code>!</code> <code>&amp;</code> <code>&amp;mut</code> </td><td>                    </td></tr>
-<tr><td> <code>as</code> <code>:</code>                    </td><td> left to right       </td></tr>
-<tr><td> <code>*</code> <code>/</code> <code>%</code>                 </td><td> left to right       </td></tr>
-<tr><td> <code>+</code> <code>-</code>                     </td><td> left to right       </td></tr>
-<tr><td> <code>&lt;&lt;</code> <code>&gt;&gt;</code>                   </td><td> left to right       </td></tr>
-<tr><td> <code>&amp;</code>                         </td><td> left to right       </td></tr>
-<tr><td> <code>^</code>                         </td><td> left to right       </td></tr>
-<tr><td> <code>|</code>         </td><td> left to right       </td></tr>
-<tr><td> <code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> </td><td> Require parentheses </td></tr>
-<tr><td> <code>&amp;&amp;</code>                        </td><td> left to right       </td></tr>
-<tr><td> <code>||</code>   </td><td> left to right       </td></tr>
-<tr><td> <code>..</code> <code>...</code>                  </td><td> Require parentheses </td></tr>
-<tr><td> <code>&lt;-</code>                        </td><td> right to left       </td></tr>
-<tr><td> <code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> <br> <code>&amp;=</code> <code>|=</code> <code>^=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code> </td><td> right to left </td></tr>
-</tbody></table>
 
                 </div>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="expressions/block-expr.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="expressions/block-expr.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="expressions/array-expr.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="expressions/array-expr.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -532,5 +478,9 @@ given by their associativity.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

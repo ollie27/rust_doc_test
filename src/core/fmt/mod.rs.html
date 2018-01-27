@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libcore\fmt\mod.rs`.">
+    <meta name="description" content="Source to the Rust file `libcore\fmt\mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css" id="themeStyle">
+    <script src="../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -1789,6 +1800,81 @@
 <span id="1744">1744</span>
 <span id="1745">1745</span>
 <span id="1746">1746</span>
+<span id="1747">1747</span>
+<span id="1748">1748</span>
+<span id="1749">1749</span>
+<span id="1750">1750</span>
+<span id="1751">1751</span>
+<span id="1752">1752</span>
+<span id="1753">1753</span>
+<span id="1754">1754</span>
+<span id="1755">1755</span>
+<span id="1756">1756</span>
+<span id="1757">1757</span>
+<span id="1758">1758</span>
+<span id="1759">1759</span>
+<span id="1760">1760</span>
+<span id="1761">1761</span>
+<span id="1762">1762</span>
+<span id="1763">1763</span>
+<span id="1764">1764</span>
+<span id="1765">1765</span>
+<span id="1766">1766</span>
+<span id="1767">1767</span>
+<span id="1768">1768</span>
+<span id="1769">1769</span>
+<span id="1770">1770</span>
+<span id="1771">1771</span>
+<span id="1772">1772</span>
+<span id="1773">1773</span>
+<span id="1774">1774</span>
+<span id="1775">1775</span>
+<span id="1776">1776</span>
+<span id="1777">1777</span>
+<span id="1778">1778</span>
+<span id="1779">1779</span>
+<span id="1780">1780</span>
+<span id="1781">1781</span>
+<span id="1782">1782</span>
+<span id="1783">1783</span>
+<span id="1784">1784</span>
+<span id="1785">1785</span>
+<span id="1786">1786</span>
+<span id="1787">1787</span>
+<span id="1788">1788</span>
+<span id="1789">1789</span>
+<span id="1790">1790</span>
+<span id="1791">1791</span>
+<span id="1792">1792</span>
+<span id="1793">1793</span>
+<span id="1794">1794</span>
+<span id="1795">1795</span>
+<span id="1796">1796</span>
+<span id="1797">1797</span>
+<span id="1798">1798</span>
+<span id="1799">1799</span>
+<span id="1800">1800</span>
+<span id="1801">1801</span>
+<span id="1802">1802</span>
+<span id="1803">1803</span>
+<span id="1804">1804</span>
+<span id="1805">1805</span>
+<span id="1806">1806</span>
+<span id="1807">1807</span>
+<span id="1808">1808</span>
+<span id="1809">1809</span>
+<span id="1810">1810</span>
+<span id="1811">1811</span>
+<span id="1812">1812</span>
+<span id="1813">1813</span>
+<span id="1814">1814</span>
+<span id="1815">1815</span>
+<span id="1816">1816</span>
+<span id="1817">1817</span>
+<span id="1818">1818</span>
+<span id="1819">1819</span>
+<span id="1820">1820</span>
+<span id="1821">1821</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1875,8 +1961,11 @@
 <span class="doccomment">/// some other means.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// An important thing to remember is that the type `fmt::Error` should not be</span>
-<span class="doccomment">/// confused with `std::io::Error` or `std::error::Error`, which you may also</span>
+<span class="doccomment">/// confused with [`std::io::Error`] or [`std::error::Error`], which you may also</span>
 <span class="doccomment">/// have in scope.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`std::io::Error`]: ../../std/io/struct.Error.html</span>
+<span class="doccomment">/// [`std::error::Error`]: ../../std/error/trait.Error.html</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -2053,6 +2142,14 @@
 
 <span class="kw">struct</span> <span class="ident">Void</span> {
     <span class="ident">_priv</span>: (),
+    <span class="doccomment">/// Erases all oibits, because `Void` erases the type of the object that</span>
+    <span class="doccomment">/// will be used to produce formatted output. Since we do not know what</span>
+    <span class="doccomment">/// oibits the real types have (and they can have any or none), we need to</span>
+    <span class="doccomment">/// take the most conservative approach and forbid all oibits.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// It was added after #45197 showed that one could share a `!Sync`</span>
+    <span class="doccomment">/// object across threads by passing it into `format_args!`.</span>
+    <span class="ident">_oibit_remover</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Fn</span>()<span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// This struct represents the generic &quot;argument&quot; which is taken by the Xprintf</span>
@@ -2317,6 +2414,26 @@
 <span class="attribute">#[<span class="ident">lang</span> <span class="op">=</span> <span class="string">&quot;debug_trait&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Debug</span> {
     <span class="doccomment">/// Formats the value using the given formatter.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::fmt;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// struct Position {</span>
+    <span class="doccomment">///     longitude: f32,</span>
+    <span class="doccomment">///     latitude: f32,</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// impl fmt::Debug for Position {</span>
+    <span class="doccomment">///     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {</span>
+    <span class="doccomment">///         write!(f, &quot;({:?}, {:?})&quot;, self.longitude, self.latitude)</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(&quot;(1.987, 2.983)&quot;.to_owned(),</span>
+    <span class="doccomment">///            format!(&quot;{:?}&quot;, Position { longitude: 1.987, latitude: 2.983, }));</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span>;
 }
@@ -2388,6 +2505,9 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `Octal` trait should format its output as a number in base-8.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// For primitive signed integers (`i8` to `i128`, and `isize`),</span>
+<span class="doccomment">/// negative values are formatted as the two’s complement representation.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// The alternate flag, `#`, adds a `0o` in front of the output.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// For more information on formatters, see [the module-level documentation][module].</span>
@@ -2403,6 +2523,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:o}&quot;, x), &quot;52&quot;);</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:#o}&quot;, x), &quot;0o52&quot;);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(format!(&quot;{:o}&quot;, -16), &quot;37777777760&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Implementing `Octal` on a type:</span>
@@ -2435,6 +2557,9 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// The `Binary` trait should format its output as a number in binary.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// For primitive signed integers (`i8` to `i128`, and `isize`),</span>
+<span class="doccomment">/// negative values are formatted as the two’s complement representation.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// The alternate flag, `#`, adds a `0b` in front of the output.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// For more information on formatters, see [the module-level documentation][module].</span>
@@ -2450,6 +2575,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:b}&quot;, x), &quot;101010&quot;);</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:#b}&quot;, x), &quot;0b101010&quot;);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(format!(&quot;{:b}&quot;, -16), &quot;11111111111111111111111111110000&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Implementing `Binary` on a type:</span>
@@ -2483,6 +2610,9 @@
 <span class="doccomment">/// The `LowerHex` trait should format its output as a number in hexadecimal, with `a` through `f`</span>
 <span class="doccomment">/// in lower case.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// For primitive signed integers (`i8` to `i128`, and `isize`),</span>
+<span class="doccomment">/// negative values are formatted as the two’s complement representation.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// The alternate flag, `#`, adds a `0x` in front of the output.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// For more information on formatters, see [the module-level documentation][module].</span>
@@ -2498,6 +2628,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:x}&quot;, x), &quot;2a&quot;);</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:#x}&quot;, x), &quot;0x2a&quot;);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(format!(&quot;{:x}&quot;, -16), &quot;fffffff0&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Implementing `LowerHex` on a type:</span>
@@ -2531,6 +2663,9 @@
 <span class="doccomment">/// The `UpperHex` trait should format its output as a number in hexadecimal, with `A` through `F`</span>
 <span class="doccomment">/// in upper case.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// For primitive signed integers (`i8` to `i128`, and `isize`),</span>
+<span class="doccomment">/// negative values are formatted as the two’s complement representation.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// The alternate flag, `#`, adds a `0x` in front of the output.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// For more information on formatters, see [the module-level documentation][module].</span>
@@ -2546,6 +2681,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:X}&quot;, x), &quot;2A&quot;);</span>
 <span class="doccomment">/// assert_eq!(format!(&quot;{:#X}&quot;, x), &quot;0x2A&quot;);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(format!(&quot;{:X}&quot;, -16), &quot;FFFFFFF0&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Implementing `UpperHex` on a type:</span>
@@ -2724,7 +2861,7 @@
 <span class="doccomment">/// assert_eq!(output, &quot;Hello world!&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Please note that using [`write!`] might be preferrable. Example:</span>
+<span class="doccomment">/// Please note that using [`write!`] might be preferable. Example:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use std::fmt::Write;</span>
@@ -2778,6 +2915,27 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">wrap_buf</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="lifetime">&#39;c</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">wrap</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span><span class="op">&gt;</span>
+        <span class="kw">where</span> <span class="lifetime">&#39;b</span>: <span class="lifetime">&#39;c</span>, <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> (<span class="ident">Write</span><span class="op">+</span><span class="lifetime">&#39;b</span>)) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;c</span> <span class="kw-2">mut</span> (<span class="ident">Write</span><span class="op">+</span><span class="lifetime">&#39;c</span>)
+    {
+        <span class="ident">Formatter</span> {
+            <span class="comment">// We want to change this</span>
+            <span class="ident">buf</span>: <span class="ident">wrap</span>(<span class="self">self</span>.<span class="ident">buf</span>),
+
+            <span class="comment">// And preserve these</span>
+            <span class="ident">flags</span>: <span class="self">self</span>.<span class="ident">flags</span>,
+            <span class="ident">fill</span>: <span class="self">self</span>.<span class="ident">fill</span>,
+            <span class="ident">align</span>: <span class="self">self</span>.<span class="ident">align</span>,
+            <span class="ident">width</span>: <span class="self">self</span>.<span class="ident">width</span>,
+            <span class="ident">precision</span>: <span class="self">self</span>.<span class="ident">precision</span>,
+
+            <span class="comment">// These only exist in the struct for the `run` method,</span>
+            <span class="comment">// which won’t be used together with this method.</span>
+            <span class="ident">curarg</span>: <span class="self">self</span>.<span class="ident">curarg</span>.<span class="ident">clone</span>(),
+            <span class="ident">args</span>: <span class="self">self</span>.<span class="ident">args</span>,
+        }
+    }
+
     <span class="comment">// First up is the collection of functions used to execute a format string</span>
     <span class="comment">// at runtime. This consumes all of the compile-time statics generated by</span>
     <span class="comment">// the format! syntax extension.</span>
@@ -3069,6 +3227,9 @@
 
     <span class="doccomment">/// Flags for formatting</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">rustc_deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.24.0&quot;</span>,
+                       <span class="ident">reason</span> <span class="op">=</span> <span class="string">&quot;use the `sign_plus`, `sign_minus`, `alternate`, \
+                                 or `sign_aware_zero_pad` methods instead&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> { <span class="self">self</span>.<span class="ident">flags</span> }
 
     <span class="doccomment">/// Character used as &#39;fill&#39; whenever there is alignment</span>
@@ -3287,14 +3448,14 @@
 
 <span class="macro">fmt_refs</span><span class="macro">!</span> { <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Octal</span>, <span class="ident">Binary</span>, <span class="ident">LowerHex</span>, <span class="ident">UpperHex</span>, <span class="ident">LowerExp</span>, <span class="ident">UpperExp</span> }
 
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;never_type_impls&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35121&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;never_type&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35121&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="op">!</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, _: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
 
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;never_type_impls&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35121&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;never_type&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;35121&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="op">!</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, _: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span> {
         <span class="kw-2">*</span><span class="self">self</span>
@@ -3550,20 +3711,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

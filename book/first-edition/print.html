@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title">The Rust Programming Language</h1>
@@ -6995,7 +6993,7 @@ expression, <code>e as U2</code> is not necessarily so (in fact it will only be 
 <p>A cast <code>e as U</code> is also valid in any of the following cases:</p>
 <ul>
 <li><code>e</code> has type <code>T</code> and <code>T</code> and <code>U</code> are any numeric types; <em>numeric-cast</em></li>
-<li><code>e</code> is a C-like enum (with no data attached to the variants),
+<li><code>e</code> is an enum with no data attached to the variants (a &quot;field-less enumeration&quot;),
 and <code>U</code> is an integer type; <em>enum-cast</em></li>
 <li><code>e</code> has type <code>bool</code> or <code>char</code> and <code>U</code> is an integer type; <em>prim-int-cast</em></li>
 <li><code>e</code> has type <code>u8</code> and <code>U</code> is <code>char</code>; <em>u8-char-cast</em></li>
@@ -13540,9 +13538,9 @@ struct Bar;
 void foo(struct Foo *arg);
 void bar(struct Bar *arg);
 </code></pre>
-<p>To do this in Rust, let’s create our own opaque types with <code>enum</code>:</p>
-<pre><pre class="playpen"><code class="language-rust">pub enum Foo {}
-pub enum Bar {}
+<p>To do this in Rust, let’s create our own opaque types:</p>
+<pre><pre class="playpen"><code class="language-rust">#[repr(C)] pub struct Foo { private: [u8; 0] }
+#[repr(C)] pub struct Bar { private: [u8; 0] }
 
 extern &quot;C&quot; {
     pub fn foo(arg: *mut Foo);
@@ -13550,8 +13548,10 @@ extern &quot;C&quot; {
 }
 # fn main() {}
 </code></pre></pre>
-<p>By using an <code>enum</code> with no variants, we create an opaque type that we can’t
-instantiate, as it has no variants. But because our <code>Foo</code> and <code>Bar</code> types are
+<p>By including a private field and no constructor,
+we create an opaque type that we can’t instantiate outside of this module.
+An empty array is both zero-size and compatible with <code>#[repr(C)]</code>.
+But because our <code>Foo</code> and <code>Bar</code> types are
 different, we’ll get type safety between the two of them, so we cannot
 accidentally pass a pointer to <code>Foo</code> to <code>bar()</code>.</p>
 <a class="header" href="print.html#borrow-and-asref" id="borrow-and-asref"><h1>Borrow and AsRef</h1></a>
@@ -14303,5 +14303,9 @@ Munksgaard's master's thesis. Research for Servo.</li>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

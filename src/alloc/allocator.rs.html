@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\liballoc\allocator.rs`.">
+    <meta name="description" content="Source to the Rust file `liballoc\allocator.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>allocator.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -1107,34 +1118,6 @@
 <span id="1062">1062</span>
 <span id="1063">1063</span>
 <span id="1064">1064</span>
-<span id="1065">1065</span>
-<span id="1066">1066</span>
-<span id="1067">1067</span>
-<span id="1068">1068</span>
-<span id="1069">1069</span>
-<span id="1070">1070</span>
-<span id="1071">1071</span>
-<span id="1072">1072</span>
-<span id="1073">1073</span>
-<span id="1074">1074</span>
-<span id="1075">1075</span>
-<span id="1076">1076</span>
-<span id="1077">1077</span>
-<span id="1078">1078</span>
-<span id="1079">1079</span>
-<span id="1080">1080</span>
-<span id="1081">1081</span>
-<span id="1082">1082</span>
-<span id="1083">1083</span>
-<span id="1084">1084</span>
-<span id="1085">1085</span>
-<span id="1086">1086</span>
-<span id="1087">1087</span>
-<span id="1088">1088</span>
-<span id="1089">1089</span>
-<span id="1090">1090</span>
-<span id="1091">1091</span>
-<span id="1092">1092</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1157,7 +1140,7 @@
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">mem</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">usize</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ptr</span>::{<span class="self">self</span>, <span class="ident">Unique</span>};
+<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">ptr</span>::{<span class="self">self</span>, <span class="ident">NonNull</span>};
 
 <span class="doccomment">/// Represents the combination of a starting address and</span>
 <span class="doccomment">/// a total capacity of the returned block.</span>
@@ -1355,14 +1338,8 @@
     <span class="doccomment">/// On arithmetic overflow, returns `None`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">repeat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="self">Self</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">padded_size</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">checked_add</span>(<span class="self">self</span>.<span class="ident">padding_needed_for</span>(<span class="self">self</span>.<span class="ident">align</span>)) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">padded_size</span>) <span class="op">=&gt;</span> <span class="ident">padded_size</span>,
-        };
-        <span class="kw">let</span> <span class="ident">alloc_size</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">padded_size</span>.<span class="ident">checked_mul</span>(<span class="ident">n</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">alloc_size</span>) <span class="op">=&gt;</span> <span class="ident">alloc_size</span>,
-        };
+        <span class="kw">let</span> <span class="ident">padded_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">checked_add</span>(<span class="self">self</span>.<span class="ident">padding_needed_for</span>(<span class="self">self</span>.<span class="ident">align</span>))<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">alloc_size</span> <span class="op">=</span> <span class="ident">padded_size</span>.<span class="ident">checked_mul</span>(<span class="ident">n</span>)<span class="question-mark">?</span>;
 
         <span class="comment">// We can assume that `self.align` is a power-of-two that does</span>
         <span class="comment">// not exceed 2&lt;sup&gt;31&lt;/sup&gt;. Furthermore, `alloc_size` has already been</span>
@@ -1384,26 +1361,14 @@
     <span class="doccomment">/// On arithmetic overflow, returns `None`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">next</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="self">Self</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">new_align</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="self">self</span>.<span class="ident">align</span>, <span class="ident">next</span>.<span class="ident">align</span>);
-        <span class="kw">let</span> <span class="ident">realigned</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="self">self</span>.<span class="ident">size</span>, <span class="ident">new_align</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">l</span>) <span class="op">=&gt;</span> <span class="ident">l</span>,
-        };
+        <span class="kw">let</span> <span class="ident">realigned</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="self">self</span>.<span class="ident">size</span>, <span class="ident">new_align</span>)<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">pad</span> <span class="op">=</span> <span class="ident">realigned</span>.<span class="ident">padding_needed_for</span>(<span class="ident">next</span>.<span class="ident">align</span>);
 
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">checked_add</span>(<span class="ident">pad</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">offset</span>) <span class="op">=&gt;</span> <span class="ident">offset</span>,
-        };
-        <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">offset</span>.<span class="ident">checked_add</span>(<span class="ident">next</span>.<span class="ident">size</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">new_size</span>) <span class="op">=&gt;</span> <span class="ident">new_size</span>,
-        };
+        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">size</span>.<span class="ident">checked_add</span>(<span class="ident">pad</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="ident">offset</span>.<span class="ident">checked_add</span>(<span class="ident">next</span>.<span class="ident">size</span>)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="ident">new_size</span>, <span class="ident">new_align</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">l</span>) <span class="op">=&gt;</span> <span class="ident">l</span>,
-        };
+        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="ident">new_size</span>, <span class="ident">new_align</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>((<span class="ident">layout</span>, <span class="ident">offset</span>))
     }
 
@@ -1420,11 +1385,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// On arithmetic overflow, returns `None`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">repeat_packed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">size</span>().<span class="ident">checked_mul</span>(<span class="ident">n</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">scaled</span>) <span class="op">=&gt;</span> <span class="ident">scaled</span>,
-        };
-
+        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">size</span>().<span class="ident">checked_mul</span>(<span class="ident">n</span>)<span class="question-mark">?</span>;
         <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="ident">size</span>, <span class="self">self</span>.<span class="ident">align</span>)
     }
 
@@ -1444,14 +1405,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// On arithmetic overflow, returns `None`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend_packed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">next</span>: <span class="self">Self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="self">Self</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">size</span>().<span class="ident">checked_add</span>(<span class="ident">next</span>.<span class="ident">size</span>()) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">new_size</span>) <span class="op">=&gt;</span> <span class="ident">new_size</span>,
-        };
-        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="ident">new_size</span>, <span class="self">self</span>.<span class="ident">align</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">l</span>) <span class="op">=&gt;</span> <span class="ident">l</span>,
-        };
+        <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">size</span>().<span class="ident">checked_add</span>(<span class="ident">next</span>.<span class="ident">size</span>())<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">from_size_align</span>(<span class="ident">new_size</span>, <span class="self">self</span>.<span class="ident">align</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>((<span class="ident">layout</span>, <span class="self">self</span>.<span class="ident">size</span>()))
     }
 
@@ -2061,12 +2016,12 @@
     <span class="doccomment">/// Clients wishing to abort computation in response to an</span>
     <span class="doccomment">/// allocation error are encouraged to call the allocator&#39;s `oom`</span>
     <span class="doccomment">/// method, rather than directly invoking `panic!` or similar.</span>
-    <span class="kw">fn</span> <span class="ident">alloc_one</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">alloc_one</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
         <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">Layout</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="kw">if</span> <span class="ident">k</span>.<span class="ident">size</span>() <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">alloc</span>(<span class="ident">k</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>)) }
+            <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">alloc</span>(<span class="ident">k</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">NonNull</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>)) }
         } <span class="kw">else</span> {
             <span class="prelude-val">Err</span>(<span class="ident">AllocErr</span>::<span class="ident">invalid_input</span>(<span class="string">&quot;zero-sized type invalid for alloc_one&quot;</span>))
         }
@@ -2089,7 +2044,7 @@
     <span class="doccomment">/// * `ptr` must denote a block of memory currently allocated via this allocator</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// * the layout of `T` must *fit* that block of memory.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">dealloc_one</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>)
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">dealloc_one</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>)
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
         <span class="kw">let</span> <span class="ident">raw_ptr</span> <span class="op">=</span> <span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
@@ -2129,7 +2084,7 @@
     <span class="doccomment">/// Clients wishing to abort computation in response to an</span>
     <span class="doccomment">/// allocation error are encouraged to call the allocator&#39;s `oom`</span>
     <span class="doccomment">/// method, rather than directly invoking `panic!` or similar.</span>
-    <span class="kw">fn</span> <span class="ident">alloc_array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">alloc_array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
         <span class="kw">match</span> <span class="ident">Layout</span>::<span class="ident">array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">n</span>) {
@@ -2137,7 +2092,7 @@
                 <span class="kw">unsafe</span> {
                     <span class="self">self</span>.<span class="ident">alloc</span>(<span class="ident">layout</span>.<span class="ident">clone</span>())
                         .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> {
-                            <span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>)
+                            <span class="ident">NonNull</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>)
                         })
                 }
             }
@@ -2178,15 +2133,15 @@
     <span class="doccomment">/// reallocation error are encouraged to call the allocator&#39;s `oom`</span>
     <span class="doccomment">/// method, rather than directly invoking `panic!` or similar.</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">realloc_array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
-                               <span class="ident">ptr</span>: <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+                               <span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
                                <span class="ident">n_old</span>: <span class="ident">usize</span>,
-                               <span class="ident">n_new</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span>
+                               <span class="ident">n_new</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
         <span class="kw">match</span> (<span class="ident">Layout</span>::<span class="ident">array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">n_old</span>), <span class="ident">Layout</span>::<span class="ident">array</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">n_new</span>), <span class="ident">ptr</span>.<span class="ident">as_ptr</span>()) {
             (<span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">k_old</span>), <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">k_new</span>), <span class="ident">ptr</span>) <span class="kw">if</span> <span class="ident">k_old</span>.<span class="ident">size</span>() <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">k_new</span>.<span class="ident">size</span>() <span class="op">&gt;</span> <span class="number">0</span> <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">realloc</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">k_old</span>.<span class="ident">clone</span>(), <span class="ident">k_new</span>.<span class="ident">clone</span>())
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span><span class="ident">Unique</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>))
+                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">NonNull</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>))
             }
             _ <span class="op">=&gt;</span> {
                 <span class="prelude-val">Err</span>(<span class="ident">AllocErr</span>::<span class="ident">invalid_input</span>(<span class="string">&quot;invalid layout for realloc_array&quot;</span>))
@@ -2214,7 +2169,7 @@
     <span class="doccomment">/// constraints.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Always returns `Err` on arithmetic overflow.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">dealloc_array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">Unique</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">AllocErr</span><span class="op">&gt;</span>
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">dealloc_array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">AllocErr</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span>
     {
         <span class="kw">let</span> <span class="ident">raw_ptr</span> <span class="op">=</span> <span class="ident">ptr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
@@ -2242,20 +2197,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

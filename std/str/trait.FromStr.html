@@ -10,8 +10,11 @@
     <title>std::str::FromStr - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait FromStr</p><div class="block items"><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>str</a></p><script>window.sidebarCurrent = {name: 'FromStr', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait FromStr</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#associated-types">Associated Types</a><div class="sidebar-links"><a href="#associatedtype.Err">Err</a></div><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.from_str">from_str</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>str</a></p><script>window.sidebarCurrent = {name: 'FromStr', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -48,17 +59,15 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/str/mod.rs.html#72-99' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/str/mod.rs.html#72-102' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait FromStr {
     type <a href='#associatedtype.Err' class="type">Err</a>;
     fn <a href='#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;<a class="primitive" href="../primitive.str.html">str</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;Self, Self::<a class="type" href="../../std/str/trait.FromStr.html#associatedtype.Err" title="type std::str::FromStr::Err">Err</a>&gt;;
 }</pre><div class='docblock'><p>A trait to abstract the idea of creating a new instance of a type from a
 string.</p>
-
-<p><code>FromStr</code>&#39;s <a href="#tymethod.from_str"><code>from_str</code></a> method is often used implicitly, through
-<a href="../../std/primitive.str.html"><code>str</code></a>&#39;s <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a> method. See <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a>&#39;s documentation for examples.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<p><code>FromStr</code>'s <a href="#tymethod.from_str"><code>from_str</code></a> method is often used implicitly, through
+<a href="../../std/primitive.str.html"><code>str</code></a>'s <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a> method. See <a href="../../std/primitive.str.html#method.parse"><code>parse</code></a>'s documentation for examples.</p>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Basic implementation of <code>FromStr</code> on an example <code>Point</code> type:</p>
 
 <pre class="rust rust-example-rendered">
@@ -100,12 +109,10 @@ string.</p>
             </h2>
             <div class='methods'>
         <h3 id='tymethod.from_str' class='method'><span id='from_str.v' class='invisible'><code>fn <a href='#tymethod.from_str' class='fnname'>from_str</a>(s: &amp;<a class="primitive" href="../primitive.str.html">str</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;Self, Self::<a class="type" href="../../std/str/trait.FromStr.html#associatedtype.Err" title="type std::str::FromStr::Err">Err</a>&gt;</code></span></h3><div class='docblock'><p>Parses a string <code>s</code> to return a value of this type.</p>
-
-<p>If parsing succeeds, return the value inside <code>Ok</code>, otherwise
+<p>If parsing succeeds, return the value inside <a href="../../std/result/enum.Result.html#variant.Ok"><code>Ok</code></a>, otherwise
 when the string is ill-formatted return an error specific to the
-inside <code>Err</code>. The error type is specific to implementation of the trait.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+inside <a href="../../std/result/enum.Result.html#variant.Err"><code>Err</code></a>. The error type is specific to implementation of the trait.</p>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <p>Basic usage with <a href="../../std/primitive.i32.html"><code>i32</code></a>, a type that implements <code>FromStr</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -120,29 +127,29 @@ inside <code>Err</code>. The error type is specific to implementation of the tra
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u8.html">u8</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i8.html">i8</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u32.html">u32</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i128.html">i128</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.usize.html">usize</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u16.html">u16</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u128.html">u128</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u64.html">u64</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u8.html">u8</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u16.html">u16</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
 <li><div class='out-of-band'><a class='srclink' href='../../src/core/num/dec2flt/mod.rs.html#112-143' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.f64.html">f64</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseFloatError.html" title="struct std::num::ParseFloatError">ParseFloatError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i64.html">i64</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i16.html">i16</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.isize.html">isize</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i16.html">i16</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u64.html">u64</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
 <li><div class='out-of-band'><a class='srclink' href='../../src/core/num/dec2flt/mod.rs.html#112-143' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.f32.html">f32</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseFloatError.html" title="struct std::num::ParseFloatError">ParseFloatError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i32.html">i32</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/str/mod.rs.html#105-138' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.bool.html">bool</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/str/struct.ParseBoolError.html" title="struct std::str::ParseBoolError">ParseBoolError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u32.html">u32</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.usize.html">usize</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.u128.html">u128</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i64.html">i64</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i8.html">i8</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
 <li><div class='out-of-band'><a class='srclink' href='../../src/core/char.rs.html#249-265' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.char.html">char</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/char/struct.ParseCharError.html" title="struct std::char::ParseCharError">ParseCharError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3020-3025' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.isize.html">isize</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/str/mod.rs.html#102-135' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.bool.html">bool</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/str/struct.ParseBoolError.html" title="struct std::str::ParseBoolError">ParseBoolError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/string.rs.html#1979-1985' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="enum" href="../../std/string/enum.ParseError.html" title="enum std::string::ParseError">ParseError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#306-314' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="enum" href="../../std/net/enum.IpAddr.html" title="enum std::net::IpAddr">IpAddr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#317-325' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.Ipv4Addr.html" title="struct std::net::Ipv4Addr">Ipv4Addr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#328-336' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#339-347' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.SocketAddrV4.html" title="struct std::net::SocketAddrV4">SocketAddrV4</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#350-358' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.SocketAddrV6.html" title="struct std::net::SocketAddrV6">SocketAddrV6</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#361-369' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="enum" href="../../std/net/enum.SocketAddr.html" title="enum std::net::SocketAddr">SocketAddr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i128.html">i128</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2960-2965' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="primitive" href="../primitive.i32.html">i32</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/num/struct.ParseIntError.html" title="struct std::num::ParseIntError">ParseIntError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/string.rs.html#1976-1982' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="enum" href="../../std/string/enum.ParseError.html" title="enum std::string::ParseError">ParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#304-312' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="enum" href="../../std/net/enum.IpAddr.html" title="enum std::net::IpAddr">IpAddr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#315-323' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.Ipv4Addr.html" title="struct std::net::Ipv4Addr">Ipv4Addr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#326-334' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.Ipv6Addr.html" title="struct std::net::Ipv6Addr">Ipv6Addr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#337-345' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.SocketAddrV4.html" title="struct std::net::SocketAddrV4">SocketAddrV4</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#348-356' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="struct" href="../../std/net/struct.SocketAddrV6.html" title="struct std::net::SocketAddrV6">SocketAddrV6</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/net/parser.rs.html#359-367' title='goto source code'>[src]</a></div><code>impl FromStr for <a class="enum" href="../../std/net/enum.SocketAddr.html" title="enum std::net::SocketAddr">SocketAddr</a><span class="where fmt-newline">  type <a href='#associatedtype.Err' class="type">Err</a> = <a class="struct" href="../../std/net/struct.AddrParseError.html" title="struct std::net::AddrParseError">AddrParseError</a>;</span></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/str/trait.FromStr.js">
                  </script></section>
@@ -158,20 +165,22 @@ inside <code>Err</code>. The error type is specific to implementation of the tra
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

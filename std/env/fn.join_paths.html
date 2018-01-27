@@ -10,8 +10,11 @@
     <title>std::env::join_paths - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>env</a></p><script>window.sidebarCurrent = {name: 'join_paths', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -51,13 +62,11 @@
                </span><a class='srclink' href='../../src/std/env.rs.html#482-488' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn join_paths&lt;I, T&gt;(paths: I) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;<a class="struct" href="../../std/ffi/struct.OsString.html" title="struct std::ffi::OsString">OsString</a>, <a class="struct" href="../../std/env/struct.JoinPathsError.html" title="struct std::env::JoinPathsError">JoinPathsError</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;I: <a class="trait" href="../../std/iter/trait.IntoIterator.html" title="trait std::iter::IntoIterator">IntoIterator</a>&lt;Item = T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/convert/trait.AsRef.html" title="trait std::convert::AsRef">AsRef</a>&lt;<a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>&gt;,&nbsp;</span></pre><div class='docblock'><p>Joins a collection of <a href="../../std/path/struct.Path.html"><code>Path</code></a>s appropriately for the <code>PATH</code>
 environment variable.</p>
-
-<h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
+<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>Returns an <a href="../../std/result/enum.Result.html#variant.Err"><code>Err</code></a> (containing an error message) if one of the input
 <a href="../../std/path/struct.Path.html"><code>Path</code></a>s contains an invalid character for constructing the <code>PATH</code>
 variable (a double quote on Windows or a colon on Unix).</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Joining paths on a Unix-like platform:</p>
 
 <pre class="rust rust-example-rendered">
@@ -68,7 +77,6 @@ variable (a double quote on Windows or a colon on Unix).</p>
 <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> [<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/bin&quot;</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/usr/bin&quot;</span>)];
 <span class="kw">let</span> <span class="ident">path_os_string</span> <span class="op">=</span> <span class="ident">env</span>::<span class="ident">join_paths</span>(<span class="ident">paths</span>.<span class="ident">iter</span>()).<span class="ident">unwrap</span>();
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">path_os_string</span>, <span class="ident">OsString</span>::<span class="ident">from</span>(<span class="string">&quot;/bin:/usr/bin&quot;</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Aif%20cfg!(unix)%20%7B%0Ause%20std%3A%3Aenv%3B%0Ause%20std%3A%3Affi%3A%3AOsString%3B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20paths%20%3D%20%5BPath%3A%3Anew(%22%2Fbin%22)%2C%20Path%3A%3Anew(%22%2Fusr%2Fbin%22)%5D%3B%0Alet%20path_os_string%20%3D%20env%3A%3Ajoin_paths(paths.iter()).unwrap()%3B%0Aassert_eq!(path_os_string%2C%20OsString%3A%3Afrom(%22%2Fbin%3A%2Fusr%2Fbin%22))%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>Joining a path containing a colon on a Unix-like platform results in an error:</p>
 
 <pre class="rust rust-example-rendered">
@@ -77,7 +85,6 @@ variable (a double quote on Windows or a colon on Unix).</p>
 
 <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> [<span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/bin&quot;</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/usr/bi:n&quot;</span>)];
 <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">env</span>::<span class="ident">join_paths</span>(<span class="ident">paths</span>.<span class="ident">iter</span>()).<span class="ident">is_err</span>());<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Aif%20cfg!(unix)%20%7B%0Ause%20std%3A%3Aenv%3B%0Ause%20std%3A%3Apath%3A%3APath%3B%0A%0Alet%20paths%20%3D%20%5BPath%3A%3Anew(%22%2Fbin%22)%2C%20Path%3A%3Anew(%22%2Fusr%2Fbi%3An%22)%5D%3B%0Aassert!(env%3A%3Ajoin_paths(paths.iter()).is_err())%3B%0A%7D%0A%7D">Run</a></pre>
-
 <p>Using <code>env::join_paths</code> with <code>env::spit_paths</code> to append an item to the <code>PATH</code> environment
 variable:</p>
 
@@ -104,20 +111,22 @@ variable:</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

@@ -10,8 +10,11 @@
     <title>alloc::string - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Module string</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../index.html'>alloc</a></p><script>window.sidebarCurrent = {name: 'string', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module string</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../index.html'>alloc</a></p><script>window.sidebarCurrent = {name: 'string', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -48,14 +59,12 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/alloc/string.rs.html#11-2260' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/alloc/string.rs.html#11-2258' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A UTF-8 encoded, growable string.</p>
-
 <p>This module contains the <a href="struct.String.html"><code>String</code></a> type, a trait for converting
 <a href="trait.ToString.html"><code>ToString</code></a>s, and several error types that may result from working with
 <a href="struct.String.html"><code>String</code></a>s.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>There are multiple ways to create a new <a href="struct.String.html"><code>String</code></a> from a string literal:</p>
 
 <pre class="rust rust-example-rendered">
@@ -63,7 +72,6 @@
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;world&quot;</span>);
 <span class="kw">let</span> <span class="ident">s</span>: <span class="ident">String</span> <span class="op">=</span> <span class="string">&quot;also this&quot;</span>.<span class="ident">into</span>();</pre>
-
 <p>You can create a new <a href="struct.String.html"><code>String</code></a> from an existing one by concatenating with
 <code>+</code>:</p>
 
@@ -71,7 +79,6 @@
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="string">&quot;Hello&quot;</span>.<span class="ident">to_string</span>();
 
 <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">+</span> <span class="string">&quot; world!&quot;</span>;</pre>
-
 <p>If you have a vector of valid UTF-8 bytes, you can make a <a href="struct.String.html"><code>String</code></a> out of
 it. You can do the reverse too.</p>
 
@@ -93,6 +100,7 @@ it. You can do the reverse too.</p>
                                   title='struct alloc::string::Drain'>Drain</a></td>
                            <td class='docblock-short'>
                                 <p>A draining iterator for <code>String</code>.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -100,6 +108,7 @@ it. You can do the reverse too.</p>
                                   title='struct alloc::string::FromUtf16Error'>FromUtf16Error</a></td>
                            <td class='docblock-short'>
                                 <p>A possible error value when converting a <code>String</code> from a UTF-16 byte slice.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -107,6 +116,7 @@ it. You can do the reverse too.</p>
                                   title='struct alloc::string::FromUtf8Error'>FromUtf8Error</a></td>
                            <td class='docblock-short'>
                                 <p>A possible error value when converting a <code>String</code> from a UTF-8 byte vector.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -114,6 +124,7 @@ it. You can do the reverse too.</p>
                                   title='struct alloc::string::String'>String</a></td>
                            <td class='docblock-short'>
                                 <p>A UTF-8 encoded, growable string.</p>
+
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
@@ -122,6 +133,7 @@ it. You can do the reverse too.</p>
                                   title='enum alloc::string::ParseError'>ParseError</a></td>
                            <td class='docblock-short'>
                                 <p>An error when parsing a <code>String</code>.</p>
+
                            </td>
                        </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
@@ -130,6 +142,7 @@ it. You can do the reverse too.</p>
                                   title='trait alloc::string::ToString'>ToString</a></td>
                            <td class='docblock-short'>
                                 <p>A trait for converting a value to a <code>String</code>.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -144,20 +157,22 @@ it. You can do the reverse too.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

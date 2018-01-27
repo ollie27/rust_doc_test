@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -105,7 +103,7 @@ be implemented at all!</p>
 Drop, Rust will prevent you from e.g. moving fields out of self. For most types,
 this is totally fine.</p>
 <p>For instance, a custom implementation of <code>Box</code> might write <code>Drop</code> like this:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(unique, allocator_api)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(ptr_internals, allocator_api)]
 
 use std::heap::{Heap, Alloc, Layout};
 use std::mem;
@@ -127,7 +125,7 @@ impl&lt;T&gt; Drop for Box&lt;T&gt; {
 a <a href="phantom-data.html">Unique</a> that has no actual <code>Drop</code> implementation. Similarly nothing can
 use-after-free the <code>ptr</code> because when drop exits, it becomes inaccessible.</p>
 <p>However this wouldn't work:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, ptr_internals)]
 
 use std::heap::{Heap, Alloc, Layout};
 use std::ptr::{drop_in_place, Unique};
@@ -191,7 +189,7 @@ certainly many valid usecases for needing to do trickier things with
 destructors.</p>
 <p>The classic safe solution to overriding recursive drop and allowing moving out
 of Self during <code>drop</code> is to use an Option:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, ptr_internals)]
 
 use std::heap::{Alloc, Heap, Layout};
 use std::ptr::{drop_in_place, Unique};
@@ -238,13 +236,13 @@ a field shouldn't be automatically dropped.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="constructors.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="constructors.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="leaking.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="leaking.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -284,5 +282,9 @@ a field shouldn't be automatically dropped.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

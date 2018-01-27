@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -108,8 +106,8 @@ C, and is explicitly contrary to the behavior of an empty type in C++, which
 still consumes a byte of space.</p>
 </li>
 <li>
-<p>DST pointers (fat pointers), tuples, and enums with data (that is, non-C-like
-enums) are not a concept in C, and as such are never FFI-safe.</p>
+<p>DST pointers (fat pointers), tuples, and enums with fields are not a concept
+in C, and as such are never FFI-safe.</p>
 </li>
 <li>
 <p>As an exception to the rule on enum with data, <code>Option&lt;&amp;T&gt;</code> is
@@ -125,13 +123,13 @@ difference from a struct is that the fields aren’t named.</p>
 </li>
 <li>
 <p>This is equivalent to one of <code>repr(u*)</code> (see the next section) for enums. The
-chosen size is the default enum size for the target platform's C ABI. Note that
-enum representation in C is implementation defined, so this is really a &quot;best
-guess&quot;. In particular, this may be incorrect when the C code of interest is
-compiled with certain flags.</p>
+chosen size is the default enum size for the target platform's C application
+binary interface (ABI). Note that enum representation in C is implementation
+defined, so this is really a &quot;best guess&quot;. In particular, this may be incorrect
+when the C code of interest is compiled with certain flags.</p>
 </li>
 <li>
-<p>&quot;C-like&quot; enums with <code>repr(C)</code> or <code>repr(u*)</code> still may not be set to an
+<p>Field-less enums with <code>repr(C)</code> or <code>repr(u*)</code> still may not be set to an
 integer value without a corresponding variant, even though this is
 permitted behavior in C or C++. It is undefined behavior to (unsafely)
 construct an instance of an enum that does not match one of its
@@ -140,17 +138,17 @@ compiled as normal.)</p>
 </li>
 </ul>
 <a class="header" href="other-reprs.html#repru-repri" id="repru-repri"><h1>repr(u*), repr(i*)</h1></a>
-<p>These specify the size to make a C-like enum. If the discriminant overflows the
-integer it has to fit in, it will produce a compile-time error. You can manually
-ask Rust to allow this by setting the overflowing element to explicitly be 0.
-However Rust will not allow you to create an enum where two variants have the
-same discriminant.</p>
-<p>The term &quot;C-like enum&quot; only means that the enum doesn't have data in any
-of its variants. A C-like enum without a <code>repr(u*)</code> or <code>repr(C)</code> is
+<p>These specify the size to make a field-less enum. If the discriminant overflows
+the integer it has to fit in, it will produce a compile-time error. You can
+manually ask Rust to allow this by setting the overflowing element to explicitly
+be 0. However Rust will not allow you to create an enum where two variants have
+the same discriminant.</p>
+<p>The term &quot;field-less enum&quot; only means that the enum doesn't have data in any
+of its variants. A field-less enum without a <code>repr(u*)</code> or <code>repr(C)</code> is
 still a Rust native type, and does not have a stable ABI representation.
 Adding a <code>repr</code> causes it to be treated exactly like the specified
 integer size for ABI purposes.</p>
-<p>A non-C-like enum is a Rust type with no guaranteed ABI (even if the
+<p>Any enum with fields is a Rust type with no guaranteed ABI (even if the
 only data is <code>PhantomData</code> or something else with zero size).</p>
 <p>Adding an explicit <code>repr</code> to an enum suppresses the null-pointer
 optimization.</p>
@@ -174,13 +172,13 @@ this should not be used.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="exotic-sizes.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="exotic-sizes.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="ownership.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="ownership.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -220,5 +218,9 @@ this should not be used.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

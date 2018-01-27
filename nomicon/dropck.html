@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -164,7 +162,7 @@ fn main() {
 
 error: aborting due to previous error
 </code></pre>
-<p>Implementing Drop lets the Inspector execute some arbitrary code during its
+<p>Implementing <code>Drop</code> lets the <code>Inspector</code> execute some arbitrary code during its
 death. This means it can potentially observe that types that are supposed to
 live as long as it does actually were destroyed first.</p>
 <p>Interestingly, only generic types need to worry about this. If they aren't
@@ -226,7 +224,7 @@ fn main() {
 checker during the analysis of <code>fn main</code>, saying that <code>days</code> does not
 live long enough.</p>
 <p>The reason is that the borrow checking analysis of <code>main</code> does not
-know about the internals of each Inspector's Drop implementation.  As
+know about the internals of each <code>Inspector</code>'s <code>Drop</code> implementation.  As
 far as the borrow checker knows while it is analyzing <code>main</code>, the body
 of an inspector's destructor might access that borrowed data.</p>
 <p>Therefore, the drop checker forces all borrowed data in a value to
@@ -238,15 +236,14 @@ the future.</p>
 borrowed data in a value to outlive that value, which is certainly sound.</p>
 <p>Future versions of the language may make the analysis more precise, to
 reduce the number of cases where sound code is rejected as unsafe.
-This would help address cases such as the two Inspectors above that
+This would help address cases such as the two <code>Inspector</code>s above that
 know not to inspect during destruction.</p>
 <p>In the meantime, there is an unstable attribute that one can use to
 assert (unsafely) that a generic type's destructor is <em>guaranteed</em> to
 not access any expired data, even if its type gives it the capability
 to do so.</p>
-<p>That attribute is called <code>may_dangle</code> and was introduced in [RFC 1327]
-(https://github.com/rust-lang/rfcs/blob/master/text/1327-dropck-param-eyepatch.md).
-To deploy it on the Inspector example from above, we would write:</p>
+<p>That attribute is called <code>may_dangle</code> and was introduced in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1327-dropck-param-eyepatch.md">RFC 1327</a>.
+To deploy it on the <code>Inspector</code> example from above, we would write:</p>
 <pre><code class="language-rust ignore">struct Inspector&lt;'a&gt;(&amp;'a u8, &amp;'static str);
 
 unsafe impl&lt;#[may_dangle] 'a&gt; Drop for Inspector&lt;'a&gt; {
@@ -325,13 +322,13 @@ the next section.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="subtyping.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="subtyping.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="phantom-data.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="phantom-data.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -371,5 +368,9 @@ the next section.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

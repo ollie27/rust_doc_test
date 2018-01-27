@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title">The Rust Programming Language</h1>
@@ -139,7 +137,7 @@ expression, <code>e as U2</code> is not necessarily so (in fact it will only be 
 <p>A cast <code>e as U</code> is also valid in any of the following cases:</p>
 <ul>
 <li><code>e</code> has type <code>T</code> and <code>T</code> and <code>U</code> are any numeric types; <em>numeric-cast</em></li>
-<li><code>e</code> is a C-like enum (with no data attached to the variants),
+<li><code>e</code> is an enum with no data attached to the variants (a &quot;field-less enumeration&quot;),
 and <code>U</code> is an integer type; <em>enum-cast</em></li>
 <li><code>e</code> has type <code>bool</code> or <code>char</code> and <code>U</code> is an integer type; <em>prim-int-cast</em></li>
 <li><code>e</code> has type <code>u8</code> and <code>U</code> is <code>char</code>; <em>u8-char-cast</em></li>
@@ -278,13 +276,13 @@ unsafe {
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="type-aliases.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="type-aliases.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="associated-types.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="associated-types.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -324,5 +322,9 @@ unsafe {
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

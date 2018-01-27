@@ -10,8 +10,11 @@
     <title>core::intrinsics - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Module intrinsics</p><div class="block items"><ul><li><a href="#reexports">Reexports</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'intrinsics', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module intrinsics</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'intrinsics', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -48,25 +59,20 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1390' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/core/intrinsics.rs.html#11-1394' title='goto source code'>[src]</a></span></h1>
 <div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>core_intrinsics</code>)</summary><p>intrinsics are unlikely to ever be stabilized, instead they should be used through stabilized interfaces in the rest of the standard library</p>
 </details></div></div><div class='docblock'><p>rustc compiler intrinsics.</p>
-
 <p>The corresponding definitions are in librustc_trans/intrinsic.rs.</p>
-
-<h1 id='volatiles' class='section-header'><a href='#volatiles'>Volatiles</a></h1>
+<h1 id="volatiles" class="section-header"><a href="#volatiles">Volatiles</a></h1>
 <p>The volatile intrinsics provide operations intended to act on I/O
 memory, which are guaranteed to not be reordered by the compiler
 across other volatile intrinsics. See the LLVM documentation on
 [<a href="http://llvm.org/docs/LangRef.html#volatile-memory-accesses">volatile</a>].</p>
-
-<h1 id='atomics' class='section-header'><a href='#atomics'>Atomics</a></h1>
+<h1 id="atomics" class="section-header"><a href="#atomics">Atomics</a></h1>
 <p>The atomic intrinsics provide common atomic operations on machine
 words, with multiple possible memory orderings. They obey the same
 semantics as C++11. See the LLVM documentation on [<a href="http://llvm.org/docs/Atomics.html">atomics</a>].</p>
-
 <p>A quick refresher on memory ordering:</p>
-
 <ul>
 <li>Acquire - a barrier for acquiring a lock. Subsequent reads and writes
 take place after the barrier.</li>
@@ -74,9 +80,9 @@ take place after the barrier.</li>
 take place before the barrier.</li>
 <li>Sequentially consistent - sequentially consistent operations are
 guaranteed to happen in order. This is the standard mode for working
-with atomic types and is equivalent to Java&#39;s <code>volatile</code>.</li>
+with atomic types and is equivalent to Java's <code>volatile</code>.</li>
 </ul>
-</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Re-exports</a></h2>
 <table><tr><td><code>pub use ptr::<a class="fn" href="../../core/ptr/fn.drop_in_place.html" title="fn core::ptr::drop_in_place">drop_in_place</a>;</code></td></tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -85,6 +91,7 @@ with atomic types and is equivalent to Java&#39;s <code>volatile</code>.</li>
                            <td class='docblock-short'>
                                 <p>Copies <code>count * size_of&lt;T&gt;</code> bytes from <code>src</code> to <code>dst</code>. The source
 and destination may overlap.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -93,6 +100,7 @@ and destination may overlap.</p>
                            <td class='docblock-short'>
                                 <p>Copies <code>count * size_of&lt;T&gt;</code> bytes from <code>src</code> to <code>dst</code>. The source
 and destination may <em>not</em> overlap.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -100,6 +108,7 @@ and destination may <em>not</em> overlap.</p>
                                   title='fn core::intrinsics::transmute'>transmute</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                 <p>Reinterprets the bits of a value of one type as another type.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -108,6 +117,7 @@ and destination may <em>not</em> overlap.</p>
                            <td class='docblock-short'>
                                 <p>Invokes memset on the specified pointer, setting <code>count * size_of::&lt;T&gt;()</code>
 bytes of memory starting at <code>dst</code> to <code>val</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -115,6 +125,7 @@ bytes of memory starting at <code>dst</code> to <code>val</code>.</p>
                                   title='fn core::intrinsics::abort'>abort</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Aborts the execution of the process.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -125,6 +136,7 @@ bytes of memory starting at <code>dst</code> to <code>val</code>.</p>
 The stabilized versions of this intrinsic are available on the integer
 primitives via the <code>overflowing_add</code> method. For example,
 <a href="../../std/primitive.u32.html#method.overflowing_add"><code>std::u32::overflowing_add</code></a></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -135,6 +147,7 @@ primitives via the <code>overflowing_add</code> method. For example,
 make it aligned to <code>align</code>.
 If it is not possible to align <code>ptr</code>, the implementation returns
 <code>usize::max_value()</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -142,6 +155,7 @@ If it is not possible to align <code>ptr</code>, the implementation returns
                                   title='fn core::intrinsics::arith_offset'>arith_offset</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Calculates the offset from a pointer, potentially wrapping.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -150,6 +164,7 @@ If it is not possible to align <code>ptr</code>, the implementation returns
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Informs the optimizer that a condition is always true.
 If the condition is false, the behavior is undefined.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -162,6 +177,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_and"><code>AtomicBool::fetch_and</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -174,6 +190,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_and"><code>AtomicBool::fetch_and</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -186,6 +203,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_and"><code>AtomicBool::fetch_and</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -198,6 +216,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_and"><code>AtomicBool::fetch_and</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -210,6 +229,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_and"><code>AtomicBool::fetch_and</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -222,6 +242,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as both the <code>success</code> and <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -234,6 +255,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as both the <code>success</code> and <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -248,6 +270,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -262,6 +285,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -276,6 +300,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -290,6 +315,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -304,6 +330,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -318,6 +345,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -330,6 +358,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as both the <code>success</code> and <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange"><code>AtomicBool::compare_exchange</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -342,6 +371,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as both the <code>success</code> and <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -354,6 +384,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as both the <code>success</code> and <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -368,6 +399,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -382,6 +414,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -396,6 +429,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -410,6 +444,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -424,6 +459,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -438,6 +474,7 @@ as the <code>success</code> and
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -450,6 +487,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as both the <code>success</code> and <code>failure</code> parameters. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.compare_exchange_weak"><code>AtomicBool::compare_exchange_weak</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -490,6 +528,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.load"><code>AtomicBool::load</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -502,6 +541,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.load"><code>AtomicBool::load</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -514,6 +554,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.load"><code>AtomicBool::load</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -603,6 +644,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_nand"><code>AtomicBool::fetch_nand</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -615,6 +657,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_nand"><code>AtomicBool::fetch_nand</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -627,6 +670,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_nand"><code>AtomicBool::fetch_nand</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -639,6 +683,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_nand"><code>AtomicBool::fetch_nand</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -651,6 +696,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_nand"><code>AtomicBool::fetch_nand</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -663,6 +709,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_or"><code>AtomicBool::fetch_or</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -675,6 +722,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_or"><code>AtomicBool::fetch_or</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -687,6 +735,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_or"><code>AtomicBool::fetch_or</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -699,6 +748,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_or"><code>AtomicBool::fetch_or</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -711,6 +761,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_or"><code>AtomicBool::fetch_or</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -718,6 +769,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::atomic_singlethreadfence'>atomic_singlethreadfence</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>A compiler-only memory barrier.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -751,6 +803,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.store"><code>AtomicBool::store</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -763,6 +816,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.store"><code>AtomicBool::store</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -775,6 +829,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.store"><code>AtomicBool::store</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -864,6 +919,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_add"><code>AtomicIsize::fetch_add</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -876,6 +932,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_add"><code>AtomicIsize::fetch_add</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -888,6 +945,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_add"><code>AtomicIsize::fetch_add</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -900,6 +958,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_add"><code>AtomicIsize::fetch_add</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -912,6 +971,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_add"><code>AtomicIsize::fetch_add</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -924,6 +984,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.swap"><code>AtomicBool::swap</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -936,6 +997,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.swap"><code>AtomicBool::swap</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -948,6 +1010,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.swap"><code>AtomicBool::swap</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -960,6 +1023,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.swap"><code>AtomicBool::swap</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -972,6 +1036,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.swap"><code>AtomicBool::swap</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -984,6 +1049,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_xor"><code>AtomicBool::fetch_xor</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -996,6 +1062,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_xor"><code>AtomicBool::fetch_xor</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1008,6 +1075,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_xor"><code>AtomicBool::fetch_xor</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1020,6 +1088,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_xor"><code>AtomicBool::fetch_xor</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1032,6 +1101,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicBool.html#method.fetch_xor"><code>AtomicBool::fetch_xor</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1044,6 +1114,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::SeqCst</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_sub"><code>AtomicIsize::fetch_sub</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1056,6 +1127,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Acquire</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_sub"><code>AtomicIsize::fetch_sub</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1068,6 +1140,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::AcqRel</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_sub"><code>AtomicIsize::fetch_sub</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1080,6 +1153,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Release</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_sub"><code>AtomicIsize::fetch_sub</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1092,6 +1166,7 @@ The stabilized version of this intrinsic is available on the
 <a href="../../std/sync/atomic/enum.Ordering.html"><code>Ordering::Relaxed</code></a>
 as the <code>order</code>. For example,
 <a href="../../std/sync/atomic/struct.AtomicIsize.html#method.fetch_sub"><code>AtomicIsize::fetch_sub</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1099,6 +1174,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::breakpoint'>breakpoint</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Executes a breakpoint trap, for inspection by a debugger.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1106,6 +1182,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::bswap'>bswap</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Reverses the bytes in an integer type <code>T</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1113,6 +1190,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::ceilf32'>ceilf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the smallest integer greater than or equal to an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1120,6 +1198,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::ceilf64'>ceilf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the smallest integer greater than or equal to an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1127,6 +1206,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::copysignf32'>copysignf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Copies the sign from <code>y</code> to <code>x</code> for <code>f32</code> values.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1134,6 +1214,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::copysignf64'>copysignf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Copies the sign from <code>y</code> to <code>x</code> for <code>f64</code> values.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1141,6 +1222,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::cosf32'>cosf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the cosine of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1148,6 +1230,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::cosf64'>cosf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the cosine of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1155,6 +1238,7 @@ as the <code>order</code>. For example,
                                   title='fn core::intrinsics::ctlz'>ctlz</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the number of leading unset bits (zeroes) in an integer type <code>T</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1163,6 +1247,7 @@ as the <code>order</code>. For example,
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Like <code>ctlz</code>, but extra-unsafe as it returns <code>undef</code> when
 given an <code>x</code> with value <code>0</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1170,6 +1255,7 @@ given an <code>x</code> with value <code>0</code>.</p>
                                   title='fn core::intrinsics::ctpop'>ctpop</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the number of bits set in an integer type <code>T</code></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1177,6 +1263,7 @@ given an <code>x</code> with value <code>0</code>.</p>
                                   title='fn core::intrinsics::cttz'>cttz</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the number of trailing unset bits (zeroes) in an integer type <code>T</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1185,14 +1272,16 @@ given an <code>x</code> with value <code>0</code>.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Like <code>cttz</code>, but extra-unsafe as it returns <code>undef</code> when
 given an <code>x</code> with value <code>0</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
                            <td><a class="fn" href="fn.discriminant_value.html"
                                   title='fn core::intrinsics::discriminant_value'>discriminant_value</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Returns the value of the discriminant for the variant in &#39;v&#39;,
+                               [<div class='stab unstable'>Experimental</div>] <p>Returns the value of the discriminant for the variant in 'v',
 cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1200,6 +1289,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                                   title='fn core::intrinsics::exp2f32'>exp2f32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns 2 raised to the power of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1207,6 +1297,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                                   title='fn core::intrinsics::exp2f64'>exp2f64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns 2 raised to the power of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1214,6 +1305,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                                   title='fn core::intrinsics::expf32'>expf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the exponential of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1221,6 +1313,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                                   title='fn core::intrinsics::expf64'>expf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the exponential of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1228,6 +1321,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                                   title='fn core::intrinsics::fabsf32'>fabsf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the absolute value of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1235,6 +1329,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                                   title='fn core::intrinsics::fabsf64'>fabsf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the absolute value of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1243,6 +1338,7 @@ cast to a <code>u64</code>; if <code>T</code> has no discriminant, returns 0.</p
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Float addition that allows optimizations based on algebraic rules.
 May assume inputs are finite.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1251,6 +1347,7 @@ May assume inputs are finite.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Float division that allows optimizations based on algebraic rules.
 May assume inputs are finite.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1258,6 +1355,7 @@ May assume inputs are finite.</p>
                                   title='fn core::intrinsics::floorf32'>floorf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the largest integer less than or equal to an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1265,6 +1363,7 @@ May assume inputs are finite.</p>
                                   title='fn core::intrinsics::floorf64'>floorf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the largest integer less than or equal to an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1272,6 +1371,7 @@ May assume inputs are finite.</p>
                                   title='fn core::intrinsics::fmaf32'>fmaf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns <code>a * b + c</code> for <code>f32</code> values.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1279,6 +1379,7 @@ May assume inputs are finite.</p>
                                   title='fn core::intrinsics::fmaf64'>fmaf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns <code>a * b + c</code> for <code>f64</code> values.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1287,6 +1388,7 @@ May assume inputs are finite.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Float multiplication that allows optimizations based on algebraic rules.
 May assume inputs are finite.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1295,6 +1397,7 @@ May assume inputs are finite.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Float remainder that allows optimizations based on algebraic rules.
 May assume inputs are finite.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1303,6 +1406,7 @@ May assume inputs are finite.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Float subtraction that allows optimizations based on algebraic rules.
 May assume inputs are finite.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1310,6 +1414,7 @@ May assume inputs are finite.</p>
                                   title='fn core::intrinsics::init'>init</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Creates a value initialized to zero.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1318,6 +1423,7 @@ May assume inputs are finite.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Hints to the compiler that branch condition is likely to be true.
 Returns the value passed to it.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1325,6 +1431,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::log10f32'>log10f32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the base 10 logarithm of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1332,6 +1439,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::log10f64'>log10f64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the base 10 logarithm of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1339,6 +1447,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::log2f32'>log2f32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the base 2 logarithm of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1346,6 +1455,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::log2f64'>log2f64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the base 2 logarithm of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1353,6 +1463,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::logf32'>logf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the natural logarithm of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1360,6 +1471,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::logf64'>logf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the natural logarithm of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1381,6 +1493,7 @@ Returns the value passed to it.</p>
                                   title='fn core::intrinsics::move_val_init'>move_val_init</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Moves a value to an uninitialized memory location.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1391,6 +1504,7 @@ Returns the value passed to it.</p>
 The stabilized versions of this intrinsic are available on the integer
 primitives via the <code>overflowing_mul</code> method. For example,
 <a href="../../std/primitive.u32.html#method.overflowing_mul"><code>std::u32::overflowing_mul</code></a></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1398,6 +1512,7 @@ primitives via the <code>overflowing_mul</code> method. For example,
                                   title='fn core::intrinsics::nearbyintf32'>nearbyintf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the nearest integer to an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1405,6 +1520,7 @@ primitives via the <code>overflowing_mul</code> method. For example,
                                   title='fn core::intrinsics::nearbyintf64'>nearbyintf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the nearest integer to an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1414,6 +1530,16 @@ primitives via the <code>overflowing_mul</code> method. For example,
                                [<div class='stab unstable'>Experimental</div>] <p>Returns <code>true</code> if the actual type given as <code>T</code> requires drop
 glue; returns <code>false</code> if the actual type provided for <code>T</code>
 implements <code>Copy</code>.</p>
+
+                           </td>
+                       </tr>
+                       <tr class='unstable module-item'>
+                           <td><a class="fn" href="fn.nontemporal_store.html"
+                                  title='fn core::intrinsics::nontemporal_store'>nontemporal_store</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab unstable'>Experimental</div>] <p>Emits a <code>!nontemporal</code> store according to LLVM (see their docs).
+Probably will never become stable.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1421,6 +1547,7 @@ implements <code>Copy</code>.</p>
                                   title='fn core::intrinsics::offset'>offset</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Calculates the offset from a pointer.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1431,6 +1558,7 @@ implements <code>Copy</code>.</p>
 The stabilized versions of this intrinsic are available on the integer
 primitives via the <code>wrapping_add</code> method. For example,
 <a href="../../std/primitive.u32.html#method.wrapping_add"><code>std::u32::wrapping_add</code></a></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1441,6 +1569,7 @@ primitives via the <code>wrapping_add</code> method. For example,
 The stabilized versions of this intrinsic are available on the integer
 primitives via the <code>wrapping_mul</code> method. For example,
 <a href="../../std/primitive.u32.html#method.wrapping_mul"><code>std::u32::wrapping_mul</code></a></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1451,6 +1580,7 @@ primitives via the <code>wrapping_mul</code> method. For example,
 The stabilized versions of this intrinsic are available on the integer
 primitives via the <code>wrapping_sub</code> method. For example,
 <a href="../../std/primitive.u32.html#method.wrapping_sub"><code>std::u32::wrapping_sub</code></a></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1458,6 +1588,7 @@ primitives via the <code>wrapping_sub</code> method. For example,
                                   title='fn core::intrinsics::powf32'>powf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Raises an <code>f32</code> to an <code>f32</code> power.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1465,6 +1596,7 @@ primitives via the <code>wrapping_sub</code> method. For example,
                                   title='fn core::intrinsics::powf64'>powf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Raises an <code>f64</code> to an <code>f64</code> power.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1472,6 +1604,7 @@ primitives via the <code>wrapping_sub</code> method. For example,
                                   title='fn core::intrinsics::powif32'>powif32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Raises an <code>f32</code> to an integer power.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1479,6 +1612,7 @@ primitives via the <code>wrapping_sub</code> method. For example,
                                   title='fn core::intrinsics::powif64'>powif64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Raises an <code>f64</code> to an integer power.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1496,6 +1630,7 @@ primitives via the <code>wrapping_sub</code> method. For example,
 if supported; otherwise, it is a noop.
 Prefetches have no effect on the behavior of the program but can change its performance
 characteristics.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1506,6 +1641,7 @@ characteristics.</p>
 if supported; otherwise, it is a noop.
 Prefetches have no effect on the behavior of the program but can change its performance
 characteristics.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1516,6 +1652,7 @@ characteristics.</p>
 if supported; otherwise, it is a noop.
 Prefetches have no effect on the behavior of the program but can change its performance
 characteristics.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1526,6 +1663,7 @@ characteristics.</p>
 if supported; otherwise, it is a noop.
 Prefetches have no effect on the behavior of the program but can change its performance
 characteristics.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1534,6 +1672,7 @@ characteristics.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the nearest integer to an <code>f32</code>. May raise an inexact floating-point exception
 if the argument is not an integer.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1542,6 +1681,7 @@ if the argument is not an integer.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the nearest integer to an <code>f64</code>. May raise an inexact floating-point exception
 if the argument is not an integer.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1549,6 +1689,7 @@ if the argument is not an integer.</p>
                                   title='fn core::intrinsics::roundf32'>roundf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the nearest integer to an <code>f32</code>. Rounds half-way cases away from zero.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1556,6 +1697,7 @@ if the argument is not an integer.</p>
                                   title='fn core::intrinsics::roundf64'>roundf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the nearest integer to an <code>f64</code>. Rounds half-way cases away from zero.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1564,6 +1706,7 @@ if the argument is not an integer.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Magic intrinsic that derives its meaning from attributes
 attached to the function.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1571,6 +1714,7 @@ attached to the function.</p>
                                   title='fn core::intrinsics::sinf32'>sinf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the sine of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1578,6 +1722,7 @@ attached to the function.</p>
                                   title='fn core::intrinsics::sinf64'>sinf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the sine of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1585,6 +1730,7 @@ attached to the function.</p>
                                   title='fn core::intrinsics::size_of'>size_of</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>The size of a type in bytes.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1592,6 +1738,7 @@ attached to the function.</p>
                                   title='fn core::intrinsics::size_of_val'>size_of_val</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>The size of the referenced value in bytes.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1599,6 +1746,7 @@ attached to the function.</p>
                                   title='fn core::intrinsics::sqrtf32'>sqrtf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the square root of an <code>f32</code></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1606,6 +1754,7 @@ attached to the function.</p>
                                   title='fn core::intrinsics::sqrtf64'>sqrtf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the square root of an <code>f64</code></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1616,6 +1765,7 @@ attached to the function.</p>
 The stabilized versions of this intrinsic are available on the integer
 primitives via the <code>overflowing_sub</code> method. For example,
 <a href="../../std/primitive.u32.html#method.overflowing_sub"><code>std::u32::overflowing_sub</code></a></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1623,6 +1773,7 @@ primitives via the <code>overflowing_sub</code> method. For example,
                                   title='fn core::intrinsics::truncf32'>truncf32</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the integer part of an <code>f32</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1630,14 +1781,16 @@ primitives via the <code>overflowing_sub</code> method. For example,
                                   title='fn core::intrinsics::truncf64'>truncf64</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the integer part of an <code>f64</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
                            <td><a class="fn" href="fn.try.html"
                                   title='fn core::intrinsics::try'>try</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
-                               [<div class='stab unstable'>Experimental</div>] <p>Rust&#39;s &quot;try catch&quot; construct which invokes the function pointer <code>f</code> with
+                               [<div class='stab unstable'>Experimental</div>] <p>Rust's &quot;try catch&quot; construct which invokes the function pointer <code>f</code> with
 the data pointer <code>data</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1647,6 +1800,7 @@ the data pointer <code>data</code>.</p>
                                [<div class='stab unstable'>Experimental</div>] <p>Gets an identifier which is globally unique to the specified type. This
 function will return the same value for a type regardless of whichever
 crate it is invoked in.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1654,6 +1808,7 @@ crate it is invoked in.</p>
                                   title='fn core::intrinsics::type_name'>type_name</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Gets a static string slice containing the name of a type.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1662,6 +1817,7 @@ crate it is invoked in.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Performs an unchecked division, resulting in undefined behavior
 where y = 0 or x = <code>T::min_value()</code> and y = -1</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1670,6 +1826,7 @@ where y = 0 or x = <code>T::min_value()</code> and y = -1</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Returns the remainder of an unchecked division, resulting in
 undefined behavior where y = 0 or x = <code>T::min_value()</code> and y = -1</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1678,6 +1835,7 @@ undefined behavior where y = 0 or x = <code>T::min_value()</code> and y = -1</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Performs an unchecked left shift, resulting in undefined behavior when
 y &lt; 0 or y &gt;= N, where N is the width of T in bits.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1686,6 +1844,7 @@ y &lt; 0 or y &gt;= N, where N is the width of T in bits.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Performs an unchecked right shift, resulting in undefined behavior when
 y &lt; 0 or y &gt;= N, where N is the width of T in bits.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1693,6 +1852,7 @@ y &lt; 0 or y &gt;= N, where N is the width of T in bits.</p>
                                   title='fn core::intrinsics::uninit'>uninit</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Creates an uninitialized value.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1701,6 +1861,7 @@ y &lt; 0 or y &gt;= N, where N is the width of T in bits.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Hints to the compiler that branch condition is likely to be false.
 Returns the value passed to it.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1709,6 +1870,7 @@ Returns the value passed to it.</p>
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>Tells LLVM that this point in the code is not reachable, enabling
 further optimizations.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1718,6 +1880,7 @@ further optimizations.</p>
                                [<div class='stab unstable'>Experimental</div>] <p>Equivalent to the appropriate <code>llvm.memmove.p0i8.0i8.*</code> intrinsic, with
 a size of <code>count</code> * <code>size_of::&lt;T&gt;()</code> and an alignment of
 <code>min_align_of::&lt;T&gt;()</code></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1727,6 +1890,7 @@ a size of <code>count</code> * <code>size_of::&lt;T&gt;()</code> and an alignmen
                                [<div class='stab unstable'>Experimental</div>] <p>Equivalent to the appropriate <code>llvm.memcpy.p0i8.0i8.*</code> intrinsic, with
 a size of <code>count</code> * <code>size_of::&lt;T&gt;()</code> and an alignment of
 <code>min_align_of::&lt;T&gt;()</code></p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1736,6 +1900,7 @@ a size of <code>count</code> * <code>size_of::&lt;T&gt;()</code> and an alignmen
                                [<div class='stab unstable'>Experimental</div>] <p>Perform a volatile load from the <code>src</code> pointer.
 The stabilized version of this intrinsic is
 <a href="../../std/ptr/fn.read_volatile.html"><code>std::ptr::read_volatile</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1745,6 +1910,7 @@ The stabilized version of this intrinsic is
                                [<div class='stab unstable'>Experimental</div>] <p>Equivalent to the appropriate <code>llvm.memset.p0i8.*</code> intrinsic, with a
 size of <code>count</code> * <code>size_of::&lt;T&gt;()</code> and an alignment of
 <code>min_align_of::&lt;T&gt;()</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -1754,6 +1920,7 @@ size of <code>count</code> * <code>size_of::&lt;T&gt;()</code> and an alignment 
                                [<div class='stab unstable'>Experimental</div>] <p>Perform a volatile store to the <code>dst</code> pointer.
 The stabilized version of this intrinsic is
 <a href="../../std/ptr/fn.write_volatile.html"><code>std::ptr::write_volatile</code></a>.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -1768,20 +1935,22 @@ The stabilized version of this intrinsic is
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

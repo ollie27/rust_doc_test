@@ -10,8 +10,11 @@
     <title>std::os::unix::io::AsRawFd - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../../main.css" id="themeStyle">
+    <script src="../../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait AsRawFd</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>unix</a>::<wbr><a href='index.html'>io</a></p><script>window.sidebarCurrent = {name: 'AsRawFd', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait AsRawFd</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.as_raw_fd">as_raw_fd</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>unix</a>::<wbr><a href='index.html'>io</a></p><script>window.sidebarCurrent = {name: 'AsRawFd', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -53,7 +64,6 @@
     fn <a href='#tymethod.as_raw_fd' class='fnname'>as_raw_fd</a>(&amp;self) -&gt; <a class="type" href="../../../../std/os/unix/io/type.RawFd.html" title="type std::os::unix::io::RawFd">RawFd</a>;
 }</pre><div class='stability'><div class='stab portability'>This is supported on <strong>Unix</strong> only.</div></div><div class='docblock'><p>A trait to extract the raw unix file descriptor from an underlying
 object.</p>
-
 <p>This is only available on unix platforms and must be imported in order
 to call the method. Windows platforms have a corresponding <code>AsRawHandle</code>
 and <code>AsRawSocket</code> set of traits.</p>
@@ -63,7 +73,6 @@ and <code>AsRawSocket</code> set of traits.</p>
             </h2>
             <div class='methods'>
         <h3 id='tymethod.as_raw_fd' class='method'><span id='as_raw_fd.v' class='invisible'><code>fn <a href='#tymethod.as_raw_fd' class='fnname'>as_raw_fd</a>(&amp;self) -&gt; <a class="type" href="../../../../std/os/unix/io/type.RawFd.html" title="type std::os::unix::io::RawFd">RawFd</a></code></span></h3><div class='stability'><div class='stab portability'>This is supported on <strong>Unix</strong> only.</div></div><div class='docblock'><p>Extracts the raw file descriptor.</p>
-
 <p>This method does <strong>not</strong> pass ownership of the raw file descriptor
 to the caller. The descriptor is only guaranteed to be valid while
 the original object has not yet been destroyed.</p>
@@ -100,20 +109,22 @@ the original object has not yet been destroyed.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

@@ -10,8 +10,11 @@
     <title>core::ops::Deref - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait Deref</p><div class="block items"><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Deref', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Deref</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#associated-types">Associated Types</a><div class="sidebar-links"><a href="#associatedtype.Target">Target</a></div><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.deref">deref</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Deref', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -54,34 +65,27 @@
     type <a href='#associatedtype.Target' class="type">Target</a>: ?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>;
     fn <a href='#tymethod.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;Self::<a class="type" href="../../core/ops/trait.Deref.html#associatedtype.Target" title="type core::ops::Deref::Target">Target</a>;
 }</pre><div class='docblock'><p>Used for immutable dereferencing operations, like <code>*v</code>.</p>
-
 <p>In addition to being used for explicit dereferencing operations with the
 (unary) <code>*</code> operator in immutable contexts, <code>Deref</code> is also used implicitly
 by the compiler in many circumstances. This mechanism is called
-<a href="#more-on-deref-coercion">&#39;<code>Deref</code> coercion&#39;</a>. In mutable contexts, <a href="trait.DerefMut.html"><code>DerefMut</code></a> is used.</p>
-
+<a href="#more-on-deref-coercion">'<code>Deref</code> coercion'</a>. In mutable contexts, <a href="trait.DerefMut.html"><code>DerefMut</code></a> is used.</p>
 <p>Implementing <code>Deref</code> for smart pointers makes accessing the data behind them
 convenient, which is why they implement <code>Deref</code>. On the other hand, the
 rules regarding <code>Deref</code> and <a href="trait.DerefMut.html"><code>DerefMut</code></a> were designed specifically to
 accommodate smart pointers. Because of this, <strong><code>Deref</code> should only be
 implemented for smart pointers</strong> to avoid confusion.</p>
-
 <p>For similar reasons, <strong>this trait should never fail</strong>. Failure during
 dereferencing can be extremely confusing when <code>Deref</code> is invoked implicitly.</p>
-
-<h1 id='more-on-deref-coercion' class='section-header'><a href='#more-on-deref-coercion'>More on <code>Deref</code> coercion</a></h1>
+<h1 id="more-on-deref-coercion" class="section-header"><a href="#more-on-deref-coercion">More on <code>Deref</code> coercion</a></h1>
 <p>If <code>T</code> implements <code>Deref&lt;Target = U&gt;</code>, and <code>x</code> is a value of type <code>T</code>, then:</p>
-
 <ul>
 <li>In immutable contexts, <code>*x</code> on non-pointer types is equivalent to
 <code>*Deref::deref(&amp;x)</code>.</li>
 <li>Values of type <code>&amp;T</code> are coerced to values of type <code>&amp;U</code></li>
 <li><code>T</code> implicitly implements all the (immutable) methods of the type <code>U</code>.</li>
 </ul>
-
-<p>For more details, visit <a href="../../book/second-edition/ch15-02-deref.html">the chapter in <em>The Rust Programming Language</em></a> as well as the reference sections on <a href="../../reference/expressions/operator-expr.html#the-dereference-operator">the dereference operator</a>, <a href="../../reference/the-deref-trait.html">the <code>Deref</code> trait</a>, and <a href="../../reference/type-coercions.html">type coercions</a>.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<p>For more details, visit <a href="../../book/second-edition/ch15-02-deref.html">the chapter in <em>The Rust Programming Language</em></a> as well as the reference sections on <a href="../../reference/expressions/operator-expr.html#the-dereference-operator">the dereference operator</a>, <a href="../../reference/expressions/method-call-expr.html">method resolution</a> and <a href="../../reference/type-coercions.html">type coercions</a>.</p>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>A struct with a single field which is accessible by dereferencing the
 struct.</p>
 
@@ -119,11 +123,11 @@ struct.</p>
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><div class='out-of-band'><a class='srclink' href='../../src/core/mem.rs.html#1000-1008' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="union" href="../../core/mem/union.ManuallyDrop.html" title="union core::mem::ManuallyDrop">ManuallyDrop</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for &amp;'a T<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for &amp;'a mut T<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#968-975' title='goto source code'>[src]</a></div><code>impl&lt;'b, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../core/cell/struct.Ref.html" title="struct core::cell::Ref">Ref</a>&lt;'b, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#1107-1114' title='goto source code'>[src]</a></div><code>impl&lt;'b, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../core/cell/struct.RefMut.html" title="struct core::cell::RefMut">RefMut</a>&lt;'b, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/core/mem.rs.html#998-1006' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="union" href="../../core/mem/union.ManuallyDrop.html" title="union core::mem::ManuallyDrop">ManuallyDrop</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ops/deref.rs.html#83-87' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for &amp;'a T<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ops/deref.rs.html#90-94' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for &amp;'a mut T<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#989-996' title='goto source code'>[src]</a></div><code>impl&lt;'b, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../core/cell/struct.Ref.html" title="struct core::cell::Ref">Ref</a>&lt;'b, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#1130-1137' title='goto source code'>[src]</a></div><code>impl&lt;'b, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../core/cell/struct.RefMut.html" title="struct core::cell::RefMut">RefMut</a>&lt;'b, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/ops/trait.Deref.js">
                  </script></section>
@@ -139,20 +143,22 @@ struct.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

@@ -10,8 +10,11 @@
     <title>alloc::range::RangeArgument - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait RangeArgument</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#foreign-impls">Implementations on Foreign Types</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>alloc</a>::<wbr><a href='index.html'>range</a></p><script>window.sidebarCurrent = {name: 'RangeArgument', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait RangeArgument</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.start">start</a><a href="#tymethod.end">end</a></div><a class="sidebar-title" href="#foreign-impls">Implementations on Foreign Types</a><div class="sidebar-links"><a href="#impl-RangeArgument%3CT%3E">RangeFull</a><a href="#impl-RangeArgument%3CT%3E">RangeFrom&lt;T&gt;</a><a href="#impl-RangeArgument%3CT%3E">RangeTo&lt;T&gt;</a><a href="#impl-RangeArgument%3CT%3E">Range&lt;T&gt;</a><a href="#impl-RangeArgument%3CT%3E">RangeInclusive&lt;T&gt;</a><a href="#impl-RangeArgument%3CT%3E">RangeToInclusive&lt;T&gt;</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>alloc</a>::<wbr><a href='index.html'>range</a></p><script>window.sidebarCurrent = {name: 'RangeArgument', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -53,7 +64,7 @@
     fn <a href='#tymethod.start' class='fnname'>start</a>(&amp;self) -&gt; <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;T&gt;;
 <div class='item-spacer'></div>    fn <a href='#tymethod.end' class='fnname'>end</a>(&amp;self) -&gt; <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;T&gt;;
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>collections_range </code><a href="https://github.com/rust-lang/rust/issues/30877">#30877</a>)</summary><p>waiting for dust to settle on inclusive ranges</p>
-</details></div></div><div class='docblock'><p><code>RangeArgument</code> is implemented by Rust&#39;s built-in range types, produced
+</details></div></div><div class='docblock'><p><code>RangeArgument</code> is implemented by Rust's built-in range types, produced
 by range syntax like <code>..</code>, <code>a..</code>, <code>..b</code> or <code>c..d</code>.</p>
 </div>
             <h2 id='required-methods' class='small-section-header'>
@@ -62,10 +73,8 @@ by range syntax like <code>..</code>, <code>a..</code>, <code>..b</code> or <cod
             <div class='methods'>
         <h3 id='tymethod.start' class='method'><span id='start.v' class='invisible'><code>fn <a href='#tymethod.start' class='fnname'>start</a>(&amp;self) -&gt; <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;T&gt;</code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>collections_range </code><a href="https://github.com/rust-lang/rust/issues/30877">#30877</a>)</summary><p>waiting for dust to settle on inclusive ranges</p>
 </details></div></div><div class='docblock'><p>Start index bound.</p>
-
 <p>Returns the start value as a <code>Bound</code>.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">alloc</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">collections_range</span>)]</span>
@@ -79,10 +88,8 @@ by range syntax like <code>..</code>, <code>a..</code>, <code>..b</code> or <cod
 <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="number">3</span>..<span class="number">10</span>).<span class="ident">start</span>(), <span class="ident">Included</span>(<span class="kw-2">&amp;</span><span class="number">3</span>));</pre>
 </div><h3 id='tymethod.end' class='method'><span id='end.v' class='invisible'><code>fn <a href='#tymethod.end' class='fnname'>end</a>(&amp;self) -&gt; <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;T&gt;</code></span></h3><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>collections_range </code><a href="https://github.com/rust-lang/rust/issues/30877">#30877</a>)</summary><p>waiting for dust to settle on inclusive ranges</p>
 </details></div></div><div class='docblock'><p>End index bound.</p>
-
 <p>Returns the end value as a <code>Bound</code>.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <pre class="rust rust-example-rendered">
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">alloc</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">collections_range</span>)]</span>
@@ -95,7 +102,7 @@ by range syntax like <code>..</code>, <code>a..</code>, <code>..b</code> or <cod
 <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="number">3</span>..).<span class="ident">end</span>(), <span class="ident">Unbounded</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="number">3</span>..<span class="number">10</span>).<span class="ident">end</span>(), <span class="ident">Excluded</span>(<span class="kw-2">&amp;</span><span class="number">10</span>));</pre>
 </div></div>
-                <h2 id='foreign-impls' class='section-header'>
+                <h2 id='foreign-impls' class='small-section-header'>
                   Implementations on Foreign Types<a href='#foreign-impls' class='anchor'></a>
                 </h2>
             <h3 id='impl-RangeArgument%3CT%3E' class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; <a class="trait" href="../../alloc/range/trait.RangeArgument.html" title="trait alloc::range::RangeArgument">RangeArgument</a>&lt;T&gt; for <a class="struct" href="../../core/ops/range/struct.RangeFull.html" title="struct core::ops::range::RangeFull">RangeFull</a></code><a href='#impl-RangeArgument%3CT%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/alloc/range.rs.html#70-77' title='goto source code'>[src]</a></span></h3>
@@ -133,8 +140,8 @@ by range syntax like <code>..</code>, <code>a..</code>, <code>..b</code> or <cod
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;T&gt; RangeArgument&lt;T&gt; for (<a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;T&gt;, <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;T&gt;)</code></li>
-<li><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> + 'a&gt; RangeArgument&lt;T&gt; for (<a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;'a T&gt;, <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;'a T&gt;)</code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/alloc/range.rs.html#126-142' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; RangeArgument&lt;T&gt; for (<a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;T&gt;, <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;T&gt;)</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/range.rs.html#144-152' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> + 'a&gt; RangeArgument&lt;T&gt; for (<a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;'a T&gt;, <a class="enum" href="../../alloc/enum.Bound.html" title="enum alloc::Bound">Bound</a>&lt;&amp;'a T&gt;)</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/alloc/range/trait.RangeArgument.js">
                  </script></section>
@@ -150,20 +157,22 @@ by range syntax like <code>..</code>, <code>a..</code>, <code>..b</code> or <cod
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

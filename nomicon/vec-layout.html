@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -148,7 +146,7 @@ impl&lt;T&gt; Unique&lt;T&gt; {
 <p>Unfortunately the mechanism for stating that your value is non-zero is
 unstable and unlikely to be stabilized soon. As such we're just going to
 take the hit and use std's Unique:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(ptr_internals)]
 
 use std::ptr::{Unique, self};
 
@@ -171,13 +169,13 @@ its contents.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="vec.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="vec.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="vec-alloc.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="vec-alloc.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -217,5 +215,9 @@ its contents.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

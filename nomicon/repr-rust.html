@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -108,7 +106,7 @@ statically in the case of <a href="exotic-sizes.html#dynamically-sized-types-dst
 <li>arrays (homogeneous product types)</li>
 <li>enums (named sum types -- tagged unions)</li>
 </ul>
-<p>An enum is said to be <em>C-like</em> if none of its variants have associated data.</p>
+<p>An enum is said to be <em>field-less</em> if none of its variants have associated data.</p>
 <p>Composite structures will have an alignment equal to the maximum
 of their fields' alignment. Rust will consequently insert padding where
 necessary to ensure that all fields are properly aligned and that the overall
@@ -190,8 +188,6 @@ struct Foo&lt;u32, u16&gt; {
 </code></pre>
 <p>The latter case quite simply wastes space. An optimal use of space therefore
 requires different monomorphizations to have <em>different field orderings</em>.</p>
-<p><strong>Note: this is a hypothetical optimization that is not yet implemented in Rust
-1.0</strong></p>
 <p>Enums make this consideration even more complicated. Naively, an enum such as:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -231,13 +227,13 @@ we leave enum layout unspecified today.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="data.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="data.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="exotic-sizes.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="exotic-sizes.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -277,5 +273,9 @@ we leave enum layout unspecified today.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

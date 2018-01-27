@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libcore\str\pattern.rs`.">
+    <meta name="description" content="Source to the Rust file `libcore\str\pattern.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>pattern.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css" id="themeStyle">
+    <script src="../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -1283,6 +1294,179 @@
 <span id="1238">1238</span>
 <span id="1239">1239</span>
 <span id="1240">1240</span>
+<span id="1241">1241</span>
+<span id="1242">1242</span>
+<span id="1243">1243</span>
+<span id="1244">1244</span>
+<span id="1245">1245</span>
+<span id="1246">1246</span>
+<span id="1247">1247</span>
+<span id="1248">1248</span>
+<span id="1249">1249</span>
+<span id="1250">1250</span>
+<span id="1251">1251</span>
+<span id="1252">1252</span>
+<span id="1253">1253</span>
+<span id="1254">1254</span>
+<span id="1255">1255</span>
+<span id="1256">1256</span>
+<span id="1257">1257</span>
+<span id="1258">1258</span>
+<span id="1259">1259</span>
+<span id="1260">1260</span>
+<span id="1261">1261</span>
+<span id="1262">1262</span>
+<span id="1263">1263</span>
+<span id="1264">1264</span>
+<span id="1265">1265</span>
+<span id="1266">1266</span>
+<span id="1267">1267</span>
+<span id="1268">1268</span>
+<span id="1269">1269</span>
+<span id="1270">1270</span>
+<span id="1271">1271</span>
+<span id="1272">1272</span>
+<span id="1273">1273</span>
+<span id="1274">1274</span>
+<span id="1275">1275</span>
+<span id="1276">1276</span>
+<span id="1277">1277</span>
+<span id="1278">1278</span>
+<span id="1279">1279</span>
+<span id="1280">1280</span>
+<span id="1281">1281</span>
+<span id="1282">1282</span>
+<span id="1283">1283</span>
+<span id="1284">1284</span>
+<span id="1285">1285</span>
+<span id="1286">1286</span>
+<span id="1287">1287</span>
+<span id="1288">1288</span>
+<span id="1289">1289</span>
+<span id="1290">1290</span>
+<span id="1291">1291</span>
+<span id="1292">1292</span>
+<span id="1293">1293</span>
+<span id="1294">1294</span>
+<span id="1295">1295</span>
+<span id="1296">1296</span>
+<span id="1297">1297</span>
+<span id="1298">1298</span>
+<span id="1299">1299</span>
+<span id="1300">1300</span>
+<span id="1301">1301</span>
+<span id="1302">1302</span>
+<span id="1303">1303</span>
+<span id="1304">1304</span>
+<span id="1305">1305</span>
+<span id="1306">1306</span>
+<span id="1307">1307</span>
+<span id="1308">1308</span>
+<span id="1309">1309</span>
+<span id="1310">1310</span>
+<span id="1311">1311</span>
+<span id="1312">1312</span>
+<span id="1313">1313</span>
+<span id="1314">1314</span>
+<span id="1315">1315</span>
+<span id="1316">1316</span>
+<span id="1317">1317</span>
+<span id="1318">1318</span>
+<span id="1319">1319</span>
+<span id="1320">1320</span>
+<span id="1321">1321</span>
+<span id="1322">1322</span>
+<span id="1323">1323</span>
+<span id="1324">1324</span>
+<span id="1325">1325</span>
+<span id="1326">1326</span>
+<span id="1327">1327</span>
+<span id="1328">1328</span>
+<span id="1329">1329</span>
+<span id="1330">1330</span>
+<span id="1331">1331</span>
+<span id="1332">1332</span>
+<span id="1333">1333</span>
+<span id="1334">1334</span>
+<span id="1335">1335</span>
+<span id="1336">1336</span>
+<span id="1337">1337</span>
+<span id="1338">1338</span>
+<span id="1339">1339</span>
+<span id="1340">1340</span>
+<span id="1341">1341</span>
+<span id="1342">1342</span>
+<span id="1343">1343</span>
+<span id="1344">1344</span>
+<span id="1345">1345</span>
+<span id="1346">1346</span>
+<span id="1347">1347</span>
+<span id="1348">1348</span>
+<span id="1349">1349</span>
+<span id="1350">1350</span>
+<span id="1351">1351</span>
+<span id="1352">1352</span>
+<span id="1353">1353</span>
+<span id="1354">1354</span>
+<span id="1355">1355</span>
+<span id="1356">1356</span>
+<span id="1357">1357</span>
+<span id="1358">1358</span>
+<span id="1359">1359</span>
+<span id="1360">1360</span>
+<span id="1361">1361</span>
+<span id="1362">1362</span>
+<span id="1363">1363</span>
+<span id="1364">1364</span>
+<span id="1365">1365</span>
+<span id="1366">1366</span>
+<span id="1367">1367</span>
+<span id="1368">1368</span>
+<span id="1369">1369</span>
+<span id="1370">1370</span>
+<span id="1371">1371</span>
+<span id="1372">1372</span>
+<span id="1373">1373</span>
+<span id="1374">1374</span>
+<span id="1375">1375</span>
+<span id="1376">1376</span>
+<span id="1377">1377</span>
+<span id="1378">1378</span>
+<span id="1379">1379</span>
+<span id="1380">1380</span>
+<span id="1381">1381</span>
+<span id="1382">1382</span>
+<span id="1383">1383</span>
+<span id="1384">1384</span>
+<span id="1385">1385</span>
+<span id="1386">1386</span>
+<span id="1387">1387</span>
+<span id="1388">1388</span>
+<span id="1389">1389</span>
+<span id="1390">1390</span>
+<span id="1391">1391</span>
+<span id="1392">1392</span>
+<span id="1393">1393</span>
+<span id="1394">1394</span>
+<span id="1395">1395</span>
+<span id="1396">1396</span>
+<span id="1397">1397</span>
+<span id="1398">1398</span>
+<span id="1399">1399</span>
+<span id="1400">1400</span>
+<span id="1401">1401</span>
+<span id="1402">1402</span>
+<span id="1403">1403</span>
+<span id="1404">1404</span>
+<span id="1405">1405</span>
+<span id="1406">1406</span>
+<span id="1407">1407</span>
+<span id="1408">1408</span>
+<span id="1409">1409</span>
+<span id="1410">1410</span>
+<span id="1411">1411</span>
+<span id="1412">1412</span>
+<span id="1413">1413</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1305,6 +1489,7 @@
 
 <span class="kw">use</span> <span class="ident">cmp</span>;
 <span class="kw">use</span> <span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">slice</span>::<span class="ident">memchr</span>;
 <span class="kw">use</span> <span class="ident">usize</span>;
 
 <span class="comment">// Pattern</span>
@@ -1413,6 +1598,11 @@
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">SearchStep</span>;
 
     <span class="doccomment">/// Find the next `Match` result. See `next()`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Unlike next(), there is no guarantee that the returned ranges</span>
+    <span class="doccomment">/// of this and next_reject will overlap. This will return (start_match, end_match),</span>
+    <span class="doccomment">/// where start_match is the index of where the match begins, and end_match is</span>
+    <span class="doccomment">/// the index after the end of the match.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">next_match</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
         <span class="kw">loop</span> {
@@ -1424,7 +1614,10 @@
         }
     }
 
-    <span class="doccomment">/// Find the next `Reject` result. See `next()`</span>
+    <span class="doccomment">/// Find the next `Reject` result. See `next()` and `next_match()`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Unlike next(), there is no guarantee that the returned ranges</span>
+    <span class="doccomment">/// of this and next_match will overlap.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">next_reject</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
         <span class="kw">loop</span> {
@@ -1520,62 +1713,276 @@
 <span class="doccomment">/// `&quot;[aa]a&quot;` or `&quot;a[aa]&quot;`, depending from which side it is searched.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">DoubleEndedSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>: <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {}
 
+
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
-<span class="comment">// Impl for a CharEq wrapper</span>
+<span class="comment">// Impl for char</span>
+<span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+
+<span class="doccomment">/// Associated type for `&lt;char as Pattern&lt;&#39;a&gt;&gt;::Searcher`.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
+    <span class="comment">// safety invariant: `finger`/`finger_back` must be a valid utf8 byte index of `haystack`</span>
+    <span class="comment">// This invariant can be broken *within* next_match and next_match_back, however</span>
+    <span class="comment">// they must exit with fingers on valid code point boundaries.</span>
+
+    <span class="doccomment">/// `finger` is the current byte index of the forward search.</span>
+    <span class="doccomment">/// Imagine that it exists before the byte at its index, i.e.</span>
+    <span class="doccomment">/// haystack[finger] is the first byte of the slice we must inspect during</span>
+    <span class="doccomment">/// forward searching</span>
+    <span class="ident">finger</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// `finger_back` is the current byte index of the reverse search.</span>
+    <span class="doccomment">/// Imagine that it exists after the byte at its index, i.e.</span>
+    <span class="doccomment">/// haystack[finger_back - 1] is the last byte of the slice we must inspect during</span>
+    <span class="doccomment">/// forward searching (and thus the first byte to be inspected when calling next_back())</span>
+    <span class="ident">finger_back</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// The character being searched for</span>
+    <span class="ident">needle</span>: <span class="ident">char</span>,
+
+    <span class="comment">// safety invariant: `utf8_size` must be less than 5</span>
+    <span class="doccomment">/// The number of bytes `needle` takes up when encoded in utf8</span>
+    <span class="ident">utf8_size</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// A utf8 encoded copy of the `needle`</span>
+    <span class="ident">utf8_encoded</span>: [<span class="ident">u8</span>; <span class="number">4</span>],
+}
+
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Searcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">haystack</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span> {
+        <span class="self">self</span>.<span class="ident">haystack</span>
+    }
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">SearchStep</span> {
+        <span class="kw">let</span> <span class="ident">old_finger</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">finger</span>;
+        <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">haystack</span>.<span class="ident">get_unchecked</span>(<span class="ident">old_finger</span>..<span class="self">self</span>.<span class="ident">finger_back</span>) };
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">chars</span>();
+        <span class="kw">let</span> <span class="ident">old_len</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">iter</span>.<span class="ident">len</span>();
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">next</span>() {
+            <span class="comment">// add byte offset of current character</span>
+            <span class="comment">// without re-encoding as utf-8</span>
+            <span class="self">self</span>.<span class="ident">finger</span> <span class="op">+=</span> <span class="ident">old_len</span> <span class="op">-</span> <span class="ident">iter</span>.<span class="ident">iter</span>.<span class="ident">len</span>();
+            <span class="kw">if</span> <span class="ident">ch</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">needle</span> {
+                <span class="ident">SearchStep</span>::<span class="ident">Match</span>(<span class="ident">old_finger</span>, <span class="self">self</span>.<span class="ident">finger</span>)
+            } <span class="kw">else</span> {
+                <span class="ident">SearchStep</span>::<span class="ident">Reject</span>(<span class="ident">old_finger</span>, <span class="self">self</span>.<span class="ident">finger</span>)
+            }
+        } <span class="kw">else</span> {
+            <span class="ident">SearchStep</span>::<span class="ident">Done</span>
+        }
+    }
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">next_match</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
+        <span class="kw">loop</span> {
+            <span class="comment">// get the haystack after the last character found</span>
+            <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">slice</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">haystack</span>.<span class="ident">as_bytes</span>()
+                                                 .<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">finger</span>..<span class="self">self</span>.<span class="ident">finger_back</span>) {
+                <span class="ident">slice</span>
+            } <span class="kw">else</span> {
+                <span class="kw">return</span> <span class="prelude-val">None</span>;
+            };
+            <span class="comment">// the last byte of the utf8 encoded needle</span>
+            <span class="kw">let</span> <span class="ident">last_byte</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">utf8_encoded</span>.<span class="ident">get_unchecked</span>(<span class="self">self</span>.<span class="ident">utf8_size</span> <span class="op">-</span> <span class="number">1</span>) };
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">memchr</span>::<span class="ident">memchr</span>(<span class="ident">last_byte</span>, <span class="ident">bytes</span>) {
+                <span class="comment">// The new finger is the index of the byte we found,</span>
+                <span class="comment">// plus one, since we memchr&#39;d for the last byte of the character.</span>
+                <span class="comment">//</span>
+                <span class="comment">// Note that this doesn&#39;t always give us a finger on a UTF8 boundary.</span>
+                <span class="comment">// If we *didn&#39;t* find our character</span>
+                <span class="comment">// we may have indexed to the non-last byte of a 3-byte or 4-byte character.</span>
+                <span class="comment">// We can&#39;t just skip to the next valid starting byte because a character like</span>
+                <span class="comment">// ꁁ (U+A041 YI SYLLABLE PA), utf-8 `EA 81 81` will have us always find</span>
+                <span class="comment">// the second byte when searching for the third.</span>
+                <span class="comment">//</span>
+                <span class="comment">// However, this is totally okay. While we have the invariant that</span>
+                <span class="comment">// self.finger is on a UTF8 boundary, this invariant is not relid upon</span>
+                <span class="comment">// within this method (it is relied upon in CharSearcher::next()).</span>
+                <span class="comment">//</span>
+                <span class="comment">// We only exit this method when we reach the end of the string, or if we</span>
+                <span class="comment">// find something. When we find something the `finger` will be set</span>
+                <span class="comment">// to a UTF8 boundary.</span>
+                <span class="self">self</span>.<span class="ident">finger</span> <span class="op">+=</span> <span class="ident">index</span> <span class="op">+</span> <span class="number">1</span>;
+                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">finger</span> <span class="op">&gt;=</span> <span class="self">self</span>.<span class="ident">utf8_size</span> {
+                    <span class="kw">let</span> <span class="ident">found_char</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">finger</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">utf8_size</span>;
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">slice</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">haystack</span>.<span class="ident">as_bytes</span>().<span class="ident">get</span>(<span class="ident">found_char</span>..<span class="self">self</span>.<span class="ident">finger</span>) {
+                        <span class="kw">if</span> <span class="ident">slice</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">utf8_encoded</span>[<span class="number">0</span>..<span class="self">self</span>.<span class="ident">utf8_size</span>] {
+                            <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">found_char</span>, <span class="self">self</span>.<span class="ident">finger</span>));
+                        }
+                    }
+                }
+            } <span class="kw">else</span> {
+                <span class="comment">// found nothing, exit</span>
+                <span class="self">self</span>.<span class="ident">finger</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">finger_back</span>;
+                <span class="kw">return</span> <span class="prelude-val">None</span>;
+            }
+        }
+    }
+
+    <span class="comment">// let next_reject use the default implementation from the Searcher trait</span>
+}
+
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">SearchStep</span> {
+        <span class="kw">let</span> <span class="ident">old_finger</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">finger_back</span>;
+        <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">haystack</span>.<span class="ident">slice_unchecked</span>(<span class="self">self</span>.<span class="ident">finger</span>, <span class="ident">old_finger</span>) };
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">slice</span>.<span class="ident">chars</span>();
+        <span class="kw">let</span> <span class="ident">old_len</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">iter</span>.<span class="ident">len</span>();
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">next_back</span>() {
+            <span class="comment">// subtract byte offset of current character</span>
+            <span class="comment">// without re-encoding as utf-8</span>
+            <span class="self">self</span>.<span class="ident">finger_back</span> <span class="op">-=</span> <span class="ident">old_len</span> <span class="op">-</span> <span class="ident">iter</span>.<span class="ident">iter</span>.<span class="ident">len</span>();
+            <span class="kw">if</span> <span class="ident">ch</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">needle</span> {
+                <span class="ident">SearchStep</span>::<span class="ident">Match</span>(<span class="self">self</span>.<span class="ident">finger_back</span>, <span class="ident">old_finger</span>)
+            } <span class="kw">else</span> {
+                <span class="ident">SearchStep</span>::<span class="ident">Reject</span>(<span class="self">self</span>.<span class="ident">finger_back</span>, <span class="ident">old_finger</span>)
+            }
+        } <span class="kw">else</span> {
+            <span class="ident">SearchStep</span>::<span class="ident">Done</span>
+        }
+    }
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">next_match_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">haystack</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">haystack</span>.<span class="ident">as_bytes</span>();
+        <span class="kw">loop</span> {
+            <span class="comment">// get the haystack up to but not including the last character searched</span>
+            <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">slice</span>) <span class="op">=</span> <span class="ident">haystack</span>.<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">finger</span>..<span class="self">self</span>.<span class="ident">finger_back</span>) {
+                <span class="ident">slice</span>
+            } <span class="kw">else</span> {
+                <span class="kw">return</span> <span class="prelude-val">None</span>;
+            };
+            <span class="comment">// the last byte of the utf8 encoded needle</span>
+            <span class="kw">let</span> <span class="ident">last_byte</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">utf8_encoded</span>.<span class="ident">get_unchecked</span>(<span class="self">self</span>.<span class="ident">utf8_size</span> <span class="op">-</span> <span class="number">1</span>) };
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">memchr</span>::<span class="ident">memrchr</span>(<span class="ident">last_byte</span>, <span class="ident">bytes</span>) {
+                <span class="comment">// we searched a slice that was offset by self.finger,</span>
+                <span class="comment">// add self.finger to recoup the original index</span>
+                <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">finger</span> <span class="op">+</span> <span class="ident">index</span>;
+                <span class="comment">// memrchr will return the index of the byte we wish to</span>
+                <span class="comment">// find. In case of an ASCII character, this is indeed</span>
+                <span class="comment">// were we wish our new finger to be (&quot;after&quot; the found</span>
+                <span class="comment">// char in the paradigm of reverse iteration). For</span>
+                <span class="comment">// multibyte chars we need to skip down by the number of more</span>
+                <span class="comment">// bytes they have than ASCII</span>
+                <span class="kw">let</span> <span class="ident">shift</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utf8_size</span> <span class="op">-</span> <span class="number">1</span>;
+                <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;=</span> <span class="ident">shift</span> {
+                    <span class="kw">let</span> <span class="ident">found_char</span> <span class="op">=</span> <span class="ident">index</span> <span class="op">-</span> <span class="ident">shift</span>;
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">slice</span>) <span class="op">=</span> <span class="ident">haystack</span>.<span class="ident">get</span>(<span class="ident">found_char</span>..(<span class="ident">found_char</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">utf8_size</span>)) {
+                        <span class="kw">if</span> <span class="ident">slice</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">utf8_encoded</span>[<span class="number">0</span>..<span class="self">self</span>.<span class="ident">utf8_size</span>] {
+                            <span class="comment">// move finger to before the character found (i.e. at its start index)</span>
+                            <span class="self">self</span>.<span class="ident">finger_back</span> <span class="op">=</span> <span class="ident">found_char</span>;
+                            <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="self">self</span>.<span class="ident">finger_back</span>, <span class="self">self</span>.<span class="ident">finger_back</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">utf8_size</span>));
+                        }
+                    }
+                }
+                <span class="comment">// We can&#39;t use finger_back = index - size + 1 here. If we found the last char</span>
+                <span class="comment">// of a different-sized character (or the middle byte of a different character)</span>
+                <span class="comment">// we need to bump the finger_back down to `index`. This similarly makes</span>
+                <span class="comment">// `finger_back` have the potential to no longer be on a boundary,</span>
+                <span class="comment">// but this is OK since we only exit this function on a boundary</span>
+                <span class="comment">// or when the haystack has been searched completely.</span>
+                <span class="comment">//</span>
+                <span class="comment">// Unlike next_match this does not</span>
+                <span class="comment">// have the problem of repeated bytes in utf-8 because</span>
+                <span class="comment">// we&#39;re searching for the last byte, and we can only have</span>
+                <span class="comment">// found the last byte when searching in reverse.</span>
+                <span class="self">self</span>.<span class="ident">finger_back</span> <span class="op">=</span> <span class="ident">index</span>;
+            } <span class="kw">else</span> {
+                <span class="self">self</span>.<span class="ident">finger_back</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">finger</span>;
+                <span class="comment">// found nothing, exit</span>
+                <span class="kw">return</span> <span class="prelude-val">None</span>;
+            }
+        }
+    }
+
+    <span class="comment">// let next_reject_back use the default implementation from the Searcher trait</span>
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DoubleEndedSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {}
+
+<span class="doccomment">/// Searches for chars that are equal to a given char</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">char</span> {
+    <span class="kw">type</span> <span class="ident">Searcher</span> <span class="op">=</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">into_searcher</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Searcher</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">utf8_encoded</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">4</span>];
+        <span class="self">self</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">utf8_encoded</span>);
+        <span class="kw">let</span> <span class="ident">utf8_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len_utf8</span>();
+        <span class="ident">CharSearcher</span> {
+            <span class="ident">haystack</span>,
+            <span class="ident">finger</span>: <span class="number">0</span>,
+            <span class="ident">finger_back</span>: <span class="ident">haystack</span>.<span class="ident">len</span>(),
+            <span class="ident">needle</span>: <span class="self">self</span>,
+            <span class="ident">utf8_size</span>,
+            <span class="ident">utf8_encoded</span>
+        }
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">is_contained_in</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">if</span> (<span class="self">self</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span> <span class="number">128</span> {
+            <span class="ident">haystack</span>.<span class="ident">as_bytes</span>().<span class="ident">contains</span>(<span class="kw-2">&amp;</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">u8</span>))
+        } <span class="kw">else</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">4</span>];
+            <span class="self">self</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>).<span class="ident">is_contained_in</span>(<span class="ident">haystack</span>)
+        }
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">is_prefix_of</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">haystack</span>.<span class="ident">chars</span>().<span class="ident">next</span>() {
+            <span class="self">self</span> <span class="op">==</span> <span class="ident">ch</span>
+        } <span class="kw">else</span> {
+            <span class="bool-val">false</span>
+        }
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">fn</span> <span class="ident">is_suffix_of</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> <span class="kw">where</span> <span class="self">Self</span>::<span class="ident">Searcher</span>: <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>
+    {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">haystack</span>.<span class="ident">chars</span>().<span class="ident">next_back</span>() {
+            <span class="self">self</span> <span class="op">==</span> <span class="ident">ch</span>
+        } <span class="kw">else</span> {
+            <span class="bool-val">false</span>
+        }
+    }
+}
+
+<span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<span class="comment">// Impl for a MultiCharEq wrapper</span>
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">trait</span> <span class="ident">CharEq</span> {
+<span class="kw">trait</span> <span class="ident">MultiCharEq</span> {
     <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">only_ascii</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">CharEq</span> <span class="kw">for</span> <span class="ident">char</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { <span class="kw-2">*</span><span class="self">self</span> <span class="op">==</span> <span class="ident">c</span> }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">only_ascii</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { (<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span> <span class="number">128</span> }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">CharEq</span> <span class="kw">for</span> <span class="ident">F</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">MultiCharEq</span> <span class="kw">for</span> <span class="ident">F</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { (<span class="kw-2">*</span><span class="self">self</span>)(<span class="ident">c</span>) }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">only_ascii</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { <span class="bool-val">false</span> }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">CharEq</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">char</span>] {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">MultiCharEq</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">char</span>] {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">m</span><span class="op">|</span> { <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">m</span>; <span class="ident">m</span>.<span class="ident">matches</span>(<span class="ident">c</span>) })
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">only_ascii</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> <span class="ident">m</span>.<span class="ident">only_ascii</span>())
+        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">m</span><span class="op">|</span> { <span class="ident">m</span> <span class="op">==</span> <span class="ident">c</span> })
     }
 }
 
-<span class="kw">struct</span> <span class="ident">CharEqPattern</span><span class="op">&lt;</span><span class="ident">C</span>: <span class="ident">CharEq</span><span class="op">&gt;</span>(<span class="ident">C</span>);
+<span class="kw">struct</span> <span class="ident">MultiCharEqPattern</span><span class="op">&lt;</span><span class="ident">C</span>: <span class="ident">MultiCharEq</span><span class="op">&gt;</span>(<span class="ident">C</span>);
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">struct</span> <span class="ident">CharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">CharEq</span><span class="op">&gt;</span> {
+<span class="kw">struct</span> <span class="ident">MultiCharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">MultiCharEq</span><span class="op">&gt;</span> {
     <span class="ident">char_eq</span>: <span class="ident">C</span>,
     <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
     <span class="ident">char_indices</span>: <span class="kw">super</span>::<span class="ident">CharIndices</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="ident">ascii_only</span>: <span class="ident">bool</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">CharEq</span><span class="op">&gt;</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharEqPattern</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Searcher</span> <span class="op">=</span> <span class="ident">CharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span>;
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">MultiCharEq</span><span class="op">&gt;</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MultiCharEqPattern</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Searcher</span> <span class="op">=</span> <span class="ident">MultiCharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">into_searcher</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">CharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {
-        <span class="ident">CharEqSearcher</span> {
-            <span class="ident">ascii_only</span>: <span class="self">self</span>.<span class="number">0</span>.<span class="ident">only_ascii</span>(),
+    <span class="kw">fn</span> <span class="ident">into_searcher</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">MultiCharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {
+        <span class="ident">MultiCharEqSearcher</span> {
             <span class="ident">haystack</span>,
             <span class="ident">char_eq</span>: <span class="self">self</span>.<span class="number">0</span>,
             <span class="ident">char_indices</span>: <span class="ident">haystack</span>.<span class="ident">char_indices</span>(),
@@ -1583,7 +1990,7 @@
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">CharEq</span><span class="op">&gt;</span> <span class="ident">Searcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">MultiCharEq</span><span class="op">&gt;</span> <span class="ident">Searcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MultiCharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">haystack</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span> {
         <span class="self">self</span>.<span class="ident">haystack</span>
@@ -1608,7 +2015,7 @@
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">CharEq</span><span class="op">&gt;</span> <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">MultiCharEq</span><span class="op">&gt;</span> <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MultiCharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">SearchStep</span> {
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">char_indices</span>;
@@ -1628,7 +2035,7 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">CharEq</span><span class="op">&gt;</span> <span class="ident">DoubleEndedSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span>: <span class="ident">MultiCharEq</span><span class="op">&gt;</span> <span class="ident">DoubleEndedSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MultiCharEqSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">C</span><span class="op">&gt;</span> {}
 
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
 
@@ -1696,55 +2103,6 @@
 }
 
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
-<span class="comment">// Impl for char</span>
-<span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
-
-<span class="doccomment">/// Associated type for `&lt;char as Pattern&lt;&#39;a&gt;&gt;::Searcher`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="op">&lt;</span><span class="ident">CharEqPattern</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>::<span class="ident">Searcher</span>);
-
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Searcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="macro">searcher_methods</span><span class="macro">!</span>(<span class="ident">forward</span>);
-}
-
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="macro">searcher_methods</span><span class="macro">!</span>(<span class="ident">reverse</span>);
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DoubleEndedSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {}
-
-<span class="doccomment">/// Searches for chars that are equal to a given char</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">char</span> {
-    <span class="kw">type</span> <span class="ident">Searcher</span> <span class="op">=</span> <span class="ident">CharSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">into_searcher</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Searcher</span> {
-        <span class="ident">CharSearcher</span>(<span class="ident">CharEqPattern</span>(<span class="self">self</span>).<span class="ident">into_searcher</span>(<span class="ident">haystack</span>))
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_contained_in</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="kw">if</span> (<span class="self">self</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span> <span class="number">128</span> {
-            <span class="ident">haystack</span>.<span class="ident">as_bytes</span>().<span class="ident">contains</span>(<span class="kw-2">&amp;</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">u8</span>))
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">4</span>];
-            <span class="self">self</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>).<span class="ident">is_contained_in</span>(<span class="ident">haystack</span>)
-        }
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_prefix_of</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="ident">CharEqPattern</span>(<span class="self">self</span>).<span class="ident">is_prefix_of</span>(<span class="ident">haystack</span>)
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_suffix_of</span>(<span class="self">self</span>, <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> <span class="kw">where</span> <span class="self">Self</span>::<span class="ident">Searcher</span>: <span class="ident">ReverseSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>
-    {
-        <span class="ident">CharEqPattern</span>(<span class="self">self</span>).<span class="ident">is_suffix_of</span>(<span class="ident">haystack</span>)
-    }
-}
-
-<span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">// Impl for &amp;[char]</span>
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
 
@@ -1752,7 +2110,7 @@
 
 <span class="doccomment">/// Associated type for `&lt;&amp;[char] as Pattern&lt;&#39;a&gt;&gt;::Searcher`.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharSliceSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="op">&lt;</span><span class="ident">CharEqPattern</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">char</span>]<span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>::<span class="ident">Searcher</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharSliceSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="op">&lt;</span><span class="ident">MultiCharEqPattern</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">char</span>]<span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>::<span class="ident">Searcher</span>);
 
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">Searcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CharSliceSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
     <span class="macro">searcher_methods</span><span class="macro">!</span>(<span class="ident">forward</span>);
@@ -1766,7 +2124,7 @@
 
 <span class="doccomment">/// Searches for chars that are equal to any of the chars in the array</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">char</span>] {
-    <span class="macro">pattern_methods</span><span class="macro">!</span>(<span class="ident">CharSliceSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>, <span class="ident">CharEqPattern</span>, <span class="ident">CharSliceSearcher</span>);
+    <span class="macro">pattern_methods</span><span class="macro">!</span>(<span class="ident">CharSliceSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>, <span class="ident">MultiCharEqPattern</span>, <span class="ident">CharSliceSearcher</span>);
 }
 
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
@@ -1775,7 +2133,7 @@
 
 <span class="doccomment">/// Associated type for `&lt;F as Pattern&lt;&#39;a&gt;&gt;::Searcher`.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharPredicateSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="op">&lt;</span><span class="ident">CharEqPattern</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>::<span class="ident">Searcher</span>)
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharPredicateSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="op">&lt;</span><span class="ident">MultiCharEqPattern</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>::<span class="ident">Searcher</span>)
     <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">CharPredicateSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>
@@ -1785,7 +2143,6 @@
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;CharPredicateSearcher&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;haystack&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>.<span class="ident">haystack</span>)
             .<span class="ident">field</span>(<span class="string">&quot;char_indices&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>.<span class="ident">char_indices</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;ascii_only&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>.<span class="ident">ascii_only</span>)
             .<span class="ident">finish</span>()
     }
 }
@@ -1806,7 +2163,7 @@
 
 <span class="doccomment">/// Searches for chars that match the given predicate</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Pattern</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">F</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-    <span class="macro">pattern_methods</span><span class="macro">!</span>(<span class="ident">CharPredicateSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>, <span class="ident">CharEqPattern</span>, <span class="ident">CharPredicateSearcher</span>);
+    <span class="macro">pattern_methods</span><span class="macro">!</span>(<span class="ident">CharPredicateSearcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>, <span class="ident">MultiCharEqPattern</span>, <span class="ident">CharPredicateSearcher</span>);
 }
 
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
@@ -2538,20 +2895,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

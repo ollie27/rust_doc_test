@@ -10,8 +10,11 @@
     <title>std::ops::Deref - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait Deref</p><div class="block items"><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Deref', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Deref</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#associated-types">Associated Types</a><div class="sidebar-links"><a href="#associatedtype.Target">Target</a></div><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.deref">deref</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Deref', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -54,34 +65,27 @@
     type <a href='#associatedtype.Target' class="type">Target</a>: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>;
     fn <a href='#tymethod.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;Self::<a class="type" href="../../std/ops/trait.Deref.html#associatedtype.Target" title="type std::ops::Deref::Target">Target</a>;
 }</pre><div class='docblock'><p>Used for immutable dereferencing operations, like <code>*v</code>.</p>
-
 <p>In addition to being used for explicit dereferencing operations with the
 (unary) <code>*</code> operator in immutable contexts, <code>Deref</code> is also used implicitly
 by the compiler in many circumstances. This mechanism is called
-<a href="#more-on-deref-coercion">&#39;<code>Deref</code> coercion&#39;</a>. In mutable contexts, <a href="trait.DerefMut.html"><code>DerefMut</code></a> is used.</p>
-
+<a href="#more-on-deref-coercion">'<code>Deref</code> coercion'</a>. In mutable contexts, <a href="trait.DerefMut.html"><code>DerefMut</code></a> is used.</p>
 <p>Implementing <code>Deref</code> for smart pointers makes accessing the data behind them
 convenient, which is why they implement <code>Deref</code>. On the other hand, the
 rules regarding <code>Deref</code> and <a href="trait.DerefMut.html"><code>DerefMut</code></a> were designed specifically to
 accommodate smart pointers. Because of this, <strong><code>Deref</code> should only be
 implemented for smart pointers</strong> to avoid confusion.</p>
-
 <p>For similar reasons, <strong>this trait should never fail</strong>. Failure during
 dereferencing can be extremely confusing when <code>Deref</code> is invoked implicitly.</p>
-
-<h1 id='more-on-deref-coercion' class='section-header'><a href='#more-on-deref-coercion'>More on <code>Deref</code> coercion</a></h1>
+<h1 id="more-on-deref-coercion" class="section-header"><a href="#more-on-deref-coercion">More on <code>Deref</code> coercion</a></h1>
 <p>If <code>T</code> implements <code>Deref&lt;Target = U&gt;</code>, and <code>x</code> is a value of type <code>T</code>, then:</p>
-
 <ul>
 <li>In immutable contexts, <code>*x</code> on non-pointer types is equivalent to
 <code>*Deref::deref(&amp;x)</code>.</li>
 <li>Values of type <code>&amp;T</code> are coerced to values of type <code>&amp;U</code></li>
 <li><code>T</code> implicitly implements all the (immutable) methods of the type <code>U</code>.</li>
 </ul>
-
-<p>For more details, visit <a href="../../book/second-edition/ch15-02-deref.html">the chapter in <em>The Rust Programming Language</em></a> as well as the reference sections on <a href="../../reference/expressions/operator-expr.html#the-dereference-operator">the dereference operator</a>, <a href="../../reference/the-deref-trait.html">the <code>Deref</code> trait</a>, and <a href="../../reference/type-coercions.html">type coercions</a>.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<p>For more details, visit <a href="../../book/second-edition/ch15-02-deref.html">the chapter in <em>The Rust Programming Language</em></a> as well as the reference sections on <a href="../../reference/expressions/operator-expr.html#the-dereference-operator">the dereference operator</a>, <a href="../../reference/expressions/method-call-expr.html">method resolution</a> and <a href="../../reference/type-coercions.html">type coercions</a>.</p>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>A struct with a single field which is accessible by dereferencing the
 struct.</p>
 
@@ -119,25 +123,25 @@ struct.</p>
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><div class='out-of-band'><a class='srclink' href='../../src/core/mem.rs.html#1000-1008' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="union" href="../../std/mem/union.ManuallyDrop.html" title="union std::mem::ManuallyDrop">ManuallyDrop</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/ops/deref.rs.html#83-87' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Deref for <a class="primitive" href="../primitive.reference.html">&amp;'a </a>T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#968-975' title='goto source code'>[src]</a></div><code>impl&lt;'b, T&gt; Deref for <a class="struct" href="../../std/cell/struct.Ref.html" title="struct std::cell::Ref">Ref</a>&lt;'b, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/core/ops/deref.rs.html#83-87' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Deref for <a class="primitive" href="../primitive.reference.html">&amp;'a </a>T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#989-996' title='goto source code'>[src]</a></div><code>impl&lt;'b, T&gt; Deref for <a class="struct" href="../../std/cell/struct.Ref.html" title="struct std::cell::Ref">Ref</a>&lt;'b, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/mem.rs.html#998-1006' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="union" href="../../std/mem/union.ManuallyDrop.html" title="union std::mem::ManuallyDrop">ManuallyDrop</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#1130-1137' title='goto source code'>[src]</a></div><code>impl&lt;'b, T&gt; Deref for <a class="struct" href="../../std/cell/struct.RefMut.html" title="struct std::cell::RefMut">RefMut</a>&lt;'b, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
 <li><div class='out-of-band'><a class='srclink' href='../../src/core/ops/deref.rs.html#90-94' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Deref for <a class="primitive" href="../primitive.reference.html">&amp;'a mut </a>T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#1107-1114' title='goto source code'>[src]</a></div><code>impl&lt;'b, T&gt; Deref for <a class="struct" href="../../std/cell/struct.RefMut.html" title="struct std::cell::RefMut">RefMut</a>&lt;'b, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/borrow.rs.html#262-273' title='goto source code'>[src]</a></div><code>impl&lt;'a, B&gt; Deref for <a class="enum" href="../../std/borrow/enum.Cow.html" title="enum std::borrow::Cow">Cow</a>&lt;'a, B&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;B: <a class="trait" href="../../std/borrow/trait.ToOwned.html" title="trait std::borrow::ToOwned">ToOwned</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = B;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/arc.rs.html#733-740' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/sync/struct.Arc.html" title="struct std::sync::Arc">Arc</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/boxed.rs.html#660-666' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/boxed/struct.Box.html" title="struct std::boxed::Box">Box</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/string.rs.html#1945-1952' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="primitive" href="../primitive.str.html">str</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/vec.rs.html#1686-1696' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="primitive" href="../primitive.slice.html">[</a>T<a class="primitive" href="../primitive.slice.html">]</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/rc.rs.html#793-800' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/rc/struct.Rc.html" title="struct std::rc::Rc">Rc</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
 <li><div class='out-of-band'><a class='srclink' href='../../src/alloc/binary_heap.rs.html#258-263' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Deref for <a class="struct" href="../../std/collections/binary_heap/struct.PeekMut.html" title="struct std::collections::binary_heap::PeekMut">PeekMut</a>&lt;'a, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/cmp/trait.Ord.html" title="trait std::cmp::Ord">Ord</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/ffi/c_str.rs.html#625-632' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/ffi/struct.CString.html" title="struct std::ffi::CString">CString</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="struct" href="../../std/ffi/struct.CStr.html" title="struct std::ffi::CStr">CStr</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/ffi/os_str.rs.html#338-345' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/ffi/struct.OsString.html" title="struct std::ffi::OsString">OsString</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/panic.rs.html#280-286' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/panic/struct.AssertUnwindSafe.html" title="struct std::panic::AssertUnwindSafe">AssertUnwindSafe</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/path.rs.html#1417-1423' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/sync/mutex.rs.html#425-431' title='goto source code'>[src]</a></div><code>impl&lt;'mutex, T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;'mutex, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/sync/rwlock.rs.html#516-522' title='goto source code'>[src]</a></div><code>impl&lt;'rwlock, T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../std/sync/struct.RwLockReadGuard.html" title="struct std::sync::RwLockReadGuard">RwLockReadGuard</a>&lt;'rwlock, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/std/sync/rwlock.rs.html#525-531' title='goto source code'>[src]</a></div><code>impl&lt;'rwlock, T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../std/sync/struct.RwLockWriteGuard.html" title="struct std::sync::RwLockWriteGuard">RwLockWriteGuard</a>&lt;'rwlock, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/boxed.rs.html#686-692' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/boxed/struct.Box.html" title="struct std::boxed::Box">Box</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/borrow.rs.html#262-273' title='goto source code'>[src]</a></div><code>impl&lt;'a, B&gt; Deref for <a class="enum" href="../../std/borrow/enum.Cow.html" title="enum std::borrow::Cow">Cow</a>&lt;'a, B&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;B: <a class="trait" href="../../std/borrow/trait.ToOwned.html" title="trait std::borrow::ToOwned">ToOwned</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = B;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/rc.rs.html#797-804' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/rc/struct.Rc.html" title="struct std::rc::Rc">Rc</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/string.rs.html#1942-1949' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/string/struct.String.html" title="struct std::string::String">String</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="primitive" href="../primitive.str.html">str</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/arc.rs.html#735-742' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/sync/struct.Arc.html" title="struct std::sync::Arc">Arc</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/alloc/vec.rs.html#1686-1696' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/vec/struct.Vec.html" title="struct std::vec::Vec">Vec</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="primitive" href="../primitive.slice.html">[</a>T<a class="primitive" href="../primitive.slice.html">]</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/ffi/c_str.rs.html#627-634' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/ffi/struct.CString.html" title="struct std::ffi::CString">CString</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="struct" href="../../std/ffi/struct.CStr.html" title="struct std::ffi::CStr">CStr</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/ffi/os_str.rs.html#343-350' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/ffi/struct.OsString.html" title="struct std::ffi::OsString">OsString</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="struct" href="../../std/ffi/struct.OsStr.html" title="struct std::ffi::OsStr">OsStr</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/panic.rs.html#273-279' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Deref for <a class="struct" href="../../std/panic/struct.AssertUnwindSafe.html" title="struct std::panic::AssertUnwindSafe">AssertUnwindSafe</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/path.rs.html#1426-1432' title='goto source code'>[src]</a></div><code>impl Deref for <a class="struct" href="../../std/path/struct.PathBuf.html" title="struct std::path::PathBuf">PathBuf</a><span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = <a class="struct" href="../../std/path/struct.Path.html" title="struct std::path::Path">Path</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/sync/mutex.rs.html#436-442' title='goto source code'>[src]</a></div><code>impl&lt;'mutex, T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../std/sync/struct.MutexGuard.html" title="struct std::sync::MutexGuard">MutexGuard</a>&lt;'mutex, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/sync/rwlock.rs.html#527-533' title='goto source code'>[src]</a></div><code>impl&lt;'rwlock, T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../std/sync/struct.RwLockReadGuard.html" title="struct std::sync::RwLockReadGuard">RwLockReadGuard</a>&lt;'rwlock, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/sync/rwlock.rs.html#536-542' title='goto source code'>[src]</a></div><code>impl&lt;'rwlock, T:&nbsp;?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>&gt; Deref for <a class="struct" href="../../std/sync/struct.RwLockWriteGuard.html" title="struct std::sync::RwLockWriteGuard">RwLockWriteGuard</a>&lt;'rwlock, T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Target' class="type">Target</a> = T;</span></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/ops/deref/trait.Deref.js">
                  </script></section>
@@ -153,20 +157,22 @@ struct.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

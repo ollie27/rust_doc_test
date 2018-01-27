@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\liballoc\btree\set.rs`.">
+    <meta name="description" content="Source to the Rust file `liballoc\btree\set.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>set.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css" id="themeStyle">
+    <script src="../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -1174,6 +1185,29 @@
 <span id="1129">1129</span>
 <span id="1130">1130</span>
 <span id="1131">1131</span>
+<span id="1132">1132</span>
+<span id="1133">1133</span>
+<span id="1134">1134</span>
+<span id="1135">1135</span>
+<span id="1136">1136</span>
+<span id="1137">1137</span>
+<span id="1138">1138</span>
+<span id="1139">1139</span>
+<span id="1140">1140</span>
+<span id="1141">1141</span>
+<span id="1142">1142</span>
+<span id="1143">1143</span>
+<span id="1144">1144</span>
+<span id="1145">1145</span>
+<span id="1146">1146</span>
+<span id="1147">1147</span>
+<span id="1148">1148</span>
+<span id="1149">1149</span>
+<span id="1150">1150</span>
+<span id="1151">1151</span>
+<span id="1152">1152</span>
+<span id="1153">1153</span>
+<span id="1154">1154</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -1405,43 +1439,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">BTreeSet</span> { <span class="ident">map</span>: <span class="ident">BTreeMap</span>::<span class="ident">new</span>() }
     }
-}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Gets an iterator that visits the values in the `BTreeSet` in ascending order.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::collections::BTreeSet;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let set: BTreeSet&lt;usize&gt; = [1, 2, 3].iter().cloned().collect();</span>
-    <span class="doccomment">/// let mut set_iter = set.iter();</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;1));</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;2));</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;3));</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), None);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Values returned by the iterator are returned in ascending order:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::collections::BTreeSet;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let set: BTreeSet&lt;usize&gt; = [3, 1, 2].iter().cloned().collect();</span>
-    <span class="doccomment">/// let mut set_iter = set.iter();</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;1));</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;2));</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;3));</span>
-    <span class="doccomment">/// assert_eq!(set_iter.next(), None);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">Iter</span> { <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">keys</span>() }
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span> <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Constructs a double-ended iterator over a sub-range of elements in the set.</span>
     <span class="doccomment">/// The simplest way is to use the range syntax `min..max`, thus `range(min..max)` will</span>
     <span class="doccomment">/// yield elements from min (inclusive) to max (exclusive).</span>
@@ -1470,9 +1468,7 @@
     {
         <span class="ident">Range</span> { <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">range</span>(<span class="ident">range</span>) }
     }
-}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Ord</span><span class="op">&gt;</span> <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Visits the values representing the difference,</span>
     <span class="doccomment">/// i.e. the values that are in `self` but not in `other`,</span>
     <span class="doccomment">/// in ascending order.</span>
@@ -1585,40 +1581,6 @@
         }
     }
 
-    <span class="doccomment">/// Returns the number of elements in the set.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::collections::BTreeSet;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let mut v = BTreeSet::new();</span>
-    <span class="doccomment">/// assert_eq!(v.len(), 0);</span>
-    <span class="doccomment">/// v.insert(1);</span>
-    <span class="doccomment">/// assert_eq!(v.len(), 1);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">len</span>()
-    }
-
-    <span class="doccomment">/// Returns `true` if the set contains no elements.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::collections::BTreeSet;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let mut v = BTreeSet::new();</span>
-    <span class="doccomment">/// assert!(v.is_empty());</span>
-    <span class="doccomment">/// v.insert(1);</span>
-    <span class="doccomment">/// assert!(!v.is_empty());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>
-    }
-
     <span class="doccomment">/// Clears the set, removing all values.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
@@ -1664,6 +1626,16 @@
     <span class="doccomment">/// The value may be any borrowed form of the set&#39;s value type,</span>
     <span class="doccomment">/// but the ordering on the borrowed form *must* match the</span>
     <span class="doccomment">/// ordering on the value type.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let set: BTreeSet&lt;_&gt; = [1, 2, 3].iter().cloned().collect();</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;2), Some(&amp;2));</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;4), None);</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;set_recovery&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.9.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span><span class="op">&lt;</span><span class="ident">Q</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
@@ -1789,6 +1761,19 @@
 
     <span class="doccomment">/// Adds a value to the set, replacing the existing value, if any, that is equal to the given</span>
     <span class="doccomment">/// one. Returns the replaced value.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut set = BTreeSet::new();</span>
+    <span class="doccomment">/// set.insert(Vec::&lt;i32&gt;::new());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;[][..]).unwrap().capacity(), 0);</span>
+    <span class="doccomment">/// set.replace(Vec::with_capacity(10));</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;[][..]).unwrap().capacity(), 10);</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;set_recovery&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.9.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Recover</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">map</span>, <span class="ident">value</span>)
@@ -1825,6 +1810,16 @@
     <span class="doccomment">/// The value may be any borrowed form of the set&#39;s value type,</span>
     <span class="doccomment">/// but the ordering on the borrowed form *must* match the</span>
     <span class="doccomment">/// ordering on the value type.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut set: BTreeSet&lt;_&gt; = [1, 2, 3].iter().cloned().collect();</span>
+    <span class="doccomment">/// assert_eq!(set.take(&amp;2), Some(2));</span>
+    <span class="doccomment">/// assert_eq!(set.take(&amp;2), None);</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;set_recovery&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.9.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take</span><span class="op">&lt;</span><span class="ident">Q</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>,
@@ -1874,30 +1869,98 @@
     <span class="doccomment">/// Basic usage:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use std::collections::BTreeMap;</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let mut a = BTreeMap::new();</span>
-    <span class="doccomment">/// a.insert(1, &quot;a&quot;);</span>
-    <span class="doccomment">/// a.insert(2, &quot;b&quot;);</span>
-    <span class="doccomment">/// a.insert(3, &quot;c&quot;);</span>
-    <span class="doccomment">/// a.insert(17, &quot;d&quot;);</span>
-    <span class="doccomment">/// a.insert(41, &quot;e&quot;);</span>
+    <span class="doccomment">/// let mut a = BTreeSet::new();</span>
+    <span class="doccomment">/// a.insert(1);</span>
+    <span class="doccomment">/// a.insert(2);</span>
+    <span class="doccomment">/// a.insert(3);</span>
+    <span class="doccomment">/// a.insert(17);</span>
+    <span class="doccomment">/// a.insert(41);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let b = a.split_off(&amp;3);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert_eq!(a.len(), 2);</span>
     <span class="doccomment">/// assert_eq!(b.len(), 3);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(a[&amp;1], &quot;a&quot;);</span>
-    <span class="doccomment">/// assert_eq!(a[&amp;2], &quot;b&quot;);</span>
+    <span class="doccomment">/// assert!(a.contains(&amp;1));</span>
+    <span class="doccomment">/// assert!(a.contains(&amp;2));</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(b[&amp;3], &quot;c&quot;);</span>
-    <span class="doccomment">/// assert_eq!(b[&amp;17], &quot;d&quot;);</span>
-    <span class="doccomment">/// assert_eq!(b[&amp;41], &quot;e&quot;);</span>
+    <span class="doccomment">/// assert!(b.contains(&amp;3));</span>
+    <span class="doccomment">/// assert!(b.contains(&amp;17));</span>
+    <span class="doccomment">/// assert!(b.contains(&amp;41));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;btree_split_off&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.11.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_off</span><span class="op">&lt;</span><span class="ident">Q</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Ord</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">Q</span>) <span class="op">-&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span> {
         <span class="ident">BTreeSet</span> { <span class="ident">map</span>: <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">split_off</span>(<span class="ident">key</span>) }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">BTreeSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Gets an iterator that visits the values in the `BTreeSet` in ascending order.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let set: BTreeSet&lt;usize&gt; = [1, 2, 3].iter().cloned().collect();</span>
+    <span class="doccomment">/// let mut set_iter = set.iter();</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;1));</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;2));</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;3));</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), None);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Values returned by the iterator are returned in ascending order:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let set: BTreeSet&lt;usize&gt; = [3, 1, 2].iter().cloned().collect();</span>
+    <span class="doccomment">/// let mut set_iter = set.iter();</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;1));</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;2));</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), Some(&amp;3));</span>
+    <span class="doccomment">/// assert_eq!(set_iter.next(), None);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+        <span class="ident">Iter</span> { <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">keys</span>() }
+    }
+
+    <span class="doccomment">/// Returns the number of elements in the set.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut v = BTreeSet::new();</span>
+    <span class="doccomment">/// assert_eq!(v.len(), 0);</span>
+    <span class="doccomment">/// v.insert(1);</span>
+    <span class="doccomment">/// assert_eq!(v.len(), 1);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">len</span>()
+    }
+
+    <span class="doccomment">/// Returns `true` if the set contains no elements.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::BTreeSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut v = BTreeSet::new();</span>
+    <span class="doccomment">/// assert!(v.is_empty());</span>
+    <span class="doccomment">/// v.insert(1);</span>
+    <span class="doccomment">/// assert!(!v.is_empty());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>
     }
 }
 
@@ -2244,21 +2307,15 @@
 
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
-            <span class="kw">let</span> <span class="ident">o_cmp</span> <span class="op">=</span> <span class="kw">match</span> (<span class="self">self</span>.<span class="ident">a</span>.<span class="ident">peek</span>(), <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">peek</span>()) {
-                (<span class="prelude-val">None</span>, _) <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
-                (_, <span class="prelude-val">None</span>) <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
-                (<span class="prelude-val">Some</span>(<span class="ident">a1</span>), <span class="prelude-val">Some</span>(<span class="ident">b1</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">a1</span>.<span class="ident">cmp</span>(<span class="ident">b1</span>)),
-            };
-            <span class="kw">match</span> <span class="ident">o_cmp</span> {
-                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-                <span class="prelude-val">Some</span>(<span class="ident">Less</span>) <span class="op">=&gt;</span> {
+            <span class="kw">match</span> <span class="ident">Ord</span>::<span class="ident">cmp</span>(<span class="self">self</span>.<span class="ident">a</span>.<span class="ident">peek</span>()<span class="question-mark">?</span>, <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">peek</span>()<span class="question-mark">?</span>) {
+                <span class="ident">Less</span> <span class="op">=&gt;</span> {
                     <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">next</span>();
                 }
-                <span class="prelude-val">Some</span>(<span class="ident">Equal</span>) <span class="op">=&gt;</span> {
+                <span class="ident">Equal</span> <span class="op">=&gt;</span> {
                     <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">next</span>();
                     <span class="kw">return</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">next</span>();
                 }
-                <span class="prelude-val">Some</span>(<span class="ident">Greater</span>) <span class="op">=&gt;</span> {
+                <span class="ident">Greater</span> <span class="op">=&gt;</span> {
                     <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">next</span>();
                 }
             }
@@ -2320,20 +2377,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

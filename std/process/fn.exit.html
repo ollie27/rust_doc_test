@@ -10,8 +10,11 @@
     <title>std::process::exit - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         <p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>process</a></p><script>window.sidebarCurrent = {name: 'exit', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -48,25 +59,21 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/std/process.rs.html#1308-1311' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn exit(code: <a class="primitive" href="../primitive.i32.html">i32</a>) -&gt; !</pre><div class='docblock'><p>Terminates the current process with the specified exit code.</p>
-
+               </span><a class='srclink' href='../../src/std/process.rs.html#1310-1313' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn exit(code: <a class="primitive" href="../primitive.i32.html">i32</a>) -&gt; <a class="primitive" href="../primitive.never.html">!</a></pre><div class='docblock'><p>Terminates the current process with the specified exit code.</p>
 <p>This function will never return and will immediately terminate the current
 process. The exit code is passed through to the underlying OS and will be
 available for consumption by another process.</p>
-
 <p>Note that because this function never returns, and that it terminates the
-process, no destructors on the current stack or any other thread&#39;s stack
+process, no destructors on the current stack or any other thread's stack
 will be run. If a clean shutdown is needed it is recommended to only call
 this function at a known point where there are no more destructors left
 to run.</p>
-
-<h2 id='platform-specific-behavior' class='section-header'><a href='#platform-specific-behavior'>Platform-specific behavior</a></h2>
+<h2 id="platform-specific-behavior" class="section-header"><a href="#platform-specific-behavior">Platform-specific behavior</a></h2>
 <p><strong>Unix</strong>: On Unix-like platforms, it is unlikely that all 32 bits of <code>exit</code>
 will be visible to a parent process inspecting the exit code. On most
 Unix-like platforms, only the eight least-significant bits are considered.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Due to this function’s behavior regarding destructors, a conventional way
 to use the function is to extract the actual computation to another
 function and compute the exit code from its return value:</p>
@@ -86,7 +93,6 @@ function and compute the exit code from its return value:</p>
        }
     });
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20run_app()%20-%3E%20Result%3C()%2C%20()%3E%20%7B%0A%20%20%20%20%2F%2F%20Application%20logic%20here%0A%20%20%20%20Ok(())%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%3A%3Astd%3A%3Aprocess%3A%3Aexit(match%20run_app()%20%7B%0A%20%20%20%20%20%20%20Ok(_)%20%3D%3E%200%2C%0A%20%20%20%20%20%20%20Err(err)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20eprintln!(%22error%3A%20%7B%3A%3F%7D%22%2C%20err)%3B%0A%20%20%20%20%20%20%20%20%20%20%201%0A%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D)%3B%0A%7D%0A">Run</a></pre>
-
 <p>Due to <a href="#platform-specific-behavior">platform-specific behavior</a>, the exit code for this example will be
 <code>0</code> on Linux, but <code>256</code> on Windows:</p>
 
@@ -107,20 +113,22 @@ function and compute the exit code from its return value:</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

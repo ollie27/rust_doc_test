@@ -10,8 +10,11 @@
     <title>std::os::unix::fs - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../../main.css" id="themeStyle">
+    <script src="../../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Module fs</p><div class="block items"><ul><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>unix</a></p><script>window.sidebarCurrent = {name: 'fs', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module fs</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../../../index.html'>std</a>::<wbr><a href='../../index.html'>os</a>::<wbr><a href='../index.html'>unix</a></p><script>window.sidebarCurrent = {name: 'fs', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -48,7 +59,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../../src/std/sys/unix/ext/fs.rs.html#11-627' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../../src/std/sys/unix/ext/fs.rs.html#11-731' title='goto source code'>[src]</a></span></h1>
 <div class='stability'><div class='stab portability'>This is supported on <strong>Unix</strong> only.</div></div><div class='docblock'><p>Unix-specific extensions to primitives in the <code>std::fs</code> module.</p>
 </div><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
@@ -56,28 +67,32 @@
                            <td><a class="trait" href="trait.DirBuilderExt.html"
                                   title='trait std::os::unix::fs::DirBuilderExt'>DirBuilderExt</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab portability'>Unix</div>] <p>An extension trait for <code>fs::DirBuilder</code> for unix-specific options.</p>
+                               [<div class='stab portability'>Unix</div>] <p>An extension trait for <a href="../../../../std/fs/struct.DirBuilder.html"><code>fs::DirBuilder</code></a> for unix-specific options.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="trait" href="trait.DirEntryExt.html"
                                   title='trait std::os::unix::fs::DirEntryExt'>DirEntryExt</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab portability'>Unix</div>] <p>Unix-specific extension methods for <code>fs::DirEntry</code></p>
+                               [<div class='stab portability'>Unix</div>] <p>Unix-specific extension methods for <a href="../../../../std/fs/struct.DirEntry.html"><code>fs::DirEntry</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="trait" href="trait.FileExt.html"
                                   title='trait std::os::unix::fs::FileExt'>FileExt</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab portability'>Unix</div>] <p>Unix-specific extensions to <code>File</code></p>
+                               [<div class='stab portability'>Unix</div>] <p>Unix-specific extensions to <a href="../../../../std/fs/struct.File.html"><code>File</code></a>.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="trait" href="trait.FileTypeExt.html"
                                   title='trait std::os::unix::fs::FileTypeExt'>FileTypeExt</a></td>
                            <td class='docblock-short'>
-                               [<div class='stab portability'>Unix</div>] <p>Add special unix types (block/char device, fifo and socket)</p>
+                               [<div class='stab portability'>Unix</div>] <p>Add support for special unix types (block/char device, fifo and socket).</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -92,6 +107,7 @@
                                   title='trait std::os::unix::fs::OpenOptionsExt'>OpenOptionsExt</a></td>
                            <td class='docblock-short'>
                                [<div class='stab portability'>Unix</div>] <p>Unix-specific extensions to <code>OpenOptions</code></p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -99,6 +115,7 @@
                                   title='trait std::os::unix::fs::PermissionsExt'>PermissionsExt</a></td>
                            <td class='docblock-short'>
                                [<div class='stab portability'>Unix</div>] <p>Unix-specific extensions to <code>Permissions</code></p>
+
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
@@ -107,6 +124,7 @@
                                   title='fn std::os::unix::fs::symlink'>symlink</a></td>
                            <td class='docblock-short'>
                                [<div class='stab portability'>Unix</div>] <p>Creates a new symbolic link on the filesystem.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -121,20 +139,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

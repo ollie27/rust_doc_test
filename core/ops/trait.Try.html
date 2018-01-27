@@ -10,8 +10,11 @@
     <title>core::ops::Try - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait Try</p><div class="block items"><li><a href="#associated-types">Associated Types</a></li><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Try', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Try</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#associated-types">Associated Types</a><div class="sidebar-links"><a href="#associatedtype.Ok">Ok</a><a href="#associatedtype.Error">Error</a></div><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.into_result">into_result</a><a href="#tymethod.from_error">from_error</a><a href="#tymethod.from_ok">from_ok</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Try', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -56,7 +67,6 @@
 <div class='item-spacer'></div>    fn <a href='#tymethod.from_error' class='fnname'>from_error</a>(v: Self::<a class="type" href="../../core/ops/trait.Try.html#associatedtype.Error" title="type core::ops::Try::Error">Error</a>) -&gt; Self;
 <div class='item-spacer'></div>    fn <a href='#tymethod.from_ok' class='fnname'>from_ok</a>(v: Self::<a class="type" href="../../core/ops/trait.Try.html#associatedtype.Ok" title="type core::ops::Try::Ok">Ok</a>) -&gt; Self;
 }</pre><div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>try_trait </code><a href="https://github.com/rust-lang/rust/issues/42327">#42327</a>)</div></div><div class='docblock'><p>A trait for customizing the behavior of the <code>?</code> operator.</p>
-
 <p>A type implementing <code>Try</code> is one that has a canonical way to view it
 in terms of a success/failure dichotomy.  This trait allows both
 extracting those success or failure values from an existing instance and
@@ -77,7 +87,6 @@ creating a new instance from a success or failure value.</p>
 execution should continue normally, and the result of <code>?</code> is the
 value <code>t</code>. A return of <code>Err(e)</code> means that execution should branch
 to the innermost enclosing <code>catch</code>, or return from the function.</p>
-
 <p>If an <code>Err(e)</code> result is returned, the value <code>e</code> will be &quot;wrapped&quot;
 in the return type of the enclosing scope (which must itself implement
 <code>Try</code>). Specifically, the value <code>X::from_error(From::from(e))</code>
@@ -91,8 +100,8 @@ is returned, where <code>X</code> is the return type of the enclosing function.<
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><div class='out-of-band'><a class='srclink' href='../../src/core/option.rs.html#1136-1151' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Try for <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Ok' class="type">Ok</a> = T;</span><span class="where fmt-newline">  type <a href='#associatedtype.Error' class="type">Error</a> = <a class="struct" href="../../core/option/struct.NoneError.html" title="struct core::option::NoneError">NoneError</a>;</span></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/result.rs.html#1157-1172' title='goto source code'>[src]</a></div><code>impl&lt;T, E&gt; Try for <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, E&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Ok' class="type">Ok</a> = T;</span><span class="where fmt-newline">  type <a href='#associatedtype.Error' class="type">Error</a> = E;</span></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/core/option.rs.html#1214-1229' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; Try for <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Ok' class="type">Ok</a> = T;</span><span class="where fmt-newline">  type <a href='#associatedtype.Error' class="type">Error</a> = <a class="struct" href="../../core/option/struct.NoneError.html" title="struct core::option::NoneError">NoneError</a>;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/result.rs.html#1196-1211' title='goto source code'>[src]</a></div><code>impl&lt;T, E&gt; Try for <a class="enum" href="../../core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, E&gt;<span class="where fmt-newline">  type <a href='#associatedtype.Ok' class="type">Ok</a> = T;</span><span class="where fmt-newline">  type <a href='#associatedtype.Error' class="type">Error</a> = E;</span></code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/ops/trait.Try.js">
                  </script></section>
@@ -108,20 +117,22 @@ is returned, where <code>X</code> is the return type of the enclosing function.<
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

@@ -10,8 +10,11 @@
     <title>std::process::Stdio - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Struct Stdio</p><div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.piped">piped</a><a href="#method.inherit">inherit</a><a href="#method.null">null</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-From%3CChildStdin%3E">From&lt;ChildStdin&gt;</a><a href="#impl-From%3CChildStdout%3E">From&lt;ChildStdout&gt;</a><a href="#impl-From%3CChildStderr%3E">From&lt;ChildStderr&gt;</a><a href="#impl-From%3CFile%3E">From&lt;File&gt;</a><a href="#impl-FromRawHandle">FromRawHandle</a><a href="#impl-FromRawFd">FromRawFd</a></div></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>process</a></p><script>window.sidebarCurrent = {name: 'Stdio', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Stdio</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.piped">piped</a><a href="#method.inherit">inherit</a><a href="#method.null">null</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-From%3CChildStdin%3E">From&lt;ChildStdin&gt;</a><a href="#impl-From%3CChildStdout%3E">From&lt;ChildStdout&gt;</a><a href="#impl-From%3CChildStderr%3E">From&lt;ChildStderr&gt;</a><a href="#impl-From%3CFile%3E">From&lt;File&gt;</a><a href="#impl-FromRawHandle">FromRawHandle</a><a href="#impl-FromRawFd">FromRawFd</a></div></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>process</a></p><script>window.sidebarCurrent = {name: 'Stdio', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -48,18 +59,17 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/std/process.rs.html#841' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/std/process.rs.html#843' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Stdio(_);</pre><div class='docblock'><p>Describes what to do with a standard I/O stream for a child process when
 passed to the <a href="struct.Command.html#method.stdin"><code>stdin</code></a>, <a href="struct.Command.html#method.stdout"><code>stdout</code></a>, and <a href="struct.Command.html#method.stderr"><code>stderr</code></a> methods of <a href="struct.Command.html"><code>Command</code></a>.</p>
 </div>
                     <h2 id='methods' class='small-section-header'>
                       Methods<a href='#methods' class='anchor'></a>
                     </h2>
-                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#843-957' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.piped' class="method"><span id='piped.v' class='invisible'><code>pub fn <a href='#method.piped' class='fnname'>piped</a>() -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#884' title='goto source code'>[src]</a></span></h4>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#845-959' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.piped' class="method"><span id='piped.v' class='invisible'><code>pub fn <a href='#method.piped' class='fnname'>piped</a>() -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#886' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>A new pipe should be arranged to connect the parent and child processes.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>With stdout:</p>
 
 <pre class="rust rust-example-rendered">
@@ -73,7 +83,6 @@ passed to the <a href="struct.Command.html#method.stdin"><code>stdin</code></a>,
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">stdout</span>), <span class="string">&quot;Hello, world!\n&quot;</span>);
 <span class="comment">// Nothing echoed to console</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3A%7BCommand%2C%20Stdio%7D%3B%0A%0Alet%20output%20%3D%20Command%3A%3Anew(%22echo%22)%0A%20%20%20%20.arg(%22Hello%2C%20world!%22)%0A%20%20%20%20.stdout(Stdio%3A%3Apiped())%0A%20%20%20%20.output()%0A%20%20%20%20.expect(%22Failed%20to%20execute%20command%22)%3B%0A%0Aassert_eq!(String%3A%3Afrom_utf8_lossy(%26output.stdout)%2C%20%22Hello%2C%20world!%5Cn%22)%3B%0A%2F%2F%20Nothing%20echoed%20to%20console%0A%7D">Run</a></pre>
-
 <p>With stdin:</p>
 
 <pre class="rust rust-example-rendered">
@@ -93,10 +102,9 @@ passed to the <a href="struct.Command.html#method.stdin"><code>stdin</code></a>,
 
 <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">child</span>.<span class="ident">wait_with_output</span>().<span class="ident">expect</span>(<span class="string">&quot;Failed to read stdout&quot;</span>);
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">stdout</span>), <span class="string">&quot;!dlrow ,olleH\n&quot;</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aio%3A%3AWrite%3B%0Ause%20std%3A%3Aprocess%3A%3A%7BCommand%2C%20Stdio%7D%3B%0A%0Alet%20mut%20child%20%3D%20Command%3A%3Anew(%22rev%22)%0A%20%20%20%20.stdin(Stdio%3A%3Apiped())%0A%20%20%20%20.stdout(Stdio%3A%3Apiped())%0A%20%20%20%20.spawn()%0A%20%20%20%20.expect(%22Failed%20to%20spawn%20child%20process%22)%3B%0A%0A%7B%0A%20%20%20%20let%20mut%20stdin%20%3D%20child.stdin.as_mut().expect(%22Failed%20to%20open%20stdin%22)%3B%0A%20%20%20%20stdin.write_all(%22Hello%2C%20world!%22.as_bytes()).expect(%22Failed%20to%20write%20to%20stdin%22)%3B%0A%7D%0A%0Alet%20output%20%3D%20child.wait_with_output().expect(%22Failed%20to%20read%20stdout%22)%3B%0Aassert_eq!(String%3A%3Afrom_utf8_lossy(%26output.stdout)%2C%20%22!dlrow%20%2ColleH%5Cn%22)%3B%0A%7D">Run</a></pre>
-</div><h4 id='method.inherit' class="method"><span id='inherit.v' class='invisible'><code>pub fn <a href='#method.inherit' class='fnname'>inherit</a>() -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#919' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.inherit' class="method"><span id='inherit.v' class='invisible'><code>pub fn <a href='#method.inherit' class='fnname'>inherit</a>() -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#921' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>The child inherits from the corresponding parent descriptor.</p>
-
-<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <p>With stdout:</p>
 
 <pre class="rust rust-example-rendered">
@@ -110,7 +118,6 @@ passed to the <a href="struct.Command.html#method.stdin"><code>stdin</code></a>,
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">stdout</span>), <span class="string">&quot;&quot;</span>);
 <span class="comment">// &quot;Hello, world!&quot; echoed to console</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3A%7BCommand%2C%20Stdio%7D%3B%0A%0Alet%20output%20%3D%20Command%3A%3Anew(%22echo%22)%0A%20%20%20%20.arg(%22Hello%2C%20world!%22)%0A%20%20%20%20.stdout(Stdio%3A%3Ainherit())%0A%20%20%20%20.output()%0A%20%20%20%20.expect(%22Failed%20to%20execute%20command%22)%3B%0A%0Aassert_eq!(String%3A%3Afrom_utf8_lossy(%26output.stdout)%2C%20%22%22)%3B%0A%2F%2F%20%22Hello%2C%20world!%22%20echoed%20to%20console%0A%7D">Run</a></pre>
-
 <p>With stdin:</p>
 
 <pre class="rust rust-example-rendered">
@@ -123,11 +130,10 @@ passed to the <a href="struct.Command.html#method.stdin"><code>stdin</code></a>,
     .<span class="ident">expect</span>(<span class="string">&quot;Failed to execute command&quot;</span>);
 
 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;You piped in the reverse of: {}&quot;</span>, <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">stdout</span>));<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3A%7BCommand%2C%20Stdio%7D%3B%0A%0Alet%20output%20%3D%20Command%3A%3Anew(%22rev%22)%0A%20%20%20%20.stdin(Stdio%3A%3Ainherit())%0A%20%20%20%20.stdout(Stdio%3A%3Apiped())%0A%20%20%20%20.output()%0A%20%20%20%20.expect(%22Failed%20to%20execute%20command%22)%3B%0A%0Aprintln!(%22You%20piped%20in%20the%20reverse%20of%3A%20%7B%7D%22%2C%20String%3A%3Afrom_utf8_lossy(%26output.stdout))%3B%0A%7D">Run</a></pre>
-</div><h4 id='method.null' class="method"><span id='null.v' class='invisible'><code>pub fn <a href='#method.null' class='fnname'>null</a>() -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#956' title='goto source code'>[src]</a></span></h4>
+</div><h4 id='method.null' class="method"><span id='null.v' class='invisible'><code>pub fn <a href='#method.null' class='fnname'>null</a>() -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#958' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>This stream will be ignored. This is the equivalent of attaching the
 stream to <code>/dev/null</code></p>
-
-<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <p>With stdout:</p>
 
 <pre class="rust rust-example-rendered">
@@ -141,7 +147,6 @@ stream to <code>/dev/null</code></p>
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">stdout</span>), <span class="string">&quot;&quot;</span>);
 <span class="comment">// Nothing echoed to console</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Aprocess%3A%3A%7BCommand%2C%20Stdio%7D%3B%0A%0Alet%20output%20%3D%20Command%3A%3Anew(%22echo%22)%0A%20%20%20%20.arg(%22Hello%2C%20world!%22)%0A%20%20%20%20.stdout(Stdio%3A%3Anull())%0A%20%20%20%20.output()%0A%20%20%20%20.expect(%22Failed%20to%20execute%20command%22)%3B%0A%0Aassert_eq!(String%3A%3Afrom_utf8_lossy(%26output.stdout)%2C%20%22%22)%3B%0A%2F%2F%20Nothing%20echoed%20to%20console%0A%7D">Run</a></pre>
-
 <p>With stdin:</p>
 
 <pre class="rust rust-example-rendered">
@@ -159,20 +164,20 @@ stream to <code>/dev/null</code></p>
             <h2 id='implementations' class='small-section-header'>
               Trait Implementations<a href='#implementations' class='anchor'></a>
             </h2>
-        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Debug.html" title="trait std::fmt::Debug">Debug</a> for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div><a class='srclink' href='../../src/std/process.rs.html#966-970' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='../../std/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="../../std/fmt/type.Result.html" title="type std::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#967-969' title='goto source code'>[src]</a></span></h4>
-<div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 id='impl-From%3CChildStdin%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/process/struct.ChildStdin.html" title="struct std::process::ChildStdin">ChildStdin</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CChildStdin%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#973-977' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.from' class="method"><span id='from.v' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(child: <a class="struct" href="../../std/process/struct.ChildStdin.html" title="struct std::process::ChildStdin">ChildStdin</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#974-976' title='goto source code'>[src]</a></span></h4>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Debug.html" title="trait std::fmt::Debug">Debug</a> for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.16.0'>1.16.0</div><a class='srclink' href='../../src/std/process.rs.html#968-972' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='../../std/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="../../std/fmt/type.Result.html" title="type std::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#969-971' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="../../std/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-From%3CChildStdin%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/process/struct.ChildStdin.html" title="struct std::process::ChildStdin">ChildStdin</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CChildStdin%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#975-979' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from' class="method"><span id='from.v' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(child: <a class="struct" href="../../std/process/struct.ChildStdin.html" title="struct std::process::ChildStdin">ChildStdin</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#976-978' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CChildStdout%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/process/struct.ChildStdout.html" title="struct std::process::ChildStdout">ChildStdout</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CChildStdout%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#980-984' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.from-1' class="method"><span id='from.v-1' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(child: <a class="struct" href="../../std/process/struct.ChildStdout.html" title="struct std::process::ChildStdout">ChildStdout</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#981-983' title='goto source code'>[src]</a></span></h4>
+</div></div><h3 id='impl-From%3CChildStdout%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/process/struct.ChildStdout.html" title="struct std::process::ChildStdout">ChildStdout</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CChildStdout%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#982-986' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from-1' class="method"><span id='from.v-1' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(child: <a class="struct" href="../../std/process/struct.ChildStdout.html" title="struct std::process::ChildStdout">ChildStdout</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#983-985' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CChildStderr%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/process/struct.ChildStderr.html" title="struct std::process::ChildStderr">ChildStderr</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CChildStderr%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#987-991' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.from-2' class="method"><span id='from.v-2' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(child: <a class="struct" href="../../std/process/struct.ChildStderr.html" title="struct std::process::ChildStderr">ChildStderr</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#988-990' title='goto source code'>[src]</a></span></h4>
+</div></div><h3 id='impl-From%3CChildStderr%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/process/struct.ChildStderr.html" title="struct std::process::ChildStderr">ChildStderr</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CChildStderr%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#989-993' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from-2' class="method"><span id='from.v-2' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(child: <a class="struct" href="../../std/process/struct.ChildStderr.html" title="struct std::process::ChildStderr">ChildStderr</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#990-992' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs the conversion.</p>
-</div></div><h3 id='impl-From%3CFile%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/fs/struct.File.html" title="struct std::fs::File">File</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CFile%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#994-998' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.from-3' class="method"><span id='from.v-3' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(file: <a class="struct" href="../../std/fs/struct.File.html" title="struct std::fs::File">File</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#995-997' title='goto source code'>[src]</a></span></h4>
+</div></div><h3 id='impl-From%3CFile%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/convert/trait.From.html" title="trait std::convert::From">From</a>&lt;<a class="struct" href="../../std/fs/struct.File.html" title="struct std::fs::File">File</a>&gt; for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-From%3CFile%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.20.0'>1.20.0</div><a class='srclink' href='../../src/std/process.rs.html#996-1000' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from-3' class="method"><span id='from.v-3' class='invisible'><code>fn <a href='../../std/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(file: <a class="struct" href="../../std/fs/struct.File.html" title="struct std::fs::File">File</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/process.rs.html#997-999' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>Performs the conversion.</p>
 </div></div><h3 id='impl-FromRawHandle' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/os/windows/io/trait.FromRawHandle.html" title="trait std::os::windows::io::FromRawHandle">FromRawHandle</a> for <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code><a href='#impl-FromRawHandle' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.2.0'>1.2.0</div><a class='srclink' href='../../src/std/sys/windows/ext/process.rs.html#21-27' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.from_raw_handle' class="method"><span id='from_raw_handle.v' class='invisible'><code>unsafe fn <a href='../../std/os/windows/io/trait.FromRawHandle.html#tymethod.from_raw_handle' class='fnname'>from_raw_handle</a>(handle: <a class="type" href="../../std/os/windows/io/type.RawHandle.html" title="type std::os::windows::io::RawHandle">RawHandle</a>) -&gt; <a class="struct" href="../../std/process/struct.Stdio.html" title="struct std::process::Stdio">Stdio</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/std/sys/windows/ext/process.rs.html#22-26' title='goto source code'>[src]</a></span></h4>
@@ -193,20 +198,22 @@ stream to <code>/dev/null</code></p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

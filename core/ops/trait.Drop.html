@@ -10,8 +10,11 @@
     <title>core::ops::Drop - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait Drop</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Drop', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait Drop</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.drop">drop</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>ops</a></p><script>window.sidebarCurrent = {name: 'Drop', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -53,20 +64,15 @@
 </div>pub trait Drop {
     fn <a href='#tymethod.drop' class='fnname'>drop</a>(&amp;mut self);
 }</pre><div class='docblock'><p>Used to run some code when a value goes out of scope.
-This is sometimes called a &#39;destructor&#39;.</p>
-
+This is sometimes called a 'destructor'.</p>
 <p>When a value goes out of scope, it will have its <code>drop</code> method called if
 its type implements <code>Drop</code>. Then, any fields the value contains will also
 be dropped recursively.</p>
-
 <p>Because of this recursive dropping, you do not need to implement this trait
 unless your type needs its own destructor logic.</p>
-
 <p>Refer to <a href="../../book/second-edition/ch15-03-drop.html">the chapter on <code>Drop</code> in <em>The Rust Programming Language</em></a>
 for some more elaboration.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
-<h2 id='implementing-drop' class='section-header'><a href='#implementing-drop'>Implementing <code>Drop</code></a></h2>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1><h2 id="implementing-drop" class="section-header"><a href="#implementing-drop">Implementing <code>Drop</code></a></h2>
 <p>The <code>drop</code> method is called when <code>_x</code> goes out of scope, and therefore
 <code>main</code> prints <code>Dropping!</code>.</p>
 
@@ -82,8 +88,7 @@ for some more elaboration.</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">_x</span> <span class="op">=</span> <span class="ident">HasDrop</span>;
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Astruct%20HasDrop%3B%0A%0Aimpl%20Drop%20for%20HasDrop%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Dropping!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_x%20%3D%20HasDrop%3B%0A%7D%0A">Run</a></pre>
-
-<h2 id='dropping-is-done-recursively' class='section-header'><a href='#dropping-is-done-recursively'>Dropping is done recursively</a></h2>
+<h2 id="dropping-is-done-recursively" class="section-header"><a href="#dropping-is-done-recursively">Dropping is done recursively</a></h2>
 <p>When <code>outer</code> goes out of scope, the <code>drop</code> method will be called first for
 <code>Outer</code>, then for <code>Inner</code>. Therefore, <code>main</code> prints <code>Dropping Outer!</code> and
 then <code>Dropping Inner!</code>.</p>
@@ -107,8 +112,7 @@ then <code>Dropping Inner!</code>.</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">_x</span> <span class="op">=</span> <span class="ident">Outer</span>(<span class="ident">Inner</span>);
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Astruct%20Inner%3B%0Astruct%20Outer(Inner)%3B%0A%0Aimpl%20Drop%20for%20Inner%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Dropping%20Inner!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Drop%20for%20Outer%20%7B%0A%20%20%20%20fn%20drop(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Dropping%20Outer!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_x%20%3D%20Outer(Inner)%3B%0A%7D%0A">Run</a></pre>
-
-<h2 id='variables-are-dropped-in-reverse-order-of-declaration' class='section-header'><a href='#variables-are-dropped-in-reverse-order-of-declaration'>Variables are dropped in reverse order of declaration</a></h2>
+<h2 id="variables-are-dropped-in-reverse-order-of-declaration" class="section-header"><a href="#variables-are-dropped-in-reverse-order-of-declaration">Variables are dropped in reverse order of declaration</a></h2>
 <p><code>_first</code> is declared first and <code>_second</code> is declared second, so <code>main</code> will
 print <code>Declared second!</code> and then <code>Declared first!</code>.</p>
 
@@ -131,17 +135,14 @@ print <code>Declared second!</code> and then <code>Declared first!</code>.</p>
             </h2>
             <div class='methods'>
         <h3 id='tymethod.drop' class='method'><span id='drop.v' class='invisible'><code>fn <a href='#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h3><div class='docblock'><p>Executes the destructor for this type.</p>
-
 <p>This method is called implilcitly when the value goes out of scope,
 and cannot be called explicitly (this is compiler error <a href="../../error-index.html#E0040">E0040</a>).
 However, the <a href="../../std/mem/fn.drop.html"><code>std::mem::drop</code></a> function in the prelude can be
-used to call the argument&#39;s <code>Drop</code> implementation.</p>
-
+used to call the argument's <code>Drop</code> implementation.</p>
 <p>When this method has been called, <code>self</code> has not yet been deallocated.
 That only happens after the method is over.
-If this wasn&#39;t the case, <code>self</code> would be a dangling reference.</p>
-
-<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+If this wasn't the case, <code>self</code> would be a dangling reference.</p>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
 <p>Given that a <a href="../macro.panic.html"><code>panic!</code></a> will call <code>drop</code> as it unwinds, any <a href="../macro.panic.html"><code>panic!</code></a>
 in a <code>drop</code> implementation will likely abort.</p>
 </div></div>
@@ -164,20 +165,22 @@ in a <code>drop</code> implementation will likely abort.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

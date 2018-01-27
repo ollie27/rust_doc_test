@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -251,13 +249,13 @@ documentation.</p>
 <pre><code class="language-bash">$ rustdoc README.md --markdown-playground-url https://play.rust-lang.org/
 </code></pre>
 <p>When rendering a Markdown file, this flag gives the base URL of the Rust
-Playround, to use for generating <code>Run</code> buttons.</p>
+Playground, to use for generating <code>Run</code> buttons.</p>
 <a class="header" href="command-line-arguments.html#--markdown-no-toc-dont-generate-a-table-of-contents" id="--markdown-no-toc-dont-generate-a-table-of-contents"><h2><code>--markdown-no-toc</code>: don't generate a table of contents</h2></a>
 <p>Using this flag looks like this:</p>
 <pre><code class="language-bash">$ rustdoc README.md --markdown-no-toc
 </code></pre>
 <p>When generating documentation from a Markdown file, by default, <code>rustdoc</code> will
-generate a table of contents. This flag supresses that, and no TOC will be
+generate a table of contents. This flag suppresses that, and no TOC will be
 generated.</p>
 <a class="header" href="command-line-arguments.html#-e--extend-css-extend-rustdocs-css" id="-e--extend-css-extend-rustdocs-css"><h2><code>-e</code>/<code>--extend-css</code>: extend rustdoc's CSS</h2></a>
 <p>Using this flag looks like this:</p>
@@ -279,13 +277,13 @@ when compiling your code.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="what-is-rustdoc.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="what-is-rustdoc.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="the-doc-attribute.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="the-doc-attribute.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -325,5 +323,9 @@ when compiling your code.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

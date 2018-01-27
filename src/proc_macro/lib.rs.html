@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libproc_macro\lib.rs`.">
+    <meta name="description" content="Source to the Rust file `libproc_macro\lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../proc_macro/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -871,6 +882,38 @@
 <span id="826">826</span>
 <span id="827">827</span>
 <span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
+<span id="857">857</span>
+<span id="858">858</span>
+<span id="859">859</span>
+<span id="860">860</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2016 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -933,7 +976,7 @@
 <span class="kw">use</span> <span class="ident">syntax</span>::<span class="ident">symbol</span>::<span class="ident">Symbol</span>;
 <span class="kw">use</span> <span class="ident">syntax</span>::<span class="ident">tokenstream</span>;
 <span class="kw">use</span> <span class="ident">syntax_pos</span>::<span class="ident">DUMMY_SP</span>;
-<span class="kw">use</span> <span class="ident">syntax_pos</span>::{<span class="ident">FileMap</span>, <span class="ident">Pos</span>, <span class="ident">SyntaxContext</span>};
+<span class="kw">use</span> <span class="ident">syntax_pos</span>::{<span class="ident">FileMap</span>, <span class="ident">Pos</span>, <span class="ident">SyntaxContext</span>, <span class="ident">FileName</span>};
 <span class="kw">use</span> <span class="ident">syntax_pos</span>::<span class="ident">hygiene</span>::<span class="ident">Mark</span>;
 
 <span class="doccomment">/// The main type provided by this crate, representing an abstract stream of</span>
@@ -963,7 +1006,7 @@
     <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">src</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span>, <span class="ident">LexError</span><span class="op">&gt;</span> {
         <span class="ident">__internal</span>::<span class="ident">with_sess</span>(<span class="op">|</span>(<span class="ident">sess</span>, <span class="ident">mark</span>)<span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">src</span> <span class="op">=</span> <span class="ident">src</span>.<span class="ident">to_string</span>();
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;&lt;proc-macro source code&gt;&quot;</span>.<span class="ident">to_string</span>();
+            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">FileName</span>::<span class="ident">ProcMacroSourceCode</span>;
             <span class="kw">let</span> <span class="ident">expn_info</span> <span class="op">=</span> <span class="ident">mark</span>.<span class="ident">expn_info</span>().<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">call_site</span> <span class="op">=</span> <span class="ident">expn_info</span>.<span class="ident">call_site</span>;
             <span class="comment">// notify the expansion info that it is unhygienic</span>
@@ -1051,9 +1094,10 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Span</span>(<span class="ident">syntax_pos</span>::<span class="ident">Span</span>);
 
-<span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Span</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="ident">Span</span> {
+<span class="kw">impl</span> <span class="ident">Span</span> {
+    <span class="doccomment">/// A span that resolves at the macro definition site.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">def_site</span>() <span class="op">-&gt;</span> <span class="ident">Span</span> {
         ::<span class="ident">__internal</span>::<span class="ident">with_sess</span>(<span class="op">|</span>(_, <span class="ident">mark</span>)<span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">call_site</span> <span class="op">=</span> <span class="ident">mark</span>.<span class="ident">expn_info</span>().<span class="ident">unwrap</span>().<span class="ident">call_site</span>;
             <span class="ident">Span</span>(<span class="ident">call_site</span>.<span class="ident">with_ctxt</span>(<span class="ident">SyntaxContext</span>::<span class="ident">empty</span>().<span class="ident">apply_mark</span>(<span class="ident">mark</span>)))
@@ -1065,7 +1109,7 @@
 <span class="doccomment">/// This is needed to implement a custom quoter.</span>
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">quote_span</span>(<span class="ident">span</span>: <span class="ident">Span</span>) <span class="op">-&gt;</span> <span class="ident">TokenStream</span> {
-    <span class="ident">TokenStream</span>(<span class="ident">quote</span>::<span class="ident">Quote</span>::<span class="ident">quote</span>(<span class="kw-2">&amp;</span><span class="ident">span</span>.<span class="number">0</span>))
+    <span class="ident">quote</span>::<span class="ident">Quote</span>::<span class="ident">quote</span>(<span class="ident">span</span>)
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">diagnostic_method</span> {
@@ -1094,6 +1138,21 @@
         }
     }
 
+    <span class="doccomment">/// The `Span` for the tokens in the previous macro expansion from which</span>
+    <span class="doccomment">/// `self` was generated from, if any.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parent</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Span</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">ctxt</span>().<span class="ident">outer</span>().<span class="ident">expn_info</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">Span</span>(<span class="ident">i</span>.<span class="ident">call_site</span>))
+    }
+
+    <span class="doccomment">/// The span for the origin source code that `self` was generated from. If</span>
+    <span class="doccomment">/// this `Span` wasn&#39;t generated from other macro expansions then the return</span>
+    <span class="doccomment">/// value is the same as `*self`.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Span</span> {
+        <span class="ident">Span</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">source_callsite</span>())
+    }
+
     <span class="doccomment">/// Get the starting line/column in the source file for this span.</span>
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">LineColumn</span> {
@@ -1120,11 +1179,25 @@
     <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Span</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Span</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">self_loc</span> <span class="op">=</span> <span class="ident">__internal</span>::<span class="ident">lookup_char_pos</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">lo</span>());
-        <span class="kw">let</span> <span class="ident">other_loc</span> <span class="op">=</span> <span class="ident">__internal</span>::<span class="ident">lookup_char_pos</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">lo</span>());
+        <span class="kw">let</span> <span class="ident">other_loc</span> <span class="op">=</span> <span class="ident">__internal</span>::<span class="ident">lookup_char_pos</span>(<span class="ident">other</span>.<span class="number">0</span>.<span class="ident">lo</span>());
 
         <span class="kw">if</span> <span class="ident">self_loc</span>.<span class="ident">file</span>.<span class="ident">name</span> <span class="op">!=</span> <span class="ident">other_loc</span>.<span class="ident">file</span>.<span class="ident">name</span> { <span class="kw">return</span> <span class="prelude-val">None</span> }
 
         <span class="prelude-val">Some</span>(<span class="ident">Span</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">to</span>(<span class="ident">other</span>.<span class="number">0</span>)))
+    }
+
+    <span class="doccomment">/// Creates a new span with the same line/column information as `self` but</span>
+    <span class="doccomment">/// that resolves symbols as though it were at `other`.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resolved_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Span</span>) <span class="op">-&gt;</span> <span class="ident">Span</span> {
+        <span class="ident">Span</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">with_ctxt</span>(<span class="ident">other</span>.<span class="number">0</span>.<span class="ident">ctxt</span>()))
+    }
+
+    <span class="doccomment">/// Creates a new span with the same name resolution behavior as `self` but</span>
+    <span class="doccomment">/// with the line/column information of `other`.</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">located_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Span</span>) <span class="op">-&gt;</span> <span class="ident">Span</span> {
+        <span class="ident">other</span>.<span class="ident">resolved_at</span>(<span class="kw-2">*</span><span class="self">self</span>)
     }
 
     <span class="macro">diagnostic_method</span><span class="macro">!</span>(<span class="ident">error</span>, <span class="ident">Level</span>::<span class="ident">Error</span>);
@@ -1138,10 +1211,12 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LineColumn</span> {
     <span class="doccomment">/// The 1-indexed line in the source file on which the span starts or ends (inclusive).</span>
-    <span class="ident">line</span>: <span class="ident">usize</span>,
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">line</span>: <span class="ident">usize</span>,
     <span class="doccomment">/// The 0-indexed column (in UTF-8 characters) in the source file on which</span>
     <span class="doccomment">/// the span starts or ends (inclusive).</span>
-    <span class="ident">column</span>: <span class="ident">usize</span>
+    <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">column</span>: <span class="ident">usize</span>
 }
 
 <span class="doccomment">/// The source file of a given `Span`.</span>
@@ -1152,7 +1227,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">SourceFile</span> {
-    <span class="doccomment">/// Get the path to this source file as a string.</span>
+    <span class="doccomment">/// Get the path to this source file.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ### Note</span>
     <span class="doccomment">/// If the code span associated with this `SourceFile` was generated by an external macro, this</span>
@@ -1163,7 +1238,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`is_real`]: #method.is_real</span>
     # [<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">FileName</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">filemap</span>.<span class="ident">name</span>
     }
 
@@ -1179,9 +1254,9 @@
 }
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
-    <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="self">self</span>.<span class="ident">as_str</span>()
+<span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">FileName</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
+    <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">FileName</span> {
+        <span class="self">self</span>.<span class="ident">path</span>()
     }
 }
 
@@ -1189,7 +1264,7 @@
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;SourceFile&quot;</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;path&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">as_str</span>())
+            .<span class="ident">field</span>(<span class="string">&quot;path&quot;</span>, <span class="self">self</span>.<span class="ident">path</span>())
             .<span class="ident">field</span>(<span class="string">&quot;is_real&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">is_real</span>())
             .<span class="ident">finish</span>()
     }
@@ -1206,8 +1281,8 @@
 <span class="kw">impl</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {}
 
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">FileName</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">FileName</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">as_ref</span>() <span class="op">==</span> <span class="ident">other</span>
     }
 }
@@ -1225,7 +1300,7 @@
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;38356&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">TokenNode</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TokenTree</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">kind</span>: <span class="ident">TokenNode</span>) <span class="op">-&gt;</span> <span class="ident">TokenTree</span> {
-        <span class="ident">TokenTree</span> { <span class="ident">span</span>: <span class="ident">Span</span>::<span class="ident">default</span>(), <span class="ident">kind</span>: <span class="ident">kind</span> }
+        <span class="ident">TokenTree</span> { <span class="ident">span</span>: <span class="ident">Span</span>::<span class="ident">def_site</span>(), <span class="ident">kind</span>: <span class="ident">kind</span> }
     }
 }
 
@@ -1602,7 +1677,7 @@
 <span class="attribute">#[<span class="ident">unstable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;proc_macro_internals&quot;</span>, <span class="ident">issue</span> <span class="op">=</span> <span class="string">&quot;27812&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">__internal</span> {
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">Quoter</span>, <span class="ident">__rt</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">LiteralKind</span>, <span class="ident">Quoter</span>, <span class="ident">unquote</span>};
 
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">Cell</span>;
 
@@ -1714,20 +1789,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

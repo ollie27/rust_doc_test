@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -66,16 +63,17 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="the-unstable-book.html">The Unstable Book</a></li><li><a href="compiler-flags.html"><strong>1.</strong> Compiler flags</a></li><li><ul class="section"><li><a href="compiler-flags/linker-flavor.html"><strong>1.1.</strong> linker_flavor</a></li><li><a href="compiler-flags/profile.html"><strong>1.2.</strong> profile</a></li><li><a href="compiler-flags/remap-path-prefix.html"><strong>1.3.</strong> remap_path_prefix</a></li></ul></li><li><a href="language-features.html"><strong>2.</strong> Language features</a></li><li><ul class="section"><li><a href="language-features/abi-msp430-interrupt.html"><strong>2.1.</strong> abi_msp430_interrupt</a></li><li><a href="language-features/abi-ptx.html"><strong>2.2.</strong> abi_ptx</a></li><li><a href="language-features/abi-sysv64.html"><strong>2.3.</strong> abi_sysv64</a></li><li><a href="language-features/abi-thiscall.html"><strong>2.4.</strong> abi_thiscall</a></li><li><a href="language-features/abi-unadjusted.html"><strong>2.5.</strong> abi_unadjusted</a></li><li><a href="language-features/abi-vectorcall.html"><strong>2.6.</strong> abi_vectorcall</a></li><li><a href="language-features/abi-x86-interrupt.html"><strong>2.7.</strong> abi_x86_interrupt</a></li><li><a href="language-features/advanced-slice-patterns.html"><strong>2.8.</strong> advanced_slice_patterns</a></li><li><a href="language-features/allocator-internals.html"><strong>2.9.</strong> allocator_internals</a></li><li><a href="language-features/allow-fail.html"><strong>2.10.</strong> allow_fail</a></li><li><a href="language-features/allow-internal-unsafe.html"><strong>2.11.</strong> allow_internal_unsafe</a></li><li><a href="language-features/allow-internal-unstable.html"><strong>2.12.</strong> allow_internal_unstable</a></li><li><a href="language-features/asm.html"><strong>2.13.</strong> asm</a></li><li><a href="language-features/associated-type-defaults.html"><strong>2.14.</strong> associated_type_defaults</a></li><li><a href="language-features/attr-literals.html"><strong>2.15.</strong> attr_literals</a></li><li><a href="language-features/box-patterns.html"><strong>2.16.</strong> box_patterns</a></li><li><a href="language-features/box-syntax.html"><strong>2.17.</strong> box_syntax</a></li><li><a href="language-features/catch-expr.html"><strong>2.18.</strong> catch_expr</a></li><li><a href="language-features/cfg-target-feature.html"><strong>2.19.</strong> cfg_target_feature</a></li><li><a href="language-features/cfg-target-has-atomic.html"><strong>2.20.</strong> cfg_target_has_atomic</a></li><li><a href="language-features/cfg-target-thread-local.html"><strong>2.21.</strong> cfg_target_thread_local</a></li><li><a href="language-features/cfg-target-vendor.html"><strong>2.22.</strong> cfg_target_vendor</a></li><li><a href="language-features/clone-closures.html"><strong>2.23.</strong> clone_closures</a></li><li><a href="language-features/compiler-builtins.html"><strong>2.24.</strong> compiler_builtins</a></li><li><a href="language-features/concat-idents.html"><strong>2.25.</strong> concat_idents</a></li><li><a href="language-features/conservative-impl-trait.html"><strong>2.26.</strong> conservative_impl_trait</a></li><li><a href="language-features/const-fn.html"><strong>2.27.</strong> const_fn</a></li><li><a href="language-features/const-indexing.html"><strong>2.28.</strong> const_indexing</a></li><li><a href="language-features/copy-closures.html"><strong>2.29.</strong> copy_closures</a></li><li><a href="language-features/crate-visibility-modifier.html"><strong>2.30.</strong> crate_visibility_modifier</a></li><li><a href="language-features/custom-attribute.html"><strong>2.31.</strong> custom_attribute</a></li><li><a href="language-features/custom-derive.html"><strong>2.32.</strong> custom_derive</a></li><li><a href="language-features/decl-macro.html"><strong>2.33.</strong> decl_macro</a></li><li><a href="language-features/default-type-parameter-fallback.html"><strong>2.34.</strong> default_type_parameter_fallback</a></li><li><a href="language-features/doc-cfg.html"><strong>2.35.</strong> doc_cfg</a></li><li><a href="language-features/doc-masked.html"><strong>2.36.</strong> doc_masked</a></li><li><a href="language-features/dotdoteq-in-patterns.html"><strong>2.37.</strong> dotdoteq_in_patterns</a></li><li><a href="language-features/dropck-eyepatch.html"><strong>2.38.</strong> dropck_eyepatch</a></li><li><a href="language-features/dropck-parametricity.html"><strong>2.39.</strong> dropck_parametricity</a></li><li><a href="language-features/dyn-trait.html"><strong>2.40.</strong> dyn_trait</a></li><li><a href="language-features/exclusive-range-pattern.html"><strong>2.41.</strong> exclusive_range_pattern</a></li><li><a href="language-features/extern-types.html"><strong>2.42.</strong> extern_types</a></li><li><a href="language-features/fn-must-use.html"><strong>2.43.</strong> fn_must_use</a></li><li><a href="language-features/fundamental.html"><strong>2.44.</strong> fundamental</a></li><li><a href="language-features/generators.html"><strong>2.45.</strong> generators</a></li><li><a href="language-features/generic-param-attrs.html"><strong>2.46.</strong> generic_param_attrs</a></li><li><a href="language-features/global-allocator.html"><strong>2.47.</strong> global_allocator</a></li><li><a href="language-features/global-asm.html"><strong>2.48.</strong> global_asm</a></li><li><a href="language-features/i128-type.html"><strong>2.49.</strong> i128_type</a></li><li><a href="language-features/inclusive-range-syntax.html"><strong>2.50.</strong> inclusive_range_syntax</a></li><li><a href="language-features/intrinsics.html"><strong>2.51.</strong> intrinsics</a></li><li><a href="language-features/lang-items.html"><strong>2.52.</strong> lang_items</a></li><li><a href="language-features/link-args.html"><strong>2.53.</strong> link_args</a></li><li><a href="language-features/link-cfg.html"><strong>2.54.</strong> link_cfg</a></li><li><a href="language-features/link-llvm-intrinsics.html"><strong>2.55.</strong> link_llvm_intrinsics</a></li><li><a href="language-features/linkage.html"><strong>2.56.</strong> linkage</a></li><li><a href="language-features/log-syntax.html"><strong>2.57.</strong> log_syntax</a></li><li><a href="language-features/macro-reexport.html"><strong>2.58.</strong> macro_reexport</a></li><li><a href="language-features/macro-vis-matcher.html"><strong>2.59.</strong> macro_vis_matcher</a></li><li><a href="language-features/main.html"><strong>2.60.</strong> main</a></li><li><a href="language-features/match-beginning-vert.html"><strong>2.61.</strong> match_beginning_vert</a></li><li><a href="language-features/match-default-bindings.html"><strong>2.62.</strong> match_default_bindings</a></li><li><a href="language-features/naked-functions.html"><strong>2.63.</strong> naked_functions</a></li><li><a href="language-features/needs-allocator.html"><strong>2.64.</strong> needs_allocator</a></li><li><a href="language-features/needs-panic-runtime.html"><strong>2.65.</strong> needs_panic_runtime</a></li><li><a href="language-features/never-type.html"><strong>2.66.</strong> never_type</a></li><li><a href="language-features/no-core.html"><strong>2.67.</strong> no_core</a></li><li><a href="language-features/no-debug.html"><strong>2.68.</strong> no_debug</a></li><li><a href="language-features/non-ascii-idents.html"><strong>2.69.</strong> non_ascii_idents</a></li><li><a href="language-features/non-exhaustive.html"><strong>2.70.</strong> non_exhaustive</a></li><li><a href="language-features/omit-gdb-pretty-printer-section.html"><strong>2.71.</strong> omit_gdb_pretty_printer_section</a></li><li><a href="language-features/on-unimplemented.html"><strong>2.72.</strong> on_unimplemented</a></li><li><a href="language-features/optin-builtin-traits.html"><strong>2.73.</strong> optin_builtin_traits</a></li><li><a href="language-features/overlapping-marker-traits.html"><strong>2.74.</strong> overlapping_marker_traits</a></li><li><a href="language-features/panic-runtime.html"><strong>2.75.</strong> panic_runtime</a></li><li><a href="language-features/placement-in-syntax.html"><strong>2.76.</strong> placement_in_syntax</a></li><li><a href="language-features/platform-intrinsics.html"><strong>2.77.</strong> platform_intrinsics</a></li><li><a href="language-features/plugin.html"><strong>2.78.</strong> plugin</a></li><li><a href="language-features/plugin-registrar.html"><strong>2.79.</strong> plugin_registrar</a></li><li><a href="language-features/prelude-import.html"><strong>2.80.</strong> prelude_import</a></li><li><a href="language-features/proc-macro.html"><strong>2.81.</strong> proc_macro</a></li><li><a href="language-features/profiler-runtime.html"><strong>2.82.</strong> profiler_runtime</a></li><li><a href="language-features/quote.html"><strong>2.83.</strong> quote</a></li><li><a href="language-features/repr128.html"><strong>2.84.</strong> repr128</a></li><li><a href="language-features/repr-align.html"><strong>2.85.</strong> repr_align</a></li><li><a href="language-features/repr-simd.html"><strong>2.86.</strong> repr_simd</a></li><li><a href="language-features/rustc-attrs.html"><strong>2.87.</strong> rustc_attrs</a></li><li><a href="language-features/rustc-const-unstable.html"><strong>2.88.</strong> rustc_const_unstable</a></li><li><a href="language-features/rustc-diagnostic-macros.html"><strong>2.89.</strong> rustc_diagnostic_macros</a></li><li><a href="language-features/sanitizer-runtime.html"><strong>2.90.</strong> sanitizer_runtime</a></li><li><a href="language-features/simd.html"><strong>2.91.</strong> simd</a></li><li><a href="language-features/simd-ffi.html"><strong>2.92.</strong> simd_ffi</a></li><li><a href="language-features/slice-patterns.html"><strong>2.93.</strong> slice_patterns</a></li><li><a href="language-features/specialization.html"><strong>2.94.</strong> specialization</a></li><li><a href="language-features/staged-api.html"><strong>2.95.</strong> staged_api</a></li><li><a href="language-features/start.html"><strong>2.96.</strong> start</a></li><li><a href="language-features/static-nobundle.html"><strong>2.97.</strong> static_nobundle</a></li><li><a href="language-features/stmt-expr-attributes.html"><strong>2.98.</strong> stmt_expr_attributes</a></li><li><a href="language-features/structural-match.html"><strong>2.99.</strong> structural_match</a></li><li><a href="language-features/target-feature.html"><strong>2.100.</strong> target_feature</a></li><li><a href="language-features/thread-local.html"><strong>2.101.</strong> thread_local</a></li><li><a href="language-features/trace-macros.html"><strong>2.102.</strong> trace_macros</a></li><li><a href="language-features/type-ascription.html"><strong>2.103.</strong> type_ascription</a></li><li><a href="language-features/unboxed-closures.html"><strong>2.104.</strong> unboxed_closures</a></li><li><a href="language-features/underscore-lifetimes.html"><strong>2.105.</strong> underscore_lifetimes</a></li><li><a href="language-features/unsized-tuple-coercion.html"><strong>2.106.</strong> unsized_tuple_coercion</a></li><li><a href="language-features/untagged-unions.html"><strong>2.107.</strong> untagged_unions</a></li><li><a href="language-features/unwind-attributes.html"><strong>2.108.</strong> unwind_attributes</a></li><li><a href="language-features/use-extern-macros.html"><strong>2.109.</strong> use_extern_macros</a></li><li><a href="language-features/used.html"><strong>2.110.</strong> used</a></li></ul></li><li><a href="library-features.html"><strong>3.</strong> Library Features</a></li><li><ul class="section"><li><a href="library-features/align-offset.html"><strong>3.1.</strong> align_offset</a></li><li><a href="library-features/alloc.html"><strong>3.2.</strong> alloc</a></li><li><a href="library-features/alloc-jemalloc.html"><strong>3.3.</strong> alloc_jemalloc</a></li><li><a href="library-features/alloc-system.html"><strong>3.4.</strong> alloc_system</a></li><li><a href="library-features/allocator-api.html"><strong>3.5.</strong> allocator_api</a></li><li><a href="library-features/array-error-internals.html"><strong>3.6.</strong> array_error_internals</a></li><li><a href="library-features/ascii-ctype.html"><strong>3.7.</strong> ascii_ctype</a></li><li><a href="library-features/box-heap.html"><strong>3.8.</strong> box_heap</a></li><li><a href="library-features/bufreader-is-empty.html"><strong>3.9.</strong> bufreader_is_empty</a></li><li><a href="library-features/c-void-variant.html"><strong>3.10.</strong> c_void_variant</a></li><li><a href="library-features/char-error-internals.html"><strong>3.11.</strong> char_error_internals</a></li><li><a href="library-features/coerce-unsized.html"><strong>3.12.</strong> coerce_unsized</a></li><li><a href="library-features/collection-placement.html"><strong>3.13.</strong> collection_placement</a></li><li><a href="library-features/collections-range.html"><strong>3.14.</strong> collections_range</a></li><li><a href="library-features/compiler-builtins-lib.html"><strong>3.15.</strong> compiler_builtins_lib</a></li><li><a href="library-features/concat-idents-macro.html"><strong>3.16.</strong> concat_idents_macro</a></li><li><a href="library-features/const-align-of.html"><strong>3.17.</strong> const_align_of</a></li><li><a href="library-features/const-atomic-bool-new.html"><strong>3.18.</strong> const_atomic_bool_new</a></li><li><a href="library-features/const-atomic-i16-new.html"><strong>3.19.</strong> const_atomic_i16_new</a></li><li><a href="library-features/const-atomic-i32-new.html"><strong>3.20.</strong> const_atomic_i32_new</a></li><li><a href="library-features/const-atomic-i64-new.html"><strong>3.21.</strong> const_atomic_i64_new</a></li><li><a href="library-features/const-atomic-i8-new.html"><strong>3.22.</strong> const_atomic_i8_new</a></li><li><a href="library-features/const-atomic-isize-new.html"><strong>3.23.</strong> const_atomic_isize_new</a></li><li><a href="library-features/const-atomic-ptr-new.html"><strong>3.24.</strong> const_atomic_ptr_new</a></li><li><a href="library-features/const-atomic-u16-new.html"><strong>3.25.</strong> const_atomic_u16_new</a></li><li><a href="library-features/const-atomic-u32-new.html"><strong>3.26.</strong> const_atomic_u32_new</a></li><li><a href="library-features/const-atomic-u64-new.html"><strong>3.27.</strong> const_atomic_u64_new</a></li><li><a href="library-features/const-atomic-u8-new.html"><strong>3.28.</strong> const_atomic_u8_new</a></li><li><a href="library-features/const-atomic-usize-new.html"><strong>3.29.</strong> const_atomic_usize_new</a></li><li><a href="library-features/const-cell-new.html"><strong>3.30.</strong> const_cell_new</a></li><li><a href="library-features/const-max-value.html"><strong>3.31.</strong> const_max_value</a></li><li><a href="library-features/const-min-value.html"><strong>3.32.</strong> const_min_value</a></li><li><a href="library-features/const-nonzero-new.html"><strong>3.33.</strong> const_nonzero_new</a></li><li><a href="library-features/const-once-new.html"><strong>3.34.</strong> const_once_new</a></li><li><a href="library-features/const-ptr-null.html"><strong>3.35.</strong> const_ptr_null</a></li><li><a href="library-features/const-ptr-null-mut.html"><strong>3.36.</strong> const_ptr_null_mut</a></li><li><a href="library-features/const-refcell-new.html"><strong>3.37.</strong> const_refcell_new</a></li><li><a href="library-features/const-shared-new.html"><strong>3.38.</strong> const_shared_new</a></li><li><a href="library-features/const-size-of.html"><strong>3.39.</strong> const_size_of</a></li><li><a href="library-features/const-unique-new.html"><strong>3.40.</strong> const_unique_new</a></li><li><a href="library-features/const-unsafe-cell-new.html"><strong>3.41.</strong> const_unsafe_cell_new</a></li><li><a href="library-features/core-char-ext.html"><strong>3.42.</strong> core_char_ext</a></li><li><a href="library-features/core-float.html"><strong>3.43.</strong> core_float</a></li><li><a href="library-features/core-intrinsics.html"><strong>3.44.</strong> core_intrinsics</a></li><li><a href="library-features/core-panic.html"><strong>3.45.</strong> core_panic</a></li><li><a href="library-features/core-private-bignum.html"><strong>3.46.</strong> core_private_bignum</a></li><li><a href="library-features/core-private-diy-float.html"><strong>3.47.</strong> core_private_diy_float</a></li><li><a href="library-features/core-slice-ext.html"><strong>3.48.</strong> core_slice_ext</a></li><li><a href="library-features/core-str-ext.html"><strong>3.49.</strong> core_str_ext</a></li><li><a href="library-features/dec2flt.html"><strong>3.50.</strong> dec2flt</a></li><li><a href="library-features/decode-utf8.html"><strong>3.51.</strong> decode_utf8</a></li><li><a href="library-features/derive-clone-copy.html"><strong>3.52.</strong> derive_clone_copy</a></li><li><a href="library-features/derive-eq.html"><strong>3.53.</strong> derive_eq</a></li><li><a href="library-features/drain-filter.html"><strong>3.54.</strong> drain_filter</a></li><li><a href="library-features/duration-from-micros.html"><strong>3.55.</strong> duration_from_micros</a></li><li><a href="library-features/entry-and-modify.html"><strong>3.56.</strong> entry_and_modify</a></li><li><a href="library-features/entry-or-default.html"><strong>3.57.</strong> entry_or_default</a></li><li><a href="library-features/error-type-id.html"><strong>3.58.</strong> error_type_id</a></li><li><a href="library-features/exact-size-is-empty.html"><strong>3.59.</strong> exact_size_is_empty</a></li><li><a href="library-features/fd.html"><strong>3.60.</strong> fd</a></li><li><a href="library-features/fd-read.html"><strong>3.61.</strong> fd_read</a></li><li><a href="library-features/fixed-size-array.html"><strong>3.62.</strong> fixed_size_array</a></li><li><a href="library-features/flt2dec.html"><strong>3.63.</strong> flt2dec</a></li><li><a href="library-features/fmt-flags-align.html"><strong>3.64.</strong> fmt_flags_align</a></li><li><a href="library-features/fmt-internals.html"><strong>3.65.</strong> fmt_internals</a></li><li><a href="library-features/fn-traits.html"><strong>3.66.</strong> fn_traits</a></li><li><a href="library-features/fnbox.html"><strong>3.67.</strong> fnbox</a></li><li><a href="library-features/from-ref.html"><strong>3.68.</strong> from_ref</a></li><li><a href="library-features/from-utf8-error-as-bytes.html"><strong>3.69.</strong> from_utf8_error_as_bytes</a></li><li><a href="library-features/fused.html"><strong>3.70.</strong> fused</a></li><li><a href="library-features/future-atomic-orderings.html"><strong>3.71.</strong> future_atomic_orderings</a></li><li><a href="library-features/generator-trait.html"><strong>3.72.</strong> generator_trait</a></li><li><a href="library-features/get-type-id.html"><strong>3.73.</strong> get_type_id</a></li><li><a href="library-features/getpid.html"><strong>3.74.</strong> getpid</a></li><li><a href="library-features/heap-api.html"><strong>3.75.</strong> heap_api</a></li><li><a href="library-features/hint-core-should-pause.html"><strong>3.76.</strong> hint_core_should_pause</a></li><li><a href="library-features/i128.html"><strong>3.77.</strong> i128</a></li><li><a href="library-features/inclusive-range.html"><strong>3.78.</strong> inclusive_range</a></li><li><a href="library-features/int-error-internals.html"><strong>3.79.</strong> int_error_internals</a></li><li><a href="library-features/integer-atomics.html"><strong>3.80.</strong> integer_atomics</a></li><li><a href="library-features/io.html"><strong>3.81.</strong> io</a></li><li><a href="library-features/io-error-internals.html"><strong>3.82.</strong> io_error_internals</a></li><li><a href="library-features/ip.html"><strong>3.83.</strong> ip</a></li><li><a href="library-features/ip-constructors.html"><strong>3.84.</strong> ip_constructors</a></li><li><a href="library-features/iter-rfind.html"><strong>3.85.</strong> iter_rfind</a></li><li><a href="library-features/iter-rfold.html"><strong>3.86.</strong> iter_rfold</a></li><li><a href="library-features/iterator-step-by.html"><strong>3.87.</strong> iterator_step_by</a></li><li><a href="library-features/libstd-io-internals.html"><strong>3.88.</strong> libstd_io_internals</a></li><li><a href="library-features/libstd-sys-internals.html"><strong>3.89.</strong> libstd_sys_internals</a></li><li><a href="library-features/libstd-thread-internals.html"><strong>3.90.</strong> libstd_thread_internals</a></li><li><a href="library-features/linked-list-extras.html"><strong>3.91.</strong> linked_list_extras</a></li><li><a href="library-features/lookup-host.html"><strong>3.92.</strong> lookup_host</a></li><li><a href="library-features/map-entry-replace.html"><strong>3.93.</strong> map_entry_replace</a></li><li><a href="library-features/mpsc-select.html"><strong>3.94.</strong> mpsc_select</a></li><li><a href="library-features/n16.html"><strong>3.95.</strong> n16</a></li><li><a href="library-features/never-type-impls.html"><strong>3.96.</strong> never_type_impls</a></li><li><a href="library-features/nonzero.html"><strong>3.97.</strong> nonzero</a></li><li><a href="library-features/offset-to.html"><strong>3.98.</strong> offset_to</a></li><li><a href="library-features/once-poison.html"><strong>3.99.</strong> once_poison</a></li><li><a href="library-features/option-ref-mut-cloned.html"><strong>3.100.</strong> option_ref_mut_cloned</a></li><li><a href="library-features/panic-abort.html"><strong>3.101.</strong> panic_abort</a></li><li><a href="library-features/panic-col.html"><strong>3.102.</strong> panic_col</a></li><li><a href="library-features/panic-unwind.html"><strong>3.103.</strong> panic_unwind</a></li><li><a href="library-features/pattern.html"><strong>3.104.</strong> pattern</a></li><li><a href="library-features/placement-in.html"><strong>3.105.</strong> placement_in</a></li><li><a href="library-features/placement-new-protocol.html"><strong>3.106.</strong> placement_new_protocol</a></li><li><a href="library-features/pointer-methods.html"><strong>3.107.</strong> pointer_methods</a></li><li><a href="library-features/print-internals.html"><strong>3.108.</strong> print_internals</a></li><li><a href="library-features/proc-macro.html"><strong>3.109.</strong> proc_macro</a></li><li><a href="library-features/proc-macro-internals.html"><strong>3.110.</strong> proc_macro_internals</a></li><li><a href="library-features/profiler-runtime-lib.html"><strong>3.111.</strong> profiler_runtime_lib</a></li><li><a href="library-features/rand.html"><strong>3.112.</strong> rand</a></li><li><a href="library-features/range-contains.html"><strong>3.113.</strong> range_contains</a></li><li><a href="library-features/raw.html"><strong>3.114.</strong> raw</a></li><li><a href="library-features/rc-downcast.html"><strong>3.115.</strong> rc_downcast</a></li><li><a href="library-features/read-initializer.html"><strong>3.116.</strong> read_initializer</a></li><li><a href="library-features/refcell-replace-swap.html"><strong>3.117.</strong> refcell_replace_swap</a></li><li><a href="library-features/rt.html"><strong>3.118.</strong> rt</a></li><li><a href="library-features/rustc-private.html"><strong>3.119.</strong> rustc_private</a></li><li><a href="library-features/sanitizer-runtime-lib.html"><strong>3.120.</strong> sanitizer_runtime_lib</a></li><li><a href="library-features/set-stdio.html"><strong>3.121.</strong> set_stdio</a></li><li><a href="library-features/shared.html"><strong>3.122.</strong> shared</a></li><li><a href="library-features/sip-hash-13.html"><strong>3.123.</strong> sip_hash_13</a></li><li><a href="library-features/slice-concat-ext.html"><strong>3.124.</strong> slice_concat_ext</a></li><li><a href="library-features/slice-get-slice.html"><strong>3.125.</strong> slice_get_slice</a></li><li><a href="library-features/slice-rotate.html"><strong>3.126.</strong> slice_rotate</a></li><li><a href="library-features/slice-rsplit.html"><strong>3.127.</strong> slice_rsplit</a></li><li><a href="library-features/sort-internals.html"><strong>3.128.</strong> sort_internals</a></li><li><a href="library-features/splice.html"><strong>3.129.</strong> splice</a></li><li><a href="library-features/step-trait.html"><strong>3.130.</strong> step_trait</a></li><li><a href="library-features/str-escape.html"><strong>3.131.</strong> str_escape</a></li><li><a href="library-features/str-internals.html"><strong>3.132.</strong> str_internals</a></li><li><a href="library-features/string-retain.html"><strong>3.133.</strong> string_retain</a></li><li><a href="library-features/swap-nonoverlapping.html"><strong>3.134.</strong> swap_nonoverlapping</a></li><li><a href="library-features/swap-with-slice.html"><strong>3.135.</strong> swap_with_slice</a></li><li><a href="library-features/take-set-limit.html"><strong>3.136.</strong> take_set_limit</a></li><li><a href="library-features/test.html"><strong>3.137.</strong> test</a></li><li><a href="library-features/thread-local-internals.html"><strong>3.138.</strong> thread_local_internals</a></li><li><a href="library-features/thread-local-state.html"><strong>3.139.</strong> thread_local_state</a></li><li><a href="library-features/toowned-clone-into.html"><strong>3.140.</strong> toowned_clone_into</a></li><li><a href="library-features/trusted-len.html"><strong>3.141.</strong> trusted_len</a></li><li><a href="library-features/try-from.html"><strong>3.142.</strong> try_from</a></li><li><a href="library-features/try-trait.html"><strong>3.143.</strong> try_trait</a></li><li><a href="library-features/unicode.html"><strong>3.144.</strong> unicode</a></li><li><a href="library-features/unique.html"><strong>3.145.</strong> unique</a></li><li><a href="library-features/unreachable.html"><strong>3.146.</strong> unreachable</a></li><li><a href="library-features/unsize.html"><strong>3.147.</strong> unsize</a></li><li><a href="library-features/update-panic-count.html"><strong>3.148.</strong> update_panic_count</a></li><li><a href="library-features/vec-remove-item.html"><strong>3.149.</strong> vec_remove_item</a></li><li><a href="library-features/vec-resize-default.html"><strong>3.150.</strong> vec_resize_default</a></li><li><a href="library-features/windows-c.html"><strong>3.151.</strong> windows_c</a></li><li><a href="library-features/windows-handle.html"><strong>3.152.</strong> windows_handle</a></li><li><a href="library-features/windows-net.html"><strong>3.153.</strong> windows_net</a></li><li><a href="library-features/windows-stdio.html"><strong>3.154.</strong> windows_stdio</a></li></ul></li></ul>
+            <ul class="chapter"><li class="affix"><a href="the-unstable-book.html">The Unstable Book</a></li><li><a href="compiler-flags.html"><strong>1.</strong> Compiler flags</a></li><li><ul class="section"><li><a href="compiler-flags/linker-flavor.html"><strong>1.1.</strong> linker_flavor</a></li><li><a href="compiler-flags/profile.html"><strong>1.2.</strong> profile</a></li><li><a href="compiler-flags/remap-path-prefix.html"><strong>1.3.</strong> remap_path_prefix</a></li></ul></li><li><a href="language-features.html"><strong>2.</strong> Language features</a></li><li><ul class="section"><li><a href="language-features/abi-msp430-interrupt.html"><strong>2.1.</strong> abi_msp430_interrupt</a></li><li><a href="language-features/abi-ptx.html"><strong>2.2.</strong> abi_ptx</a></li><li><a href="language-features/abi-thiscall.html"><strong>2.3.</strong> abi_thiscall</a></li><li><a href="language-features/abi-unadjusted.html"><strong>2.4.</strong> abi_unadjusted</a></li><li><a href="language-features/abi-vectorcall.html"><strong>2.5.</strong> abi_vectorcall</a></li><li><a href="language-features/abi-x86-interrupt.html"><strong>2.6.</strong> abi_x86_interrupt</a></li><li><a href="language-features/advanced-slice-patterns.html"><strong>2.7.</strong> advanced_slice_patterns</a></li><li><a href="language-features/allocator-internals.html"><strong>2.8.</strong> allocator_internals</a></li><li><a href="language-features/allow-fail.html"><strong>2.9.</strong> allow_fail</a></li><li><a href="language-features/allow-internal-unsafe.html"><strong>2.10.</strong> allow_internal_unsafe</a></li><li><a href="language-features/allow-internal-unstable.html"><strong>2.11.</strong> allow_internal_unstable</a></li><li><a href="language-features/arbitrary-self-types.html"><strong>2.12.</strong> arbitrary_self_types</a></li><li><a href="language-features/asm.html"><strong>2.13.</strong> asm</a></li><li><a href="language-features/associated-type-defaults.html"><strong>2.14.</strong> associated_type_defaults</a></li><li><a href="language-features/attr-literals.html"><strong>2.15.</strong> attr_literals</a></li><li><a href="language-features/box-patterns.html"><strong>2.16.</strong> box_patterns</a></li><li><a href="language-features/box-syntax.html"><strong>2.17.</strong> box_syntax</a></li><li><a href="language-features/catch-expr.html"><strong>2.18.</strong> catch_expr</a></li><li><a href="language-features/cfg-target-feature.html"><strong>2.19.</strong> cfg_target_feature</a></li><li><a href="language-features/cfg-target-has-atomic.html"><strong>2.20.</strong> cfg_target_has_atomic</a></li><li><a href="language-features/cfg-target-thread-local.html"><strong>2.21.</strong> cfg_target_thread_local</a></li><li><a href="language-features/cfg-target-vendor.html"><strong>2.22.</strong> cfg_target_vendor</a></li><li><a href="language-features/clone-closures.html"><strong>2.23.</strong> clone_closures</a></li><li><a href="language-features/compiler-builtins.html"><strong>2.24.</strong> compiler_builtins</a></li><li><a href="language-features/concat-idents.html"><strong>2.25.</strong> concat_idents</a></li><li><a href="language-features/conservative-impl-trait.html"><strong>2.26.</strong> conservative_impl_trait</a></li><li><a href="language-features/const-fn.html"><strong>2.27.</strong> const_fn</a></li><li><a href="language-features/const-indexing.html"><strong>2.28.</strong> const_indexing</a></li><li><a href="language-features/copy-closures.html"><strong>2.29.</strong> copy_closures</a></li><li><a href="language-features/crate-in-paths.html"><strong>2.30.</strong> crate_in_paths</a></li><li><a href="language-features/crate-visibility-modifier.html"><strong>2.31.</strong> crate_visibility_modifier</a></li><li><a href="language-features/custom-attribute.html"><strong>2.32.</strong> custom_attribute</a></li><li><a href="language-features/custom-derive.html"><strong>2.33.</strong> custom_derive</a></li><li><a href="language-features/decl-macro.html"><strong>2.34.</strong> decl_macro</a></li><li><a href="language-features/default-type-parameter-fallback.html"><strong>2.35.</strong> default_type_parameter_fallback</a></li><li><a href="language-features/doc-cfg.html"><strong>2.36.</strong> doc_cfg</a></li><li><a href="language-features/doc-masked.html"><strong>2.37.</strong> doc_masked</a></li><li><a href="language-features/doc-spotlight.html"><strong>2.38.</strong> doc_spotlight</a></li><li><a href="language-features/dotdoteq-in-patterns.html"><strong>2.39.</strong> dotdoteq_in_patterns</a></li><li><a href="language-features/dropck-eyepatch.html"><strong>2.40.</strong> dropck_eyepatch</a></li><li><a href="language-features/dropck-parametricity.html"><strong>2.41.</strong> dropck_parametricity</a></li><li><a href="language-features/dyn-trait.html"><strong>2.42.</strong> dyn_trait</a></li><li><a href="language-features/exclusive-range-pattern.html"><strong>2.43.</strong> exclusive_range_pattern</a></li><li><a href="language-features/extern-absolute-paths.html"><strong>2.44.</strong> extern_absolute_paths</a></li><li><a href="language-features/extern-in-paths.html"><strong>2.45.</strong> extern_in_paths</a></li><li><a href="language-features/extern-types.html"><strong>2.46.</strong> extern_types</a></li><li><a href="language-features/external-doc.html"><strong>2.47.</strong> external_doc</a></li><li><a href="language-features/fn-must-use.html"><strong>2.48.</strong> fn_must_use</a></li><li><a href="language-features/fundamental.html"><strong>2.49.</strong> fundamental</a></li><li><a href="language-features/generators.html"><strong>2.50.</strong> generators</a></li><li><a href="language-features/generic-associated-types.html"><strong>2.51.</strong> generic_associated_types</a></li><li><a href="language-features/generic-param-attrs.html"><strong>2.52.</strong> generic_param_attrs</a></li><li><a href="language-features/global-allocator.html"><strong>2.53.</strong> global_allocator</a></li><li><a href="language-features/global-asm.html"><strong>2.54.</strong> global_asm</a></li><li><a href="language-features/i128-type.html"><strong>2.55.</strong> i128_type</a></li><li><a href="language-features/in-band-lifetimes.html"><strong>2.56.</strong> in_band_lifetimes</a></li><li><a href="language-features/inclusive-range-syntax.html"><strong>2.57.</strong> inclusive_range_syntax</a></li><li><a href="language-features/intrinsics.html"><strong>2.58.</strong> intrinsics</a></li><li><a href="language-features/lang-items.html"><strong>2.59.</strong> lang_items</a></li><li><a href="language-features/link-args.html"><strong>2.60.</strong> link_args</a></li><li><a href="language-features/link-cfg.html"><strong>2.61.</strong> link_cfg</a></li><li><a href="language-features/link-llvm-intrinsics.html"><strong>2.62.</strong> link_llvm_intrinsics</a></li><li><a href="language-features/linkage.html"><strong>2.63.</strong> linkage</a></li><li><a href="language-features/log-syntax.html"><strong>2.64.</strong> log_syntax</a></li><li><a href="language-features/macro-lifetime-matcher.html"><strong>2.65.</strong> macro_lifetime_matcher</a></li><li><a href="language-features/macro-reexport.html"><strong>2.66.</strong> macro_reexport</a></li><li><a href="language-features/macro-vis-matcher.html"><strong>2.67.</strong> macro_vis_matcher</a></li><li><a href="language-features/main.html"><strong>2.68.</strong> main</a></li><li><a href="language-features/match-beginning-vert.html"><strong>2.69.</strong> match_beginning_vert</a></li><li><a href="language-features/match-default-bindings.html"><strong>2.70.</strong> match_default_bindings</a></li><li><a href="language-features/naked-functions.html"><strong>2.71.</strong> naked_functions</a></li><li><a href="language-features/needs-allocator.html"><strong>2.72.</strong> needs_allocator</a></li><li><a href="language-features/needs-panic-runtime.html"><strong>2.73.</strong> needs_panic_runtime</a></li><li><a href="language-features/nested-impl-trait.html"><strong>2.74.</strong> nested_impl_trait</a></li><li><a href="language-features/never-type.html"><strong>2.75.</strong> never_type</a></li><li><a href="language-features/nll.html"><strong>2.76.</strong> nll</a></li><li><a href="language-features/no-core.html"><strong>2.77.</strong> no_core</a></li><li><a href="language-features/no-debug.html"><strong>2.78.</strong> no_debug</a></li><li><a href="language-features/non-ascii-idents.html"><strong>2.79.</strong> non_ascii_idents</a></li><li><a href="language-features/non-exhaustive.html"><strong>2.80.</strong> non_exhaustive</a></li><li><a href="language-features/non-modrs-mods.html"><strong>2.81.</strong> non_modrs_mods</a></li><li><a href="language-features/omit-gdb-pretty-printer-section.html"><strong>2.82.</strong> omit_gdb_pretty_printer_section</a></li><li><a href="language-features/on-unimplemented.html"><strong>2.83.</strong> on_unimplemented</a></li><li><a href="language-features/optin-builtin-traits.html"><strong>2.84.</strong> optin_builtin_traits</a></li><li><a href="language-features/overlapping-marker-traits.html"><strong>2.85.</strong> overlapping_marker_traits</a></li><li><a href="language-features/panic-runtime.html"><strong>2.86.</strong> panic_runtime</a></li><li><a href="language-features/placement-in-syntax.html"><strong>2.87.</strong> placement_in_syntax</a></li><li><a href="language-features/platform-intrinsics.html"><strong>2.88.</strong> platform_intrinsics</a></li><li><a href="language-features/plugin.html"><strong>2.89.</strong> plugin</a></li><li><a href="language-features/plugin-registrar.html"><strong>2.90.</strong> plugin_registrar</a></li><li><a href="language-features/prelude-import.html"><strong>2.91.</strong> prelude_import</a></li><li><a href="language-features/proc-macro.html"><strong>2.92.</strong> proc_macro</a></li><li><a href="language-features/profiler-runtime.html"><strong>2.93.</strong> profiler_runtime</a></li><li><a href="language-features/quote.html"><strong>2.94.</strong> quote</a></li><li><a href="language-features/repr-simd.html"><strong>2.95.</strong> repr_simd</a></li><li><a href="language-features/repr-transparent.html"><strong>2.96.</strong> repr_transparent</a></li><li><a href="language-features/repr128.html"><strong>2.97.</strong> repr128</a></li><li><a href="language-features/rustc-attrs.html"><strong>2.98.</strong> rustc_attrs</a></li><li><a href="language-features/rustc-const-unstable.html"><strong>2.99.</strong> rustc_const_unstable</a></li><li><a href="language-features/rustc-diagnostic-macros.html"><strong>2.100.</strong> rustc_diagnostic_macros</a></li><li><a href="language-features/sanitizer-runtime.html"><strong>2.101.</strong> sanitizer_runtime</a></li><li><a href="language-features/simd-ffi.html"><strong>2.102.</strong> simd_ffi</a></li><li><a href="language-features/slice-patterns.html"><strong>2.103.</strong> slice_patterns</a></li><li><a href="language-features/specialization.html"><strong>2.104.</strong> specialization</a></li><li><a href="language-features/staged-api.html"><strong>2.105.</strong> staged_api</a></li><li><a href="language-features/start.html"><strong>2.106.</strong> start</a></li><li><a href="language-features/static-nobundle.html"><strong>2.107.</strong> static_nobundle</a></li><li><a href="language-features/stmt-expr-attributes.html"><strong>2.108.</strong> stmt_expr_attributes</a></li><li><a href="language-features/structural-match.html"><strong>2.109.</strong> structural_match</a></li><li><a href="language-features/target-feature.html"><strong>2.110.</strong> target_feature</a></li><li><a href="language-features/termination-trait.html"><strong>2.111.</strong> termination_trait</a></li><li><a href="language-features/thread-local.html"><strong>2.112.</strong> thread_local</a></li><li><a href="language-features/trace-macros.html"><strong>2.113.</strong> trace_macros</a></li><li><a href="language-features/trait-alias.html"><strong>2.114.</strong> trait_alias</a></li><li><a href="language-features/type-ascription.html"><strong>2.115.</strong> type_ascription</a></li><li><a href="language-features/unboxed-closures.html"><strong>2.116.</strong> unboxed_closures</a></li><li><a href="language-features/underscore-lifetimes.html"><strong>2.117.</strong> underscore_lifetimes</a></li><li><a href="language-features/universal-impl-trait.html"><strong>2.118.</strong> universal_impl_trait</a></li><li><a href="language-features/unsized-tuple-coercion.html"><strong>2.119.</strong> unsized_tuple_coercion</a></li><li><a href="language-features/untagged-unions.html"><strong>2.120.</strong> untagged_unions</a></li><li><a href="language-features/unwind-attributes.html"><strong>2.121.</strong> unwind_attributes</a></li><li><a href="language-features/use-extern-macros.html"><strong>2.122.</strong> use_extern_macros</a></li><li><a href="language-features/use-nested-groups.html"><strong>2.123.</strong> use_nested_groups</a></li><li><a href="language-features/used.html"><strong>2.124.</strong> used</a></li><li><a href="language-features/wasm-import-memory.html"><strong>2.125.</strong> wasm_import_memory</a></li></ul></li><li><a href="library-features.html"><strong>3.</strong> Library Features</a></li><li><ul class="section"><li><a href="library-features/align-offset.html"><strong>3.1.</strong> align_offset</a></li><li><a href="library-features/alloc.html"><strong>3.2.</strong> alloc</a></li><li><a href="library-features/alloc-jemalloc.html"><strong>3.3.</strong> alloc_jemalloc</a></li><li><a href="library-features/alloc-system.html"><strong>3.4.</strong> alloc_system</a></li><li><a href="library-features/allocator-api.html"><strong>3.5.</strong> allocator_api</a></li><li><a href="library-features/array-error-internals.html"><strong>3.6.</strong> array_error_internals</a></li><li><a href="library-features/ascii-ctype.html"><strong>3.7.</strong> ascii_ctype</a></li><li><a href="library-features/box-heap.html"><strong>3.8.</strong> box_heap</a></li><li><a href="library-features/box-into-raw-non-null.html"><strong>3.9.</strong> box_into_raw_non_null</a></li><li><a href="library-features/box-leak.html"><strong>3.10.</strong> box_leak</a></li><li><a href="library-features/bufreader-is-empty.html"><strong>3.11.</strong> bufreader_is_empty</a></li><li><a href="library-features/bufreader-seek-relative.html"><strong>3.12.</strong> bufreader_seek_relative</a></li><li><a href="library-features/c-void-variant.html"><strong>3.13.</strong> c_void_variant</a></li><li><a href="library-features/char-error-internals.html"><strong>3.14.</strong> char_error_internals</a></li><li><a href="library-features/coerce-unsized.html"><strong>3.15.</strong> coerce_unsized</a></li><li><a href="library-features/collection-placement.html"><strong>3.16.</strong> collection_placement</a></li><li><a href="library-features/collections-range.html"><strong>3.17.</strong> collections_range</a></li><li><a href="library-features/compiler-builtins-lib.html"><strong>3.18.</strong> compiler_builtins_lib</a></li><li><a href="library-features/concat-idents-macro.html"><strong>3.19.</strong> concat_idents_macro</a></li><li><a href="library-features/core-char-ext.html"><strong>3.20.</strong> core_char_ext</a></li><li><a href="library-features/core-float.html"><strong>3.21.</strong> core_float</a></li><li><a href="library-features/core-intrinsics.html"><strong>3.22.</strong> core_intrinsics</a></li><li><a href="library-features/core-panic.html"><strong>3.23.</strong> core_panic</a></li><li><a href="library-features/core-private-bignum.html"><strong>3.24.</strong> core_private_bignum</a></li><li><a href="library-features/core-private-diy-float.html"><strong>3.25.</strong> core_private_diy_float</a></li><li><a href="library-features/core-slice-ext.html"><strong>3.26.</strong> core_slice_ext</a></li><li><a href="library-features/core-str-ext.html"><strong>3.27.</strong> core_str_ext</a></li><li><a href="library-features/cursor-mut-vec.html"><strong>3.28.</strong> cursor_mut_vec</a></li><li><a href="library-features/deadline-api.html"><strong>3.29.</strong> deadline_api</a></li><li><a href="library-features/dec2flt.html"><strong>3.30.</strong> dec2flt</a></li><li><a href="library-features/decode-utf8.html"><strong>3.31.</strong> decode_utf8</a></li><li><a href="library-features/derive-clone-copy.html"><strong>3.32.</strong> derive_clone_copy</a></li><li><a href="library-features/derive-eq.html"><strong>3.33.</strong> derive_eq</a></li><li><a href="library-features/drain-filter.html"><strong>3.34.</strong> drain_filter</a></li><li><a href="library-features/duration-extras.html"><strong>3.35.</strong> duration_extras</a></li><li><a href="library-features/duration-from-micros.html"><strong>3.36.</strong> duration_from_micros</a></li><li><a href="library-features/entry-and-modify.html"><strong>3.37.</strong> entry_and_modify</a></li><li><a href="library-features/entry-or-default.html"><strong>3.38.</strong> entry_or_default</a></li><li><a href="library-features/error-type-id.html"><strong>3.39.</strong> error_type_id</a></li><li><a href="library-features/exact-chunks.html"><strong>3.40.</strong> exact_chunks</a></li><li><a href="library-features/exact-size-is-empty.html"><strong>3.41.</strong> exact_size_is_empty</a></li><li><a href="library-features/fd.html"><strong>3.42.</strong> fd</a></li><li><a href="library-features/fd-read.html"><strong>3.43.</strong> fd_read</a></li><li><a href="library-features/fixed-size-array.html"><strong>3.44.</strong> fixed_size_array</a></li><li><a href="library-features/flt2dec.html"><strong>3.45.</strong> flt2dec</a></li><li><a href="library-features/fmt-flags-align.html"><strong>3.46.</strong> fmt_flags_align</a></li><li><a href="library-features/fmt-internals.html"><strong>3.47.</strong> fmt_internals</a></li><li><a href="library-features/fn-traits.html"><strong>3.48.</strong> fn_traits</a></li><li><a href="library-features/fnbox.html"><strong>3.49.</strong> fnbox</a></li><li><a href="library-features/from-ref.html"><strong>3.50.</strong> from_ref</a></li><li><a href="library-features/from-utf8-error-as-bytes.html"><strong>3.51.</strong> from_utf8_error_as_bytes</a></li><li><a href="library-features/fs-read-write.html"><strong>3.52.</strong> fs_read_write</a></li><li><a href="library-features/fused.html"><strong>3.53.</strong> fused</a></li><li><a href="library-features/future-atomic-orderings.html"><strong>3.54.</strong> future_atomic_orderings</a></li><li><a href="library-features/generator-trait.html"><strong>3.55.</strong> generator_trait</a></li><li><a href="library-features/get-type-id.html"><strong>3.56.</strong> get_type_id</a></li><li><a href="library-features/getpid.html"><strong>3.57.</strong> getpid</a></li><li><a href="library-features/hash-map-remove-entry.html"><strong>3.58.</strong> hash_map_remove_entry</a></li><li><a href="library-features/heap-api.html"><strong>3.59.</strong> heap_api</a></li><li><a href="library-features/i128.html"><strong>3.60.</strong> i128</a></li><li><a href="library-features/inclusive-range.html"><strong>3.61.</strong> inclusive_range</a></li><li><a href="library-features/int-error-internals.html"><strong>3.62.</strong> int_error_internals</a></li><li><a href="library-features/integer-atomics.html"><strong>3.63.</strong> integer_atomics</a></li><li><a href="library-features/io.html"><strong>3.64.</strong> io</a></li><li><a href="library-features/io-error-internals.html"><strong>3.65.</strong> io_error_internals</a></li><li><a href="library-features/ip.html"><strong>3.66.</strong> ip</a></li><li><a href="library-features/ip-constructors.html"><strong>3.67.</strong> ip_constructors</a></li><li><a href="library-features/iter-rfind.html"><strong>3.68.</strong> iter_rfind</a></li><li><a href="library-features/iter-rfold.html"><strong>3.69.</strong> iter_rfold</a></li><li><a href="library-features/iterator-step-by.html"><strong>3.70.</strong> iterator_step_by</a></li><li><a href="library-features/iterator-try-fold.html"><strong>3.71.</strong> iterator_try_fold</a></li><li><a href="library-features/libstd-io-internals.html"><strong>3.72.</strong> libstd_io_internals</a></li><li><a href="library-features/libstd-sys-internals.html"><strong>3.73.</strong> libstd_sys_internals</a></li><li><a href="library-features/libstd-thread-internals.html"><strong>3.74.</strong> libstd_thread_internals</a></li><li><a href="library-features/linked-list-extras.html"><strong>3.75.</strong> linked_list_extras</a></li><li><a href="library-features/lookup-host.html"><strong>3.76.</strong> lookup_host</a></li><li><a href="library-features/map-entry-replace.html"><strong>3.77.</strong> map_entry_replace</a></li><li><a href="library-features/mpsc-select.html"><strong>3.78.</strong> mpsc_select</a></li><li><a href="library-features/n16.html"><strong>3.79.</strong> n16</a></li><li><a href="library-features/nonzero.html"><strong>3.80.</strong> nonzero</a></li><li><a href="library-features/offset-to.html"><strong>3.81.</strong> offset_to</a></li><li><a href="library-features/once-poison.html"><strong>3.82.</strong> once_poison</a></li><li><a href="library-features/option-filter.html"><strong>3.83.</strong> option_filter</a></li><li><a href="library-features/option-ref-mut-cloned.html"><strong>3.84.</strong> option_ref_mut_cloned</a></li><li><a href="library-features/panic-abort.html"><strong>3.85.</strong> panic_abort</a></li><li><a href="library-features/panic-unwind.html"><strong>3.86.</strong> panic_unwind</a></li><li><a href="library-features/pattern.html"><strong>3.87.</strong> pattern</a></li><li><a href="library-features/placement-in.html"><strong>3.88.</strong> placement_in</a></li><li><a href="library-features/placement-new-protocol.html"><strong>3.89.</strong> placement_new_protocol</a></li><li><a href="library-features/pointer-methods.html"><strong>3.90.</strong> pointer_methods</a></li><li><a href="library-features/print-internals.html"><strong>3.91.</strong> print_internals</a></li><li><a href="library-features/proc-macro-internals.html"><strong>3.92.</strong> proc_macro_internals</a></li><li><a href="library-features/process-internals.html"><strong>3.93.</strong> process_internals</a></li><li><a href="library-features/profiler-runtime-lib.html"><strong>3.94.</strong> profiler_runtime_lib</a></li><li><a href="library-features/ptr-internals.html"><strong>3.95.</strong> ptr_internals</a></li><li><a href="library-features/range-contains.html"><strong>3.96.</strong> range_contains</a></li><li><a href="library-features/raw.html"><strong>3.97.</strong> raw</a></li><li><a href="library-features/rc-downcast.html"><strong>3.98.</strong> rc_downcast</a></li><li><a href="library-features/read-initializer.html"><strong>3.99.</strong> read_initializer</a></li><li><a href="library-features/refcell-replace-swap.html"><strong>3.100.</strong> refcell_replace_swap</a></li><li><a href="library-features/rt.html"><strong>3.101.</strong> rt</a></li><li><a href="library-features/rustc-private.html"><strong>3.102.</strong> rustc_private</a></li><li><a href="library-features/sanitizer-runtime-lib.html"><strong>3.103.</strong> sanitizer_runtime_lib</a></li><li><a href="library-features/set-stdio.html"><strong>3.104.</strong> set_stdio</a></li><li><a href="library-features/shared.html"><strong>3.105.</strong> shared</a></li><li><a href="library-features/sip-hash-13.html"><strong>3.106.</strong> sip_hash_13</a></li><li><a href="library-features/slice-concat-ext.html"><strong>3.107.</strong> slice_concat_ext</a></li><li><a href="library-features/slice-get-slice.html"><strong>3.108.</strong> slice_get_slice</a></li><li><a href="library-features/slice-internals.html"><strong>3.109.</strong> slice_internals</a></li><li><a href="library-features/slice-rotate.html"><strong>3.110.</strong> slice_rotate</a></li><li><a href="library-features/slice-rsplit.html"><strong>3.111.</strong> slice_rsplit</a></li><li><a href="library-features/sort-internals.html"><strong>3.112.</strong> sort_internals</a></li><li><a href="library-features/splice.html"><strong>3.113.</strong> splice</a></li><li><a href="library-features/std-internals.html"><strong>3.114.</strong> std_internals</a></li><li><a href="library-features/step-trait.html"><strong>3.115.</strong> step_trait</a></li><li><a href="library-features/str-escape.html"><strong>3.116.</strong> str_escape</a></li><li><a href="library-features/str-internals.html"><strong>3.117.</strong> str_internals</a></li><li><a href="library-features/string-retain.html"><strong>3.118.</strong> string_retain</a></li><li><a href="library-features/swap-nonoverlapping.html"><strong>3.119.</strong> swap_nonoverlapping</a></li><li><a href="library-features/swap-with-slice.html"><strong>3.120.</strong> swap_with_slice</a></li><li><a href="library-features/take-set-limit.html"><strong>3.121.</strong> take_set_limit</a></li><li><a href="library-features/test.html"><strong>3.122.</strong> test</a></li><li><a href="library-features/thread-local-internals.html"><strong>3.123.</strong> thread_local_internals</a></li><li><a href="library-features/thread-local-state.html"><strong>3.124.</strong> thread_local_state</a></li><li><a href="library-features/toowned-clone-into.html"><strong>3.125.</strong> toowned_clone_into</a></li><li><a href="library-features/transpose-result.html"><strong>3.126.</strong> transpose_result</a></li><li><a href="library-features/trusted-len.html"><strong>3.127.</strong> trusted_len</a></li><li><a href="library-features/try-from.html"><strong>3.128.</strong> try_from</a></li><li><a href="library-features/try-trait.html"><strong>3.129.</strong> try_trait</a></li><li><a href="library-features/unicode.html"><strong>3.130.</strong> unicode</a></li><li><a href="library-features/unix-ppid.html"><strong>3.131.</strong> unix_ppid</a></li><li><a href="library-features/unreachable.html"><strong>3.132.</strong> unreachable</a></li><li><a href="library-features/unsize.html"><strong>3.133.</strong> unsize</a></li><li><a href="library-features/update-panic-count.html"><strong>3.134.</strong> update_panic_count</a></li><li><a href="library-features/vec-remove-item.html"><strong>3.135.</strong> vec_remove_item</a></li><li><a href="library-features/vec-resize-default.html"><strong>3.136.</strong> vec_resize_default</a></li><li><a href="library-features/windows-c.html"><strong>3.137.</strong> windows_c</a></li><li><a href="library-features/windows-handle.html"><strong>3.138.</strong> windows_handle</a></li><li><a href="library-features/windows-net.html"><strong>3.139.</strong> windows_net</a></li><li><a href="library-features/windows-stdio.html"><strong>3.140.</strong> windows_stdio</a></li></ul></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -278,9 +276,6 @@ $ cat $(find -name '*.s')
         ret;
 }
 </code></pre>
-<a class="header" href="print.html#abi_sysv64" id="abi_sysv64"><h1><code>abi_sysv64</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/36167">#36167</a></p>
-<hr />
 <a class="header" href="print.html#abi_thiscall" id="abi_thiscall"><h1><code>abi_thiscall</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/42202">#42202</a></p>
 <hr />
@@ -336,6 +331,9 @@ compiler.</p>
 <hr />
 <a class="header" href="print.html#allow_internal_unstable" id="allow_internal_unstable"><h1><code>allow_internal_unstable</code></h1></a>
 <p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
+<hr />
+<a class="header" href="print.html#arbitrary_self_types" id="arbitrary_self_types"><h1><code>arbitrary_self_types</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44874">#44874</a></p>
 <hr />
 <a class="header" href="print.html#asm" id="asm"><h1><code>asm</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29722">#29722</a></p>
@@ -695,6 +693,51 @@ const ARR2: [usize; ARR[1]] = [42, 99];
 <a class="header" href="print.html#copy_closures" id="copy_closures"><h1><code>copy_closures</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44490">#44490</a></p>
 <hr />
+<a class="header" href="print.html#crate_in_paths" id="crate_in_paths"><h1><code>crate_in_paths</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44660">#44660</a></p>
+<hr />
+<p>The <code>crate_in_paths</code> feature allows to explicitly refer to the crate root in absolute paths
+using keyword <code>crate</code>.</p>
+<p><code>crate</code> can be used <em>only</em> in absolute paths, i.e. either in <code>::crate::a::b::c</code> form or in <code>use</code>
+items where the starting <code>::</code> is added implicitly.<br />
+Paths like <code>crate::a::b::c</code> are not accepted currently.</p>
+<p>This feature is required in <code>feature(extern_absolute_paths)</code> mode to refer to any absolute path
+in the local crate (absolute paths refer to extern crates by default in that mode), but can be
+used without <code>feature(extern_absolute_paths)</code> as well.</p>
+<pre><pre class="playpen"><code class="language-rust">#![feature(crate_in_paths)]
+
+// Imports, `::` is added implicitly
+use crate::m::f;
+use crate as root;
+
+mod m {
+    pub fn f() -&gt; u8 { 1 }
+    pub fn g() -&gt; u8 { 2 }
+    pub fn h() -&gt; u8 { 3 }
+
+    // OK, visibilities implicitly add starting `::` as well, like imports
+    pub(in crate::m) struct S;
+}
+
+mod n
+{
+    use crate::m::f;
+    use crate as root;
+    pub fn check() {
+        assert_eq!(f(), 1);
+        // `::` is required in non-import paths
+        assert_eq!(::crate::m::g(), 2);
+        assert_eq!(root::m::h(), 3);
+    }
+}
+
+fn main() {
+    assert_eq!(f(), 1);
+    assert_eq!(::crate::m::g(), 2);
+    assert_eq!(root::m::h(), 3);
+    n::check();
+}
+</code></pre></pre>
 <a class="header" href="print.html#crate_visibility_modifier" id="crate_visibility_modifier"><h1><code>crate_visibility_modifier</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/45388">#45388</a></p>
 <hr />
@@ -785,6 +828,27 @@ are not emitted into the documentation.</p>
 <p>This feature was introduced in PR <a href="https://github.com/rust-lang/rust/pull/44026">#44026</a> to ensure that compiler-internal and
 implementation-specific types and traits were not included in the standard library's documentation.
 Such types would introduce broken links into the documentation.</p>
+<a class="header" href="print.html#doc_spotlight" id="doc_spotlight"><h1><code>doc_spotlight</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/45040">#45040</a></p>
+<p>The <code>doc_spotlight</code> feature allows the use of the <code>spotlight</code> parameter to the <code>#[doc]</code> attribute,
+to &quot;spotlight&quot; a specific trait on the return values of functions. Adding a <code>#[doc(spotlight)]</code>
+attribute to a trait definition will make rustdoc print extra information for functions which return
+a type that implements that trait. This attribute is applied to the <code>Iterator</code>, <code>io::Read</code>, and
+<code>io::Write</code> traits in the standard library.</p>
+<p>You can do this on your own traits, like this:</p>
+<pre><code>#![feature(doc_spotlight)]
+
+#[doc(spotlight)]
+pub trait MyTrait {}
+
+pub struct MyStruct;
+impl MyTrait for MyStruct {}
+
+/// The docs for this function will have an extra line about `MyStruct` implementing `MyTrait`,
+/// without having to write that yourself!
+pub fn my_fn() -&gt; MyStruct { MyStruct }
+</code></pre>
+<p>This feature was originally implemented in PR <a href="https://github.com/rust-lang/rust/pull/45039">#45039</a>.</p>
 <a class="header" href="print.html#dotdoteq_in_patterns" id="dotdoteq_in_patterns"><h1><code>dotdoteq_in_patterns</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/28237">#28237</a></p>
 <hr />
@@ -800,9 +864,97 @@ Such types would introduce broken links into the documentation.</p>
 <a class="header" href="print.html#exclusive_range_pattern" id="exclusive_range_pattern"><h1><code>exclusive_range_pattern</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/37854">#37854</a></p>
 <hr />
+<a class="header" href="print.html#extern_absolute_paths" id="extern_absolute_paths"><h1><code>extern_absolute_paths</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44660">#44660</a></p>
+<hr />
+<p>The <code>extern_absolute_paths</code> feature enables mode allowing to refer to names from other crates
+&quot;inline&quot;, without introducing <code>extern crate</code> items, using absolute paths like <code>::my_crate::a::b</code>.</p>
+<p><code>::my_crate::a::b</code> will resolve to path <code>a::b</code> in crate <code>my_crate</code>.</p>
+<p><code>feature(crate_in_paths)</code> can be used in <code>feature(extern_absolute_paths)</code> mode for referring
+to absolute paths in the local crate (<code>::crate::a::b</code>).</p>
+<p><code>feature(extern_in_paths)</code> provides the same effect by using keyword <code>extern</code> to refer to
+paths from other crates (<code>extern::my_crate::a::b</code>).</p>
+<pre><code class="language-rust ignore">#![feature(extern_absolute_paths)]
+
+// Suppose we have a dependency crate `xcrate` available through `Cargo.toml`, or `--extern`
+// options, or standard Rust distribution, or some other means.
+
+use xcrate::Z;
+
+fn f() {
+    use xcrate;
+    use xcrate as ycrate;
+    let s = xcrate::S;
+    assert_eq!(format!(&quot;{:?}&quot;, s), &quot;S&quot;);
+    let z = ycrate::Z;
+    assert_eq!(format!(&quot;{:?}&quot;, z), &quot;Z&quot;);
+}
+
+fn main() {
+    let s = ::xcrate::S;
+    assert_eq!(format!(&quot;{:?}&quot;, s), &quot;S&quot;);
+    let z = Z;
+    assert_eq!(format!(&quot;{:?}&quot;, z), &quot;Z&quot;);
+}
+</code></pre>
+<a class="header" href="print.html#extern_in_paths" id="extern_in_paths"><h1><code>extern_in_paths</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44660">#44660</a></p>
+<hr />
+<p>The <code>extern_in_paths</code> feature allows to refer to names from other crates &quot;inline&quot;, without
+introducing <code>extern crate</code> items, using keyword <code>extern</code>.</p>
+<p>For example, <code>extern::my_crat::a::b</code> will resolve to path <code>a::b</code> in crate <code>my_crate</code>.</p>
+<p><code>feature(extern_absolute_paths)</code> mode provides the same effect by resolving absolute paths like
+<code>::my_crate::a::b</code> to paths from extern crates by default.</p>
+<pre><code class="language-rust ignore">#![feature(extern_in_paths)]
+
+// Suppose we have a dependency crate `xcrate` available through `Cargo.toml`, or `--extern`
+// options, or standard Rust distribution, or some other means.
+
+use extern::xcrate::Z;
+
+fn f() {
+    use extern::xcrate;
+    use extern::xcrate as ycrate;
+    let s = xcrate::S;
+    assert_eq!(format!(&quot;{:?}&quot;, s), &quot;S&quot;);
+    let z = ycrate::Z;
+    assert_eq!(format!(&quot;{:?}&quot;, z), &quot;Z&quot;);
+}
+
+fn main() {
+    let s = extern::xcrate::S;
+    assert_eq!(format!(&quot;{:?}&quot;, s), &quot;S&quot;);
+    let z = Z;
+    assert_eq!(format!(&quot;{:?}&quot;, z), &quot;Z&quot;);
+}
+</code></pre>
 <a class="header" href="print.html#extern_types" id="extern_types"><h1><code>extern_types</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/43467">#43467</a></p>
 <hr />
+<a class="header" href="print.html#external_doc" id="external_doc"><h1><code>external_doc</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44732">#44732</a></p>
+<p>The <code>external_doc</code> feature allows the use of the <code>include</code> parameter to the <code>#[doc]</code> attribute, to
+include external files in documentation. Use the attribute in place of, or in addition to, regular
+doc comments and <code>#[doc]</code> attributes, and <code>rustdoc</code> will load the given file when it renders
+documentation for your crate.</p>
+<p>With the following files in the same directory:</p>
+<p><code>external-doc.md</code>:</p>
+<pre><code class="language-markdown"># My Awesome Type
+
+This is the documentation for this spectacular type.
+</code></pre>
+<p><code>lib.rs</code>:</p>
+<pre><code class="language-no_run(needs-external-files)">#![feature(external_doc)]
+
+#[doc(include = &quot;external-doc.md&quot;)]
+pub struct MyAwesomeType;
+</code></pre>
+<p><code>rustdoc</code> will load the file <code>external-doc.md</code> and use it as the documentation for the <code>MyAwesomeType</code>
+struct.</p>
+<p>When locating files, <code>rustdoc</code> will base paths in the <code>src/</code> directory, as if they were alongside the
+<code>lib.rs</code> for your crate. So if you want a <code>docs/</code> folder to live alongside the <code>src/</code> directory,
+start your paths with <code>../docs/</code> for <code>rustdoc</code> to properly find the file.</p>
+<p>This feature was proposed in <a href="https://github.com/rust-lang/rfcs/pull/1990">RFC #1990</a> and initially implemented in PR <a href="https://github.com/rust-lang/rust/pull/44781">#44781</a>.</p>
 <a class="header" href="print.html#fn_must_use" id="fn_must_use"><h1><code>fn_must_use</code></h1></a>
 <p>The tracking issue for this feature is <a href="https://github.com/rust-lang/rust/issues/43302">#43302</a>.</p>
 <hr />
@@ -1041,6 +1193,9 @@ state.</p>
 it's invalid to resume a completed generator. It's also worth noting that this
 is just a rough desugaring, not a normative specification for what the compiler
 does.</p>
+<a class="header" href="print.html#generic_associated_types" id="generic_associated_types"><h1><code>generic_associated_types</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44265">#44265</a></p>
+<hr />
 <a class="header" href="print.html#generic_param_attrs" id="generic_param_attrs"><h1><code>generic_param_attrs</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/34761">#34761</a></p>
 <hr />
@@ -1177,6 +1332,9 @@ fn main() {
     assert_eq!(i128::max_value(), 170141183460469231731687303715884105727);
 }
 </code></pre></pre>
+<a class="header" href="print.html#in_band_lifetimes" id="in_band_lifetimes"><h1><code>in_band_lifetimes</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44524">#44524</a></p>
+<hr />
 <a class="header" href="print.html#inclusive_range_syntax" id="inclusive_range_syntax"><h1><code>inclusive_range_syntax</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/28237">#28237</a></p>
 <hr />
@@ -1552,6 +1710,14 @@ formal <code>#[link(...)]</code> attribute on <code>extern</code> blocks instead
 <a class="header" href="print.html#log_syntax" id="log_syntax"><h1><code>log_syntax</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29598">#29598</a></p>
 <hr />
+<a class="header" href="print.html#macro_lifetime_matcher" id="macro_lifetime_matcher"><h1><code>macro_lifetime_matcher</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46895">#46895</a></p>
+<p>With this feature gate enabled, the <a href="../book/first-edition/macros.html#syntactic-requirements">list of fragment specifiers</a> gains one more entry:</p>
+<ul>
+<li><code>lifetime</code>: a lifetime. Examples: 'static, 'a.</li>
+</ul>
+<p>A <code>lifetime</code> variable may be followed by anything.</p>
+<hr />
 <a class="header" href="print.html#macro_reexport" id="macro_reexport"><h1><code>macro_reexport</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29638">#29638</a></p>
 <hr />
@@ -1583,7 +1749,50 @@ fn main() {
     }
 }
 </code></pre></pre>
-<a class="header" href="print.html#match_default_bindings" id="match_default_bindings"><h1>match_default_bindings</h1></a>
+<a class="header" href="print.html#match_default_bindings" id="match_default_bindings"><h1><code>match_default_bindings</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/42640">#42640</a></p>
+<hr />
+<p>Match default bindings (also called &quot;default binding modes in match&quot;) improves ergonomics for
+pattern-matching on references by introducing automatic dereferencing (and a corresponding shift
+in binding modes) for large classes of patterns that would otherwise not compile.</p>
+<p>For example, under match default bindings,</p>
+<pre><pre class="playpen"><code class="language-rust">#![feature(match_default_bindings)]
+
+fn main() {
+    let x: &amp;Option&lt;_&gt; = &amp;Some(0);
+
+    match x {
+        Some(y) =&gt; {
+            println!(&quot;y={}&quot;, *y);
+        },
+        None =&gt; {},
+    }
+}
+</code></pre></pre>
+<p>compiles and is equivalent to either of the below:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let x: &amp;Option&lt;_&gt; = &amp;Some(0);
+
+    match *x {
+        Some(ref y) =&gt; {
+            println!(&quot;y={}&quot;, *y);
+        },
+        None =&gt; {},
+    }
+}
+</code></pre></pre>
+<p>or</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    let x: &amp;Option&lt;_&gt; = &amp;Some(0);
+
+    match x {
+        &amp;Some(ref y) =&gt; {
+            println!(&quot;y={}&quot;, *y);
+        },
+        &amp;None =&gt; {},
+    }
+}
+</code></pre></pre>
 <a class="header" href="print.html#naked_functions" id="naked_functions"><h1><code>naked_functions</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32408">#32408</a></p>
 <hr />
@@ -1593,8 +1802,14 @@ fn main() {
 <a class="header" href="print.html#needs_panic_runtime" id="needs_panic_runtime"><h1><code>needs_panic_runtime</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32837">#32837</a></p>
 <hr />
+<a class="header" href="print.html#nested_impl_trait" id="nested_impl_trait"><h1><code>nested_impl_trait</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/34511">#34511</a></p>
+<hr />
 <a class="header" href="print.html#never_type" id="never_type"><h1><code>never_type</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35121">#35121</a></p>
+<hr />
+<a class="header" href="print.html#nll" id="nll"><h1><code>nll</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44928">#44928</a></p>
 <hr />
 <a class="header" href="print.html#no_core" id="no_core"><h1><code>no_core</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29639">#29639</a></p>
@@ -1701,6 +1916,9 @@ let config = Config { window_width: 640, window_height: 480 };
 // when marked non_exhaustive.
 let &amp;Config { window_width, window_height, .. } = config;
 </code></pre>
+<a class="header" href="print.html#non_modrs_mods" id="non_modrs_mods"><h1><code>non_modrs_mods</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44660">#44660</a></p>
+<hr />
 <a class="header" href="print.html#omit_gdb_pretty_printer_section" id="omit_gdb_pretty_printer_section"><h1><code>omit_gdb_pretty_printer_section</code></h1></a>
 <p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
 <hr />
@@ -1745,7 +1963,7 @@ error: aborting due to previous error
 <p>The <code>optin_builtin_traits</code> feature gate allows you to define auto traits.</p>
 <p>Auto traits, like <a href="https://doc.rust-lang.org/std/marker/trait.Send.html"><code>Send</code></a> or <a href="https://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a> in the standard library, are marker traits
 that are automatically implemented for every type, unless the type, or a type it contains,
-has explictly opted out via a negative impl.</p>
+has explicitly opted out via a negative impl.</p>
 <pre><code class="language-rust ignore">impl !Type for Trait
 </code></pre>
 <p>Example:</p>
@@ -1925,7 +2143,7 @@ quasiquote as an ordinary plugin library.</p>
 <p>Plugins can extend <a href="../reference/attributes.html#lint-check-attributes">Rust's lint
 infrastructure</a> with
 additional checks for code style, safety, etc. Now let's write a plugin
-<a href="https://github.com/rust-lang/rust/blob/master/src/test/run-pass-fulldeps/auxiliary/lint_plugin_test.rs"><code>lint_plugin_test.rs</code></a>
+<a href="https://github.com/rust-lang/rust/blob/master/src/test/ui-fulldeps/auxiliary/lint_plugin_test.rs"><code>lint_plugin_test.rs</code></a>
 that warns about any item named <code>lintme</code>.</p>
 <pre><code class="language-rust ignore">#![feature(plugin_registrar)]
 #![feature(box_syntax, rustc_private)]
@@ -2203,14 +2421,157 @@ pub fn foo() {
 <a class="header" href="print.html#quote" id="quote"><h1><code>quote</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29601">#29601</a></p>
 <hr />
-<a class="header" href="print.html#repr128" id="repr128"><h1><code>repr128</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35118">#35118</a></p>
-<hr />
-<a class="header" href="print.html#repr_align" id="repr_align"><h1><code>repr_align</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/33626">#33626</a></p>
-<hr />
 <a class="header" href="print.html#repr_simd" id="repr_simd"><h1><code>repr_simd</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27731">#27731</a></p>
+<hr />
+<a class="header" href="print.html#repr_transparent" id="repr_transparent"><h1><code>repr_transparent</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/43036">#43036</a></p>
+<hr />
+<p>This feature enables the <code>repr(transparent)</code> attribute on structs, which enables
+the use of newtypes without the usual ABI implications of wrapping the value in
+a struct.</p>
+<a class="header" href="print.html#background-1" id="background-1"><h2>Background</h2></a>
+<p>It's sometimes useful to add additional type safety by introducing <em>newtypes</em>.
+For example, code that handles numeric quantities in different units such as
+millimeters, centimeters, grams, kilograms, etc. may want to use the type system
+to rule out mistakes such as adding millimeters to grams:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::ops::Add;
+
+struct Millimeters(f64);
+struct Grams(f64);
+
+impl Add&lt;Millimeters&gt; for Millimeters {
+    type Output = Millimeters;
+
+    fn add(self, other: Millimeters) -&gt; Millimeters {
+        Millimeters(self.0 + other.0)
+    }
+}
+
+// Likewise: impl Add&lt;Grams&gt; for Grams {}
+#}</code></pre></pre>
+<p>Other uses of newtypes include using <code>PhantomData</code> to add lifetimes to raw
+pointers or to implement the &quot;phantom types&quot; pattern. See the <a href="https://doc.rust-lang.org/std/marker/struct.PhantomData.html">PhantomData</a>
+documentation and <a href="https://doc.rust-lang.org/nomicon/phantom-data.html">the Nomicon</a> for more details.</p>
+<p>The added type safety is especially useful when interacting with C or other
+languages. However, in those cases we need to ensure the newtypes we add do not
+introduce incompatibilities with the C ABI.</p>
+<a class="header" href="print.html#newtypes-in-ffi" id="newtypes-in-ffi"><h2>Newtypes in FFI</h2></a>
+<p>Luckily, <code>repr(C)</code> newtypes are laid out just like the type they wrap on all
+platforms which Rust currently supports, and likely on many more. For example,
+consider this C declaration:</p>
+<pre><code class="language-C">struct Object {
+    double weight; //&lt; in grams
+    double height; //&lt; in millimeters
+    // ...
+}
+
+void frobnicate(struct Object *);
+</code></pre>
+<p>While using this C code from Rust, we could add <code>repr(C)</code> to the <code>Grams</code> and
+<code>Millimeters</code> newtypes introduced above and use them to add some type safety
+while staying compatible with the memory layout of <code>Object</code>:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+#[repr(C)]
+struct Grams(f64);
+
+#[repr(C)]
+struct Millimeters(f64);
+
+#[repr(C)]
+struct Object {
+    weight: Grams,
+    height: Millimeters,
+    // ...
+}
+
+extern {
+    fn frobnicate(_: *mut Object);
+}
+#}</code></pre></pre>
+<p>This works even when adding some <code>PhantomData</code> fields, because they are
+zero-sized and therefore don't have to affect the memory layout.</p>
+<p>However, there's more to the ABI than just memory layout: there's also the
+question of how function call arguments and return values are passed. Many
+common ABI treat a struct containing a single field differently from that field
+itself, at least when the field is a scalar (e.g., integer or float or pointer).</p>
+<p>To continue the above example, suppose the C library also exposes a function
+like this:</p>
+<pre><code class="language-C">double calculate_weight(double height);
+</code></pre>
+<p>Using our newtypes on the Rust side like this will cause an ABI mismatch on many
+platforms:</p>
+<pre><code class="language-rust ignore">extern {
+    fn calculate_weight(height: Millimeters) -&gt; Grams;
+}
+</code></pre>
+<p>For example, on x86_64 Linux, Rust will pass the argument in an integer
+register, while the C function expects the argument to be in a floating-point
+register. Likewise, the C function will return the result in a floating-point
+register while Rust will expect it in an integer register.</p>
+<p>Note that this problem is not specific to floats: To give another example,
+32-bit x86 linux will pass and return <code>struct Foo(i32);</code> on the stack while
+<code>i32</code> is placed in registers.</p>
+<a class="header" href="print.html#enter-reprtransparent" id="enter-reprtransparent"><h2>Enter <code>repr(transparent)</code></h2></a>
+<p>So while <code>repr(C)</code> happens to do the right thing with respect to memory layout,
+it's not quite the right tool for newtypes in FFI. Instead of declaring a C
+struct, we need to communicate to the Rust compiler that our newtype is just for
+type safety on the Rust side. This is what <code>repr(transparent)</code> does.</p>
+<p>The attribute can be applied to a newtype-like structs that contains a single
+field. It indicates that the newtype should be represented exactly like that
+field's type, i.e., the newtype should be ignored for ABI purpopses: not only is
+it laid out the same in memory, it is also passed identically in function calls.</p>
+<p>In the above example, the ABI mismatches can be prevented by making the newtypes
+<code>Grams</code> and <code>Millimeters</code> transparent like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(repr_transparent)]
+
+#fn main() {
+#[repr(transparent)]
+struct Grams(f64);
+
+#[repr(transparent)]
+struct Millimeters(f64);
+#}</code></pre></pre>
+<p>In addition to that single field, any number of zero-sized fields are permitted,
+including but not limited to <code>PhantomData</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(repr_transparent)]
+
+#fn main() {
+use std::marker::PhantomData;
+
+struct Foo { /* ... */ }
+
+#[repr(transparent)]
+struct FooPtrWithLifetime&lt;'a&gt;(*const Foo, PhantomData&lt;&amp;'a Foo&gt;);
+
+#[repr(transparent)]
+struct NumberWithUnit&lt;T, U&gt;(T, PhantomData&lt;U&gt;);
+
+struct CustomZst;
+
+#[repr(transparent)]
+struct PtrWithCustomZst&lt;'a&gt; {
+    ptr: FooPtrWithLifetime&lt;'a&gt;,
+    some_marker: CustomZst,
+}
+#}</code></pre></pre>
+<p>Transparent structs can be nested: <code>PtrWithCustomZst</code> is also represented
+exactly like <code>*const Foo</code>.</p>
+<p>Because <code>repr(transparent)</code> delegates all representation concerns to another
+type, it is incompatible with all other <code>repr(..)</code> attributes. It also cannot be
+applied to enums, unions, empty structs, structs whose fields are all
+zero-sized, or structs with <em>multiple</em> non-zero-sized fields.</p>
+<a class="header" href="print.html#repr128" id="repr128"><h1><code>repr128</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35118">#35118</a></p>
 <hr />
 <a class="header" href="print.html#rustc_attrs" id="rustc_attrs"><h1><code>rustc_attrs</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29642">#29642</a></p>
@@ -2223,9 +2584,6 @@ pub fn foo() {
 <hr />
 <a class="header" href="print.html#sanitizer_runtime" id="sanitizer_runtime"><h1><code>sanitizer_runtime</code></h1></a>
 <p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
-<hr />
-<a class="header" href="print.html#simd" id="simd"><h1><code>simd</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27731">#27731</a></p>
 <hr />
 <a class="header" href="print.html#simd_ffi" id="simd_ffi"><h1><code>simd_ffi</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27731">#27731</a></p>
@@ -2269,6 +2627,9 @@ fn main() {
 <a class="header" href="print.html#target_feature" id="target_feature"><h1><code>target_feature</code></h1></a>
 <p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
 <hr />
+<a class="header" href="print.html#termination_trait" id="termination_trait"><h1><code>termination_trait</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/43301">#43301</a></p>
+<hr />
 <a class="header" href="print.html#thread_local" id="thread_local"><h1><code>thread_local</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29594">#29594</a></p>
 <hr />
@@ -2300,6 +2661,9 @@ fn main() {
 
     Finished dev [unoptimized + debuginfo] target(s) in 0.60 secs
 </code></pre>
+<a class="header" href="print.html#trait_alias" id="trait_alias"><h1><code>trait_alias</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/41517">#41517</a></p>
+<hr />
 <a class="header" href="print.html#type_ascription" id="type_ascription"><h1><code>type_ascription</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/23416">#23416</a></p>
 <hr />
@@ -2308,7 +2672,7 @@ fn main() {
 <p>See Also: <a href="library-features/fn-traits.html"><code>fn_traits</code></a></p>
 <hr />
 <p>The <code>unboxed_closures</code> feature allows you to write functions using the <code>&quot;rust-call&quot;</code> ABI,
-required for implmenting the <a href="https://doc.rust-lang.org/std/ops/trait.Fn.html"><code>Fn*</code></a> family of traits. <code>&quot;rust-call&quot;</code> functions must have
+required for implementing the <a href="https://doc.rust-lang.org/std/ops/trait.Fn.html"><code>Fn*</code></a> family of traits. <code>&quot;rust-call&quot;</code> functions must have
 exactly one (non self) argument, a tuple representing the argument list.</p>
 <pre><pre class="playpen"><code class="language-rust">#![feature(unboxed_closures)]
 
@@ -2321,6 +2685,28 @@ fn main() {}
 <a class="header" href="print.html#underscore_lifetimes" id="underscore_lifetimes"><h1><code>underscore_lifetimes</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44524">#44524</a></p>
 <hr />
+<a class="header" href="print.html#universal_impl_trait" id="universal_impl_trait"><h1><code>universal_impl_trait</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/34511">#34511</a>.</p>
+<hr />
+<p>The <code>universal_impl_trait</code> feature extends the <a href="./language-features/conservative-impl-trait.html"><code>conservative_impl_trait</code></a>
+feature allowing the <code>impl Trait</code> syntax in arguments (universal
+quantification).</p>
+<a class="header" href="print.html#examples-7" id="examples-7"><h2>Examples</h2></a>
+<pre><pre class="playpen"><code class="language-rust">#![feature(universal_impl_trait)]
+use std::ops::Not;
+
+fn any_zero(values: impl IntoIterator&lt;Item = i32&gt;) -&gt; bool {
+    for val in values { if val == 0 { return true; } }
+    false
+}
+
+fn main() {
+    let test1 = -5..;
+    let test2 = vec![1, 8, 42, -87, 60];
+    assert!(any_zero(test1));
+    assert!(bool::not(any_zero(test2)));
+}
+</code></pre></pre>
 <a class="header" href="print.html#unsized_tuple_coercion" id="unsized_tuple_coercion"><h1><code>unsized_tuple_coercion</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/42877">#42877</a></p>
 <hr />
@@ -2345,6 +2731,80 @@ fn main() {
 <a class="header" href="print.html#use_extern_macros" id="use_extern_macros"><h1><code>use_extern_macros</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35896">#35896</a></p>
 <hr />
+<a class="header" href="print.html#use_nested_groups" id="use_nested_groups"><h1><code>use_nested_groups</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44494">#44494</a></p>
+<hr />
+<p>The <code>use_nested_groups</code> feature allows you to import multiple items from a
+complex module tree easily, by nesting different imports in the same
+declaration. For example:</p>
+<pre><pre class="playpen"><code class="language-rust">#![feature(use_nested_groups)]
+# #![allow(unused_imports, dead_code)]
+#
+# mod foo {
+#     pub mod bar {
+#         pub type Foo = ();
+#     }
+#     pub mod baz {
+#         pub mod quux {
+#             pub type Bar = ();
+#         }
+#     }
+# }
+
+use foo::{
+    bar::{self, Foo},
+    baz::{*, quux::Bar},
+};
+#
+# fn main() {}
+</code></pre></pre>
+<a class="header" href="print.html#snippet-for-the-books-new-features-appendix" id="snippet-for-the-books-new-features-appendix"><h2>Snippet for the book's new features appendix</h2></a>
+<p>When stabilizing, add this to
+<code>src/doc/book/second-edition/src/appendix-07-newest-features.md</code>:</p>
+<a class="header" href="print.html#nested-groups-in-use-declarations" id="nested-groups-in-use-declarations"><h3>Nested groups in <code>use</code> declarations</h3></a>
+<p>If you have a complex module tree with many different submodules and you need
+to import a few items from each one, it might be useful to group all the
+imports in the same declaration to keep your code clean and avoid repeating the
+base modules' name.</p>
+<p>The <code>use</code> declaration supports nesting to help you in those cases, both with
+simple imports and glob ones. For example this snippets imports <code>bar</code>, <code>Foo</code>,
+all the items in <code>baz</code> and <code>Bar</code>:</p>
+<pre><pre class="playpen"><code class="language-rust"># #![feature(use_nested_groups)]
+# #![allow(unused_imports, dead_code)]
+#
+# mod foo {
+#     pub mod bar {
+#         pub type Foo = ();
+#     }
+#     pub mod baz {
+#         pub mod quux {
+#             pub type Bar = ();
+#         }
+#     }
+# }
+#
+use foo::{
+    bar::{self, Foo},
+    baz::{*, quux::Bar},
+};
+#
+# fn main() {}
+</code></pre></pre>
+<a class="header" href="print.html#updated-reference" id="updated-reference"><h2>Updated reference</h2></a>
+<p>When stabilizing, replace the shortcut list in
+<code>src/doc/reference/src/items/use-declarations.md</code> with this updated one:</p>
+<ul>
+<li>Simultaneously binding a list of paths with a common prefix, using the
+glob-like brace syntax <code>use a::b::{c, d, e::f, g::h::i};</code></li>
+<li>Simultaneously binding a list of paths with a common prefix and their common
+parent module, using the <code>self</code> keyword, such as <code>use a::b::{self, c, d::e};</code></li>
+<li>Rebinding the target name as a new local name, using the syntax <code>use p::q::r as x;</code>. This can also be used with the last two features:
+<code>use a::b::{self as ab, c as abc}</code>.</li>
+<li>Binding all paths matching a given prefix, using the asterisk wildcard syntax
+<code>use a::b::*;</code>.</li>
+<li>Nesting groups of the previous features multiple times, such as
+<code>use a::b::{self as ab, c d::{*, e::f}};</code></li>
+</ul>
 <a class="header" href="print.html#used" id="used"><h1><code>used</code></h1></a>
 <p>The tracking issue for this feature
 is: <a href="https://github.com/rust-lang/rust/issues/40289">40289</a>.</p>
@@ -2471,6 +2931,9 @@ Disassembly of section .text:
 08000008 &lt;app::reset_handler&gt;:
  8000008:       e7fe            b.n     8000008 &lt;app::reset_handler&gt;
 </code></pre>
+<a class="header" href="print.html#wasm_import_memory" id="wasm_import_memory"><h1><code>wasm_import_memory</code></h1></a>
+<p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
+<hr />
 <a class="header" href="print.html#library-features" id="library-features"><h1>Library Features</h1></a>
 <a class="header" href="print.html#align_offset" id="align_offset"><h1><code>align_offset</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44488">#44488</a></p>
@@ -2561,8 +3024,17 @@ for which you want a custom allocator.</p>
 <a class="header" href="print.html#box_heap" id="box_heap"><h1><code>box_heap</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27779">#27779</a></p>
 <hr />
+<a class="header" href="print.html#box_into_raw_non_null" id="box_into_raw_non_null"><h1><code>box_into_raw_non_null</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/47336">#47336</a></p>
+<hr />
+<a class="header" href="print.html#box_leak" id="box_leak"><h1><code>box_leak</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46179">#46179</a></p>
+<hr />
 <a class="header" href="print.html#bufreader_is_empty" id="bufreader_is_empty"><h1><code>bufreader_is_empty</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/45323">#45323</a></p>
+<hr />
+<a class="header" href="print.html#bufreader_seek_relative" id="bufreader_seek_relative"><h1><code>bufreader_seek_relative</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/31100">#31100</a></p>
 <hr />
 <a class="header" href="print.html#c_void_variant" id="c_void_variant"><h1><code>c_void_variant</code></h1></a>
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
@@ -2606,81 +3078,6 @@ extern crate compiler_builtins;
 <a class="header" href="print.html#concat_idents_macro" id="concat_idents_macro"><h1><code>concat_idents_macro</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/29599">#29599</a></p>
 <hr />
-<a class="header" href="print.html#const_align_of" id="const_align_of"><h1><code>const_align_of</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_bool_new" id="const_atomic_bool_new"><h1><code>const_atomic_bool_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_i16_new" id="const_atomic_i16_new"><h1><code>const_atomic_i16_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_i32_new" id="const_atomic_i32_new"><h1><code>const_atomic_i32_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_i64_new" id="const_atomic_i64_new"><h1><code>const_atomic_i64_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_i8_new" id="const_atomic_i8_new"><h1><code>const_atomic_i8_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_isize_new" id="const_atomic_isize_new"><h1><code>const_atomic_isize_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_ptr_new" id="const_atomic_ptr_new"><h1><code>const_atomic_ptr_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_u16_new" id="const_atomic_u16_new"><h1><code>const_atomic_u16_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_u32_new" id="const_atomic_u32_new"><h1><code>const_atomic_u32_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_u64_new" id="const_atomic_u64_new"><h1><code>const_atomic_u64_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_u8_new" id="const_atomic_u8_new"><h1><code>const_atomic_u8_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_atomic_usize_new" id="const_atomic_usize_new"><h1><code>const_atomic_usize_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_cell_new" id="const_cell_new"><h1><code>const_cell_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_max_value" id="const_max_value"><h1><code>const_max_value</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_min_value" id="const_min_value"><h1><code>const_min_value</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_nonzero_new" id="const_nonzero_new"><h1><code>const_nonzero_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_once_new" id="const_once_new"><h1><code>const_once_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_ptr_null" id="const_ptr_null"><h1><code>const_ptr_null</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_ptr_null_mut" id="const_ptr_null_mut"><h1><code>const_ptr_null_mut</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_refcell_new" id="const_refcell_new"><h1><code>const_refcell_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_shared_new" id="const_shared_new"><h1><code>const_shared_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_size_of" id="const_size_of"><h1><code>const_size_of</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_unique_new" id="const_unique_new"><h1><code>const_unique_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
-<a class="header" href="print.html#const_unsafe_cell_new" id="const_unsafe_cell_new"><h1><code>const_unsafe_cell_new</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/24111">#24111</a></p>
-<hr />
 <a class="header" href="print.html#core_char_ext" id="core_char_ext"><h1><code>core_char_ext</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32110">#32110</a></p>
 <hr />
@@ -2705,6 +3102,12 @@ extern crate compiler_builtins;
 <a class="header" href="print.html#core_str_ext" id="core_str_ext"><h1><code>core_str_ext</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32110">#32110</a></p>
 <hr />
+<a class="header" href="print.html#cursor_mut_vec" id="cursor_mut_vec"><h1><code>cursor_mut_vec</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/30132">#30132</a></p>
+<hr />
+<a class="header" href="print.html#deadline_api" id="deadline_api"><h1><code>deadline_api</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46316">#46316</a></p>
+<hr />
 <a class="header" href="print.html#dec2flt" id="dec2flt"><h1><code>dec2flt</code></h1></a>
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
 <hr />
@@ -2719,6 +3122,9 @@ extern crate compiler_builtins;
 <hr />
 <a class="header" href="print.html#drain_filter" id="drain_filter"><h1><code>drain_filter</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/43244">#43244</a></p>
+<hr />
+<a class="header" href="print.html#duration_extras" id="duration_extras"><h1><code>duration_extras</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46507">#46507</a></p>
 <hr />
 <a class="header" href="print.html#duration_from_micros" id="duration_from_micros"><h1><code>duration_from_micros</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44400">#44400</a></p>
@@ -2796,6 +3202,9 @@ key.</p>
 <a class="header" href="print.html#error_type_id" id="error_type_id"><h1><code>error_type_id</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27745">#27745</a></p>
 <hr />
+<a class="header" href="print.html#exact_chunks" id="exact_chunks"><h1><code>exact_chunks</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/47115">#47115</a></p>
+<hr />
 <a class="header" href="print.html#exact_size_is_empty" id="exact_size_is_empty"><h1><code>exact_size_is_empty</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35428">#35428</a></p>
 <hr />
@@ -2851,6 +3260,9 @@ fn main() {
 <a class="header" href="print.html#from_utf8_error_as_bytes" id="from_utf8_error_as_bytes"><h1><code>from_utf8_error_as_bytes</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/40895">#40895</a></p>
 <hr />
+<a class="header" href="print.html#fs_read_write" id="fs_read_write"><h1><code>fs_read_write</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46588">#46588</a></p>
+<hr />
 <a class="header" href="print.html#fused" id="fused"><h1><code>fused</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35602">#35602</a></p>
 <hr />
@@ -2866,45 +3278,12 @@ fn main() {
 <a class="header" href="print.html#getpid" id="getpid"><h1><code>getpid</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/44971">#44971</a></p>
 <hr />
+<a class="header" href="print.html#hash_map_remove_entry" id="hash_map_remove_entry"><h1><code>hash_map_remove_entry</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46344">#46344</a></p>
+<hr />
 <a class="header" href="print.html#heap_api" id="heap_api"><h1><code>heap_api</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27700">#27700</a></p>
 <hr />
-<a class="header" href="print.html#hint_core_should_pause" id="hint_core_should_pause"><h1><code>hint_core_should_pause</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/41196">#41196</a></p>
-<hr />
-<p>Many programs have spin loops like the following:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#fn main() {
-use std::sync::atomic::{AtomicBool,Ordering};
-
-fn spin_loop(value: &amp;AtomicBool) {
-    loop {
-        if value.load(Ordering::Acquire) {
-             break;
-        }
-    }
-}
-#}</code></pre></pre>
-<p>These programs can be improved in performance like so:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">
-# #![allow(unused_variables)]
-#![feature(hint_core_should_pause)]
-#fn main() {
-use std::sync::atomic;
-use std::sync::atomic::{AtomicBool,Ordering};
-
-fn spin_loop(value: &amp;AtomicBool) {
-    loop {
-        if value.load(Ordering::Acquire) {
-             break;
-        }
-        atomic::hint_core_should_pause();
-    }
-}
-#}</code></pre></pre>
-<p>Further improvements could combine <code>hint_core_should_pause</code> with
-exponential backoff or <code>std::thread::yield_now</code>.</p>
 <a class="header" href="print.html#i128" id="i128"><h1><code>i128</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35118">#35118</a></p>
 <hr />
@@ -2938,6 +3317,9 @@ exponential backoff or <code>std::thread::yield_now</code>.</p>
 <a class="header" href="print.html#iterator_step_by" id="iterator_step_by"><h1><code>iterator_step_by</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27741">#27741</a></p>
 <hr />
+<a class="header" href="print.html#iterator_try_fold" id="iterator_try_fold"><h1><code>iterator_try_fold</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/45594">#45594</a></p>
+<hr />
 <a class="header" href="print.html#libstd_io_internals" id="libstd_io_internals"><h1><code>libstd_io_internals</code></h1></a>
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
 <hr />
@@ -2962,9 +3344,6 @@ exponential backoff or <code>std::thread::yield_now</code>.</p>
 <a class="header" href="print.html#n16" id="n16"><h1><code>n16</code></h1></a>
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
 <hr />
-<a class="header" href="print.html#never_type_impls" id="never_type_impls"><h1><code>never_type_impls</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35121">#35121</a></p>
-<hr />
 <a class="header" href="print.html#nonzero" id="nonzero"><h1><code>nonzero</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27730">#27730</a></p>
 <hr />
@@ -2974,14 +3353,14 @@ exponential backoff or <code>std::thread::yield_now</code>.</p>
 <a class="header" href="print.html#once_poison" id="once_poison"><h1><code>once_poison</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/33577">#33577</a></p>
 <hr />
+<a class="header" href="print.html#option_filter" id="option_filter"><h1><code>option_filter</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/45860">#45860</a></p>
+<hr />
 <a class="header" href="print.html#option_ref_mut_cloned" id="option_ref_mut_cloned"><h1><code>option_ref_mut_cloned</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/43738">#43738</a></p>
 <hr />
 <a class="header" href="print.html#panic_abort" id="panic_abort"><h1><code>panic_abort</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32837">#32837</a></p>
-<hr />
-<a class="header" href="print.html#panic_col" id="panic_col"><h1><code>panic_col</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/42939">#42939</a></p>
 <hr />
 <a class="header" href="print.html#panic_unwind" id="panic_unwind"><h1><code>panic_unwind</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32837">#32837</a></p>
@@ -3001,17 +3380,17 @@ exponential backoff or <code>std::thread::yield_now</code>.</p>
 <a class="header" href="print.html#print_internals" id="print_internals"><h1><code>print_internals</code></h1></a>
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
 <hr />
-<a class="header" href="print.html#proc_macro-1" id="proc_macro-1"><h1><code>proc_macro</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/38356">#38356</a></p>
-<hr />
 <a class="header" href="print.html#proc_macro_internals" id="proc_macro_internals"><h1><code>proc_macro_internals</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27812">#27812</a></p>
+<hr />
+<a class="header" href="print.html#process_internals" id="process_internals"><h1><code>process_internals</code></h1></a>
+<p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
 <hr />
 <a class="header" href="print.html#profiler_runtime_lib" id="profiler_runtime_lib"><h1><code>profiler_runtime_lib</code></h1></a>
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
 <hr />
-<a class="header" href="print.html#rand" id="rand"><h1><code>rand</code></h1></a>
-<p>This feature is internal to the Rust compiler and is not intended for general use.</p>
+<a class="header" href="print.html#ptr_internals" id="ptr_internals"><h1><code>ptr_internals</code></h1></a>
+<p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
 <hr />
 <a class="header" href="print.html#range_contains" id="range_contains"><h1><code>range_contains</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/32311">#32311</a></p>
@@ -3052,6 +3431,9 @@ exponential backoff or <code>std::thread::yield_now</code>.</p>
 <a class="header" href="print.html#slice_get_slice" id="slice_get_slice"><h1><code>slice_get_slice</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/35729">#35729</a></p>
 <hr />
+<a class="header" href="print.html#slice_internals" id="slice_internals"><h1><code>slice_internals</code></h1></a>
+<p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
+<hr />
 <a class="header" href="print.html#slice_rotate" id="slice_rotate"><h1><code>slice_rotate</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/41891">#41891</a></p>
 <hr />
@@ -3080,6 +3462,9 @@ let beta_offset = s.find('β').unwrap_or(s.len());
 s.splice(..beta_offset, &quot;Α is capital alpha; &quot;);
 assert_eq!(s, &quot;Α is capital alpha; β is beta&quot;);
 #}</code></pre></pre>
+<a class="header" href="print.html#std_internals" id="std_internals"><h1><code>std_internals</code></h1></a>
+<p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>
+<hr />
 <a class="header" href="print.html#step_trait" id="step_trait"><h1><code>step_trait</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/42168">#42168</a></p>
 <hr />
@@ -3256,6 +3641,9 @@ even when using either of the above.</p>
 <a class="header" href="print.html#toowned_clone_into" id="toowned_clone_into"><h1><code>toowned_clone_into</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/41263">#41263</a></p>
 <hr />
+<a class="header" href="print.html#transpose_result" id="transpose_result"><h1><code>transpose_result</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/47338">#47338</a></p>
+<hr />
 <a class="header" href="print.html#trusted_len" id="trusted_len"><h1><code>trusted_len</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/37572">#37572</a></p>
 <hr />
@@ -3304,8 +3692,8 @@ just <code>()</code>, or similar) restricts this to where it's semantically mean
 <a class="header" href="print.html#unicode" id="unicode"><h1><code>unicode</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27783">#27783</a></p>
 <hr />
-<a class="header" href="print.html#unique" id="unique"><h1><code>unique</code></h1></a>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/27730">#27730</a></p>
+<a class="header" href="print.html#unix_ppid" id="unix_ppid"><h1><code>unix_ppid</code></h1></a>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/46104">#46104</a></p>
 <hr />
 <a class="header" href="print.html#unreachable" id="unreachable"><h1><code>unreachable</code></h1></a>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/43751">#43751</a></p>
@@ -3375,5 +3763,9 @@ just <code>()</code>, or similar) restricts this to where it's semantically mean
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

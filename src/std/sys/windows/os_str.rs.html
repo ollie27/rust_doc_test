@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libstd\sys\windows\os_str.rs`.">
+    <meta name="description" content="Source to the Rust file `libstd\sys\windows\os_str.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>os_str.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../../main.css" id="themeStyle">
+    <script src="../../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -190,6 +201,36 @@
 <span id="145">145</span>
 <span id="146">146</span>
 <span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -208,7 +249,9 @@
 <span class="kw">use</span> <span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">sys_common</span>::<span class="ident">wtf8</span>::{<span class="ident">Wtf8</span>, <span class="ident">Wtf8Buf</span>};
 <span class="kw">use</span> <span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">sys_common</span>::{<span class="ident">AsInner</span>, <span class="ident">IntoInner</span>};
+<span class="kw">use</span> <span class="ident">rc</span>::<span class="ident">Rc</span>;
+<span class="kw">use</span> <span class="ident">sync</span>::<span class="ident">Arc</span>;
+<span class="kw">use</span> <span class="ident">sys_common</span>::{<span class="ident">AsInner</span>, <span class="ident">IntoInner</span>, <span class="ident">FromInner</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Buf</span> {
@@ -218,6 +261,12 @@
 <span class="kw">impl</span> <span class="ident">IntoInner</span><span class="op">&lt;</span><span class="ident">Wtf8Buf</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Buf</span> {
     <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Wtf8Buf</span> {
         <span class="self">self</span>.<span class="ident">inner</span>
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">FromInner</span><span class="op">&lt;</span><span class="ident">Wtf8Buf</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Buf</span> {
+    <span class="kw">fn</span> <span class="ident">from_inner</span>(<span class="ident">inner</span>: <span class="ident">Wtf8Buf</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">Buf</span> { <span class="ident">inner</span> }
     }
 }
 
@@ -308,6 +357,16 @@
         <span class="kw">let</span> <span class="ident">inner</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Wtf8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">boxed</span>) };
         <span class="ident">Buf</span> { <span class="ident">inner</span>: <span class="ident">Wtf8Buf</span>::<span class="ident">from_box</span>(<span class="ident">inner</span>) }
     }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_arc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">as_slice</span>().<span class="ident">into_arc</span>()
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_rc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">as_slice</span>().<span class="ident">into_rc</span>()
+    }
 }
 
 <span class="kw">impl</span> <span class="ident">Slice</span> {
@@ -337,6 +396,18 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">empty_box</span>() <span class="op">-&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> { <span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">Wtf8</span>::<span class="ident">empty_box</span>()) }
     }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_arc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">arc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">into_arc</span>();
+        <span class="kw">unsafe</span> { <span class="ident">Arc</span>::<span class="ident">from_raw</span>(<span class="ident">Arc</span>::<span class="ident">into_raw</span>(<span class="ident">arc</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Slice</span>) }
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_rc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">rc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">into_rc</span>();
+        <span class="kw">unsafe</span> { <span class="ident">Rc</span>::<span class="ident">from_raw</span>(<span class="ident">Rc</span>::<span class="ident">into_raw</span>(<span class="ident">rc</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Slice</span>) }
+    }
 }
 </pre>
 </section>
@@ -352,20 +423,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

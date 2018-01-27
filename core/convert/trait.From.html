@@ -10,8 +10,11 @@
     <title>core::convert::From - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait From</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>convert</a></p><script>window.sidebarCurrent = {name: 'From', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait From</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.from">from</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>convert</a></p><script>window.sidebarCurrent = {name: 'From', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -53,32 +64,25 @@
     fn <a href='#tymethod.from' class='fnname'>from</a>(_: T) -&gt; Self;
 }</pre><div class='docblock'><p>Simple and safe type conversions in to <code>Self</code>. It is the reciprocal of
 <code>Into</code>.</p>
-
 <p>This trait is useful when performing error handling as described by
 <a href="../../book/first-edition/error-handling.html">the book</a> and is closely related to the <code>?</code> operator.</p>
-
 <p>When constructing a function that is capable of failing the return type
 will generally be of the form <code>Result&lt;T, E&gt;</code>.</p>
-
 <p>The <code>From</code> trait allows for simplification of error handling by providing a
 means of returning a single error type that encapsulates numerous possible
 erroneous situations.</p>
-
 <p>This trait is not limited to error handling, rather the general case for
 this trait would be in any type conversions to have an explicit definition
 of how they are performed.</p>
-
 <p><strong>Note: this trait must not fail</strong>. If the conversion can fail, use
 <a href="trait.TryFrom.html"><code>TryFrom</code></a> or a dedicated method which returns an <a href="../../std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a> or a
 <a href="../../std/result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>.</p>
-
-<h1 id='generic-implementations' class='section-header'><a href='#generic-implementations'>Generic Implementations</a></h1>
+<h1 id="generic-implementations" class="section-header"><a href="#generic-implementations">Generic Implementations</a></h1>
 <ul>
 <li><code>From&lt;T&gt; for U</code> implies <a href="trait.Into.html"><code>Into&lt;U&gt;</code></a><code>for T</code></li>
 <li><a href="trait.From.html#tymethod.from"><code>from</code></a> is reflexive, which means that <code>From&lt;T&gt; for T</code> is implemented</li>
 </ul>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p><a href="../../std/string/struct.String.html"><code>String</code></a> implements <code>From&lt;&amp;str&gt;</code>:</p>
 
 <pre class="rust rust-example-rendered">
@@ -86,7 +90,6 @@ of how they are performed.</p>
 <span class="kw">let</span> <span class="ident">other_string</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;hello&quot;</span>);
 
 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">string</span>, <span class="ident">other_string</span>);<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Alet%20string%20%3D%20%22hello%22.to_string()%3B%0Alet%20other_string%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%0Aassert_eq!(string%2C%20other_string)%3B%0A%7D">Run</a></pre>
-
 <p>An example usage for error handling:</p>
 
 <pre class="rust rust-example-rendered">
@@ -128,76 +131,78 @@ of how they are performed.</p>
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3054-3059' title='goto source code'>[src]</a></div><code>impl From&lt;<a class="enum" href="../../core/convert/enum.Infallible.html" title="enum core::convert::Infallible">Infallible</a>&gt; for <a class="struct" href="../../core/num/struct.TryFromIntError.html" title="struct core::num::TryFromIntError">TryFromIntError</a></code></li>
-<li><code>impl From&lt;u8&gt; for u16</code></li>
-<li><code>impl From&lt;u8&gt; for u32</code></li>
-<li><code>impl From&lt;u8&gt; for u64</code></li>
-<li><code>impl From&lt;u8&gt; for u128</code></li>
-<li><code>impl From&lt;u8&gt; for usize</code></li>
-<li><code>impl From&lt;u16&gt; for u32</code></li>
-<li><code>impl From&lt;u16&gt; for u64</code></li>
-<li><code>impl From&lt;u16&gt; for u128</code></li>
-<li><code>impl From&lt;u32&gt; for u64</code></li>
-<li><code>impl From&lt;u32&gt; for u128</code></li>
-<li><code>impl From&lt;u64&gt; for u128</code></li>
-<li><code>impl From&lt;i8&gt; for i16</code></li>
-<li><code>impl From&lt;i8&gt; for i32</code></li>
-<li><code>impl From&lt;i8&gt; for i64</code></li>
-<li><code>impl From&lt;i8&gt; for i128</code></li>
-<li><code>impl From&lt;i8&gt; for isize</code></li>
-<li><code>impl From&lt;i16&gt; for i32</code></li>
-<li><code>impl From&lt;i16&gt; for i64</code></li>
-<li><code>impl From&lt;i16&gt; for i128</code></li>
-<li><code>impl From&lt;i32&gt; for i64</code></li>
-<li><code>impl From&lt;i32&gt; for i128</code></li>
-<li><code>impl From&lt;i64&gt; for i128</code></li>
-<li><code>impl From&lt;u8&gt; for i16</code></li>
-<li><code>impl From&lt;u8&gt; for i32</code></li>
-<li><code>impl From&lt;u8&gt; for i64</code></li>
-<li><code>impl From&lt;u8&gt; for i128</code></li>
-<li><code>impl From&lt;u16&gt; for i32</code></li>
-<li><code>impl From&lt;u16&gt; for i64</code></li>
-<li><code>impl From&lt;u16&gt; for i128</code></li>
-<li><code>impl From&lt;u32&gt; for i64</code></li>
-<li><code>impl From&lt;u32&gt; for i128</code></li>
-<li><code>impl From&lt;u64&gt; for i128</code></li>
-<li><code>impl From&lt;i8&gt; for f32</code></li>
-<li><code>impl From&lt;i8&gt; for f64</code></li>
-<li><code>impl From&lt;i16&gt; for f32</code></li>
-<li><code>impl From&lt;i16&gt; for f64</code></li>
-<li><code>impl From&lt;i32&gt; for f64</code></li>
-<li><code>impl From&lt;u8&gt; for f32</code></li>
-<li><code>impl From&lt;u8&gt; for f64</code></li>
-<li><code>impl From&lt;u16&gt; for f32</code></li>
-<li><code>impl From&lt;u16&gt; for f64</code></li>
-<li><code>impl From&lt;u32&gt; for f64</code></li>
-<li><code>impl From&lt;f32&gt; for f64</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/nonzero.rs.html#98-102' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;*mut T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/nonzero.rs.html#104-109' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;*const T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/nonzero.rs.html#111-115' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a T&gt; for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;*const T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2397-2401' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2404-2408' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a T&gt; for <a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2539-2543' title='goto source code'>[src]</a></div><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;<a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;&gt; for <a class="struct" href="../../core/ptr/struct.Shared.html" title="struct core::ptr::Shared">Shared</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2546-2550' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/ptr/struct.Shared.html" title="struct core::ptr::Shared">Shared</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2553-2557' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a T&gt; for <a class="struct" href="../../core/ptr/struct.Shared.html" title="struct core::ptr::Shared">Shared</a>&lt;T&gt;</code></li>
-<li><code>impl&lt;T&gt; From&lt;T&gt; for T</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#931-934' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;*mut T&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicPtr.html" title="struct core::sync::atomic::AtomicPtr">AtomicPtr</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI8.html" title="struct core::sync::atomic::AtomicI8">AtomicI8</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU8.html" title="struct core::sync::atomic::AtomicU8">AtomicU8</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI16.html" title="struct core::sync::atomic::AtomicI16">AtomicI16</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU16.html" title="struct core::sync::atomic::AtomicU16">AtomicU16</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;i32&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI32.html" title="struct core::sync::atomic::AtomicI32">AtomicI32</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU32.html" title="struct core::sync::atomic::AtomicU32">AtomicU32</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;i64&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI64.html" title="struct core::sync::atomic::AtomicI64">AtomicI64</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;u64&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU64.html" title="struct core::sync::atomic::AtomicU64">AtomicU64</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;isize&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicIsize.html" title="struct core::sync::atomic::AtomicIsize">AtomicIsize</a></code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#977-980' title='goto source code'>[src]</a></div><code>impl From&lt;usize&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicUsize.html" title="struct core::sync::atomic::AtomicUsize">AtomicUsize</a></code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#2994-2999' title='goto source code'>[src]</a></div><code>impl From&lt;<a class="enum" href="../../core/convert/enum.Infallible.html" title="enum core::convert::Infallible">Infallible</a>&gt; for <a class="struct" href="../../core/num/struct.TryFromIntError.html" title="struct core::num::TryFromIntError">TryFromIntError</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for u16</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for u32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for u64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for u128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for usize</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for u32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for u64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for u128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for u64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for u128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u64&gt; for u128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for i16</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for i32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for isize</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for i32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i32&gt; for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i32&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i64&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for i16</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for i32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for i32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u64&gt; for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for f32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for f32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;i32&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for f32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for f32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/num/mod.rs.html#3345-3350' title='goto source code'>[src]</a></div><code>impl From&lt;f32&gt; for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/nonzero.rs.html#96-100' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;*mut T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/nonzero.rs.html#102-107' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;*const T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/nonzero.rs.html#109-113' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a T&gt; for <a class="struct" href="../../core/nonzero/struct.NonZero.html" title="struct core::nonzero::NonZero">NonZero</a>&lt;*const T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2443-2447' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2450-2454' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a T&gt; for <a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2457-2461' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;<a class="struct" href="../../core/ptr/struct.NonNull.html" title="struct core::ptr::NonNull">NonNull</a>&lt;T&gt;&gt; for <a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2586-2590' title='goto source code'>[src]</a></div><code>impl&lt;T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;<a class="struct" href="../../core/ptr/struct.Unique.html" title="struct core::ptr::Unique">Unique</a>&lt;T&gt;&gt; for <a class="struct" href="../../core/ptr/struct.NonNull.html" title="struct core::ptr::NonNull">NonNull</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2593-2597' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a mut T&gt; for <a class="struct" href="../../core/ptr/struct.NonNull.html" title="struct core::ptr::NonNull">NonNull</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/ptr.rs.html#2600-2604' title='goto source code'>[src]</a></div><code>impl&lt;'a, T:&nbsp;?<a class="trait" href="../../core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>&gt; From&lt;&amp;'a T&gt; for <a class="struct" href="../../core/ptr/struct.NonNull.html" title="struct core::ptr::NonNull">NonNull</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/convert.rs.html#421-423' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for T</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#929-932' title='goto source code'>[src]</a></div><code>impl From&lt;bool&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicBool.html" title="struct core::sync::atomic::AtomicBool">AtomicBool</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#936-939' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;*mut T&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicPtr.html" title="struct core::sync::atomic::AtomicPtr">AtomicPtr</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;i8&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI8.html" title="struct core::sync::atomic::AtomicI8">AtomicI8</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU8.html" title="struct core::sync::atomic::AtomicU8">AtomicU8</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;i16&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI16.html" title="struct core::sync::atomic::AtomicI16">AtomicI16</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;u16&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU16.html" title="struct core::sync::atomic::AtomicU16">AtomicU16</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;i32&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI32.html" title="struct core::sync::atomic::AtomicI32">AtomicI32</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;u32&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU32.html" title="struct core::sync::atomic::AtomicU32">AtomicU32</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;i64&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicI64.html" title="struct core::sync::atomic::AtomicI64">AtomicI64</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;u64&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicU64.html" title="struct core::sync::atomic::AtomicU64">AtomicU64</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;isize&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicIsize.html" title="struct core::sync::atomic::AtomicIsize">AtomicIsize</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/sync/atomic.rs.html#983-986' title='goto source code'>[src]</a></div><code>impl From&lt;usize&gt; for <a class="struct" href="../../core/sync/atomic/struct.AtomicUsize.html" title="struct core::sync::atomic::AtomicUsize">AtomicUsize</a></code></li>
 <li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#315-319' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="struct" href="../../core/cell/struct.Cell.html" title="struct core::cell::Cell">Cell</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#908-912' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="struct" href="../../core/cell/struct.RefCell.html" title="struct core::cell::RefCell">RefCell</a>&lt;T&gt;</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#1255-1259' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="struct" href="../../core/cell/struct.UnsafeCell.html" title="struct core::cell::UnsafeCell">UnsafeCell</a>&lt;T&gt;</code></li>
-<li><code>impl From&lt;char&gt; for u32</code></li>
-<li><code>impl From&lt;u8&gt; for char</code></li>
-<li><div class='out-of-band'><a class='srclink' href='../../src/core/option.rs.html#901-905' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#929-933' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="struct" href="../../core/cell/struct.RefCell.html" title="struct core::cell::RefCell">RefCell</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/cell.rs.html#1277-1281' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="struct" href="../../core/cell/struct.UnsafeCell.html" title="struct core::cell::UnsafeCell">UnsafeCell</a>&lt;T&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/char.rs.html#178-183' title='goto source code'>[src]</a></div><code>impl From&lt;char&gt; for u32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/char.rs.html#204-209' title='goto source code'>[src]</a></div><code>impl From&lt;u8&gt; for char</code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/core/option.rs.html#979-983' title='goto source code'>[src]</a></div><code>impl&lt;T&gt; From&lt;T&gt; for <a class="enum" href="../../core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/convert/trait.From.js">
                  </script></section>
@@ -213,20 +218,22 @@ of how they are performed.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

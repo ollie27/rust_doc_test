@@ -10,8 +10,11 @@
     <title>std::error - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Module error</p><div class="block items"><ul><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'error', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module error</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#traits">Traits</a></li></ul></div><p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'error', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -50,8 +61,7 @@
                    </a>
                </span><a class='srclink' href='../../src/std/error.rs.html#11-560' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Traits for working with Errors.</p>
-
-<h1 id='the-error-trait' class='section-header'><a href='#the-error-trait'>The <code>Error</code> trait</a></h1>
+<h1 id="the-error-trait" class="section-header"><a href="#the-error-trait">The <code>Error</code> trait</a></h1>
 <p><code>Error</code> is a trait representing the basic expectations for error values,
 i.e. values of type <code>E</code> in <a href="../result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>. At a minimum, errors must provide
 a description, but they may optionally provide additional detail (via
@@ -65,7 +75,6 @@ a description, but they may optionally provide additional detail (via
 
     <span class="kw">fn</span> <span class="ident">cause</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Error</span><span class="op">&gt;</span> { <span class="prelude-val">None</span> }
 }<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Afn%20main()%20%7B%0Ause%20std%3A%3Afmt%3A%3ADisplay%3B%0A%0Atrait%20Error%3A%20Display%20%7B%0A%20%20%20%20fn%20description(%26self)%20-%3E%20%26str%3B%0A%0A%20%20%20%20fn%20cause(%26self)%20-%3E%20Option%3C%26Error%3E%20%7B%20None%20%7D%0A%7D%0A%7D">Run</a></pre>
-
 <p>The <a href="trait.Error.html#method.cause"><code>cause</code></a> method is generally used when errors cross &quot;abstraction
 boundaries&quot;, i.e.  when a one module must report an error that is &quot;caused&quot;
 by an error from a lower-level module. This setup makes it possible for the
@@ -79,6 +88,7 @@ debugging via <a href="trait.Error.html#method.cause"><code>cause</code></a> cha
                                   title='trait std::error::Error'>Error</a></td>
                            <td class='docblock-short'>
                                 <p>Base functionality for all errors in Rust.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -93,20 +103,22 @@ debugging via <a href="trait.Error.html#method.cause"><code>cause</code></a> cha
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

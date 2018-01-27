@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -117,16 +115,18 @@ function! Forcing you to write <code>main</code> for every example, no matter ho
 adds friction. So <code>rustdoc</code> processes your examples slightly before
 running them. Here's the full algorithm rustdoc uses to preprocess examples:</p>
 <ol>
-<li>Any leading <code>#![foo]</code> attributes are left intact as crate attributes.</li>
 <li>Some common <code>allow</code> attributes are inserted, including
 <code>unused_variables</code>, <code>unused_assignments</code>, <code>unused_mut</code>,
 <code>unused_attributes</code>, and <code>dead_code</code>. Small examples often trigger
 these lints.</li>
-<li>If the example does not contain <code>extern crate</code>, then <code>extern crate &lt;mycrate&gt;;</code> is inserted (note the lack of <code>#[macro_use]</code>).</li>
+<li>Any attributes specified with <code>#![doc(test(attr(...)))]</code> are added.</li>
+<li>Any leading <code>#![foo]</code> attributes are left intact as crate attributes.</li>
+<li>If the example does not contain <code>extern crate</code>, and
+<code>#![doc(test(no_crate_inject))]</code> was not specified, then <code>extern crate &lt;mycrate&gt;;</code> is inserted (note the lack of <code>#[macro_use]</code>).</li>
 <li>Finally, if the example does not contain <code>fn main</code>, the remainder of the
 text is wrapped in <code>fn main() { your_code }</code>.</li>
 </ol>
-<p>For more about that caveat in rule 3, see &quot;Documeting Macros&quot; below.</p>
+<p>For more about that caveat in rule 4, see &quot;Documenting Macros&quot; below.</p>
 <a class="header" href="documentation-tests.html#hiding-portions-of-the-example" id="hiding-portions-of-the-example"><h2>Hiding portions of the example</h2></a>
 <p>Sometimes, you need some setup code, or other things that would distract
 from your example, but are important to make the tests work. Consider
@@ -317,13 +317,13 @@ environment that has no network access.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="the-doc-attribute.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="the-doc-attribute.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="passes.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="passes.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -363,5 +363,9 @@ environment that has no network access.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

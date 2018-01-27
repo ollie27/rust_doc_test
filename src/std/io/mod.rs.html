@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libstd\io\mod.rs`.">
+    <meta name="description" content="Source to the Rust file `libstd\io\mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css" id="themeStyle">
+    <script src="../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -2399,6 +2410,31 @@
 <span id="2354">2354</span>
 <span id="2355">2355</span>
 <span id="2356">2356</span>
+<span id="2357">2357</span>
+<span id="2358">2358</span>
+<span id="2359">2359</span>
+<span id="2360">2360</span>
+<span id="2361">2361</span>
+<span id="2362">2362</span>
+<span id="2363">2363</span>
+<span id="2364">2364</span>
+<span id="2365">2365</span>
+<span id="2366">2366</span>
+<span id="2367">2367</span>
+<span id="2368">2368</span>
+<span id="2369">2369</span>
+<span id="2370">2370</span>
+<span id="2371">2371</span>
+<span id="2372">2372</span>
+<span id="2373">2373</span>
+<span id="2374">2374</span>
+<span id="2375">2375</span>
+<span id="2376">2376</span>
+<span id="2377">2377</span>
+<span id="2378">2378</span>
+<span id="2379">2379</span>
+<span id="2380">2380</span>
+<span id="2381">2381</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2768,16 +2804,13 @@
 <span class="kw">fn</span> <span class="ident">read_to_end</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">r</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">start_len</span> <span class="op">=</span> <span class="ident">buf</span>.<span class="ident">len</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">Guard</span> { <span class="ident">len</span>: <span class="ident">buf</span>.<span class="ident">len</span>(), <span class="ident">buf</span>: <span class="ident">buf</span> };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_write_size</span> <span class="op">=</span> <span class="number">16</span>;
     <span class="kw">let</span> <span class="ident">ret</span>;
     <span class="kw">loop</span> {
         <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">len</span> <span class="op">==</span> <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">len</span>() {
-            <span class="kw">if</span> <span class="ident">new_write_size</span> <span class="op">&lt;</span> <span class="ident">DEFAULT_BUF_SIZE</span> {
-                <span class="ident">new_write_size</span> <span class="op">*=</span> <span class="number">2</span>;
-            }
             <span class="kw">unsafe</span> {
-                <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">reserve</span>(<span class="ident">new_write_size</span>);
-                <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">set_len</span>(<span class="ident">g</span>.<span class="ident">len</span> <span class="op">+</span> <span class="ident">new_write_size</span>);
+                <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">reserve</span>(<span class="number">32</span>);
+                <span class="kw">let</span> <span class="ident">capacity</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">capacity</span>();
+                <span class="ident">g</span>.<span class="ident">buf</span>.<span class="ident">set_len</span>(<span class="ident">capacity</span>);
                 <span class="ident">r</span>.<span class="ident">initializer</span>().<span class="ident">initialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">g</span>.<span class="ident">buf</span>[<span class="ident">g</span>.<span class="ident">len</span>..]);
             }
         }
@@ -2821,14 +2854,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`File`]s implement `Read`:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// [`read()`]: trait.Read.html#tymethod.read</span>
-<span class="doccomment">/// [`std::io`]: ../../std/io/index.html</span>
-<span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
-<span class="doccomment">/// [`BufRead`]: trait.BufRead.html</span>
-<span class="doccomment">/// [`BufReader`]: struct.BufReader.html</span>
-<span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// use std::io;</span>
+<span class="doccomment">/// # use std::io;</span>
 <span class="doccomment">/// use std::io::prelude::*;</span>
 <span class="doccomment">/// use std::fs::File;</span>
 <span class="doccomment">///</span>
@@ -2851,7 +2878,34 @@
 <span class="doccomment">/// # Ok(())</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Read from [`&amp;str`] because [`&amp;[u8]`][slice] implements `Read`:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// # use std::io;</span>
+<span class="doccomment">/// use std::io::prelude::*;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # fn foo() -&gt; io::Result&lt;()&gt; {</span>
+<span class="doccomment">/// let mut b = &quot;This string will be read&quot;.as_bytes();</span>
+<span class="doccomment">/// let mut buffer = [0; 10];</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// // read up to 10 bytes</span>
+<span class="doccomment">/// b.read(&amp;mut buffer)?;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// // etc... it works exactly as a File does!</span>
+<span class="doccomment">/// # Ok(())</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`read()`]: trait.Read.html#tymethod.read</span>
+<span class="doccomment">/// [`std::io`]: ../../std/io/index.html</span>
+<span class="doccomment">/// [`File`]: ../fs/struct.File.html</span>
+<span class="doccomment">/// [`BufRead`]: trait.BufRead.html</span>
+<span class="doccomment">/// [`BufReader`]: struct.BufReader.html</span>
+<span class="doccomment">/// [`&amp;str`]: ../../std/primitive.str.html</span>
+<span class="doccomment">/// [slice]: ../../std/primitive.slice.html</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">spotlight</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Read</span> {
     <span class="doccomment">/// Pull some bytes from this source into the specified buffer, returning</span>
     <span class="doccomment">/// how many bytes were read.</span>
@@ -2985,7 +3039,7 @@
         <span class="ident">read_to_end</span>(<span class="self">self</span>, <span class="ident">buf</span>)
     }
 
-    <span class="doccomment">/// Read all bytes until EOF in this source, placing them into `buf`.</span>
+    <span class="doccomment">/// Read all bytes until EOF in this source, appending them to `buf`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If successful, this function returns the number of bytes which were read</span>
     <span class="doccomment">/// and appended to `buf`.</span>
@@ -3139,7 +3193,7 @@
     <span class="doccomment">/// Transforms this `Read` instance to an [`Iterator`] over its bytes.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The returned type implements [`Iterator`] where the `Item` is</span>
-    <span class="doccomment">/// [`Result`]`&lt;`[`u8`]`, `[`io::Error`]&gt;`.</span>
+    <span class="doccomment">/// [`Result`]`&lt;`[`u8`]`, `[`io::Error`]`&gt;`.</span>
     <span class="doccomment">/// The yielded item is [`Ok`] if a byte was successfully read and [`Err`]</span>
     <span class="doccomment">/// otherwise. EOF is mapped to returning [`None`] from this iterator.</span>
     <span class="doccomment">///</span>
@@ -3150,7 +3204,7 @@
     <span class="doccomment">/// [file]: ../fs/struct.File.html</span>
     <span class="doccomment">/// [`Iterator`]: ../../std/iter/trait.Iterator.html</span>
     <span class="doccomment">/// [`Result`]: ../../std/result/enum.Result.html</span>
-    <span class="doccomment">/// [`io::Error``]: ../../std/io/struct.Error.html</span>
+    <span class="doccomment">/// [`io::Error`]: ../../std/io/struct.Error.html</span>
     <span class="doccomment">/// [`u8`]: ../../std/primitive.u8.html</span>
     <span class="doccomment">/// [`Ok`]: ../../std/result/enum.Result.html#variant.Ok</span>
     <span class="doccomment">/// [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
@@ -3370,6 +3424,7 @@
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">spotlight</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Write</span> {
     <span class="doccomment">/// Write a buffer into this object, returning how many bytes were written.</span>
     <span class="doccomment">///</span>
@@ -3380,9 +3435,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Calls to `write` are not guaranteed to block waiting for data to be</span>
     <span class="doccomment">/// written, and a write which would otherwise block can be indicated through</span>
-    <span class="doccomment">/// an `Err` variant.</span>
+    <span class="doccomment">/// an [`Err`] variant.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the return value is `Ok(n)` then it must be guaranteed that</span>
+    <span class="doccomment">/// If the return value is [`Ok(n)`] then it must be guaranteed that</span>
     <span class="doccomment">/// `0 &lt;= n &lt;= buf.len()`. A return value of `0` typically means that the</span>
     <span class="doccomment">/// underlying object is no longer able to accept bytes and will likely not</span>
     <span class="doccomment">/// be able to in the future as well, or that the buffer provided is empty.</span>
@@ -3396,8 +3451,12 @@
     <span class="doccomment">/// It is **not** considered an error if the entire buffer could not be</span>
     <span class="doccomment">/// written to this writer.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// An error of the `ErrorKind::Interrupted` kind is non-fatal and the</span>
+    <span class="doccomment">/// An error of the [`ErrorKind::Interrupted`] kind is non-fatal and the</span>
     <span class="doccomment">/// write operation should be retried if there is nothing else to do.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Err`]: ../../std/result/enum.Result.html#variant.Err</span>
+    <span class="doccomment">/// [`Ok(n)`]:  ../../std/result/enum.Result.html#variant.Ok</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`]: ../../std/io/enum.ErrorKind.html#variant.Interrupted</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -3444,17 +3503,20 @@
 
     <span class="doccomment">/// Attempts to write an entire buffer into this write.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This method will continuously call `write` until there is no more data</span>
-    <span class="doccomment">/// to be written or an error of non-`ErrorKind::Interrupted` kind is</span>
+    <span class="doccomment">/// This method will continuously call [`write`] until there is no more data</span>
+    <span class="doccomment">/// to be written or an error of non-[`ErrorKind::Interrupted`] kind is</span>
     <span class="doccomment">/// returned. This method will not return until the entire buffer has been</span>
     <span class="doccomment">/// successfully written or such an error occurs. The first error that is</span>
-    <span class="doccomment">/// not of `ErrorKind::Interrupted` kind generated from this method will be</span>
+    <span class="doccomment">/// not of [`ErrorKind::Interrupted`] kind generated from this method will be</span>
     <span class="doccomment">/// returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function will return the first error of</span>
-    <span class="doccomment">/// non-`ErrorKind::Interrupted` kind that `write` returns.</span>
+    <span class="doccomment">/// non-[`ErrorKind::Interrupted`] kind that [`write`] returns.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`ErrorKind::Interrupted`]: ../../std/io/enum.ErrorKind.html#variant.Interrupted</span>
+    <span class="doccomment">/// [`write`]: #tymethod.write</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -4403,10 +4465,9 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">char</span>, <span class="ident">CharsError</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">char</span>, <span class="ident">CharsError</span><span class="op">&gt;&gt;</span> {
-        <span class="kw">let</span> <span class="ident">first_byte</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">read_one_byte</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>) {
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">b</span>)) <span class="op">=&gt;</span> <span class="ident">b</span>,
-            <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">CharsError</span>::<span class="ident">Other</span>(<span class="ident">e</span>))),
+        <span class="kw">let</span> <span class="ident">first_byte</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">read_one_byte</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>)<span class="question-mark">?</span> {
+            <span class="prelude-val">Ok</span>(<span class="ident">b</span>) <span class="op">=&gt;</span> <span class="ident">b</span>,
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">CharsError</span>::<span class="ident">Other</span>(<span class="ident">e</span>))),
         };
         <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">core_str</span>::<span class="ident">utf8_char_width</span>(<span class="ident">first_byte</span>);
         <span class="kw">if</span> <span class="ident">width</span> <span class="op">==</span> <span class="number">1</span> { <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">first_byte</span> <span class="kw">as</span> <span class="ident">char</span>)) }
@@ -4770,20 +4831,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

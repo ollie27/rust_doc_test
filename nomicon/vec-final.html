@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -89,7 +87,7 @@
 
                 <div id="content" class="content">
                     <a class="header" href="vec-final.html#the-final-code" id="the-final-code"><h1>The Final Code</h1></a>
-<pre><pre class="playpen"><code class="language-rust">#![feature(unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(ptr_internals)]
 #![feature(allocator_api)]
 
 use std::ptr::{Unique, self};
@@ -401,13 +399,13 @@ fn oom() {
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="vec-zsts.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="vec-zsts.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="arc-and-mutex.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="arc-and-mutex.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -447,5 +445,9 @@ fn oom() {
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

@@ -10,8 +10,11 @@
     <title>alloc::binary_heap::BinaryHeapPlace - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Struct BinaryHeapPlace</p><div class="block items"><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-Place%3CT%3E">Place&lt;T&gt;</a><a href="#impl-InPlace%3CT%3E">InPlace&lt;T&gt;</a></div></div><p class='location'><a href='../index.html'>alloc</a>::<wbr><a href='index.html'>binary_heap</a></p><script>window.sidebarCurrent = {name: 'BinaryHeapPlace', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct BinaryHeapPlace</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-Place%3CT%3E">Place&lt;T&gt;</a><a href="#impl-InPlace%3CT%3E">InPlace&lt;T&gt;</a></div></div><p class='location'><a href='../index.html'>alloc</a>::<wbr><a href='index.html'>binary_heap</a></p><script>window.sidebarCurrent = {name: 'BinaryHeapPlace', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -56,7 +67,7 @@
             </h2>
         <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl&lt;'a, T:&nbsp;<a class="trait" href="../../core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> + <a class="trait" href="../../core/cmp/trait.Ord.html" title="trait core::cmp::Ord">Ord</a> + <a class="trait" href="../../alloc/fmt/trait.Debug.html" title="trait alloc::fmt::Debug">Debug</a>&gt; <a class="trait" href="../../alloc/fmt/trait.Debug.html" title="trait alloc::fmt::Debug">Debug</a> for <a class="struct" href="../../alloc/binary_heap/struct.BinaryHeapPlace.html" title="struct alloc::binary_heap::BinaryHeapPlace">BinaryHeapPlace</a>&lt;'a, T&gt;</code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/alloc/binary_heap.rs.html#1186-1192' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='../../alloc/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../alloc/fmt/struct.Formatter.html" title="struct alloc::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="../../alloc/fmt/type.Result.html" title="type alloc::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/alloc/binary_heap.rs.html#1187-1191' title='goto source code'>[src]</a></span></h4>
-<div class='docblock'><p>Formats the value using the given formatter.</p>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="../../alloc/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
 </div></div><h3 id='impl-Place%3CT%3E' class='impl'><span class='in-band'><code>impl&lt;'a, T&gt; <a class="trait" href="../../core/ops/place/trait.Place.html" title="trait core::ops::place::Place">Place</a>&lt;T&gt; for <a class="struct" href="../../alloc/binary_heap/struct.BinaryHeapPlace.html" title="struct alloc::binary_heap::BinaryHeapPlace">BinaryHeapPlace</a>&lt;'a, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> + <a class="trait" href="../../core/cmp/trait.Ord.html" title="trait core::cmp::Ord">Ord</a>,&nbsp;</span></code><a href='#impl-Place%3CT%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/alloc/binary_heap.rs.html#1214-1219' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.pointer' class="method"><span id='pointer.v' class='invisible'><code>fn <a href='../../core/ops/place/trait.Place.html#tymethod.pointer' class='fnname'>pointer</a>(&amp;mut self) -&gt; *mut T</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/alloc/binary_heap.rs.html#1216-1218' title='goto source code'>[src]</a></span></h4>
 <div class='stability'><div class='stab unstable'><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>placement_new_protocol </code><a href="https://github.com/rust-lang/rust/issues/27779">#27779</a>)</div></div><div class='docblock'><p>Returns the address where the input value will be written. Note that the data at this address is generally uninitialized, and thus one should use <code>ptr::write</code> for initializing it. <a href="../../core/ops/place/trait.Place.html#tymethod.pointer">Read more</a></p>
@@ -78,20 +89,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

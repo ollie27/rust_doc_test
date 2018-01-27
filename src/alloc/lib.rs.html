@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\liballoc\lib.rs`.">
+    <meta name="description" content="Source to the Rust file `liballoc\lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -318,6 +329,9 @@
 <span id="273">273</span>
 <span id="274">274</span>
 <span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014-2017 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -336,7 +350,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This library, like libcore, is not intended for general usage, but rather as</span>
 <span class="doccomment">//! a building block of other libraries. The types and interfaces in this</span>
-<span class="doccomment">//! library are reexported through the [standard library](../std/index.html),</span>
+<span class="doccomment">//! library are re-exported through the [standard library](../std/index.html),</span>
 <span class="doccomment">//! and should not be used through this library.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Boxed values</span>
@@ -373,7 +387,7 @@
 <span class="doccomment">//! ## Collections</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Implementations of the most common general purpose data structures are</span>
-<span class="doccomment">//! defined in this library. They are reexported through the</span>
+<span class="doccomment">//! defined in this library. They are re-exported through the</span>
 <span class="doccomment">//! [standard collections library](../std/collections/index.html).</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Heap interfaces</span>
@@ -405,6 +419,7 @@
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">feature</span>(<span class="ident">rand</span>, <span class="ident">test</span>))]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">allow_internal_unstable</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">ascii_ctype</span>)]</span>
+<span class="attribute">#![<span class="ident">feature</span>(<span class="ident">box_into_raw_non_null</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">box_patterns</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">box_syntax</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">cfg_target_has_atomic</span>)]</span>
@@ -430,8 +445,8 @@
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">pattern</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">placement_in_syntax</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">placement_new_protocol</span>)]</span>
+<span class="attribute">#![<span class="ident">feature</span>(<span class="ident">ptr_internals</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">rustc_attrs</span>)]</span>
-<span class="attribute">#![<span class="ident">feature</span>(<span class="ident">shared</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">slice_get_slice</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">slice_patterns</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">slice_rsplit</span>)]</span>
@@ -441,10 +456,10 @@
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">trusted_len</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">unboxed_closures</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">unicode</span>)]</span>
-<span class="attribute">#![<span class="ident">feature</span>(<span class="ident">unique</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">unsize</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">allocator_internals</span>)]</span>
 <span class="attribute">#![<span class="ident">feature</span>(<span class="ident">on_unimplemented</span>)]</span>
+<span class="attribute">#![<span class="ident">feature</span>(<span class="ident">exact_chunks</span>)]</span>
 
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">test</span>), <span class="ident">feature</span>(<span class="ident">fused</span>, <span class="ident">fn_traits</span>, <span class="ident">placement_new_protocol</span>, <span class="ident">swap_with_slice</span>, <span class="ident">i128</span>))]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">feature</span>(<span class="ident">test</span>, <span class="ident">box_heap</span>))]</span>
@@ -456,6 +471,8 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">test</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std_unicode</span>;
 
@@ -608,20 +625,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

@@ -10,8 +10,11 @@
     <title>core::array::FixedSizeArray - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Trait FixedSizeArray</p><div class="block items"><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>array</a></p><script>window.sidebarCurrent = {name: 'FixedSizeArray', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait FixedSizeArray</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.as_slice">as_slice</a><a href="#tymethod.as_mut_slice">as_mut_slice</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>core</a>::<wbr><a href='index.html'>array</a></p><script>window.sidebarCurrent = {name: 'FixedSizeArray', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -54,15 +65,12 @@
 <div class='item-spacer'></div>    fn <a href='#tymethod.as_mut_slice' class='fnname'>as_mut_slice</a>(&amp;mut self) -&gt; &amp;mut [T];
 }</pre><div class='stability'><div class='stab unstable'><details><summary><span class=microscope>🔬</span> This is a nightly-only experimental API.  (<code>fixed_size_array </code><a href="https://github.com/rust-lang/rust/issues/27778">#27778</a>)</summary><p>traits and impls are better expressed through generic integer constants</p>
 </details></div></div><div class='docblock'><p>Utility trait implemented only on arrays of fixed size</p>
-
 <p>This trait can be used to implement other traits on fixed-size arrays
 without causing much metadata bloat.</p>
-
 <p>The trait is marked unsafe in order to restrict implementors to fixed-size
 arrays. User of this trait can assume that implementors have the exact
 layout in memory of a fixed size array (for example, for unsafe
 initialization).</p>
-
 <p>Note that the traits AsRef and AsMut provide similar methods for types that
 may not be fixed-size arrays. Implementors should prefer those traits
 instead.</p>
@@ -80,7 +88,7 @@ instead.</p>
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;T, A:&nbsp;<a class="trait" href="../../core/marker/trait.Unsize.html" title="trait core::marker::Unsize">Unsize</a>&lt;[T]&gt;&gt; FixedSizeArray&lt;T&gt; for A</code></li>
+    <li><div class='out-of-band'><a class='srclink' href='../../src/core/array.rs.html#50-59' title='goto source code'>[src]</a></div><code>impl&lt;T, A:&nbsp;<a class="trait" href="../../core/marker/trait.Unsize.html" title="trait core::marker::Unsize">Unsize</a>&lt;[T]&gt;&gt; FixedSizeArray&lt;T&gt; for A</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/core/array/trait.FixedSizeArray.js">
                  </script></section>
@@ -96,20 +104,22 @@ instead.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

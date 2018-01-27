@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -172,7 +170,8 @@ adding the following method:</p>
 capacity violates the invariants of Vec (that <code>cap</code> reflects the allocated space
 in the Vec). This is not something the rest of Vec can guard against. It <em>has</em>
 to trust the capacity field because there's no way to verify it.</p>
-<p><code>unsafe</code> does more than pollute a whole function: it pollutes a whole <em>module</em>.
+<p>Because it relies on invariants of a struct field, this <code>unsafe</code> code
+does more than pollute a whole function: it pollutes a whole <em>module</em>.
 Generally, the only bullet-proof way to limit the scope of unsafe code is at the
 module boundary with privacy.</p>
 <p>However this works <em>perfectly</em>. The existence of <code>make_room</code> is <em>not</em> a
@@ -193,13 +192,13 @@ with our trusted state.</p>
 
                 <!-- Mobile navigation buttons -->
                 
-                    <a rel="prev" href="what-unsafe-does.html" class="mobile-nav-chapters previous">
+                    <a rel="prev" href="what-unsafe-does.html" class="mobile-nav-chapters previous" title="Previous chapter">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="data.html" class="mobile-nav-chapters next">
+                    <a rel="next" href="data.html" class="mobile-nav-chapters next" title="Next chapter">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -239,5 +238,9 @@ with our trusted state.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

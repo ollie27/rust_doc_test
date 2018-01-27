@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -207,8 +205,8 @@ memory safety to be freely violated.</li>
 type safety in arbitrary ways (see <a href="conversions.html">conversions</a> for details).</li>
 <li>Every raw pointer to a sized type has an <code>offset</code> method that
 invokes Undefined Behavior if the passed offset is not <a href="../std/primitive.pointer.html#method.offset">&quot;in bounds&quot;</a>.</li>
-<li>All FFI functions are <code>unsafe</code> to call because the other language can do
-arbitrary operations that the Rust compiler can't check.</li>
+<li>All FFI (Foreign Function Interface) functions are <code>unsafe</code> to call because the
+other language can do arbitrary operations that the Rust compiler can't check.</li>
 </ul>
 <p>As of Rust 1.0 there are exactly two unsafe traits:</p>
 <ul>
@@ -431,7 +429,8 @@ adding the following method:</p>
 capacity violates the invariants of Vec (that <code>cap</code> reflects the allocated space
 in the Vec). This is not something the rest of Vec can guard against. It <em>has</em>
 to trust the capacity field because there's no way to verify it.</p>
-<p><code>unsafe</code> does more than pollute a whole function: it pollutes a whole <em>module</em>.
+<p>Because it relies on invariants of a struct field, this <code>unsafe</code> code
+does more than pollute a whole function: it pollutes a whole <em>module</em>.
 Generally, the only bullet-proof way to limit the scope of unsafe code is at the
 module boundary with privacy.</p>
 <p>However this works <em>perfectly</em>. The existence of <code>make_room</code> is <em>not</em> a
@@ -471,7 +470,7 @@ statically in the case of <a href="exotic-sizes.html#dynamically-sized-types-dst
 <li>arrays (homogeneous product types)</li>
 <li>enums (named sum types -- tagged unions)</li>
 </ul>
-<p>An enum is said to be <em>C-like</em> if none of its variants have associated data.</p>
+<p>An enum is said to be <em>field-less</em> if none of its variants have associated data.</p>
 <p>Composite structures will have an alignment equal to the maximum
 of their fields' alignment. Rust will consequently insert padding where
 necessary to ensure that all fields are properly aligned and that the overall
@@ -553,8 +552,6 @@ struct Foo&lt;u32, u16&gt; {
 </code></pre>
 <p>The latter case quite simply wastes space. An optimal use of space therefore
 requires different monomorphizations to have <em>different field orderings</em>.</p>
-<p><strong>Note: this is a hypothetical optimization that is not yet implemented in Rust
-1.0</strong></p>
 <p>Enums make this consideration even more complicated. Naively, an enum such as:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -710,8 +707,8 @@ C, and is explicitly contrary to the behavior of an empty type in C++, which
 still consumes a byte of space.</p>
 </li>
 <li>
-<p>DST pointers (fat pointers), tuples, and enums with data (that is, non-C-like
-enums) are not a concept in C, and as such are never FFI-safe.</p>
+<p>DST pointers (fat pointers), tuples, and enums with fields are not a concept
+in C, and as such are never FFI-safe.</p>
 </li>
 <li>
 <p>As an exception to the rule on enum with data, <code>Option&lt;&amp;T&gt;</code> is
@@ -727,13 +724,13 @@ difference from a struct is that the fields aren’t named.</p>
 </li>
 <li>
 <p>This is equivalent to one of <code>repr(u*)</code> (see the next section) for enums. The
-chosen size is the default enum size for the target platform's C ABI. Note that
-enum representation in C is implementation defined, so this is really a &quot;best
-guess&quot;. In particular, this may be incorrect when the C code of interest is
-compiled with certain flags.</p>
+chosen size is the default enum size for the target platform's C application
+binary interface (ABI). Note that enum representation in C is implementation
+defined, so this is really a &quot;best guess&quot;. In particular, this may be incorrect
+when the C code of interest is compiled with certain flags.</p>
 </li>
 <li>
-<p>&quot;C-like&quot; enums with <code>repr(C)</code> or <code>repr(u*)</code> still may not be set to an
+<p>Field-less enums with <code>repr(C)</code> or <code>repr(u*)</code> still may not be set to an
 integer value without a corresponding variant, even though this is
 permitted behavior in C or C++. It is undefined behavior to (unsafely)
 construct an instance of an enum that does not match one of its
@@ -742,17 +739,17 @@ compiled as normal.)</p>
 </li>
 </ul>
 <a class="header" href="print.html#repru-repri" id="repru-repri"><h1>repr(u*), repr(i*)</h1></a>
-<p>These specify the size to make a C-like enum. If the discriminant overflows the
-integer it has to fit in, it will produce a compile-time error. You can manually
-ask Rust to allow this by setting the overflowing element to explicitly be 0.
-However Rust will not allow you to create an enum where two variants have the
-same discriminant.</p>
-<p>The term &quot;C-like enum&quot; only means that the enum doesn't have data in any
-of its variants. A C-like enum without a <code>repr(u*)</code> or <code>repr(C)</code> is
+<p>These specify the size to make a field-less enum. If the discriminant overflows
+the integer it has to fit in, it will produce a compile-time error. You can
+manually ask Rust to allow this by setting the overflowing element to explicitly
+be 0. However Rust will not allow you to create an enum where two variants have
+the same discriminant.</p>
+<p>The term &quot;field-less enum&quot; only means that the enum doesn't have data in any
+of its variants. A field-less enum without a <code>repr(u*)</code> or <code>repr(C)</code> is
 still a Rust native type, and does not have a stable ABI representation.
 Adding a <code>repr</code> causes it to be treated exactly like the specified
 integer size for ABI purposes.</p>
-<p>A non-C-like enum is a Rust type with no guaranteed ABI (even if the
+<p>Any enum with fields is a Rust type with no guaranteed ABI (even if the
 only data is <code>PhantomData</code> or something else with zero size).</p>
 <p>Adding an explicit <code>repr</code> to an enum suppresses the null-pointer
 optimization.</p>
@@ -1607,7 +1604,7 @@ fn main() {
 
 error: aborting due to previous error
 </code></pre>
-<p>Implementing Drop lets the Inspector execute some arbitrary code during its
+<p>Implementing <code>Drop</code> lets the <code>Inspector</code> execute some arbitrary code during its
 death. This means it can potentially observe that types that are supposed to
 live as long as it does actually were destroyed first.</p>
 <p>Interestingly, only generic types need to worry about this. If they aren't
@@ -1669,7 +1666,7 @@ fn main() {
 checker during the analysis of <code>fn main</code>, saying that <code>days</code> does not
 live long enough.</p>
 <p>The reason is that the borrow checking analysis of <code>main</code> does not
-know about the internals of each Inspector's Drop implementation.  As
+know about the internals of each <code>Inspector</code>'s <code>Drop</code> implementation.  As
 far as the borrow checker knows while it is analyzing <code>main</code>, the body
 of an inspector's destructor might access that borrowed data.</p>
 <p>Therefore, the drop checker forces all borrowed data in a value to
@@ -1681,15 +1678,14 @@ the future.</p>
 borrowed data in a value to outlive that value, which is certainly sound.</p>
 <p>Future versions of the language may make the analysis more precise, to
 reduce the number of cases where sound code is rejected as unsafe.
-This would help address cases such as the two Inspectors above that
+This would help address cases such as the two <code>Inspector</code>s above that
 know not to inspect during destruction.</p>
 <p>In the meantime, there is an unstable attribute that one can use to
 assert (unsafely) that a generic type's destructor is <em>guaranteed</em> to
 not access any expired data, even if its type gives it the capability
 to do so.</p>
-<p>That attribute is called <code>may_dangle</code> and was introduced in [RFC 1327]
-(https://github.com/rust-lang/rfcs/blob/master/text/1327-dropck-param-eyepatch.md).
-To deploy it on the Inspector example from above, we would write:</p>
+<p>That attribute is called <code>may_dangle</code> and was introduced in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1327-dropck-param-eyepatch.md">RFC 1327</a>.
+To deploy it on the <code>Inspector</code> example from above, we would write:</p>
 <pre><code class="language-rust ignore">struct Inspector&lt;'a&gt;(&amp;'a u8, &amp;'static str);
 
 unsafe impl&lt;#[may_dangle] 'a&gt; Drop for Inspector&lt;'a&gt; {
@@ -2244,7 +2240,7 @@ primitive:</p>
 <li><code>*T as integer</code></li>
 <li><code>integer as *T</code></li>
 <li><code>number as number</code></li>
-<li><code>C-like-enum as integer</code></li>
+<li><code>field-less enum as integer</code></li>
 <li><code>bool as integer</code></li>
 <li><code>char as integer</code></li>
 <li><code>u8 as char</code></li>
@@ -2656,7 +2652,7 @@ be implemented at all!</p>
 Drop, Rust will prevent you from e.g. moving fields out of self. For most types,
 this is totally fine.</p>
 <p>For instance, a custom implementation of <code>Box</code> might write <code>Drop</code> like this:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(unique, allocator_api)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(ptr_internals, allocator_api)]
 
 use std::heap::{Heap, Alloc, Layout};
 use std::mem;
@@ -2678,7 +2674,7 @@ impl&lt;T&gt; Drop for Box&lt;T&gt; {
 a <a href="phantom-data.html">Unique</a> that has no actual <code>Drop</code> implementation. Similarly nothing can
 use-after-free the <code>ptr</code> because when drop exits, it becomes inaccessible.</p>
 <p>However this wouldn't work:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, ptr_internals)]
 
 use std::heap::{Heap, Alloc, Layout};
 use std::ptr::{drop_in_place, Unique};
@@ -2742,7 +2738,7 @@ certainly many valid usecases for needing to do trickier things with
 destructors.</p>
 <p>The classic safe solution to overriding recursive drop and allowing moving out
 of Self during <code>drop</code> is to use an Option:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(allocator_api, ptr_internals)]
 
 use std::heap::{Alloc, Heap, Layout};
 use std::ptr::{drop_in_place, Unique};
@@ -3682,7 +3678,7 @@ impl&lt;T&gt; Unique&lt;T&gt; {
 <p>Unfortunately the mechanism for stating that your value is non-zero is
 unstable and unlikely to be stabilized soon. As such we're just going to
 take the hit and use std's Unique:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(ptr_internals)]
 
 use std::ptr::{Unique, self};
 
@@ -4283,7 +4279,7 @@ struct Drain&lt;'a, T: 'a&gt; {
     // Need to bound the lifetime here, so we do it with `&amp;'a mut Vec&lt;T&gt;`
     // because that's semantically what we contain. We're &quot;just&quot; calling
     // `pop()` and `remove(0)`.
-    vec: PhantomData&lt;&amp;'a mut Vec&lt;T&gt;&gt;
+    vec: PhantomData&lt;&amp;'a mut Vec&lt;T&gt;&gt;,
     start: *const T,
     end: *const T,
 }
@@ -4565,7 +4561,7 @@ impl&lt;T&gt; DoubleEndedIterator for RawValIter&lt;T&gt; {
 </code></pre>
 <p>And that's it. Iteration works!</p>
 <a class="header" href="print.html#the-final-code" id="the-final-code"><h1>The Final Code</h1></a>
-<pre><pre class="playpen"><code class="language-rust">#![feature(unique)]
+<pre><pre class="playpen"><code class="language-rust">#![feature(ptr_internals)]
 #![feature(allocator_api)]
 
 use std::ptr::{Unique, self};
@@ -5543,5 +5539,9 @@ accidentally pass a pointer to <code>Foo</code> to <code>bar()</code>.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>

@@ -10,8 +10,11 @@
     <title>std::sync - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
-        <p class='location'>Module sync</p><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#constants">Constants</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'sync', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'>Module sync</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#constants">Constants</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../index.html'>std</a></p><script>window.sidebarCurrent = {name: 'sync', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -50,7 +61,6 @@
                    </a>
                </span><a class='srclink' href='../../src/std/sync/mod.rs.html#11-44' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Useful synchronization primitives.</p>
-
 <p>This module contains useful safe and unsafe synchronization primitives.
 Most of the primitives in this module do not provide any sort of locking
 and/or blocking at all, but rather provide the necessary tools to build
@@ -62,6 +72,7 @@ other types of concurrent primitives.</p>
                                   title='mod std::sync::atomic'>atomic</a></td>
                            <td class='docblock-short'>
                                 <p>Atomic types</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -69,6 +80,7 @@ other types of concurrent primitives.</p>
                                   title='mod std::sync::mpsc'>mpsc</a></td>
                            <td class='docblock-short'>
                                 <p>Multi-producer, single-consumer FIFO queue communication primitives.</p>
+
                            </td>
                        </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -76,8 +88,9 @@ other types of concurrent primitives.</p>
                            <td><a class="struct" href="struct.Arc.html"
                                   title='struct std::sync::Arc'>Arc</a></td>
                            <td class='docblock-short'>
-                                <p>A thread-safe reference-counting pointer. &#39;Arc&#39; stands for &#39;Atomically
-Reference Counted&#39;.</p>
+                                <p>A thread-safe reference-counting pointer. 'Arc' stands for 'Atomically
+Reference Counted'.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -86,6 +99,7 @@ Reference Counted&#39;.</p>
                            <td class='docblock-short'>
                                 <p>A barrier enables multiple threads to synchronize the beginning
 of some computation.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -94,6 +108,7 @@ of some computation.</p>
                            <td class='docblock-short'>
                                 <p>A <code>BarrierWaitResult</code> is returned by <a href="struct.Barrier.html#method.wait"><code>wait</code></a> when all threads in the <a href="struct.Barrier.html"><code>Barrier</code></a>
 have rendezvoused.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -101,6 +116,7 @@ have rendezvoused.</p>
                                   title='struct std::sync::Condvar'>Condvar</a></td>
                            <td class='docblock-short'>
                                 <p>A Condition Variable</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -108,6 +124,7 @@ have rendezvoused.</p>
                                   title='struct std::sync::Mutex'>Mutex</a></td>
                            <td class='docblock-short'>
                                 <p>A mutual exclusion primitive useful for protecting shared data</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -116,6 +133,7 @@ have rendezvoused.</p>
                            <td class='docblock-short'>
                                 <p>An RAII implementation of a &quot;scoped lock&quot; of a mutex. When this structure is
 dropped (falls out of scope), the lock will be unlocked.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -126,6 +144,7 @@ dropped (falls out of scope), the lock will be unlocked.</p>
 initialization. Useful for one-time initialization for FFI or related
 functionality. This type can only be constructed with the <a href="constant.ONCE_INIT.html"><code>ONCE_INIT</code></a>
 value.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -133,6 +152,7 @@ value.</p>
                                   title='struct std::sync::PoisonError'>PoisonError</a></td>
                            <td class='docblock-short'>
                                 <p>A type of error which can be returned whenever a lock is acquired.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -140,6 +160,7 @@ value.</p>
                                   title='struct std::sync::RwLock'>RwLock</a></td>
                            <td class='docblock-short'>
                                 <p>A reader-writer lock</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -148,6 +169,7 @@ value.</p>
                            <td class='docblock-short'>
                                 <p>RAII structure used to release the shared read access of a lock when
 dropped.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -156,6 +178,7 @@ dropped.</p>
                            <td class='docblock-short'>
                                 <p>RAII structure used to release the exclusive write access of a lock when
 dropped.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -164,6 +187,7 @@ dropped.</p>
                            <td class='docblock-short'>
                                 <p>A type indicating whether a timed wait on a condition variable returned
 due to a time out or not.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -173,6 +197,7 @@ due to a time out or not.</p>
                                 <p><code>Weak</code> is a version of <a href="struct.Arc.html"><code>Arc</code></a> that holds a non-owning reference to the
 managed value. The value is accessed by calling <a href="struct.Weak.html#method.upgrade"><code>upgrade</code></a> on the <code>Weak</code>
 pointer, which returns an <a href="../../std/option/enum.Option.html"><code>Option</code></a><code>&lt;</code><a href="struct.Arc.html"><code>Arc</code></a><code>&lt;T&gt;&gt;</code>.</p>
+
                            </td>
                        </tr>
                        <tr class='unstable module-item'>
@@ -181,6 +206,7 @@ pointer, which returns an <a href="../../std/option/enum.Option.html"><code>Opti
                            <td class='docblock-short'>
                                [<div class='stab unstable'>Experimental</div>] <p>State yielded to <a href="struct.Once.html#method.call_once_force"><code>call_once_force</code></a>’s closure parameter. The state can be
 used to query the poison status of the <a href="struct.Once.html"><code>Once</code></a>.</p>
+
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
@@ -191,6 +217,7 @@ used to query the poison status of the <a href="struct.Once.html"><code>Once</co
                                 <p>An enumeration of possible errors associated with a <a href="type.TryLockResult.html"><code>TryLockResult</code></a> which
 can occur while trying to aquire a lock, from the <a href="struct.Mutex.html#method.try_lock"><code>try_lock</code></a> method on a
 <a href="struct.Mutex.html"><code>Mutex</code></a> or the <a href="struct.RwLock.html#method.try_read"><code>try_read</code></a> and <a href="struct.RwLock.html#method.try_write"><code>try_write</code></a> methods on an <a href="struct.RwLock.html"><code>RwLock</code></a>.</p>
+
                            </td>
                        </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
@@ -199,6 +226,7 @@ can occur while trying to aquire a lock, from the <a href="struct.Mutex.html#met
                                   title='constant std::sync::ONCE_INIT'>ONCE_INIT</a></td>
                            <td class='docblock-short'>
                                 <p>Initialization value for static <a href="struct.Once.html"><code>Once</code></a> values.</p>
+
                            </td>
                        </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
@@ -207,6 +235,7 @@ can occur while trying to aquire a lock, from the <a href="struct.Mutex.html#met
                                   title='type std::sync::LockResult'>LockResult</a></td>
                            <td class='docblock-short'>
                                 <p>A type alias for the result of a lock method which can be poisoned.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -214,6 +243,7 @@ can occur while trying to aquire a lock, from the <a href="struct.Mutex.html#met
                                   title='type std::sync::TryLockResult'>TryLockResult</a></td>
                            <td class='docblock-short'>
                                 <p>A type alias for the result of a nonblocking locking method.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -228,20 +258,22 @@ can occur while trying to aquire a lock, from the <a href="struct.Mutex.html#met
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

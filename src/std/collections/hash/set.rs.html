@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libstd\collections\hash\set.rs`.">
+    <meta name="description" content="Source to the Rust file `libstd\collections\hash\set.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>set.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../../../main.css" id="themeStyle">
+    <script src="../../../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../../../std/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -1773,6 +1784,31 @@
 <span id="1728">1728</span>
 <span id="1729">1729</span>
 <span id="1730">1730</span>
+<span id="1731">1731</span>
+<span id="1732">1732</span>
+<span id="1733">1733</span>
+<span id="1734">1734</span>
+<span id="1735">1735</span>
+<span id="1736">1736</span>
+<span id="1737">1737</span>
+<span id="1738">1738</span>
+<span id="1739">1739</span>
+<span id="1740">1740</span>
+<span id="1741">1741</span>
+<span id="1742">1742</span>
+<span id="1743">1743</span>
+<span id="1744">1744</span>
+<span id="1745">1745</span>
+<span id="1746">1746</span>
+<span id="1747">1747</span>
+<span id="1748">1748</span>
+<span id="1749">1749</span>
+<span id="1750">1750</span>
+<span id="1751">1751</span>
+<span id="1752">1752</span>
+<span id="1753">1753</span>
+<span id="1754">1754</span>
+<span id="1755">1755</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -2303,6 +2339,16 @@
     <span class="doccomment">/// [`Hash`] and [`Eq`] on the borrowed form *must* match those for</span>
     <span class="doccomment">/// the value type.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::HashSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let set: HashSet&lt;_&gt; = [1, 2, 3].iter().cloned().collect();</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;2), Some(&amp;2));</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;4), None);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// [`Eq`]: ../../std/cmp/trait.Eq.html</span>
     <span class="doccomment">/// [`Hash`]: ../../std/hash/trait.Hash.html</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;set_recovery&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.9.0&quot;</span>)]</span>
@@ -2407,6 +2453,19 @@
 
     <span class="doccomment">/// Adds a value to the set, replacing the existing value, if any, that is equal to the given</span>
     <span class="doccomment">/// one. Returns the replaced value.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::HashSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut set = HashSet::new();</span>
+    <span class="doccomment">/// set.insert(Vec::&lt;i32&gt;::new());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;[][..]).unwrap().capacity(), 0);</span>
+    <span class="doccomment">/// set.replace(Vec::with_capacity(10));</span>
+    <span class="doccomment">/// assert_eq!(set.get(&amp;[][..]).unwrap().capacity(), 10);</span>
+    <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;set_recovery&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.9.0&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Recover</span>::<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">map</span>, <span class="ident">value</span>)
@@ -2446,6 +2505,16 @@
     <span class="doccomment">/// The value may be any borrowed form of the set&#39;s value type, but</span>
     <span class="doccomment">/// [`Hash`] and [`Eq`] on the borrowed form *must* match those for</span>
     <span class="doccomment">/// the value type.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use std::collections::HashSet;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut set: HashSet&lt;_&gt; = [1, 2, 3].iter().cloned().collect();</span>
+    <span class="doccomment">/// assert_eq!(set.take(&amp;2), Some(2));</span>
+    <span class="doccomment">/// assert_eq!(set.take(&amp;2), None);</span>
+    <span class="doccomment">/// ```</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Eq`]: ../../std/cmp/trait.Eq.html</span>
     <span class="doccomment">/// [`Hash`]: ../../std/hash/trait.Hash.html</span>
@@ -2928,13 +2997,9 @@
 
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>() {
-                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-                <span class="prelude-val">Some</span>(<span class="ident">elt</span>) <span class="op">=&gt;</span> {
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">elt</span>) {
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">elt</span>);
-                    }
-                }
+            <span class="kw">let</span> <span class="ident">elt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">elt</span>) {
+                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">elt</span>);
             }
         }
     }
@@ -2978,13 +3043,9 @@
 
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>() {
-                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-                <span class="prelude-val">Some</span>(<span class="ident">elt</span>) <span class="op">=&gt;</span> {
-                    <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">elt</span>) {
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">elt</span>);
-                    }
-                }
+            <span class="kw">let</span> <span class="ident">elt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">other</span>.<span class="ident">contains</span>(<span class="ident">elt</span>) {
+                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">elt</span>);
             }
         }
     }
@@ -3518,20 +3579,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

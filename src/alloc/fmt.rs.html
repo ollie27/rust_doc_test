@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\liballoc\fmt.rs`.">
+    <meta name="description" content="Source to the Rust file `liballoc\fmt.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>fmt.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../alloc/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -600,6 +611,16 @@
 <span id="555">555</span>
 <span id="556">556</span>
 <span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2013-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -611,7 +632,7 @@
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
 
-<span class="doccomment">//! Utilities for formatting and printing `String`s</span>
+<span class="doccomment">//! Utilities for formatting and printing `String`s.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This module contains the runtime support for the [`format!`] syntax extension.</span>
 <span class="doccomment">//! This macro is implemented in the compiler to emit calls to this module in</span>
@@ -839,6 +860,8 @@
 <span class="doccomment">//! writeln!     // same as write but appends a newline</span>
 <span class="doccomment">//! print!       // the format string is printed to the standard output</span>
 <span class="doccomment">//! println!     // same as print but appends a newline</span>
+<span class="doccomment">//! eprint!      // the format string is printed to the standard error</span>
+<span class="doccomment">//! eprintln!    // same as eprint but appends a newline</span>
 <span class="doccomment">//! format_args! // described below.</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
@@ -867,6 +890,11 @@
 <span class="doccomment">//! print!(&quot;Hello {}!&quot;, &quot;world&quot;);</span>
 <span class="doccomment">//! println!(&quot;I have a newline {}&quot;, &quot;character at the end&quot;);</span>
 <span class="doccomment">//! ```</span>
+<span class="doccomment">//! ### `eprint!`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The [`eprint!`] and [`eprintln!`] macros are identical to</span>
+<span class="doccomment">//! [`print!`] and [`println!`], respectively, except they emit their</span>
+<span class="doccomment">//! output to stderr.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### `format_args!`</span>
 <span class="doccomment">//!</span>
@@ -1093,7 +1121,10 @@
 <span class="doccomment">//! [`writeln!`]: ../../std/macro.writeln.html</span>
 <span class="doccomment">//! [`write_fmt`]: ../../std/io/trait.Write.html#method.write_fmt</span>
 <span class="doccomment">//! [`std::io::Write`]: ../../std/io/trait.Write.html</span>
+<span class="doccomment">//! [`print!`]: ../../std/macro.print.html</span>
 <span class="doccomment">//! [`println!`]: ../../std/macro.println.html</span>
+<span class="doccomment">//! [`eprint!`]: ../../std/macro.eprint.html</span>
+<span class="doccomment">//! [`eprintln!`]: ../../std/macro.eprintln.html</span>
 <span class="doccomment">//! [`write!`]: ../../std/macro.write.html</span>
 <span class="doccomment">//! [`format_args!`]: ../../std/macro.format_args.html</span>
 <span class="doccomment">//! [`fmt::Arguments`]: struct.Arguments.html</span>
@@ -1139,7 +1170,7 @@
 <span class="doccomment">/// assert_eq!(s, &quot;Hello, world!&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Please note that using [`format!`] might be preferrable.</span>
+<span class="doccomment">/// Please note that using [`format!`] might be preferable.</span>
 <span class="doccomment">/// Example:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
@@ -1172,20 +1203,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

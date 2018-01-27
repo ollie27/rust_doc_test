@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src\libcore\macros.rs`.">
+    <meta name="description" content="Source to the Rust file `libcore\macros.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>macros.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         <a href='../../core/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -787,6 +798,21 @@
 <span id="742">742</span>
 <span id="743">743</span>
 <span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
 </pre><pre class="rust ">
 <span class="comment">// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class="comment">// file at the top-level directory of this distribution and at</span>
@@ -910,6 +936,9 @@
             }
         }
     });
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>,) <span class="op">=&gt;</span> ({
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>)
+    });
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="op">+</span>) <span class="op">=&gt;</span> ({
         <span class="kw">match</span> (<span class="kw-2">&amp;</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>), <span class="kw-2">&amp;</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>)) {
             (<span class="ident">left_val</span>, <span class="ident">right_val</span>) <span class="op">=&gt;</span> {
@@ -958,6 +987,9 @@
             }
         }
     });
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>,) <span class="op">=&gt;</span> {
+        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>)
+    };
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="op">+</span>) <span class="op">=&gt;</span> ({
         <span class="kw">match</span> (<span class="kw-2">&amp;</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>), <span class="kw-2">&amp;</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>)) {
             (<span class="ident">left_val</span>, <span class="ident">right_val</span>) <span class="op">=&gt;</span> {
@@ -1114,6 +1146,7 @@
 <span class="doccomment">/// // The prefered method of quick returning Errors</span>
 <span class="doccomment">/// fn write_to_file_question() -&gt; Result&lt;(), MyError&gt; {</span>
 <span class="doccomment">///     let mut file = File::create(&quot;my_best_friends.txt&quot;)?;</span>
+<span class="doccomment">///     file.write_all(b&quot;This is a list of my best friends.&quot;)?;</span>
 <span class="doccomment">///     Ok(())</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
@@ -1145,7 +1178,7 @@
     })
 }
 
-<span class="doccomment">/// Write formatted data into a buffer</span>
+<span class="doccomment">/// Write formatted data into a buffer.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This macro accepts a format string, a list of arguments, and a &#39;writer&#39;. Arguments will be</span>
 <span class="doccomment">/// formatted according to the specified format string and the result will be passed to the writer.</span>
@@ -1380,9 +1413,9 @@
 
     <span class="doccomment">/// Unconditionally causes compilation to fail with the given error message when encountered.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// For more information, see the [RFC].</span>
+    <span class="doccomment">/// For more information, see the documentation for [`std::compile_error!`].</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// [RFC]: https://github.com/rust-lang/rfcs/blob/master/text/1695-add-error-macro.md</span>
+    <span class="doccomment">/// [`std::compile_error!`]: ../std/macro.compile_error.html</span>
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;compile_error_macro&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.20.0&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">macro_export</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">dox</span>)]</span>
@@ -1396,9 +1429,10 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">macro_export</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">dox</span>)]</span>
-    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">format_args</span> { (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({
-        <span class="comment">/* compiler built-in */</span>
-    }) }
+    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">format_args</span> {
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+    }
 
     <span class="doccomment">/// Inspect an environment variable at compile time.</span>
     <span class="doccomment">///</span>
@@ -1408,7 +1442,10 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">macro_export</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">dox</span>)]</span>
-    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">env</span> { (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> }) }
+    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">env</span> {
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">expr</span>,) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+    }
 
     <span class="doccomment">/// Optionally inspect an environment variable at compile time.</span>
     <span class="doccomment">///</span>
@@ -1429,7 +1466,8 @@
     <span class="attribute">#[<span class="ident">macro_export</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">dox</span>)]</span>
     <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">concat_idents</span> {
-        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">ident</span>),<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> })
+        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">ident</span>),<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">ident</span>,)<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
     }
 
     <span class="doccomment">/// Concatenates literals into a static string slice.</span>
@@ -1440,7 +1478,10 @@
     <span class="attribute">#[<span class="ident">stable</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rust1&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;1.0.0&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">macro_export</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">dox</span>)]</span>
-    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">concat</span> { ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">expr</span>),<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> }) }
+    <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">concat</span> {
+        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">expr</span>),<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">expr</span>,)<span class="kw-2">*</span>) <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> });
+    }
 
     <span class="doccomment">/// A macro which expands to the line number on which it was invoked.</span>
     <span class="doccomment">///</span>
@@ -1512,7 +1553,7 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">dox</span>)]</span>
     <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">module_path</span> { () <span class="op">=&gt;</span> ({ <span class="comment">/* compiler built-in */</span> }) }
 
-    <span class="doccomment">/// Boolean evaluation of configuration flags.</span>
+    <span class="doccomment">/// Boolean evaluation of configuration flags, at compile-time.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// For more information, see the documentation for [`std::cfg!`].</span>
     <span class="doccomment">///</span>
@@ -1546,20 +1587,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>↑</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>↓</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>↹</dt>
+                    <dt><kbd>↹</kbd></dt>
                     <dd>Switch tab</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

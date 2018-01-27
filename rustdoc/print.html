@@ -46,9 +46,6 @@
         <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
         <script src="store.js"></script>
 
-        <!-- Custom JS script -->
-        
-
     </head>
     <body class="light">
         <!-- Set the theme before any content is loaded, prevents flash -->
@@ -72,10 +69,11 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page" tabindex="-1">
+                
                 <div id="menu-bar" class="menu-bar">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
                     </div>
 
                     <h1 class="menu-title"></h1>
@@ -345,13 +343,13 @@ documentation.</p>
 <pre><code class="language-bash">$ rustdoc README.md --markdown-playground-url https://play.rust-lang.org/
 </code></pre>
 <p>When rendering a Markdown file, this flag gives the base URL of the Rust
-Playround, to use for generating <code>Run</code> buttons.</p>
+Playground, to use for generating <code>Run</code> buttons.</p>
 <a class="header" href="print.html#--markdown-no-toc-dont-generate-a-table-of-contents" id="--markdown-no-toc-dont-generate-a-table-of-contents"><h2><code>--markdown-no-toc</code>: don't generate a table of contents</h2></a>
 <p>Using this flag looks like this:</p>
 <pre><code class="language-bash">$ rustdoc README.md --markdown-no-toc
 </code></pre>
 <p>When generating documentation from a Markdown file, by default, <code>rustdoc</code> will
-generate a table of contents. This flag supresses that, and no TOC will be
+generate a table of contents. This flag suppresses that, and no TOC will be
 generated.</p>
 <a class="header" href="print.html#-e--extend-css-extend-rustdocs-css" id="-e--extend-css-extend-rustdocs-css"><h2><code>-e</code>/<code>--extend-css</code>: extend rustdoc's CSS</h2></a>
 <p>Using this flag looks like this:</p>
@@ -430,6 +428,17 @@ to it in the docs. But if you include this:</p>
 <pre><code class="language-rust ignore">#![doc(html_no_source)]
 </code></pre>
 <p>it will not.</p>
+<a class="header" href="print.html#testno_crate_inject" id="testno_crate_inject"><h3><code>test(no_crate_inject)</code></h3></a>
+<p>By default, <code>rustdoc</code> will automatically add a line with <code>extern crate my_crate;</code> into each doctest.
+But if you include this:</p>
+<pre><code class="language-rust ignore">#![doc(test(no_crate_inject))]
+</code></pre>
+<p>it will not.</p>
+<a class="header" href="print.html#testattr" id="testattr"><h3><code>test(attr(...))</code></h3></a>
+<p>This form of the <code>doc</code> attribute allows you to add arbitrary attributes to all your doctests. For
+example, if you want your doctests to fail if they produce any warnings, you could add this:</p>
+<pre><code class="language-rust ignore">#![doc(test(attr(deny(warnings))))]
+</code></pre>
 <a class="header" href="print.html#at-the-item-level" id="at-the-item-level"><h2>At the item level</h2></a>
 <p>These forms of the <code>#[doc]</code> attribute are used on individual items, to control how
 they are documented.</p>
@@ -444,7 +453,7 @@ pub mod bar {
     pub struct Bar;
 }
 </code></pre>
-<p>The documentation will generate a &quot;Reexports&quot; section, and say <code>pub use bar::Bar;</code>, where
+<p>The documentation will generate a &quot;Re-exports&quot; section, and say <code>pub use bar::Bar;</code>, where
 <code>Bar</code> is a link to its page.</p>
 <p>If we change the <code>use</code> line like this:</p>
 <pre><code class="language-rust ignore">#[doc(inline)]
@@ -474,7 +483,7 @@ mod bar {
     pub struct Bar;
 }
 </code></pre>
-<p>Now we'll have a <code>Reexports</code> line, and <code>Bar</code> will not link to anywhere.</p>
+<p>Now we'll have a <code>Re-exports</code> line, and <code>Bar</code> will not link to anywhere.</p>
 <a class="header" href="print.html#dochidden" id="dochidden"><h2><code>#[doc(hidden)]</code></h2></a>
 <p>Any item annotated with <code>#[doc(hidden)]</code> will not appear in the documentation, unless
 the <code>strip-hidden</code> pass is removed.</p>
@@ -511,16 +520,18 @@ function! Forcing you to write <code>main</code> for every example, no matter ho
 adds friction. So <code>rustdoc</code> processes your examples slightly before
 running them. Here's the full algorithm rustdoc uses to preprocess examples:</p>
 <ol>
-<li>Any leading <code>#![foo]</code> attributes are left intact as crate attributes.</li>
 <li>Some common <code>allow</code> attributes are inserted, including
 <code>unused_variables</code>, <code>unused_assignments</code>, <code>unused_mut</code>,
 <code>unused_attributes</code>, and <code>dead_code</code>. Small examples often trigger
 these lints.</li>
-<li>If the example does not contain <code>extern crate</code>, then <code>extern crate &lt;mycrate&gt;;</code> is inserted (note the lack of <code>#[macro_use]</code>).</li>
+<li>Any attributes specified with <code>#![doc(test(attr(...)))]</code> are added.</li>
+<li>Any leading <code>#![foo]</code> attributes are left intact as crate attributes.</li>
+<li>If the example does not contain <code>extern crate</code>, and
+<code>#![doc(test(no_crate_inject))]</code> was not specified, then <code>extern crate &lt;mycrate&gt;;</code> is inserted (note the lack of <code>#[macro_use]</code>).</li>
 <li>Finally, if the example does not contain <code>fn main</code>, the remainder of the
 text is wrapped in <code>fn main() { your_code }</code>.</li>
 </ol>
-<p>For more about that caveat in rule 3, see &quot;Documeting Macros&quot; below.</p>
+<p>For more about that caveat in rule 4, see &quot;Documenting Macros&quot; below.</p>
 <a class="header" href="print.html#hiding-portions-of-the-example" id="hiding-portions-of-the-example"><h2>Hiding portions of the example</h2></a>
 <p>Sometimes, you need some setup code, or other things that would distract
 from your example, but are important to make the tests work. Consider
@@ -804,5 +815,9 @@ statements instead of items.</p>
 
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
     </body>
 </html>
